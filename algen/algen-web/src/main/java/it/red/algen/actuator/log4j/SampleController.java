@@ -23,6 +23,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import it.red.algen.AlgParameters;
@@ -43,20 +44,14 @@ public class SampleController {
 	@Autowired
 	private HelloWorldService helloWorldService;
 
-	@RequestMapping("/")
+	
+	@RequestMapping(path = "/access", method = RequestMethod.HEAD)
 	@ResponseBody
 	public Map<String, String> helloWorld() {
 		return Collections.singletonMap("message",
 				this.helloWorldService.getHelloMessage());
 	}
-
-	@RequestMapping("/foo")
-	@ResponseBody
-	public String foo() {
-		throw new IllegalArgumentException("Server error");
-	}
 	
-
 	@RequestMapping("/calculate/{domain}/{target}")
 	@ResponseBody
 	public Stats calculate(@PathVariable String domain, @PathVariable Integer target) {

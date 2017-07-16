@@ -15,9 +15,10 @@
 
 
 	 <properties>
-   		<docker.image.prefix>algen</docker.image.prefix>
-	    <file>readme</file>
 	    <base>frolvlad/alpine-oraclejdk8:slim</base>
+	    <tomcat.port>4000</tomcat.port>
+	    <tomcat.ip>192.168.99.100</tomcat.ip>
+	    <file>readme</file>
     	<!-- <docker.maven.plugin.version>0.21-SNAPSHOT</docker.maven.plugin.version> -->
 	  </properties>
   
@@ -53,7 +54,91 @@
                 </executions>
             </plugin>
             
-	      <!--   <plugin>
+	         <plugin>
+		        <groupId>io.fabric8</groupId>
+		        <artifactId>docker-maven-plugin</artifactId>
+		        <extensions>true</extensions>
+		        
+ 		        <configuration>
+		          <images>
+			            <image>
+			              <name>algen</name>
+			              <build>
+			                <filter>@</filter>
+			                <dockerFileDir>${project.basedir}/src/main/docker</dockerFileDir>
+			                <assembly>
+			                  <descriptorRef>artifact</descriptorRef>
+			                </assembly>
+			              </build>
+			              <run>
+			                <ports> 
+			                  <port>${tomcat.port}:8080</port>
+			                </ports>
+					         <wait> 
+					           <http>
+					              <url>http://${tomcat.ip}:${tomcat.port}/access</url>
+					           </http>
+					           <time>50000</time>
+					         </wait>
+			              </run>
+			            </image>
+		          </images>
+		        </configuration>		        
+		        
+				  <!-- Connect start/stop to pre- and
+				       post-integration-test phase, respectively if you want to start
+				       your docker containers during integration tests -->
+				  <!-- <executions>
+				    <execution>
+				       <id>start</id>
+				       <phase>pre-integration-test</phase>
+				       <goals>
+				         "build" should be used to create the images with the
+				              artifact
+				         <goal>build</goal>
+				         <goal>start</goal>
+				       </goals>
+				    </execution>
+				    <execution>
+				       <id>stop</id>
+				       <phase>post-integration-test</phase>
+				       <goals>
+				         <goal>stop</goal>
+				      </goals>
+				    </execution>
+				  </executions> -->
+		        
+		        <!--  ALTERNATIVE CONF
+		        <configuration>
+                <verbose>true</verbose>
+                <images>
+                    <image>
+                        <name>algen</name>
+                        <build>
+                            <from>frolvlad/alpine-oraclejdk8:slim</from>
+                            <entryPoint>
+                                <exec>
+                                    <arg>java</arg>
+                                    <arg>-Djava.security.egd=file:/dev/./urandom</arg>
+                                    <arg>-Dbasedir=/tmp</arg>
+                                    <arg>-jar</arg>
+                                    <arg>/maven/${project.artifactId}-${project.version}.${project.packaging}</arg>
+                                </exec>
+                            </entryPoint>
+
+                            <assembly>
+                                <descriptorRef>artifact</descriptorRef>
+                            </assembly>
+                        </build>
+                    </image>
+                </images>
+            </configuration>
+		     -->
+		        
+		      </plugin>
+
+	      <!--   ALTERNATIVE PLUGIN
+	      <plugin>
 	            <groupId>com.spotify</groupId>
 	            <artifactId>docker-maven-plugin</artifactId>
 	            <version>0.4.11</version>
@@ -70,71 +155,6 @@
 	            </configuration>
 	        </plugin> -->
 	        
-	         <plugin>
-		        <groupId>io.fabric8</groupId>
-		        <artifactId>docker-maven-plugin</artifactId>
-		        <extensions>true</extensions>
-
-		          <!-- See:
-		          https://github.com/fabric8io/docker-maven-plugin/tree/master/samples/dockerfile
-		           -->
-		        
-		        <configuration>
-                <verbose>true</verbose>
-                <images>
-                    <image>
-                        <!-- Replace your-project-name -->
-                        <name>algen</name>
-
-                        <build>
-
-                            <!-- This is the same FROM used in a Dockerfile -->
-                            <from>frolvlad/alpine-oraclejdk8:slim</from>
-
-                            <!-- This is the same ENTRYPOINT used in a Dockerfile -->
-                            <entryPoint>
-                                <exec>
-                                    <arg>java</arg>
-                                    <!-- This extra argument is so Tomcat can start faster due to lack of entropy -->
-                                    <arg>-Djava.security.egd=file:/dev/./urandom</arg>
-                                    <arg>-Dbasedir=/tmp</arg>
-                                    <arg>-jar</arg>
-                                    <!-- /maven/ is the default dir that the plugin copies your artifact to -->
-                                    <arg>/maven/${project.artifactId}-${project.version}.${project.packaging}</arg>
-                                </exec>
-                            </entryPoint>
-
-                            <assembly>
-                                <!-- This is a predefined assembly.xml that will only copy your final artifact to the Docker image -->
-                                <descriptorRef>artifact</descriptorRef>
-                            </assembly>
-                        </build>
-                    </image>
-                </images>
-            </configuration>
-		        
-<!-- 		        <configuration>
-		          <images>
-		          
-			            <image>
-			              <name>algen</name>
-			              <name>${docker.image.prefix}/${project.artifactId}</name>
-			              <build>
-			                <filter>@</filter>
-			                <dockerFileDir>${project.basedir}/src/main/docker</dockerFileDir>
-			                <assembly>
-			                  <descriptorRef>artifact</descriptorRef>
-			                </assembly>
-			              </build>
-			              <run>
-			                <ports> 
-			                  <port>4000:8080</port>
-			                </ports>
-			              </run>
-			            </image>
-		          </images>
-		        </configuration> -->
-		      </plugin>
 	        
         </plugins>
     </build>
