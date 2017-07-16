@@ -28,8 +28,12 @@ public class ExprConf {
     
     public static final boolean VERBOSE = false;
     
-    public static final String BASE_DIR = 			"C:\\dev\\workspaces\\ws_ga\\algen-core\\data";
-    public static final String DATABASE_DIR = 		BASE_DIR + "\\expressions\\db";
-    public static final String STATS_DIR = 			BASE_DIR + "\\expressions\\stats";
-    public static final String MASSIVE_STATS_DIR = 	BASE_DIR + "\\expressions\\massive-stats";
+    public static String BASE_DIR = System.getProperty("basedir");
+	static {
+        BASE_DIR = BASE_DIR==null ? "C:\\tmp\\algendata" : BASE_DIR;
+	}
+
+    public static final String DATABASE_DIR = 		BASE_DIR + "/expressions/db";
+    public static final String STATS_DIR = 			BASE_DIR + "/expressions/stats";
+    public static final String MASSIVE_STATS_DIR = 	BASE_DIR + "/expressions/massive-stats";
 }

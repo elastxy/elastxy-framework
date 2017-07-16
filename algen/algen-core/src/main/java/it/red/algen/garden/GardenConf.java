@@ -33,7 +33,7 @@ public class GardenConf {
     
     public static String BASE_DIR = System.getProperty("basedir");
 	static {
-        BASE_DIR = BASE_DIR==null ? "C:\\dev\\workspaces\\ws_ga\\algen-core\\data" : BASE_DIR;
+        BASE_DIR = BASE_DIR==null ? "C:\\tmp\\algendata" : BASE_DIR;
 	}
     
     public static final String DATABASE_DIR = 		BASE_DIR + "/garden/db";
