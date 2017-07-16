@@ -13,6 +13,14 @@
 	<name>Algen Spring Boot Application</name>
 	<version>1.0.0-SNAPSHOT</version>
 
+
+	 <properties>
+   		<docker.image.prefix>algen</docker.image.prefix>
+	    <file>readme</file>
+	    <base>frolvlad/alpine-oraclejdk8:slim</base>
+    	<!-- <docker.maven.plugin.version>0.21-SNAPSHOT</docker.maven.plugin.version> -->
+	  </properties>
+  
 	<dependencies>
     	<dependency>
         	<groupId>org.springframework.boot</groupId>
@@ -45,13 +53,12 @@
                 </executions>
             </plugin>
             
-	        <plugin>
+	      <!--   <plugin>
 	            <groupId>com.spotify</groupId>
 	            <artifactId>docker-maven-plugin</artifactId>
 	            <version>0.4.11</version>
 	            <configuration>
-	                <!-- <imageName>${docker.image.prefix}/${project.artifactId}</imageName> -->
-	                <imageName>test</imageName>
+	                <imageName>${docker.image.prefix}/${project.artifactId}</imageName>
 	                <dockerDirectory>src/main/docker</dockerDirectory>
 	                <resources>
 	                    <resource>
@@ -61,13 +68,75 @@
 	                    </resource>
 	                </resources>
 	            </configuration>
-	        </plugin>
+	        </plugin> -->
+	        
+	         <plugin>
+		        <groupId>io.fabric8</groupId>
+		        <artifactId>docker-maven-plugin</artifactId>
+		        <extensions>true</extensions>
+
+		          <!-- See:
+		          https://github.com/fabric8io/docker-maven-plugin/tree/master/samples/dockerfile
+		           -->
+		        
+		        <configuration>
+                <verbose>true</verbose>
+                <images>
+                    <image>
+                        <!-- Replace your-project-name -->
+                        <name>algen</name>
+
+                        <build>
+
+                            <!-- This is the same FROM used in a Dockerfile -->
+                            <from>frolvlad/alpine-oraclejdk8:slim</from>
+
+                            <!-- This is the same ENTRYPOINT used in a Dockerfile -->
+                            <entryPoint>
+                                <exec>
+                                    <arg>java</arg>
+                                    <!-- This extra argument is so Tomcat can start faster due to lack of entropy -->
+                                    <arg>-Djava.security.egd=file:/dev/./urandom</arg>
+                                    <arg>-Dbasedir=/tmp</arg>
+                                    <arg>-jar</arg>
+                                    <!-- /maven/ is the default dir that the plugin copies your artifact to -->
+                                    <arg>/maven/${project.artifactId}-${project.version}.${project.packaging}</arg>
+                                </exec>
+                            </entryPoint>
+
+                            <assembly>
+                                <!-- This is a predefined assembly.xml that will only copy your final artifact to the Docker image -->
+                                <descriptorRef>artifact</descriptorRef>
+                            </assembly>
+                        </build>
+                    </image>
+                </images>
+            </configuration>
+		        
+<!-- 		        <configuration>
+		          <images>
+		          
+			            <image>
+			              <name>algen</name>
+			              <name>${docker.image.prefix}/${project.artifactId}</name>
+			              <build>
+			                <filter>@</filter>
+			                <dockerFileDir>${project.basedir}/src/main/docker</dockerFileDir>
+			                <assembly>
+			                  <descriptorRef>artifact</descriptorRef>
+			                </assembly>
+			              </build>
+			              <run>
+			                <ports> 
+			                  <port>4000:8080</port>
+			                </ports>
+			              </run>
+			            </image>
+		          </images>
+		        </configuration> -->
+		      </plugin>
 	        
         </plugins>
     </build>
-	
-	<properties>
-   		<docker.image.prefix>springio</docker.image.prefix>
-	</properties>
 	
 </project>

@@ -1,0 +1,21 @@
+# Sample Dockerfile for use with the Docker file mode
+#FROM @base@
+
+#ENV SAMPLE_BUILD_MODE=dockerfile
+ENV JAVA_OPTS=""
+LABEL PROJECT_NAME=algen
+
+# Arbitrary files can be added
+ADD @file@ /
+
+# In maven/ the files as specified in the <assembly> section is stored
+# and need to be added manually
+#COPY maven/* /maven
+
+VOLUME /tmp
+
+#RUN sh -c 'touch /app.jar'
+
+#ENTRYPOINT [ "sh", "-c", "java $JAVA_OPTS -Djava.security.egd=file:/dev/./urandom -Dbasedir=$BASEDIR -jar /app.jar" ]
+
+#EXPOSE 8080

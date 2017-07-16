@@ -5,8 +5,8 @@ mvn clean package docker:build
 cd target/docker
 docker build -t algen .
 
-# Run/Stop
-docker run -d --name algenc -p 4000:8080 -v /c/Users/red/Docker/algenc:/tmp -e "BASEDIR=/tmp" algen
+# Run/Stop [-d for detached]
+docker run --name algenc -p 4000:8080 -v /c/Users/red/Docker/algenc:/tmp -e "BASEDIR=/tmp" algen/algen-web
 docker stop algenc
 
 # Shell
