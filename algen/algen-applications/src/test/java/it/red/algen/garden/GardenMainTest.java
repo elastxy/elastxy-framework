@@ -12,6 +12,8 @@ package it.red.algen.garden;
 
 import static org.junit.Assert.assertNotNull;
 
+import java.io.File;
+
 import org.junit.Test;
 
 import it.red.algen.AlgParameters;
@@ -27,6 +29,8 @@ public class GardenMainTest {
     
 	@Test
     public void simpleRun() {
+		System.setProperty("basedir", new File("C:\\tmp\\algendata").getAbsolutePath());
+		
         LoggerManager.instance().init(new SimpleLogger());
         AlgParameters.instance().init(
         		GardenConf.RECOMBINANTION_PERC, 

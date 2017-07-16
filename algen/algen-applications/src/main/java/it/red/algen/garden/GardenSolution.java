@@ -10,14 +10,10 @@
 
 package it.red.algen.garden;
 
-import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.Random;
-
-import javax.json.Json;
-import javax.json.JsonObject;
 
 import it.red.algen.Fitness;
 import it.red.algen.IllegalSolutionException;

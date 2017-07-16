@@ -12,6 +12,8 @@ package it.red.algen.expressions;
 
 import static org.junit.Assert.assertNotNull;
 
+import java.io.File;
+
 import org.junit.Test;
 
 import it.red.algen.AlgParameters;
@@ -28,7 +30,9 @@ public class ExpressionsMainTest {
    
 	@Test
     public void simpleRun() {
-        LoggerManager.instance().init(new SimpleLogger());
+		System.setProperty("basedir", new File("C:\\tmp\\algendata").getAbsolutePath());
+
+		LoggerManager.instance().init(new SimpleLogger());
         AlgParameters.instance().init(
         		ExprConf.RECOMBINANTION_PERC, 
         		ExprConf.MUTATION_PERC, 

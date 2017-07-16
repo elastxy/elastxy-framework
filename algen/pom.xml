@@ -17,6 +17,13 @@
         <module>algen-applications</module>
     </modules>
 
+	<properties>
+	 	<spring.version>4.3.9.RELEASE</spring.version>
+	 	<spring-boot.version>1.5.4.RELEASE</spring-boot.version>
+	 	<opencsv.version>2.4</opencsv.version>
+	 	<junit.version>4.12</junit.version>
+	</properties>
+	
     <build>
         <pluginManagement>
             <plugins>
@@ -32,12 +39,37 @@
         </pluginManagement>
     </build>
 
-    <dependencies>
-        <dependency>
-            <groupId>junit</groupId>
-            <artifactId>junit</artifactId>
-            <version>4.12</version>
-            <scope>test</scope>
-        </dependency>
-    </dependencies>
+	<dependencyManagement>
+		<dependencies>
+			
+			<dependency>
+				<groupId>org.springframework</groupId>
+				<artifactId>spring-core</artifactId>
+				<version>${spring.version}</version>
+				<exclusions>
+					<exclusion>
+						<groupId>commons-logging</groupId>
+						<artifactId>commons-logging</artifactId>
+					</exclusion>
+				</exclusions>
+			</dependency>
+			
+			<dependency>
+			    <groupId>au.com.bytecode</groupId>
+			    <artifactId>opencsv</artifactId>
+					<version>${opencsv.version}</version>
+			</dependency>
+    			
+		
+	    	<!-- TEST -->
+	        <dependency>
+	            <groupId>junit</groupId>
+	            <artifactId>junit</artifactId>
+	            <version>${junit.version}</version>
+	            <scope>test</scope>
+	        </dependency>
+			
+		</dependencies>
+	</dependencyManagement>
+
 </project>
