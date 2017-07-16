@@ -14,6 +14,7 @@
     <modules>
         <module>algen-core</module>
         <module>algen-web</module>
+        <module>algen-applications</module>
     </modules>
 
     <build>
