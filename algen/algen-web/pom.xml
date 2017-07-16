@@ -79,7 +79,7 @@
 					           <http>
 					              <url>http://${tomcat.ip}:${tomcat.port}/access</url>
 					           </http>
-					           <time>50000</time>
+					           <time>60000</time>
 					         </wait>
 			              </run>
 			            </image>
@@ -121,7 +121,7 @@
                                 <exec>
                                     <arg>java</arg>
                                     <arg>-Djava.security.egd=file:/dev/./urandom</arg>
-                                    <arg>-Dbasedir=/tmp</arg>
+                                    <arg>-Ddatadir=/tmp</arg>
                                     <arg>-jar</arg>
                                     <arg>/maven/${project.artifactId}-${project.version}.${project.packaging}</arg>
                                 </exec>

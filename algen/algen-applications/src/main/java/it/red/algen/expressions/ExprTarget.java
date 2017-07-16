@@ -19,7 +19,11 @@ import it.red.algen.Target;
 public class ExprTarget implements Target {
     private int _computeValue;
     private int _distance;
-    
+
+    public ExprTarget(int computeValue) {
+    	this._computeValue = computeValue;
+    }
+
     public ExprTarget(int computeValue, int minValue, int maxValue) {
         _computeValue = computeValue;
         _distance = Math.max(_computeValue-minValue, maxValue-_computeValue);

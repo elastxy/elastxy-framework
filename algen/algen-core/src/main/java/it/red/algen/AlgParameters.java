@@ -10,27 +10,17 @@
 
 package it.red.algen;
 
+import org.springframework.stereotype.Component;
+
 /**
  *
  * @author grossi
  */
 public class AlgParameters {
     
-    // SINGLETON
-    private static AlgParameters _instance;
-    public static AlgParameters instance(){
-        if(_instance==null){
-            _instance = new AlgParameters();
-        }
-        return _instance;
-    }
-    
-    //PARAMETRI
-    private double _recombinationPerc = Conf.DEFAULT_RECOMBINANTION_PERC;
+	private double _recombinationPerc = Conf.DEFAULT_RECOMBINANTION_PERC;
     private double _mutationPerc = Conf.DEFAULT_MUTATION_PERC;
     private boolean _elitarism = Conf.DEFAULT_ELITARISM;
-    public AlgParameters() {
-    }
     
     public void init(double recombinationPerc, double mutationPerc, boolean elitarism){
         _recombinationPerc = recombinationPerc;

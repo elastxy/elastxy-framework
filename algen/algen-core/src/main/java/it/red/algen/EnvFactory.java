@@ -15,5 +15,5 @@ package it.red.algen;
  * @author grossi
  */
 public interface EnvFactory {
-    public Env create(int maxIterations, int maxLifetime, Integer maxIdenticalFitness);
+    public Env create(AlgParameters algParameters, Target target, int maxIterations, int maxLifetime, Integer maxIdenticalFitness);
 }

@@ -31,7 +31,7 @@ public class GardenConf {
     
     public static final boolean VERBOSE = false;
     
-    public static String BASE_DIR = System.getProperty("basedir");
+    public static String BASE_DIR = System.getProperty("datadir");
 	static {
         BASE_DIR = BASE_DIR==null ? "C:\\tmp\\algendata" : BASE_DIR;
         System.out.println("Set BASEDIR "+BASE_DIR);

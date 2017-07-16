@@ -21,7 +21,9 @@
 	 	<spring.version>4.3.9.RELEASE</spring.version>
 	 	<spring-boot.version>1.5.4.RELEASE</spring-boot.version>
 	 	<opencsv.version>2.4</opencsv.version>
+	 	
 	 	<junit.version>4.12</junit.version>
+	 	<servlet.version>3.0.1</servlet.version>
 	</properties>
 	
     <build>
@@ -44,14 +46,21 @@
 			
 			<dependency>
 				<groupId>org.springframework</groupId>
-				<artifactId>spring-core</artifactId>
+				<artifactId>spring-context</artifactId>
 				<version>${spring.version}</version>
-				<exclusions>
-					<exclusion>
-						<groupId>commons-logging</groupId>
-						<artifactId>commons-logging</artifactId>
-					</exclusion>
-				</exclusions>
+			</dependency>
+						
+			<dependency>
+			  <groupId>commons-logging</groupId>
+			  <artifactId>commons-logging</artifactId>
+			  <version>1.1.1</version>
+			  <scope>provided</scope>
+			</dependency>
+			
+			<dependency>
+			  <groupId>org.slf4j</groupId>
+			  <artifactId>jcl-over-slf4j</artifactId>
+			  <version>1.8.0-alpha2</version>
 			</dependency>
 			
 			<dependency>
@@ -68,6 +77,13 @@
 	            <version>${junit.version}</version>
 	            <scope>test</scope>
 	        </dependency>
+	
+			<dependency>
+			    <groupId>org.springframework</groupId>
+			    <artifactId>spring-test</artifactId>
+			    <version>${spring.version}</version>
+			    <scope>test</scope>
+			</dependency>
 			
 		</dependencies>
 	</dependencyManagement>

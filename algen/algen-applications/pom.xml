@@ -16,16 +16,22 @@
   	</dependency>
   	
   	<dependency>
-			<groupId>org.springframework</groupId>
-			<artifactId>spring-core</artifactId>
-		</dependency>
-		
-		<!-- TEST -->
-	        <dependency>
-	            <groupId>junit</groupId>
-	            <artifactId>junit</artifactId>
-	            <scope>test</scope>
-	        </dependency>
+		<groupId>org.springframework</groupId>
+		<artifactId>spring-context</artifactId>
+	</dependency>
+	
+	<!-- TEST -->
+      <dependency>
+          <groupId>junit</groupId>
+          <artifactId>junit</artifactId>
+          <scope>test</scope>
+      </dependency>
   	
+	<dependency>
+	    <groupId>org.springframework</groupId>
+	    <artifactId>spring-test</artifactId>
+	    <scope>test</scope>
+	</dependency>
+		
   </dependencies>
 </project>

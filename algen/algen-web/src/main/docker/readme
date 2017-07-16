@@ -6,7 +6,7 @@ cd target/docker
 docker build -t algen .
 
 # Run/Stop [-d for detached]
-docker run --name algenc -p 4000:8080 -v /c/Users/red/Docker/algenc:/tmp -e "BASEDIR=/tmp" algen/algen-web
+docker run --name algenc -p 4000:8080 -v /c/Users/red/Docker/algenc:/tmp -e "DATADIR=/tmp" algen
 docker stop algenc
 
 # Shell

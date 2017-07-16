@@ -25,7 +25,7 @@ import org.springframework.context.annotation.Configuration;
 @Configuration
 @EnableAutoConfiguration
 @EnableConfigurationProperties
-@ComponentScan
+@ComponentScan(basePackages = "it.red.algen")
 public class SampleApplication {
 
 	public static void main(String[] args) throws Exception {

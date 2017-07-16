@@ -13,6 +13,7 @@ package it.red.algen;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
+
 import it.red.algen.stats.Stats;
 import it.red.algen.tracking.EnvObserver;
 
@@ -22,13 +23,14 @@ import it.red.algen.tracking.EnvObserver;
  * @author grossi
  */
 public class Env {
-    
+	
     // DATI CORRENTI
     private Population _currentGen;
     private int _currentGenNumber;
     private int _totIdenticalFitnesses = 0; // total of subsequent best matches with same fitness value
     
     // PARAMETRI
+	private AlgParameters _algParameters;
     private Target _target;
     private int _maxIterations;
     private int _maxLifetime;
@@ -41,8 +43,9 @@ public class Env {
     // LISTENER
     private EnvObserver _listener;
     
-    public Env(Population startGen, Target target, int maxIterations, int maxLifetime, Integer maxIdenticalFitnesses) {
-        _currentGen = startGen;
+    public void init(AlgParameters algParameters, Population startGen, Target target, int maxIterations, int maxLifetime, Integer maxIdenticalFitnesses) {
+        _algParameters = algParameters;
+    	_currentGen = startGen;
         _target = target;
         _maxIterations = maxIterations;
         _maxLifetime = maxLifetime;
@@ -53,6 +56,10 @@ public class Env {
     public void subscribe(EnvObserver l){
         _listener = l;
         if(_currentGen!=null) _currentGen.subscribe(l);
+    }
+    
+    public AlgParameters getAlgParameters(){
+    	return _algParameters;
     }
     
     public Stats getStats(){
@@ -100,7 +107,7 @@ public class Env {
             Fitness bestMatchFitness = lastGen.getBestMatch().getFitness();
             
             // Check stability of the fitness value
-            if(AlgParameters.instance().getElitarism()){
+            if(_algParameters.getElitarism()){
 	            if(bestMatchFitness.sameOf(currentGenFitness)){
 	            	_totIdenticalFitnesses++;
 	                if(_totIdenticalFitnesses==_maxIdenticalFitnesses){

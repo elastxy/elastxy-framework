@@ -10,6 +10,10 @@
 
 package it.red.algen.expressions;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
+
+import it.red.algen.AlgParameters;
 import it.red.algen.Env;
 import it.red.algen.EnvFactory;
 import it.red.algen.Population;
@@ -19,23 +23,26 @@ import it.red.algen.Target;
  *
  * @author grossi
  */
+@Component
 public class ExprEnvFactory implements EnvFactory {
-    private int targetValue;
-    
-	public ExprEnvFactory(int targetValue){
-		this.targetValue = targetValue;
-	}
+	
+	@Autowired
+	private ExprPopulationFactory populationFactory;
 	
 	
-    public Env create(int maxIterations, int maxLifetime, Integer maxIdenticalFitnesses){
+    public Env create(AlgParameters algParameters, Target target, int maxIterations, int maxLifetime, Integer maxIdenticalFitnesses){
         // Crea la popolazione iniziale
-        Population startGen = ExprPopulationFactory.createNew(ExprConf.INITIAL_POPULATION);
+        Population startGen = populationFactory.createNew(algParameters, ExprConf.INITIAL_POPULATION);
         
         // Definisce l'ambiente di riproduzione
         ExprSolution minSol = new ExprSolution(0, '-', 9);
         ExprSolution maxSol = new ExprSolution(9, '*', 9);
-        Target target = new ExprTarget(targetValue, minSol.compute(), maxSol.compute());
-        return new Env(startGen, target, maxIterations, maxLifetime, maxIdenticalFitnesses);
+        ExprTarget exprTarget = new ExprTarget(((ExprTarget)target).getComputeValue(), minSol.compute(), maxSol.compute());
+        // TODOA: add Contraints, StopCondition
+        
+        Env env = new Env();
+        env.init(algParameters, startGen, exprTarget, maxIterations, maxLifetime, maxIdenticalFitnesses);
+        return env;
     }
     
 }

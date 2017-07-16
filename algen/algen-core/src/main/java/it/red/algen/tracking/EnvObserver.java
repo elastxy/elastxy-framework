@@ -10,6 +10,8 @@
 
 package it.red.algen.tracking;
 
+import org.springframework.beans.factory.annotation.Autowired;
+
 import it.red.algen.AlgParameters;
 import it.red.algen.Env;
 import it.red.algen.Population;
@@ -24,6 +26,7 @@ import it.red.algen.stats.Stats;
  * @author grossi
  */
 public class EnvObserver {
+	
     private boolean _verbose;
     private Reporter _reporter;
     
@@ -75,7 +78,7 @@ public class EnvObserver {
         log.out(stats._lastGeneration.getBestMatch());
         log.out("Number of generations: "+stats._generations);
         log.out("Total time (sec): "+stats._time);
-        if(AlgParameters.instance().getElitarism()) {
+        if(environment.getAlgParameters().getElitarism()) {
         	log.out("Total generations with same fitness: "+stats._totIdenticalFitnesses);
         }
         

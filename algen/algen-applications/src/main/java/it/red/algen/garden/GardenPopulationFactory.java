@@ -10,23 +10,26 @@
 
 package it.red.algen.garden;
 
-import it.red.algen.Population;
-import it.red.algen.garden.domain.Place;
-import it.red.algen.garden.domain.Tree;
-
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
+
+import org.springframework.stereotype.Component;
+
+import it.red.algen.AlgParameters;
+import it.red.algen.Population;
+import it.red.algen.garden.domain.Place;
+import it.red.algen.garden.domain.Tree;
 
 /**
  *
  * @author grossi
  */
+@Component
 public class GardenPopulationFactory {
 	private Place[] places;
 	private Tree[] trees;
 
-	
 	public void init(Place[] places, Tree[] trees){
 		this.places = places;
 		this.trees = trees;
@@ -38,8 +41,8 @@ public class GardenPopulationFactory {
 	 * @param number
 	 * @return
 	 */
-    public Population createNew(int number) {
-    	Population population = new Population();
+    public Population createNew(AlgParameters algParameters, int number) {
+    	Population population = new Population(algParameters);
     	for(int i = 0; i < number; i++){
     		List<Tree> listOfTrees = Arrays.asList(trees);
     		Collections.shuffle(listOfTrees);

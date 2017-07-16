@@ -29,6 +29,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import it.red.algen.AlgParameters;
 import it.red.algen.expressions.ExprConf;
 import it.red.algen.expressions.ExprEnvFactory;
+import it.red.algen.expressions.ExprTarget;
 import it.red.algen.garden.GardenCSVReporter;
 import it.red.algen.garden.GardenConf;
 import it.red.algen.garden.GardenEnvFactory;
@@ -45,6 +46,15 @@ public class SampleController {
 	private HelloWorldService helloWorldService;
 
 	
+	// TODOA: refactor!
+	@Autowired
+	private ExprEnvFactory exprEnvFactory;
+	
+	// TODOA: refactor!
+	@Autowired
+	private GardenEnvFactory gardenEnvFactory;
+	
+	
 	@RequestMapping(path = "/access", method = RequestMethod.HEAD)
 	@ResponseBody
 	public Map<String, String> helloWorld() {
@@ -58,12 +68,15 @@ public class SampleController {
 		 	LoggerManager.instance().init(new SimpleLogger());
 		 	Experiment e = null;
 		 	if("garden".equals(domain)){
-		        AlgParameters.instance().init(
+		 		AlgParameters algParameters = new AlgParameters();
+		        algParameters.init(
 		        		GardenConf.RECOMBINANTION_PERC, 
 		        		GardenConf.MUTATION_PERC, 
 		        		GardenConf.ELITARISM);
 		        e = new Experiment(
-		        		new GardenEnvFactory(), 
+		        		algParameters,
+		        		null,
+		        		gardenEnvFactory, 
 		        		GardenConf.MAX_ITERATIONS, 
 		        		GardenConf.MAX_LIFETIME_SEC, 
 		        		GardenConf.MAX_IDENTICAL_FITNESSES,
@@ -71,12 +84,15 @@ public class SampleController {
 		        		new GardenCSVReporter(GardenConf.STATS_DIR));
 		 	}
 		 	else if("expressions".equals(domain)){
-		        AlgParameters.instance().init(
+		 		AlgParameters algParameters = new AlgParameters();
+		        algParameters.init(
 		        		ExprConf.RECOMBINANTION_PERC, 
 		        		ExprConf.MUTATION_PERC, 
 		        		ExprConf.ELITARISM);
 		        e = new Experiment(
-		        		new ExprEnvFactory(target), 
+		        		algParameters,
+		        		new ExprTarget(target),
+		        		exprEnvFactory, 
 		        		ExprConf.MAX_ITERATIONS, 
 		        		ExprConf.MAX_LIFETIME_SEC, 
 		        		ExprConf.MAX_IDENTICAL_FITNESSES,

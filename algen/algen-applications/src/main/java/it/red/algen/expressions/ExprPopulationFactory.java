@@ -10,17 +10,21 @@
 
 package it.red.algen.expressions;
 
+import org.springframework.stereotype.Component;
+
+import it.red.algen.AlgParameters;
 import it.red.algen.Population;
 
 /**
  *
  * @author grossi
  */
+@Component
 public class ExprPopulationFactory {
-    
-    public static Population createNew(int number) {
+    	
+    public Population createNew(AlgParameters algParameters, int number) {
         ExprGenesFactory factory = new ExprGenesFactory();
-        Population population = new Population();
+        Population population = new Population(algParameters);
         for(int i = 0; i < number; i++){
             population.add(new ExprSolution(
                     factory.getNumber(0),
@@ -30,9 +34,9 @@ public class ExprPopulationFactory {
         return population;
     }
 
-    public static Population createNewRandom(int number) {
+    public Population createNewRandom(AlgParameters algParameters, int number) {
         ExprGenesFactory factory = new ExprGenesFactory();
-        Population population = new Population();
+        Population population = new Population(algParameters);
         for(int i = 0; i < number; i++){
             population.add(new ExprSolution(
                     factory.getRandomNumber(),

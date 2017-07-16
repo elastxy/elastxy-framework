@@ -9,13 +9,13 @@
  */
 
 package it.red.algen;
-import it.red.algen.tracking.EnvObserver;
-
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Random;
+
+import it.red.algen.tracking.EnvObserver;
 
 /** Contiene la popolazione di soluzioni
  *
@@ -23,13 +23,17 @@ import java.util.Random;
  */
 public class Population {
     private static Random RANDOMIZER = new Random();
+
+    private AlgParameters _algParameters;
+    
     private List<Solution> _solutions;
     private Solution _bestMatch;
     
     private EnvObserver _listener;
     
-    public Population() {
+    public Population(AlgParameters algParameters) {
         _solutions = new ArrayList<Solution>();
+        _algParameters = algParameters;
     }
     
     public void subscribe(EnvObserver l){
@@ -92,9 +96,9 @@ public class Population {
     	Collections.shuffle(actualPopulation);
     	
         // Inserimento best match e rimozione fra quelli da valutare
-        Population nextGen = new Population();
+        Population nextGen = new Population(_algParameters);
         nextGen.subscribe(_listener);
-        if(AlgParameters.instance().getElitarism() && _bestMatch!=null){
+        if(_algParameters.getElitarism() && _bestMatch!=null){
             nextGen.add((Solution)_bestMatch.clone());
             actualPopulation.remove(_bestMatch);
         }
@@ -114,7 +118,7 @@ public class Population {
             Solution[] sons = null;
             
             // Crossover
-            boolean crossover = RANDOMIZER.nextDouble() < AlgParameters.instance().getRecombinationPerc();
+            boolean crossover = RANDOMIZER.nextDouble() < _algParameters.getRecombinationPerc();
             if(crossover) {
                 sons = father.crossoverWith(mother);
                 fireCrossoverEvent(father, mother, sons);
@@ -127,8 +131,8 @@ public class Population {
             }
             
             // Mutazione
-            boolean mute0 = RANDOMIZER.nextDouble() < AlgParameters.instance().getMutationPerc();
-            boolean mute1 = RANDOMIZER.nextDouble() < AlgParameters.instance().getMutationPerc();
+            boolean mute0 = RANDOMIZER.nextDouble() < _algParameters.getMutationPerc();
+            boolean mute1 = RANDOMIZER.nextDouble() < _algParameters.getMutationPerc();
             if(mute0) { 
                 Solution old = sons[0];
                 sons[0] = (Solution)sons[0].clone();

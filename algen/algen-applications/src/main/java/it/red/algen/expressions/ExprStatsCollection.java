@@ -10,6 +10,8 @@
 
 package it.red.algen.expressions;
 
+import it.red.algen.AlgParameters;
+import it.red.algen.garden.GardenConf;
 import it.red.algen.stats.StatsCollector;
 import it.red.algen.tracking.CSVReporter;
 
@@ -20,7 +22,14 @@ import it.red.algen.tracking.CSVReporter;
 public class ExprStatsCollection {
     
     public static void main(String[] args) {
+        AlgParameters algParameters = new AlgParameters();
+        algParameters.init(
+        		GardenConf.RECOMBINANTION_PERC, 
+        		GardenConf.MUTATION_PERC, 
+        		GardenConf.ELITARISM);
+
         StatsCollector collector = new StatsCollector(new ExprExperimentFactory(
+        		algParameters,
         		10000, 
         		120, 
         		100,
