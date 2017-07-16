@@ -1,0 +1,45 @@
+SUN EXPOSURE;WET LEVEL;WIND LEVEL;NOTE;;;;;NAME;SUN REQUEST;MAX WET ALLOWED;MAX WIND ALLOWED
+2;2;2;ringhiera;Fragola1;2;2;2;;;;
+2;2;2;ringhiera;Fragola2;2;2;2;;;;
+2;2;2;ringhiera;Salvia;2;2;2;;;;
+2;2;2;ringhiera;Geranio;2;2;2;;;;
+2;2;2;ringhiera;Rosa;2;1;2;;;;
+2;2;2;ringhiera;Garofano;2;2;2;;;;
+2;2;2;ringhiera;;;;;;;;
+2;2;2;ringhiera;;;;;;;;
+2;2;2;ringhiera;;;;;;;;
+1;0;2;muro alto;Gelsomino1;1;2;2;;;;
+1;0;2;muro alto;Gelsomino2;1;2;2;;;;
+0;0;1;muro basso;Ribes rosso;0;2;2;Alloro grande;0;0;2
+0;0;1;muro basso;Origano;0;2;2;Cerfoglio;0;0;2
+0;0;1;muro basso;Melissa;0;2;2;Erica;0;0;2
+0;0;1;muro basso;Prezzemolo;0;2;2;Elicrisio;0;0;2
+0;0;1;muro basso;Erba cipollina;0;2;2;;;;
+0;0;1;muro basso;Tulipano1;2;2;2;;;;
+0;0;1;muro basso;Tulipano2;2;2;2;;;;
+0;0;1;muro basso;Tulipano3;2;2;2;;;;
+0;0;1;muro basso;Tulipano4;2;2;2;;;;
+0;0;1;muro basso;Tulipano5;2;2;2;Campanellino;2;2;2
+0;0;1;muro basso;Coriandolo;0;2;2;Verbena;2;2;2
+0;0;1;muro basso;Menta;2;2;2;Geranio edera;2;2;2
+0;0;1;muro basso;Alloro piccolo;2;2;2;;;;
+0;0;1;muro basso;Pianta grassa;2;0;2;;;;
+0;0;1;muro basso;;;;;;;;
+0;0;1;muro basso;;;;;;;;
+2;0;1;su seggiola;Basilico;2;2;2;;;;
+2;0;2;angolo sole;Finocchietto selvatico;2;2;2;;;;
+2;0;2;angolo sole;Limoncina;2;2;2;;;;
+2;0;2;angolo sole;Santoreggia;2;0;2;;;;
+2;0;2;angolo sole;Maggiorana;2;0;2;;;;
+2;0;2;angolo sole;Timo;2;0;2;;;;
+2;0;2;angolo sole;Rosmarino;2;0;2;;;;
+2;0;2;angolo sole;Borragine;2;0;2;;;;
+2;0;2;angolo sole;Santolina;2;0;2;;;;
+2;0;2;angolo sole;Pomodoro;2;2;2;;;;
+2;0;2;angolo sole;Aneto;2;0;2;;;;
+2;0;2;angolo sole;Dragoncello;2;0;2;;;;
+0;0;1;vicino porta;;;;;;;;
+0;0;1;vicino porta;;;;;;;;
+0;0;1;vicino porta;;;;;;;;
+0;0;1;vicino porta;;;;;Gerbera;2;2;2
+0;0;0;dentro;Orchidea;0;0;0;Ibisco;2;1;2

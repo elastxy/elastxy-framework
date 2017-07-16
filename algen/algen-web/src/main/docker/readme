@@ -1,0 +1,21 @@
+# Maven build
+mvn clean package docker:build
+
+# Build
+cd target/docker
+docker build -t algen .
+
+# Run/Stop
+docker run -d --name algenc -p 4000:8080 -v /c/Users/red/Docker/algenc:/tmp -e "BASEDIR=/tmp" algen
+docker stop algenc
+
+# Shell
+docker exec -it algenc sh
+
+# Manage images
+docker -rmi algen
+
+# Manage containers
+docker ps
+docker stop CID
+docker logs -f algenc
