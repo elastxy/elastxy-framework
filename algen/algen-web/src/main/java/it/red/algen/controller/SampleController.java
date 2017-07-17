@@ -22,12 +22,11 @@ import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import it.red.algen.AlgParameters;
+import it.red.algen.conf.AlgorithmContext;
 import it.red.algen.expressions.ExprConf;
 import it.red.algen.expressions.ExprEnvFactory;
 import it.red.algen.expressions.ExprTarget;
@@ -47,7 +46,7 @@ public class SampleController {
 	private InfoService infoService;
 
 	
-	// TODOA: refactor!
+	// TODOA: refactor! ExprEnvFactory cannot be a Singleton
 	@Autowired
 	private ExprEnvFactory exprEnvFactory;
 	
@@ -75,36 +74,36 @@ public class SampleController {
 		 	LoggerManager.instance().init(new SimpleLogger());
 		 	Experiment e = null;
 		 	if("garden".equals(domain)){
-		 		AlgParameters algParameters = new AlgParameters();
-		        algParameters.init(
-		        		GardenConf.RECOMBINANTION_PERC, 
+				AlgorithmContext context = AlgorithmContext.build(
+						GardenConf.RECOMBINANTION_PERC, 
 		        		GardenConf.MUTATION_PERC, 
-		        		GardenConf.ELITARISM);
-		        e = new Experiment(
-		        		algParameters,
-		        		null,
-		        		gardenEnvFactory, 
+		        		GardenConf.ELITARISM, 
 		        		GardenConf.MAX_ITERATIONS, 
 		        		GardenConf.MAX_LIFETIME_SEC, 
 		        		GardenConf.MAX_IDENTICAL_FITNESSES,
-		        		GardenConf.VERBOSE,
+		        		GardenConf.VERBOSE, 
 		        		new GardenCSVReporter(GardenConf.STATS_DIR));
+		 		
+		        e = new Experiment(
+		        		context,
+		        		null,
+		        		gardenEnvFactory);
 		 	}
 		 	else if("expressions".equals(domain)){
-		 		AlgParameters algParameters = new AlgParameters();
-		        algParameters.init(
-		        		ExprConf.RECOMBINANTION_PERC, 
+				AlgorithmContext context = AlgorithmContext.build(
+						ExprConf.RECOMBINANTION_PERC, 
 		        		ExprConf.MUTATION_PERC, 
-		        		ExprConf.ELITARISM);
-		        e = new Experiment(
-		        		algParameters,
-		        		new ExprTarget(target),
-		        		exprEnvFactory, 
+		        		ExprConf.ELITARISM, 
 		        		ExprConf.MAX_ITERATIONS, 
 		        		ExprConf.MAX_LIFETIME_SEC, 
 		        		ExprConf.MAX_IDENTICAL_FITNESSES,
 		        		ExprConf.VERBOSE, 
 		        		new CSVReporter(ExprConf.STATS_DIR));
+
+		        e = new Experiment(
+		        		context,
+		        		new ExprTarget(target),
+		        		exprEnvFactory);
 		 	}
 	        e.run();
 	        Stats stats = e.getStats();

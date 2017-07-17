@@ -13,26 +13,28 @@ package it.red.algen.expressions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import it.red.algen.AlgParameters;
 import it.red.algen.Env;
 import it.red.algen.EnvFactory;
 import it.red.algen.Population;
 import it.red.algen.Target;
+import it.red.algen.conf.AlgorithmContext;
 
 /**
  *
+ *TODO: move all factories in a package
  * @author grossi
  */
 @Component
 public class ExprEnvFactory implements EnvFactory {
 	
+	
 	@Autowired
 	private ExprPopulationFactory populationFactory;
 	
 	
-    public Env create(AlgParameters algParameters, Target target, int maxIterations, int maxLifetime, Integer maxIdenticalFitnesses){
+    public Env create(AlgorithmContext context, Target target){
         // Crea la popolazione iniziale
-        Population startGen = populationFactory.createNew(algParameters, ExprConf.INITIAL_POPULATION);
+        Population startGen = populationFactory.createNew(context.parameters, ExprConf.INITIAL_POPULATION);
         
         // Definisce l'ambiente di riproduzione
         ExprSolution minSol = new ExprSolution(0, '-', 9);
@@ -41,8 +43,9 @@ public class ExprEnvFactory implements EnvFactory {
         // TODOA: add Contraints, StopCondition
         
         Env env = new Env();
-        env.init(algParameters, startGen, exprTarget, maxIterations, maxLifetime, maxIdenticalFitnesses);
+        env.init(context, startGen, exprTarget);
         return env;
     }
-    
+
+
 }

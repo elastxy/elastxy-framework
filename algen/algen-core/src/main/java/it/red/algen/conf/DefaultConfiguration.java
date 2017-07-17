@@ -8,14 +8,19 @@
  * Open. You can then make changes to the template in the Source Editor.
  */
 
-package it.red.algen;
+package it.red.algen.conf;
 
 /**
  *
  * @author grossi
  */
-public class Conf {
+public class DefaultConfiguration {
     public static final boolean DEFAULT_ELITARISM = true;
-	public static double DEFAULT_RECOMBINANTION_PERC = 0.66;
-    public static double DEFAULT_MUTATION_PERC = 0.1;
+	public static final double DEFAULT_RECOMBINANTION_PERC = 0.66;
+    public static final double DEFAULT_MUTATION_PERC = 0.1;
+    
+    public static final int MAX_ITERATIONS = -1;
+    public static final int MAX_LIFETIME_MS = -1;
+    public static final int MAX_IDENTICAL_FITNESSES = -1;
+
 }

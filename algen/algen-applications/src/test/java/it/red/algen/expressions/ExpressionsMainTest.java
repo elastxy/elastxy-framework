@@ -20,8 +20,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
-import it.red.algen.AlgParameters;
 import it.red.algen.TestConfig;
+import it.red.algen.conf.AlgorithmContext;
 import it.red.algen.stats.Experiment;
 import it.red.algen.tracking.CSVReporter;
 import it.red.algen.tracking.LoggerManager;
@@ -43,21 +43,24 @@ public class ExpressionsMainTest {
 		System.setProperty("datadir", new File("C:\\tmp\\algendata").getAbsolutePath());
 
 		LoggerManager.instance().init(new SimpleLogger());
-		AlgParameters algParameters = new AlgParameters();
-		algParameters.init(
-        		ExprConf.RECOMBINANTION_PERC, 
+		
+		AlgorithmContext context = AlgorithmContext.build(
+				ExprConf.RECOMBINANTION_PERC, 
         		ExprConf.MUTATION_PERC, 
-        		ExprConf.ELITARISM);
-        Experiment e = new Experiment(
-        		algParameters,
-        		new ExprTarget(ExprConf.TARGET),
-        		exprEnvFactory,
+        		ExprConf.ELITARISM, 
         		ExprConf.MAX_ITERATIONS, 
         		ExprConf.MAX_LIFETIME_SEC, 
         		ExprConf.MAX_IDENTICAL_FITNESSES,
         		ExprConf.VERBOSE, 
         		new CSVReporter(ExprConf.STATS_DIR));
+		
+		Experiment e = new Experiment(
+        		context,
+        		new ExprTarget(33),
+        		exprEnvFactory);
+        
         e.run();
+        
         assertNotNull(e.getStats());
         assertNotNull(e.getStats()._lastGeneration);
     }

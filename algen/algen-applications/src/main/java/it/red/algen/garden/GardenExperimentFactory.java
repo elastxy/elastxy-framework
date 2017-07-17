@@ -10,32 +10,19 @@
 
 package it.red.algen.garden;
 
-import it.red.algen.AlgParameters;
+import it.red.algen.Target;
+import it.red.algen.conf.AlgorithmContext;
 import it.red.algen.stats.Experiment;
 import it.red.algen.stats.ExperimentFactory;
-import it.red.algen.tracking.Reporter;
 
 /**
  *
  * @author grossi
  */
 public class GardenExperimentFactory implements ExperimentFactory {
-    private AlgParameters _algParameters;
-    private int _maxIterations;
-    private int _maxLifetime;
-    private Integer _maxIdenticalFitnesses;
-    private boolean _verbose;
-    private Reporter _reporter;
     
-    public GardenExperimentFactory(AlgParameters algParameters, int maxIterations, int maxLifetime, Integer maxIdenticalFitnesses, boolean verbose, Reporter reporter){
-        _algParameters = algParameters;
-        _maxIterations = maxIterations;
-        _verbose = verbose;
-        _reporter = reporter;
+    public Experiment create(AlgorithmContext context, Target target){
+        return new Experiment(context, target, new GardenEnvFactory());
     }
-    
-    public Experiment create(){
-        return new Experiment(_algParameters, null, new GardenEnvFactory(), _maxIterations, _maxLifetime, _maxIdenticalFitnesses, _verbose, _reporter);
-    }
-    
+
 }

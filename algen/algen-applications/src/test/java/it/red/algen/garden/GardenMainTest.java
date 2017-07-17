@@ -20,10 +20,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
-import it.red.algen.AlgParameters;
 import it.red.algen.TestConfig;
-import it.red.algen.expressions.ExprEnvFactory;
+import it.red.algen.conf.AlgorithmContext;
 import it.red.algen.stats.Experiment;
+import it.red.algen.tracking.CSVReporter;
 import it.red.algen.tracking.LoggerManager;
 import it.red.algen.tracking.SimpleLogger;
 
@@ -44,21 +44,24 @@ public class GardenMainTest {
 		System.setProperty("datadir", new File("C:\\tmp\\algendata").getAbsolutePath());
 		
         LoggerManager.instance().init(new SimpleLogger());
-        AlgParameters algParameters = new AlgParameters();
-        algParameters.init(
-        		GardenConf.RECOMBINANTION_PERC, 
+        
+		AlgorithmContext context = AlgorithmContext.build(
+				GardenConf.RECOMBINANTION_PERC, 
         		GardenConf.MUTATION_PERC, 
-        		GardenConf.ELITARISM);
-        Experiment e = new Experiment(
-        		algParameters,
-        		null,
-        		gardenEnvFactory, 
+        		GardenConf.ELITARISM, 
         		GardenConf.MAX_ITERATIONS, 
         		GardenConf.MAX_LIFETIME_SEC, 
         		GardenConf.MAX_IDENTICAL_FITNESSES,
-        		GardenConf.VERBOSE,
-        		new GardenCSVReporter(GardenConf.STATS_DIR));
+        		GardenConf.VERBOSE, 
+        		new CSVReporter(GardenConf.STATS_DIR));
+		
+		Experiment e = new Experiment(
+        		context,
+        		null, // target already set in database data
+        		gardenEnvFactory);
+        
         e.run();
+        
         assertNotNull(e.getStats());
         assertNotNull(e.getStats()._lastGeneration);
     }

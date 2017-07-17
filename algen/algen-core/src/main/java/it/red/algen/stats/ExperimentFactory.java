@@ -10,12 +10,15 @@
 
 package it.red.algen.stats;
 
+import it.red.algen.Target;
+import it.red.algen.conf.AlgorithmContext;
+
 /**
  *
  * @author grossi
  */
 public interface ExperimentFactory {
     
-    public Experiment create();
+    public Experiment create(AlgorithmContext context, Target target);
     
 }

@@ -15,6 +15,7 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Random;
 
+import it.red.algen.conf.OperatorsParameters;
 import it.red.algen.tracking.EnvObserver;
 
 /** Contiene la popolazione di soluzioni
@@ -24,14 +25,14 @@ import it.red.algen.tracking.EnvObserver;
 public class Population {
     private static Random RANDOMIZER = new Random();
 
-    private AlgParameters _algParameters;
+    private OperatorsParameters _algParameters;
     
     private List<Solution> _solutions;
     private Solution _bestMatch;
     
     private EnvObserver _listener;
     
-    public Population(AlgParameters algParameters) {
+    public Population(OperatorsParameters algParameters) {
         _solutions = new ArrayList<Solution>();
         _algParameters = algParameters;
     }

@@ -12,8 +12,8 @@ package it.red.algen.expressions;
 
 import org.springframework.stereotype.Component;
 
-import it.red.algen.AlgParameters;
 import it.red.algen.Population;
+import it.red.algen.conf.OperatorsParameters;
 
 /**
  *
@@ -22,7 +22,7 @@ import it.red.algen.Population;
 @Component
 public class ExprPopulationFactory {
     	
-    public Population createNew(AlgParameters algParameters, int number) {
+    public Population createNew(OperatorsParameters algParameters, int number) {
         ExprGenesFactory factory = new ExprGenesFactory();
         Population population = new Population(algParameters);
         for(int i = 0; i < number; i++){
@@ -34,7 +34,7 @@ public class ExprPopulationFactory {
         return population;
     }
 
-    public Population createNewRandom(AlgParameters algParameters, int number) {
+    public Population createNewRandom(OperatorsParameters algParameters, int number) {
         ExprGenesFactory factory = new ExprGenesFactory();
         Population population = new Population(algParameters);
         for(int i = 0; i < number; i++){

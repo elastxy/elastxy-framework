@@ -16,8 +16,8 @@ import java.util.List;
 
 import org.springframework.stereotype.Component;
 
-import it.red.algen.AlgParameters;
 import it.red.algen.Population;
+import it.red.algen.conf.OperatorsParameters;
 import it.red.algen.garden.domain.Place;
 import it.red.algen.garden.domain.Tree;
 
@@ -41,7 +41,7 @@ public class GardenPopulationFactory {
 	 * @param number
 	 * @return
 	 */
-    public Population createNew(AlgParameters algParameters, int number) {
+    public Population createNew(OperatorsParameters algParameters, int number) {
     	Population population = new Population(algParameters);
     	for(int i = 0; i < number; i++){
     		List<Tree> listOfTrees = Arrays.asList(trees);

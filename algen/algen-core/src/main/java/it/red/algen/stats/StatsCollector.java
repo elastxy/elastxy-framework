@@ -12,6 +12,8 @@ package it.red.algen.stats;
 
 import java.util.Optional;
 
+import it.red.algen.Target;
+import it.red.algen.conf.AlgorithmContext;
 import it.red.algen.tracking.Logger;
 import it.red.algen.tracking.LoggerManager;
 import it.red.algen.tracking.SimpleLogger;
@@ -23,13 +25,18 @@ import it.red.algen.tracking.SimpleLogger;
  * @author grossi
  */
 public class StatsCollector {
+	private AlgorithmContext _context;
     private ExperimentFactory _factory;
     private int _experiments;
+    private Target _target;
+    
     private GlobalStats _globalStats;
     
-    public StatsCollector(ExperimentFactory factory, int experiments){
-        _factory = factory;
+    public StatsCollector(AlgorithmContext context, ExperimentFactory factory, int experiments, Target target){
+        _context = context;
+    	_factory = factory;
         _experiments = experiments;
+        _target = target;
         _globalStats = new GlobalStats();
         _globalStats._totExperiments = _experiments;
     }
@@ -47,7 +54,7 @@ public class StatsCollector {
     public void run(){
         LoggerManager.instance().init(new SimpleLogger());
         for(int i = 0; i < _experiments; i++){
-            Experiment e = _factory.create();
+            Experiment e = _factory.create(_context, _target);
             e.run();
             addStats(e.getStats());
         }

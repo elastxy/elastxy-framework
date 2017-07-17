@@ -12,10 +12,11 @@ package it.red.algen.tracking;
 
 import org.springframework.beans.factory.annotation.Autowired;
 
-import it.red.algen.AlgParameters;
 import it.red.algen.Env;
 import it.red.algen.Population;
 import it.red.algen.Solution;
+import it.red.algen.conf.AlgorithmContext;
+import it.red.algen.conf.OperatorsParameters;
 import it.red.algen.stats.Stats;
 
 
@@ -27,16 +28,14 @@ import it.red.algen.stats.Stats;
  */
 public class EnvObserver {
 	
-    private boolean _verbose;
-    private Reporter _reporter;
+    private AlgorithmContext _context;
     
-    public EnvObserver(boolean verbose, Reporter reporter){
-        _verbose = verbose;
-        _reporter = reporter;
+    public EnvObserver(AlgorithmContext context){
+        _context = context;
     }
     
     public void newGenerationEvent(int number, Population newGen){
-        if(_verbose) LoggerManager.instance().out("\n*** Nuova generazione "+number+" > \n"+newGen+"\n");
+        if(_context.monitoringConfiguration.verbose) LoggerManager.instance().out("\n*** Nuova generazione "+number+" > \n"+newGen+"\n");
     }
     
     public void fitnessCalculatedEvent(Solution s){
@@ -44,15 +43,15 @@ public class EnvObserver {
     }
     
     public void illegalSolutionEvent(Solution s){
-        if(_verbose) LoggerManager.instance().out("!    "+s+" Soluzione non ammessa. "+s.legalCheck());
+        if(_context.monitoringConfiguration.verbose) LoggerManager.instance().out("!    "+s+" Soluzione non ammessa. "+s.legalCheck());
     }
     
     public void crossoverEvent(Solution father, Solution mother, Solution[] sons){
-        if(_verbose) LoggerManager.instance().out("XXX CROSSOVER: \n"+father+"\n"+mother+"\n\t->\n"+sons[0]+"\n"+sons[1]);
+        if(_context.monitoringConfiguration.verbose) LoggerManager.instance().out("XXX CROSSOVER: \n"+father+"\n"+mother+"\n\t->\n"+sons[0]+"\n"+sons[1]);
     }
     
     public void mutationEvent(Solution original, Solution mutated){
-        if(_verbose) LoggerManager.instance().out("+++ MUTAZIONE: \n"+original+"\n\t-> \n"+mutated);
+        if(_context.monitoringConfiguration.verbose) LoggerManager.instance().out("+++ MUTAZIONE: \n"+original+"\n\t-> \n"+mutated);
     }
     
     public void goalReachedEvent(Env environment){
@@ -78,12 +77,12 @@ public class EnvObserver {
         log.out(stats._lastGeneration.getBestMatch());
         log.out("Number of generations: "+stats._generations);
         log.out("Total time (sec): "+stats._time);
-        if(environment.getAlgParameters().getElitarism()) {
+        if(environment.getContext().parameters.getElitarism()) {
         	log.out("Total generations with same fitness: "+stats._totIdenticalFitnesses);
         }
         
-        if(_reporter!=null) {
-        	_reporter.createReports(stats);
+        if(_context.monitoringConfiguration.reporter!=null) {
+        	_context.monitoringConfiguration.reporter.createReports(stats);
         }
         
 //        log.out("History of generations");

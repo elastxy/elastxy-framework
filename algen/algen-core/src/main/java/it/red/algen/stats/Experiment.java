@@ -10,12 +10,11 @@
 
 package it.red.algen.stats;
 
-import it.red.algen.AlgParameters;
 import it.red.algen.Env;
 import it.red.algen.EnvFactory;
 import it.red.algen.Target;
+import it.red.algen.conf.AlgorithmContext;
 import it.red.algen.tracking.EnvObserver;
-import it.red.algen.tracking.Reporter;
 
 
 
@@ -25,25 +24,15 @@ import it.red.algen.tracking.Reporter;
  * @author grossi
  */
 public class Experiment {
-	private AlgParameters _algParameters;
+	private AlgorithmContext _context;
 	private Target _target;
     private EnvFactory _factory;
-    private int _maxIterations;
-    private int _maxLifetime;
-    private Integer _maxIdenticalFitnesses;
-    private boolean _verbose;
     private Stats _stats;
-    private Reporter _reporter;
     
-    public Experiment(AlgParameters algParameters, Target target, EnvFactory factory, int maxIterations, int maxLifetime, Integer maxIdenticalFitnesses, boolean verbose, Reporter reporter) {
-    	_algParameters = algParameters;
+    public Experiment(AlgorithmContext context, Target target, EnvFactory factory) {
+    	_context = context;
     	_target = target;
-    	_maxIterations = maxIterations;
-        _maxLifetime = maxLifetime;
-        _maxIdenticalFitnesses = maxIdenticalFitnesses;
         _factory = factory;
-        _verbose = verbose;
-        _reporter = reporter;
     }
     
     public Stats getStats(){
@@ -51,8 +40,8 @@ public class Experiment {
     }
     
     public void run(){
-        EnvObserver observer = new EnvObserver(_verbose, _reporter);
-        Env environment = _factory.create(_algParameters, _target, _maxIterations, _maxLifetime, _maxIdenticalFitnesses);
+        EnvObserver observer = new EnvObserver(_context);
+        Env environment = _factory.create(_context, _target);
         environment.subscribe(observer);
         
         // Avvia l'evoluzione

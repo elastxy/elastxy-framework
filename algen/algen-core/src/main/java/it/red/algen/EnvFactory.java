@@ -10,10 +10,13 @@
 
 package it.red.algen;
 
+import it.red.algen.conf.AlgorithmContext;
+
 /**
  *
  * @author grossi
  */
 public interface EnvFactory {
-    public Env create(AlgParameters algParameters, Target target, int maxIterations, int maxLifetime, Integer maxIdenticalFitness);
+    
+	public Env create(AlgorithmContext context, Target target);
 }

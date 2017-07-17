@@ -10,8 +10,8 @@
 
 package it.red.algen.expressions;
 
-import it.red.algen.AlgParameters;
-import it.red.algen.garden.GardenConf;
+import it.red.algen.conf.AlgorithmContext;
+import it.red.algen.stats.ExperimentFactory;
 import it.red.algen.stats.StatsCollector;
 import it.red.algen.tracking.CSVReporter;
 
@@ -22,20 +22,24 @@ import it.red.algen.tracking.CSVReporter;
 public class ExprStatsCollection {
     
     public static void main(String[] args) {
-        AlgParameters algParameters = new AlgParameters();
-        algParameters.init(
-        		GardenConf.RECOMBINANTION_PERC, 
-        		GardenConf.MUTATION_PERC, 
-        		GardenConf.ELITARISM);
-
-        StatsCollector collector = new StatsCollector(new ExprExperimentFactory(
-        		algParameters,
+    	final int experimentsNumber = 3;
+        
+		AlgorithmContext context = AlgorithmContext.build(
+				ExprConf.RECOMBINANTION_PERC, 
+        		ExprConf.MUTATION_PERC, 
+        		ExprConf.ELITARISM, 
         		10000, 
-        		120, 
+        		120000, 
         		100,
-        		false, 
-        		new CSVReporter(ExprConf.MASSIVE_STATS_DIR)), 
-        		100);
+        		ExprConf.VERBOSE, 
+        		new CSVReporter(ExprConf.MASSIVE_STATS_DIR));
+		
+        StatsCollector collector = new StatsCollector(
+        		context,
+        		new ExprExperimentFactory(), 
+        		experimentsNumber, 
+        		new ExprTarget(33));
+        
         collector.run();
         collector.print();
     }

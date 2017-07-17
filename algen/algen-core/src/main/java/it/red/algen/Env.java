@@ -14,6 +14,9 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
 
+import it.red.algen.conf.OperatorsParameters;
+import it.red.algen.conf.AlgorithmContext;
+import it.red.algen.conf.StopConditions;
 import it.red.algen.stats.Stats;
 import it.red.algen.tracking.EnvObserver;
 
@@ -30,11 +33,8 @@ public class Env {
     private int _totIdenticalFitnesses = 0; // total of subsequent best matches with same fitness value
     
     // PARAMETRI
-	private AlgParameters _algParameters;
     private Target _target;
-    private int _maxIterations;
-    private int _maxLifetime;
-    private int _maxIdenticalFitnesses;
+    private AlgorithmContext _context;
             
     // STORICO
     private List<Population> _generationsHistory;
@@ -43,13 +43,10 @@ public class Env {
     // LISTENER
     private EnvObserver _listener;
     
-    public void init(AlgParameters algParameters, Population startGen, Target target, int maxIterations, int maxLifetime, Integer maxIdenticalFitnesses) {
-        _algParameters = algParameters;
+    public void init(AlgorithmContext context, Population startGen, Target target) {
+        _context = context;
     	_currentGen = startGen;
         _target = target;
-        _maxIterations = maxIterations;
-        _maxLifetime = maxLifetime;
-        _maxIdenticalFitnesses = maxIdenticalFitnesses==null ? -1 : maxIdenticalFitnesses;
         _generationsHistory = new ArrayList<Population>();
     }
     
@@ -58,15 +55,15 @@ public class Env {
         if(_currentGen!=null) _currentGen.subscribe(l);
     }
     
-    public AlgParameters getAlgParameters(){
-    	return _algParameters;
+    public AlgorithmContext getContext(){
+    	return _context;
     }
     
     public Stats getStats(){
         Stats stats = new Stats();
         stats._lastGeneration = _currentGen;
         stats._generations = _currentGenNumber+1;
-        stats._time = getLifeTime();
+        stats._time = getLifeTimeInMillis();
         stats._totIdenticalFitnesses = _totIdenticalFitnesses;
         stats._generationHistory = _generationsHistory;
         return stats;
@@ -74,9 +71,9 @@ public class Env {
     
     /** Ritorna il tempo totale di vita del sistema in secondi.
      */
-    public double getLifeTime(){
+    public long getLifeTimeInMillis(){
         long now = Calendar.getInstance().getTimeInMillis();
-        return (now - _startTime) / 1000.0;
+        return now - _startTime;
     }
     
     /** Avvia la vita del sistema.
@@ -94,7 +91,7 @@ public class Env {
         
         // Finch� si trova la soluzione o il numero max 
         // di iterazioni � raggiunto, o il tempo di vita del sistema non termina, prosegue
-        while(!_currentGen.isGoalReached() && _currentGenNumber < _maxIterations-1 && getLifeTime() <= _maxLifetime){
+        while(!_currentGen.isGoalReached() && _context.onTime(_currentGenNumber, getLifeTimeInMillis())) {
         	
         	// Save last gen
         	Population lastGen = _currentGen;
@@ -107,10 +104,10 @@ public class Env {
             Fitness bestMatchFitness = lastGen.getBestMatch().getFitness();
             
             // Check stability of the fitness value
-            if(_algParameters.getElitarism()){
+            if(_context.parameters.getElitarism()){
 	            if(bestMatchFitness.sameOf(currentGenFitness)){
 	            	_totIdenticalFitnesses++;
-	                if(_totIdenticalFitnesses==_maxIdenticalFitnesses){
+	                if(_context.isStable(_totIdenticalFitnesses)){
 	                	fireStableSolutionEvent();
 	                	endConditionFound = true;
 	                	break;

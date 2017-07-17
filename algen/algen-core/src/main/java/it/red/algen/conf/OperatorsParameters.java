@@ -8,19 +8,21 @@
  * Open. You can then make changes to the template in the Source Editor.
  */
 
-package it.red.algen;
-
-import org.springframework.stereotype.Component;
+package it.red.algen.conf;
 
 /**
+ * Parameters for genetics operatiors:
+ * - selection
+ * - recombination
+ * - mutation
  *
  * @author grossi
  */
-public class AlgParameters {
+public class OperatorsParameters {
     
-	private double _recombinationPerc = Conf.DEFAULT_RECOMBINANTION_PERC;
-    private double _mutationPerc = Conf.DEFAULT_MUTATION_PERC;
-    private boolean _elitarism = Conf.DEFAULT_ELITARISM;
+	private double _recombinationPerc = DefaultConfiguration.DEFAULT_RECOMBINANTION_PERC;
+    private double _mutationPerc = DefaultConfiguration.DEFAULT_MUTATION_PERC;
+    private boolean _elitarism = DefaultConfiguration.DEFAULT_ELITARISM;
     
     public void init(double recombinationPerc, double mutationPerc, boolean elitarism){
         _recombinationPerc = recombinationPerc;
