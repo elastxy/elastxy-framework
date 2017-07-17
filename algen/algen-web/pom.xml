@@ -64,6 +64,7 @@
 		          <images>
 			            <image>
 			              <name>algen</name>
+			              <alias>algenc</alias>
 			              <build>
 			                <filter>@</filter>
 			                <dockerFileDir>${project.basedir}/src/main/docker</dockerFileDir>
@@ -72,6 +73,7 @@
 			                </assembly>
 			              </build>
 			              <run>
+			              	<namingStrategy>alias</namingStrategy>
 			                <ports> 
 			                  <port>${tomcat.port}:8080</port>
 			                </ports>

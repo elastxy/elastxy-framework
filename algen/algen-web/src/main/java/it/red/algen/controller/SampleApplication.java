@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package it.red.algen.actuator.log4j;
+package it.red.algen.controller;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;

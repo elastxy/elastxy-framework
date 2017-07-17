@@ -14,19 +14,19 @@
  * limitations under the License.
  */
 
-package it.red.algen.actuator.log4j;
+package it.red.algen.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 @Component
-public class HelloWorldService {
+public class InfoService {
 
 	@Autowired
 	private ServiceProperties configuration;
 
-	public String getHelloMessage() {
-		return "Hello " + this.configuration.getName();
+	public String getInfoMessage() {
+		return "Hello from " + this.configuration.getName() + "! I'm here to serve <!!!>o";
 	}
 
 }

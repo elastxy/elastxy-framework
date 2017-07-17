@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package it.red.algen.actuator.log4j;
+package it.red.algen.controller;
 
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.stereotype.Component;
@@ -23,7 +23,7 @@ import org.springframework.stereotype.Component;
 @Component
 public class ServiceProperties {
 
-	private String name = "World";
+	private String name = "Algen";
 
 	public String getName() {
 		return this.name;

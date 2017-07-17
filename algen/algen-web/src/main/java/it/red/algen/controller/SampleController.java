@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package it.red.algen.actuator.log4j;
+package it.red.algen.controller;
 
 import java.util.Collections;
 import java.util.Map;
@@ -22,6 +22,7 @@ import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -43,7 +44,7 @@ import it.red.algen.tracking.SimpleLogger;
 public class SampleController {
 
 	@Autowired
-	private HelloWorldService helloWorldService;
+	private InfoService infoService;
 
 	
 	// TODOA: refactor!
@@ -57,9 +58,15 @@ public class SampleController {
 	
 	@RequestMapping(path = "/access", method = RequestMethod.HEAD)
 	@ResponseBody
-	public Map<String, String> helloWorld() {
+	public String access() {
+		return "OK";
+	}
+	
+	@RequestMapping(path = "/hello", method = RequestMethod.GET)
+	@ResponseBody
+	public Map<String, String> hello() {
 		return Collections.singletonMap("message",
-				this.helloWorldService.getHelloMessage());
+				infoService.getInfoMessage());
 	}
 	
 	@RequestMapping("/calculate/{domain}/{target}")
