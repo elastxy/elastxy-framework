@@ -19,7 +19,7 @@ public class AlgorithmContext {
 	}
 	
 	public boolean isStable(int totIdenticalFitnesses){
-		return stopConditions.maxIdenticalFitnesses!=-1 && totIdenticalFitnesses==stopConditions.maxIdenticalFitnesses;
+		return stopConditions.maxIdenticalFitnesses!=-1 && totIdenticalFitnesses>=stopConditions.maxIdenticalFitnesses;
 	}
 	
 	
