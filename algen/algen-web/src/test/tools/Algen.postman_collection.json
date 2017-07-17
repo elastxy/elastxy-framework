@@ -1,0 +1,95 @@
+{
+	"variables": [],
+	"info": {
+		"name": "Algen",
+		"_postman_id": "0dd1b6f6-f005-0c98-407e-bcad843a40ab",
+		"description": "",
+		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "/access",
+			"request": {
+				"url": "http://{{ip}}:{{port}}/access",
+				"method": "HEAD",
+				"header": [],
+				"body": {},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "/hello",
+			"request": {
+				"url": "http://{{ip}}:{{port}}/hello",
+				"method": "GET",
+				"header": [],
+				"body": {},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "/calculate/expressions/{target}",
+			"request": {
+				"url": "http://{{ip}}:{{port}}/calculate/expressions/33",
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"parameters\":{\"_recombinationPerc\":0.7,\"_mutationPerc\":0.2,\"_elitarism\":\"false\"},\"stopConditions\":{\"maxIterations\":-1,\"maxLifetimeMs\":1000,\"maxIdenticalFitnesses\":-1},\"monitoringConfiguration\":{\"verbose\":false}}"
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "/calculate/garden",
+			"request": {
+				"url": "http://{{ip}}:{{port}}/calculate/garden/0",
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"parameters\":{\"_recombinationPerc\":0.7,\"_mutationPerc\":0.2,\"_elitarism\":true},\"stopConditions\":{\"maxIterations\":10000,\"maxLifetimeMs\":120,\"maxIdenticalFitnesses\":2000},\"monitoringConfiguration\":{\"verbose\":false}}"
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "/calculate-test/expressions/{target}",
+			"request": {
+				"url": "http://{{ip}}:{{port}}/calculate-test/expressions/-5",
+				"method": "GET",
+				"header": [],
+				"body": {},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "/calculate-test/garden",
+			"request": {
+				"url": "http://{{ip}}:{{port}}/calculate/garden/0",
+				"method": "GET",
+				"header": [],
+				"body": {},
+				"description": ""
+			},
+			"response": []
+		}
+	]
+}

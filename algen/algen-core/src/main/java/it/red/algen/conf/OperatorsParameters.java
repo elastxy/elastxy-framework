@@ -20,9 +20,9 @@ package it.red.algen.conf;
  */
 public class OperatorsParameters {
     
-	private double _recombinationPerc = DefaultConfiguration.DEFAULT_RECOMBINANTION_PERC;
-    private double _mutationPerc = DefaultConfiguration.DEFAULT_MUTATION_PERC;
-    private boolean _elitarism = DefaultConfiguration.DEFAULT_ELITARISM;
+	public double _recombinationPerc = DefaultConfiguration.DEFAULT_RECOMBINANTION_PERC;
+    public double _mutationPerc = DefaultConfiguration.DEFAULT_MUTATION_PERC;
+    public boolean _elitarism = DefaultConfiguration.DEFAULT_ELITARISM;
     
     public void init(double recombinationPerc, double mutationPerc, boolean elitarism){
         _recombinationPerc = recombinationPerc;

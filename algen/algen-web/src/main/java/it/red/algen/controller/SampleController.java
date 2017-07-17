@@ -19,12 +19,17 @@ package it.red.algen.controller;
 import java.util.Collections;
 import java.util.Map;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
+
+import com.google.gson.Gson;
 
 import it.red.algen.conf.AlgorithmContext;
 import it.red.algen.expressions.ExprConf;
@@ -41,6 +46,7 @@ import it.red.algen.tracking.SimpleLogger;
 
 @Controller
 public class SampleController {
+	private static Logger logger = LoggerFactory.getLogger(SampleController.class);
 
 	@Autowired
 	private InfoService infoService;
@@ -67,8 +73,32 @@ public class SampleController {
 		return Collections.singletonMap("message",
 				infoService.getInfoMessage());
 	}
+
 	
-	@RequestMapping("/calculate/{domain}/{target}")
+	@RequestMapping(path = "/calculate/{domain}/{target}", method = RequestMethod.POST)
+	@ResponseBody
+	public ExperimentStats calculateWithParams(
+			@PathVariable String domain, 
+			@PathVariable Integer target, 
+			@RequestBody AlgorithmContext context) {
+	 	LoggerManager.instance().init(new SimpleLogger());
+	 	Experiment e = null;
+	 	if("garden".equals(domain)){
+			context.monitoringConfiguration.reporter = new GardenCSVReporter(GardenConf.STATS_DIR);
+	        e = new Experiment(context,null,gardenEnvFactory);
+	 	}
+	 	else if("expressions".equals(domain)){
+	 		context.monitoringConfiguration.reporter = new CSVReporter(ExprConf.STATS_DIR);
+	        e = new Experiment(context,new ExprTarget(target),exprEnvFactory);
+	 	}
+        e.run();
+        ExperimentStats stats = e.getStats();
+        return stats;
+	}
+
+	
+	
+	@RequestMapping("/calculate-test/{domain}/{target}")
 	@ResponseBody
 	public ExperimentStats calculate(@PathVariable String domain, @PathVariable Integer target) {
 		 	LoggerManager.instance().init(new SimpleLogger());
@@ -83,7 +113,11 @@ public class SampleController {
 		        		GardenConf.MAX_IDENTICAL_FITNESSES,
 		        		GardenConf.VERBOSE, 
 		        		new GardenCSVReporter(GardenConf.STATS_DIR));
-		 		
+
+				Gson gson = new Gson();
+				String json = gson.toJson(context);
+				logger.info(json);
+				
 		        e = new Experiment(
 		        		context,
 		        		null,
@@ -100,6 +134,10 @@ public class SampleController {
 		        		ExprConf.VERBOSE, 
 		        		new CSVReporter(ExprConf.STATS_DIR));
 
+				Gson gson = new Gson();
+				String json = gson.toJson(context);
+				logger.info(json);
+				
 		        e = new Experiment(
 		        		context,
 		        		new ExprTarget(target),
