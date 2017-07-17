@@ -10,13 +10,10 @@
 
 package it.red.algen.tracking;
 
-import org.springframework.beans.factory.annotation.Autowired;
-
 import it.red.algen.Env;
 import it.red.algen.Population;
 import it.red.algen.Solution;
 import it.red.algen.conf.AlgorithmContext;
-import it.red.algen.conf.OperatorsParameters;
 import it.red.algen.stats.ExperimentStats;
 
 
