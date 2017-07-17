@@ -102,7 +102,7 @@ public class Env {
             Fitness bestMatchFitness = lastGen.getBestMatch().getFitness();
             
             // Check stability of the fitness value
-            if(_context.parameters.getElitarism()){
+            if(_context.parameters._elitarism){
 	            if(bestMatchFitness.sameOf(currentGenFitness)){
 	            	_totIdenticalFitnesses++;
 	                if(_context.isStable(_totIdenticalFitnesses)){

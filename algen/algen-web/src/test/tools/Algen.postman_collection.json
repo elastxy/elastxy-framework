@@ -43,7 +43,7 @@
 				],
 				"body": {
 					"mode": "raw",
-					"raw": "{\"parameters\":{\"_recombinationPerc\":0.7,\"_mutationPerc\":0.2,\"_elitarism\":\"false\"},\"stopConditions\":{\"maxIterations\":-1,\"maxLifetimeMs\":1000,\"maxIdenticalFitnesses\":-1},\"monitoringConfiguration\":{\"verbose\":false}}"
+					"raw": "{\"parameters\":{\"_recombinationPerc\":0.7,\"_mutationPerc\":0.2,\"_elitarism\":true,\"_initialSelectionNumber\":5,\"_initialSelectionRandom\":false},\"stopConditions\":{\"maxIterations\":-1,\"maxLifetimeMs\":-1,\"maxIdenticalFitnesses\":3},\"monitoringConfiguration\":{\"verbose\":false}}"
 				},
 				"description": ""
 			},
@@ -63,7 +63,7 @@
 				],
 				"body": {
 					"mode": "raw",
-					"raw": "{\"parameters\":{\"_recombinationPerc\":0.7,\"_mutationPerc\":0.2,\"_elitarism\":true},\"stopConditions\":{\"maxIterations\":10000,\"maxLifetimeMs\":120,\"maxIdenticalFitnesses\":2000},\"monitoringConfiguration\":{\"verbose\":false}}"
+					"raw": "{\"parameters\":{\"_recombinationPerc\":0.7,\"_mutationPerc\":0.2,\"_elitarism\":true,\"_initialSelectionNumber\":100,\"_initialSelectionRandom\":true},\"stopConditions\":{\"maxIterations\":10000,\"maxLifetimeMs\":120,\"maxIdenticalFitnesses\":2000},\"monitoringConfiguration\":{\"verbose\":false}}"
 				},
 				"description": ""
 			},
@@ -72,7 +72,7 @@
 		{
 			"name": "/calculate-test/expressions/{target}",
 			"request": {
-				"url": "http://{{ip}}:{{port}}/calculate-test/expressions/-5",
+				"url": "http://{{ip}}:{{port}}/calculate-test/expressions/33",
 				"method": "GET",
 				"header": [],
 				"body": {},
@@ -83,7 +83,7 @@
 		{
 			"name": "/calculate-test/garden",
 			"request": {
-				"url": "http://{{ip}}:{{port}}/calculate/garden/0",
+				"url": "http://{{ip}}:{{port}}/calculate-test/garden/0",
 				"method": "GET",
 				"header": [],
 				"body": {},

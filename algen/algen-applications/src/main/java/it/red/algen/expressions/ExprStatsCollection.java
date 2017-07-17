@@ -24,6 +24,8 @@ public class ExprStatsCollection {
     	final int experimentsNumber = 3;
         
 		AlgorithmContext context = AlgorithmContext.build(
+				ExprConf.INITIAL_SELECTION_NUMBER,
+				ExprConf.INITIAL_SELECTION_RANDOM,
 				ExprConf.RECOMBINANTION_PERC, 
         		ExprConf.MUTATION_PERC, 
         		ExprConf.ELITARISM, 

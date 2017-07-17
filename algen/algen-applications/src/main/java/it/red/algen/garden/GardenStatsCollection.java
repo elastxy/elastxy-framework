@@ -25,7 +25,9 @@ public class GardenStatsCollection {
     	final int experimentsNumber = 3;
         
 		AlgorithmContext context = AlgorithmContext.build(
-        		GardenConf.RECOMBINANTION_PERC, 
+        		GardenConf.INITIAL_SELECTION_NUMBER,
+        		GardenConf.INITIAL_SELECTION_RANDOM,
+				GardenConf.RECOMBINANTION_PERC, 
         		GardenConf.MUTATION_PERC, 
         		GardenConf.ELITARISM,
         		10000, 

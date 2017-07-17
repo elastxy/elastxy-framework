@@ -46,6 +46,8 @@ public class GardenMainTest {
         LoggerManager.instance().init(new SimpleLogger());
         
 		AlgorithmContext context = AlgorithmContext.build(
+				GardenConf.INITIAL_SELECTION_NUMBER,
+				GardenConf.INITIAL_SELECTION_RANDOM,
 				GardenConf.RECOMBINANTION_PERC, 
         		GardenConf.MUTATION_PERC, 
         		GardenConf.ELITARISM, 

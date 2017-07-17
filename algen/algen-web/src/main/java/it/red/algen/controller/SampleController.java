@@ -105,6 +105,8 @@ public class SampleController {
 		 	Experiment e = null;
 		 	if("garden".equals(domain)){
 				AlgorithmContext context = AlgorithmContext.build(
+						GardenConf.INITIAL_SELECTION_NUMBER,
+						GardenConf.INITIAL_SELECTION_RANDOM,
 						GardenConf.RECOMBINANTION_PERC, 
 		        		GardenConf.MUTATION_PERC, 
 		        		GardenConf.ELITARISM, 
@@ -125,6 +127,8 @@ public class SampleController {
 		 	}
 		 	else if("expressions".equals(domain)){
 				AlgorithmContext context = AlgorithmContext.build(
+						GardenConf.INITIAL_SELECTION_NUMBER,
+						GardenConf.INITIAL_SELECTION_RANDOM,
 						ExprConf.RECOMBINANTION_PERC, 
 		        		ExprConf.MUTATION_PERC, 
 		        		ExprConf.ELITARISM, 

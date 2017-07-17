@@ -34,7 +34,7 @@ public class ExprEnvFactory implements EnvFactory {
 	
     public Env create(AlgorithmContext context, Target target){
         // Crea la popolazione iniziale
-        Population startGen = populationFactory.createNew(context.parameters, ExprConf.INITIAL_POPULATION);
+        Population startGen = populationFactory.createNew(context);
         
         // Definisce l'ambiente di riproduzione
         ExprSolution minSol = new ExprSolution(0, '-', 9);

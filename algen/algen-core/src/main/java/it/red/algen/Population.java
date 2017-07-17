@@ -99,7 +99,7 @@ public class Population {
         // Inserimento best match e rimozione fra quelli da valutare
         Population nextGen = new Population(_algParameters);
         nextGen.subscribe(_listener);
-        if(_algParameters.getElitarism() && _bestMatch!=null){
+        if(_algParameters._elitarism && _bestMatch!=null){
             nextGen.add((Solution)_bestMatch.clone());
             actualPopulation.remove(_bestMatch);
         }
@@ -119,7 +119,7 @@ public class Population {
             Solution[] sons = null;
             
             // Crossover
-            boolean crossover = RANDOMIZER.nextDouble() < _algParameters.getRecombinationPerc();
+            boolean crossover = RANDOMIZER.nextDouble() < _algParameters._recombinationPerc;
             if(crossover) {
                 sons = father.crossoverWith(mother);
                 fireCrossoverEvent(father, mother, sons);
@@ -132,8 +132,8 @@ public class Population {
             }
             
             // Mutazione
-            boolean mute0 = RANDOMIZER.nextDouble() < _algParameters.getMutationPerc();
-            boolean mute1 = RANDOMIZER.nextDouble() < _algParameters.getMutationPerc();
+            boolean mute0 = RANDOMIZER.nextDouble() < _algParameters._mutationPerc;
+            boolean mute1 = RANDOMIZER.nextDouble() < _algParameters._mutationPerc;
             if(mute0) { 
                 Solution old = sons[0];
                 sons[0] = (Solution)sons[0].clone();

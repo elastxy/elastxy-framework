@@ -15,7 +15,9 @@ package it.red.algen.expressions;
  * @author grossi
  */
 public class ExprConf {
-    public static final int INITIAL_POPULATION = 1000;
+    public static final long INITIAL_SELECTION_NUMBER = 10;
+    public static final boolean INITIAL_SELECTION_RANDOM = false;
+    
     public static final int MAX_ITERATIONS = 10;
     public static final int MAX_LIFETIME_SEC = 60;
     public static final int MAX_IDENTICAL_FITNESSES = 3;

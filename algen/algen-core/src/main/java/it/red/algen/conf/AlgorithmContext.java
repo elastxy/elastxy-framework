@@ -25,6 +25,8 @@ public class AlgorithmContext {
 	
 	
 	public static AlgorithmContext build(
+			long initialSelectionNumber,
+			boolean initialSelectionRandom,
 			double recombinationPerc,
 			double mutationPerc,
 			boolean elitarism,
@@ -35,7 +37,11 @@ public class AlgorithmContext {
 			Reporter reporter
 			){
         OperatorsParameters algParameters = new OperatorsParameters();
-        algParameters.init(recombinationPerc, mutationPerc, elitarism);
+        algParameters._recombinationPerc = recombinationPerc;
+        algParameters._mutationPerc = mutationPerc;
+        algParameters._elitarism = elitarism;
+        algParameters._initialSelectionNumber = initialSelectionNumber;
+        algParameters._initialSelectionRandom = initialSelectionRandom;
         
         StopConditions stopConditions = new StopConditions();
         stopConditions.maxIterations = maxIterations;

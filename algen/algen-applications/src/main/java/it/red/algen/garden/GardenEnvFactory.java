@@ -37,7 +37,7 @@ public class GardenEnvFactory implements EnvFactory {
     	Place[] places = database.getAllPlaces();
     	Tree[] trees = database.getAllTrees();
     	gardenPopulationFactory.init(places, trees);
-        Population startGen = gardenPopulationFactory.createNew(context.parameters, GardenConf.INITIAL_POPULATION);
+        Population startGen = gardenPopulationFactory.createNew(context);
         
         // Definisce l'ambiente di riproduzione
         // TODOM: target from outside!

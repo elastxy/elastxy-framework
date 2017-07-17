@@ -45,6 +45,8 @@ public class ExpressionsMainTest {
 		LoggerManager.instance().init(new SimpleLogger());
 		
 		AlgorithmContext context = AlgorithmContext.build(
+				ExprConf.INITIAL_SELECTION_NUMBER,
+				ExprConf.INITIAL_SELECTION_RANDOM,
 				ExprConf.RECOMBINANTION_PERC, 
         		ExprConf.MUTATION_PERC, 
         		ExprConf.ELITARISM, 

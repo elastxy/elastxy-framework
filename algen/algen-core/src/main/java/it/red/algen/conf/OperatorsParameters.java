@@ -19,26 +19,10 @@ package it.red.algen.conf;
  * @author grossi
  */
 public class OperatorsParameters {
-    
+	public long _initialSelectionNumber = DefaultConfiguration.DEFAULT_INITIAL_SELECTION_NUMBER;    
+	public boolean _initialSelectionRandom = DefaultConfiguration.DEFAULT_INITIAL_SELECTION_RANDOM;
 	public double _recombinationPerc = DefaultConfiguration.DEFAULT_RECOMBINANTION_PERC;
     public double _mutationPerc = DefaultConfiguration.DEFAULT_MUTATION_PERC;
     public boolean _elitarism = DefaultConfiguration.DEFAULT_ELITARISM;
     
-    public void init(double recombinationPerc, double mutationPerc, boolean elitarism){
-        _recombinationPerc = recombinationPerc;
-        _mutationPerc = mutationPerc;
-        _elitarism = elitarism;
-    }
-    
-    public double getRecombinationPerc(){
-        return _recombinationPerc;
-    }
-    
-    public double getMutationPerc(){
-        return _mutationPerc;
-    }
-    
-    public boolean getElitarism(){
-    	return _elitarism;
-    }
 }

@@ -15,12 +15,13 @@ package it.red.algen.garden;
  * @author grossi
  */
 public class GardenConf {
+	public static final long INITIAL_SELECTION_NUMBER = 100; // numero pari
+	public static final boolean INITIAL_SELECTION_RANDOM = true;
 	
 	public static final int FITNESS_WEIGHT_SUN = 5;
 	public static final int FITNESS_WEIGHT_WIND = 3;
 	public static final int FITNESS_WEIGHT_WET = 1;
 	
-	public static final int INITIAL_POPULATION = 100; // numero pari
     public static final int MAX_ITERATIONS = 10000;
     public static final int MAX_LIFETIME_SEC = 120;
     public static final Integer MAX_IDENTICAL_FITNESSES = 2000;

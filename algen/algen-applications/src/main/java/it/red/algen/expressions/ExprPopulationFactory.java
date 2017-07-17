@@ -13,7 +13,7 @@ package it.red.algen.expressions;
 import org.springframework.stereotype.Component;
 
 import it.red.algen.Population;
-import it.red.algen.conf.OperatorsParameters;
+import it.red.algen.conf.AlgorithmContext;
 
 /**
  *
@@ -22,29 +22,24 @@ import it.red.algen.conf.OperatorsParameters;
 @Component
 public class ExprPopulationFactory {
     	
-    public Population createNew(OperatorsParameters algParameters, int number) {
+    public Population createNew(AlgorithmContext context) {
         ExprGenesFactory factory = new ExprGenesFactory();
-        Population population = new Population(algParameters);
-        for(int i = 0; i < number; i++){
-            population.add(new ExprSolution(
-                    factory.getNumber(0),
-                    factory.getOperator('+'),
-                    factory.getNumber(0)));
+        Population population = new Population(context.parameters);
+        for(int i = 0; i < context.parameters._initialSelectionNumber; i++){
+        	if(context.parameters._initialSelectionRandom){
+                population.add(new ExprSolution(
+                        factory.getRandomNumber(),
+                        factory.getRandomOperator(),
+                        factory.getRandomNumber()));
+        	}
+        	else {
+        		population.add(new ExprSolution(
+                        factory.getNumber(0),
+                        factory.getOperator('+'),
+                        factory.getNumber(0)));
+        	}
         }
         return population;
     }
 
-    public Population createNewRandom(OperatorsParameters algParameters, int number) {
-        ExprGenesFactory factory = new ExprGenesFactory();
-        Population population = new Population(algParameters);
-        for(int i = 0; i < number; i++){
-            population.add(new ExprSolution(
-                    factory.getRandomNumber(),
-                    factory.getRandomOperator(),
-                    factory.getRandomNumber()));
-        }
-        return population;
-    }
-    
-    
 }

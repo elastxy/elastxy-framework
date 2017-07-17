@@ -15,6 +15,8 @@ package it.red.algen.conf;
  * @author grossi
  */
 public class DefaultConfiguration {
+    public static final long DEFAULT_INITIAL_SELECTION_NUMBER = 100L;
+	public static final boolean DEFAULT_INITIAL_SELECTION_RANDOM = true;
     public static final boolean DEFAULT_ELITARISM = true;
 	public static final double DEFAULT_RECOMBINANTION_PERC = 0.66;
     public static final double DEFAULT_MUTATION_PERC = 0.1;

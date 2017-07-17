@@ -17,7 +17,7 @@ import java.util.List;
 import org.springframework.stereotype.Component;
 
 import it.red.algen.Population;
-import it.red.algen.conf.OperatorsParameters;
+import it.red.algen.conf.AlgorithmContext;
 import it.red.algen.garden.domain.Place;
 import it.red.algen.garden.domain.Tree;
 
@@ -37,20 +37,22 @@ public class GardenPopulationFactory {
 	
 	
 	/**
-	 * Crea una popolazione iniziale di piante collocate in modo casuale, i posti sono fissi
+	 * Crea una popolazione iniziale di piante collocate eventualmente casuale, i posti sono fissi
 	 * @param number
 	 * @return
 	 */
-    public Population createNew(OperatorsParameters algParameters, int number) {
-    	Population population = new Population(algParameters);
-    	for(int i = 0; i < number; i++){
+    public Population createNew(AlgorithmContext context) {
+    	Population population = new Population(context.parameters);
+    	for(int i = 0; i < context.parameters._initialSelectionNumber; i++){
     		List<Tree> listOfTrees = Arrays.asList(trees);
-    		Collections.shuffle(listOfTrees);
+    		if(context.parameters._initialSelectionRandom){
+    			Collections.shuffle(listOfTrees);
+    		}
     		GardenSolution solution = new GardenSolution(places, (Tree[])listOfTrees.toArray());
     		population.add(solution);
         }
         return population;
     }
-
+    
     
 }
