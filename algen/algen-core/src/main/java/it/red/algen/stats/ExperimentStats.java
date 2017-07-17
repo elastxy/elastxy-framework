@@ -10,15 +10,15 @@
 
 package it.red.algen.stats;
 
-import java.io.Serializable;
 import java.util.List;
-import it.red.algen.*;
+
+import it.red.algen.Population;
 
 /**
  *
  * @author grossi
  */
-public class Stats  {
+public class ExperimentStats  {
     public Population _lastGeneration;
     public int _generations;
     public double _time;

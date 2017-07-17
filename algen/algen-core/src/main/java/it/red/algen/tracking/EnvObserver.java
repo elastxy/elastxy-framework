@@ -17,7 +17,7 @@ import it.red.algen.Population;
 import it.red.algen.Solution;
 import it.red.algen.conf.AlgorithmContext;
 import it.red.algen.conf.OperatorsParameters;
-import it.red.algen.stats.Stats;
+import it.red.algen.stats.ExperimentStats;
 
 
 
@@ -72,7 +72,7 @@ public class EnvObserver {
     private void showResults(Env environment){
         LoggerManager log = LoggerManager.instance();
         log.out("\n##################### STATS #####################");
-        Stats stats = environment.getStats();
+        ExperimentStats stats = environment.getStats();
         log.out("Best match:");
         log.out(stats._lastGeneration.getBestMatch());
         log.out("Number of generations: "+stats._generations);

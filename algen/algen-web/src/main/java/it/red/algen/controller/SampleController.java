@@ -34,7 +34,7 @@ import it.red.algen.garden.GardenCSVReporter;
 import it.red.algen.garden.GardenConf;
 import it.red.algen.garden.GardenEnvFactory;
 import it.red.algen.stats.Experiment;
-import it.red.algen.stats.Stats;
+import it.red.algen.stats.ExperimentStats;
 import it.red.algen.tracking.CSVReporter;
 import it.red.algen.tracking.LoggerManager;
 import it.red.algen.tracking.SimpleLogger;
@@ -70,7 +70,7 @@ public class SampleController {
 	
 	@RequestMapping("/calculate/{domain}/{target}")
 	@ResponseBody
-	public Stats calculate(@PathVariable String domain, @PathVariable Integer target) {
+	public ExperimentStats calculate(@PathVariable String domain, @PathVariable Integer target) {
 		 	LoggerManager.instance().init(new SimpleLogger());
 		 	Experiment e = null;
 		 	if("garden".equals(domain)){
@@ -106,7 +106,7 @@ public class SampleController {
 		        		exprEnvFactory);
 		 	}
 	        e.run();
-	        Stats stats = e.getStats();
+	        ExperimentStats stats = e.getStats();
 	        return stats;
 	}
 	

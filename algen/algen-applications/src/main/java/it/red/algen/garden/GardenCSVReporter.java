@@ -1,6 +1,6 @@
 package it.red.algen.garden;
 
-import it.red.algen.stats.Stats;
+import it.red.algen.stats.ExperimentStats;
 import it.red.algen.tracking.CSVReporter;
 
 import java.util.ArrayList;
@@ -12,7 +12,7 @@ public class GardenCSVReporter extends CSVReporter {
 		super(path);
 	}
 	
-	protected List<String[]> createCustomPart(Stats stats) {
+	protected List<String[]> createCustomPart(ExperimentStats stats) {
 		List<String[]> result = new ArrayList<String[]>();
 		result.add(new String[] {"Placement", "Happyness (1=happy, 0=dead)"}); 
 		String[] bestMatchCSV = stats._lastGeneration.getBestMatch().toString().split(";");

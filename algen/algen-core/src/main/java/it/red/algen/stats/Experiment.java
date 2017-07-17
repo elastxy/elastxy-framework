@@ -27,7 +27,7 @@ public class Experiment {
 	private AlgorithmContext _context;
 	private Target _target;
     private EnvFactory _factory;
-    private Stats _stats;
+    private ExperimentStats _stats;
     
     public Experiment(AlgorithmContext context, Target target, EnvFactory factory) {
     	_context = context;
@@ -35,7 +35,7 @@ public class Experiment {
         _factory = factory;
     }
     
-    public Stats getStats(){
+    public ExperimentStats getStats(){
         return _stats;
     }
     

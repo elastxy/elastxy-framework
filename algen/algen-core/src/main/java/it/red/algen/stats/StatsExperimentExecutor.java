@@ -24,24 +24,24 @@ import it.red.algen.tracking.SimpleLogger;
  *
  * @author grossi
  */
-public class StatsCollector {
+public class StatsExperimentExecutor {
 	private AlgorithmContext _context;
     private ExperimentFactory _factory;
     private int _experiments;
     private Target _target;
     
-    private GlobalStats _globalStats;
+    private AggregatedStats _globalStats;
     
-    public StatsCollector(AlgorithmContext context, ExperimentFactory factory, int experiments, Target target){
+    public StatsExperimentExecutor(AlgorithmContext context, ExperimentFactory factory, int experiments, Target target){
         _context = context;
     	_factory = factory;
         _experiments = experiments;
         _target = target;
-        _globalStats = new GlobalStats();
+        _globalStats = new AggregatedStats();
         _globalStats._totExperiments = _experiments;
     }
     
-    private void addStats(Stats stats){
+    private void addStats(ExperimentStats stats){
         _globalStats._totTime += stats._time;
         _globalStats._totGenerations += stats._generations;
         _globalStats._totSuccesses += (stats._lastGeneration.isGoalReached() ? 1 : 0);

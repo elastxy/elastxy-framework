@@ -12,7 +12,7 @@ package it.red.algen.expressions;
 
 import it.red.algen.conf.AlgorithmContext;
 import it.red.algen.stats.ExperimentFactory;
-import it.red.algen.stats.StatsCollector;
+import it.red.algen.stats.StatsExperimentExecutor;
 import it.red.algen.tracking.CSVReporter;
 
 /**
@@ -34,7 +34,7 @@ public class ExprStatsCollection {
         		ExprConf.VERBOSE, 
         		new CSVReporter(ExprConf.MASSIVE_STATS_DIR));
 		
-        StatsCollector collector = new StatsCollector(
+        StatsExperimentExecutor collector = new StatsExperimentExecutor(
         		context,
         		new ExprExperimentFactory(), 
         		experimentsNumber, 

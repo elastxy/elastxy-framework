@@ -17,7 +17,7 @@ import java.util.List;
 import it.red.algen.conf.OperatorsParameters;
 import it.red.algen.conf.AlgorithmContext;
 import it.red.algen.conf.StopConditions;
-import it.red.algen.stats.Stats;
+import it.red.algen.stats.ExperimentStats;
 import it.red.algen.tracking.EnvObserver;
 
 /** Ambiente in cui la popolazione evolve in base al target.
@@ -59,8 +59,8 @@ public class Env {
     	return _context;
     }
     
-    public Stats getStats(){
-        Stats stats = new Stats();
+    public ExperimentStats getStats(){
+        ExperimentStats stats = new ExperimentStats();
         stats._lastGeneration = _currentGen;
         stats._generations = _currentGenNumber+1;
         stats._time = getLifeTimeInMillis();

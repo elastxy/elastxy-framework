@@ -16,7 +16,7 @@ import java.util.Optional;
  *
  * @author grossi
  */
-public class GlobalStats {
+public class AggregatedStats {
     public int _totExperiments;
     public int _totSuccesses;
     public int _totGenerations;
@@ -25,7 +25,7 @@ public class GlobalStats {
     public Optional<Double> _minFitness = Optional.empty();
     public Optional<Double> _maxFitness = Optional.empty();
     
-    public GlobalStats() {
+    public AggregatedStats() {
     }
     
     public double getPercSuccesses(){

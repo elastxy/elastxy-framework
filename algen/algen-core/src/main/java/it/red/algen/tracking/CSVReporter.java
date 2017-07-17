@@ -1,6 +1,6 @@
 package it.red.algen.tracking;
 
-import it.red.algen.stats.Stats;
+import it.red.algen.stats.ExperimentStats;
 
 import java.io.File;
 import java.io.FileWriter;
@@ -22,7 +22,7 @@ public class CSVReporter implements Reporter {
 		_outputDir = path;
 	}
 	
-	public void createReports(Stats stats) {
+	public void createReports(ExperimentStats stats) {
 		try {
 			File outputDir = new File(_outputDir);
 			outputDir.mkdirs();
@@ -43,7 +43,7 @@ public class CSVReporter implements Reporter {
 		}
 	}
 
-	protected List<String[]> createCustomPart(Stats stats){
+	protected List<String[]> createCustomPart(ExperimentStats stats){
 		return new ArrayList<String[]>(0);
 	}
 	
