@@ -19,7 +19,7 @@ import it.red.algen.Fitness;
 public class ExprFitness implements Fitness {
     // Valore massimo: tutti i valori di fitness devono essere normalizzati a 1
     public static final double MAX = 1.0;
-    public static final double APPROX = 0.0001;
+    public static final double APPROX = 0.000000001;
     private double _value;
     
     public ExprFitness(double value) {

@@ -62,7 +62,7 @@ public class Population {
     public Fitness testFitness(Target target){
         _bestMatch = null;
         Iterator<Solution> it = _solutions.iterator();
-        while(it.hasNext()){
+        while(it.hasNext()){ // TODOA: MapReduce!
             Solution solution = it.next();
             solution.calcFitness(target);
             if(solution.legalCheck()!=null) {
