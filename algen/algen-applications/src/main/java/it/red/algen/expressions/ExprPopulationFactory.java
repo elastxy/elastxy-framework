@@ -14,6 +14,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import it.red.algen.Population;
+import it.red.algen.PopulationFactory;
 import it.red.algen.context.ContextSupplier;
 
 /**
@@ -21,11 +22,12 @@ import it.red.algen.context.ContextSupplier;
  * @author grossi
  */
 @Component
-public class ExprPopulationFactory {
+public class ExprPopulationFactory implements PopulationFactory {
 	
 	@Autowired
 	private ContextSupplier contextSupplier;
 	
+	@Override
     public Population createNew() {
         ExprGenesFactory factory = new ExprGenesFactory();
         Population population = new Population(contextSupplier.getContext().parameters);

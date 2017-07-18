@@ -31,6 +31,6 @@ public class ExprGenesFactory {
     }
     
     public NumberGene getRandomNumber(){
-        return new NumberGene(RANDOMIZER.nextInt(10));
+        return new NumberGene(RANDOMIZER.nextInt(2 * ExprConf.MAX_NUMBER_GENE_VALUE + 1) - ExprConf.MAX_NUMBER_GENE_VALUE); // From -max to +max
     }
 }

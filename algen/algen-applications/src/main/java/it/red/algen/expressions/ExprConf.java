@@ -15,6 +15,8 @@ package it.red.algen.expressions;
  * @author grossi
  */
 public class ExprConf {
+	public static final int MAX_NUMBER_GENE_VALUE = 1000;
+	
     public static final long INITIAL_SELECTION_NUMBER = 10;
     public static final boolean INITIAL_SELECTION_RANDOM = false;
     

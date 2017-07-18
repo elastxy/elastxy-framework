@@ -57,13 +57,11 @@ public class SampleController {
 	private InfoService infoService;
 
 	
-	// TODOA: refactor! ExprEnvFactory cannot be a Singleton
 	@Autowired
 	private ExprEnvFactory exprEnvFactory;
-	
-	// TODOA: refactor!
 	@Autowired
 	private GardenEnvFactory gardenEnvFactory;
+	
 	
 	private @Autowired AutowireCapableBeanFactory beanFactory;
 
@@ -98,7 +96,7 @@ public class SampleController {
 	 	Experiment e = null;
 	 	if("garden".equals(domain)){
 			context.monitoringConfiguration.reporter = new GardenCSVReporter(GardenConf.STATS_DIR);
-	        e = new Experiment(null,gardenEnvFactory);
+	        e = new Experiment(null,gardenEnvFactory); // No target given from user
 	 	}
 	 	else if("expressions".equals(domain)){
 	 		context.monitoringConfiguration.reporter = new CSVReporter(ExprConf.STATS_DIR);

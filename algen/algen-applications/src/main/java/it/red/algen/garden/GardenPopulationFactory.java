@@ -18,6 +18,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import it.red.algen.Population;
+import it.red.algen.PopulationFactory;
 import it.red.algen.context.ContextSupplier;
 import it.red.algen.garden.domain.Place;
 import it.red.algen.garden.domain.Tree;
@@ -27,7 +28,7 @@ import it.red.algen.garden.domain.Tree;
  * @author grossi
  */
 @Component
-public class GardenPopulationFactory {
+public class GardenPopulationFactory implements PopulationFactory {
 	
 	@Autowired
 	private ContextSupplier contextSupplier;
@@ -46,6 +47,7 @@ public class GardenPopulationFactory {
 	 * @param number
 	 * @return
 	 */
+	@Override
     public Population createNew() {
     	Population population = new Population(contextSupplier.getContext().parameters);
     	for(int i = 0; i < contextSupplier.getContext().parameters._initialSelectionNumber; i++){

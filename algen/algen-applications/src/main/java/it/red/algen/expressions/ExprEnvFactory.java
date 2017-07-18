@@ -39,8 +39,8 @@ public class ExprEnvFactory implements EnvFactory {
         Population startGen = populationFactory.createNew();
         
         // Definisce l'ambiente di riproduzione
-        ExprSolution minSol = new ExprSolution(0, '-', 9);
-        ExprSolution maxSol = new ExprSolution(9, '*', 9);
+        ExprSolution minSol = new ExprSolution(ExprConf.MAX_NUMBER_GENE_VALUE, '*', -ExprConf.MAX_NUMBER_GENE_VALUE);
+        ExprSolution maxSol = new ExprSolution(ExprConf.MAX_NUMBER_GENE_VALUE, '*', ExprConf.MAX_NUMBER_GENE_VALUE);
         ExprTarget exprTarget = new ExprTarget(((ExprTarget)target).getComputeValue(), minSol.compute(), maxSol.compute());
         
         Env env = new Env();
