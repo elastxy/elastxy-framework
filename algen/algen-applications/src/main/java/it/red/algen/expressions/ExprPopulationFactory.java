@@ -10,10 +10,11 @@
 
 package it.red.algen.expressions;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import it.red.algen.Population;
-import it.red.algen.context.AlgorithmContext;
+import it.red.algen.context.ContextSupplier;
 
 /**
  *
@@ -21,12 +22,15 @@ import it.red.algen.context.AlgorithmContext;
  */
 @Component
 public class ExprPopulationFactory {
-    	
-    public Population createNew(AlgorithmContext context) {
+	
+	@Autowired
+	private ContextSupplier contextSupplier;
+	
+    public Population createNew() {
         ExprGenesFactory factory = new ExprGenesFactory();
-        Population population = new Population(context.parameters);
-        for(int i = 0; i < context.parameters._initialSelectionNumber; i++){
-        	if(context.parameters._initialSelectionRandom){
+        Population population = new Population(contextSupplier.getContext().parameters);
+        for(int i = 0; i < contextSupplier.getContext().parameters._initialSelectionNumber; i++){
+        	if(contextSupplier.getContext().parameters._initialSelectionRandom){
                 population.add(new ExprSolution(
                         factory.getRandomNumber(),
                         factory.getRandomOperator(),

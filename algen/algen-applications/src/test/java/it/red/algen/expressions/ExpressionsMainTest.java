@@ -17,11 +17,13 @@ import java.io.File;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.config.AutowireCapableBeanFactory;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import it.red.algen.TestConfig;
 import it.red.algen.context.AlgorithmContext;
+import it.red.algen.context.ContextSupplier;
 import it.red.algen.stats.Experiment;
 import it.red.algen.tracking.CSVReporter;
 import it.red.algen.tracking.LoggerManager;
@@ -36,7 +38,12 @@ import it.red.algen.tracking.SimpleLogger;
 public class ExpressionsMainTest {
    
 	@Autowired
+	private ContextSupplier contextSupplier;
+	
+	@Autowired
 	private ExprEnvFactory exprEnvFactory;
+		
+	private @Autowired AutowireCapableBeanFactory beanFactory;
 	
 	@Test
     public void simpleRun() {
@@ -56,15 +63,20 @@ public class ExpressionsMainTest {
         		ExprConf.VERBOSE, 
         		new CSVReporter(ExprConf.STATS_DIR));
 		
+		contextSupplier.init(context);
+		
 		Experiment e = new Experiment(
-        		context,
         		new ExprTarget(33),
         		exprEnvFactory);
-        
+		
+		beanFactory.autowireBean(e);
+		
         e.run();
         
         assertNotNull(e.getStats());
         assertNotNull(e.getStats()._lastGeneration);
+        
+        contextSupplier.destroy();
     }
     
 }

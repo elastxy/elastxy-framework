@@ -23,6 +23,7 @@ public class ExprStatsCollection {
     public static void main(String[] args) {
     	final int experimentsNumber = 3;
         
+    	// TODOM: port to spring boot main
 		AlgorithmContext context = AlgorithmContext.build(
 				ExprConf.INITIAL_SELECTION_NUMBER,
 				ExprConf.INITIAL_SELECTION_RANDOM,
@@ -36,8 +37,6 @@ public class ExprStatsCollection {
         		new CSVReporter(ExprConf.MASSIVE_STATS_DIR));
 		
         StatsExperimentExecutor collector = new StatsExperimentExecutor(
-        		context,
-        		new ExprExperimentFactory(), 
         		experimentsNumber, 
         		new ExprTarget(33));
         

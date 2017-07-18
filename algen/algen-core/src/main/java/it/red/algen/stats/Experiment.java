@@ -10,10 +10,15 @@
 
 package it.red.algen.stats;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.config.AutowireCapableBeanFactory;
+import org.springframework.context.annotation.Scope;
+import org.springframework.stereotype.Component;
+
 import it.red.algen.Env;
 import it.red.algen.EnvFactory;
 import it.red.algen.Target;
-import it.red.algen.context.AlgorithmContext;
+import it.red.algen.context.ContextSupplier;
 import it.red.algen.tracking.EnvObserver;
 
 
@@ -24,15 +29,19 @@ import it.red.algen.tracking.EnvObserver;
  * @author grossi
  */
 public class Experiment {
-	private AlgorithmContext _context;
-	private Target _target;
-    private EnvFactory _factory;
+	private Target _target;    
+	private EnvFactory _factory;
     private ExperimentStats _stats;
+
+//	private @Autowired AutowireCapableBeanFactory beanFactory;
+
+    @Autowired
+    private ContextSupplier contextSupplier;
     
-    public Experiment(AlgorithmContext context, Target target, EnvFactory factory) {
-    	_context = context;
+    public Experiment(Target target, EnvFactory factory) {
     	_target = target;
         _factory = factory;
+        _stats = null;
     }
     
     public ExperimentStats getStats(){
@@ -40,8 +49,9 @@ public class Experiment {
     }
     
     public void run(){
-        EnvObserver observer = new EnvObserver(_context);
-        Env environment = _factory.create(_context, _target);
+//        beanFactory.autowireBean(this);
+        EnvObserver observer = new EnvObserver(contextSupplier.getContext());
+        Env environment = _factory.create(_target);
         environment.subscribe(observer);
         
         // Avvia l'evoluzione

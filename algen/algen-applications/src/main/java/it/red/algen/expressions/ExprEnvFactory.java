@@ -17,7 +17,7 @@ import it.red.algen.Env;
 import it.red.algen.EnvFactory;
 import it.red.algen.Population;
 import it.red.algen.Target;
-import it.red.algen.context.AlgorithmContext;
+import it.red.algen.context.ContextSupplier;
 
 /**
  *
@@ -31,19 +31,20 @@ public class ExprEnvFactory implements EnvFactory {
 	@Autowired
 	private ExprPopulationFactory populationFactory;
 	
+	@Autowired
+	private ContextSupplier contextSupplier;
 	
-    public Env create(AlgorithmContext context, Target target){
+    public Env create(Target target){
         // Crea la popolazione iniziale
-        Population startGen = populationFactory.createNew(context);
+        Population startGen = populationFactory.createNew();
         
         // Definisce l'ambiente di riproduzione
         ExprSolution minSol = new ExprSolution(0, '-', 9);
         ExprSolution maxSol = new ExprSolution(9, '*', 9);
         ExprTarget exprTarget = new ExprTarget(((ExprTarget)target).getComputeValue(), minSol.compute(), maxSol.compute());
-        // TODOA: add Contraints, StopCondition
         
         Env env = new Env();
-        env.init(context, startGen, exprTarget);
+        env.init(contextSupplier.getContext(), startGen, exprTarget);
         return env;
     }
 

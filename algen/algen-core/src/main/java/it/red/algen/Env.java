@@ -24,6 +24,8 @@ import it.red.algen.tracking.EnvObserver;
  * @author grossi
  */
 public class Env {
+
+	private AlgorithmContext _context;
 	
     // DATI CORRENTI
     private Population _currentGen;
@@ -32,7 +34,6 @@ public class Env {
     
     // PARAMETRI
     private Target _target;
-    private AlgorithmContext _context;
             
     // STORICO
     private List<Population> _generationsHistory;
@@ -42,7 +43,7 @@ public class Env {
     private EnvObserver _listener;
     
     public void init(AlgorithmContext context, Population startGen, Target target) {
-        _context = context;
+    	_context = context;
     	_currentGen = startGen;
         _target = target;
         _generationsHistory = new ArrayList<Population>();
@@ -51,10 +52,6 @@ public class Env {
     public void subscribe(EnvObserver l){
         _listener = l;
         if(_currentGen!=null) _currentGen.subscribe(l);
-    }
-    
-    public AlgorithmContext getContext(){
-    	return _context;
     }
     
     public ExperimentStats getStats(){

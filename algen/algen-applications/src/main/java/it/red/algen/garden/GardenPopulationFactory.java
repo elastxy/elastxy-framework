@@ -14,10 +14,11 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import it.red.algen.Population;
-import it.red.algen.context.AlgorithmContext;
+import it.red.algen.context.ContextSupplier;
 import it.red.algen.garden.domain.Place;
 import it.red.algen.garden.domain.Tree;
 
@@ -27,6 +28,10 @@ import it.red.algen.garden.domain.Tree;
  */
 @Component
 public class GardenPopulationFactory {
+	
+	@Autowired
+	private ContextSupplier contextSupplier;
+	
 	private Place[] places;
 	private Tree[] trees;
 
@@ -41,11 +46,11 @@ public class GardenPopulationFactory {
 	 * @param number
 	 * @return
 	 */
-    public Population createNew(AlgorithmContext context) {
-    	Population population = new Population(context.parameters);
-    	for(int i = 0; i < context.parameters._initialSelectionNumber; i++){
+    public Population createNew() {
+    	Population population = new Population(contextSupplier.getContext().parameters);
+    	for(int i = 0; i < contextSupplier.getContext().parameters._initialSelectionNumber; i++){
     		List<Tree> listOfTrees = Arrays.asList(trees);
-    		if(context.parameters._initialSelectionRandom){
+    		if(contextSupplier.getContext().parameters._initialSelectionRandom){
     			Collections.shuffle(listOfTrees);
     		}
     		GardenSolution solution = new GardenSolution(places, (Tree[])listOfTrees.toArray());

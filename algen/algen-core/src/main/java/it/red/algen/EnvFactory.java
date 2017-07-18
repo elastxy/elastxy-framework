@@ -10,13 +10,11 @@
 
 package it.red.algen;
 
-import it.red.algen.context.AlgorithmContext;
-
 /**
  *
  * @author grossi
  */
 public interface EnvFactory {
     
-	public Env create(AlgorithmContext context, Target target);
+	public Env create(Target target);
 }

@@ -22,6 +22,7 @@ import java.util.Map;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.config.AutowireCapableBeanFactory;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -32,6 +33,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.google.gson.Gson;
 
 import it.red.algen.context.AlgorithmContext;
+import it.red.algen.context.ContextSupplier;
 import it.red.algen.expressions.ExprConf;
 import it.red.algen.expressions.ExprEnvFactory;
 import it.red.algen.expressions.ExprTarget;
@@ -49,6 +51,9 @@ public class SampleController {
 	private static Logger logger = LoggerFactory.getLogger(SampleController.class);
 
 	@Autowired
+	private ContextSupplier contextSupplier;
+	
+	@Autowired
 	private InfoService infoService;
 
 	
@@ -60,12 +65,16 @@ public class SampleController {
 	@Autowired
 	private GardenEnvFactory gardenEnvFactory;
 	
+	private @Autowired AutowireCapableBeanFactory beanFactory;
+
+	
 	
 	@RequestMapping(path = "/access", method = RequestMethod.HEAD)
 	@ResponseBody
 	public String access() {
 		return "OK";
 	}
+	
 	
 	@RequestMapping(path = "/hello", method = RequestMethod.GET)
 	@ResponseBody
@@ -81,18 +90,28 @@ public class SampleController {
 			@PathVariable String domain, 
 			@PathVariable Integer target, 
 			@RequestBody AlgorithmContext context) {
-	 	LoggerManager.instance().init(new SimpleLogger());
+		
+		contextSupplier.init(context);
+		
+		LoggerManager.instance().init(new SimpleLogger());
+
 	 	Experiment e = null;
 	 	if("garden".equals(domain)){
 			context.monitoringConfiguration.reporter = new GardenCSVReporter(GardenConf.STATS_DIR);
-	        e = new Experiment(context,null,gardenEnvFactory);
+	        e = new Experiment(null,gardenEnvFactory);
 	 	}
 	 	else if("expressions".equals(domain)){
 	 		context.monitoringConfiguration.reporter = new CSVReporter(ExprConf.STATS_DIR);
-	        e = new Experiment(context,new ExprTarget(target),exprEnvFactory);
+	        e = new Experiment(new ExprTarget(target),exprEnvFactory);
 	 	}
+	 	beanFactory.autowireBean(e);
+	 	
         e.run();
+        
         ExperimentStats stats = e.getStats();
+        
+        contextSupplier.destroy();
+        
         return stats;
 	}
 
@@ -115,15 +134,13 @@ public class SampleController {
 		        		GardenConf.MAX_IDENTICAL_FITNESSES,
 		        		GardenConf.VERBOSE, 
 		        		new GardenCSVReporter(GardenConf.STATS_DIR));
+				contextSupplier.init(context);
 
 				Gson gson = new Gson();
 				String json = gson.toJson(context);
 				logger.info(json);
 				
-		        e = new Experiment(
-		        		context,
-		        		null,
-		        		gardenEnvFactory);
+		        e = new Experiment(null, gardenEnvFactory);
 		 	}
 		 	else if("expressions".equals(domain)){
 				AlgorithmContext context = AlgorithmContext.build(
@@ -137,18 +154,22 @@ public class SampleController {
 		        		ExprConf.MAX_IDENTICAL_FITNESSES,
 		        		ExprConf.VERBOSE, 
 		        		new CSVReporter(ExprConf.STATS_DIR));
+				contextSupplier.init(context);
 
 				Gson gson = new Gson();
 				String json = gson.toJson(context);
 				logger.info(json);
 				
-		        e = new Experiment(
-		        		context,
-		        		new ExprTarget(target),
-		        		exprEnvFactory);
+		        e = new Experiment(new ExprTarget(target), exprEnvFactory);
 		 	}
+		 	beanFactory.autowireBean(e);
+		 	
 	        e.run();
+	        
 	        ExperimentStats stats = e.getStats();
+	        
+	        contextSupplier.destroy();
+	        
 	        return stats;
 	}
 	

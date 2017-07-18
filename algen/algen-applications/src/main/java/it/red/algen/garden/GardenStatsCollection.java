@@ -12,7 +12,6 @@ package it.red.algen.garden;
 
 import it.red.algen.context.AlgorithmContext;
 import it.red.algen.expressions.ExprConf;
-import it.red.algen.expressions.ExprExperimentFactory;
 import it.red.algen.stats.StatsExperimentExecutor;
 
 /**
@@ -24,6 +23,7 @@ public class GardenStatsCollection {
     public static void main(String[] args) {
     	final int experimentsNumber = 3;
         
+    	// TODOM: port to spring boot main
 		AlgorithmContext context = AlgorithmContext.build(
         		GardenConf.INITIAL_SELECTION_NUMBER,
         		GardenConf.INITIAL_SELECTION_RANDOM,
@@ -37,10 +37,9 @@ public class GardenStatsCollection {
         		new GardenCSVReporter(GardenConf.MASSIVE_STATS_DIR));
 		
         StatsExperimentExecutor collector = new StatsExperimentExecutor(
-        		context,
-        		new ExprExperimentFactory(), 
         		experimentsNumber, 
         		null);
+        
         collector.run();
         collector.print();
     }

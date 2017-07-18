@@ -12,8 +12,12 @@ package it.red.algen.stats;
 
 import java.util.Optional;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.config.AutowireCapableBeanFactory;
+
+import it.red.algen.EnvFactory;
 import it.red.algen.Target;
-import it.red.algen.context.AlgorithmContext;
+import it.red.algen.context.ContextSupplier;
 import it.red.algen.tracking.Logger;
 import it.red.algen.tracking.LoggerManager;
 import it.red.algen.tracking.SimpleLogger;
@@ -25,16 +29,18 @@ import it.red.algen.tracking.SimpleLogger;
  * @author grossi
  */
 public class StatsExperimentExecutor {
-	private AlgorithmContext _context;
-    private ExperimentFactory _factory;
+    
+	@Autowired
+	private EnvFactory _envFactory;
+	
+	private @Autowired AutowireCapableBeanFactory beanFactory;
+	
     private int _experiments;
     private Target _target;
     
     private AggregatedStats _globalStats;
     
-    public StatsExperimentExecutor(AlgorithmContext context, ExperimentFactory factory, int experiments, Target target){
-        _context = context;
-    	_factory = factory;
+    public StatsExperimentExecutor(int experiments, Target target){
         _experiments = experiments;
         _target = target;
         _globalStats = new AggregatedStats();
@@ -54,7 +60,8 @@ public class StatsExperimentExecutor {
     public void run(){
         LoggerManager.instance().init(new SimpleLogger());
         for(int i = 0; i < _experiments; i++){
-            Experiment e = _factory.create(_context, _target);
+            Experiment e = new Experiment(_target, _envFactory);
+            beanFactory.autowireBean(e);
             e.run();
             addStats(e.getStats());
         }
