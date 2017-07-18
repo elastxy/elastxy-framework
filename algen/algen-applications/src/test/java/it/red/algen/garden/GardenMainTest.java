@@ -21,7 +21,7 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import it.red.algen.TestConfig;
-import it.red.algen.conf.AlgorithmContext;
+import it.red.algen.context.AlgorithmContext;
 import it.red.algen.stats.Experiment;
 import it.red.algen.tracking.CSVReporter;
 import it.red.algen.tracking.LoggerManager;

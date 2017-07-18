@@ -13,7 +13,7 @@ package it.red.algen.expressions;
 import org.springframework.stereotype.Component;
 
 import it.red.algen.Population;
-import it.red.algen.conf.AlgorithmContext;
+import it.red.algen.context.AlgorithmContext;
 
 /**
  *

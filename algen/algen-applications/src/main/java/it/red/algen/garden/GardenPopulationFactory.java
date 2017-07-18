@@ -17,7 +17,7 @@ import java.util.List;
 import org.springframework.stereotype.Component;
 
 import it.red.algen.Population;
-import it.red.algen.conf.AlgorithmContext;
+import it.red.algen.context.AlgorithmContext;
 import it.red.algen.garden.domain.Place;
 import it.red.algen.garden.domain.Tree;
 

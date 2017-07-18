@@ -11,7 +11,7 @@
 package it.red.algen.stats;
 
 import it.red.algen.Target;
-import it.red.algen.conf.AlgorithmContext;
+import it.red.algen.context.AlgorithmContext;
 
 /**
  *

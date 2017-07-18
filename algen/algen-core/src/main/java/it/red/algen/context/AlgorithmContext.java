@@ -1,5 +1,8 @@
-package it.red.algen.conf;
+package it.red.algen.context;
 
+import it.red.algen.conf.MonitoringConfiguration;
+import it.red.algen.conf.OperatorsParameters;
+import it.red.algen.conf.StopConditions;
 import it.red.algen.tracking.Reporter;
 
 public class AlgorithmContext {

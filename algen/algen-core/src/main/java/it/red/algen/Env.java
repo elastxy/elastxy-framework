@@ -14,7 +14,7 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
 
-import it.red.algen.conf.AlgorithmContext;
+import it.red.algen.context.AlgorithmContext;
 import it.red.algen.stats.ExperimentStats;
 import it.red.algen.tracking.EnvObserver;
 

@@ -10,7 +10,7 @@
 
 package it.red.algen;
 
-import it.red.algen.conf.AlgorithmContext;
+import it.red.algen.context.AlgorithmContext;
 
 /**
  *

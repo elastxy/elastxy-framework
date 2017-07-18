@@ -10,7 +10,7 @@
 
 package it.red.algen.expressions;
 
-import it.red.algen.conf.AlgorithmContext;
+import it.red.algen.context.AlgorithmContext;
 import it.red.algen.stats.StatsExperimentExecutor;
 import it.red.algen.tracking.CSVReporter;
 

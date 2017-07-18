@@ -16,7 +16,7 @@ import it.red.algen.Env;
 import it.red.algen.EnvFactory;
 import it.red.algen.Population;
 import it.red.algen.Target;
-import it.red.algen.conf.AlgorithmContext;
+import it.red.algen.context.AlgorithmContext;
 import it.red.algen.garden.domain.GardenDatabase;
 import it.red.algen.garden.domain.GardenDatabaseCSV;
 import it.red.algen.garden.domain.Place;

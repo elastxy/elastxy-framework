@@ -31,7 +31,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.google.gson.Gson;
 
-import it.red.algen.conf.AlgorithmContext;
+import it.red.algen.context.AlgorithmContext;
 import it.red.algen.expressions.ExprConf;
 import it.red.algen.expressions.ExprEnvFactory;
 import it.red.algen.expressions.ExprTarget;

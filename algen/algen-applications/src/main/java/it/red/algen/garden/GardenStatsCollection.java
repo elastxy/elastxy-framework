@@ -10,7 +10,7 @@
 
 package it.red.algen.garden;
 
-import it.red.algen.conf.AlgorithmContext;
+import it.red.algen.context.AlgorithmContext;
 import it.red.algen.expressions.ExprConf;
 import it.red.algen.expressions.ExprExperimentFactory;
 import it.red.algen.stats.StatsExperimentExecutor;

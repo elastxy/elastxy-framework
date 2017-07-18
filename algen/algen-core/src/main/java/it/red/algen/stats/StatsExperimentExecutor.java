@@ -13,7 +13,7 @@ package it.red.algen.stats;
 import java.util.Optional;
 
 import it.red.algen.Target;
-import it.red.algen.conf.AlgorithmContext;
+import it.red.algen.context.AlgorithmContext;
 import it.red.algen.tracking.Logger;
 import it.red.algen.tracking.LoggerManager;
 import it.red.algen.tracking.SimpleLogger;
