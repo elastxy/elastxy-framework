@@ -10,11 +10,12 @@
 
 package it.red.algen.expressions;
 
+import java.util.Random;
+
 import it.red.algen.Fitness;
 import it.red.algen.IllegalSolutionException;
 import it.red.algen.Solution;
 import it.red.algen.Target;
-import java.util.Random;
 
 /**
  *
@@ -22,6 +23,9 @@ import java.util.Random;
  */
 public class ExprSolution implements Solution {
     private static Random RANDOMIZER = new Random();
+    
+    private ExprGenesFactory _genesFactory;
+    
     private NumberGene _val1;
     private OperatorGene _op;
     private NumberGene _val2;
@@ -29,17 +33,27 @@ public class ExprSolution implements Solution {
     private Fitness _fitness;
     private String _legalCheck;
     
-    public ExprSolution(NumberGene val1, OperatorGene op, NumberGene val2) {
-        _val1 = val1;
+    // TODOM: gene creation to be moved outside
+    public ExprSolution(ExprGenesFactory genesFactory) {
+        _genesFactory = genesFactory;
+    	_val1 = 	_genesFactory.getRandomNumber();
+        _op = 		_genesFactory.getRandomOperator();
+        _val2 = 	_genesFactory.getRandomNumber();
+    }
+    
+    public ExprSolution(ExprGenesFactory genesFactory, NumberGene val1, OperatorGene op, NumberGene val2) {
+        _genesFactory = genesFactory;
+    	_val1 = val1;
         _op = op;
         _val2 = val2;
     }
     
-    public ExprSolution(int val1, char op,int val2) {
-        ExprGenesFactory factory = new ExprGenesFactory();
-        _val1 = factory.getNumber(val1);
-        _op = factory.getOperator(op);
-        _val2 = factory.getNumber(val2);
+    
+    public ExprSolution(ExprGenesFactory genesFactory, int val1, char op,int val2) {
+        _genesFactory = genesFactory;
+        _val1 = _genesFactory.getNumber(val1);
+        _op = _genesFactory.getOperator(op);
+        _val2 = _genesFactory.getNumber(val2);
     }
     
 
@@ -81,35 +95,34 @@ public class ExprSolution implements Solution {
         // I punti di ricombinazione possono essere all'operatore o al secondo operando
         int crossoverPoint = RANDOMIZER.nextInt(2);
         if(crossoverPoint==0){
-            sons[0] = new ExprSolution(ot._val1,    _op,        _val2);
-            sons[1] = new ExprSolution(_val1,       ot._op,     ot._val2);
+            sons[0] = new ExprSolution(_genesFactory, ot._val1,    _op,        _val2);
+            sons[1] = new ExprSolution(_genesFactory, _val1,       ot._op,     ot._val2);
         } else {
-            sons[0] = new ExprSolution(ot._val1,    ot._op,        _val2);
-            sons[1] = new ExprSolution(_val1,       _op,     ot._val2);
+            sons[0] = new ExprSolution(_genesFactory, ot._val1,    ot._op,        _val2);
+            sons[1] = new ExprSolution(_genesFactory, _val1,       _op,     ot._val2);
         }
         return sons;
     }
     
-    /** Pi� probabile la mutazione dell'operatore
+    /** Piu' probabile la mutazione dell'operatore
      */
     public void mute(){
-        ExprGenesFactory factory = new ExprGenesFactory();
         switch(RANDOMIZER.nextInt(4)){
             case 0:
-            	_val1 = factory.getRandomNumber();
+            	_val1 = _genesFactory.getRandomNumber();
                 break;
             case 1:
             case 2:
-            	_op = factory.getRandomOperator();
+            	_op = _genesFactory.getRandomOperator();
                 break;
             case 3:
-            	_val2 = factory.getRandomNumber();
+            	_val2 = _genesFactory.getRandomNumber();
                 break;
         }
     }
     
     public Object clone(){
-        return new ExprSolution(_val1, _op, _val2);
+        return new ExprSolution(_genesFactory, _val1, _op, _val2);
     }
     
     public String toString(){

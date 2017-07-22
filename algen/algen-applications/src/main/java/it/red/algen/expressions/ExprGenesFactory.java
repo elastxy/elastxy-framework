@@ -11,14 +11,19 @@
 package it.red.algen.expressions;
 import java.util.Random;
 
+import org.springframework.cache.annotation.Cacheable;
+import org.springframework.stereotype.Component;
+
 /** Componenti base dell'applicazione matematica
  * TODO: cache dei geni
  * @author grossi
  */
+@Component
 public class ExprGenesFactory {
     private static Random RANDOMIZER = new Random();
     
-    public OperatorGene getOperator(char o){
+    @Cacheable(value = "exprgenes", cacheManager = "springCM")
+    public OperatorGene getOperator(Character o){
         return new OperatorGene(o);
     }
     

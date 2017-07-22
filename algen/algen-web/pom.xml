@@ -10,19 +10,16 @@
     	<!-- <docker.maven.plugin.version>0.21-SNAPSHOT</docker.maven.plugin.version> -->
 	  </properties>
 
-	<parent>
-    	<groupId>org.springframework.boot</groupId>
-    	<artifactId>spring-boot-starter-parent</artifactId>
-    	<version>1.5.4.RELEASE</version>
-	</parent>
-	
+    <parent>
+        <groupId>it.red.algen</groupId>
+        <artifactId>algen-parent</artifactId>
+        <version>1.0.0-SNAPSHOT</version>
+    </parent>
+    
 	<artifactId>algen-web</artifactId>
-	<groupId>it.red.algen</groupId>
 	<name>Algen Spring Boot Application</name>
-	<version>1.0.0-SNAPSHOT</version>
 
 
-  
 	<dependencies>
     	<dependency>
         	<groupId>org.springframework.boot</groupId>
@@ -35,7 +32,6 @@
     	<dependency>
 		    <groupId>com.google.code.gson</groupId>
 		    <artifactId>gson</artifactId>
-		    <version>${gson.version}</version>
 		</dependency>
     	
     	<!-- RED Dependencies -->

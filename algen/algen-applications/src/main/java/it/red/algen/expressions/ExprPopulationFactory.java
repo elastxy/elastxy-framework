@@ -27,22 +27,21 @@ public class ExprPopulationFactory implements PopulationFactory {
 	@Autowired
 	private ContextSupplier contextSupplier;
 	
+	@Autowired
+	private ExprGenesFactory genesFactory;
+	
 	@Override
     public Population createNew() {
-        ExprGenesFactory factory = new ExprGenesFactory();
         Population population = new Population(contextSupplier.getContext().parameters);
         for(int i = 0; i < contextSupplier.getContext().parameters._initialSelectionNumber; i++){
         	if(contextSupplier.getContext().parameters._initialSelectionRandom){
-                population.add(new ExprSolution(
-                        factory.getRandomNumber(),
-                        factory.getRandomOperator(),
-                        factory.getRandomNumber()));
+                population.add(new ExprSolution(genesFactory));
         	}
         	else {
-        		population.add(new ExprSolution(
-                        factory.getNumber(0),
-                        factory.getOperator('+'),
-                        factory.getNumber(0)));
+        		population.add(new ExprSolution(genesFactory,
+        				genesFactory.getNumber(0),
+        				genesFactory.getOperator('+'),
+        				genesFactory.getNumber(0)));
         	}
         }
         return population;

@@ -19,14 +19,24 @@ package it.red.algen.controller;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
+import org.springframework.cache.CacheManager;
+import org.springframework.cache.annotation.EnableCaching;
+import org.springframework.cache.concurrent.ConcurrentMapCacheManager;
+import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 
+@EnableCaching
 @Configuration
 @EnableAutoConfiguration
 @EnableConfigurationProperties
 @ComponentScan(basePackages = "it.red.algen")
 public class SampleApplication {
+
+    @Bean(name = "springCM")
+    public CacheManager cacheManager() {
+        return new ConcurrentMapCacheManager("exprgenes");
+    }
 
 	public static void main(String[] args) throws Exception {
 		SpringApplication.run(SampleApplication.class, args);

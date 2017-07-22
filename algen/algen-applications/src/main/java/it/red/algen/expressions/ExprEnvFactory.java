@@ -34,15 +34,21 @@ public class ExprEnvFactory implements EnvFactory {
 	@Autowired
 	private ContextSupplier contextSupplier;
 	
+	@Autowired
+	private ExprGenesFactory genesFactory;
+	
+	
     public Env create(Target target){
         // Crea la popolazione iniziale
         Population startGen = populationFactory.createNew();
         
         // Definisce l'ambiente di riproduzione
-        ExprSolution minSol = new ExprSolution(ExprConf.MAX_NUMBER_GENE_VALUE, '*', -ExprConf.MAX_NUMBER_GENE_VALUE);
-        ExprSolution maxSol = new ExprSolution(ExprConf.MAX_NUMBER_GENE_VALUE, '*', ExprConf.MAX_NUMBER_GENE_VALUE);
+        ExprSolution minSol = new ExprSolution(genesFactory, ExprConf.MAX_NUMBER_GENE_VALUE, '*', -ExprConf.MAX_NUMBER_GENE_VALUE);
+        ExprSolution maxSol = new ExprSolution(genesFactory, ExprConf.MAX_NUMBER_GENE_VALUE, '*', ExprConf.MAX_NUMBER_GENE_VALUE);
         ExprTarget exprTarget = new ExprTarget(((ExprTarget)target).getComputeValue(), minSol.compute(), maxSol.compute());
-        
+        if(exprTarget.getDistance() < 0){
+        	throw new RuntimeException("Negative distance not allowed: check numbers precision.");
+        }
         Env env = new Env();
         env.init(contextSupplier.getContext(), startGen, exprTarget);
         return env;
