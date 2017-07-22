@@ -11,8 +11,11 @@
 package it.red.algen.expressions;
 import java.util.Random;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Component;
+
+import it.red.algen.context.ContextSupplier;
 
 /** Componenti base dell'applicazione matematica
  * TODO: cache dei geni
@@ -21,6 +24,9 @@ import org.springframework.stereotype.Component;
 @Component
 public class ExprGenesFactory {
     private static Random RANDOMIZER = new Random();
+    
+	@Autowired
+	private ContextSupplier contextSupplier;
     
     @Cacheable(value = "exprgenes", cacheManager = "springCM")
     public OperatorGene getOperator(Character o){
@@ -36,6 +42,7 @@ public class ExprGenesFactory {
     }
     
     public NumberGene getRandomNumber(){
-        return new NumberGene(RANDOMIZER.nextInt(2 * ExprConf.MAX_NUMBER_GENE_VALUE + 1) - ExprConf.MAX_NUMBER_GENE_VALUE); // From -max to +max
+    	int maxOperandValue = contextSupplier.getContext().customParameters.getInteger(ExprConf.MAX_OPERAND_VALUE);
+        return new NumberGene(RANDOMIZER.nextInt(2 * maxOperandValue + 1) - maxOperandValue); // From -max to +max
     }
 }

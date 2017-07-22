@@ -17,6 +17,7 @@ import it.red.algen.Env;
 import it.red.algen.EnvFactory;
 import it.red.algen.Population;
 import it.red.algen.Target;
+import it.red.algen.context.AlgorithmContext;
 import it.red.algen.context.ContextSupplier;
 
 /**
@@ -39,18 +40,21 @@ public class ExprEnvFactory implements EnvFactory {
 	
 	
     public Env create(Target target){
-        // Crea la popolazione iniziale
+        
+    	// Crea la popolazione iniziale
         Population startGen = populationFactory.createNew();
         
         // Definisce l'ambiente di riproduzione
-        ExprSolution minSol = new ExprSolution(genesFactory, ExprConf.MAX_NUMBER_GENE_VALUE, '*', -ExprConf.MAX_NUMBER_GENE_VALUE);
-        ExprSolution maxSol = new ExprSolution(genesFactory, ExprConf.MAX_NUMBER_GENE_VALUE, '*', ExprConf.MAX_NUMBER_GENE_VALUE);
+        AlgorithmContext context = contextSupplier.getContext();
+        int maxOperandValue = context.customParameters.getInteger(ExprConf.MAX_OPERAND_VALUE);
+        ExprSolution minSol = new ExprSolution(genesFactory, maxOperandValue, '*', -maxOperandValue);
+        ExprSolution maxSol = new ExprSolution(genesFactory, maxOperandValue, '*', maxOperandValue);
         ExprTarget exprTarget = new ExprTarget(((ExprTarget)target).getComputeValue(), minSol.compute(), maxSol.compute());
         if(exprTarget.getDistance() < 0){
         	throw new RuntimeException("Negative distance not allowed: check numbers precision.");
         }
         Env env = new Env();
-        env.init(contextSupplier.getContext(), startGen, exprTarget);
+        env.init(context, startGen, exprTarget);
         return env;
     }
 

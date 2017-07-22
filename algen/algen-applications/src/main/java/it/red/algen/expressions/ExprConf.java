@@ -15,7 +15,13 @@ package it.red.algen.expressions;
  * @author grossi
  */
 public class ExprConf {
-	public static final int MAX_NUMBER_GENE_VALUE = 32000;
+
+	// Constants
+	public static final String MAX_OPERAND_VALUE = "MAX_OPERAND_VALUE"; // 32000
+	
+	
+	// Default values
+	public static final int DEFAULT_MAX_OPERAND_VALUE = 32000;
 	
     public static final long INITIAL_SELECTION_NUMBER = 10;
     public static final boolean INITIAL_SELECTION_RANDOM = false;
@@ -30,6 +36,8 @@ public class ExprConf {
     
     public static final boolean VERBOSE = false;
     
+    
+    // Data directory
     public static String BASE_DIR = System.getProperty("datadir");
 	static {
         BASE_DIR = BASE_DIR==null ? "C:\\tmp\\algendata" : BASE_DIR;

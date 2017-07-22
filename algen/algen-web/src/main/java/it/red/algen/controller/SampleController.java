@@ -152,6 +152,7 @@ public class SampleController {
 		        		ExprConf.MAX_IDENTICAL_FITNESSES,
 		        		ExprConf.VERBOSE, 
 		        		new CSVReporter(ExprConf.STATS_DIR));
+				context.customParameters.put(ExprConf.MAX_OPERAND_VALUE, ExprConf.DEFAULT_MAX_OPERAND_VALUE);
 				contextSupplier.init(context);
 
 				Gson gson = new Gson();

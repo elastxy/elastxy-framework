@@ -11,7 +11,6 @@
 package it.red.algen.garden;
 
 import it.red.algen.context.AlgorithmContext;
-import it.red.algen.expressions.ExprConf;
 import it.red.algen.stats.StatsExperimentExecutor;
 
 /**
@@ -33,7 +32,7 @@ public class GardenStatsCollection {
         		10000, 
         		120000, 
         		100,
-        		ExprConf.VERBOSE, 
+        		GardenConf.VERBOSE, 
         		new GardenCSVReporter(GardenConf.MASSIVE_STATS_DIR));
 		
         StatsExperimentExecutor collector = new StatsExperimentExecutor(
