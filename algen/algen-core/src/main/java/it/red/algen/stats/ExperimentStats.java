@@ -15,10 +15,12 @@ import java.util.List;
 import it.red.algen.Population;
 
 /**
- *
+ *TODOM: togliere carattere _
  * @author grossi
  */
 public class ExperimentStats  {
+	// TODOM: tipizzato a Target
+	public Object _target;
     public Population _lastGeneration;
     public int _generations;
     public double _time;

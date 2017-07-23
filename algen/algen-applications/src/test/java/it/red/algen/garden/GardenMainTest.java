@@ -25,7 +25,6 @@ import it.red.algen.TestConfig;
 import it.red.algen.context.AlgorithmContext;
 import it.red.algen.context.ContextSupplier;
 import it.red.algen.stats.Experiment;
-import it.red.algen.tracking.CSVReporter;
 import it.red.algen.tracking.LoggerManager;
 import it.red.algen.tracking.SimpleLogger;
 
@@ -51,23 +50,10 @@ public class GardenMainTest {
 		
         LoggerManager.instance().init(new SimpleLogger());
         
-		AlgorithmContext context = AlgorithmContext.build(
-				GardenConf.INITIAL_SELECTION_NUMBER,
-				GardenConf.INITIAL_SELECTION_RANDOM,
-				GardenConf.RECOMBINANTION_PERC, 
-        		GardenConf.MUTATION_PERC, 
-        		GardenConf.ELITARISM, 
-        		GardenConf.MAX_ITERATIONS, 
-        		GardenConf.MAX_LIFETIME_SEC, 
-        		GardenConf.MAX_IDENTICAL_FITNESSES,
-        		GardenConf.VERBOSE, 
-        		new CSVReporter(GardenConf.STATS_DIR));
+        AlgorithmContext context = new GardenBenchmark().build();
+ 		contextSupplier.init(context);
 		
-		contextSupplier.init(context);
-		
-		Experiment e = new Experiment(
-        		null, // target already set in database data
-        		gardenEnvFactory);
+		Experiment e = new Experiment(gardenEnvFactory);
         
         beanFactory.autowireBean(e);
         

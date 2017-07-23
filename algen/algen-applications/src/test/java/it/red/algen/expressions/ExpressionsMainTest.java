@@ -25,7 +25,6 @@ import it.red.algen.TestConfig;
 import it.red.algen.context.AlgorithmContext;
 import it.red.algen.context.ContextSupplier;
 import it.red.algen.stats.Experiment;
-import it.red.algen.tracking.CSVReporter;
 import it.red.algen.tracking.LoggerManager;
 import it.red.algen.tracking.SimpleLogger;
 
@@ -50,25 +49,11 @@ public class ExpressionsMainTest {
 		System.setProperty("datadir", new File("C:\\tmp\\algendata").getAbsolutePath());
 
 		LoggerManager.instance().init(new SimpleLogger());
-		
-		AlgorithmContext context = AlgorithmContext.build(
-				ExprConf.INITIAL_SELECTION_NUMBER,
-				ExprConf.INITIAL_SELECTION_RANDOM,
-				ExprConf.RECOMBINANTION_PERC, 
-        		ExprConf.MUTATION_PERC, 
-        		ExprConf.ELITARISM, 
-        		ExprConf.MAX_ITERATIONS, 
-        		ExprConf.MAX_LIFETIME_SEC, 
-        		ExprConf.MAX_IDENTICAL_FITNESSES,
-        		ExprConf.VERBOSE, 
-        		new CSVReporter(ExprConf.STATS_DIR));
-		context.customParameters.put(ExprConf.MAX_OPERAND_VALUE, ExprConf.DEFAULT_MAX_OPERAND_VALUE);
-		
+
+		AlgorithmContext context = new ExprBenchmark().build();
 		contextSupplier.init(context);
 		
-		Experiment e = new Experiment(
-        		new ExprTarget(33),
-        		exprEnvFactory);
+		Experiment e = new Experiment(exprEnvFactory);
 		
 		beanFactory.autowireBean(e);
 		

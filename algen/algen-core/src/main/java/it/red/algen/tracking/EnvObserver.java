@@ -78,7 +78,7 @@ public class EnvObserver {
         	log.out("Total generations with same fitness: "+stats._totIdenticalFitnesses);
         }
         
-        if(_context.monitoringConfiguration.reporter!=null) {
+        if(_context.monitoringConfiguration.verbose && _context.monitoringConfiguration.reporter!=null) {
         	_context.monitoringConfiguration.reporter.createReports(stats);
         }
         

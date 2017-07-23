@@ -1,6 +1,6 @@
 package it.red.algen.context;
 
-import it.red.algen.conf.CustomParameters;
+import it.red.algen.conf.ApplicationSpecifics;
 import it.red.algen.conf.MonitoringConfiguration;
 import it.red.algen.conf.OperatorsParameters;
 import it.red.algen.conf.StopConditions;
@@ -10,7 +10,7 @@ public class AlgorithmContext {
 	public OperatorsParameters parameters;
 	public StopConditions stopConditions;
 	public MonitoringConfiguration monitoringConfiguration;
-	public CustomParameters customParameters;
+	public ApplicationSpecifics applicationSpecifics = new ApplicationSpecifics();
 	
 	public boolean onTime(int currentGenNumber, long currentLifeTime){
 		
@@ -41,6 +41,7 @@ public class AlgorithmContext {
 			boolean verbose,
 			Reporter reporter
 			){
+		
         OperatorsParameters algParameters = new OperatorsParameters();
         algParameters._recombinationPerc = recombinationPerc;
         algParameters._mutationPerc = mutationPerc;
@@ -57,13 +58,10 @@ public class AlgorithmContext {
         monitoringConfiguration.verbose = verbose;
         monitoringConfiguration.reporter = reporter;
         
-        CustomParameters customParameters = new CustomParameters();
-        
         AlgorithmContext context = new AlgorithmContext();
         context.parameters = algParameters;
         context.stopConditions = stopConditions;
         context.monitoringConfiguration = monitoringConfiguration;
-        context.customParameters = customParameters;
         
         return context;
 	}

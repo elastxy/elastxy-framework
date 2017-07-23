@@ -16,5 +16,5 @@ package it.red.algen;
  */
 public interface EnvFactory {
     
-	public Env create(Target target);
+	public Env create();
 }

@@ -16,8 +16,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.config.AutowireCapableBeanFactory;
 
 import it.red.algen.EnvFactory;
-import it.red.algen.Target;
-import it.red.algen.context.ContextSupplier;
 import it.red.algen.tracking.Logger;
 import it.red.algen.tracking.LoggerManager;
 import it.red.algen.tracking.SimpleLogger;
@@ -30,19 +28,17 @@ import it.red.algen.tracking.SimpleLogger;
  */
 public class StatsExperimentExecutor {
     
-	@Autowired
 	private EnvFactory _envFactory;
 	
 	private @Autowired AutowireCapableBeanFactory beanFactory;
 	
     private int _experiments;
-    private Target _target;
     
     private AggregatedStats _globalStats;
     
-    public StatsExperimentExecutor(int experiments, Target target){
+    public StatsExperimentExecutor(EnvFactory envFactory, int experiments){
+        _envFactory = envFactory;
         _experiments = experiments;
-        _target = target;
         _globalStats = new AggregatedStats();
         _globalStats._totExperiments = _experiments;
     }
@@ -60,22 +56,32 @@ public class StatsExperimentExecutor {
     public void run(){
         LoggerManager.instance().init(new SimpleLogger());
         for(int i = 0; i < _experiments; i++){
-            Experiment e = new Experiment(_target, _envFactory);
+            Experiment e = new Experiment(_envFactory);
             beanFactory.autowireBean(e);
             e.run();
             addStats(e.getStats());
         }
     }
     
-    public void print(){
+    public String print(){
+    	StringBuffer buffer = new StringBuffer();
+    	
         Logger logger = LoggerManager.instance();
-        logger.out("\n\n@@@@@@@@@@@@  GLOBAL STATS @@@@@@@@@@@");
-        logger.out("EXPERIMENTS: "+_globalStats._totExperiments);
-        logger.out("SUCCESSES: "+_globalStats.getPercSuccesses()+"%");
-        logger.out("AVG TIME (sec): "+_globalStats.getAvgTime());
-        logger.out("AVG GEN: "+_globalStats.getAvgGenerations());
-        logger.out("AVG FITNESS: "+_globalStats.getAvgFitness());
-        logger.out("MAX FITNESS: "+String.format("%.2f", _globalStats._maxFitness.orElse(null)));
-        logger.out("MIN FITNESS: "+String.format("%.2f", _globalStats._minFitness.orElse(null)));
+        out(logger, buffer, "\n\n@@@@@@@@@@@@  GLOBAL STATS @@@@@@@@@@@");
+        out(logger, buffer, "EXPERIMENTS: "+_globalStats._totExperiments);
+        out(logger, buffer, "SUCCESSES: "+_globalStats.getPercSuccesses()+"%");
+        out(logger, buffer, "AVG TIME (sec): "+_globalStats.getAvgTime());
+        out(logger, buffer, "AVG GEN: "+_globalStats.getAvgGenerations());
+        out(logger, buffer, "AVG FITNESS: "+_globalStats.getAvgFitness());
+        out(logger, buffer, "MAX FITNESS: "+String.format("%.2f", _globalStats._maxFitness.orElse(null)));
+        out(logger, buffer, "MIN FITNESS: "+String.format("%.2f", _globalStats._minFitness.orElse(null)));
+        
+        return buffer.toString();
+    }
+    
+    // TODOM: logging serio
+    private void out(Logger logger, StringBuffer buffer, String msg){
+    	logger.out(msg);
+    	buffer.append(msg).append(System.getProperty("line.separator"));
     }
 }

@@ -38,7 +38,7 @@ public class GardenEnvFactory implements EnvFactory {
 	private ContextSupplier contextSupplier;
 
 	
-    public Env create(Target target){
+    public Env create(){
     	
         // Crea la popolazione iniziale
     	Place[] places = database.getAllPlaces();

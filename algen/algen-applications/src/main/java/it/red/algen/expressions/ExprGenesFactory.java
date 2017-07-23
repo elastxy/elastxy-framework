@@ -42,7 +42,7 @@ public class ExprGenesFactory {
     }
     
     public NumberGene getRandomNumber(){
-    	int maxOperandValue = contextSupplier.getContext().customParameters.getInteger(ExprConf.MAX_OPERAND_VALUE);
+    	int maxOperandValue = contextSupplier.getContext().applicationSpecifics.getParamInteger(ExprConf.MAX_OPERAND_VALUE);
         return new NumberGene(RANDOMIZER.nextInt(2 * maxOperandValue + 1) - maxOperandValue); // From -max to +max
     }
 }

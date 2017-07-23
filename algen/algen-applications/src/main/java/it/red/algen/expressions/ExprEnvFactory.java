@@ -16,7 +16,6 @@ import org.springframework.stereotype.Component;
 import it.red.algen.Env;
 import it.red.algen.EnvFactory;
 import it.red.algen.Population;
-import it.red.algen.Target;
 import it.red.algen.context.AlgorithmContext;
 import it.red.algen.context.ContextSupplier;
 
@@ -39,22 +38,28 @@ public class ExprEnvFactory implements EnvFactory {
 	private ExprGenesFactory genesFactory;
 	
 	
-    public Env create(Target target){
+    public Env create(){
         
     	// Crea la popolazione iniziale
         Population startGen = populationFactory.createNew();
         
         // Definisce l'ambiente di riproduzione
         AlgorithmContext context = contextSupplier.getContext();
-        int maxOperandValue = context.customParameters.getInteger(ExprConf.MAX_OPERAND_VALUE);
+        int maxOperandValue = context.applicationSpecifics.getParamInteger(ExprConf.MAX_OPERAND_VALUE);
         ExprSolution minSol = new ExprSolution(genesFactory, maxOperandValue, '*', -maxOperandValue);
         ExprSolution maxSol = new ExprSolution(genesFactory, maxOperandValue, '*', maxOperandValue);
-        ExprTarget exprTarget = new ExprTarget(((ExprTarget)target).getComputeValue(), minSol.compute(), maxSol.compute());
+
+        // Definisce il target
+        Integer target = context.applicationSpecifics.getTargetInteger(ExprConf.TARGET_EXPRESSION_RESULT);
+        ExprTarget exprTarget = new ExprTarget(target, minSol.compute(), maxSol.compute());
         if(exprTarget.getDistance() < 0){
         	throw new RuntimeException("Negative distance not allowed: check numbers precision.");
         }
+        
+        // Crea l'ambiente
         Env env = new Env();
         env.init(context, startGen, exprTarget);
+        
         return env;
     }
 

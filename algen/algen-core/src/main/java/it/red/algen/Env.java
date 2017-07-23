@@ -56,6 +56,7 @@ public class Env {
     
     public ExperimentStats getStats(){
         ExperimentStats stats = new ExperimentStats();
+        stats._target = _context.applicationSpecifics.target;
         stats._lastGeneration = _currentGen;
         stats._generations = _currentGenNumber+1;
         stats._time = getLifeTimeInMillis();

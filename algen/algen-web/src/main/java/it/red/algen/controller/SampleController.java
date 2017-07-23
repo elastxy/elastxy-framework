@@ -32,16 +32,19 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.google.gson.Gson;
 
+import it.red.algen.EnvFactory;
 import it.red.algen.context.AlgorithmContext;
 import it.red.algen.context.ContextSupplier;
+import it.red.algen.expressions.ExprBenchmark;
 import it.red.algen.expressions.ExprConf;
 import it.red.algen.expressions.ExprEnvFactory;
-import it.red.algen.expressions.ExprTarget;
+import it.red.algen.garden.GardenBenchmark;
 import it.red.algen.garden.GardenCSVReporter;
 import it.red.algen.garden.GardenConf;
 import it.red.algen.garden.GardenEnvFactory;
 import it.red.algen.stats.Experiment;
 import it.red.algen.stats.ExperimentStats;
+import it.red.algen.stats.StatsExperimentExecutor;
 import it.red.algen.tracking.CSVReporter;
 import it.red.algen.tracking.LoggerManager;
 import it.red.algen.tracking.SimpleLogger;
@@ -59,6 +62,7 @@ public class SampleController {
 	
 	@Autowired
 	private ExprEnvFactory exprEnvFactory;
+	
 	@Autowired
 	private GardenEnvFactory gardenEnvFactory;
 	
@@ -82,11 +86,10 @@ public class SampleController {
 	}
 
 	
-	@RequestMapping(path = "/calculate/{domain}/{target}", method = RequestMethod.POST)
+	@RequestMapping(path = "/experiment/{domain}", method = RequestMethod.POST)
 	@ResponseBody
 	public ExperimentStats calculateWithParams(
-			@PathVariable String domain, 
-			@PathVariable Integer target, 
+			@PathVariable String domain,  
 			@RequestBody AlgorithmContext context) {
 		
 		contextSupplier.init(context);
@@ -96,11 +99,11 @@ public class SampleController {
 	 	Experiment e = null;
 	 	if("garden".equals(domain)){
 			context.monitoringConfiguration.reporter = new GardenCSVReporter(GardenConf.STATS_DIR);
-	        e = new Experiment(null,gardenEnvFactory); // No target given from user
+	        e = new Experiment(gardenEnvFactory);
 	 	}
 	 	else if("expressions".equals(domain)){
 	 		context.monitoringConfiguration.reporter = new CSVReporter(ExprConf.STATS_DIR);
-	        e = new Experiment(new ExprTarget(target),exprEnvFactory);
+	        e = new Experiment(exprEnvFactory);
 	 	}
 	 	beanFactory.autowireBean(e);
 	 	
@@ -113,56 +116,63 @@ public class SampleController {
         return stats;
 	}
 
-	
-	
-	@RequestMapping("/calculate-test/{domain}/{target}")
+
+	// TODOM: structured results
+	@RequestMapping(path = "/analysis/{domain}/{experiments}", method = RequestMethod.POST)
 	@ResponseBody
-	public ExperimentStats calculate(@PathVariable String domain, @PathVariable Integer target) {
+	public String analysis(
+			@PathVariable String domain, 
+			@PathVariable Integer experiments,
+			@RequestBody AlgorithmContext context) {
+		
+		contextSupplier.init(context);
+		
+		LoggerManager.instance().init(new SimpleLogger());
+
+	 	EnvFactory envFactory = null;
+	 	
+	 	// TODOM: Make generics default build mode
+	 	if("garden".equals(domain)){ 
+	 		envFactory = gardenEnvFactory;
+	 	}
+	 	else if("expressions".equals(domain)){ 
+	 		envFactory = exprEnvFactory;
+	 	}
+
+        StatsExperimentExecutor collector = new StatsExperimentExecutor(envFactory, experiments);
+        beanFactory.autowireBean(collector);
+        
+        collector.run();
+        
+        String result = collector.print();
+        return result;
+	}
+
+	
+	@RequestMapping("/test/{domain}")
+	@ResponseBody
+	public ExperimentStats calculateTest(@PathVariable String domain) {
 		 	LoggerManager.instance().init(new SimpleLogger());
-		 	Experiment e = null;
-		 	if("garden".equals(domain)){
-				AlgorithmContext context = AlgorithmContext.build(
-						GardenConf.INITIAL_SELECTION_NUMBER,
-						GardenConf.INITIAL_SELECTION_RANDOM,
-						GardenConf.RECOMBINANTION_PERC, 
-		        		GardenConf.MUTATION_PERC, 
-		        		GardenConf.ELITARISM, 
-		        		GardenConf.MAX_ITERATIONS, 
-		        		GardenConf.MAX_LIFETIME_SEC, 
-		        		GardenConf.MAX_IDENTICAL_FITNESSES,
-		        		GardenConf.VERBOSE, 
-		        		new GardenCSVReporter(GardenConf.STATS_DIR));
-				contextSupplier.init(context);
-
-				Gson gson = new Gson();
-				String json = gson.toJson(context);
-				logger.info(json);
-				
-		        e = new Experiment(null, gardenEnvFactory);
-		 	}
-		 	else if("expressions".equals(domain)){
-				AlgorithmContext context = AlgorithmContext.build(
-						GardenConf.INITIAL_SELECTION_NUMBER,
-						GardenConf.INITIAL_SELECTION_RANDOM,
-						ExprConf.RECOMBINANTION_PERC, 
-		        		ExprConf.MUTATION_PERC, 
-		        		ExprConf.ELITARISM, 
-		        		ExprConf.MAX_ITERATIONS, 
-		        		ExprConf.MAX_LIFETIME_SEC, 
-		        		ExprConf.MAX_IDENTICAL_FITNESSES,
-		        		ExprConf.VERBOSE, 
-		        		new CSVReporter(ExprConf.STATS_DIR));
-				context.customParameters.put(ExprConf.MAX_OPERAND_VALUE, ExprConf.DEFAULT_MAX_OPERAND_VALUE);
-				contextSupplier.init(context);
-
-				Gson gson = new Gson();
-				String json = gson.toJson(context);
-				logger.info(json);
-				
-		        e = new Experiment(new ExprTarget(target), exprEnvFactory);
-		 	}
-		 	beanFactory.autowireBean(e);
+		 	AlgorithmContext context = null;
+		 	EnvFactory envFactory = null;
 		 	
+		 	// TODOM: Make generics default build mode
+		 	if("garden".equals(domain)){ 
+		 		context = new GardenBenchmark().build(); 
+		 		envFactory = gardenEnvFactory;
+		 	}
+		 	else if("expressions".equals(domain)){ 
+		 		context = new ExprBenchmark().build(); 
+		 		envFactory = exprEnvFactory;
+		 	}
+			
+		 	contextSupplier.init(context);
+			Gson gson = new Gson();
+			String json = gson.toJson(context);
+			logger.info(json);
+			
+			Experiment e = new Experiment(envFactory);
+		 	beanFactory.autowireBean(e);
 	        e.run();
 	        
 	        ExperimentStats stats = e.getStats();
@@ -171,5 +181,7 @@ public class SampleController {
 	        
 	        return stats;
 	}
-	
+
+
+
 }
