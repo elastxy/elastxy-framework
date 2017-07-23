@@ -28,7 +28,7 @@ public class ExprGenesFactory {
 	@Autowired
 	private ContextSupplier contextSupplier;
     
-    @Cacheable(value = "exprgenes", cacheManager = "springCM")
+    @Cacheable(value = "exprgene")//, cacheManager = "springCM")
     public OperatorGene getOperator(Character o){
         return new OperatorGene(o);
     }

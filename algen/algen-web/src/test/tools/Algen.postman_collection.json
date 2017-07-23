@@ -32,7 +32,7 @@
 		{
 			"name": "/calculate/expressions/{target}",
 			"request": {
-				"url": "http://{{ip}}:{{port}}/calculate/expressions/33",
+				"url": "http://{{ip}}:{{port}}/calculate/expressions/10003",
 				"method": "POST",
 				"header": [
 					{
@@ -43,7 +43,7 @@
 				],
 				"body": {
 					"mode": "raw",
-					"raw": "{\"parameters\":{\"_recombinationPerc\":0.7,\"_mutationPerc\":0.2,\"_elitarism\":true,\"_initialSelectionNumber\":5,\"_initialSelectionRandom\":false},\"stopConditions\":{\"maxIterations\":-1,\"maxLifetimeMs\":-1,\"maxIdenticalFitnesses\":3},\"monitoringConfiguration\":{\"verbose\":false}}"
+					"raw": "{\n\t\"parameters\": {\n\t\t\"_recombinationPerc\": 0.8,\n\t\t\"_mutationPerc\": 0.1,\n\t\t\"_elitarism\": true,\n\t\t\"_initialSelectionNumber\": 10,\n\t\t\"_initialSelectionRandom\": false\n\t},\n\t\"customParameters\": {\n\t\t\"params\" : {\n\t\t\t\"MAX_OPERAND_VALUE\" : \"10\"\n\t\t}\n\t},\n\t\"stopConditions\": {\n\t\t\"maxIterations\": -1,\n\t\t\"maxLifetimeMs\": 3000,\n\t\t\"maxIdenticalFitnesses\": -1\n\t},\n\t\"monitoringConfiguration\": {\n\t\t\"verbose\": false\n\t}\n}"
 				},
 				"description": ""
 			},

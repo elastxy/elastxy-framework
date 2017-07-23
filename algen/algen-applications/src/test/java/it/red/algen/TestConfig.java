@@ -14,7 +14,7 @@ public class TestConfig {
 
     @Bean(name = "springCM")
     public CacheManager cacheManager() {
-        return new ConcurrentMapCacheManager("exprgenes");
+        return new ConcurrentMapCacheManager("exprgene");
     }
     
 }

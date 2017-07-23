@@ -35,7 +35,7 @@ public class SampleApplication {
 
     @Bean(name = "springCM")
     public CacheManager cacheManager() {
-        return new ConcurrentMapCacheManager("exprgenes");
+        return new ConcurrentMapCacheManager("exprgene");
     }
 
 	public static void main(String[] args) throws Exception {
