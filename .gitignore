@@ -1,4 +1,6 @@
-/algen/algen-applications/.settings/org.eclipse.jdt.core.prefs
-/algen/algen-applications/.settings/org.eclipse.m2e.core.prefs
+/algen/algen-applications/.settings/*
 /algen/algen-applications/.classpath
 /algen/algen-applications/.project
+/algen/algen-web/.classpath
+/algen/algen-web/.settings/*
+/algen/.settings/*
