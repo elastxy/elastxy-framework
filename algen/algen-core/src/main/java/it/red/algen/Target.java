@@ -16,4 +16,11 @@ package it.red.algen;
  */
 public interface Target {
     
+	/**
+	 * Returns the non-normalized fitness values, useful to evaluate any solution against
+	 * @return
+	 */
+	public RawFitness getRawFitness();
+	
+	public void setRawFitness(RawFitness raw);
 }

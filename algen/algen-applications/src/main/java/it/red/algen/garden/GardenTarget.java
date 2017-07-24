@@ -10,42 +10,26 @@
 
 package it.red.algen.garden;
 
+import it.red.algen.RawFitness;
 import it.red.algen.Target;
-import it.red.algen.garden.domain.Place;
-import it.red.algen.garden.domain.Tree;
 
 /**
  *
  * @author grossi
  */
 public class GardenTarget implements Target {
-	private int bestLuxurianceLevel;
-	private int worstLuxurianceLevel;
+	private RawFitness rawFitness;
 	
 	
-	public GardenTarget(Place[] places, Tree[] trees) {
-		bestLuxurianceLevel = 0;
-		worstLuxurianceLevel = places.length * 1; // 1=distanza massima dall'ottimo
+	@Override
+	public RawFitness getRawFitness() {
+		return rawFitness;
 	}
 
 
-	public int getBestLuxurianceLevel() {
-		return bestLuxurianceLevel;
-	}
-
-
-	public void setBestLuxurianceLevel(int bestLuxurianceLevel) {
-		this.bestLuxurianceLevel = bestLuxurianceLevel;
-	}
-
-
-	public long getWorstLuxurianceLevel() {
-		return worstLuxurianceLevel;
-	}
-
-
-	public void setWorstLuxurianceLevel(int worstLuxurianceLevel) {
-		this.worstLuxurianceLevel = worstLuxurianceLevel;
+	@Override
+	public void setRawFitness(RawFitness raw) {
+		this.rawFitness = raw;
 	}
 	
 

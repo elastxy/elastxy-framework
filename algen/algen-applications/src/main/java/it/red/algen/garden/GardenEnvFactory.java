@@ -48,7 +48,8 @@ public class GardenEnvFactory implements EnvFactory {
         
         // Definisce l'ambiente di riproduzione
         // TODOM: target from outside!
-        Target mytarget = new GardenTarget(places, trees);
+        Target mytarget = new GardenTarget();
+        mytarget.setRawFitness(new GardenRawFitness(places.length * 1)); // 1=distanza massima dall'ottimo
         Env env = new Env();
         env.init(contextSupplier.getContext(), startGen, mytarget);
         return env;

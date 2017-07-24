@@ -77,7 +77,7 @@ public class ExprSolution implements Solution {
         try { 
             sValue = compute(); 
             int distance = Math.abs(tValue-sValue);
-            normalized = 1 - distance / (double)t.getDistance();
+            normalized = 1 - distance / (double)((ExprRawFitness)t.getRawFitness()).distance;
         } catch(IllegalSolutionException ex){ 
             _legalCheck = "Divisione per 0 non ammessa: secondo operando non valido.";
             normalized = 0;

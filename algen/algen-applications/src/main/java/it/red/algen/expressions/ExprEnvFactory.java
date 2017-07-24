@@ -51,10 +51,13 @@ public class ExprEnvFactory implements EnvFactory {
 
         // Definisce il target
         Integer target = context.applicationSpecifics.getTargetInteger(ExprConf.TARGET_EXPRESSION_RESULT);
-        ExprTarget exprTarget = new ExprTarget(target, minSol.compute(), maxSol.compute());
-        if(exprTarget.getDistance() < 0){
+        ExprTarget exprTarget = new ExprTarget(target);
+        // Raw Fitness
+        ExprRawFitness raw = new ExprRawFitness(Math.max(target-minSol.compute(), maxSol.compute()-target));
+        if(raw.distance < 0){
         	throw new RuntimeException("Negative distance not allowed: check numbers precision.");
         }
+        exprTarget.setRawFitness(raw);
         
         // Crea l'ambiente
         Env env = new Env();

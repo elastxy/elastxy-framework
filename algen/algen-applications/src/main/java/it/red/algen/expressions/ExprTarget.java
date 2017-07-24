@@ -10,30 +10,40 @@
 
 package it.red.algen.expressions;
 
+import it.red.algen.RawFitness;
 import it.red.algen.Target;
 
 /**
+ *TODOM: distance is a indirect measure of the fitness of a chromosome,
+ *Comes from environment contraints and characteristics, and can be used globally in an experiment to simplify 
+ *other chromosomes fitness calculation
+ *distance <= number interval
+ *
+ *fitness <= environment constraints
+ *
+ *Could be taken outside in an interface
  *
  * @author grossi
  */
 public class ExprTarget implements Target {
     private int _computeValue;
-    private int _distance;
-
+    private RawFitness rawFitness;
+    
     public ExprTarget(int computeValue) {
     	this._computeValue = computeValue;
     }
 
-    public ExprTarget(int computeValue, int minValue, int maxValue) {
-        _computeValue = computeValue;
-        _distance = Math.max(_computeValue-minValue, maxValue-_computeValue);
-    }
-    
     public int getComputeValue(){
         return _computeValue;
     }
     
-    public int getDistance(){
-        return _distance;
-    }
+	@Override
+	public RawFitness getRawFitness() {
+		return rawFitness;
+	}
+
+	@Override
+	public void setRawFitness(RawFitness raw) {
+		this.rawFitness = raw;
+	}
 }

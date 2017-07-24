@@ -18,7 +18,6 @@ import org.springframework.stereotype.Component;
 import it.red.algen.context.ContextSupplier;
 
 /** Componenti base dell'applicazione matematica
- * TODO: cache dei geni
  * @author grossi
  */
 @Component

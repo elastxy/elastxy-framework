@@ -78,7 +78,6 @@ public class GardenSolution implements Solution {
     
     public void calcFitness(Target target){
         GardenTarget t = (GardenTarget)target;
-//        double tValue = (double)t.getBestLuxurianceLevel();
         double sValue = 0;
         double normalized = 0.0;
         try { 
@@ -86,7 +85,7 @@ public class GardenSolution implements Solution {
             // sValue in questo caso = distance, essendo sempre 0 il valore riferimento
             // es. sValue = 12, worst = 100, dist = 12, normalized = 88%
             // es. sValue = 76, worst = 100, dist = 76, normalized = 24%
-            normalized = 1 - sValue / (double)t.getWorstLuxurianceLevel();
+            normalized = 1 - sValue / (double)((GardenRawFitness)t.getRawFitness()).rawFitness;
         } catch(IllegalSolutionException ex){ 
             _legalCheck = "Divisione per 0 non ammessa: secondo operando non valido.";
             normalized = 0;

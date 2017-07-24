@@ -13,7 +13,7 @@ package it.red.algen.expressions;
 import it.red.algen.Fitness;
 
 /**
- *
+ * Normalized fitness in [0..1]
  * @author grossi
  */
 public class ExprFitness implements Fitness {
