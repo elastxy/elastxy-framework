@@ -1,4 +1,6 @@
-package it.red.algen;
+package it.red.algen.engine;
+
+import it.red.algen.domain.Population;
 
 public interface PopulationFactory {
 

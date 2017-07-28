@@ -10,7 +10,7 @@
 
 package it.red.algen.expressions;
 
-import it.red.algen.Gene;
+import it.red.algen.domain.Gene;
 
 /**
  *

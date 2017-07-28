@@ -10,8 +10,8 @@
 
 package it.red.algen.garden;
 
-import it.red.algen.RawFitness;
-import it.red.algen.Target;
+import it.red.algen.domain.RawFitness;
+import it.red.algen.domain.Target;
 
 /**
  *

@@ -13,11 +13,11 @@ package it.red.algen.expressions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import it.red.algen.Env;
-import it.red.algen.EnvFactory;
-import it.red.algen.Population;
 import it.red.algen.context.AlgorithmContext;
 import it.red.algen.context.ContextSupplier;
+import it.red.algen.domain.Env;
+import it.red.algen.domain.Population;
+import it.red.algen.engine.EnvFactory;
 
 /**
  *

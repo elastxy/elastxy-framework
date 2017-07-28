@@ -17,9 +17,9 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import it.red.algen.Population;
-import it.red.algen.PopulationFactory;
 import it.red.algen.context.ContextSupplier;
+import it.red.algen.domain.Population;
+import it.red.algen.engine.PopulationFactory;
 import it.red.algen.garden.domain.Place;
 import it.red.algen.garden.domain.Tree;
 

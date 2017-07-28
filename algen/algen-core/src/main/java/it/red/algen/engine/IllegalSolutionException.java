@@ -8,10 +8,11 @@
  * Open. You can then make changes to the template in the Source Editor.
  */
 
-package it.red.algen;
+package it.red.algen.engine;
 
 /**
- *
+ * TODOM: definire interfaccia per validazioni su bontà della soluzione
+ * 
  * @author grossi
  */
 public class IllegalSolutionException extends RuntimeException {

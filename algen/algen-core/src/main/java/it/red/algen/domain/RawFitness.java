@@ -1,4 +1,4 @@
-package it.red.algen;
+package it.red.algen.domain;
 
 public interface RawFitness {
 

@@ -12,10 +12,10 @@ package it.red.algen.expressions;
 
 import java.util.Random;
 
-import it.red.algen.Fitness;
-import it.red.algen.IllegalSolutionException;
-import it.red.algen.Solution;
-import it.red.algen.Target;
+import it.red.algen.domain.Fitness;
+import it.red.algen.domain.Solution;
+import it.red.algen.domain.Target;
+import it.red.algen.engine.IllegalSolutionException;
 
 /**
  *

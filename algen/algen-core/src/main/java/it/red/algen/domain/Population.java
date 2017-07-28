@@ -8,7 +8,7 @@
  * Open. You can then make changes to the template in the Source Editor.
  */
 
-package it.red.algen;
+package it.red.algen.domain;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Iterator;
@@ -19,6 +19,8 @@ import it.red.algen.conf.OperatorsParameters;
 import it.red.algen.tracking.EnvObserver;
 
 /** Contiene la popolazione di soluzioni
+ * 
+ * TODOA: separate algorithm from domain data
  *
  * @author grossi
  */

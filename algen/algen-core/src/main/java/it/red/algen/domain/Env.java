@@ -8,7 +8,7 @@
  * Open. You can then make changes to the template in the Source Editor.
  */
 
-package it.red.algen;
+package it.red.algen.domain;
 
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -20,6 +20,8 @@ import it.red.algen.tracking.EnvObserver;
 
 /** Ambiente in cui la popolazione evolve in base al target.
  *  E' qui che avviene la logica di evoluzione.
+ *  
+ *  TODOA: remove algorithm logics
  *
  * @author grossi
  */

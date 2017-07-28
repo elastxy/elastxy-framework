@@ -8,9 +8,10 @@
  * Open. You can then make changes to the template in the Source Editor.
  */
 
-package it.red.algen;
+package it.red.algen.domain;
 
 /**
+ * TODOA: separate algorithm from domain data
  *
  * @author grossi
  */

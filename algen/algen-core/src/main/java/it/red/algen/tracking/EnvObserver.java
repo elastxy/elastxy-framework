@@ -10,10 +10,10 @@
 
 package it.red.algen.tracking;
 
-import it.red.algen.Env;
-import it.red.algen.Population;
-import it.red.algen.Solution;
 import it.red.algen.context.AlgorithmContext;
+import it.red.algen.domain.Env;
+import it.red.algen.domain.Population;
+import it.red.algen.domain.Solution;
 import it.red.algen.stats.ExperimentStats;
 
 

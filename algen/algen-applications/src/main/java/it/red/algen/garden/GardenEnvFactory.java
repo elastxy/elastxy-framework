@@ -13,11 +13,11 @@ package it.red.algen.garden;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import it.red.algen.Env;
-import it.red.algen.EnvFactory;
-import it.red.algen.Population;
-import it.red.algen.Target;
 import it.red.algen.context.ContextSupplier;
+import it.red.algen.domain.Env;
+import it.red.algen.domain.Population;
+import it.red.algen.domain.Target;
+import it.red.algen.engine.EnvFactory;
 import it.red.algen.garden.domain.GardenDatabase;
 import it.red.algen.garden.domain.GardenDatabaseCSV;
 import it.red.algen.garden.domain.Place;

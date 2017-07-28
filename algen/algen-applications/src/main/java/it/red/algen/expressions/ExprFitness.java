@@ -10,7 +10,7 @@
 
 package it.red.algen.expressions;
 
-import it.red.algen.Fitness;
+import it.red.algen.domain.Fitness;
 
 /**
  * Normalized fitness in [0..1]

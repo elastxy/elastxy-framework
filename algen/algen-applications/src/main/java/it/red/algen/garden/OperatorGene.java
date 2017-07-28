@@ -10,8 +10,8 @@
 
 package it.red.algen.garden;
 
-import it.red.algen.Gene;
-import it.red.algen.IllegalSolutionException;
+import it.red.algen.domain.Gene;
+import it.red.algen.engine.IllegalSolutionException;
 
 /** Singolo gene dell'espressione matematica
  *
