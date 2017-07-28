@@ -1,4 +1,4 @@
-package it.red.algen.expressions;
+package it.red.algen.expressions.domain;
 
 import it.red.algen.domain.RawFitness;
 

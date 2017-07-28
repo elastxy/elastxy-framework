@@ -8,21 +8,22 @@
  * Open. You can then make changes to the template in the Source Editor.
  */
 
-package it.red.algen.expressions;
+package it.red.algen.garden.domain;
 
 import it.red.algen.domain.Fitness;
 
 /**
- * Normalized fitness in [0..1]
+ *
  * @author grossi
  */
-public class ExprFitness implements Fitness {
+public class GardenFitness implements Fitness {
+	
     // Valore massimo: tutti i valori di fitness devono essere normalizzati a 1
     public static final double MAX = 1.0;
-    public static final double APPROX = 0.000000001;
+    public static final double APPROX = 0.0001;
     private double _value;
     
-    public ExprFitness(double value) {
+    public GardenFitness(double value) {
         _value = value;
     }
     
@@ -37,10 +38,10 @@ public class ExprFitness implements Fitness {
     }
     
     public boolean greaterThan(Fitness other){
-        return _value > ((ExprFitness)other)._value;
+        return _value > ((GardenFitness)other)._value;
     }
 
 	public boolean sameOf(Fitness other) {
-        return Math.abs(((ExprFitness)other)._value -_value) < APPROX;
+        return Math.abs(((GardenFitness)other)._value -_value) < APPROX;
 	}
 }

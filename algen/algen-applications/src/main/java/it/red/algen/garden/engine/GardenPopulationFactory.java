@@ -8,7 +8,7 @@
  * Open. You can then make changes to the template in the Source Editor.
  */
 
-package it.red.algen.garden;
+package it.red.algen.garden.engine;
 
 import java.util.Arrays;
 import java.util.Collections;
@@ -20,6 +20,7 @@ import org.springframework.stereotype.Component;
 import it.red.algen.context.ContextSupplier;
 import it.red.algen.domain.Population;
 import it.red.algen.engine.PopulationFactory;
+import it.red.algen.garden.domain.GardenSolution;
 import it.red.algen.garden.domain.Place;
 import it.red.algen.garden.domain.Tree;
 

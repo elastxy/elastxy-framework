@@ -3,9 +3,9 @@ package it.red.algen.garden.domain;
 /**
  * 
 Ogni posizione Gi ha le seguenti caratteristiche:
-Ga = esposizione alla pioggia: sì, no
+Ga = esposizione alla pioggia: sï¿½, no
 Gs = esposizione al sole: alta, media, bassa, nessuna
-Gv = quantità di vento: alta, bassa, nessuna
+Gv = quantitï¿½ di vento: alta, bassa, nessuna
  * @author Gabriele
  *
  */

@@ -8,7 +8,7 @@
  * Open. You can then make changes to the template in the Source Editor.
  */
 
-package it.red.algen.garden;
+package it.red.algen.garden.conf;
 
 /**
  *

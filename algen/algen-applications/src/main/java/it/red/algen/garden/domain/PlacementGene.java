@@ -1,7 +1,6 @@
-package it.red.algen.garden;
+package it.red.algen.garden.domain;
 
-import it.red.algen.garden.domain.Place;
-import it.red.algen.garden.domain.Tree;
+import it.red.algen.garden.conf.GardenConf;
 
 public class PlacementGene {
 	private Place place;

@@ -8,7 +8,7 @@
  * Open. You can then make changes to the template in the Source Editor.
  */
 
-package it.red.algen.expressions;
+package it.red.algen.expressions.domain;
 
 import java.util.Random;
 
@@ -16,6 +16,7 @@ import it.red.algen.domain.Fitness;
 import it.red.algen.domain.Solution;
 import it.red.algen.domain.Target;
 import it.red.algen.engine.IllegalSolutionException;
+import it.red.algen.expressions.engine.ExprGenesFactory;
 
 /**
  *

@@ -8,7 +8,7 @@
  * Open. You can then make changes to the template in the Source Editor.
  */
 
-package it.red.algen.expressions;
+package it.red.algen.expressions.engine;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -16,6 +16,7 @@ import org.springframework.stereotype.Component;
 import it.red.algen.context.ContextSupplier;
 import it.red.algen.domain.Population;
 import it.red.algen.engine.PopulationFactory;
+import it.red.algen.expressions.domain.ExprSolution;
 
 /**
  *

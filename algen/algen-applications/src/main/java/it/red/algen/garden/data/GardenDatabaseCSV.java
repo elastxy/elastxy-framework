@@ -1,4 +1,4 @@
-package it.red.algen.garden.domain;
+package it.red.algen.garden.data;
 
 import java.io.File;
 import java.io.FileReader;
@@ -6,6 +6,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 import au.com.bytecode.opencsv.CSVReader;
+import it.red.algen.garden.domain.Place;
+import it.red.algen.garden.domain.Tree;
 
 public class GardenDatabaseCSV implements GardenDatabase{
 	private static final String PLACES_FILENAME = "places.csv";

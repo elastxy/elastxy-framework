@@ -8,7 +8,7 @@
  * Open. You can then make changes to the template in the Source Editor.
  */
 
-package it.red.algen.garden;
+package it.red.algen.garden.domain;
 
 import it.red.algen.domain.RawFitness;
 import it.red.algen.domain.Target;

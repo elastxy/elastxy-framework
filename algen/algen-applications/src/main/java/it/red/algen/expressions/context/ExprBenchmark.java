@@ -1,7 +1,8 @@
-package it.red.algen.expressions;
+package it.red.algen.expressions.context;
 
 import it.red.algen.context.AlgorithmContext;
 import it.red.algen.context.BenchmarkContextBuilder;
+import it.red.algen.expressions.conf.ExprConf;
 import it.red.algen.tracking.CSVReporter;
 
 public class ExprBenchmark implements BenchmarkContextBuilder {

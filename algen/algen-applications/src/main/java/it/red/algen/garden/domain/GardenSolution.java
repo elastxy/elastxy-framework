@@ -8,7 +8,7 @@
  * Open. You can then make changes to the template in the Source Editor.
  */
 
-package it.red.algen.garden;
+package it.red.algen.garden.domain;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -19,8 +19,6 @@ import it.red.algen.domain.Fitness;
 import it.red.algen.domain.Solution;
 import it.red.algen.domain.Target;
 import it.red.algen.engine.IllegalSolutionException;
-import it.red.algen.garden.domain.Place;
-import it.red.algen.garden.domain.Tree;
 
 /**
  *

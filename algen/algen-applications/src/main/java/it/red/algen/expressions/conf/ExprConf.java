@@ -8,7 +8,7 @@
  * Open. You can then make changes to the template in the Source Editor.
  */
 
-package it.red.algen.expressions;
+package it.red.algen.expressions.conf;
 
 /**
  *

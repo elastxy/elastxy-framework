@@ -8,7 +8,7 @@
  * Open. You can then make changes to the template in the Source Editor.
  */
 
-package it.red.algen.garden;
+package it.red.algen.garden.engine;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -18,8 +18,11 @@ import it.red.algen.domain.Env;
 import it.red.algen.domain.Population;
 import it.red.algen.domain.Target;
 import it.red.algen.engine.EnvFactory;
-import it.red.algen.garden.domain.GardenDatabase;
-import it.red.algen.garden.domain.GardenDatabaseCSV;
+import it.red.algen.garden.conf.GardenConf;
+import it.red.algen.garden.data.GardenDatabase;
+import it.red.algen.garden.data.GardenDatabaseCSV;
+import it.red.algen.garden.domain.GardenRawFitness;
+import it.red.algen.garden.domain.GardenTarget;
 import it.red.algen.garden.domain.Place;
 import it.red.algen.garden.domain.Tree;
 

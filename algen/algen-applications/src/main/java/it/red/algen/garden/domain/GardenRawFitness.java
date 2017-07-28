@@ -1,4 +1,4 @@
-package it.red.algen.garden;
+package it.red.algen.garden.domain;
 
 import it.red.algen.domain.RawFitness;
 

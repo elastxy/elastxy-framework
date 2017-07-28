@@ -24,6 +24,8 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import it.red.algen.TestConfig;
 import it.red.algen.context.AlgorithmContext;
 import it.red.algen.context.ContextSupplier;
+import it.red.algen.garden.context.GardenBenchmark;
+import it.red.algen.garden.engine.GardenEnvFactory;
 import it.red.algen.stats.Experiment;
 
 /**

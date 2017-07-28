@@ -8,7 +8,7 @@
  * Open. You can then make changes to the template in the Source Editor.
  */
 
-package it.red.algen.expressions;
+package it.red.algen.expressions.engine;
 import java.util.Random;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,8 +16,14 @@ import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Component;
 
 import it.red.algen.context.ContextSupplier;
+import it.red.algen.expressions.conf.ExprConf;
+import it.red.algen.expressions.domain.NumberGene;
+import it.red.algen.expressions.domain.OperatorGene;
 
 /** Componenti base dell'applicazione matematica
+ * 
+ * TODOA: rendere interfaccia generica
+ * 
  * @author grossi
  */
 @Component
