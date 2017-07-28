@@ -10,19 +10,16 @@
 
 package it.red.algen.tracking;
 
-
 /**
  *
  * @author grossi
  */
 public class SimpleLogger implements Logger {
     
-    public SimpleLogger() {
-    }
-    
     public void out(Object msg){
         System.out.println(msg);
     }
+    
     public void err(Object msg, Throwable t){
     	System.out.println(msg);
     	t.printStackTrace();

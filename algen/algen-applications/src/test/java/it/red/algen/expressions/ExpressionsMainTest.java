@@ -25,8 +25,6 @@ import it.red.algen.TestConfig;
 import it.red.algen.context.AlgorithmContext;
 import it.red.algen.context.ContextSupplier;
 import it.red.algen.stats.Experiment;
-import it.red.algen.tracking.LoggerManager;
-import it.red.algen.tracking.SimpleLogger;
 
 /**
  *
@@ -48,13 +46,10 @@ public class ExpressionsMainTest {
     public void simpleRun() {
 		System.setProperty("datadir", new File("C:\\tmp\\algendata").getAbsolutePath());
 
-		LoggerManager.instance().init(new SimpleLogger());
-
 		AlgorithmContext context = new ExprBenchmark().build();
 		contextSupplier.init(context);
 		
 		Experiment e = new Experiment(exprEnvFactory);
-		
 		beanFactory.autowireBean(e);
 		
         e.run();

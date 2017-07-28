@@ -16,9 +16,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.config.AutowireCapableBeanFactory;
 
 import it.red.algen.EnvFactory;
-import it.red.algen.tracking.Logger;
-import it.red.algen.tracking.LoggerManager;
-import it.red.algen.tracking.SimpleLogger;
 
 
 
@@ -54,7 +51,6 @@ public class StatsExperimentExecutor {
     }
     
     public void run(){
-        LoggerManager.instance().init(new SimpleLogger());
         for(int i = 0; i < _experiments; i++){
             Experiment e = new Experiment(_envFactory);
             beanFactory.autowireBean(e);
@@ -66,22 +62,19 @@ public class StatsExperimentExecutor {
     public String print(){
     	StringBuffer buffer = new StringBuffer();
     	
-        Logger logger = LoggerManager.instance();
-        out(logger, buffer, "\n\n@@@@@@@@@@@@  GLOBAL STATS @@@@@@@@@@@");
-        out(logger, buffer, "EXPERIMENTS: "+_globalStats._totExperiments);
-        out(logger, buffer, "SUCCESSES: "+_globalStats.getPercSuccesses()+"%");
-        out(logger, buffer, "AVG TIME (sec): "+_globalStats.getAvgTime());
-        out(logger, buffer, "AVG GEN: "+_globalStats.getAvgGenerations());
-        out(logger, buffer, "AVG FITNESS: "+_globalStats.getAvgFitness());
-        out(logger, buffer, "MAX FITNESS: "+String.format("%.2f", _globalStats._maxFitness.orElse(null)));
-        out(logger, buffer, "MIN FITNESS: "+String.format("%.2f", _globalStats._minFitness.orElse(null)));
+        outln(buffer, "\n\n@@@@@@@@@@@@  GLOBAL STATS @@@@@@@@@@@");
+        outln(buffer, "EXPERIMENTS: "+_globalStats._totExperiments);
+        outln(buffer, "SUCCESSES: "+_globalStats.getPercSuccesses()+"%");
+        outln(buffer, "AVG TIME (sec): "+_globalStats.getAvgTime());
+        outln(buffer, "AVG GEN: "+_globalStats.getAvgGenerations());
+        outln(buffer, "AVG FITNESS: "+_globalStats.getAvgFitness());
+        outln(buffer, "MAX FITNESS: "+String.format("%.2f", _globalStats._maxFitness.orElse(null)));
+        outln(buffer, "MIN FITNESS: "+String.format("%.2f", _globalStats._minFitness.orElse(null)));
         
         return buffer.toString();
     }
     
-    // TODOM: logging serio
-    private void out(Logger logger, StringBuffer buffer, String msg){
-    	logger.out(msg);
+    private void outln(StringBuffer buffer, String msg){
     	buffer.append(msg).append(System.getProperty("line.separator"));
     }
 }

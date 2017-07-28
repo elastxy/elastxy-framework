@@ -32,7 +32,7 @@ public class EnvObserver {
     }
     
     public void newGenerationEvent(int number, Population newGen){
-        if(_context.monitoringConfiguration.verbose) LoggerManager.instance().out("\n*** Nuova generazione "+number+" > \n"+newGen+"\n");
+        if(_context.monitoringConfiguration.verbose) _context.monitoringConfiguration.logger.out("\n*** Nuova generazione "+number+" > \n"+newGen+"\n");
     }
     
     public void fitnessCalculatedEvent(Solution s){
@@ -40,34 +40,34 @@ public class EnvObserver {
     }
     
     public void illegalSolutionEvent(Solution s){
-        if(_context.monitoringConfiguration.verbose) LoggerManager.instance().out("!    "+s+" Soluzione non ammessa. "+s.legalCheck());
+        if(_context.monitoringConfiguration.verbose) _context.monitoringConfiguration.logger.out("!    "+s+" Soluzione non ammessa. "+s.legalCheck());
     }
     
     public void crossoverEvent(Solution father, Solution mother, Solution[] sons){
-        if(_context.monitoringConfiguration.verbose) LoggerManager.instance().out("XXX CROSSOVER: \n"+father+"\n"+mother+"\n\t->\n"+sons[0]+"\n"+sons[1]);
+        if(_context.monitoringConfiguration.verbose) _context.monitoringConfiguration.logger.out("XXX CROSSOVER: \n"+father+"\n"+mother+"\n\t->\n"+sons[0]+"\n"+sons[1]);
     }
     
     public void mutationEvent(Solution original, Solution mutated){
-        if(_context.monitoringConfiguration.verbose) LoggerManager.instance().out("+++ MUTAZIONE: \n"+original+"\n\t-> \n"+mutated);
+        if(_context.monitoringConfiguration.verbose) _context.monitoringConfiguration.logger.out("+++ MUTAZIONE: \n"+original+"\n\t-> \n"+mutated);
     }
     
     public void goalReachedEvent(Env environment){
-        LoggerManager.instance().out("******* SUCCESS *******");
+    	_context.monitoringConfiguration.logger.out("******* SUCCESS *******");
         showResults(environment);
     }
     
     public void stableSolutionEvent(Env environment){
-        LoggerManager.instance().out("******* STABLE SOLUTION *******");
+    	_context.monitoringConfiguration.logger.out("******* STABLE SOLUTION *******");
         showResults(environment);
     }
     
     public void historyEndedEvent(Env environment){
-        LoggerManager.instance().out("--- STORY HAS ENDED WITHOUT REACHING GOAL... ---");
+    	_context.monitoringConfiguration.logger.out("--- STORY HAS ENDED WITHOUT REACHING GOAL... ---");
         showResults(environment);
     }
     
     private void showResults(Env environment){
-        LoggerManager log = LoggerManager.instance();
+    	Logger log = _context.monitoringConfiguration.logger;
         log.out("\n##################### STATS #####################");
         ExperimentStats stats = environment.getStats();
         log.out("Best match:");

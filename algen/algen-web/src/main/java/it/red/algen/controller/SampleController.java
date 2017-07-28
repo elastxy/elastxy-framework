@@ -46,8 +46,6 @@ import it.red.algen.stats.Experiment;
 import it.red.algen.stats.ExperimentStats;
 import it.red.algen.stats.StatsExperimentExecutor;
 import it.red.algen.tracking.CSVReporter;
-import it.red.algen.tracking.LoggerManager;
-import it.red.algen.tracking.SimpleLogger;
 
 @Controller
 public class SampleController {
@@ -94,8 +92,6 @@ public class SampleController {
 		
 		contextSupplier.init(context);
 		
-		LoggerManager.instance().init(new SimpleLogger());
-
 	 	Experiment e = null;
 	 	if("garden".equals(domain)){
 			context.monitoringConfiguration.reporter = new GardenCSVReporter(GardenConf.STATS_DIR);
@@ -127,8 +123,6 @@ public class SampleController {
 		
 		contextSupplier.init(context);
 		
-		LoggerManager.instance().init(new SimpleLogger());
-
 	 	EnvFactory envFactory = null;
 	 	
 	 	// TODOM: Make generics default build mode
@@ -152,7 +146,6 @@ public class SampleController {
 	@RequestMapping("/test/{domain}")
 	@ResponseBody
 	public ExperimentStats calculateTest(@PathVariable String domain) {
-		 	LoggerManager.instance().init(new SimpleLogger());
 		 	AlgorithmContext context = null;
 		 	EnvFactory envFactory = null;
 		 	

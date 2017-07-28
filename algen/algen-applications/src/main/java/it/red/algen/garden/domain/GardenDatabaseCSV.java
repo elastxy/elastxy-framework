@@ -1,7 +1,5 @@
 package it.red.algen.garden.domain;
 
-import it.red.algen.tracking.LoggerManager;
-
 import java.io.File;
 import java.io.FileReader;
 import java.util.ArrayList;
@@ -37,8 +35,7 @@ public class GardenDatabaseCSV implements GardenDatabase{
 			return (Tree[])result.toArray(new Tree[result.size()]);
 		}
 		catch(Throwable t){
-			LoggerManager.instance().err("Error reading trees from db", t);
-			throw new RuntimeException(t);
+			throw new RuntimeException("Error reading trees from db. Ex: "+t, t);
 		}
 	}
 	
@@ -59,8 +56,7 @@ public class GardenDatabaseCSV implements GardenDatabase{
 			return (Place[])result.toArray(new Place[result.size()]);
 		}
 		catch(Throwable t){
-			LoggerManager.instance().err("Error reading places from db", t);
-			throw new RuntimeException(t);
+			throw new RuntimeException("Error reading places from db: "+t, t);
 		}
 	}
 	

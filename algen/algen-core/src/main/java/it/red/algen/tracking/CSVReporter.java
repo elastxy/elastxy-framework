@@ -1,7 +1,5 @@
 package it.red.algen.tracking;
 
-import it.red.algen.stats.ExperimentStats;
-
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
@@ -10,6 +8,8 @@ import java.util.Calendar;
 import java.util.List;
 
 import au.com.bytecode.opencsv.CSVWriter;
+import it.red.algen.stats.ExperimentStats;
+
 
 public class CSVReporter implements Reporter {
 	private String _outputDir = null;
@@ -39,7 +39,7 @@ public class CSVReporter implements Reporter {
 			writer.writeAll(csv);
 			writer.close();
 		} catch (IOException e) {
-			LoggerManager.instance().err("Cannot create report. Ex: "+e, e);
+			throw new RuntimeException("Cannot create report. Ex: "+e, e);
 		}
 	}
 
