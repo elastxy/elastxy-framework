@@ -15,12 +15,19 @@ package it.red.algen.conf;
  * @author grossi
  */
 public class DefaultConfiguration {
+	
+	// SELECTION
     public static final long 	DEFAULT_INITIAL_SELECTION_NUMBER = 100L;
 	public static final boolean DEFAULT_INITIAL_SELECTION_RANDOM = true;
     public static final boolean DEFAULT_ELITARISM = true;
-	public static final double 	DEFAULT_RECOMBINANTION_PERC = 0.8;
+	
+    // RECOMBINATION
+    public static final double 	DEFAULT_RECOMBINANTION_PERC = 0.8;
+    
+    // MUTATION
     public static final double 	DEFAULT_MUTATION_PERC = 0.1;
     
+    // STOP CONDITIONS
     public static final int 	MAX_ITERATIONS = -1;
     public static final int 	MAX_LIFETIME_MS = 60000;
     public static final int 	MAX_IDENTICAL_FITNESSES = -1;

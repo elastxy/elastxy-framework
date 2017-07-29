@@ -41,6 +41,8 @@ public class ExpressionsMainTest {
 	
 	@Autowired
 	private ExprEnvFactory exprEnvFactory;
+	@Autowired
+	private ExprBenchmark exprBenchmark;
 		
 	private @Autowired AutowireCapableBeanFactory beanFactory;
 	
@@ -48,7 +50,7 @@ public class ExpressionsMainTest {
     public void simpleRun() {
 		System.setProperty("datadir", new File("C:\\tmp\\algendata").getAbsolutePath());
 
-		AlgorithmContext context = new ExprBenchmark().build();
+		AlgorithmContext context = exprBenchmark.build();
 		contextSupplier.init(context);
 		
 		Experiment e = new Experiment(exprEnvFactory);

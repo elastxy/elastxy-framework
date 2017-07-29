@@ -41,6 +41,8 @@ public class GardenMainTest {
 	
 	@Autowired
 	private GardenEnvFactory gardenEnvFactory;
+	@Autowired
+	private GardenBenchmark gardenBenchmark;
 
 	private @Autowired AutowireCapableBeanFactory beanFactory;
 	
@@ -48,7 +50,7 @@ public class GardenMainTest {
     public void simpleRun() {
 		System.setProperty("datadir", new File("C:\\tmp\\algendata").getAbsolutePath());
 		
-        AlgorithmContext context = new GardenBenchmark().build();
+        AlgorithmContext context = gardenBenchmark.build();
  		contextSupplier.init(context);
 		
 		Experiment e = new Experiment(gardenEnvFactory);

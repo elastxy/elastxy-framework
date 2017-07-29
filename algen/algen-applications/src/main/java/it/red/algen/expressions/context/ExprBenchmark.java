@@ -1,15 +1,23 @@
 package it.red.algen.expressions.context;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
+
 import it.red.algen.context.AlgorithmContext;
+import it.red.algen.context.AlgorithmContextBuilder;
 import it.red.algen.context.BenchmarkContextBuilder;
 import it.red.algen.expressions.conf.ExprConf;
 import it.red.algen.tracking.CSVReporter;
 
+@Component
 public class ExprBenchmark implements BenchmarkContextBuilder {
 
+	@Autowired
+	private AlgorithmContextBuilder contextBuilder;
+	
 	@Override
 	public AlgorithmContext build() {
-		AlgorithmContext context = AlgorithmContext.build(
+		AlgorithmContext context = contextBuilder.build(
 				ExprConf.INITIAL_SELECTION_NUMBER,
 				ExprConf.INITIAL_SELECTION_RANDOM,
 				ExprConf.RECOMBINANTION_PERC, 

@@ -60,9 +60,13 @@ public class SampleController {
 	
 	@Autowired
 	private ExprEnvFactory exprEnvFactory;
-	
 	@Autowired
 	private GardenEnvFactory gardenEnvFactory;
+	
+	@Autowired
+	private ExprBenchmark exprBenchmark;
+	@Autowired
+	private GardenBenchmark gardenBenchmark;
 	
 	
 	private @Autowired AutowireCapableBeanFactory beanFactory;
@@ -151,11 +155,11 @@ public class SampleController {
 		 	
 		 	// TODOM: Make generics default build mode
 		 	if("garden".equals(domain)){ 
-		 		context = new GardenBenchmark().build(); 
+		 		context = gardenBenchmark.build(); 
 		 		envFactory = gardenEnvFactory;
 		 	}
 		 	else if("expressions".equals(domain)){ 
-		 		context = new ExprBenchmark().build(); 
+		 		context = exprBenchmark.build(); 
 		 		envFactory = exprEnvFactory;
 		 	}
 			
