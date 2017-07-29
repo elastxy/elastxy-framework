@@ -29,13 +29,13 @@ public class ExprConf {
     public static final long INITIAL_SELECTION_NUMBER = 10;
     public static final boolean INITIAL_SELECTION_RANDOM = true;
     
-    public static final int MAX_ITERATIONS = 1000;
-    public static final int MAX_LIFETIME_MILLIS = 1000;
-    public static final int MAX_IDENTICAL_FITNESSES = 100;
+    public static final int MAX_ITERATIONS = -1;
+    public static final int MAX_LIFETIME_MILLIS = 3000;
+    public static final int MAX_IDENTICAL_FITNESSES = -1;
 
     public static final boolean ELITARISM = true;
 	public static final double RECOMBINANTION_PERC = 0.8;
-    public static final double MUTATION_PERC = 0.1;
+    public static final double MUTATION_PERC = 0.2;
     
     public static final boolean VERBOSE = false;
     
