@@ -10,6 +10,8 @@
 
 package it.red.algen.stats;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
 
 /**
@@ -25,6 +27,12 @@ public class AggregatedStats {
     public Optional<Double> _minFitness = Optional.empty();
     public Optional<Double> _maxFitness = Optional.empty();
     
+    public Optional<Double> mean = Optional.empty();
+    public Optional<Double> stdDev = Optional.empty();
+    public Optional<Double> median = Optional.empty();
+    
+    public transient List<Double> successExecutionTimes = new ArrayList<Double>();
+    
     public AggregatedStats() {
     }
     
@@ -36,6 +44,9 @@ public class AggregatedStats {
     }
     public double getAvgTime(){
         return _totTime / (double)_totExperiments;
+    }
+    public double getAvgTimePerGeneration(){
+        return _totTime / (double)_totGenerations;
     }
     public double getAvgFitness(){
         return _totFitness / (double)_totExperiments;

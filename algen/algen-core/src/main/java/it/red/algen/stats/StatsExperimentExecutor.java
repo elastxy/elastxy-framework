@@ -12,6 +12,7 @@ package it.red.algen.stats;
 
 import java.util.Optional;
 
+import org.apache.commons.math3.stat.descriptive.DescriptiveStatistics;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.config.AutowireCapableBeanFactory;
 
@@ -42,8 +43,12 @@ public class StatsExperimentExecutor {
     
     private void addStats(ExperimentStats stats){
         _globalStats._totTime += stats._time;
+        
+        if(stats.targetReached){
+        	_globalStats.successExecutionTimes.add(stats._time);
+        	_globalStats._totSuccesses++;;
+        }
         _globalStats._totGenerations += stats._generations;
-        _globalStats._totSuccesses += (stats.targetReached ? 1 : 0);
         double bestMatchFitness = stats._lastGeneration.bestMatch.getFitness().getValue();
         _globalStats._totFitness += bestMatchFitness;
         _globalStats._maxFitness = Optional.of(_globalStats._minFitness.isPresent() ? Math.max(_globalStats._minFitness.get(), bestMatchFitness) : bestMatchFitness);
@@ -57,6 +62,24 @@ public class StatsExperimentExecutor {
             e.run();
             addStats(e.getStats());
         }
+        
+        calculateGlobalStats();
+    }
+    
+    private void calculateGlobalStats(){
+    	
+    	// Get a DescriptiveStatistics instance
+    	DescriptiveStatistics stats = new DescriptiveStatistics();
+
+    	// Add the data from the array
+    	for( int i = 0; i < _globalStats.successExecutionTimes.size(); i++) {
+    	        stats.addValue(_globalStats.successExecutionTimes.get(i));
+    	}
+
+    	// Compute some statistics
+    	_globalStats.mean = Optional.of(stats.getMean());
+    	_globalStats.stdDev = Optional.of(stats.getStandardDeviation());
+    	_globalStats.median = Optional.of(stats.getPercentile(50.0));
     }
     
     public String print(){
@@ -65,9 +88,15 @@ public class StatsExperimentExecutor {
         outln(buffer, "\n\n@@@@@@@@@@@@  GLOBAL STATS @@@@@@@@@@@");
         outln(buffer, "EXPERIMENTS: "+_globalStats._totExperiments);
         outln(buffer, "SUCCESSES: "+_globalStats.getPercSuccesses()+"%");
-        outln(buffer, "AVG TIME (ms): "+_globalStats.getAvgTime());
+        outln(buffer, "-- Descriptive Statistics --");
         outln(buffer, "AVG GEN: "+_globalStats.getAvgGenerations());
-        outln(buffer, "AVG FITNESS: "+_globalStats.getAvgFitness());
+        outln(buffer, "AVG TIME (ms): "+_globalStats.getAvgTime());
+        outln(buffer, "AVG TIME/GEN (ms): "+String.format("%.2f", _globalStats.getAvgTimePerGeneration()));
+        outln(buffer, "TIME MEAN: "+String.format("%.2f", _globalStats.mean.orElse(null)));
+        outln(buffer, "TIME STD DEV: "+String.format("%.2f", _globalStats.stdDev.orElse(null)));
+        outln(buffer, "TIME MEDIAN: "+String.format("%.2f", _globalStats.median.orElse(null)));
+        outln(buffer, "-- Results --");
+        outln(buffer, "AVG FITNESS: "+String.format("%.2f", _globalStats.getAvgFitness()));
         outln(buffer, "MAX FITNESS: "+String.format("%.2f", _globalStats._maxFitness.orElse(null)));
         outln(buffer, "MIN FITNESS: "+String.format("%.2f", _globalStats._minFitness.orElse(null)));
         
