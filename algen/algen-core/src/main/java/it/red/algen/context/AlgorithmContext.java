@@ -10,22 +10,4 @@ public class AlgorithmContext {
 	public StopConditions stopConditions;
 	public MonitoringConfiguration monitoringConfiguration;
 	public ApplicationSpecifics applicationSpecifics = new ApplicationSpecifics();
-	
-	
-	// TODOA: move into engine
-	public boolean onTime(int currentGenNumber, long currentLifeTime){
-		
-		// Time
-		boolean result = stopConditions.maxLifetimeMs==-1 || currentLifeTime <= stopConditions.maxLifetimeMs;
-		
-		// Iterations
-		result &= (stopConditions.maxIterations==-1 || currentGenNumber < stopConditions.maxIterations-1);
-		
-		return result;
-	}
-	
-	public boolean isStable(int totIdenticalFitnesses){
-		return stopConditions.maxIdenticalFitnesses!=-1 && totIdenticalFitnesses>=stopConditions.maxIdenticalFitnesses;
-	}
-	
 }

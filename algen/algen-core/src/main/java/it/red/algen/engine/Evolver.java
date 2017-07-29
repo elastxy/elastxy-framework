@@ -18,6 +18,7 @@ public class Evolver implements EnvObservable {
 	// ALGORITHM PARAMETERS
     public AlgorithmContext context;
     private Selector selector;
+    private StopConditionVerifier stopVerifier;
 
     // WORKING DATA
     private Env env;
@@ -35,6 +36,7 @@ public class Evolver implements EnvObservable {
     	this.context = context;
     	this.env = env;
     	this.selector = selector;
+    	this.stopVerifier = new StopConditionVerifier(context.stopConditions);
     }
     
     
@@ -61,7 +63,7 @@ public class Evolver implements EnvObservable {
         
         // Finch� si trova la soluzione o il numero max 
         // di iterazioni � raggiunto, o il tempo di vita del sistema non termina, prosegue
-        while(!isGoalReached(env.currentGen) && context.onTime(env.currentGenNumber, getLifeTimeInMillis())) {
+        while(!isGoalReached(env.currentGen) && stopVerifier.onTime(env.currentGenNumber, getLifeTimeInMillis())) {
         	
         	// Save last gen
         	Population lastGen = env.currentGen;
@@ -77,7 +79,7 @@ public class Evolver implements EnvObservable {
             if(context.parameters._elitarism){
 	            if(bestMatchFitness.sameOf(currentGenFitness)){
 	            	env.totIdenticalFitnesses++;
-	                if(context.isStable(env.totIdenticalFitnesses)){
+	                if(stopVerifier.isStable(env.totIdenticalFitnesses)){
 	                	fireStableSolutionEvent();
 	                	endConditionFound = true;
 	                	break;
