@@ -9,7 +9,7 @@
         <java.version>1.8</java.version>
         
 	    <base>frolvlad/alpine-oraclejdk8:slim</base>
-	    <tomcat.port>4000</tomcat.port>
+	    <tomcat.port>4003</tomcat.port>
 	    <tomcat.ip>192.168.99.100</tomcat.ip>
 	    <file>readme</file>
     	<!-- <docker.maven.plugin.version>0.21-SNAPSHOT</docker.maven.plugin.version> -->
@@ -22,39 +22,33 @@
         <version>1.0.0-SNAPSHOT</version>
     </parent>
     
-	<artifactId>algen-web</artifactId>
-	<name>Algen Web Application</name>
+	<artifactId>algen-distributed</artifactId>
+	<name>Algen Distributed Application</name>
 
 
 	<dependencies>
     	<dependency>
         	<groupId>org.springframework.boot</groupId>
         	<artifactId>spring-boot-starter-web</artifactId>
-        	<!-- 
             <exclusions>
                 <exclusion>
                     <groupId>ch.qos.logback</groupId>
                     <artifactId>logback-classic</artifactId>
                 </exclusion>
             </exclusions>
-             -->
     	</dependency>
-    	
 <!--     	<dependency>
         	<groupId>org.springframework.boot</groupId>
         	<artifactId>spring-boot-starter-cache</artifactId>
     	</dependency> -->
-    	
     	<dependency>
         	<groupId>org.springframework.boot</groupId>
         	<artifactId>spring-boot-starter-actuator</artifactId>
     	</dependency>
-    	
     	<dependency>
 		    <groupId>com.google.code.gson</groupId>
 		    <artifactId>gson</artifactId>
 		</dependency>
-    	
     	
     	
     	<!-- RED Dependencies -->
@@ -64,9 +58,58 @@
   			<version>1.0.0-SNAPSHOT</version>
     	</dependency>
     	
-	</dependencies>
-	
-	
+
+				
+				<!-- SPARK -->
+		    	
+		        <!-- https://mvnrepository.com/artifact/org.apache.spark/spark-core_2.11 -->
+		        <dependency>
+		            <groupId>org.apache.spark</groupId>
+		            <artifactId>spark-core_2.11</artifactId>
+		            <scope>provided</scope>
+		            <exclusions>
+		                <exclusion>
+		                    <groupId>org.slf4j</groupId>
+		                    <artifactId>slf4j-log4j12</artifactId>
+		                </exclusion>
+		                <exclusion>
+		                    <groupId>log4j</groupId>
+		                    <artifactId>log4j</artifactId>
+		                </exclusion>
+		            </exclusions>
+		        </dependency>
+		
+		        <!-- https://mvnrepository.com/artifact/org.apache.spark/spark-sql_2.11 -->
+		        <dependency>
+				    <groupId>org.apache.spark</groupId>
+				    <artifactId>spark-sql_2.11</artifactId>
+		            <scope>provided</scope>
+				</dependency>
+		        
+		
+		        <!-- fix java.lang.ClassNotFoundException: org.codehaus.commons.compiler.UncheckedCompileException -->
+		        <dependency>
+		            <groupId>org.codehaus.janino</groupId>
+		            <artifactId>commons-compiler</artifactId>
+		        </dependency>
+		
+		        <!-- https://mvnrepository.com/artifact/org.slf4j/log4j-over-slf4j -->
+		        <dependency>
+		            <groupId>org.slf4j</groupId>
+		            <artifactId>log4j-over-slf4j</artifactId>
+		        </dependency>
+		        <dependency>
+		            <groupId>org.slf4j</groupId>
+		            <artifactId>slf4j-api</artifactId>
+		        </dependency>
+		        <dependency>
+		            <groupId>org.slf4j</groupId>
+		            <artifactId>slf4j-simple</artifactId>
+		        </dependency>
+		    	
+			 </dependencies>
+	    			
+    		
 	   <build>
         <plugins>
             <plugin>
@@ -90,7 +133,7 @@
 		          <images>
 			            <image>
 			              <name>algen</name>
-			              <alias>algenc</alias>
+			              <alias>algend</alias>
 			              <build>
 			                <filter>@</filter>
 			                <dockerFileDir>${project.basedir}/src/main/docker</dockerFileDir>
@@ -101,11 +144,11 @@
 			              <run>
 			              	<namingStrategy>alias</namingStrategy>
 			                <ports> 
-			                  <port>${tomcat.port}:8080</port>
+			                  <port>${tomcat.port}:8083</port>
 			                </ports>
 					         <wait> 
 					           <http>
-					              <url>http://${tomcat.ip}:${tomcat.port}/access</url>
+					              <url>http://${tomcat.ip}:${tomcat.port}/distributed/access</url>
 					           </http>
 					           <time>90000</time>
 					         </wait>

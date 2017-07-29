@@ -12,7 +12,11 @@ docker stop algenc
 # Shell
 docker exec -it algenc sh
 
-# Manage images
+# Info
+docker images
+docker inspect algenc
+
+# Remove image
 docker -rmi algen
 
 # Manage containers

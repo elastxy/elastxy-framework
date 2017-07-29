@@ -3,4 +3,7 @@
 /algen/algen-applications/.project
 /algen/algen-web/.classpath
 /algen/algen-web/.settings/*
+/algen/algen-distributed/.settings/*
+/algen/algen-distributed/.classpath
+/algen/algen-distributed/.project
 /algen/.settings/*
