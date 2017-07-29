@@ -25,5 +25,6 @@ public class ExperimentStats  {
     public int _generations;
     public double _time;
     public int _totIdenticalFitnesses;
+    public boolean targetReached;
     public List<Population> _generationHistory;
 }

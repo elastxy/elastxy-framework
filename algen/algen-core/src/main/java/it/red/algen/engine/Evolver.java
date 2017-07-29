@@ -61,7 +61,7 @@ public class Evolver implements EnvObservable {
         
         // Finch� si trova la soluzione o il numero max 
         // di iterazioni � raggiunto, o il tempo di vita del sistema non termina, prosegue
-        while(!env.currentGen.isGoalReached() && context.onTime(env.currentGenNumber, getLifeTimeInMillis())) {
+        while(!isGoalReached(env.currentGen) && context.onTime(env.currentGenNumber, getLifeTimeInMillis())) {
         	
         	// Save last gen
         	Population lastGen = env.currentGen;
@@ -89,8 +89,9 @@ public class Evolver implements EnvObservable {
             }
             
             // Determine end condition
-            if(env.currentGen.isGoalReached()){
+            if(isGoalReached(env.currentGen)){
                 fireGoalReachedEvent();
+                env.targetReached = true;
                 endConditionFound = true;
                 break;
             }
@@ -126,6 +127,7 @@ public class Evolver implements EnvObservable {
         stats._generations = env.currentGenNumber+1;
         stats._time = env.endTime;
         stats._totIdenticalFitnesses = env.totIdenticalFitnesses;
+        stats.targetReached = env.targetReached;
         stats._generationHistory = env.generationsHistory;
         return stats;
     }
@@ -158,6 +160,12 @@ public class Evolver implements EnvObservable {
     }
     
 
+
+    private boolean isGoalReached(Population generation){
+        return generation.bestMatch.getFitness().fit();
+    }
+    
+    
     /** Per ogni soluzione, calcola il fitness e tiene memorizzata la migliore.
      * 
      * TODOM: create a FitnessTester interface

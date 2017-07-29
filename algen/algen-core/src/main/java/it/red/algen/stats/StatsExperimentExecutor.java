@@ -43,7 +43,7 @@ public class StatsExperimentExecutor {
     private void addStats(ExperimentStats stats){
         _globalStats._totTime += stats._time;
         _globalStats._totGenerations += stats._generations;
-        _globalStats._totSuccesses += (stats._lastGeneration.isGoalReached() ? 1 : 0);
+        _globalStats._totSuccesses += (stats.targetReached ? 1 : 0);
         double bestMatchFitness = stats._lastGeneration.bestMatch.getFitness().getValue();
         _globalStats._totFitness += bestMatchFitness;
         _globalStats._maxFitness = Optional.of(_globalStats._minFitness.isPresent() ? Math.max(_globalStats._minFitness.get(), bestMatchFitness) : bestMatchFitness);

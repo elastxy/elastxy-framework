@@ -32,10 +32,6 @@ public class Population {
         _solutions.add(solution);
     }
     
-    public boolean isGoalReached(){
-        return bestMatch.getFitness().fit();
-    }
-    
     
     public String toString(){
     	StringBuffer result = new StringBuffer();

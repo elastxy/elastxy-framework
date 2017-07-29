@@ -29,6 +29,7 @@ public class Env {
     public List<Population> generationsHistory = new ArrayList<Population>();
     public long startTime;
     public long endTime;
+    public boolean targetReached;
     
     public Env(Target target, Population currentGen){
     	this.target = target;
