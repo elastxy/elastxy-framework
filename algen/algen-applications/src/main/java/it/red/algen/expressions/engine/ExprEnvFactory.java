@@ -64,8 +64,7 @@ public class ExprEnvFactory implements EnvFactory {
         exprTarget.setRawFitness(raw);
         
         // Crea l'ambiente
-        Env env = new Env();
-        env.init(context, startGen, exprTarget);
+        Env env = new Env(exprTarget, startGen);
         
         return env;
     }

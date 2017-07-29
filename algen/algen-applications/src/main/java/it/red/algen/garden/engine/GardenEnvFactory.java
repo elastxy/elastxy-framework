@@ -13,7 +13,6 @@ package it.red.algen.garden.engine;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import it.red.algen.context.ContextSupplier;
 import it.red.algen.domain.Env;
 import it.red.algen.domain.Population;
 import it.red.algen.domain.Target;
@@ -37,9 +36,6 @@ public class GardenEnvFactory implements EnvFactory {
 	@Autowired
 	private GardenPopulationFactory gardenPopulationFactory;
 	
-	@Autowired
-	private ContextSupplier contextSupplier;
-
 	
     public Env create(){
     	
@@ -53,8 +49,7 @@ public class GardenEnvFactory implements EnvFactory {
         // TODOM: target from outside!
         Target mytarget = new GardenTarget();
         mytarget.setRawFitness(new GardenRawFitness(places.length * 1)); // 1=distanza massima dall'ottimo
-        Env env = new Env();
-        env.init(contextSupplier.getContext(), startGen, mytarget);
+        Env env = new Env(mytarget, startGen);
         return env;
     }
 

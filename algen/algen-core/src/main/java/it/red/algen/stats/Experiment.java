@@ -15,12 +15,15 @@ import org.springframework.beans.factory.annotation.Autowired;
 import it.red.algen.context.ContextSupplier;
 import it.red.algen.domain.Env;
 import it.red.algen.engine.EnvFactory;
+import it.red.algen.engine.Evolver;
 import it.red.algen.tracking.EnvObserver;
 
 
 
 
 /**
+ *
+ *TODOM: collapse with Evolver?
  *
  * @author grossi
  */
@@ -45,10 +48,11 @@ public class Experiment {
         EnvObserver observer = new EnvObserver(contextSupplier.getContext());
         
         Env environment = _factory.create();
-        environment.subscribe(observer);
         
         // Avvia l'evoluzione
-        environment.evolve();
-        _stats = environment.getStats();
+        Evolver evolver = new Evolver(contextSupplier.getContext(), environment);
+        evolver.subscribe(observer);
+        evolver.evolve();
+        _stats = evolver.getStats();
     }
 }
