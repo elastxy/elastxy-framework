@@ -14,10 +14,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /** Ambiente in cui la popolazione evolve in base al target.
- *  E' qui che avviene la logica di evoluzione.
  *  
- *  TODOA: remove algorithm logics
- *
  * @author grossi
  */
 public class Env {

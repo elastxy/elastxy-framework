@@ -27,7 +27,7 @@ import it.red.algen.domain.Target;
  */
 public class ExprTarget implements Target {
     private int _computeValue;
-    private RawFitness rawFitness;
+    private transient RawFitness rawFitness;
     
     public ExprTarget(int computeValue) {
     	this._computeValue = computeValue;

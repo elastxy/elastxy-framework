@@ -50,7 +50,7 @@ public class GardenPopulationFactory implements PopulationFactory {
 	 */
 	@Override
     public Population createNew() {
-    	Population population = new Population(contextSupplier.getContext().parameters);
+    	Population population = new Population();
     	for(int i = 0; i < contextSupplier.getContext().parameters._initialSelectionNumber; i++){
     		List<Tree> listOfTrees = Arrays.asList(trees);
     		if(contextSupplier.getContext().parameters._initialSelectionRandom){

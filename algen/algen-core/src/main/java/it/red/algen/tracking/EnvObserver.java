@@ -71,7 +71,7 @@ public class EnvObserver {
         log.out("\n##################### STATS #####################");
         ExperimentStats stats = evolver.getStats();
         log.out("Best match:");
-        log.out(stats._lastGeneration.getBestMatch());
+        log.out(stats._lastGeneration.bestMatch);
         log.out("Number of generations: "+stats._generations);
         log.out("Total time (sec): "+stats._time);
         if(_context.parameters._elitarism) {

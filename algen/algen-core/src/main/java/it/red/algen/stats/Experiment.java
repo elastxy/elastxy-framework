@@ -16,6 +16,8 @@ import it.red.algen.context.ContextSupplier;
 import it.red.algen.domain.Env;
 import it.red.algen.engine.EnvFactory;
 import it.red.algen.engine.Evolver;
+import it.red.algen.engine.Selector;
+import it.red.algen.engine.StandardSelector;
 import it.red.algen.tracking.EnvObserver;
 
 
@@ -45,14 +47,27 @@ public class Experiment {
     }
     
     public void run(){
+    	
+    	// Setups observer
         EnvObserver observer = new EnvObserver(contextSupplier.getContext());
         
-        Env environment = _factory.create();
+        // Setups operators
+        Selector selector = new StandardSelector();
+        selector.setup(contextSupplier.getContext().parameters);
+        selector.subscribe(observer);
+        // TODOA: Mutator, Recombinator
         
-        // Avvia l'evoluzione
-        Evolver evolver = new Evolver(contextSupplier.getContext(), environment);
+        // Creates initial environment
+        Env environment = _factory.create();
+    	
+        // Setups engine
+        Evolver evolver = new Evolver(contextSupplier.getContext(), environment, selector);
         evolver.subscribe(observer);
+        
+        // Stars evolution
         evolver.evolve();
+        
+        // Retrieves stats
         _stats = evolver.getStats();
     }
 }

@@ -1,35 +1,46 @@
 package it.red.algen.engine;
 
 import java.util.Calendar;
+import java.util.Iterator;
 
 import it.red.algen.context.AlgorithmContext;
 import it.red.algen.domain.Env;
 import it.red.algen.domain.Fitness;
 import it.red.algen.domain.Population;
+import it.red.algen.domain.Solution;
+import it.red.algen.domain.Target;
 import it.red.algen.stats.ExperimentStats;
+import it.red.algen.tracking.EnvObservable;
 import it.red.algen.tracking.EnvObserver;
 
-public class Evolver {
+public class Evolver implements EnvObservable {
 	
+	// ALGORITHM PARAMETERS
     public AlgorithmContext context;
+    private Selector selector;
 
     // WORKING DATA
     private Env env;
 
     // LISTENER
-    private EnvObserver listener;
+    private EnvObserver observer;
     
     
-    
-    public Evolver(AlgorithmContext context, Env env){
+    /**
+     * Select Selector based on bean name configured in AlgorithmContext 
+     * @param context
+     * @param env
+     */
+    public Evolver(AlgorithmContext context, Env env, Selector selector){
     	this.context = context;
     	this.env = env;
+    	this.selector = selector;
     }
     
     
     public void subscribe(EnvObserver l){
-        listener = l;
-        if(env.currentGen!=null) env.currentGen.subscribe(l);
+        observer = l;
+        selector.subscribe(l);
     }
 
 
@@ -38,12 +49,12 @@ public class Evolver {
     /** Avvia la vita del sistema.
      */
     public void evolve(){
+    	
         // Azzera il tempo
         env.startTime = Calendar.getInstance().getTimeInMillis();
         
         // Testa la popolazione iniziale
-        env.currentGen.testFitness(env.target);
-//        _generationsHistory.add(_currentGen);
+        testFitness(env.target, env.currentGen);
         fireNewGenerationEvent();
         
         boolean endConditionFound = false;
@@ -56,11 +67,11 @@ public class Evolver {
         	Population lastGen = env.currentGen;
         	
         	// Create new gen
-        	env.currentGen = env.currentGen.nextGen();
+        	env.currentGen = selector.select(env.currentGen);
             
             // Test fitness of population
-            Fitness currentGenFitness = env.currentGen.testFitness(env.target);
-            Fitness bestMatchFitness = lastGen.getBestMatch().getFitness();
+            Fitness currentGenFitness = testFitness(env.target, env.currentGen);
+            Fitness bestMatchFitness = lastGen.bestMatch.getFitness();
             
             // Check stability of the fitness value
             if(context.parameters._elitarism){
@@ -121,20 +132,54 @@ public class Evolver {
 
 
     private void fireNewGenerationEvent(){
-        listener.newGenerationEvent(env.currentGenNumber+1, env.currentGen);
+        observer.newGenerationEvent(env.currentGenNumber+1, env.currentGen);
     }
     
     private void fireGoalReachedEvent(){
-        listener.goalReachedEvent(this);
+        observer.goalReachedEvent(this);
     }
 
     private void fireStableSolutionEvent(){
-        listener.stableSolutionEvent(this);
+        observer.stableSolutionEvent(this);
     }
     
     private void fireHistoryEndedEvent(){
-        listener.historyEndedEvent(this);
+        observer.historyEndedEvent(this);
     }
     
+    
+
+    private void fireFitnessCalculatedEvent(Solution s){
+        observer.fitnessCalculatedEvent(s);
+    }
+    
+    private void fireIllegalSolutionEvent(Solution s){
+    	observer.illegalSolutionEvent(s);
+    }
+    
+
+    /** Per ogni soluzione, calcola il fitness e tiene memorizzata la migliore.
+     * 
+     * TODOM: create a FitnessTester interface
+     */
+    public Fitness testFitness(Target target, Population population){
+    	population.bestMatch = null;
+        Iterator<Solution> it = population._solutions.iterator();
+        while(it.hasNext()){ // TODOA: MapReduce!
+            Solution solution = it.next();
+            solution.calcFitness(target);
+            if(solution.legalCheck()!=null) {
+                fireIllegalSolutionEvent(solution);
+            }
+            else {
+                fireFitnessCalculatedEvent(solution);
+            }
+            if(population.bestMatch==null || 
+            		(population.bestMatch!=null && solution.getFitness().greaterThan(population.bestMatch.getFitness()))){
+            	population.bestMatch = solution;
+            }
+        }
+        return population.bestMatch.getFitness();
+    }
     
 }

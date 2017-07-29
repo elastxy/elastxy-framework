@@ -11,6 +11,10 @@
 package it.red.algen.domain;
 
 /**
+ * 
+ * Marker interface for a generic Gene.
+ * 
+ * TODOM: BuildingBlock concept to optionally group/cluster many genes
  *
  * @author grossi
  */

@@ -28,7 +28,7 @@ public class CSVReporter implements Reporter {
 			outputDir.mkdirs();
 			CSVWriter writer = new CSVWriter(new FileWriter(new File(outputDir, "results_gen"+stats._generations+"_pop"+stats._lastGeneration.size()+"_"+Calendar.getInstance().getTimeInMillis()+".csv")), ';');
 			List<String[]> csv = new ArrayList<String[]>();
-			csv.add(new String[] {"FITNESS", String.format("%1.3f", stats._lastGeneration.getBestMatch().getFitness().getValue())});
+			csv.add(new String[] {"FITNESS", String.format("%1.3f", stats._lastGeneration.bestMatch.getFitness().getValue())});
 			csv.add(new String[] {"Last population size", String.valueOf(stats._lastGeneration.size())});
 			csv.add(new String[] {"Number of generations", String.valueOf(stats._generations)});
 			csv.add(new String[] {"Total time (sec)", String.valueOf(stats._time) });
