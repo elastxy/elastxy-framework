@@ -64,7 +64,7 @@ public class Experiment {
         Evolver evolver = new Evolver(contextSupplier.getContext(), environment, selector);
         evolver.subscribe(observer);
         
-        // Stars evolution
+        // Starts evolution
         evolver.evolve();
         
         // Retrieves stats

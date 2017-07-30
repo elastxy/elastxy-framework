@@ -1,14 +1,11 @@
 package it.red.algen.engine;
 
 import java.util.Calendar;
-import java.util.Iterator;
 
 import it.red.algen.context.AlgorithmContext;
 import it.red.algen.domain.Env;
 import it.red.algen.domain.Fitness;
 import it.red.algen.domain.Population;
-import it.red.algen.domain.Solution;
-import it.red.algen.domain.Target;
 import it.red.algen.stats.ExperimentStats;
 import it.red.algen.tracking.EnvObservable;
 import it.red.algen.tracking.EnvObserver;
@@ -18,6 +15,7 @@ public class Evolver implements EnvObservable {
 	// ALGORITHM PARAMETERS
     public AlgorithmContext context;
     private Selector selector;
+    private FitnessTester fitnessTester;
     private StopConditionVerifier stopVerifier;
 
     // WORKING DATA
@@ -36,6 +34,7 @@ public class Evolver implements EnvObservable {
     	this.context = context;
     	this.env = env;
     	this.selector = selector;
+    	this.fitnessTester = new StandardFitnessTester();
     	this.stopVerifier = new StopConditionVerifier(context.stopConditions);
     }
     
@@ -43,6 +42,7 @@ public class Evolver implements EnvObservable {
     public void subscribe(EnvObserver l){
         observer = l;
         selector.subscribe(l);
+        fitnessTester.subscribe(l);
     }
 
 
@@ -56,7 +56,7 @@ public class Evolver implements EnvObservable {
         env.startTime = Calendar.getInstance().getTimeInMillis();
         
         // Testa la popolazione iniziale
-        testFitness(env.target, env.currentGen);
+        fitnessTester.testFitness(env.target, env.currentGen);
         fireNewGenerationEvent();
         
         boolean endConditionFound = false;
@@ -72,7 +72,7 @@ public class Evolver implements EnvObservable {
         	env.currentGen = selector.select(env.currentGen);
             
             // Test fitness of population
-            Fitness currentGenFitness = testFitness(env.target, env.currentGen);
+            Fitness currentGenFitness = fitnessTester.testFitness(env.target, env.currentGen);
             Fitness bestMatchFitness = lastGen.bestMatch.getFitness();
             
             // Check stability of the fitness value
@@ -151,45 +151,10 @@ public class Evolver implements EnvObservable {
         observer.historyEndedEvent(this);
     }
     
-    
-
-    private void fireFitnessCalculatedEvent(Solution s){
-        observer.fitnessCalculatedEvent(s);
-    }
-    
-    private void fireIllegalSolutionEvent(Solution s){
-    	observer.illegalSolutionEvent(s);
-    }
-    
-
 
     private boolean isGoalReached(Population generation){
         return generation.bestMatch.getFitness().fit();
     }
     
-    
-    /** Per ogni soluzione, calcola il fitness e tiene memorizzata la migliore.
-     * 
-     * TODOM: create a FitnessTester interface
-     */
-    public Fitness testFitness(Target target, Population population){
-    	population.bestMatch = null;
-        Iterator<Solution> it = population._solutions.iterator();
-        while(it.hasNext()){ // TODOA: MapReduce!
-            Solution solution = it.next();
-            solution.calcFitness(target);
-            if(solution.legalCheck()!=null) {
-                fireIllegalSolutionEvent(solution);
-            }
-            else {
-                fireFitnessCalculatedEvent(solution);
-            }
-            if(population.bestMatch==null || 
-            		(population.bestMatch!=null && solution.getFitness().greaterThan(population.bestMatch.getFitness()))){
-            	population.bestMatch = solution;
-            }
-        }
-        return population.bestMatch.getFitness();
-    }
     
 }

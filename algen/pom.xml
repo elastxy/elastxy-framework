@@ -31,9 +31,18 @@
     <modules>
         <module>algen-core</module>
         <module>algen-web</module>
-        <module>algen-distributed</module>
         <module>algen-applications</module>
     </modules>
+    
+    
+	  <profiles>
+	    <profile>
+	      <id>distributed</id>
+	      <modules>
+        	<module>algen-distributed</module>
+	      </modules>
+	    </profile>
+	  </profiles>
 	
     <build>
         <pluginManagement>
