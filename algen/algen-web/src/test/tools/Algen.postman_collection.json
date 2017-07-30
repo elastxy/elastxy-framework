@@ -148,6 +148,50 @@
 			"description": "",
 			"item": [
 				{
+					"name": "/distributed/access",
+					"request": {
+						"url": "http://{{ip}}:{{port}}/distributed/access",
+						"method": "HEAD",
+						"header": [],
+						"body": {},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "/distributed/test/spark/single",
+					"request": {
+						"url": "http://{{ip}}:{{port}}/distributed/test/spark/single",
+						"method": "GET",
+						"header": [],
+						"body": {},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "/distributed/test/spark/concurrent",
+					"request": {
+						"url": "http://{{ip}}:{{port}}/distributed/test/spark/concurrent",
+						"method": "GET",
+						"header": [],
+						"body": {},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "/distributed/evolution",
+					"request": {
+						"url": "http://{{ip}}:{{port}}/distributed/evolution",
+						"method": "GET",
+						"header": [],
+						"body": {},
+						"description": ""
+					},
+					"response": []
+				},
+				{
 					"name": "/distributed/wordcount",
 					"request": {
 						"url": "http://{{ip}}:{{port}}/distributed/wordcount",

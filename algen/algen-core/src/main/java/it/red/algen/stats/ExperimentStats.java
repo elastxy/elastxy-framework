@@ -1,5 +1,5 @@
 /*
- * Stats.java
+ * java
  *
  * Created on 5 agosto 2007, 14.34
  *
@@ -13,6 +13,7 @@ package it.red.algen.stats;
 import java.util.List;
 
 import it.red.algen.domain.Population;
+import it.red.algen.tracking.Logger;
 
 /**
  *TODOM: togliere carattere _
@@ -27,4 +28,14 @@ public class ExperimentStats  {
     public int _totIdenticalFitnesses;
     public boolean targetReached;
     public List<Population> _generationHistory;
+    
+    public String toString(){
+    	StringBuffer buf = new StringBuffer();
+        buf.append("##################### STATS #####################").append(Character.LINE_SEPARATOR);
+        buf.append("Best match:" + _lastGeneration.bestMatch).append(Character.LINE_SEPARATOR);
+        buf.append("Number of generations: "+_generations).append(Character.LINE_SEPARATOR);
+        buf.append("Total time (sec): "+_time).append(Character.LINE_SEPARATOR);
+        buf.append("Total generations with same fitness: "+_totIdenticalFitnesses);
+        return buf.toString();
+    }
 }

@@ -59,176 +59,170 @@
     	</dependency>
     	
 
-				
-				<!-- SPARK -->
-		    	
-		        <!-- https://mvnrepository.com/artifact/org.apache.spark/spark-core_2.11 -->
-		        <dependency>
-		            <groupId>org.apache.spark</groupId>
-		            <artifactId>spark-core_2.11</artifactId>
-		            <scope>provided</scope>
-		            <exclusions>
-		                <exclusion>
-		                    <groupId>org.slf4j</groupId>
-		                    <artifactId>slf4j-log4j12</artifactId>
-		                </exclusion>
-		                <exclusion>
-		                    <groupId>log4j</groupId>
-		                    <artifactId>log4j</artifactId>
-		                </exclusion>
-		            </exclusions>
-		        </dependency>
 		
-		        <!-- https://mvnrepository.com/artifact/org.apache.spark/spark-sql_2.11 -->
-		        <dependency>
+		<!-- SPARK -->
+    	
+    	  <!-- Spark -->
+   		<dependency>
+            <groupId>org.apache.spark</groupId>
+            <artifactId>spark-core_2.11</artifactId>
+            <scope>provided</scope>
+            <exclusions>
+                <exclusion>
+                    <groupId>org.slf4j</groupId>
+                    <artifactId>slf4j-log4j12</artifactId>
+                </exclusion>
+                <exclusion>
+                    <groupId>log4j</groupId>
+                    <artifactId>log4j</artifactId>
+                </exclusion>
+            </exclusions>
+        </dependency>
+
+        <!-- fix java.lang.ClassNotFoundException: org.codehaus.commons.compiler.UncheckedCompileException -->
+        <dependency>
+            <groupId>org.codehaus.janino</groupId>
+            <artifactId>commons-compiler</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>org.slf4j</groupId>
+            <artifactId>log4j-over-slf4j</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.slf4j</groupId>
+            <artifactId>slf4j-api</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.slf4j</groupId>
+            <artifactId>slf4j-simple</artifactId>
+        </dependency>
+        
+        
+    	<!-- RED Dependencies -->
+    	<dependency>
+        	<groupId>it.red.algen</groupId>
+			<artifactId>algen-applications</artifactId>
+  			<version>1.0.0-SNAPSHOT</version>
+    	</dependency>
+		    	
+	</dependencies>
+	    			
+	    			
+	    			
+	    			
+	<profiles>
+		<profile>
+			<id>distributed</id>
+			<activation>
+				<activeByDefault>true</activeByDefault>
+			</activation>
+			
+			   <build>
+				   
+			        <plugins>
+			        	
+				        <plugin>
+						  <groupId>org.apache.maven.plugins</groupId>
+						  <artifactId>maven-compiler-plugin</artifactId>
+						  <configuration>
+						    <excludes>
+						      <exclude>**/example/*.java</exclude>
+						    </excludes>
+						  </configuration>
+						</plugin>
+			
+			            <plugin>
+			                <groupId>org.springframework.boot</groupId>
+			                <artifactId>spring-boot-maven-plugin</artifactId>
+			                <executions>
+			                    <execution>
+			                        <goals>
+			                            <goal>repackage</goal>
+			                        </goals>
+			                    </execution>
+			                </executions>
+			            </plugin>
+			            
+				        <plugin>
+					        <groupId>io.fabric8</groupId>
+					        <artifactId>docker-maven-plugin</artifactId>
+					        <extensions>true</extensions>
+					        
+			 		        <configuration>
+					          <images>
+						            <image>
+						              <name>algen</name>
+						              <alias>algend</alias>
+						              <build>
+						                <filter>@</filter>
+						                <dockerFileDir>${project.basedir}/src/main/docker</dockerFileDir>
+						                <assembly>
+						                  <descriptorRef>artifact</descriptorRef>
+						                </assembly>
+						              </build>
+						              <run>
+						              	<namingStrategy>alias</namingStrategy>
+						                <ports> 
+						                  <port>${tomcat.port}:8083</port>
+						                </ports>
+								         <wait> 
+								           <http>
+								              <url>http://${tomcat.ip}:${tomcat.port}/distributed/access</url>
+								           </http>
+								           <time>90000</time>
+								         </wait>
+						              </run>
+						            </image>
+					          </images>
+					        </configuration>
+					        
+					      </plugin>
+				        
+			        </plugins>
+			        
+			    </build>
+		</profile>
+	
+		<profile>
+			<id>example</id>
+			<activation>
+				<activeByDefault>false</activeByDefault>
+			</activation>
+			<build>
+        		<plugins>
+			        <plugin>
+					  <groupId>org.apache.maven.plugins</groupId>
+					  <artifactId>maven-compiler-plugin</artifactId>
+					  <configuration>
+					    <includes>
+					      <include>**/example/*.java</include>
+					    </includes>
+					  </configuration>
+					</plugin>
+		            <plugin>
+		                <groupId>org.springframework.boot</groupId>
+		                <artifactId>spring-boot-maven-plugin</artifactId>
+		                <executions>
+		                    <execution>
+		                        <goals>
+		                            <goal>repackage</goal>
+		                        </goals>
+		                    </execution>
+		                </executions>
+		            </plugin>
+				</plugins>
+			</build>
+			<dependencies>
+		       <!-- https://mvnrepository.com/artifact/org.apache.spark/spark-sql_2.11 -->
+		       <dependency>
 				    <groupId>org.apache.spark</groupId>
 				    <artifactId>spark-sql_2.11</artifactId>
 		            <scope>provided</scope>
 				</dependency>
-		        
-		
-		        <!-- fix java.lang.ClassNotFoundException: org.codehaus.commons.compiler.UncheckedCompileException -->
-		        <dependency>
-		            <groupId>org.codehaus.janino</groupId>
-		            <artifactId>commons-compiler</artifactId>
-		        </dependency>
-		
-		        <!-- https://mvnrepository.com/artifact/org.slf4j/log4j-over-slf4j -->
-		        <dependency>
-		            <groupId>org.slf4j</groupId>
-		            <artifactId>log4j-over-slf4j</artifactId>
-		        </dependency>
-		        <dependency>
-		            <groupId>org.slf4j</groupId>
-		            <artifactId>slf4j-api</artifactId>
-		        </dependency>
-		        <dependency>
-		            <groupId>org.slf4j</groupId>
-		            <artifactId>slf4j-simple</artifactId>
-		        </dependency>
-		    	
-			 </dependencies>
-	    			
-    		
-	   <build>
-        <plugins>
-            <plugin>
-                <groupId>org.springframework.boot</groupId>
-                <artifactId>spring-boot-maven-plugin</artifactId>
-                <executions>
-                    <execution>
-                        <goals>
-                            <goal>repackage</goal>
-                        </goals>
-                    </execution>
-                </executions>
-            </plugin>
-            
-	         <plugin>
-		        <groupId>io.fabric8</groupId>
-		        <artifactId>docker-maven-plugin</artifactId>
-		        <extensions>true</extensions>
-		        
- 		        <configuration>
-		          <images>
-			            <image>
-			              <name>algen</name>
-			              <alias>algend</alias>
-			              <build>
-			                <filter>@</filter>
-			                <dockerFileDir>${project.basedir}/src/main/docker</dockerFileDir>
-			                <assembly>
-			                  <descriptorRef>artifact</descriptorRef>
-			                </assembly>
-			              </build>
-			              <run>
-			              	<namingStrategy>alias</namingStrategy>
-			                <ports> 
-			                  <port>${tomcat.port}:8083</port>
-			                </ports>
-					         <wait> 
-					           <http>
-					              <url>http://${tomcat.ip}:${tomcat.port}/distributed/access</url>
-					           </http>
-					           <time>90000</time>
-					         </wait>
-			              </run>
-			            </image>
-		          </images>
-		        </configuration>		        
-		        
-				  <!-- Connect start/stop to pre- and
-				       post-integration-test phase, respectively if you want to start
-				       your docker containers during integration tests -->
-				  <!-- <executions>
-				    <execution>
-				       <id>start</id>
-				       <phase>pre-integration-test</phase>
-				       <goals>
-				         "build" should be used to create the images with the
-				              artifact
-				         <goal>build</goal>
-				         <goal>start</goal>
-				       </goals>
-				    </execution>
-				    <execution>
-				       <id>stop</id>
-				       <phase>post-integration-test</phase>
-				       <goals>
-				         <goal>stop</goal>
-				      </goals>
-				    </execution>
-				  </executions> -->
-		        
-		        <!--  ALTERNATIVE CONF
-		        <configuration>
-                <verbose>true</verbose>
-                <images>
-                    <image>
-                        <name>algen</name>
-                        <build>
-                            <from>frolvlad/alpine-oraclejdk8:slim</from>
-                            <entryPoint>
-                                <exec>
-                                    <arg>java</arg>
-                                    <arg>-Djava.security.egd=file:/dev/./urandom</arg>
-                                    <arg>-Ddatadir=/tmp</arg>
-                                    <arg>-jar</arg>
-                                    <arg>/maven/${project.artifactId}-${project.version}.${project.packaging}</arg>
-                                </exec>
-                            </entryPoint>
-
-                            <assembly>
-                                <descriptorRef>artifact</descriptorRef>
-                            </assembly>
-                        </build>
-                    </image>
-                </images>
-            </configuration>
-		     -->
-		        
-		      </plugin>
-
-	      <!--   ALTERNATIVE PLUGIN
-	      <plugin>
-	            <groupId>com.spotify</groupId>
-	            <artifactId>docker-maven-plugin</artifactId>
-	            <version>0.4.11</version>
-	            <configuration>
-	                <imageName>${docker.image.prefix}/${project.artifactId}</imageName>
-	                <dockerDirectory>src/main/docker</dockerDirectory>
-	                <resources>
-	                    <resource>
-	                        <targetPath>/</targetPath>
-	                        <directory>${project.build.directory}</directory>
-	                        <include>${project.build.finalName}.jar</include>
-	                    </resource>
-	                </resources>
-	            </configuration>
-	        </plugin> -->
-	        
-	        
-        </plugins>
-    </build>
+			</dependencies>
+		</profile>
+	</profiles>
+	
 	
 </project>
