@@ -7,6 +7,7 @@ import it.red.algen.context.AlgorithmContext;
 import it.red.algen.context.AlgorithmContextBuilder;
 import it.red.algen.context.BenchmarkContextBuilder;
 import it.red.algen.garden.engine.GardenApplication;
+import it.red.algen.garden.engine.GardenMutator;
 import it.red.algen.garden.tracking.GardenCSVReporter;
 
 @Component
@@ -39,6 +40,9 @@ public class GardenBenchmark implements BenchmarkContextBuilder {
 				MAX_IDENTICAL_FITNESSES,
 				VERBOSE, 
 				new GardenCSVReporter(GardenApplication.STATS_DIR));
+		
+		context.mutator = new GardenMutator();
+		
 		return context;
 	}
 	

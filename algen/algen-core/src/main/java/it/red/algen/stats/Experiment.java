@@ -53,9 +53,9 @@ public class Experiment {
         
         // Setups operators
         Selector selector = new StandardSelector();
-        selector.setup(contextSupplier.getContext().parameters);
+        selector.setup(contextSupplier.getContext().parameters, contextSupplier.getContext().mutator);
         selector.subscribe(observer);
-        // TODOA: Mutator, Recombinator
+        // TODOA: Recombinator
         
         // Creates initial environment
         Env environment = _factory.create();

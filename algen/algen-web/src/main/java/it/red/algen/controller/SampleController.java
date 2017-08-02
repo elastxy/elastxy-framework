@@ -38,9 +38,11 @@ import it.red.algen.engine.EnvFactory;
 import it.red.algen.expressions.context.ExprBenchmark;
 import it.red.algen.expressions.engine.ExprApplication;
 import it.red.algen.expressions.engine.ExprEnvFactory;
+import it.red.algen.expressions.engine.ExprMutator;
 import it.red.algen.garden.context.GardenBenchmark;
 import it.red.algen.garden.engine.GardenApplication;
 import it.red.algen.garden.engine.GardenEnvFactory;
+import it.red.algen.garden.engine.GardenMutator;
 import it.red.algen.garden.tracking.GardenCSVReporter;
 import it.red.algen.stats.Experiment;
 import it.red.algen.stats.ExperimentStats;
@@ -98,10 +100,12 @@ public class SampleController {
 		
 	 	Experiment e = null;
 	 	if("garden".equals(domain)){
+	 		context.mutator = new ExprMutator();
 			context.monitoringConfiguration.reporter = new GardenCSVReporter(GardenApplication.STATS_DIR);
 	        e = new Experiment(gardenEnvFactory);
 	 	}
 	 	else if("expressions".equals(domain)){
+	 		context.mutator = new GardenMutator();
 	 		context.monitoringConfiguration.reporter = new CSVReporter(ExprApplication.STATS_DIR);
 	        e = new Experiment(exprEnvFactory);
 	 	}

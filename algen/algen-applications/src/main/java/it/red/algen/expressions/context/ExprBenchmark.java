@@ -7,6 +7,8 @@ import it.red.algen.context.AlgorithmContext;
 import it.red.algen.context.AlgorithmContextBuilder;
 import it.red.algen.context.BenchmarkContextBuilder;
 import it.red.algen.expressions.engine.ExprApplication;
+import it.red.algen.expressions.engine.ExprGenesFactory;
+import it.red.algen.expressions.engine.ExprMutator;
 import it.red.algen.tracking.CSVReporter;
 
 @Component
@@ -33,6 +35,9 @@ public class ExprBenchmark implements BenchmarkContextBuilder {
 	@Autowired
 	private AlgorithmContextBuilder contextBuilder;
 	
+	@Autowired
+	private ExprGenesFactory genesFactory;
+	
 	@Override
 	public AlgorithmContext build() {
 		AlgorithmContext context = contextBuilder.build(
@@ -46,7 +51,10 @@ public class ExprBenchmark implements BenchmarkContextBuilder {
 				MAX_IDENTICAL_FITNESSES,
 				VERBOSE, 
 				new CSVReporter(ExprApplication.STATS_DIR));
-
+		
+		context.mutator = new ExprMutator();
+		context.mutator.setGenesFactory(genesFactory);
+		
 //		context.applicationSpecifics.target = Optional.of(new ExprTarget(ExprConf.DEFAULT_EXPRESSION_RESULT));
 		context.applicationSpecifics.putTarget(ExprApplication.TARGET_EXPRESSION_RESULT, DEFAULT_EXPRESSION_RESULT);
 		context.applicationSpecifics.putParam(ExprApplication.MAX_OPERAND_VALUE, DEFAULT_MAX_OPERAND_VALUE);

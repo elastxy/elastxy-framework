@@ -19,7 +19,6 @@ public interface Solution {
         public Fitness getFitness();
         public void calcFitness(Target target);
         public Solution[] crossoverWith(Solution other);
-        public void mute();
         public Object clone();
         // Se ritorna una stringa, la soluzione non � valida
         public String legalCheck();

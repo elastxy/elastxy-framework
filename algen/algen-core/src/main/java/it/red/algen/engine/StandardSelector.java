@@ -18,10 +18,13 @@ public class StandardSelector implements Selector {
 
     // LISTENER
     private EnvObserver observer;
+    
+    private Mutator mutator;
 
     
-    public void setup(OperatorsParameters algParameters) {
+    public void setup(OperatorsParameters algParameters, Mutator mutator) {
         this.algParameters = algParameters;
+        this.mutator = mutator;
     }
 
     
@@ -88,13 +91,13 @@ public class StandardSelector implements Selector {
             if(mute0) { 
                 Solution old = sons[0];
                 sons[0] = (Solution)sons[0].clone();
-                sons[0].mute();
+                mutator.mutate(sons[0]);
                 fireMutationEvent(old, sons[0]);
             }
             if(mute1) { 
                 Solution old = sons[1];
                 sons[1] = (Solution)sons[1].clone();
-                sons[1].mute(); 
+                mutator.mutate(sons[1]); 
                 fireMutationEvent(old, sons[1]);
             }
             

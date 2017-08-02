@@ -27,7 +27,7 @@ import it.red.algen.engine.IllegalSolutionException;
 public class GardenSolution implements Solution {
     private static Random RANDOMIZER = new Random();
     
-    private List<PlacementGene> placementGenes;
+    public transient List<PlacementGene> placementGenes;
     
     private Fitness _fitness;
     private String _legalCheck;
@@ -150,7 +150,7 @@ public class GardenSolution implements Solution {
 		substituteTree(gene2A, gene2B);
 	}
 
-	private void substituteTree(PlacementGene gene1A, PlacementGene gene1B) {
+	public static void substituteTree(PlacementGene gene1A, PlacementGene gene1B) {
 		Tree tree = gene1A.getTree();
 		gene1A.setTree(gene1B.getTree());
 		gene1B.setTree(tree);
@@ -166,14 +166,6 @@ public class GardenSolution implements Solution {
 		return null;
 	}
 
-    
-    /**
-     * Cambio l'ordine di alcune coppie a caso
-     */
-	public void mute(){
-        int pos = RANDOMIZER.nextInt(placementGenes.size()-1); // posso mutare fino alla coppia [N-1, N]
-        substituteTree(placementGenes.get(pos), placementGenes.get(pos+1));
-    }
     
     public Object clone(){
     	Place[] newPlaces = new Place[placementGenes.size()];

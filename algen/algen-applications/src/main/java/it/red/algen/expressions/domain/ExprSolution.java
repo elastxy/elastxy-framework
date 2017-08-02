@@ -16,7 +16,6 @@ import it.red.algen.domain.Fitness;
 import it.red.algen.domain.Solution;
 import it.red.algen.domain.Target;
 import it.red.algen.engine.IllegalSolutionException;
-import it.red.algen.expressions.engine.ExprGenesFactory;
 
 /**
  *
@@ -25,36 +24,19 @@ import it.red.algen.expressions.engine.ExprGenesFactory;
 public class ExprSolution implements Solution {
     private static Random RANDOMIZER = new Random();
     
-    private ExprGenesFactory _genesFactory;
+	// Phenotype
+	public NumberGene val1;
+    public OperatorGene op;
+    public NumberGene val2;
+
+    // Runtime data
+    private Fitness fitness;
+    private String legalCheck;
     
-    private NumberGene _val1;
-    private OperatorGene _op;
-    private NumberGene _val2;
-    
-    private Fitness _fitness;
-    private String _legalCheck;
-    
-    // TODOM: gene creation to be moved outside
-    public ExprSolution(ExprGenesFactory genesFactory) {
-        _genesFactory = genesFactory;
-    	_val1 = 	_genesFactory.getRandomNumber();
-        _op = 		_genesFactory.getRandomOperator();
-        _val2 = 	_genesFactory.getRandomNumber();
-    }
-    
-    public ExprSolution(ExprGenesFactory genesFactory, NumberGene val1, OperatorGene op, NumberGene val2) {
-        _genesFactory = genesFactory;
-    	_val1 = val1;
-        _op = op;
-        _val2 = val2;
-    }
-    
-    
-    public ExprSolution(ExprGenesFactory genesFactory, int val1, char op,int val2) {
-        _genesFactory = genesFactory;
-        _val1 = _genesFactory.getNumber(val1);
-        _op = _genesFactory.getOperator(op);
-        _val2 = _genesFactory.getNumber(val2);
+    public ExprSolution(NumberGene val1, OperatorGene op, NumberGene val2) {
+    	this.val1 = val1;
+        this.op = op;
+        this.val2 = val2;
     }
     
 
@@ -63,11 +45,11 @@ public class ExprSolution implements Solution {
 	}
     
     public Fitness getFitness(){
-        return _fitness;
+        return fitness;
     }
     
     public int compute() throws IllegalSolutionException {
-        return _op.apply(_val1.getValue(), _val2.getValue());
+        return op.apply(val1.getValue(), val2.getValue());
     }
     
     public void calcFitness(Target target){
@@ -80,14 +62,14 @@ public class ExprSolution implements Solution {
             int distance = Math.abs(tValue-sValue);
             normalized = 1 - distance / (double)((ExprRawFitness)t.getRawFitness()).distance;
         } catch(IllegalSolutionException ex){ 
-            _legalCheck = "Divisione per 0 non ammessa: secondo operando non valido.";
+            legalCheck = "Divisione per 0 non ammessa: secondo operando non valido.";
             normalized = 0;
         }
-        _fitness = new ExprFitness(normalized);
+        fitness = new ExprFitness(normalized);
     }
     
     public String legalCheck(){
-        return _legalCheck;
+        return legalCheck;
     }
     
     public Solution[] crossoverWith(Solution other){
@@ -96,49 +78,32 @@ public class ExprSolution implements Solution {
         // I punti di ricombinazione possono essere all'operatore o al secondo operando
         int crossoverPoint = RANDOMIZER.nextInt(2);
         if(crossoverPoint==0){
-            sons[0] = new ExprSolution(_genesFactory, ot._val1,    _op,        _val2);
-            sons[1] = new ExprSolution(_genesFactory, _val1,       ot._op,     ot._val2);
+            sons[0] = new ExprSolution(ot.val1,    op,        val2);
+            sons[1] = new ExprSolution(val1,       ot.op,     ot.val2);
         } else {
-            sons[0] = new ExprSolution(_genesFactory, ot._val1,    ot._op,        _val2);
-            sons[1] = new ExprSolution(_genesFactory, _val1,       _op,     ot._val2);
+            sons[0] = new ExprSolution(ot.val1,    ot.op,        val2);
+            sons[1] = new ExprSolution(val1,       op,     ot.val2);
         }
         return sons;
     }
     
-    /** Piu' probabile la mutazione dell'operatore
-     */
-    public void mute(){
-        switch(RANDOMIZER.nextInt(4)){
-            case 0:
-            	_val1 = _genesFactory.getRandomNumber();
-                break;
-            case 1:
-            case 2:
-            	_op = _genesFactory.getRandomOperator();
-                break;
-            case 3:
-            	_val2 = _genesFactory.getRandomNumber();
-                break;
-        }
-    }
-    
     public Object clone(){
-        return new ExprSolution(_genesFactory, _val1, _op, _val2);
+        return new ExprSolution(val1, op, val2);
     }
     
     public String toString(){
-        String solution = "("+_val1+" "+_op+" "+_val2+")";
+        String solution = "("+val1+" "+op+" "+val2+")";
         String details = getDetails();
         return solution+details;
     }
     
     private String getDetails(){
         // Calcolo non ancora effettuato
-        if(_fitness==null && _legalCheck==null){
+        if(fitness==null && legalCheck==null){
             return "";
         }
-        double fitness = ((ExprFitness)_fitness).getValue();
-        String res = _legalCheck!=null ? "###" : String.valueOf(fitness);
+        double fitness = ((ExprFitness)this.fitness).getValue();
+        String res = legalCheck!=null ? "###" : String.valueOf(fitness);
         return " => F:"+res;
     }
 }

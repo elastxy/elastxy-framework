@@ -38,7 +38,7 @@ public class ExprEnvFactory implements EnvFactory {
 	private ContextSupplier contextSupplier;
 	
 	@Autowired
-	private ExprGenesFactory genesFactory;
+	private ExprSolutionFactory solutionsFactory;
 	
 	
     public Env create(){
@@ -49,8 +49,8 @@ public class ExprEnvFactory implements EnvFactory {
         // Definisce l'ambiente di riproduzione
         AlgorithmContext context = contextSupplier.getContext();
         int maxOperandValue = context.applicationSpecifics.getParamInteger(ExprApplication.MAX_OPERAND_VALUE);
-        ExprSolution minSol = new ExprSolution(genesFactory, maxOperandValue, '*', -maxOperandValue);
-        ExprSolution maxSol = new ExprSolution(genesFactory, maxOperandValue, '*', maxOperandValue);
+        ExprSolution minSol = solutionsFactory.create(maxOperandValue, '*', -maxOperandValue);
+        ExprSolution maxSol = solutionsFactory.create(maxOperandValue, '*', maxOperandValue);
 
         // Definisce il target
         Integer target = context.applicationSpecifics.getTargetInteger(ExprApplication.TARGET_EXPRESSION_RESULT);
