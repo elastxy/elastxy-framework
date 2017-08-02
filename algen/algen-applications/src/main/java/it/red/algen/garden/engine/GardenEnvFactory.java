@@ -17,7 +17,6 @@ import it.red.algen.domain.Env;
 import it.red.algen.domain.Population;
 import it.red.algen.domain.Target;
 import it.red.algen.engine.EnvFactory;
-import it.red.algen.garden.conf.GardenConf;
 import it.red.algen.garden.data.GardenDatabase;
 import it.red.algen.garden.data.GardenDatabaseCSV;
 import it.red.algen.garden.domain.GardenRawFitness;
@@ -31,7 +30,7 @@ import it.red.algen.garden.domain.Tree;
  */
 @Component
 public class GardenEnvFactory implements EnvFactory {
-	private GardenDatabase database = new GardenDatabaseCSV(GardenConf.DATABASE_DIR);
+	private GardenDatabase database = new GardenDatabaseCSV(GardenApplication.DATABASE_DIR);
 	
 	@Autowired
 	private GardenPopulationFactory gardenPopulationFactory;

@@ -16,7 +16,6 @@ import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Component;
 
 import it.red.algen.context.ContextSupplier;
-import it.red.algen.expressions.conf.ExprConf;
 import it.red.algen.expressions.domain.NumberGene;
 import it.red.algen.expressions.domain.OperatorGene;
 
@@ -47,7 +46,7 @@ public class ExprGenesFactory {
     }
     
     public NumberGene getRandomNumber(){
-    	int maxOperandValue = contextSupplier.getContext().applicationSpecifics.getParamInteger(ExprConf.MAX_OPERAND_VALUE);
+    	int maxOperandValue = contextSupplier.getContext().applicationSpecifics.getParamInteger(ExprApplication.MAX_OPERAND_VALUE);
         return new NumberGene(RANDOMIZER.nextInt(2 * maxOperandValue + 1) - maxOperandValue); // From -max to +max
     }
 }

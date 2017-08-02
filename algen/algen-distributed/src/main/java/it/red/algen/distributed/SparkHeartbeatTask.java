@@ -6,7 +6,9 @@ import java.util.concurrent.ExecutionException;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.Future;
+import java.util.stream.Stream;
 
+import org.apache.spark.api.java.JavaPairRDD;
 import org.apache.spark.api.java.JavaRDD;
 import org.apache.spark.api.java.JavaSparkContext;
 import org.slf4j.Logger;
@@ -25,18 +27,30 @@ public class SparkHeartbeatTask {
 	
 	
 	public String runSingle(String inputFilePath) {
-	    StringBuffer buf = new StringBuffer();
+//	    final StringBuffer buf = new StringBuffer();
+//	    final List<String> list = new ArrayList<String>();
 
-	    sparkContext.textFile(inputFilePath)
+	    JavaPairRDD<String, Integer> wordCount = sparkContext.textFile(inputFilePath)
 	        .flatMap(text -> Arrays.asList(text.split(" ")).iterator())
 	        .mapToPair(word -> new Tuple2<>(word, 1))
-	        .reduceByKey((a, b) -> a + b)
-	        .foreach(res -> logger.info(String.format("Word [%s] count [%d].", res._1(), res._2)));
-//	        .foreach(res -> write(buf, String.format("Word [%s] count [%d].", res._1(), res._2)));
+	        .reduceByKey((a, b) -> a + b);
 	    
-	    String res = buf.toString();
-	    logger.info(res);
-	    return res;
+//	        .foreach(res -> logger.info(String.format("Word [%s] count [%d].%n", res._1(), res._2)));
+//	        .foreach(res -> write(buf, list, String.format("Word [%s] count [%d].%n", res._1(), res._2)));
+	    
+//	    String result = wordCount.toDebugString();
+	    
+//	    wordCount.collect().stream(tuple -> write(buf, list, String.format("Word [%s] count [%d].%n", tuple._1, tuple_2)));
+	    Stream<Tuple2<String,Integer>> s1 = wordCount.collect().stream();
+	    Stream<String> s2 = s1.map(tuple -> String.format("Word [%s] count [%d].%n", tuple._1(), tuple._2));
+//	    s2.forEach(SparkHeartbeatTask::write);
+//	    s2.forEach(action);
+	    
+//	    String res = buf.toString();
+//	    logger.info(res);
+//	    return "BUF=\n"+res+"\nLIST=\n"+list.toString();
+	    
+	    return Arrays.toString(s2.toArray());
 	}
 	
 
@@ -67,8 +81,13 @@ public class SparkHeartbeatTask {
     }
     
     
-	private void write(StringBuffer buf, String msg){
-		buf.append(msg);
-		logger.info(msg);
-	}
+//	private static void write(String buf){
+//		System.out.println(buf);;
+//	}
+
+//	private static StringBuffer write(StringBuffer buf, List<String> list, String msg){
+//		logger.info(msg);
+//		list.add(msg);
+//		return buf.append(msg);
+//	}
 }

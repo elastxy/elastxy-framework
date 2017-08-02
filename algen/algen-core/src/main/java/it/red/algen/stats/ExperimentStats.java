@@ -13,7 +13,6 @@ package it.red.algen.stats;
 import java.util.List;
 
 import it.red.algen.domain.Population;
-import it.red.algen.tracking.Logger;
 
 /**
  *TODOM: togliere carattere _

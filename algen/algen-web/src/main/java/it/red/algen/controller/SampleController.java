@@ -35,11 +35,11 @@ import com.google.gson.Gson;
 import it.red.algen.context.AlgorithmContext;
 import it.red.algen.context.ContextSupplier;
 import it.red.algen.engine.EnvFactory;
-import it.red.algen.expressions.conf.ExprConf;
 import it.red.algen.expressions.context.ExprBenchmark;
+import it.red.algen.expressions.engine.ExprApplication;
 import it.red.algen.expressions.engine.ExprEnvFactory;
-import it.red.algen.garden.conf.GardenConf;
 import it.red.algen.garden.context.GardenBenchmark;
+import it.red.algen.garden.engine.GardenApplication;
 import it.red.algen.garden.engine.GardenEnvFactory;
 import it.red.algen.garden.tracking.GardenCSVReporter;
 import it.red.algen.stats.Experiment;
@@ -98,11 +98,11 @@ public class SampleController {
 		
 	 	Experiment e = null;
 	 	if("garden".equals(domain)){
-			context.monitoringConfiguration.reporter = new GardenCSVReporter(GardenConf.STATS_DIR);
+			context.monitoringConfiguration.reporter = new GardenCSVReporter(GardenApplication.STATS_DIR);
 	        e = new Experiment(gardenEnvFactory);
 	 	}
 	 	else if("expressions".equals(domain)){
-	 		context.monitoringConfiguration.reporter = new CSVReporter(ExprConf.STATS_DIR);
+	 		context.monitoringConfiguration.reporter = new CSVReporter(ExprApplication.STATS_DIR);
 	        e = new Experiment(exprEnvFactory);
 	 	}
 	 	beanFactory.autowireBean(e);

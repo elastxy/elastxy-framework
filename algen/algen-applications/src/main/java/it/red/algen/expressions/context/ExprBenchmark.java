@@ -6,32 +6,50 @@ import org.springframework.stereotype.Component;
 import it.red.algen.context.AlgorithmContext;
 import it.red.algen.context.AlgorithmContextBuilder;
 import it.red.algen.context.BenchmarkContextBuilder;
-import it.red.algen.expressions.conf.ExprConf;
+import it.red.algen.expressions.engine.ExprApplication;
 import it.red.algen.tracking.CSVReporter;
 
 @Component
 public class ExprBenchmark implements BenchmarkContextBuilder {
 
+	// Default values
+	private static final int DEFAULT_EXPRESSION_RESULT = 235000;
+	
+	private static final int DEFAULT_MAX_OPERAND_VALUE = 1000;
+	
+    private static final long INITIAL_SELECTION_NUMBER = 10;
+    private static final boolean INITIAL_SELECTION_RANDOM = true;
+    
+    private static final int MAX_ITERATIONS = -1;
+    private static final int MAX_LIFETIME_MILLIS = 3000;
+    private static final int MAX_IDENTICAL_FITNESSES = -1;
+
+    private static final boolean ELITARISM = true;
+	private static final double RECOMBINANTION_PERC = 0.8;
+    private static final double MUTATION_PERC = 0.2;
+    
+    private static final boolean VERBOSE = false;
+    
 	@Autowired
 	private AlgorithmContextBuilder contextBuilder;
 	
 	@Override
 	public AlgorithmContext build() {
 		AlgorithmContext context = contextBuilder.build(
-				ExprConf.INITIAL_SELECTION_NUMBER,
-				ExprConf.INITIAL_SELECTION_RANDOM,
-				ExprConf.RECOMBINANTION_PERC, 
-				ExprConf.MUTATION_PERC, 
-				ExprConf.ELITARISM, 
-				ExprConf.MAX_ITERATIONS, 
-				ExprConf.MAX_LIFETIME_MILLIS, 
-				ExprConf.MAX_IDENTICAL_FITNESSES,
-				ExprConf.VERBOSE, 
-				new CSVReporter(ExprConf.STATS_DIR));
+				INITIAL_SELECTION_NUMBER,
+				INITIAL_SELECTION_RANDOM,
+				RECOMBINANTION_PERC, 
+				MUTATION_PERC, 
+				ELITARISM, 
+				MAX_ITERATIONS, 
+				MAX_LIFETIME_MILLIS, 
+				MAX_IDENTICAL_FITNESSES,
+				VERBOSE, 
+				new CSVReporter(ExprApplication.STATS_DIR));
 
 //		context.applicationSpecifics.target = Optional.of(new ExprTarget(ExprConf.DEFAULT_EXPRESSION_RESULT));
-		context.applicationSpecifics.putTarget(ExprConf.TARGET_EXPRESSION_RESULT, ExprConf.DEFAULT_EXPRESSION_RESULT);
-		context.applicationSpecifics.putParam(ExprConf.MAX_OPERAND_VALUE, ExprConf.DEFAULT_MAX_OPERAND_VALUE);
+		context.applicationSpecifics.putTarget(ExprApplication.TARGET_EXPRESSION_RESULT, DEFAULT_EXPRESSION_RESULT);
+		context.applicationSpecifics.putParam(ExprApplication.MAX_OPERAND_VALUE, DEFAULT_MAX_OPERAND_VALUE);
 		return context;
 	}
 

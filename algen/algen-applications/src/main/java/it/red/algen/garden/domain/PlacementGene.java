@@ -1,7 +1,5 @@
 package it.red.algen.garden.domain;
 
-import it.red.algen.garden.conf.GardenConf;
-
 public class PlacementGene {
 	private Place place;
 	private Tree tree;
@@ -40,20 +38,20 @@ public class PlacementGene {
 		// distanza della richiesta dalla pianta alla fornita dal posto
 		int sunExcess = Math.abs(place.getSunExposure()-tree.getSunRequest());
 		boolean dead = sunExcess==2;
-		result += sunExcess/2.0 * GardenConf.FITNESS_WEIGHT_SUN;
+		result += sunExcess/2.0 * GardenFitness.FITNESS_WEIGHT_SUN;
 		
 		
 		// umidita' in eccesso rispetto a quella accettata dalla pianta
 		int wetExcess = place.getWetLevel() - tree.getWetAllowed();
 		dead |= wetExcess==2;
-		result += wetExcess > 0 ? wetExcess/2.0 * GardenConf.FITNESS_WEIGHT_WET : 0;
+		result += wetExcess > 0 ? wetExcess/2.0 * GardenFitness.FITNESS_WEIGHT_WET : 0;
 		
 		// vento in eccesso rispetto a quello ammesso dalla pianta
 		int windExcess = place.getWindLevel() - tree.getWindAllowed();
 		dead |= windExcess==2;
-		result += windExcess > 0 ? windExcess/2.0 * GardenConf.FITNESS_WEIGHT_WIND : 0;
+		result += windExcess > 0 ? windExcess/2.0 * GardenFitness.FITNESS_WEIGHT_WIND : 0;
 		
-		result = result / (GardenConf.FITNESS_WEIGHT_SUN+GardenConf.FITNESS_WEIGHT_WET+GardenConf.FITNESS_WEIGHT_WIND);
+		result = result / (GardenFitness.FITNESS_WEIGHT_SUN+GardenFitness.FITNESS_WEIGHT_WET+GardenFitness.FITNESS_WEIGHT_WIND);
 		
 		// Ritorna 
 		//	1 se la pianta e' molto infelice o morirebbe

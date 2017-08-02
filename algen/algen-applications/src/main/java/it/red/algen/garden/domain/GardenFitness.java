@@ -18,6 +18,10 @@ import it.red.algen.domain.Fitness;
  */
 public class GardenFitness implements Fitness {
 	
+	public static final int FITNESS_WEIGHT_SUN = 5;
+	public static final int FITNESS_WEIGHT_WIND = 3;
+	public static final int FITNESS_WEIGHT_WET = 1;
+	
     // Valore massimo: tutti i valori di fitness devono essere normalizzati a 1
     public static final double MAX = 1.0;
     public static final double APPROX = 0.0001;

@@ -18,7 +18,6 @@ import it.red.algen.context.ContextSupplier;
 import it.red.algen.domain.Env;
 import it.red.algen.domain.Population;
 import it.red.algen.engine.EnvFactory;
-import it.red.algen.expressions.conf.ExprConf;
 import it.red.algen.expressions.domain.ExprRawFitness;
 import it.red.algen.expressions.domain.ExprSolution;
 import it.red.algen.expressions.domain.ExprTarget;
@@ -49,12 +48,12 @@ public class ExprEnvFactory implements EnvFactory {
         
         // Definisce l'ambiente di riproduzione
         AlgorithmContext context = contextSupplier.getContext();
-        int maxOperandValue = context.applicationSpecifics.getParamInteger(ExprConf.MAX_OPERAND_VALUE);
+        int maxOperandValue = context.applicationSpecifics.getParamInteger(ExprApplication.MAX_OPERAND_VALUE);
         ExprSolution minSol = new ExprSolution(genesFactory, maxOperandValue, '*', -maxOperandValue);
         ExprSolution maxSol = new ExprSolution(genesFactory, maxOperandValue, '*', maxOperandValue);
 
         // Definisce il target
-        Integer target = context.applicationSpecifics.getTargetInteger(ExprConf.TARGET_EXPRESSION_RESULT);
+        Integer target = context.applicationSpecifics.getTargetInteger(ExprApplication.TARGET_EXPRESSION_RESULT);
         ExprTarget exprTarget = new ExprTarget(target);
         // Raw Fitness
         ExprRawFitness raw = new ExprRawFitness(Math.max(target-minSol.compute(), maxSol.compute()-target));

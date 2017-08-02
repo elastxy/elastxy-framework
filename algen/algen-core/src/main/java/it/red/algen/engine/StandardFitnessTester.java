@@ -1,7 +1,6 @@
 package it.red.algen.engine;
 
 import java.util.Iterator;
-import java.util.Observable;
 
 import it.red.algen.domain.Fitness;
 import it.red.algen.domain.Population;
