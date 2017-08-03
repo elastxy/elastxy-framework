@@ -56,7 +56,9 @@ public class ExprEnvFactory implements EnvFactory {
         Integer target = context.applicationSpecifics.getTargetInteger(ExprApplication.TARGET_EXPRESSION_RESULT);
         ExprTarget exprTarget = new ExprTarget(target);
         // Raw Fitness
-        ExprRawFitness raw = new ExprRawFitness(Math.max(target-minSol.compute(), maxSol.compute()-target));
+        Long minSolPerformance = (Long) context.fitnessCalculator.perform(minSol);
+        Long maxSolPerformance = (Long) context.fitnessCalculator.perform(maxSol);
+        ExprRawFitness raw = new ExprRawFitness(Math.max(target-minSolPerformance, maxSolPerformance-target));
         if(raw.distance < 0){
         	throw new RuntimeException("Negative distance not allowed: check numbers precision.");
         }

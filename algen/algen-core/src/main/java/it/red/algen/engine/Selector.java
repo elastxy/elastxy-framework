@@ -6,7 +6,7 @@ import it.red.algen.tracking.EnvObservable;
 
 public interface Selector extends EnvObservable {
 
-    public void setup(OperatorsParameters algParameters, Mutator mutator);
+    public void setup(OperatorsParameters algParameters, Mutator<?> mutator);
     
 
 	/**

@@ -15,7 +15,6 @@ import org.springframework.stereotype.Component;
 
 import it.red.algen.domain.Env;
 import it.red.algen.domain.Population;
-import it.red.algen.domain.Target;
 import it.red.algen.engine.EnvFactory;
 import it.red.algen.garden.data.GardenDatabase;
 import it.red.algen.garden.data.GardenDatabaseCSV;
@@ -46,7 +45,7 @@ public class GardenEnvFactory implements EnvFactory {
         
         // Definisce l'ambiente di riproduzione
         // TODOM: target from outside!
-        Target mytarget = new GardenTarget();
+        GardenTarget mytarget = new GardenTarget();
         mytarget.setRawFitness(new GardenRawFitness(places.length * 1)); // 1=distanza massima dall'ottimo
         Env env = new Env(mytarget, startGen);
         return env;

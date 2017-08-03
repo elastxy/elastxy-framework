@@ -34,7 +34,7 @@ public class Evolver implements EnvObservable {
     	this.context = context;
     	this.env = env;
     	this.selector = selector;
-    	this.fitnessTester = new StandardFitnessTester();
+    	this.fitnessTester = new StandardFitnessTester(context.fitnessCalculator);
     	this.stopVerifier = new StopConditionVerifier(context.stopConditions);
     }
     
@@ -56,7 +56,7 @@ public class Evolver implements EnvObservable {
         env.startTime = Calendar.getInstance().getTimeInMillis();
         
         // Testa la popolazione iniziale
-        fitnessTester.testFitness(env.target, env.currentGen);
+        fitnessTester.test(env.target, env.currentGen);
         fireNewGenerationEvent();
         
         boolean endConditionFound = false;
@@ -72,7 +72,7 @@ public class Evolver implements EnvObservable {
         	env.currentGen = selector.select(env.currentGen);
             
             // Test fitness of population
-            Fitness currentGenFitness = fitnessTester.testFitness(env.target, env.currentGen);
+            Fitness currentGenFitness = fitnessTester.test(env.target, env.currentGen);
             Fitness bestMatchFitness = lastGen.bestMatch.getFitness();
             
             // Check stability of the fitness value

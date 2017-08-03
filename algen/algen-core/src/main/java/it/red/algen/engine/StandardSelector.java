@@ -45,6 +45,7 @@ public class StandardSelector implements Selector {
      *  
      *  ..finche' la lista e' vuota
      */
+    @SuppressWarnings({ "rawtypes", "unchecked" })
     public Population select(Population actualGeneration){
     	
     	// Creazione lista random

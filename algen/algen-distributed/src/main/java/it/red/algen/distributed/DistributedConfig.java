@@ -14,6 +14,7 @@ import org.springframework.core.env.Environment;
 @PropertySource("classpath:distributed.properties")
 public class DistributedConfig {
 	
+	@SuppressWarnings("unused")
 	@Autowired
 	private Environment env;
 	

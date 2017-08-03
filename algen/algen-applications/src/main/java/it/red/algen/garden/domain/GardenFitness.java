@@ -10,42 +10,15 @@
 
 package it.red.algen.garden.domain;
 
-import it.red.algen.domain.Fitness;
+import it.red.algen.engine.StandardFitness;
 
 /**
  *
  * @author grossi
  */
-public class GardenFitness implements Fitness {
-	
+public class GardenFitness extends StandardFitness {
 	public static final int FITNESS_WEIGHT_SUN = 5;
 	public static final int FITNESS_WEIGHT_WIND = 3;
 	public static final int FITNESS_WEIGHT_WET = 1;
 	
-    // Valore massimo: tutti i valori di fitness devono essere normalizzati a 1
-    public static final double MAX = 1.0;
-    public static final double APPROX = 0.0001;
-    private double _value;
-    
-    public GardenFitness(double value) {
-        _value = value;
-    }
-    
-    public double getValue(){
-        return _value;
-    }
-    
-    /** Essendo double occorre approssimare il valore
-     */
-    public boolean fit(){
-        return Math.abs(MAX-_value) < APPROX;
-    }
-    
-    public boolean greaterThan(Fitness other){
-        return _value > ((GardenFitness)other)._value;
-    }
-
-	public boolean sameOf(Fitness other) {
-        return Math.abs(((GardenFitness)other)._value -_value) < APPROX;
-	}
 }

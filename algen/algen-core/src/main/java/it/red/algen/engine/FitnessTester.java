@@ -11,6 +11,6 @@ public interface FitnessTester extends EnvObservable {
     /** Per ogni soluzione, calcola il fitness e tiene memorizzata la migliore.
      * 
      */
-    public Fitness testFitness(Target target, Population population);
+    public Fitness test(Target<?> target, Population population);
     
 }

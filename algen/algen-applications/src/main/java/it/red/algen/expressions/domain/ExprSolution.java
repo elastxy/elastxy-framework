@@ -14,8 +14,6 @@ import java.util.Random;
 
 import it.red.algen.domain.Fitness;
 import it.red.algen.domain.Solution;
-import it.red.algen.domain.Target;
-import it.red.algen.engine.IllegalSolutionException;
 
 /**
  *
@@ -31,7 +29,7 @@ public class ExprSolution implements Solution {
 
     // Runtime data
     private Fitness fitness;
-    private String legalCheck;
+
     
     public ExprSolution(NumberGene val1, OperatorGene op, NumberGene val2) {
     	this.val1 = val1;
@@ -40,39 +38,43 @@ public class ExprSolution implements Solution {
     }
     
 
-	public String getRepresentation() {
-		return toString();
-	}
-    
     public Fitness getFitness(){
         return fitness;
     }
-    
-    public int compute() throws IllegalSolutionException {
-        return op.apply(val1.getValue(), val2.getValue());
+
+    public void setFitness(Fitness fitness){
+        this.fitness= fitness;
     }
     
-    public void calcFitness(Target target){
-        ExprTarget t = (ExprTarget)target;
-        int tValue = t.getComputeValue();
-        int sValue = 0;
-        double normalized = 0.0;
-        try { 
-            sValue = compute(); 
-            int distance = Math.abs(tValue-sValue);
-            normalized = 1 - distance / (double)((ExprRawFitness)t.getRawFitness()).distance;
-        } catch(IllegalSolutionException ex){ 
-            legalCheck = "Divisione per 0 non ammessa: secondo operando non valido.";
-            normalized = 0;
+	public String getDescription() {
+		return toString();
+	}
+    
+    public Solution clone(){
+        return new ExprSolution(val1, op, val2);
+    }
+    
+    public String toString(){
+        return "("+val1+" "+op+" "+val2+")";
+    }
+    
+    public String getDetails(){
+    	String result = toString();
+
+    	// Calcolo non ancora effettuato
+        if(fitness==null){
+            return result;
         }
-        fitness = new ExprFitness(normalized);
+        
+        result += " => F:" + fitness.getLegalCheck()!=null ? "###" : String.valueOf(fitness);
+        return result;
     }
     
-    public String legalCheck(){
-        return legalCheck;
-    }
     
-    public Solution[] crossoverWith(Solution other){
+    
+
+	// TODOA: move in a recombinator class
+	public Solution[] crossoverWith(Solution other){
         Solution[] sons = new Solution[2];
         ExprSolution ot = (ExprSolution)other;
         // I punti di ricombinazione possono essere all'operatore o al secondo operando
@@ -85,25 +87,5 @@ public class ExprSolution implements Solution {
             sons[1] = new ExprSolution(val1,       op,     ot.val2);
         }
         return sons;
-    }
-    
-    public Object clone(){
-        return new ExprSolution(val1, op, val2);
-    }
-    
-    public String toString(){
-        String solution = "("+val1+" "+op+" "+val2+")";
-        String details = getDetails();
-        return solution+details;
-    }
-    
-    private String getDetails(){
-        // Calcolo non ancora effettuato
-        if(fitness==null && legalCheck==null){
-            return "";
-        }
-        double fitness = ((ExprFitness)this.fitness).getValue();
-        String res = legalCheck!=null ? "###" : String.valueOf(fitness);
-        return " => F:"+res;
     }
 }

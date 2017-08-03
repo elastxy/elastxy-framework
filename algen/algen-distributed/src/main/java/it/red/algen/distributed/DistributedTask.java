@@ -25,6 +25,7 @@ public class DistributedTask {
 	private static Logger logger = LoggerFactory.getLogger(DistributedTask.class);
 
 	
+	@SuppressWarnings("unused")
 	@Autowired
 	private JavaSparkContext sparkContext;
 	

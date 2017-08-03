@@ -20,7 +20,7 @@ import java.util.List;
 public class Env {
 
     // DATI CORRENTI
-	public Target target;
+	public Target<?> target;
     public Population currentGen;
     public int currentGenNumber = 0; // first generation starts from 0
     public int totIdenticalFitnesses = 0; // total of subsequent best matches with same fitness value
@@ -31,7 +31,7 @@ public class Env {
     public long endTime;
     public boolean targetReached;
     
-    public Env(Target target, Population currentGen){
+    public Env(Target<?> target, Population currentGen){
     	this.target = target;
     	this.currentGen = currentGen;
     }

@@ -15,22 +15,18 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Random;
 
-import it.red.algen.domain.Fitness;
 import it.red.algen.domain.Solution;
-import it.red.algen.domain.Target;
-import it.red.algen.engine.IllegalSolutionException;
 
 /**
  *
  * @author grossi
  */
-public class GardenSolution implements Solution {
+public class GardenSolution implements Solution<GardenSolution, GardenFitness> {
     private static Random RANDOMIZER = new Random();
     
     public transient List<PlacementGene> placementGenes;
     
-    private Fitness _fitness;
-    private String _legalCheck;
+    private GardenFitness fitness;
     
     public GardenSolution(Place[] places, Tree[] trees) {
     	placementGenes = new ArrayList<PlacementGene>(places.length);
@@ -50,50 +46,16 @@ public class GardenSolution implements Solution {
 //    }
     
     
-	public String getRepresentation() {
-		return toString();
+	@Override
+    public GardenFitness getFitness(){
+        return fitness;
+    }
+
+	@Override
+	public void setFitness(GardenFitness fitness) {
+		this.fitness = fitness;
 	}
-	
-    public Fitness getFitness(){
-        return _fitness;
-    }
-    
-    
-    private double compute() throws IllegalSolutionException {
-    	double result = 0;
-    	int deadTreesCount = 0;
-    	for(PlacementGene gene : placementGenes){
-    		result += gene.calcFitness();
-    		deadTreesCount += result > 0.99 ? 1 : 0;
-    	}
-    	
-    	// Se il numero di piante morte supera una soglia, la funzione ritorna il peggio (1)
-    	if(deadTreesCount/placementGenes.size() > 0.8){
-    		result = placementGenes.size();
-    	}
-    	return result;
-    }
-    
-    public void calcFitness(Target target){
-        GardenTarget t = (GardenTarget)target;
-        double sValue = 0;
-        double normalized = 0.0;
-        try { 
-            sValue = compute(); 
-            // sValue in questo caso = distance, essendo sempre 0 il valore riferimento
-            // es. sValue = 12, worst = 100, dist = 12, normalized = 88%
-            // es. sValue = 76, worst = 100, dist = 76, normalized = 24%
-            normalized = 1 - sValue / (double)((GardenRawFitness)t.getRawFitness()).rawFitness;
-        } catch(IllegalSolutionException ex){ 
-            _legalCheck = "Divisione per 0 non ammessa: secondo operando non valido.";
-            normalized = 0;
-        }
-        _fitness = new GardenFitness(normalized);
-    }
-    
-    public String legalCheck(){
-        return _legalCheck;
-    }
+
     
     
     /**
@@ -105,13 +67,11 @@ public class GardenSolution implements Solution {
      * 4 d	4 a.	  2A	4 d	4 a	
      * 5 e	5 e				5 e 5 e
      */
-    public Solution[] crossoverWith(Solution other){
+    public GardenSolution[] crossoverWith(GardenSolution other){
         
-        GardenSolution ot = (GardenSolution)other;
-
         // Inizialmente identiche ai genitori
-        GardenSolution son1 = (GardenSolution)this.clone();
-        GardenSolution son2 = (GardenSolution)ot.clone();
+        GardenSolution son1 = this.clone();
+        GardenSolution son2 = other.clone();
         
         // 1: Seleziono le posizioni per le quali cambiare pianta: tutte
         List<Integer> positions = new ArrayList<Integer>(son1.placementGenes.size()); 
@@ -135,7 +95,7 @@ public class GardenSolution implements Solution {
         	}
         }
         
-        Solution[] sons = new Solution[] {son1, son2};
+        GardenSolution[] sons = new GardenSolution[] {son1, son2};
         return sons;
     }
 
@@ -167,7 +127,7 @@ public class GardenSolution implements Solution {
 	}
 
     
-    public Object clone(){
+    public GardenSolution clone(){
     	Place[] newPlaces = new Place[placementGenes.size()];
     	Tree[] newTrees = new Tree[placementGenes.size()];
     	for(int pos = 0; pos < placementGenes.size(); pos++){
@@ -177,8 +137,9 @@ public class GardenSolution implements Solution {
     	}
         return new GardenSolution(newPlaces, newTrees);
     }
-    
-    public String toString(){
+
+	@Override
+    public String getDetails(){
     	StringBuffer buffer = new StringBuffer();
     	for(int pos = 0; pos < placementGenes.size(); pos++){
     		PlacementGene gene = placementGenes.get(pos);
@@ -187,20 +148,23 @@ public class GardenSolution implements Solution {
     			buffer.append(";");
     		}
     	}
-    	String details = getDetails();
+    	String details = toString();
     	if(details!=null && details.length()>0){
-    		buffer.append("\n\t").append(getDetails());
+    		buffer.append("\n\t").append(toString());
     	}
         return buffer.toString();
     }
+
     
-    private String getDetails(){
+	@Override
+    public String toString(){
         // Calcolo non ancora effettuato
-        if(_fitness==null && _legalCheck==null){
+        if(fitness==null){
             return "";
         }
-        double fitness = ((GardenFitness)_fitness).getValue();
-        String res = _legalCheck!=null ? "###" : String.format("%1.5f", fitness);
+        String res = fitness.getLegalCheck()!=null ? "###" : String.format("%1.5f", fitness.getValue());
         return " => F:"+res;
     }
+
+
 }

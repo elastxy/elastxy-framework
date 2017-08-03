@@ -2,12 +2,11 @@ package it.red.algen.garden.engine;
 
 import java.util.Random;
 
-import it.red.algen.domain.Solution;
 import it.red.algen.engine.GenesFactory;
 import it.red.algen.engine.Mutator;
 import it.red.algen.garden.domain.GardenSolution;
 
-public class GardenMutator implements Mutator {
+public class GardenMutator implements Mutator<GardenSolution> {
     private static Random RANDOMIZER = new Random();
 
 	/**
@@ -21,11 +20,10 @@ public class GardenMutator implements Mutator {
     /**
      * Cambio l'ordine di alcune coppie a caso
      */
-	public Solution mutate(Solution solution) {
-		GardenSolution result = (GardenSolution)solution;
-		int pos = RANDOMIZER.nextInt(result.placementGenes.size()-1); // posso mutare fino alla coppia [N-1, N]
-		GardenSolution.substituteTree(result.placementGenes.get(pos), result.placementGenes.get(pos+1));
-		return result;
+	public GardenSolution mutate(GardenSolution solution) {
+		int pos = RANDOMIZER.nextInt(solution.placementGenes.size()-1); // posso mutare fino alla coppia [N-1, N]
+		GardenSolution.substituteTree(solution.placementGenes.get(pos), solution.placementGenes.get(pos+1));
+		return solution;
 	}
 
 }

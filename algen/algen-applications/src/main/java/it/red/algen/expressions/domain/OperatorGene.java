@@ -45,8 +45,8 @@ public class OperatorGene implements Gene {
         return _value;
     }
     
-    public int apply(int val1, int val2) throws IllegalSolutionException {
-        int result = 0;
+    public long apply(int val1, int val2) throws IllegalSolutionException {
+        long result = 0;
         switch(_value){
             case '+':
                 result = val1 + val2;

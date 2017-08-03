@@ -9,21 +9,27 @@ import it.red.algen.domain.Target;
 import it.red.algen.tracking.EnvObserver;
 
 public class StandardFitnessTester implements FitnessTester {
-
+	private FitnessCalculator calculator;
 	private EnvObserver observer;
 
+	public StandardFitnessTester(FitnessCalculator calculator){
+		this.calculator = calculator;
+	}
+	
 	@Override
 	public void subscribe(EnvObserver observer) {
 		this.observer = observer;
 	}
 	
-    public Fitness testFitness(Target target, Population population){
+	@Override
+    public Fitness test(Target<?> target, Population population){
     	population.bestMatch = null;
         Iterator<Solution> it = population._solutions.iterator();
         while(it.hasNext()){ // TODOA: MapReduce!
             Solution solution = it.next();
-            solution.calcFitness(target);
-            if(solution.legalCheck()!=null) {
+            
+            Fitness fitness = calculator.calculate(solution, target);
+            if(fitness.getLegalCheck()!=null) {
                 fireIllegalSolutionEvent(solution);
             }
             else {

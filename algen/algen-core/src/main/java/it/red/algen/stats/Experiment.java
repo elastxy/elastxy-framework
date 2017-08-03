@@ -55,13 +55,17 @@ public class Experiment {
         Selector selector = new StandardSelector();
         selector.setup(contextSupplier.getContext().parameters, contextSupplier.getContext().mutator);
         selector.subscribe(observer);
+        
         // TODOA: Recombinator
         
         // Creates initial environment
         Env environment = _factory.create();
     	
         // Setups engine
-        Evolver evolver = new Evolver(contextSupplier.getContext(), environment, selector);
+        Evolver evolver = new Evolver(
+        		contextSupplier.getContext(), 
+        		environment, 
+        		selector);
         evolver.subscribe(observer);
         
         // Starts evolution

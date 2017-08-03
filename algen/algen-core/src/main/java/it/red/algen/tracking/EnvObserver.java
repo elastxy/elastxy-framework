@@ -40,7 +40,7 @@ public class EnvObserver {
     }
     
     public void illegalSolutionEvent(Solution s){
-        if(_context.monitoringConfiguration.verbose) _context.monitoringConfiguration.logger.out("!    "+s+" Soluzione non ammessa. "+s.legalCheck());
+        if(_context.monitoringConfiguration.verbose) _context.monitoringConfiguration.logger.out("!    "+s+" Soluzione non ammessa. "+s.getFitness().getLegalCheck());
     }
     
     public void crossoverEvent(Solution father, Solution mother, Solution[] sons){

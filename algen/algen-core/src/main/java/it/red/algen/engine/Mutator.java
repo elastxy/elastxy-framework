@@ -2,7 +2,7 @@ package it.red.algen.engine;
 
 import it.red.algen.domain.Solution;
 
-public interface Mutator {
+public interface Mutator<S extends Solution> {
 	
 	// TODOA: introductionof genoma
 	public void setGenesFactory(GenesFactory genesFactory);
@@ -14,5 +14,5 @@ public interface Mutator {
 	 * @param solution
 	 * @return
 	 */
-	public Solution mutate(Solution solution);
+	public S mutate(S solution);
 }

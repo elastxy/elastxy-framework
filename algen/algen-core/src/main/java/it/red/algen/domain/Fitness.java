@@ -15,11 +15,27 @@ package it.red.algen.domain;
  * @author grossi
  */
 public interface Fitness {
+	
+	/**
+	 * Value for fitness, possibly normalized in a [0..1] interval
+	 * 
+	 * @return
+	 */
+    public Double getValue();
+    
+    public void setValue(Double value);
+
+    /**
+     * Not null if it's not possible to calculate fitness
+     * @return
+     */
+    public String getLegalCheck();
+    
+    public void setLegalCheck(String legalCheck);
+    
     public boolean fit();
     
     public boolean greaterThan(Fitness other);
-    
-    public double getValue();
 
     public boolean sameOf(Fitness other);
 }

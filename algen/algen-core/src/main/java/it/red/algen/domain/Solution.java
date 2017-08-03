@@ -11,16 +11,21 @@
 package it.red.algen.domain;
 
 /**
- * TODOA: separate algorithm from domain data
  *
  * @author grossi
  */
-public interface Solution {
-        public Fitness getFitness();
-        public void calcFitness(Target target);
-        public Solution[] crossoverWith(Solution other);
-        public Object clone();
-        // Se ritorna una stringa, la soluzione non � valida
-        public String legalCheck();
-        public Object getRepresentation();
+public interface Solution<S extends Solution, F extends Fitness> {
+	
+    public F getFitness();
+    
+    public void setFitness(F fitness);
+    
+    // TODOA: move to a recombinator interface
+	public S[] crossoverWith(S other);
+	
+    public S clone();
+        
+    public String toString();
+        
+    public String getDetails();
 }

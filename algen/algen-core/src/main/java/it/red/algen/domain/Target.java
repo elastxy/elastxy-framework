@@ -14,13 +14,13 @@ package it.red.algen.domain;
  *
  * @author grossi
  */
-public interface Target {
+public interface Target<R extends RawFitness> {
     
 	/**
 	 * Returns the non-normalized fitness values, useful to evaluate any solution against
 	 * @return
 	 */
-	public RawFitness getRawFitness();
+	public R getRawFitness();
 	
-	public void setRawFitness(RawFitness raw);
+	public void setRawFitness(R raw);
 }

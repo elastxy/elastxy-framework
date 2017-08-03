@@ -26,7 +26,7 @@ public class ExperimentStats  {
     public double _time;
     public int _totIdenticalFitnesses;
     public boolean targetReached;
-    public List<Population> _generationHistory;
+    public transient List<Population> _generationHistory;
     
     public String toString(){
     	StringBuffer buf = new StringBuffer();

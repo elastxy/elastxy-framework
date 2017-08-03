@@ -7,6 +7,7 @@ import it.red.algen.context.AlgorithmContext;
 import it.red.algen.context.AlgorithmContextBuilder;
 import it.red.algen.context.BenchmarkContextBuilder;
 import it.red.algen.expressions.engine.ExprApplication;
+import it.red.algen.expressions.engine.ExprFitnessCalculator;
 import it.red.algen.expressions.engine.ExprGenesFactory;
 import it.red.algen.expressions.engine.ExprMutator;
 import it.red.algen.tracking.CSVReporter;
@@ -54,6 +55,8 @@ public class ExprBenchmark implements BenchmarkContextBuilder {
 		
 		context.mutator = new ExprMutator();
 		context.mutator.setGenesFactory(genesFactory);
+		
+		context.fitnessCalculator = new ExprFitnessCalculator();
 		
 //		context.applicationSpecifics.target = Optional.of(new ExprTarget(ExprConf.DEFAULT_EXPRESSION_RESULT));
 		context.applicationSpecifics.putTarget(ExprApplication.TARGET_EXPRESSION_RESULT, DEFAULT_EXPRESSION_RESULT);
