@@ -59,8 +59,6 @@ public class Experiment {
         		contextSupplier.getContext().recombinator);
         selector.subscribe(observer);
         
-        // TODOA: Recombinator
-        
         // Creates initial environment
         Env environment = _factory.create();
     	

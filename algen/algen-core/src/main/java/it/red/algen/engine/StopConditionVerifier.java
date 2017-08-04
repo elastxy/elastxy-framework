@@ -12,7 +12,6 @@ public class StopConditionVerifier {
 	}
 	
 	
-	// TODOA: move into engine
 	public boolean onTime(int currentGenNumber, long currentLifeTime){
 		
 		// Time

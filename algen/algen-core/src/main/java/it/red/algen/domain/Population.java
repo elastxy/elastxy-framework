@@ -14,8 +14,6 @@ import java.util.List;
 
 /** Contiene la popolazione di soluzioni
  * 
- * TODOA: separate algorithm from domain data
- *
  * @author grossi
  */
 public class Population {
