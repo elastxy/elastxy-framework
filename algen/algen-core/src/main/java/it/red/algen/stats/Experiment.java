@@ -53,7 +53,10 @@ public class Experiment {
         
         // Setups operators
         Selector selector = new StandardSelector();
-        selector.setup(contextSupplier.getContext().parameters, contextSupplier.getContext().mutator);
+        selector.setup(
+        		contextSupplier.getContext().parameters, 
+        		contextSupplier.getContext().mutator,
+        		contextSupplier.getContext().recombinator);
         selector.subscribe(observer);
         
         // TODOA: Recombinator

@@ -20,7 +20,6 @@ import it.red.algen.domain.Solution;
  * @author grossi
  */
 public class ExprSolution implements Solution {
-    private static Random RANDOMIZER = new Random();
     
 	// Phenotype
 	public NumberGene val1;
@@ -70,22 +69,4 @@ public class ExprSolution implements Solution {
         return result;
     }
     
-    
-    
-
-	// TODOA: move in a recombinator class
-	public Solution[] crossoverWith(Solution other){
-        Solution[] sons = new Solution[2];
-        ExprSolution ot = (ExprSolution)other;
-        // I punti di ricombinazione possono essere all'operatore o al secondo operando
-        int crossoverPoint = RANDOMIZER.nextInt(2);
-        if(crossoverPoint==0){
-            sons[0] = new ExprSolution(ot.val1,    op,        val2);
-            sons[1] = new ExprSolution(val1,       ot.op,     ot.val2);
-        } else {
-            sons[0] = new ExprSolution(ot.val1,    ot.op,        val2);
-            sons[1] = new ExprSolution(val1,       op,     ot.val2);
-        }
-        return sons;
-    }
 }

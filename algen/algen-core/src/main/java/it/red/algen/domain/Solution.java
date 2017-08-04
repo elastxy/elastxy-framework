@@ -14,15 +14,13 @@ package it.red.algen.domain;
  *
  * @author grossi
  */
+@SuppressWarnings("rawtypes")
 public interface Solution<S extends Solution, F extends Fitness> {
 	
     public F getFitness();
     
     public void setFitness(F fitness);
     
-    // TODOA: move to a recombinator interface
-	public S[] crossoverWith(S other);
-	
     public S clone();
         
     public String toString();

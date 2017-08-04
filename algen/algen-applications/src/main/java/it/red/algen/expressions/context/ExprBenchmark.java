@@ -10,6 +10,7 @@ import it.red.algen.expressions.engine.ExprApplication;
 import it.red.algen.expressions.engine.ExprFitnessCalculator;
 import it.red.algen.expressions.engine.ExprGenesFactory;
 import it.red.algen.expressions.engine.ExprMutator;
+import it.red.algen.expressions.engine.ExprRecombinator;
 import it.red.algen.tracking.CSVReporter;
 
 @Component
@@ -55,7 +56,9 @@ public class ExprBenchmark implements BenchmarkContextBuilder {
 		
 		context.mutator = new ExprMutator();
 		context.mutator.setGenesFactory(genesFactory);
-		
+
+		context.recombinator = new ExprRecombinator();
+
 		context.fitnessCalculator = new ExprFitnessCalculator();
 		
 //		context.applicationSpecifics.target = Optional.of(new ExprTarget(ExprConf.DEFAULT_EXPRESSION_RESULT));

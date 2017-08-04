@@ -41,11 +41,13 @@ import it.red.algen.expressions.engine.ExprEnvFactory;
 import it.red.algen.expressions.engine.ExprFitnessCalculator;
 import it.red.algen.expressions.engine.ExprGenesFactory;
 import it.red.algen.expressions.engine.ExprMutator;
+import it.red.algen.expressions.engine.ExprRecombinator;
 import it.red.algen.garden.context.GardenBenchmark;
 import it.red.algen.garden.engine.GardenApplication;
 import it.red.algen.garden.engine.GardenEnvFactory;
 import it.red.algen.garden.engine.GardenFitnessCalculator;
 import it.red.algen.garden.engine.GardenMutator;
+import it.red.algen.garden.engine.GardenRecombinator;
 import it.red.algen.garden.tracking.GardenCSVReporter;
 import it.red.algen.stats.Experiment;
 import it.red.algen.stats.ExperimentStats;
@@ -105,14 +107,16 @@ public class SampleController {
 		
 	 	Experiment e = null;
 	 	if("garden".equals(domain)){
-	 		context.mutator = new GardenMutator();
 	 		context.fitnessCalculator = new GardenFitnessCalculator();
+	 		context.mutator = new GardenMutator();
+	 		context.recombinator = new GardenRecombinator();
 			context.monitoringConfiguration.reporter = new GardenCSVReporter(GardenApplication.STATS_DIR);
 	        e = new Experiment(gardenEnvFactory);
 	 	}
 	 	else if("expressions".equals(domain)){
 	 		context.mutator = new ExprMutator();
 	 		context.mutator.setGenesFactory(exprGenesFactory);
+	 		context.recombinator = new ExprRecombinator();
 	 		context.fitnessCalculator = new ExprFitnessCalculator();
 	 		context.monitoringConfiguration.reporter = new CSVReporter(ExprApplication.STATS_DIR);
 	        e = new Experiment(exprEnvFactory);
@@ -143,15 +147,17 @@ public class SampleController {
 	 	
 	 	// TODOM: Make generics default build mode
 	 	// TODOA: rimuovere duplicazioni
-	 	if("garden".equals(domain)){ 
-	 		context.mutator = new GardenMutator();
+	 	if("garden".equals(domain)){
 	 		context.fitnessCalculator = new GardenFitnessCalculator();
+	 		context.mutator = new GardenMutator();
+	 		context.recombinator = new GardenRecombinator();
 	 		envFactory = gardenEnvFactory;
 	 	}
 	 	else if("expressions".equals(domain)){ 
+	 		context.fitnessCalculator = new ExprFitnessCalculator();
 	 		context.mutator = new ExprMutator();
 	 		context.mutator.setGenesFactory(exprGenesFactory);
-	 		context.fitnessCalculator = new ExprFitnessCalculator();
+	 		context.recombinator = new ExprRecombinator();
 	 		envFactory = exprEnvFactory;
 	 	}
 

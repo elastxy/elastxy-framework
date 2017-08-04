@@ -10,6 +10,8 @@
 
 package it.red.algen.tracking;
 
+import java.util.List;
+
 import it.red.algen.context.AlgorithmContext;
 import it.red.algen.domain.Population;
 import it.red.algen.domain.Solution;
@@ -43,8 +45,8 @@ public class EnvObserver {
         if(_context.monitoringConfiguration.verbose) _context.monitoringConfiguration.logger.out("!    "+s+" Soluzione non ammessa. "+s.getFitness().getLegalCheck());
     }
     
-    public void crossoverEvent(Solution father, Solution mother, Solution[] sons){
-        if(_context.monitoringConfiguration.verbose) _context.monitoringConfiguration.logger.out("XXX CROSSOVER: \n"+father+"\n"+mother+"\n\t->\n"+sons[0]+"\n"+sons[1]);
+    public void crossoverEvent(Solution father, Solution mother, List<Solution> sons){
+        if(_context.monitoringConfiguration.verbose) _context.monitoringConfiguration.logger.out("XXX CROSSOVER: \n"+father+"\n"+mother+"\n\t->\n"+sons.get(0)+"\n"+sons.get(1));
     }
     
     public void mutationEvent(Solution original, Solution mutated){

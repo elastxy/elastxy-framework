@@ -1,6 +1,7 @@
 package it.red.algen.engine;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 import java.util.Random;
@@ -20,11 +21,14 @@ public class StandardSelector implements Selector {
     private EnvObserver observer;
     
     private Mutator mutator;
+    
+    private Recombinator recombinator;
 
     
-    public void setup(OperatorsParameters algParameters, Mutator mutator) {
+    public void setup(OperatorsParameters algParameters, Mutator mutator, Recombinator recombinator) {
         this.algParameters = algParameters;
         this.mutator = mutator;
+        this.recombinator = recombinator;
     }
 
     
@@ -71,40 +75,39 @@ public class StandardSelector implements Selector {
             // Estrazione due individui e generazione dei figli
             Solution father = actualPopulation.remove(0);
             Solution mother = actualPopulation.remove(0);
-            Solution[] sons = null;
+            List<Solution> sons = null;
             
             // Crossover
             boolean crossover = RANDOMIZER.nextDouble() < algParameters._recombinationPerc;
             if(crossover) {
-                sons = father.crossoverWith(mother);
+                sons = recombinator.crossoverWith(Arrays.asList(father, mother));
                 fireCrossoverEvent(father, mother, sons);
             }
             else {
-            	sons = new Solution[] {
-                		(Solution)father.clone(), 
-                		(Solution)mother.clone()
-                };            
+            	sons = Arrays.asList(father.clone(),mother.clone());            
             }
             
             // Mutazione
             boolean mute0 = RANDOMIZER.nextDouble() < algParameters._mutationPerc;
             boolean mute1 = RANDOMIZER.nextDouble() < algParameters._mutationPerc;
             if(mute0) { 
-                Solution old = sons[0];
-                sons[0] = (Solution)sons[0].clone();
-                mutator.mutate(sons[0]);
-                fireMutationEvent(old, sons[0]);
+                Solution old = sons.get(0);
+                Solution niu = old.clone();
+                mutator.mutate(niu);
+                sons.set(0, niu);
+                fireMutationEvent(old, niu);
             }
             if(mute1) { 
-                Solution old = sons[1];
-                sons[1] = (Solution)sons[1].clone();
-                mutator.mutate(sons[1]); 
-                fireMutationEvent(old, sons[1]);
+                Solution old = sons.get(1);
+                Solution niu = old.clone();
+                mutator.mutate(niu);
+                sons.set(1, niu);
+                fireMutationEvent(old, niu);
             }
             
             // Aggiungo i due individui alla nuova popolazione
-            nextGen.add(sons[0]);
-            nextGen.add(sons[1]);
+            nextGen.add(sons.get(0));
+            nextGen.add(sons.get(1));
             
             // Caso di popolazione pari e elitarismo o popolazione dispari:
             // l'ultimo non verra' valutato, ma inserito d'ufficio nella successiva per mantenere il numero
@@ -117,7 +120,7 @@ public class StandardSelector implements Selector {
     
     
     
-    private void fireCrossoverEvent(Solution father, Solution mother, Solution[] sons){
+    private void fireCrossoverEvent(Solution father, Solution mother, List<Solution> sons){
     	observer.crossoverEvent(father, mother, sons);
     }
     

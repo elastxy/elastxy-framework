@@ -9,6 +9,7 @@ import it.red.algen.context.BenchmarkContextBuilder;
 import it.red.algen.garden.engine.GardenApplication;
 import it.red.algen.garden.engine.GardenFitnessCalculator;
 import it.red.algen.garden.engine.GardenMutator;
+import it.red.algen.garden.engine.GardenRecombinator;
 import it.red.algen.garden.tracking.GardenCSVReporter;
 
 @Component
@@ -44,6 +45,7 @@ public class GardenBenchmark implements BenchmarkContextBuilder {
 		
 		context.fitnessCalculator = new GardenFitnessCalculator();
 		context.mutator = new GardenMutator();
+		context.recombinator = new GardenRecombinator();
 		
 		return context;
 	}
