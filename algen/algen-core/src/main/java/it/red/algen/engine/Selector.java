@@ -2,12 +2,11 @@ package it.red.algen.engine;
 
 import it.red.algen.conf.OperatorsParameters;
 import it.red.algen.domain.Population;
-import it.red.algen.tracking.EnvObservable;
 
-public interface Selector extends EnvObservable {
+public interface Selector {
 
     @SuppressWarnings("rawtypes")
-	public void setup(OperatorsParameters algParameters, Mutator mutator, Recombinator recombinator);
+	public void setup(OperatorsParameters algParameters);
     
 
 	/**

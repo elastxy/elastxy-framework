@@ -24,7 +24,7 @@ public class StandardFitnessTester implements FitnessTester {
 	@Override
     public Fitness test(Target<?> target, Population population){
     	population.bestMatch = null;
-        Iterator<Solution> it = population._solutions.iterator();
+        Iterator<Solution> it = population.solutions.iterator();
         while(it.hasNext()){ // TODOA: MapReduce!
             Solution solution = it.next();
             
@@ -40,6 +40,10 @@ public class StandardFitnessTester implements FitnessTester {
             	population.bestMatch = solution;
             }
         }
+        
+        // Order by fitness desc
+        population.orderByFitness();
+        
         return population.bestMatch.getFitness();
     }
     

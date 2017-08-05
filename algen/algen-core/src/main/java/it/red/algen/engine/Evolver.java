@@ -1,20 +1,26 @@
 package it.red.algen.engine;
 
+import java.util.Arrays;
 import java.util.Calendar;
+import java.util.Iterator;
+import java.util.List;
+import java.util.Random;
 
 import it.red.algen.context.AlgorithmContext;
 import it.red.algen.domain.Env;
 import it.red.algen.domain.Fitness;
 import it.red.algen.domain.Population;
+import it.red.algen.domain.Solution;
 import it.red.algen.stats.ExperimentStats;
 import it.red.algen.tracking.EnvObservable;
 import it.red.algen.tracking.EnvObserver;
 
 public class Evolver implements EnvObservable {
-	
+
+    private static Random RANDOMIZER = new Random();
+    
 	// ALGORITHM PARAMETERS
     public AlgorithmContext context;
-    private Selector selector;
     private FitnessTester fitnessTester;
     private StopConditionVerifier stopVerifier;
 
@@ -30,10 +36,9 @@ public class Evolver implements EnvObservable {
      * @param context
      * @param env
      */
-    public Evolver(AlgorithmContext context, Env env, Selector selector){
+    public Evolver(AlgorithmContext context, Env env){
     	this.context = context;
     	this.env = env;
-    	this.selector = selector;
     	this.fitnessTester = new StandardFitnessTester(context.fitnessCalculator);
     	this.stopVerifier = new StopConditionVerifier(context.stopConditions);
     }
@@ -41,7 +46,6 @@ public class Evolver implements EnvObservable {
     
     public void subscribe(EnvObserver l){
         observer = l;
-        selector.subscribe(l);
         fitnessTester.subscribe(l);
     }
 
@@ -66,12 +70,79 @@ public class Evolver implements EnvObservable {
         while(!isGoalReached(env.currentGen) && stopVerifier.onTime(env.currentGenNumber, getLifeTimeInMillis())) {
         	
         	// Save last gen
+        	// -----------------------------------------------
         	Population lastGen = env.currentGen;
         	
-        	// Create new gen
-        	env.currentGen = selector.select(env.currentGen);
+        	
+        	// SELECTION
+        	// -----------------------------------------------
+        	env.currentGen = context.selector.select(env.currentGen);
+        	int currentGenSize = env.currentGen.solutions.size();
+        	int startSolution = 0;
+        	
+        	// Best match insertion
+            // TODOM: best matches a certain percentage, not only one
+        	// TODOA: valutare eliminazione variabile best match
+            if(context.parameters._elitarism){
+            	startSolution++;
+            	
+                // Caso di elitarismo e popolazione pari: anche il successivo deve essere inserito
+                // per mantenere il numero delle coppie
+                if(currentGenSize > 1 && currentGenSize % 2 == 0){
+                	startSolution++;
+                }            
+            }
+
             
+        	// Per ogni coppia effettua ricombinazione e mutazione
+        	for(int s=startSolution; s < currentGenSize; s=s+2){
+                
+        		// Estrazione due individui
+                Solution father = env.currentGen.solutions.get(s);
+                Solution mother = env.currentGen.solutions.get(s+1);
+                List<Solution> sons = null;
+
+                
+                // RECOMBINATION
+            	// -----------------------------------------------
+                boolean crossover = RANDOMIZER.nextDouble() < context.parameters._recombinationPerc;
+                if(crossover) {
+                    sons = context.recombinator.crossoverWith(Arrays.asList(father, mother));
+                    fireCrossoverEvent(father, mother, sons);
+                }
+                else {
+                	sons = Arrays.asList(father.clone(),mother.clone());            
+                }
+                
+                
+                // MUTATION
+            	// -----------------------------------------------
+                boolean mute0 = RANDOMIZER.nextDouble() < context.parameters._mutationPerc;
+                boolean mute1 = RANDOMIZER.nextDouble() < context.parameters._mutationPerc;
+                if(mute0) { 
+                    Solution old = sons.get(0);
+                    Solution niu = old.clone();
+                    context.mutator.mutate(niu);
+                    sons.set(0, niu);
+                    fireMutationEvent(old, niu);
+                }
+                if(mute1) { 
+                    Solution old = sons.get(1);
+                    Solution niu = old.clone();
+                    context.mutator.mutate(niu);
+                    sons.set(1, niu);
+                    fireMutationEvent(old, niu);
+                }
+        	
+                // Aggiungo i due individui alla nuova popolazione
+                env.currentGen.solutions.set(s, sons.get(0));
+                env.currentGen.solutions.set(s, sons.get(1));
+
+        	}
+        	
+        	
             // Test fitness of population
+        	// -----------------------------------------------
             Fitness currentGenFitness = fitnessTester.test(env.target, env.currentGen);
             Fitness bestMatchFitness = lastGen.bestMatch.getFitness();
             
@@ -137,6 +208,14 @@ public class Evolver implements EnvObservable {
 
     private void fireNewGenerationEvent(){
         observer.newGenerationEvent(env.currentGenNumber+1, env.currentGen);
+    }
+
+    private void fireCrossoverEvent(Solution father, Solution mother, List<Solution> sons){
+    	observer.crossoverEvent(father, mother, sons);
+    }
+    
+    private void fireMutationEvent(Solution orig, Solution mutated){
+    	observer.mutationEvent(orig, mutated);
     }
     
     private void fireGoalReachedEvent(){

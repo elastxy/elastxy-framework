@@ -35,6 +35,7 @@ import com.google.gson.Gson;
 import it.red.algen.context.AlgorithmContext;
 import it.red.algen.context.ContextSupplier;
 import it.red.algen.engine.EnvFactory;
+import it.red.algen.engine.StandardSelector;
 import it.red.algen.expressions.context.ExprBenchmark;
 import it.red.algen.expressions.engine.ExprApplication;
 import it.red.algen.expressions.engine.ExprEnvFactory;
@@ -108,16 +109,20 @@ public class SampleController {
 	 	Experiment e = null;
 	 	if("garden".equals(domain)){
 	 		context.fitnessCalculator = new GardenFitnessCalculator();
+			context.selector = new StandardSelector();
+			context.selector.setup(context.parameters);
 	 		context.mutator = new GardenMutator();
 	 		context.recombinator = new GardenRecombinator();
 			context.monitoringConfiguration.reporter = new GardenCSVReporter(GardenApplication.STATS_DIR);
 	        e = new Experiment(gardenEnvFactory);
 	 	}
 	 	else if("expressions".equals(domain)){
+	 		context.fitnessCalculator = new ExprFitnessCalculator();
+			context.selector = new StandardSelector();
+			context.selector.setup(context.parameters);
 	 		context.mutator = new ExprMutator();
 	 		context.mutator.setGenesFactory(exprGenesFactory);
 	 		context.recombinator = new ExprRecombinator();
-	 		context.fitnessCalculator = new ExprFitnessCalculator();
 	 		context.monitoringConfiguration.reporter = new CSVReporter(ExprApplication.STATS_DIR);
 	        e = new Experiment(exprEnvFactory);
 	 	}
@@ -149,12 +154,16 @@ public class SampleController {
 	 	// TODOA: rimuovere duplicazioni
 	 	if("garden".equals(domain)){
 	 		context.fitnessCalculator = new GardenFitnessCalculator();
+			context.selector = new StandardSelector();
+			context.selector.setup(context.parameters);
 	 		context.mutator = new GardenMutator();
 	 		context.recombinator = new GardenRecombinator();
 	 		envFactory = gardenEnvFactory;
 	 	}
 	 	else if("expressions".equals(domain)){ 
 	 		context.fitnessCalculator = new ExprFitnessCalculator();
+			context.selector = new StandardSelector();
+			context.selector.setup(context.parameters);
 	 		context.mutator = new ExprMutator();
 	 		context.mutator.setGenesFactory(exprGenesFactory);
 	 		context.recombinator = new ExprRecombinator();

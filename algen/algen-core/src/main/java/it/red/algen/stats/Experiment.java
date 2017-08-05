@@ -51,22 +51,13 @@ public class Experiment {
     	// Setups observer
         EnvObserver observer = new EnvObserver(contextSupplier.getContext());
         
-        // Setups operators
-        Selector selector = new StandardSelector();
-        selector.setup(
-        		contextSupplier.getContext().parameters, 
-        		contextSupplier.getContext().mutator,
-        		contextSupplier.getContext().recombinator);
-        selector.subscribe(observer);
-        
         // Creates initial environment
         Env environment = _factory.create();
     	
         // Setups engine
         Evolver evolver = new Evolver(
         		contextSupplier.getContext(), 
-        		environment, 
-        		selector);
+        		environment);
         evolver.subscribe(observer);
         
         // Starts evolution

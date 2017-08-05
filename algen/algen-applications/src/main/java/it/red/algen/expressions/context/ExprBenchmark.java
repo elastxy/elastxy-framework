@@ -6,6 +6,7 @@ import org.springframework.stereotype.Component;
 import it.red.algen.context.AlgorithmContext;
 import it.red.algen.context.AlgorithmContextBuilder;
 import it.red.algen.context.BenchmarkContextBuilder;
+import it.red.algen.engine.StandardSelector;
 import it.red.algen.expressions.engine.ExprApplication;
 import it.red.algen.expressions.engine.ExprFitnessCalculator;
 import it.red.algen.expressions.engine.ExprGenesFactory;
@@ -54,12 +55,15 @@ public class ExprBenchmark implements BenchmarkContextBuilder {
 				VERBOSE, 
 				new CSVReporter(ExprApplication.STATS_DIR));
 		
+		context.fitnessCalculator = new ExprFitnessCalculator();
+
+		context.selector = new StandardSelector();
+		context.selector.setup(context.parameters);
+		
 		context.mutator = new ExprMutator();
 		context.mutator.setGenesFactory(genesFactory);
 
 		context.recombinator = new ExprRecombinator();
-
-		context.fitnessCalculator = new ExprFitnessCalculator();
 		
 //		context.applicationSpecifics.target = Optional.of(new ExprTarget(ExprConf.DEFAULT_EXPRESSION_RESULT));
 		context.applicationSpecifics.putTarget(ExprApplication.TARGET_EXPRESSION_RESULT, DEFAULT_EXPRESSION_RESULT);

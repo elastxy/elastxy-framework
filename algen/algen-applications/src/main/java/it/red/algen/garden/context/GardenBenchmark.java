@@ -6,6 +6,7 @@ import org.springframework.stereotype.Component;
 import it.red.algen.context.AlgorithmContext;
 import it.red.algen.context.AlgorithmContextBuilder;
 import it.red.algen.context.BenchmarkContextBuilder;
+import it.red.algen.engine.StandardSelector;
 import it.red.algen.garden.engine.GardenApplication;
 import it.red.algen.garden.engine.GardenFitnessCalculator;
 import it.red.algen.garden.engine.GardenMutator;
@@ -44,6 +45,8 @@ public class GardenBenchmark implements BenchmarkContextBuilder {
 				new GardenCSVReporter(GardenApplication.STATS_DIR));
 		
 		context.fitnessCalculator = new GardenFitnessCalculator();
+		context.selector = new StandardSelector();
+		context.selector.setup(context.parameters);
 		context.mutator = new GardenMutator();
 		context.recombinator = new GardenRecombinator();
 		

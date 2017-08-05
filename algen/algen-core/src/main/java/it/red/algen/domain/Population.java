@@ -10,6 +10,7 @@
 
 package it.red.algen.domain;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 /** Contiene la popolazione di soluzioni
@@ -18,22 +19,26 @@ import java.util.List;
  */
 public class Population {
     
-    public transient List<Solution> _solutions = new ArrayList<Solution>();
+    public transient List<Solution> solutions = new ArrayList<Solution>();
     public Solution bestMatch;
     
     
     public int size(){
-    	return _solutions.size();
+    	return solutions.size();
     }
     
     public void add(Solution solution){
-        _solutions.add(solution);
+        solutions.add(solution);
+    }
+    
+    public void orderByFitness(){
+    	Collections.sort(solutions, (arg0, arg1) -> -arg0.getFitness().getValue().compareTo(arg1.getFitness().getValue()));
     }
     
     
     public String toString(){
     	StringBuffer result = new StringBuffer();
-    	for(Solution s : _solutions){
+    	for(Solution s : solutions){
     		result.append(s).append("\n");
     	}
     	return result.toString();
