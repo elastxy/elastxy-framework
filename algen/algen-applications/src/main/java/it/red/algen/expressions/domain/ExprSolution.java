@@ -10,8 +10,6 @@
 
 package it.red.algen.expressions.domain;
 
-import java.util.Random;
-
 import it.red.algen.domain.Fitness;
 import it.red.algen.domain.Solution;
 

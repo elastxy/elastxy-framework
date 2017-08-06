@@ -28,12 +28,15 @@ public class StandardFitnessTester implements FitnessTester {
         while(it.hasNext()){ // TODOA: MapReduce!
             Solution solution = it.next();
             
-            Fitness fitness = calculator.calculate(solution, target);
-            if(fitness.getLegalCheck()!=null) {
-                fireIllegalSolutionEvent(solution);
-            }
-            else {
-                fireFitnessCalculatedEvent(solution);
+            // Skip fitness test for solutions already tested
+            if(solution.getFitness()==null || solution.getFitness().getValue()==null){
+            	Fitness fitness = calculator.calculate(solution, target);
+            	if(fitness.getLegalCheck()!=null) {
+            		fireIllegalSolutionEvent(solution);
+            	}
+            	else {
+            		fireFitnessCalculatedEvent(solution);
+            	}
             }
             if(population.bestMatch==null || 
             		(population.bestMatch!=null && solution.getFitness().greaterThan(population.bestMatch.getFitness()))){
@@ -42,7 +45,7 @@ public class StandardFitnessTester implements FitnessTester {
         }
         
         // Order by fitness desc
-        population.orderByFitness();
+        population.orderByFitnessDesc();
         
         return population.bestMatch.getFitness();
     }

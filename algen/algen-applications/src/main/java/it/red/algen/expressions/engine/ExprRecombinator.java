@@ -19,7 +19,7 @@ public class ExprRecombinator implements Recombinator<ExprSolution> {
      * @param other
      * @return
      */
-	public List<ExprSolution> crossoverWith(List<ExprSolution> parents){
+	public List<ExprSolution> recombine(List<ExprSolution> parents){
 		ExprSolution[] sons = new ExprSolution[2];
         int crossoverPoint = RANDOMIZER.nextInt(2);
         ExprSolution parent1 = parents.get(0);
@@ -31,6 +31,7 @@ public class ExprRecombinator implements Recombinator<ExprSolution> {
             sons[0] = new ExprSolution(parent2.val1,	parent2.op,	parent1.val2);
             sons[1] = new ExprSolution(parent1.val1,	parent1.op,	parent2.val2);
         }
+        
         return Arrays.asList(sons);
     }
 	

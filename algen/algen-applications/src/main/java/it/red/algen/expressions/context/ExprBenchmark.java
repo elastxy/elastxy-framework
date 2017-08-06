@@ -32,8 +32,9 @@ public class ExprBenchmark implements BenchmarkContextBuilder {
     private static final boolean ELITARISM = true;
 	private static final double RECOMBINANTION_PERC = 0.8;
     private static final double MUTATION_PERC = 0.2;
-    
+
     private static final boolean VERBOSE = false;
+    private static final boolean TRACE_HISTORY = false;
     
 	@Autowired
 	private AlgorithmContextBuilder contextBuilder;
@@ -53,6 +54,7 @@ public class ExprBenchmark implements BenchmarkContextBuilder {
 				MAX_LIFETIME_MILLIS, 
 				MAX_IDENTICAL_FITNESSES,
 				VERBOSE, 
+				TRACE_HISTORY,
 				new CSVReporter(ExprApplication.STATS_DIR));
 		
 		context.fitnessCalculator = new ExprFitnessCalculator();

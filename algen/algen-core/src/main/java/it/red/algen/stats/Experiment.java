@@ -16,8 +16,6 @@ import it.red.algen.context.ContextSupplier;
 import it.red.algen.domain.Env;
 import it.red.algen.engine.EnvFactory;
 import it.red.algen.engine.Evolver;
-import it.red.algen.engine.Selector;
-import it.red.algen.engine.StandardSelector;
 import it.red.algen.tracking.EnvObserver;
 
 

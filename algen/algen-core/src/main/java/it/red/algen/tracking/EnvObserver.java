@@ -80,16 +80,18 @@ public class EnvObserver {
         	log.out("Total generations with same fitness: "+stats._totIdenticalFitnesses);
         }
         
+        if(_context.monitoringConfiguration.traceHistory) {
+            log.out("\n===================== HISTORY =====================");
+            log.out("History of generations");
+            List<Population> generations = stats._generationHistory;
+            for(int i=0; i < generations.size(); i++){
+            	log.out(String.format("Generation [%d] => Best match %s", i+1, generations.get(i).bestMatch));
+            }
+        }
+        
         if(_context.monitoringConfiguration.verbose && _context.monitoringConfiguration.reporter!=null) {
         	_context.monitoringConfiguration.reporter.createReports(stats);
         }
-        
-//        log.out("History of generations");
-//        List generations = stats._generationsHistory;
-//        for(int i = 0; i < generations.size(); i++){
-//            Population p = (Population)generations.get(i);
-//            log.out(p.getBestMatch());
-//        }
     }
     
 }

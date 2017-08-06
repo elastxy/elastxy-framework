@@ -25,8 +25,9 @@ public class GardenBenchmark implements BenchmarkContextBuilder {
     private static final boolean ELITARISM = true;
 	private static final double RECOMBINANTION_PERC = 0.7;
     private static final double MUTATION_PERC = 0.2;
-    
+
     private static final boolean VERBOSE = false;
+    private static final boolean TRACE_HISTORY = false;
 
 	@Autowired
 	private AlgorithmContextBuilder contextBuilder;
@@ -42,6 +43,7 @@ public class GardenBenchmark implements BenchmarkContextBuilder {
 				MAX_LIFETIME_SEC, 
 				MAX_IDENTICAL_FITNESSES,
 				VERBOSE, 
+				TRACE_HISTORY,
 				new GardenCSVReporter(GardenApplication.STATS_DIR));
 		
 		context.fitnessCalculator = new GardenFitnessCalculator();

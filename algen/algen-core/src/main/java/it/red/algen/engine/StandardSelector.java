@@ -1,6 +1,7 @@
 package it.red.algen.engine;
 
 import java.util.ArrayList;
+import java.util.Collections;
 
 import it.red.algen.conf.OperatorsParameters;
 import it.red.algen.domain.Population;
@@ -16,7 +17,8 @@ public class StandardSelector implements Selector {
     /** SELEZIONE 
      * 
      * Select next generation:
-     * - starts from the actual population, with fitness calculated and ordered by fitness descending
+     * - starts from the actual population, with fitness already calculated for every individual
+     * - and ordered by fitness descending
      * - if elitism is enabled, selects the best match and puts it into the next population
      * - TODOM: inserts a certain percentage of the best individuals
      * 
@@ -25,11 +27,10 @@ public class StandardSelector implements Selector {
     @SuppressWarnings({ "rawtypes", "unchecked" })
     public Population select(Population actualGeneration){
     	
-    	
     	// Creation of new population, initially identical to actual
     	Population nextGen = new Population();
     	nextGen.solutions = new ArrayList<Solution>(actualGeneration.solutions);
-
+    	
         return nextGen;
     }
     

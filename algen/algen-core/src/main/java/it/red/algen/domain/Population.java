@@ -13,12 +13,14 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
+import it.red.algen.engine.FitnessComparator;
+
 /** Contiene la popolazione di soluzioni
  * 
  * @author grossi
  */
 public class Population {
-    
+    private static FitnessComparator FITNESS_COMPARATOR = new FitnessComparator();
     public transient List<Solution> solutions = new ArrayList<Solution>();
     public Solution bestMatch;
     
@@ -31,8 +33,8 @@ public class Population {
         solutions.add(solution);
     }
     
-    public void orderByFitness(){
-    	Collections.sort(solutions, (arg0, arg1) -> -arg0.getFitness().getValue().compareTo(arg1.getFitness().getValue()));
+    public void orderByFitnessDesc(){
+    	Collections.sort(solutions, FITNESS_COMPARATOR);
     }
     
     

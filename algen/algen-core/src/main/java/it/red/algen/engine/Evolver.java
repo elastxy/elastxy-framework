@@ -1,10 +1,13 @@
 package it.red.algen.engine;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Calendar;
-import java.util.Iterator;
+import java.util.Collections;
+import java.util.Currency;
 import java.util.List;
 import java.util.Random;
+import java.util.logging.Logger;
 
 import it.red.algen.context.AlgorithmContext;
 import it.red.algen.domain.Env;
@@ -16,6 +19,7 @@ import it.red.algen.tracking.EnvObservable;
 import it.red.algen.tracking.EnvObserver;
 
 public class Evolver implements EnvObservable {
+	private static Logger logger = Logger.getLogger(Evolver.class.getName());
 
     private static Random RANDOMIZER = new Random();
     
@@ -49,141 +53,185 @@ public class Evolver implements EnvObservable {
         fitnessTester.subscribe(l);
     }
 
+    
 
-
-
-    /** Avvia la vita del sistema.
+    /** Starts system life.
      */
     public void evolve(){
     	
-        // Azzera il tempo
-        env.startTime = Calendar.getInstance().getTimeInMillis();
+        resetTime();
         
-        // Testa la popolazione iniziale
+        
+    	// TEST FITNESS - initial gen
         fitnessTester.test(env.target, env.currentGen);
-        fireNewGenerationEvent();
+        int generationSize = env.currentGen.solutions.size();
+        // fireTestedGenerationEvent(); // TODOM
         
+        
+    	// Loops until end condition rises
         boolean endConditionFound = false;
-        
-        // Finch� si trova la soluzione o il numero max 
-        // di iterazioni � raggiunto, o il tempo di vita del sistema non termina, prosegue
-        while(!isGoalReached(env.currentGen) && stopVerifier.onTime(env.currentGenNumber, getLifeTimeInMillis())) {
-        	
-        	// Save last gen
-        	// -----------------------------------------------
-        	Population lastGen = env.currentGen;
-        	
+        do {
         	
         	// SELECTION
-        	// -----------------------------------------------
-        	env.currentGen = context.selector.select(env.currentGen);
-        	int currentGenSize = env.currentGen.solutions.size();
-        	int startSolution = 0;
+        	Population nextGeneration = selection(generationSize);
         	
-        	// Best match insertion
-            // TODOM: best matches a certain percentage, not only one
-        	// TODOA: valutare eliminazione variabile best match
-            if(context.parameters._elitarism){
-            	startSolution++;
-            	
-                // Caso di elitarismo e popolazione pari: anche il successivo deve essere inserito
-                // per mantenere il numero delle coppie
-                if(currentGenSize > 1 && currentGenSize % 2 == 0){
-                	startSolution++;
-                }            
-            }
+        	// BEST MATCH - calculate
+        	List<Solution> bestMatches = extractBestMatches(generationSize, nextGeneration);
 
-            
-        	// Per ogni coppia effettua ricombinazione e mutazione
-        	for(int s=startSolution; s < currentGenSize; s=s+2){
+        	// LOOP OVER NON-BEST
+        	for(int s=0; s < generationSize-bestMatches.size(); s=s+2){
                 
-        		// Estrazione due individui
-                Solution father = env.currentGen.solutions.get(s);
-                Solution mother = env.currentGen.solutions.get(s+1);
-                List<Solution> sons = null;
+        		// EXTRACT PARENTS
+        		Solution[] parents = {nextGeneration.solutions.get(s), nextGeneration.solutions.get(s+1)};
 
                 
                 // RECOMBINATION
-            	// -----------------------------------------------
-                boolean crossover = RANDOMIZER.nextDouble() < context.parameters._recombinationPerc;
-                if(crossover) {
-                    sons = context.recombinator.crossoverWith(Arrays.asList(father, mother));
-                    fireCrossoverEvent(father, mother, sons);
-                }
-                else {
-                	sons = Arrays.asList(father.clone(),mother.clone());            
-                }
+        		List<Solution> sons = recombination(parents);
                 
                 
                 // MUTATION
-            	// -----------------------------------------------
-                boolean mute0 = RANDOMIZER.nextDouble() < context.parameters._mutationPerc;
-                boolean mute1 = RANDOMIZER.nextDouble() < context.parameters._mutationPerc;
-                if(mute0) { 
-                    Solution old = sons.get(0);
-                    Solution niu = old.clone();
-                    context.mutator.mutate(niu);
-                    sons.set(0, niu);
-                    fireMutationEvent(old, niu);
-                }
-                if(mute1) { 
-                    Solution old = sons.get(1);
-                    Solution niu = old.clone();
-                    context.mutator.mutate(niu);
-                    sons.set(1, niu);
-                    fireMutationEvent(old, niu);
-                }
+                mutation(sons);
         	
-                // Aggiungo i due individui alla nuova popolazione
-                env.currentGen.solutions.set(s, sons.get(0));
-                env.currentGen.solutions.set(s, sons.get(1));
-
+                // REPLACE PARENTS WITH SONS
+                nextGeneration.solutions.set(s, sons.get(0));
+                nextGeneration.solutions.set(s, sons.get(1));
         	}
+
+        	// BEST MATCH - reinsert
+        	for(Solution s : bestMatches){ nextGeneration.add(s); }
         	
-        	
-            // Test fitness of population
-        	// -----------------------------------------------
-            Fitness currentGenFitness = fitnessTester.test(env.target, env.currentGen);
-            Fitness bestMatchFitness = lastGen.bestMatch.getFitness();
+            // TEST FITNESS - next gen
+            Fitness nextGenFitness = fitnessTester.test(env.target, nextGeneration);
+
+            // CHECK END CONDITION
+            endConditionFound = checkEndCondition(nextGenFitness);
             
-            // Check stability of the fitness value
-            if(context.parameters._elitarism){
-	            if(bestMatchFitness.sameOf(currentGenFitness)){
-	            	env.totIdenticalFitnesses++;
-	                if(stopVerifier.isStable(env.totIdenticalFitnesses)){
-	                	fireStableSolutionEvent();
-	                	endConditionFound = true;
-	                	break;
-	                }
-	            }
-	            else {
-	            	env.totIdenticalFitnesses = 0; // reset if doesn't match
-	            }
-            }
-            
-            // Determine end condition
-            if(isGoalReached(env.currentGen)){
-                fireGoalReachedEvent();
-                env.targetReached = true;
-                endConditionFound = true;
-                break;
-            }
-            
-            // Start new generation
-//            _generationsHistory.add(_currentGen);
+            env.currentGen = nextGeneration;
+            if(context.monitoringConfiguration.verbose) env.generationsHistory.add(env.currentGen);
             env.currentGenNumber++;
-            fireNewGenerationEvent();
         }
-        
-        // Naturally end history for this environment
-        if(!endConditionFound) {
-        	fireHistoryEndedEvent();
-        }
-        
+        while(!endConditionFound);
         
         // END OF EXPERIMENT
-        env.endTime = getLifeTimeInMillis();
+        stopTime();
     }
+
+
+	private void stopTime() {
+		env.endTime = getLifeTimeInMillis();
+	}
+
+
+	private boolean checkEndCondition(Fitness nextGenFitness) {
+		boolean endConditionFound = false;
+		
+		// Check stability of the fitness value
+		if(context.parameters._elitarism){
+		    if(env.currentGen.bestMatch.getFitness().sameOf(nextGenFitness)){
+		    	env.totIdenticalFitnesses++;
+		        if(stopVerifier.isStable(env.totIdenticalFitnesses)){
+		        	fireStableSolutionEvent();
+		        	endConditionFound = true;
+		        }
+		    }
+		    else {
+		    	env.totIdenticalFitnesses = 0; // reset if doesn't match
+		    }
+		}
+		
+		// Check goal reached
+		if(!endConditionFound && isGoalReached(env.currentGen)){
+		    fireGoalReachedEvent();
+		    env.targetReached = true;
+		    endConditionFound = true;
+		}
+		
+		// Check time stop
+		if(!endConditionFound && !stopVerifier.onTime(env.currentGenNumber, getLifeTimeInMillis())){
+			fireHistoryEndedEvent();
+		    endConditionFound = true;
+		}
+		return endConditionFound;
+	}
+
+
+	private void mutation(List<Solution> sons) {
+		boolean mute0 = RANDOMIZER.nextDouble() < context.parameters._mutationPerc;
+		boolean mute1 = RANDOMIZER.nextDouble() < context.parameters._mutationPerc;
+		if(mute0) { 
+		    Solution old = sons.get(0);
+		    Solution niu = old.clone();
+		    context.mutator.mutate(niu);
+		    sons.set(0, niu);
+		    fireMutationEvent(old, niu);
+		}
+		if(mute1) { 
+		    Solution old = sons.get(1);
+		    Solution niu = old.clone();
+		    context.mutator.mutate(niu);
+		    sons.set(1, niu);
+		    fireMutationEvent(old, niu);
+		}
+	}
+
+
+	private List<Solution> recombination(Solution[] parents) {
+		List<Solution> sons;
+		boolean crossover = RANDOMIZER.nextDouble() < context.parameters._recombinationPerc;
+		if(crossover) {
+		    sons = context.recombinator.recombine(Arrays.asList(parents));
+		    fireCrossoverEvent(parents[0], parents[1], sons);
+		}
+		else {
+			sons = Arrays.asList(parents[0].clone(), parents[1].clone());            
+		}
+		return sons;
+	}
+
+    
+    /**
+     * 
+     * // TODOM: best matches a certain percentage, not only one
+	 * // TODOA: valutare eliminazione variabile best match
+	 * 
+     * @param generationSize
+     * @param nextGeneration
+     */
+	private List<Solution> extractBestMatches(int generationSize, Population nextGeneration) {
+		List<Solution> bestMatches = new ArrayList<Solution>();
+		if(!context.parameters._elitarism){
+			return bestMatches;
+		}
+		bestMatches.add(nextGeneration.solutions.remove(0));
+		
+	    // Caso di elitarismo e popolazione pari: anche il successivo deve essere inserito
+	    // per mantenere il numero delle coppie
+	    if(generationSize > 1 && generationSize % 2 == 0){
+	    	bestMatches.add(nextGeneration.solutions.remove(0));;
+	    }
+
+        // Shuffles the other solutions
+        // TODOA: check if it's good..
+        Collections.shuffle(nextGeneration.solutions);
+		return bestMatches;
+	}
+
+
+	private Population selection(int generationSize) {
+		Population nextGeneration = context.selector.select(env.currentGen);
+		fireNewGenerationEvent();
+		if(generationSize!=nextGeneration.solutions.size()){
+			String msg = String.format("Selected generation size (%d) differs from last (%d)", nextGeneration.solutions.size(), generationSize);
+			logger.severe(msg);
+			throw new IllegalStateException(msg);
+		}
+		return nextGeneration;
+	}
+
+
+	private void resetTime() {
+		env.startTime = Calendar.getInstance().getTimeInMillis();
+	}
     
 
     /** Ritorna il tempo totale di vita del sistema in secondi.

@@ -23,7 +23,7 @@ public class GardenRecombinator implements Recombinator<GardenSolution> {
      * 4 d	4 a.	  2A	4 d	4 a	
      * 5 e	5 e				5 e 5 e
      */
-    public List<GardenSolution> crossoverWith(List<GardenSolution> parents){
+    public List<GardenSolution> recombine(List<GardenSolution> parents){
         
         // Inizialmente identiche ai genitori
         GardenSolution son1 = parents.get(0).clone();
@@ -50,6 +50,10 @@ public class GardenRecombinator implements Recombinator<GardenSolution> {
 				recombine(son1, son2, genePosition);
         	}
         }
+        
+        // 3: Reset fitness (must be recalculated)
+        son1.setFitness(null);
+        son2.setFitness(null);
         
         return Arrays.asList(son1, son2);
     }
