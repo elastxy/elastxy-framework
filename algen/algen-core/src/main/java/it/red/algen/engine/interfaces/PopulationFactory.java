@@ -1,4 +1,4 @@
-package it.red.algen.engine;
+package it.red.algen.engine.interfaces;
 
 import it.red.algen.domain.Population;
 

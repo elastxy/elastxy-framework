@@ -2,8 +2,8 @@ package it.red.algen.garden.engine;
 
 import java.util.Random;
 
-import it.red.algen.engine.GenesFactory;
-import it.red.algen.engine.Mutator;
+import it.red.algen.engine.interfaces.GenesFactory;
+import it.red.algen.engine.interfaces.Mutator;
 import it.red.algen.garden.domain.GardenSolution;
 
 public class GardenMutator implements Mutator<GardenSolution> {

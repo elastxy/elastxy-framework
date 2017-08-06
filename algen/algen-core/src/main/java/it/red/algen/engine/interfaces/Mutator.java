@@ -1,6 +1,6 @@
-package it.red.algen.engine;
+package it.red.algen.engine.interfaces;
 
-import it.red.algen.domain.Solution;
+import it.red.algen.domain.interfaces.Solution;
 
 @SuppressWarnings("rawtypes")
 public interface Mutator<S extends Solution> {

@@ -13,6 +13,8 @@ package it.red.algen.domain;
 import java.util.ArrayList;
 import java.util.List;
 
+import it.red.algen.domain.interfaces.Target;
+
 /** Ambiente in cui la popolazione evolve in base al target.
  *  
  * @author grossi

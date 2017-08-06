@@ -10,7 +10,7 @@
 
 package it.red.algen.expressions.domain;
 
-import it.red.algen.domain.Target;
+import it.red.algen.domain.interfaces.Target;
 
 /**
  *TODOM: distance is an indirect absolute measure of the fitness of a chromosome,

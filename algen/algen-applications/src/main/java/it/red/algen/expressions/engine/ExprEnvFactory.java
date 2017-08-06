@@ -17,7 +17,7 @@ import it.red.algen.context.AlgorithmContext;
 import it.red.algen.context.ContextSupplier;
 import it.red.algen.domain.Env;
 import it.red.algen.domain.Population;
-import it.red.algen.engine.EnvFactory;
+import it.red.algen.engine.interfaces.EnvFactory;
 import it.red.algen.expressions.domain.ExprRawFitness;
 import it.red.algen.expressions.domain.ExprSolution;
 import it.red.algen.expressions.domain.ExprTarget;

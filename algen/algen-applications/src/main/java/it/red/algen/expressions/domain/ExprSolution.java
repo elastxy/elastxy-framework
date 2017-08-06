@@ -10,8 +10,8 @@
 
 package it.red.algen.expressions.domain;
 
-import it.red.algen.domain.Fitness;
-import it.red.algen.domain.Solution;
+import it.red.algen.domain.interfaces.Fitness;
+import it.red.algen.domain.interfaces.Solution;
 
 /**
  *

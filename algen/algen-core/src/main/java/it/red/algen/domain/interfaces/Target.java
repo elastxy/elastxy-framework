@@ -8,7 +8,7 @@
  * Open. You can then make changes to the template in the Source Editor.
  */
 
-package it.red.algen.domain;
+package it.red.algen.domain.interfaces;
 
 /**
  *

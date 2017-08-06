@@ -16,7 +16,7 @@ import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Component;
 
 import it.red.algen.context.ContextSupplier;
-import it.red.algen.engine.GenesFactory;
+import it.red.algen.engine.interfaces.GenesFactory;
 import it.red.algen.expressions.domain.NumberGene;
 import it.red.algen.expressions.domain.OperatorGene;
 

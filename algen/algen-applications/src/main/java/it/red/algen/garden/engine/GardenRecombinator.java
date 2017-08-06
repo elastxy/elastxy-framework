@@ -6,7 +6,7 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Random;
 
-import it.red.algen.engine.Recombinator;
+import it.red.algen.engine.interfaces.Recombinator;
 import it.red.algen.garden.domain.GardenSolution;
 import it.red.algen.garden.domain.PlacementGene;
 

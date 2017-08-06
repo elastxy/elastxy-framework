@@ -1,6 +1,6 @@
-package it.red.algen.engine;
+package it.red.algen.engine.standard;
 
-import it.red.algen.domain.Fitness;
+import it.red.algen.domain.interfaces.Fitness;
 
 /**
  * 

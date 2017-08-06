@@ -1,8 +1,8 @@
 package it.red.algen.expressions.engine;
 
-import it.red.algen.engine.FitnessCalculator;
 import it.red.algen.engine.IllegalSolutionException;
-import it.red.algen.engine.StandardFitness;
+import it.red.algen.engine.interfaces.FitnessCalculator;
+import it.red.algen.engine.standard.StandardFitness;
 import it.red.algen.expressions.domain.ExprRawFitness;
 import it.red.algen.expressions.domain.ExprSolution;
 import it.red.algen.expressions.domain.ExprTarget;

@@ -10,7 +10,7 @@
 
 package it.red.algen.garden.domain;
 
-import it.red.algen.engine.StandardFitness;
+import it.red.algen.engine.standard.StandardFitness;
 
 /**
  *

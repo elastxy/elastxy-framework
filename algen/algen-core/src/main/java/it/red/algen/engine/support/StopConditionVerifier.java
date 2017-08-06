@@ -1,4 +1,4 @@
-package it.red.algen.engine;
+package it.red.algen.engine.support;
 
 import it.red.algen.conf.StopConditions;
 

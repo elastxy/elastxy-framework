@@ -13,7 +13,7 @@ package it.red.algen.garden.domain;
 import java.util.ArrayList;
 import java.util.List;
 
-import it.red.algen.domain.Solution;
+import it.red.algen.domain.interfaces.Solution;
 
 /**
  *

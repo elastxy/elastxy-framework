@@ -1,6 +1,6 @@
 package it.red.algen.expressions.domain;
 
-import it.red.algen.domain.RawFitness;
+import it.red.algen.domain.interfaces.RawFitness;
 
 /**
  * Absolute distance from target value

@@ -1,8 +1,8 @@
 package it.red.algen.engine;
 
-import it.red.algen.domain.Fitness;
 import it.red.algen.domain.Population;
-import it.red.algen.domain.Target;
+import it.red.algen.domain.interfaces.Fitness;
+import it.red.algen.domain.interfaces.Target;
 import it.red.algen.tracking.EnvObservable;
 
 public interface FitnessTester extends EnvObservable {

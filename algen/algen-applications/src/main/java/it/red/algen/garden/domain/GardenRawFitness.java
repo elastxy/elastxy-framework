@@ -1,6 +1,6 @@
 package it.red.algen.garden.domain;
 
-import it.red.algen.domain.RawFitness;
+import it.red.algen.domain.interfaces.RawFitness;
 
 public class GardenRawFitness implements RawFitness {
 	public int rawFitness;

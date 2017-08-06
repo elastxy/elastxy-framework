@@ -1,8 +1,8 @@
-package it.red.algen.engine;
+package it.red.algen.engine.support;
 
 import java.util.Comparator;
 
-import it.red.algen.domain.Solution;
+import it.red.algen.domain.interfaces.Solution;
 
 /**
  * Compares two solutions fitness by value, ordering in DESC order
@@ -17,7 +17,7 @@ import it.red.algen.domain.Solution;
 public class FitnessComparator implements Comparator<Solution> {
 
 	@Override
-	public int compare(@SuppressWarnings("rawtypes") Solution arg1, Solution arg2) {
+	public int compare(Solution arg1, Solution arg2) {
 		Double fitness1 = arg1.getFitness()==null ? null : arg1.getFitness().getValue();
 		Double fitness2 = arg2.getFitness()==null ? null : arg2.getFitness().getValue();
 		int result = 0;

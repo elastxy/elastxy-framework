@@ -34,8 +34,8 @@ import com.google.gson.Gson;
 
 import it.red.algen.context.AlgorithmContext;
 import it.red.algen.context.ContextSupplier;
-import it.red.algen.engine.EnvFactory;
-import it.red.algen.engine.StandardSelector;
+import it.red.algen.engine.interfaces.EnvFactory;
+import it.red.algen.engine.standard.StandardSelector;
 import it.red.algen.expressions.context.ExprBenchmark;
 import it.red.algen.expressions.engine.ExprApplication;
 import it.red.algen.expressions.engine.ExprEnvFactory;

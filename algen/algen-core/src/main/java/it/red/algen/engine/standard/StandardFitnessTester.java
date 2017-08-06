@@ -1,11 +1,13 @@
-package it.red.algen.engine;
+package it.red.algen.engine.standard;
 
 import java.util.Iterator;
 
-import it.red.algen.domain.Fitness;
 import it.red.algen.domain.Population;
-import it.red.algen.domain.Solution;
-import it.red.algen.domain.Target;
+import it.red.algen.domain.interfaces.Fitness;
+import it.red.algen.domain.interfaces.Solution;
+import it.red.algen.domain.interfaces.Target;
+import it.red.algen.engine.FitnessTester;
+import it.red.algen.engine.interfaces.FitnessCalculator;
 import it.red.algen.tracking.EnvObserver;
 
 public class StandardFitnessTester implements FitnessTester {

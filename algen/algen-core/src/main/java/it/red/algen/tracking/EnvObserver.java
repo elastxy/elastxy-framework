@@ -14,7 +14,7 @@ import java.util.List;
 
 import it.red.algen.context.AlgorithmContext;
 import it.red.algen.domain.Population;
-import it.red.algen.domain.Solution;
+import it.red.algen.domain.interfaces.Solution;
 import it.red.algen.engine.Evolver;
 import it.red.algen.stats.ExperimentStats;
 

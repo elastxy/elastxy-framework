@@ -5,7 +5,6 @@ import it.red.algen.domain.Population;
 
 public interface Selector {
 
-    @SuppressWarnings("rawtypes")
 	public void setup(OperatorsParameters algParameters);
     
 

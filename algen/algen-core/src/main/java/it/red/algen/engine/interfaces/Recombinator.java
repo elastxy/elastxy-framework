@@ -1,8 +1,8 @@
-package it.red.algen.engine;
+package it.red.algen.engine.interfaces;
 
 import java.util.List;
 
-import it.red.algen.domain.Solution;
+import it.red.algen.domain.interfaces.Solution;
 
 @SuppressWarnings("rawtypes")
 public interface Recombinator<R extends Solution> {

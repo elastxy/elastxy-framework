@@ -1,11 +1,11 @@
-package it.red.algen.engine;
+package it.red.algen.engine.standard;
 
 import java.util.ArrayList;
-import java.util.Collections;
 
 import it.red.algen.conf.OperatorsParameters;
 import it.red.algen.domain.Population;
-import it.red.algen.domain.Solution;
+import it.red.algen.domain.interfaces.Solution;
+import it.red.algen.engine.Selector;
 
 public class StandardSelector implements Selector {
 
@@ -24,7 +24,6 @@ public class StandardSelector implements Selector {
      * 
      *  ..finche' la lista e' vuota
      */
-    @SuppressWarnings({ "rawtypes", "unchecked" })
     public Population select(Population actualGeneration){
     	
     	// Creation of new population, initially identical to actual

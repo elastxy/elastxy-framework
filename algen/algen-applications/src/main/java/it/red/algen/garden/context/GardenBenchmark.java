@@ -6,7 +6,7 @@ import org.springframework.stereotype.Component;
 import it.red.algen.context.AlgorithmContext;
 import it.red.algen.context.AlgorithmContextBuilder;
 import it.red.algen.context.BenchmarkContextBuilder;
-import it.red.algen.engine.StandardSelector;
+import it.red.algen.engine.standard.StandardSelector;
 import it.red.algen.garden.engine.GardenApplication;
 import it.red.algen.garden.engine.GardenFitnessCalculator;
 import it.red.algen.garden.engine.GardenMutator;

@@ -1,7 +1,7 @@
 package it.red.algen.garden.engine;
 
-import it.red.algen.engine.FitnessCalculator;
 import it.red.algen.engine.IllegalSolutionException;
+import it.red.algen.engine.interfaces.FitnessCalculator;
 import it.red.algen.garden.domain.GardenFitness;
 import it.red.algen.garden.domain.GardenRawFitness;
 import it.red.algen.garden.domain.GardenSolution;

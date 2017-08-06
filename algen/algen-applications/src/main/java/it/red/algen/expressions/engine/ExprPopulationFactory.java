@@ -15,7 +15,7 @@ import org.springframework.stereotype.Component;
 
 import it.red.algen.context.ContextSupplier;
 import it.red.algen.domain.Population;
-import it.red.algen.engine.PopulationFactory;
+import it.red.algen.engine.interfaces.PopulationFactory;
 
 /**
  *

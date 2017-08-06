@@ -3,8 +3,8 @@ package it.red.algen.expressions.engine;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import it.red.algen.domain.Solution;
-import it.red.algen.engine.SolutionsFactory;
+import it.red.algen.domain.interfaces.Solution;
+import it.red.algen.engine.interfaces.SolutionsFactory;
 import it.red.algen.expressions.domain.ExprSolution;
 
 @Component
