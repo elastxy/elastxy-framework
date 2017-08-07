@@ -6,13 +6,16 @@ import it.red.algen.conf.OperatorsParameters;
 import it.red.algen.domain.Population;
 import it.red.algen.domain.interfaces.Solution;
 import it.red.algen.engine.Selector;
+import it.red.algen.engine.interfaces.PopulationFactory;
 
 public class StandardSelector implements Selector {
 
-	// TODOA: mettere anche in mutator e recombinator
     public void setup(OperatorsParameters algParameters) {
     }
 
+	public void setup(OperatorsParameters algParameters, PopulationFactory populationFactory){
+		
+	}
 
     /** SELEZIONE 
      * 

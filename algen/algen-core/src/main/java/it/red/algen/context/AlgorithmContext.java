@@ -9,7 +9,6 @@ import it.red.algen.engine.interfaces.FitnessCalculator;
 import it.red.algen.engine.interfaces.Mutator;
 import it.red.algen.engine.interfaces.Recombinator;
 
-// TODOA: move parameters into specific operators
 public class AlgorithmContext {
 	public transient FitnessCalculator fitnessCalculator;
 	

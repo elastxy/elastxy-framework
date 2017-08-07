@@ -90,15 +90,15 @@ public class StatsExperimentExecutor {
         outln(buffer, "SUCCESSES: "+_globalStats.getPercSuccesses()+"%");
         outln(buffer, "-- Descriptive Statistics --");
         outln(buffer, "AVG GEN: "+_globalStats.getAvgGenerations());
-        outln(buffer, "AVG TIME (ms): "+_globalStats.getAvgTime());
-        outln(buffer, "AVG TIME/GEN (ms): "+String.format("%.2f", _globalStats.getAvgTimePerGeneration()));
-        outln(buffer, "TIME MEAN: "+String.format("%.2f", _globalStats.mean.orElse(null)));
-        outln(buffer, "TIME STD DEV: "+String.format("%.2f", _globalStats.stdDev.orElse(null)));
-        outln(buffer, "TIME MEDIAN: "+String.format("%.2f", _globalStats.median.orElse(null)));
+        outln(buffer, "AVG TIME (ms): "+String.format("%.2f", _globalStats.getAvgTime()));
+        outln(buffer, "AVG TIME/GEN (ms): "+String.format("%.3f", _globalStats.getAvgTimePerGeneration()));
+        outln(buffer, "TIME MEAN: "+String.format("%.3f", _globalStats.mean.orElse(null)));
+        outln(buffer, "TIME STD DEV: "+String.format("%.3f", _globalStats.stdDev.orElse(null)));
+        outln(buffer, "TIME MEDIAN: "+String.format("%.3f", _globalStats.median.orElse(null)));
         outln(buffer, "-- Results --");
-        outln(buffer, "AVG FITNESS: "+String.format("%.2f", _globalStats.getAvgFitness()));
-        outln(buffer, "MAX FITNESS: "+String.format("%.2f", _globalStats._maxFitness.orElse(null)));
-        outln(buffer, "MIN FITNESS: "+String.format("%.2f", _globalStats._minFitness.orElse(null)));
+        outln(buffer, "AVG FITNESS: "+String.format("%.10f", _globalStats.getAvgFitness()));
+        outln(buffer, "MAX FITNESS: "+String.format("%.10f", _globalStats._maxFitness.orElse(null)));
+        outln(buffer, "MIN FITNESS: "+String.format("%.10f", _globalStats._minFitness.orElse(null)));
         
         return buffer.toString();
     }

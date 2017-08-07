@@ -12,7 +12,6 @@ public class BestMatchesUtil {
 	  /**
      * 
      * // TODOM: best matches a certain percentage, not only one
-	 * // TODOA: valutare eliminazione variabile best match
 	 * 
      * @param generationSize
      * @param nextGeneration
@@ -32,7 +31,6 @@ public class BestMatchesUtil {
 	    }
 
         // Shuffles the other solutions
-        // TODOA: check if it's good..
         Collections.shuffle(nextGeneration.solutions);
 		return bestMatches;
 	}

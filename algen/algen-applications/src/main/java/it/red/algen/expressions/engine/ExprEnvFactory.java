@@ -24,7 +24,6 @@ import it.red.algen.expressions.domain.ExprTarget;
 
 /**
  *
- *TODO: move all factories in a package
  * @author grossi
  */
 @Component

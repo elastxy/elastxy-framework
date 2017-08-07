@@ -64,7 +64,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n\t\"applicationSpecifics\": {\n\t\t\"target\" : {\n\t\t\t\"TARGET_EXPRESSION_RESULT\" : 235000\n\t\t},\n\t\t\"params\" : {\n\t\t\t\"MAX_OPERAND_VALUE\" : \"1000\"\n\t\t}\n\t},\n\t\"parameters\": {\n\t\t\"_recombinationPerc\": 0.8,\n\t\t\"_mutationPerc\": 0.2,\n\t\t\"_elitarism\": true,\n\t\t\"_initialSelectionNumber\": 100,\n\t\t\"_initialSelectionRandom\": true\n\t},\n\t\"stopConditions\": {\n\t\t\"maxIterations\": -1,\n\t\t\"maxLifetimeMs\": 3000,\n\t\t\"maxIdenticalFitnesses\": -1\n\t},\n\t\"monitoringConfiguration\": {\n\t\t\"verbose\": false\n\t}\n}"
+							"raw": "{\n\t\"applicationSpecifics\": {\n\t\t\"target\" : {\n\t\t\t\"TARGET_EXPRESSION_RESULT\" : 235000\n\t\t},\n\t\t\"params\" : {\n\t\t\t\"MAX_OPERAND_VALUE\" : \"1000\"\n\t\t}\n\t},\n\t\"parameters\": {\n\t\t\"_recombinationPerc\": 0.8,\n\t\t\"_mutationPerc\": 0.1,\n\t\t\"_elitarism\": true,\n\t\t\"_initialSelectionNumber\": 1000,\n\t\t\"_initialSelectionRandom\": false\n\t},\n\t\"stopConditions\": {\n\t\t\"maxIterations\": -1,\n\t\t\"maxLifetimeMs\": 3000000,\n\t\t\"maxIdenticalFitnesses\": -1\n\t},\n\t\"monitoringConfiguration\": {\n\t\t\"verbose\": false\n\t}\n}"
 						},
 						"description": ""
 					},
@@ -84,7 +84,27 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n\t\"applicationSpecifics\": {\n\t\t\"target\" : {\n\t\t\t\"TARGET_EXPRESSION_RESULT\" : 235001\n\t\t},\n\t\t\"params\" : {\n\t\t\t\"MAX_OPERAND_VALUE\" : \"1000\"\n\t\t}\n\t},\n\t\"parameters\": {\n\t\t\"_recombinationPerc\": 0.8,\n\t\t\"_mutationPerc\": 0.1,\n\t\t\"_elitarism\": true,\n\t\t\"_initialSelectionNumber\": 1000,\n\t\t\"_initialSelectionRandom\": false\n\t},\n\t\"stopConditions\": {\n\t\t\"maxIterations\": -1,\n\t\t\"maxLifetimeMs\": 3000,\n\t\t\"maxIdenticalFitnesses\": -1\n\t},\n\t\"monitoringConfiguration\": {\n\t\t\"verbose\": false\n\t}\n}"
+							"raw": "{\n\t\"applicationSpecifics\": {\n\t\t\"target\" : {\n\t\t\t\"TARGET_EXPRESSION_RESULT\" : 235000\n\t\t},\n\t\t\"params\" : {\n\t\t\t\"MAX_OPERAND_VALUE\" : \"1000\"\n\t\t}\n\t},\n\t\"parameters\": {\n\t\t\"_recombinationPerc\": 0.8,\n\t\t\"_mutationPerc\": 0.1,\n\t\t\"_elitarism\": true,\n\t\t\"_initialSelectionNumber\": 10000,\n\t\t\"_initialSelectionRandom\": true\n\t},\n\t\"stopConditions\": {\n\t\t\"maxIterations\": 1000,\n\t\t\"maxLifetimeMs\": 3000,\n\t\t\"maxIdenticalFitnesses\": -1\n\t},\n\t\"monitoringConfiguration\": {\n\t\t\"verbose\": false\n\t}\n}"
+						},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "/benchmark/expressions",
+					"request": {
+						"url": "http://{{ip}}:{{port}}/benchmark/expressions/5",
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"applicationSpecifics\": {\n\t\t\"target\" : {\n\t\t\t\"TARGET_EXPRESSION_RESULT\" : 235000\n\t\t},\n\t\t\"params\" : {\n\t\t\t\"MAX_OPERAND_VALUE\" : \"1000\"\n\t\t}\n\t},\n\t\"parameters\": {\n\t\t\"_initialSelectionNumber\": 10000,\n\t\t\"_initialSelectionRandom\": true\n\t},\n\t\"stopConditions\": {\n\t\t\"maxIterations\": 1000,\n\t\t\"maxLifetimeMs\": 3000\n\t},\n\t\"monitoringConfiguration\": {\n\t}\n}"
 						},
 						"description": ""
 					},
@@ -115,7 +135,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n\t\"parameters\": {\n\t\t\"_recombinationPerc\": 0.7,\n\t\t\"_mutationPerc\": 0.2,\n\t\t\"_elitarism\": true,\n\t\t\"_initialSelectionNumber\": 10000,\n\t\t\"_initialSelectionRandom\": false\n\t},\n\t\"stopConditions\": {\n\t\t\"maxIterations\": -1,\n\t\t\"maxLifetimeMs\": 3000,\n\t\t\"maxIdenticalFitnesses\": 20\n\t},\n\t\"monitoringConfiguration\": {\n\t\t\"verbose\": false\n\t}\n}"
+							"raw": "{\n\t\"parameters\": {\n\t\t\"_recombinationPerc\": 0.7,\n\t\t\"_mutationPerc\": 0.2,\n\t\t\"_elitarism\": false,\n\t\t\"_initialSelectionNumber\": 10000,\n\t\t\"_initialSelectionRandom\": false\n\t},\n\t\"stopConditions\": {\n\t\t\"maxIterations\": -1,\n\t\t\"maxLifetimeMs\": 3000,\n\t\t\"maxIdenticalFitnesses\": 20\n\t},\n\t\"monitoringConfiguration\": {\n\t\t\"verbose\": false\n\t}\n}"
 						},
 						"description": ""
 					},
@@ -184,17 +204,6 @@
 					"name": "/distributed/evolution",
 					"request": {
 						"url": "http://{{ip}}:{{port}}/distributed/evolution",
-						"method": "GET",
-						"header": [],
-						"body": {},
-						"description": ""
-					},
-					"response": []
-				},
-				{
-					"name": "/distributed/wordcount",
-					"request": {
-						"url": "http://{{ip}}:{{port}}/distributed/wordcount",
 						"method": "GET",
 						"header": [],
 						"body": {},

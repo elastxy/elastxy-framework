@@ -6,12 +6,16 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Random;
 
+import it.red.algen.conf.OperatorsParameters;
 import it.red.algen.engine.interfaces.Recombinator;
 import it.red.algen.garden.domain.GardenSolution;
 import it.red.algen.garden.domain.PlacementGene;
 
 public class GardenRecombinator implements Recombinator<GardenSolution> {
     private static Random RANDOMIZER = new Random();
+
+    public void setup(OperatorsParameters algParameters) {
+    }
 
 
     /**

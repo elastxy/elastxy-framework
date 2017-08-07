@@ -4,11 +4,16 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Random;
 
+import it.red.algen.conf.OperatorsParameters;
 import it.red.algen.engine.interfaces.Recombinator;
 import it.red.algen.expressions.domain.ExprSolution;
 
 public class ExprRecombinator implements Recombinator<ExprSolution> {
     private static Random RANDOMIZER = new Random();
+
+    
+    public void setup(OperatorsParameters algParameters) {
+    }
 
     /**
      * I punti di ricombinazione possono essere all'operatore o al secondo operando

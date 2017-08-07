@@ -36,12 +36,14 @@ import it.red.algen.context.AlgorithmContext;
 import it.red.algen.context.ContextSupplier;
 import it.red.algen.engine.interfaces.EnvFactory;
 import it.red.algen.engine.standard.StandardSelector;
+import it.red.algen.engine.standard.UniformlyDistributedSelector;
 import it.red.algen.expressions.context.ExprBenchmark;
 import it.red.algen.expressions.engine.ExprApplication;
 import it.red.algen.expressions.engine.ExprEnvFactory;
 import it.red.algen.expressions.engine.ExprFitnessCalculator;
 import it.red.algen.expressions.engine.ExprGenesFactory;
 import it.red.algen.expressions.engine.ExprMutator;
+import it.red.algen.expressions.engine.ExprPopulationFactory;
 import it.red.algen.expressions.engine.ExprRecombinator;
 import it.red.algen.garden.context.GardenBenchmark;
 import it.red.algen.garden.engine.GardenApplication;
@@ -69,6 +71,8 @@ public class SampleController {
 	@Autowired
 	private ExprEnvFactory exprEnvFactory;
 	@Autowired
+	private ExprPopulationFactory populationFactory;
+	@Autowired
 	private ExprGenesFactory exprGenesFactory;
 	@Autowired
 	private GardenEnvFactory gardenEnvFactory;
@@ -93,8 +97,7 @@ public class SampleController {
 	@RequestMapping(path = "/hello", method = RequestMethod.GET)
 	@ResponseBody
 	public Map<String, String> hello() {
-		return Collections.singletonMap("message",
-				infoService.getInfoMessage());
+		return Collections.singletonMap("message", infoService.getInfoMessage());
 	}
 
 	
@@ -108,21 +111,12 @@ public class SampleController {
 		
 	 	Experiment e = null;
 	 	if("garden".equals(domain)){
-	 		context.fitnessCalculator = new GardenFitnessCalculator();
-			context.selector = new StandardSelector();
-			context.selector.setup(context.parameters);
-	 		context.mutator = new GardenMutator();
-	 		context.recombinator = new GardenRecombinator();
+	 		setupGardenContext(context);
 			context.monitoringConfiguration.reporter = new GardenCSVReporter(GardenApplication.STATS_DIR);
 	        e = new Experiment(gardenEnvFactory);
 	 	}
 	 	else if("expressions".equals(domain)){
-	 		context.fitnessCalculator = new ExprFitnessCalculator();
-			context.selector = new StandardSelector();
-			context.selector.setup(context.parameters);
-	 		context.mutator = new ExprMutator();
-	 		context.mutator.setGenesFactory(exprGenesFactory);
-	 		context.recombinator = new ExprRecombinator();
+	 		setupExprContext(context);
 	 		context.monitoringConfiguration.reporter = new CSVReporter(ExprApplication.STATS_DIR);
 	        e = new Experiment(exprEnvFactory);
 	 	}
@@ -151,22 +145,12 @@ public class SampleController {
 	 	EnvFactory envFactory = null;
 	 	
 	 	// TODOM: Make generics default build mode
-	 	// TODOA: rimuovere duplicazioni
 	 	if("garden".equals(domain)){
-	 		context.fitnessCalculator = new GardenFitnessCalculator();
-			context.selector = new StandardSelector();
-			context.selector.setup(context.parameters);
-	 		context.mutator = new GardenMutator();
-	 		context.recombinator = new GardenRecombinator();
+	 		setupGardenContext(context);
 	 		envFactory = gardenEnvFactory;
 	 	}
 	 	else if("expressions".equals(domain)){ 
-	 		context.fitnessCalculator = new ExprFitnessCalculator();
-			context.selector = new StandardSelector();
-			context.selector.setup(context.parameters);
-	 		context.mutator = new ExprMutator();
-	 		context.mutator.setGenesFactory(exprGenesFactory);
-	 		context.recombinator = new ExprRecombinator();
+	 		setupExprContext(context);
 	 		envFactory = exprEnvFactory;
 	 	}
 
@@ -175,8 +159,29 @@ public class SampleController {
         
         collector.run();
         
+        contextSupplier.destroy();
+        
         String result = collector.print();
         return result;
+	}
+
+
+	private void setupGardenContext(AlgorithmContext context) {
+		context.fitnessCalculator = new GardenFitnessCalculator();
+		context.selector = new StandardSelector();
+		context.selector.setup(context.parameters);
+		context.mutator = new GardenMutator();
+		context.recombinator = new GardenRecombinator();
+	}
+
+
+	private void setupExprContext(AlgorithmContext context) {
+		context.fitnessCalculator = new ExprFitnessCalculator();
+		context.selector = new StandardSelector();
+		context.selector.setup(context.parameters);
+		context.mutator = new ExprMutator();
+		context.mutator.setGenesFactory(exprGenesFactory);
+		context.recombinator = new ExprRecombinator();
 	}
 
 	
@@ -213,5 +218,43 @@ public class SampleController {
 	}
 
 
+	@RequestMapping(path = "/trial/{domain}/{experiments}", method = RequestMethod.POST)
+	@ResponseBody
+	public String trialTest(
+			@PathVariable String domain, 
+			@PathVariable Integer experiments,
+			@RequestBody AlgorithmContext context) {
+		
+		contextSupplier.init(context);
+		
+	 	EnvFactory envFactory = null;
+	 	
+	 	// TODOM: Make generics default build mode
+	 	if("garden".equals(domain)){
+	 		setupGardenContext(context);
+	 		envFactory = gardenEnvFactory;
+	 	}
+	 	else if("expressions".equals(domain)){ 
+	 		setupExprContext(context);
+	 		context.parameters._elitarism = false;
+	 		context.parameters._mutationPerc = 0.0;
+	 		context.parameters._recombinationPerc = 0.0;
+	 		context.parameters._initialSelectionRandom = true;
+	 		context.selector = new UniformlyDistributedSelector();
+			context.selector.setup(context.parameters, populationFactory);
+
+	 		envFactory = exprEnvFactory;
+	 	}
+
+        StatsExperimentExecutor collector = new StatsExperimentExecutor(envFactory, experiments);
+        beanFactory.autowireBean(collector);
+        
+        collector.run();
+        
+        contextSupplier.destroy();
+        
+        String result = collector.print();
+        return result;
+	}
 
 }
