@@ -85,7 +85,7 @@ public class Evolver implements EnvObservable {
         	Population nextGeneration = selection(generationSize);
         	
         	// BEST MATCH - calculate
-        	List<Solution> bestMatches = BestMatchesUtil.extractBestMatches(nextGeneration, context.parameters._elitarism);
+        	List<Solution> bestMatches = BestMatchesUtil.extractBestMatches(nextGeneration, context.parameters.elitarism);
 
         	// LOOP OVER NON-BEST
         	for(int s=0; s < generationSize-bestMatches.size(); s=s+2){
@@ -140,7 +140,7 @@ public class Evolver implements EnvObservable {
 		boolean endConditionFound = false;
 		
 		// Check stability of the fitness value
-		if(context.parameters._elitarism){
+		if(context.parameters.elitarism){
 		    if(env.currentGen.bestMatch.getFitness().sameOf(nextGenFitness)){
 		    	env.totIdenticalFitnesses++;
 		        if(stopVerifier.isStable(env.totIdenticalFitnesses)){
@@ -190,7 +190,7 @@ public class Evolver implements EnvObservable {
 
 	private List<Solution> recombination(Solution[] parents) {
 		List<Solution> sons;
-		boolean crossover = RANDOMIZER.nextDouble() < context.parameters._recombinationPerc;
+		boolean crossover = RANDOMIZER.nextDouble() < context.parameters.recombinationPerc;
 		if(crossover) {
 		    sons = context.recombinator.recombine(Arrays.asList(parents));
 		    fireCrossoverEvent(parents[0], parents[1], sons);
@@ -202,8 +202,8 @@ public class Evolver implements EnvObservable {
 	}
 
 	private void mutation(List<Solution> sons) {
-		boolean mute0 = RANDOMIZER.nextDouble() < context.parameters._mutationPerc;
-		boolean mute1 = RANDOMIZER.nextDouble() < context.parameters._mutationPerc;
+		boolean mute0 = RANDOMIZER.nextDouble() < context.parameters.mutationPerc;
+		boolean mute1 = RANDOMIZER.nextDouble() < context.parameters.mutationPerc;
 		if(mute0) { 
 		    Solution old = sons.get(0);
 		    Solution niu = old.clone();

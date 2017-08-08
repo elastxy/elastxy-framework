@@ -15,7 +15,7 @@ public class GardenCSVReporter extends CSVReporter {
 	protected List<String[]> createCustomPart(ExperimentStats stats) {
 		List<String[]> result = new ArrayList<String[]>();
 		result.add(new String[] {"Placement", "Happyness (1=happy, 0=dead)"}); 
-		String[] bestMatchCSV = stats._lastGeneration.bestMatch.toString().split(";");
+		String[] bestMatchCSV = stats.lastGeneration.bestMatch.toString().split(";");
 		int happy = 0;
 		int unhappy = 0;
 		int dead = 0;

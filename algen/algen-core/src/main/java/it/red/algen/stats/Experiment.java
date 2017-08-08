@@ -15,7 +15,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import it.red.algen.context.ContextSupplier;
 import it.red.algen.domain.Env;
 import it.red.algen.engine.Evolver;
-import it.red.algen.engine.interfaces.EnvFactory;
+import it.red.algen.engine.factories.EnvFactory;
 import it.red.algen.tracking.EnvObserver;
 
 
@@ -28,20 +28,20 @@ import it.red.algen.tracking.EnvObserver;
  * @author grossi
  */
 public class Experiment {
-	private EnvFactory _factory;
-    private ExperimentStats _stats;
+	private EnvFactory factory;
+    private ExperimentStats stats;
 
 
     @Autowired
     private ContextSupplier contextSupplier;
     
     public Experiment(EnvFactory factory) {
-        _factory = factory;
-        _stats = null;
+        this.factory = factory;
+        stats = null;
     }
     
     public ExperimentStats getStats(){
-        return _stats;
+        return stats;
     }
     
     public void run(){
@@ -50,7 +50,7 @@ public class Experiment {
         EnvObserver observer = new EnvObserver(contextSupplier.getContext());
         
         // Creates initial environment
-        Env environment = _factory.create();
+        Env environment = factory.create();
     	
         // Setups engine
         Evolver evolver = new Evolver(
@@ -62,6 +62,6 @@ public class Experiment {
         evolver.evolve();
         
         // Retrieves stats
-        _stats = evolver.getStats();
+        stats = evolver.getStats();
     }
 }

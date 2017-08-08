@@ -15,7 +15,7 @@ import org.springframework.stereotype.Component;
 
 import it.red.algen.domain.Env;
 import it.red.algen.domain.Population;
-import it.red.algen.engine.interfaces.EnvFactory;
+import it.red.algen.engine.factories.EnvFactory;
 import it.red.algen.garden.data.GardenDatabase;
 import it.red.algen.garden.data.GardenDatabaseCSV;
 import it.red.algen.garden.domain.GardenRawFitness;

@@ -1,11 +1,11 @@
 package it.red.algen.engine.interfaces;
 
 import it.red.algen.domain.interfaces.Solution;
+import it.red.algen.engine.factories.GenesFactory;
 
 @SuppressWarnings("rawtypes")
 public interface Mutator<S extends Solution> {
 	
-	// TODOA: introduction of genoma
 	public void setGenesFactory(GenesFactory genesFactory);
 
 	/**

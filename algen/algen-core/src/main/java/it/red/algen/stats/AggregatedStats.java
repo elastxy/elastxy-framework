@@ -19,13 +19,13 @@ import java.util.Optional;
  * @author grossi
  */
 public class AggregatedStats {
-    public int _totExperiments;
-    public int _totSuccesses;
-    public int _totGenerations;
-    public double _totTime;
-    public double _totFitness;
-    public Optional<Double> _minFitness = Optional.empty();
-    public Optional<Double> _maxFitness = Optional.empty();
+    public int totExperiments;
+    public int totSuccesses;
+    public int totGenerations;
+    public double totTime;
+    public double totFitness;
+    public Optional<Double> minFitness = Optional.empty();
+    public Optional<Double> maxFitness = Optional.empty();
     
     public Optional<Double> mean = Optional.empty();
     public Optional<Double> stdDev = Optional.empty();
@@ -37,19 +37,19 @@ public class AggregatedStats {
     }
     
     public double getPercSuccesses(){
-        return _totSuccesses / (double)_totExperiments * 100.0;
+        return totSuccesses / (double)totExperiments * 100.0;
     }
     public double getAvgGenerations(){
-        return _totGenerations / (double)_totExperiments;
+        return totGenerations / (double)totExperiments;
     }
     public double getAvgTime(){
-        return _totTime / (double)_totExperiments;
+        return totTime / (double)totExperiments;
     }
     public double getAvgTimePerGeneration(){
-        return _totTime / (double)_totGenerations;
+        return totTime / (double)totGenerations;
     }
     public double getAvgFitness(){
-        return _totFitness / (double)_totExperiments;
+        return totFitness / (double)totExperiments;
     }
     
 }

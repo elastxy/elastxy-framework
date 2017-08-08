@@ -1,8 +1,8 @@
-package it.red.algen.engine;
+package it.red.algen.engine.interfaces;
 
 import it.red.algen.conf.OperatorsParameters;
 import it.red.algen.domain.Population;
-import it.red.algen.engine.interfaces.PopulationFactory;
+import it.red.algen.engine.factories.PopulationFactory;
 
 public interface Selector {
 

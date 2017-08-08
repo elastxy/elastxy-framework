@@ -59,7 +59,7 @@ public class ExpressionsMainTest {
         e.run();
         
         assertNotNull(e.getStats());
-        assertNotNull(e.getStats()._lastGeneration);
+        assertNotNull(e.getStats().lastGeneration);
         
         contextSupplier.destroy();
     }

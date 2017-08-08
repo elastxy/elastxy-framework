@@ -25,11 +25,11 @@ public class AlgorithmContextBuilder {
 			){
 		
         OperatorsParameters algParameters = new OperatorsParameters();
-        algParameters._recombinationPerc = recombinationPerc;
-        algParameters._mutationPerc = mutationPerc;
-        algParameters._elitarism = elitarism;
-        algParameters._initialSelectionNumber = initialSelectionNumber;
-        algParameters._initialSelectionRandom = initialSelectionRandom;
+        algParameters.recombinationPerc = recombinationPerc;
+        algParameters.mutationPerc = mutationPerc;
+        algParameters.elitarism = elitarism;
+        algParameters.initialSelectionNumber = initialSelectionNumber;
+        algParameters.initialSelectionRandom = initialSelectionRandom;
         
         StopConditions stopConditions = new StopConditions();
         stopConditions.maxIterations = maxIterations;

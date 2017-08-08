@@ -16,7 +16,7 @@ import org.apache.commons.math3.stat.descriptive.DescriptiveStatistics;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.config.AutowireCapableBeanFactory;
 
-import it.red.algen.engine.interfaces.EnvFactory;
+import it.red.algen.engine.factories.EnvFactory;
 
 
 
@@ -26,38 +26,38 @@ import it.red.algen.engine.interfaces.EnvFactory;
  */
 public class StatsExperimentExecutor {
     
-	private EnvFactory _envFactory;
+	private EnvFactory envFactory;
 	
 	private @Autowired AutowireCapableBeanFactory beanFactory;
 	
-    private int _experiments;
+    private int experiments;
     
-    private AggregatedStats _globalStats;
+    private AggregatedStats globalStats;
     
     public StatsExperimentExecutor(EnvFactory envFactory, int experiments){
-        _envFactory = envFactory;
-        _experiments = experiments;
-        _globalStats = new AggregatedStats();
-        _globalStats._totExperiments = _experiments;
+        this.envFactory = envFactory;
+        this.experiments = experiments;
+        globalStats = new AggregatedStats();
+        globalStats.totExperiments = experiments;
     }
     
     private void addStats(ExperimentStats stats){
-        _globalStats._totTime += stats._time;
+        globalStats.totTime += stats.time;
         
         if(stats.targetReached){
-        	_globalStats.successExecutionTimes.add(stats._time);
-        	_globalStats._totSuccesses++;;
+        	globalStats.successExecutionTimes.add(stats.time);
+        	globalStats.totSuccesses++;;
         }
-        _globalStats._totGenerations += stats._generations;
-        double bestMatchFitness = stats._lastGeneration.bestMatch.getFitness().getValue();
-        _globalStats._totFitness += bestMatchFitness;
-        _globalStats._maxFitness = Optional.of(_globalStats._minFitness.isPresent() ? Math.max(_globalStats._minFitness.get(), bestMatchFitness) : bestMatchFitness);
-        _globalStats._minFitness = Optional.of(_globalStats._minFitness.isPresent() ? Math.min(_globalStats._minFitness.get(), bestMatchFitness) : bestMatchFitness);
+        globalStats.totGenerations += stats.generations;
+        double bestMatchFitness = stats.lastGeneration.bestMatch.getFitness().getValue();
+        globalStats.totFitness += bestMatchFitness;
+        globalStats.maxFitness = Optional.of(globalStats.minFitness.isPresent() ? Math.max(globalStats.minFitness.get(), bestMatchFitness) : bestMatchFitness);
+        globalStats.minFitness = Optional.of(globalStats.minFitness.isPresent() ? Math.min(globalStats.minFitness.get(), bestMatchFitness) : bestMatchFitness);
     }
     
     public void run(){
-        for(int i = 0; i < _experiments; i++){
-            Experiment e = new Experiment(_envFactory);
+        for(int i = 0; i < experiments; i++){
+            Experiment e = new Experiment(envFactory);
             beanFactory.autowireBean(e);
             e.run();
             addStats(e.getStats());
@@ -72,33 +72,33 @@ public class StatsExperimentExecutor {
     	DescriptiveStatistics stats = new DescriptiveStatistics();
 
     	// Add the data from the array
-    	for( int i = 0; i < _globalStats.successExecutionTimes.size(); i++) {
-    	        stats.addValue(_globalStats.successExecutionTimes.get(i));
+    	for( int i = 0; i < globalStats.successExecutionTimes.size(); i++) {
+    	        stats.addValue(globalStats.successExecutionTimes.get(i));
     	}
 
     	// Compute some statistics
-    	_globalStats.mean = Optional.of(stats.getMean());
-    	_globalStats.stdDev = Optional.of(stats.getStandardDeviation());
-    	_globalStats.median = Optional.of(stats.getPercentile(50.0));
+    	globalStats.mean = Optional.of(stats.getMean());
+    	globalStats.stdDev = Optional.of(stats.getStandardDeviation());
+    	globalStats.median = Optional.of(stats.getPercentile(50.0));
     }
     
     public String print(){
     	StringBuffer buffer = new StringBuffer();
     	
         outln(buffer, "\n\n@@@@@@@@@@@@  GLOBAL STATS @@@@@@@@@@@");
-        outln(buffer, "EXPERIMENTS: "+_globalStats._totExperiments);
-        outln(buffer, "SUCCESSES: "+_globalStats.getPercSuccesses()+"%");
+        outln(buffer, "EXPERIMENTS: "+globalStats.totExperiments);
+        outln(buffer, "SUCCESSES: "+globalStats.getPercSuccesses()+"%");
         outln(buffer, "-- Descriptive Statistics --");
-        outln(buffer, "AVG GEN: "+_globalStats.getAvgGenerations());
-        outln(buffer, "AVG TIME (ms): "+String.format("%.2f", _globalStats.getAvgTime()));
-        outln(buffer, "AVG TIME/GEN (ms): "+String.format("%.3f", _globalStats.getAvgTimePerGeneration()));
-        outln(buffer, "TIME MEAN: "+String.format("%.3f", _globalStats.mean.orElse(null)));
-        outln(buffer, "TIME STD DEV: "+String.format("%.3f", _globalStats.stdDev.orElse(null)));
-        outln(buffer, "TIME MEDIAN: "+String.format("%.3f", _globalStats.median.orElse(null)));
+        outln(buffer, "AVG GEN: "+globalStats.getAvgGenerations());
+        outln(buffer, "AVG TIME (ms): "+String.format("%.2f", globalStats.getAvgTime()));
+        outln(buffer, "AVG TIME/GEN (ms): "+String.format("%.3f", globalStats.getAvgTimePerGeneration()));
+        outln(buffer, "TIME MEAN: "+String.format("%.3f", globalStats.mean.orElse(null)));
+        outln(buffer, "TIME STD DEV: "+String.format("%.3f", globalStats.stdDev.orElse(null)));
+        outln(buffer, "TIME MEDIAN: "+String.format("%.3f", globalStats.median.orElse(null)));
         outln(buffer, "-- Results --");
-        outln(buffer, "AVG FITNESS: "+String.format("%.10f", _globalStats.getAvgFitness()));
-        outln(buffer, "MAX FITNESS: "+String.format("%.10f", _globalStats._maxFitness.orElse(null)));
-        outln(buffer, "MIN FITNESS: "+String.format("%.10f", _globalStats._minFitness.orElse(null)));
+        outln(buffer, "AVG FITNESS: "+String.format("%.10f", globalStats.getAvgFitness()));
+        outln(buffer, "MAX FITNESS: "+String.format("%.10f", globalStats.maxFitness.orElse(null)));
+        outln(buffer, "MIN FITNESS: "+String.format("%.10f", globalStats.minFitness.orElse(null)));
         
         return buffer.toString();
     }

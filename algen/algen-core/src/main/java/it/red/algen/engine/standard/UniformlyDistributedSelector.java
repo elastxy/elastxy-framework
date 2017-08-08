@@ -2,8 +2,8 @@ package it.red.algen.engine.standard;
 
 import it.red.algen.conf.OperatorsParameters;
 import it.red.algen.domain.Population;
-import it.red.algen.engine.Selector;
-import it.red.algen.engine.interfaces.PopulationFactory;
+import it.red.algen.engine.factories.PopulationFactory;
+import it.red.algen.engine.interfaces.Selector;
 
 public class UniformlyDistributedSelector implements Selector {
 

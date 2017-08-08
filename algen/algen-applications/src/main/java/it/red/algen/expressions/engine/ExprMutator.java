@@ -2,7 +2,7 @@ package it.red.algen.expressions.engine;
 
 import java.util.Random;
 
-import it.red.algen.engine.interfaces.GenesFactory;
+import it.red.algen.engine.factories.GenesFactory;
 import it.red.algen.engine.interfaces.Mutator;
 import it.red.algen.expressions.domain.ExprSolution;
 

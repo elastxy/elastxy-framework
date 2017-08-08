@@ -34,7 +34,7 @@ import com.google.gson.Gson;
 
 import it.red.algen.context.AlgorithmContext;
 import it.red.algen.context.ContextSupplier;
-import it.red.algen.engine.interfaces.EnvFactory;
+import it.red.algen.engine.factories.EnvFactory;
 import it.red.algen.engine.standard.StandardSelector;
 import it.red.algen.engine.standard.UniformlyDistributedSelector;
 import it.red.algen.expressions.context.ExprBenchmark;
@@ -236,10 +236,10 @@ public class SampleController {
 	 	}
 	 	else if("expressions".equals(domain)){ 
 	 		setupExprContext(context);
-	 		context.parameters._elitarism = false;
-	 		context.parameters._mutationPerc = 0.0;
-	 		context.parameters._recombinationPerc = 0.0;
-	 		context.parameters._initialSelectionRandom = true;
+	 		context.parameters.elitarism = false;
+	 		context.parameters.mutationPerc = 0.0;
+	 		context.parameters.recombinationPerc = 0.0;
+	 		context.parameters.initialSelectionRandom = true;
 	 		context.selector = new UniformlyDistributedSelector();
 			context.selector.setup(context.parameters, populationFactory);
 

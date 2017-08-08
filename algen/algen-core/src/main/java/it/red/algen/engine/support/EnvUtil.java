@@ -29,13 +29,13 @@ public class EnvUtil {
 
     public static ExperimentStats getStats(Env env){
         ExperimentStats stats = new ExperimentStats();
-        stats._target = env.target;
-        stats._lastGeneration = env.currentGen;
-        stats._generations = env.currentGenNumber+1;
-        stats._time = env.endTime;
-        stats._totIdenticalFitnesses = env.totIdenticalFitnesses;
+        stats.target = env.target;
+        stats.lastGeneration = env.currentGen;
+        stats.generations = env.currentGenNumber+1;
+        stats.time = env.endTime;
+        stats.totIdenticalFitnesses = env.totIdenticalFitnesses;
         stats.targetReached = env.targetReached;
-        stats._generationHistory = env.generationsHistory;
+        stats.generationHistory = env.generationsHistory;
         return stats;
     }
 }

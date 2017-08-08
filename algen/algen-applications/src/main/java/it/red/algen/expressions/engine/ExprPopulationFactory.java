@@ -15,7 +15,7 @@ import org.springframework.stereotype.Component;
 
 import it.red.algen.context.ContextSupplier;
 import it.red.algen.domain.Population;
-import it.red.algen.engine.interfaces.PopulationFactory;
+import it.red.algen.engine.factories.PopulationFactory;
 
 /**
  *
@@ -33,8 +33,8 @@ public class ExprPopulationFactory implements PopulationFactory {
 	@Override
     public Population createNew() {
         Population population = new Population();
-        for(int i = 0; i < contextSupplier.getContext().parameters._initialSelectionNumber; i++){
-        	if(contextSupplier.getContext().parameters._initialSelectionRandom){
+        for(int i = 0; i < contextSupplier.getContext().parameters.initialSelectionNumber; i++){
+        	if(contextSupplier.getContext().parameters.initialSelectionRandom){
                 population.add(solutionsFactory.createRandom());
         	}
         	else {

@@ -15,26 +15,25 @@ import java.util.List;
 import it.red.algen.domain.Population;
 
 /**
- *TODOM: togliere carattere _
  * @author grossi
  */
 public class ExperimentStats  {
 	// TODOM: tipizzato a Target
-	public Object _target;
-    public Population _lastGeneration;
-    public int _generations;
-    public double _time;
-    public int _totIdenticalFitnesses;
+	public Object target;
+    public Population lastGeneration;
+    public int generations;
+    public double time;
+    public int totIdenticalFitnesses;
     public boolean targetReached;
-    public transient List<Population> _generationHistory;
+    public transient List<Population> generationHistory;
     
     public String toString(){
     	StringBuffer buf = new StringBuffer();
         buf.append("##################### STATS #####################").append(Character.LINE_SEPARATOR);
-        buf.append("Best match:" + _lastGeneration.bestMatch).append(Character.LINE_SEPARATOR);
-        buf.append("Number of generations: "+_generations).append(Character.LINE_SEPARATOR);
-        buf.append("Total time (sec): "+_time).append(Character.LINE_SEPARATOR);
-        buf.append("Total generations with same fitness: "+_totIdenticalFitnesses);
+        buf.append("Best match:" + lastGeneration.bestMatch).append(Character.LINE_SEPARATOR);
+        buf.append("Number of generations: "+generations).append(Character.LINE_SEPARATOR);
+        buf.append("Total time (sec): "+time).append(Character.LINE_SEPARATOR);
+        buf.append("Total generations with same fitness: "+totIdenticalFitnesses);
         return buf.toString();
     }
 }

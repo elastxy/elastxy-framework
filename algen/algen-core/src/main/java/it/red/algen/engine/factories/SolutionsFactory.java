@@ -1,4 +1,4 @@
-package it.red.algen.engine.interfaces;
+package it.red.algen.engine.factories;
 
 import it.red.algen.domain.interfaces.Solution;
 

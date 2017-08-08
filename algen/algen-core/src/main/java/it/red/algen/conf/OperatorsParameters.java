@@ -29,9 +29,9 @@ public class OperatorsParameters {
 	 * SELECTION
 	 * ======================================
 	 */
-	public long _initialSelectionNumber = DefaultConfiguration.DEFAULT_INITIAL_SELECTION_NUMBER;    
-	public boolean _initialSelectionRandom = DefaultConfiguration.DEFAULT_INITIAL_SELECTION_RANDOM;
-    public boolean _elitarism = DefaultConfiguration.DEFAULT_ELITARISM;
+	public long initialSelectionNumber = DefaultConfiguration.DEFAULT_INITIAL_SELECTION_NUMBER;    
+	public boolean initialSelectionRandom = DefaultConfiguration.DEFAULT_INITIAL_SELECTION_RANDOM;
+    public boolean elitarism = DefaultConfiguration.DEFAULT_ELITARISM;
 
 	// TODOM: type of selection: stochastic sampling, roulette-wheel, tournament (con % gruppi), truncation (con %) + elitism, reward based
     // At the end they are 4: Proportional selection (in combination with a scaling method), linear ranking, tournament selection, and
@@ -60,7 +60,7 @@ public class OperatorsParameters {
 	 * RECOMBINATION
 	 * ======================================
 	 */
-	public double _recombinationPerc = DefaultConfiguration.DEFAULT_RECOMBINANTION_PERC;
+	public double recombinationPerc = DefaultConfiguration.DEFAULT_RECOMBINANTION_PERC;
 	
 	// TODOM: Ordering: not ordered, ordered (based on natural genes ordering given by application)
 	//	public RecombinationOrderType recombinationOrder = DefaultConfiguration.DEFAULT_RECOMBINANTION_ORDER;
@@ -75,7 +75,7 @@ public class OperatorsParameters {
 	 * MUTATION
 	 * ======================================
 	 */
-	public double _mutationPerc = DefaultConfiguration.DEFAULT_MUTATION_PERC;
+	public double mutationPerc = DefaultConfiguration.DEFAULT_MUTATION_PERC;
 	
 	// TODOM: Auto (decrease based on current results and genes alphabet length if available), Fixed ratio
 	//	public MutationDecreaseType mutationDecreaseType =  = DefaultConfiguration.DEFAULT_MUTATION_DECREASE_TYPE; 

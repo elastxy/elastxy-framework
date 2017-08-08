@@ -19,7 +19,7 @@ import org.springframework.stereotype.Component;
 
 import it.red.algen.context.ContextSupplier;
 import it.red.algen.domain.Population;
-import it.red.algen.engine.interfaces.PopulationFactory;
+import it.red.algen.engine.factories.PopulationFactory;
 import it.red.algen.garden.domain.GardenSolution;
 import it.red.algen.garden.domain.Place;
 import it.red.algen.garden.domain.Tree;
@@ -51,9 +51,9 @@ public class GardenPopulationFactory implements PopulationFactory {
 	@Override
     public Population createNew() {
     	Population population = new Population();
-    	for(int i = 0; i < contextSupplier.getContext().parameters._initialSelectionNumber; i++){
+    	for(int i = 0; i < contextSupplier.getContext().parameters.initialSelectionNumber; i++){
     		List<Tree> listOfTrees = Arrays.asList(trees);
-    		if(contextSupplier.getContext().parameters._initialSelectionRandom){
+    		if(contextSupplier.getContext().parameters.initialSelectionRandom){
     			Collections.shuffle(listOfTrees);
     		}
     		GardenSolution solution = new GardenSolution(places, (Tree[])listOfTrees.toArray());

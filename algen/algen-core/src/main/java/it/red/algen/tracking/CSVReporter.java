@@ -12,26 +12,26 @@ import it.red.algen.stats.ExperimentStats;
 
 
 public class CSVReporter implements Reporter {
-	private String _outputDir = null;
+	private String outputDir = null;
 	
 	public CSVReporter(String path){
-		_outputDir = path;
+		outputDir = path;
 	}
 	
 	public void setOutputDir(String path){
-		_outputDir = path;
+		outputDir = path;
 	}
 	
 	public void createReports(ExperimentStats stats) {
 		try {
-			File outputDir = new File(_outputDir);
+			File outputDir = new File(this.outputDir);
 			outputDir.mkdirs();
-			CSVWriter writer = new CSVWriter(new FileWriter(new File(outputDir, "results_gen"+stats._generations+"_pop"+stats._lastGeneration.size()+"_"+Calendar.getInstance().getTimeInMillis()+".csv")), ';');
+			CSVWriter writer = new CSVWriter(new FileWriter(new File(outputDir, "results_gen"+stats.generations+"_pop"+stats.lastGeneration.size()+"_"+Calendar.getInstance().getTimeInMillis()+".csv")), ';');
 			List<String[]> csv = new ArrayList<String[]>();
-			csv.add(new String[] {"FITNESS", String.format("%1.3f", stats._lastGeneration.bestMatch.getFitness().getValue())});
-			csv.add(new String[] {"Last population size", String.valueOf(stats._lastGeneration.size())});
-			csv.add(new String[] {"Number of generations", String.valueOf(stats._generations)});
-			csv.add(new String[] {"Total time (sec)", String.valueOf(stats._time) });
+			csv.add(new String[] {"FITNESS", String.format("%1.3f", stats.lastGeneration.bestMatch.getFitness().getValue())});
+			csv.add(new String[] {"Last population size", String.valueOf(stats.lastGeneration.size())});
+			csv.add(new String[] {"Number of generations", String.valueOf(stats.generations)});
+			csv.add(new String[] {"Total time (sec)", String.valueOf(stats.time) });
 			
 			List<String[]> customPart = createCustomPart(stats);
 			csv.addAll(customPart);

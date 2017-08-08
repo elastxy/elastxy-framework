@@ -27,14 +27,14 @@ import it.red.algen.stats.ExperimentStats;
  */
 public class EnvObserver {
 	
-    private AlgorithmContext _context;
+    private AlgorithmContext context;
     
     public EnvObserver(AlgorithmContext context){
-        _context = context;
+        this.context = context;
     }
     
     public void newGenerationEvent(int number, Population newGen){
-        if(_context.monitoringConfiguration.verbose) _context.monitoringConfiguration.logger.out("\n*** Nuova generazione "+number+" > \n"+newGen+"\n");
+        if(context.monitoringConfiguration.verbose) context.monitoringConfiguration.logger.out("\n*** Nuova generazione "+number+" > \n"+newGen+"\n");
     }
     
     public void fitnessCalculatedEvent(Solution s){
@@ -42,55 +42,55 @@ public class EnvObserver {
     }
     
     public void illegalSolutionEvent(Solution s){
-        if(_context.monitoringConfiguration.verbose) _context.monitoringConfiguration.logger.out("!    "+s+" Soluzione non ammessa. "+s.getFitness().getLegalCheck());
+        if(context.monitoringConfiguration.verbose) context.monitoringConfiguration.logger.out("!    "+s+" Soluzione non ammessa. "+s.getFitness().getLegalCheck());
     }
     
     public void crossoverEvent(Solution father, Solution mother, List<Solution> sons){
-        if(_context.monitoringConfiguration.verbose) _context.monitoringConfiguration.logger.out("XXX CROSSOVER: \n"+father+"\n"+mother+"\n\t->\n"+sons.get(0)+"\n"+sons.get(1));
+        if(context.monitoringConfiguration.verbose) context.monitoringConfiguration.logger.out("XXX CROSSOVER: \n"+father+"\n"+mother+"\n\t->\n"+sons.get(0)+"\n"+sons.get(1));
     }
     
     public void mutationEvent(Solution original, Solution mutated){
-        if(_context.monitoringConfiguration.verbose) _context.monitoringConfiguration.logger.out("+++ MUTAZIONE: \n"+original+"\n\t-> \n"+mutated);
+        if(context.monitoringConfiguration.verbose) context.monitoringConfiguration.logger.out("+++ MUTAZIONE: \n"+original+"\n\t-> \n"+mutated);
     }
     
     public void goalReachedEvent(Evolver evolver){
-    	_context.monitoringConfiguration.logger.out("******* SUCCESS *******");
+    	context.monitoringConfiguration.logger.out("******* SUCCESS *******");
         showResults(evolver);
     }
     
     public void stableSolutionEvent(Evolver evolver){
-    	_context.monitoringConfiguration.logger.out("******* STABLE SOLUTION *******");
+    	context.monitoringConfiguration.logger.out("******* STABLE SOLUTION *******");
         showResults(evolver);
     }
     
     public void historyEndedEvent(Evolver evolver){
-    	_context.monitoringConfiguration.logger.out("--- STORY HAS ENDED WITHOUT REACHING GOAL... ---");
+    	context.monitoringConfiguration.logger.out("--- STORY HAS ENDED WITHOUT REACHING GOAL... ---");
         showResults(evolver);
     }
     
     private void showResults(Evolver evolver){
-    	Logger log = _context.monitoringConfiguration.logger;
+    	Logger log = context.monitoringConfiguration.logger;
         log.out("\n##################### STATS #####################");
         ExperimentStats stats = evolver.getStats();
         log.out("Best match:");
-        log.out(stats._lastGeneration.bestMatch);
-        log.out("Number of generations: "+stats._generations);
-        log.out("Total time (sec): "+stats._time);
-        if(_context.parameters._elitarism) {
-        	log.out("Total generations with same fitness: "+stats._totIdenticalFitnesses);
+        log.out(stats.lastGeneration.bestMatch);
+        log.out("Number of generations: "+stats.generations);
+        log.out("Total time (sec): "+stats.time);
+        if(context.parameters.elitarism) {
+        	log.out("Total generations with same fitness: "+stats.totIdenticalFitnesses);
         }
         
-        if(_context.monitoringConfiguration.traceHistory) {
+        if(context.monitoringConfiguration.traceHistory) {
             log.out("\n===================== HISTORY =====================");
             log.out("History of generations");
-            List<Population> generations = stats._generationHistory;
+            List<Population> generations = stats.generationHistory;
             for(int i=0; i < generations.size(); i++){
             	log.out(String.format("Generation [%d] => Best match %s", i+1, generations.get(i).bestMatch));
             }
         }
         
-        if(_context.monitoringConfiguration.verbose && _context.monitoringConfiguration.reporter!=null) {
-        	_context.monitoringConfiguration.reporter.createReports(stats);
+        if(context.monitoringConfiguration.verbose && context.monitoringConfiguration.reporter!=null) {
+        	context.monitoringConfiguration.reporter.createReports(stats);
         }
     }
     
