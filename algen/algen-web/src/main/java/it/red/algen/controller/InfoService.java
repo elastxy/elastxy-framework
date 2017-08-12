@@ -19,9 +19,11 @@ package it.red.algen.controller;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import it.red.algen.application.ServiceProperties;
+
 @Component
 public class InfoService {
-
+ 
 	@Autowired
 	private ServiceProperties configuration;
 

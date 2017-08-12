@@ -6,14 +6,10 @@ import java.util.Random;
 import java.util.logging.Logger;
 
 import it.red.algen.context.AlgorithmContext;
-import it.red.algen.domain.Env;
-import it.red.algen.domain.Population;
-import it.red.algen.domain.interfaces.Fitness;
-import it.red.algen.domain.interfaces.Solution;
-import it.red.algen.engine.standard.StandardFitnessTester;
-import it.red.algen.engine.support.BestMatchesUtil;
-import it.red.algen.engine.support.EnvUtil;
-import it.red.algen.engine.support.StopConditionVerifier;
+import it.red.algen.domain.experiment.Env;
+import it.red.algen.domain.experiment.Fitness;
+import it.red.algen.domain.experiment.Population;
+import it.red.algen.domain.experiment.Solution;
 import it.red.algen.stats.ExperimentStats;
 import it.red.algen.tracking.EnvObservable;
 import it.red.algen.tracking.EnvObserver;
@@ -54,7 +50,7 @@ public class Evolver implements EnvObservable {
     }
 
     public ExperimentStats getStats(){
-    	return EnvUtil.getStats(env);
+    	return EnvSupport.getStats(env);
     }
     
 
@@ -68,7 +64,7 @@ public class Evolver implements EnvObservable {
      */
     public void evolve(){
     	
-    	EnvUtil.startTime(env);
+    	EnvSupport.startTime(env);
         
         
     	// TEST FITNESS - initial gen
@@ -85,7 +81,7 @@ public class Evolver implements EnvObservable {
         	Population nextGeneration = selection(generationSize);
         	
         	// BEST MATCH - calculate
-        	List<Solution> bestMatches = BestMatchesUtil.extractBestMatches(nextGeneration, context.parameters.elitarism);
+        	List<Solution> bestMatches = BestMatchesSupport.extractBestMatches(nextGeneration, context.parameters.elitarism);
 
         	// LOOP OVER NON-BEST
         	for(int s=0; s < generationSize-bestMatches.size(); s=s+2){
@@ -122,7 +118,6 @@ public class Evolver implements EnvObservable {
         while(!endConditionFound);
         
         // END OF EXPERIMENT
-        EnvUtil.stopTime(env);
     }
 
 
@@ -144,6 +139,7 @@ public class Evolver implements EnvObservable {
 		    if(env.currentGen.bestMatch.getFitness().sameOf(nextGenFitness)){
 		    	env.totIdenticalFitnesses++;
 		        if(stopVerifier.isStable(env.totIdenticalFitnesses)){
+		        	EnvSupport.stopTime(env);
 		        	fireStableSolutionEvent();
 		        	endConditionFound = true;
 		        }
@@ -155,15 +151,17 @@ public class Evolver implements EnvObservable {
 		
 		// Check goal reached
 		if(!endConditionFound && env.currentGen.bestMatch.getFitness().fit()){
-		    fireGoalReachedEvent();
+			EnvSupport.stopTime(env);
 		    env.targetReached = true;
 		    endConditionFound = true;
+		    fireGoalReachedEvent();
 		}
 		
 		// Check time stop
-		if(!endConditionFound && !stopVerifier.onTime(env.currentGenNumber, EnvUtil.getLifeTimeInMillis(env))){
-			fireHistoryEndedEvent();
-		    endConditionFound = true;
+		if(!endConditionFound && !stopVerifier.onTime(env.currentGenNumber, EnvSupport.getLifeTimeInMillis(env))){
+			EnvSupport.stopTime(env);
+			endConditionFound = true;
+		    fireHistoryEndedEvent();
 		}
 		return endConditionFound;
 	}
@@ -196,7 +194,7 @@ public class Evolver implements EnvObservable {
 		    fireCrossoverEvent(parents[0], parents[1], sons);
 		}
 		else {
-			sons = Arrays.asList(parents[0].clone(), parents[1].clone());            
+			sons = Arrays.asList(parents[0].copy(), parents[1].copy());            
 		}
 		return sons;
 	}
@@ -206,14 +204,14 @@ public class Evolver implements EnvObservable {
 		boolean mute1 = RANDOMIZER.nextDouble() < context.parameters.mutationPerc;
 		if(mute0) { 
 		    Solution old = sons.get(0);
-		    Solution niu = old.clone();
+		    Solution niu = old.copy();
 		    context.mutator.mutate(niu);
 		    sons.set(0, niu);
 		    fireMutationEvent(old, niu);
 		}
 		if(mute1) { 
 		    Solution old = sons.get(1);
-		    Solution niu = old.clone();
+		    Solution niu = old.copy();
 		    context.mutator.mutate(niu);
 		    sons.set(1, niu);
 		    fireMutationEvent(old, niu);

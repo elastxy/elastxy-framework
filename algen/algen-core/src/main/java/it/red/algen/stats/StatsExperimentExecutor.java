@@ -16,7 +16,7 @@ import org.apache.commons.math3.stat.descriptive.DescriptiveStatistics;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.config.AutowireCapableBeanFactory;
 
-import it.red.algen.engine.factories.EnvFactory;
+import it.red.algen.dataaccess.EnvFactory;
 
 
 
@@ -49,7 +49,7 @@ public class StatsExperimentExecutor {
         	globalStats.totSuccesses++;;
         }
         globalStats.totGenerations += stats.generations;
-        double bestMatchFitness = stats.lastGeneration.bestMatch.getFitness().getValue();
+        double bestMatchFitness = stats.lastGeneration.bestMatch.getFitness().getValue().doubleValue();
         globalStats.totFitness += bestMatchFitness;
         globalStats.maxFitness = Optional.of(globalStats.minFitness.isPresent() ? Math.max(globalStats.minFitness.get(), bestMatchFitness) : bestMatchFitness);
         globalStats.minFitness = Optional.of(globalStats.minFitness.isPresent() ? Math.min(globalStats.minFitness.get(), bestMatchFitness) : bestMatchFitness);

@@ -12,7 +12,7 @@ package it.red.algen.stats;
 
 import java.util.List;
 
-import it.red.algen.domain.Population;
+import it.red.algen.domain.experiment.Population;
 
 /**
  * @author grossi

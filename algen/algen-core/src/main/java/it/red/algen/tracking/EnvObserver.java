@@ -13,8 +13,8 @@ package it.red.algen.tracking;
 import java.util.List;
 
 import it.red.algen.context.AlgorithmContext;
-import it.red.algen.domain.Population;
-import it.red.algen.domain.interfaces.Solution;
+import it.red.algen.domain.experiment.Population;
+import it.red.algen.domain.experiment.Solution;
 import it.red.algen.engine.Evolver;
 import it.red.algen.stats.ExperimentStats;
 
@@ -72,10 +72,9 @@ public class EnvObserver {
     	Logger log = context.monitoringConfiguration.logger;
         log.out("\n##################### STATS #####################");
         ExperimentStats stats = evolver.getStats();
-        log.out("Best match:");
-        log.out(stats.lastGeneration.bestMatch);
+        log.out("Best match:"+stats.lastGeneration.bestMatch);
         log.out("Number of generations: "+stats.generations);
-        log.out("Total time (sec): "+stats.time);
+        log.out("Total time (ms): "+stats.time);
         if(context.parameters.elitarism) {
         	log.out("Total generations with same fitness: "+stats.totIdenticalFitnesses);
         }

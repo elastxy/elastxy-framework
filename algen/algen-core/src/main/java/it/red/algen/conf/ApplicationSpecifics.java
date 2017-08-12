@@ -3,6 +3,13 @@ package it.red.algen.conf;
 import java.util.HashMap;
 import java.util.Map;
 
+
+
+/**
+ * Generic format specifications passed to REST algorithm services
+ * 
+ * @author red
+ */
 public class ApplicationSpecifics {
 	
 	// TODOM: inheritance
@@ -17,6 +24,10 @@ public class ApplicationSpecifics {
 
 	public Integer getTargetInteger(String parKey){
 		return getInteger(target, parKey);
+	}
+
+	public Long getTargetLong(String parKey){
+		return getLong(target, parKey);
 	}
 	
 	public void putTarget(String key, Object value){
@@ -33,7 +44,9 @@ public class ApplicationSpecifics {
 		return getInteger(params, parKey);
 	}
 	
-	
+	public Long getParamLong(String parKey){
+		return getLong(params, parKey);
+	}
 	
 	private String getString(Map<String, Object> map, String parKey){
 		return map.get(parKey).toString();
@@ -47,6 +60,19 @@ public class ApplicationSpecifics {
 		}
 		else if(parValue instanceof String){
 			result = Integer.parseInt((String) parValue);
+		}
+		return result;
+	}
+
+	
+	public Long getLong(Map<String, Object> map, String parKey){
+		Long result = null;
+		Object parValue = map.get(parKey);
+		if(parValue instanceof Number) {
+			result = ((Number)parValue).longValue();
+		}
+		else if(parValue instanceof String){
+			result = Long.parseLong((String) parValue);
 		}
 		return result;
 	}

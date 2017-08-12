@@ -188,4 +188,46 @@
         </plugins>
     </build>
 	
+	
+	    			
+	<profiles>
+		<profile>
+			<id>exclusions</id>
+			<activation>
+				<activeByDefault>true</activeByDefault>
+			</activation>
+			
+			   <build>
+				   
+			        <plugins>
+			        	
+				        <plugin>
+						  <groupId>org.apache.maven.plugins</groupId>
+						  <artifactId>maven-compiler-plugin</artifactId>
+						  <configuration>
+						    <excludes>
+						      <exclude>**/legacy/**/*.java</exclude>
+						    </excludes>
+						  </configuration>
+						  <executions>
+						    <execution>
+						      <id>default-testCompile</id>
+						      <phase>test-compile</phase>
+						      <configuration>
+						        <testExcludes>
+						          <exclude>**/legacy/**/*.java</exclude>
+						        </testExcludes>
+						      </configuration> 
+						      <goals>
+						        <goal>testCompile</goal>
+						      </goals>
+						    </execution>                  
+						  </executions>
+						</plugin>
+					</plugins>
+					
+				</build>
+  		</profile>
+	</profiles>
+	
 </project>

@@ -15,8 +15,8 @@ import org.springframework.stereotype.Component;
 
 import it.red.algen.context.AlgorithmContext;
 import it.red.algen.context.ContextSupplier;
+import it.red.algen.data.EnvFactory;
 import it.red.algen.expressions.context.ExprBenchmark;
-import it.red.algen.expressions.engine.ExprEnvFactory;
 import it.red.algen.stats.Experiment;
 import it.red.algen.stats.ExperimentStats;
 
@@ -33,7 +33,7 @@ public class DistributedTask {
 	private ContextSupplier contextSupplier;
 	
 	@Autowired
-	private ExprEnvFactory exprEnvFactory;
+	private EnvFactory envFactory;
 	
 	@Autowired
 	private ExprBenchmark exprBenchmark;
@@ -54,7 +54,7 @@ public class DistributedTask {
             @Override
             public ExperimentStats call() throws Exception {
         		contextSupplier.init(context);
-        		Experiment e = new Experiment(exprEnvFactory);
+        		Experiment e = new Experiment(envFactory);
         		beanFactory.autowireBean(e);
                 e.run();
                 return e.getStats();
@@ -65,7 +65,7 @@ public class DistributedTask {
             @Override
             public ExperimentStats call() throws Exception {
         		contextSupplier.init(context);
-        		Experiment e = new Experiment(exprEnvFactory);
+        		Experiment e = new Experiment(envFactory);
         		beanFactory.autowireBean(e);
                 e.run();
                 return e.getStats();
