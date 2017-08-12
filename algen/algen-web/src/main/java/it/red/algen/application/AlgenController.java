@@ -24,10 +24,12 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import it.red.algen.context.AlgorithmContext;
 import it.red.algen.controller.InfoService;
 import it.red.algen.service.ExpressionsService;
 import it.red.algen.stats.ExperimentStats;
@@ -70,37 +72,37 @@ public class AlgenController {
 	/**
 	 * ********************* EXPERIMENT CONTROLLER *********************
 	 */
-//	@RequestMapping(path = "/experiment/{domain}", method = RequestMethod.POST)
-//	@ResponseBody
-//	public ExperimentStats calculateWithParams(
-//			@PathVariable String domain,  
-//			@RequestBody AlgorithmContext context) {
-//		
-//		contextSupplier.init(context);
-//		
-//	 	Experiment e = null;
-//	 	if("garden".equals(domain)){
-//	 		setupGardenContext(context);
-//			context.monitoringConfiguration.reporter = new GardenCSVReporter(GardenApplication.STATS_DIR);
-//	        e = new Experiment(gardenEnvFactory);
-//	 	}
-//	 	else if("expressions".equals(domain)){
-//	 		setupExprContext(context);
-//	 		context.monitoringConfiguration.reporter = new CSVReporter(ExprApplication.STATS_DIR);
-//	        e = new Experiment(exprEnvFactory);
-//	 	}
-//	 	beanFactory.autowireBean(e);
-//	 	
-//        e.run();
-//        
-//        ExperimentStats stats = e.getStats();
-//        
-//        contextSupplier.destroy();
-//        
-//        return stats;
-//	}
-//
-//
+	@RequestMapping(path = "/experiment/{domain}", method = RequestMethod.POST)
+	@ResponseBody
+	public ExperimentStats calculateWithParams(
+			@PathVariable String domain,  
+			@RequestBody AlgorithmContext context) {
+		logger.info("REQUEST Service /experiment/{domain} => "+domain+""+context);
+
+		ExperimentStats stats = null;
+		if("expressions".equals(domain)){ 
+		 	stats = expressionsService.executeExperiment(context);
+		}
+		logger.info("RESPONSE Service /experiment/{domain} => "+stats);
+		return stats;
+	}
+
+
+	@RequestMapping("/test/{domain}")
+	@ResponseBody
+	public ExperimentStats calculateTest(@PathVariable String domain) {
+		logger.info("REQUEST Service /test/{domain} => "+domain);
+
+		ExperimentStats stats = null;
+		if("expressions".equals(domain)){ 
+		 	stats = expressionsService.executeBenchmark();
+		}
+		logger.info("RESPONSE Service /test/{domain} => "+stats);
+		return stats;
+	}
+	
+	
+
 //	// TODOM: structured results
 //	@RequestMapping(path = "/analysis/{domain}/{experiments}", method = RequestMethod.POST)
 //	@ResponseBody
@@ -143,28 +145,6 @@ public class AlgenController {
 //		context.recombinator = new GardenRecombinator();
 //	}
 //
-//	private void setupExprContext(AlgorithmContext context) {
-//		context.fitnessCalculator = new ExprFitnessCalculator();
-//		context.selector = new StandardSelector();
-//		context.selector.setup(context.parameters);
-//		context.mutator = new ExprMutator();
-//		context.mutator.setGenesFactory(exprGenesFactory);
-//		context.recombinator = new ExprRecombinator();
-//	}
-
-	
-	@RequestMapping("/test/{domain}")
-	@ResponseBody
-	public ExperimentStats calculateTest(@PathVariable String domain) {
-		logger.info("REQUEST Service /test/{domain} => "+domain);
-
-		ExperimentStats stats = null;
-		if("expressions".equals(domain)){ 
-		 	stats = expressionsService.executeBenchmark();
-		}
-		logger.info("RESPONSE Service /test/{domain} => "+stats);
-		return stats;
-	}
 
 
 //	@RequestMapping(path = "/trial/{domain}/{experiments}", method = RequestMethod.POST)
