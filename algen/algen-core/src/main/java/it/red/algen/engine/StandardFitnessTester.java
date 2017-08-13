@@ -1,5 +1,6 @@
 package it.red.algen.engine;
 
+import java.math.BigDecimal;
 import java.util.Iterator;
 
 import it.red.algen.domain.experiment.Fitness;
@@ -42,6 +43,8 @@ public class StandardFitnessTester implements FitnessTester {
             		fireFitnessCalculatedEvent(solution);
             	}
             }
+            
+            // TODOA: manage target.targetFitness
             if(firstTest ||
             		(population.bestMatch!=null && solution.getFitness().greaterThan(population.bestMatch.getFitness()))){
             	population.bestMatch = solution;

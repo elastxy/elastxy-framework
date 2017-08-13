@@ -49,8 +49,9 @@ public class MegEnvFactory implements EnvFactory {
         // Defines goal representation
         PerformanceTarget<String,Double> gardenTarget = new PerformanceTarget<String,Double>();
         gardenTarget.setGoal(contextSupplier.getContext().applicationSpecifics.getTargetString(MegApplication.TARGET_WELLNESS)); // TODOA: also sad...
+        gardenTarget.setLevel(contextSupplier.getContext().stopConditions.targetFitness);
         // Determines goal rough measure: minimum possible unhappiness (illness), 0.0
-        gardenTarget.setMeasure(startGen.solutions.get(0).getGenotype().getPositions().size() * 2.0);  // 2 is the maximum value happiness can reach
+        gardenTarget.setReferenceMeasure(startGen.solutions.get(0).getGenotype().getPositions().size() * 2.0);  // 2 is the maximum value happiness can reach
         
         // Creates environment
         Env env = new Env(gardenTarget, startGen);

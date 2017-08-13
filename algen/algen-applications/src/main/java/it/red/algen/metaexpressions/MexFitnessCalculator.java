@@ -50,9 +50,9 @@ public class MexFitnessCalculator implements FitnessCalculator<GenericSolution,P
         	distance = Math.abs(tValue-sValue);
         	
         	// Normalize fitness to 1.0
-            normalized = BigDecimal.ONE.subtract(new BigDecimal(distance).setScale(20).divide(target.getMeasure().setScale(20), BigDecimal.ROUND_HALF_UP));
+            normalized = BigDecimal.ONE.subtract(new BigDecimal(distance).setScale(20).divide(target.getReferenceMeasure().setScale(20), BigDecimal.ROUND_HALF_UP));
         } catch(IllegalSolutionException ex){ 
-            legalCheck = String.format("Division by 0 not allowed: second operand not valid [%s].",target.getMeasure());
+            legalCheck = String.format("Division by 0 not allowed: second operand not valid [%s].",target.getReferenceMeasure());
             normalized = BigDecimal.ZERO;
         }
         

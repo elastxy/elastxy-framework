@@ -22,7 +22,7 @@ public class ExprBenchmark implements BenchmarkContextBuilder {
 	
 	private static final int DEFAULT_MAX_OPERAND_VALUE = 1000;
 	
-    private static final long INITIAL_SELECTION_NUMBER = 10;
+    private static final long INITIAL_SELECTION_NUMBER = 100;
     private static final boolean INITIAL_SELECTION_RANDOM = true;
     
     private static final int MAX_ITERATIONS = -1;

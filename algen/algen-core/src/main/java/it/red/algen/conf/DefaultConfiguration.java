@@ -10,6 +10,8 @@
 
 package it.red.algen.conf;
 
+import java.math.BigDecimal;
+
 /**
  *
  * @author grossi
@@ -28,8 +30,9 @@ public class DefaultConfiguration {
     public static final double 	DEFAULT_MUTATION_PERC = 0.1;
     
     // STOP CONDITIONS
-    public static final int 	MAX_ITERATIONS = -1;
-    public static final int 	MAX_LIFETIME_MS = 60000;
-    public static final int 	MAX_IDENTICAL_FITNESSES = -1;
+    public static final BigDecimal	TARGET_LEVEL = BigDecimal.ONE;
+    public static final int 		MAX_ITERATIONS = -1;
+    public static final int 		MAX_LIFETIME_MS = 60000;
+    public static final int 		MAX_IDENTICAL_FITNESSES = -1;
 
 }

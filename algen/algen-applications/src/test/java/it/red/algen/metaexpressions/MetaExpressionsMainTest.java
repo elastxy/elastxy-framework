@@ -24,9 +24,6 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import it.red.algen.TestConfig;
 import it.red.algen.context.AlgorithmContext;
 import it.red.algen.context.ContextSupplier;
-import it.red.algen.dataaccess.EnvFactory;
-import it.red.algen.dataaccess.GenomaProvider;
-import it.red.algen.metaexpressions.MexBenchmark;
 import it.red.algen.stats.Experiment;
 
 
@@ -42,10 +39,10 @@ public class MetaExpressionsMainTest {
 	private ContextSupplier contextSupplier;
 	
 	@Autowired
-	private EnvFactory envFactory;
+	private MexEnvFactory envFactory;
 	
 	@Autowired
-	private GenomaProvider genomaProvider;
+	private MexGenomaProvider genomaProvider;
 	
 	@Autowired
 	private MexBenchmark benchmark;

@@ -10,6 +10,8 @@
 
 package it.red.algen.domain.experiment;
 
+import java.math.BigDecimal;
+
 /**
  * 
  * The goal toward which the whole algorithm evolves.
@@ -52,6 +54,16 @@ public interface Target<G,M> {
 	 * The simple measure value to compare solutions performance to
 	 * @return
 	 */
-	public M getMeasure();
-	public void setMeasure(M p);
+	public M getReferenceMeasure();
+	public void setReferenceMeasure(M p);
+	
+	
+	/**
+	 * The level of the goal, with respect to normalized fitness:
+	 * 1.0 BEST
+	 * 0.5 AVERAGE
+	 * 0.0 WORST
+	 */
+	public BigDecimal getLevel();
+	public void setLevel(BigDecimal level);
 }

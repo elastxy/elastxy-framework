@@ -62,6 +62,7 @@ public class MexEnvFactory implements EnvFactory {
         Long target = context.applicationSpecifics.getTargetLong(MexApplication.TARGET_EXPRESSION_RESULT);
         PerformanceTarget exprTarget = new PerformanceTarget();
         exprTarget.setGoal(target);
+        exprTarget.setLevel(contextSupplier.getContext().stopConditions.targetFitness);
 
         // Determines goal rough measure by deriving from extreme solutions
         // TODOM concept of boundaries
@@ -72,7 +73,7 @@ public class MexEnvFactory implements EnvFactory {
         if(raw.value.doubleValue() < 0){
         	throw new RuntimeException("Negative distance not allowed: check numbers precision.");
         }
-        exprTarget.setMeasure(raw.value);
+        exprTarget.setReferenceMeasure(raw.value);
         
         // Creates environment
         Env env = new Env(exprTarget, startGen);

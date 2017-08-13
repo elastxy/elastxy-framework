@@ -64,7 +64,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n\t\"applicationSpecifics\": {\n\t\t\"target\" : {\n\t\t\t\"TARGET_EXPRESSION_RESULT\" : 235000\n\t\t},\n\t\t\"params\" : {\n\t\t\t\"MAX_OPERAND_VALUE\" : \"1000\"\n\t\t}\n\t},\n\t\"parameters\": {\n\t\t\"_recombinationPerc\": 0.8,\n\t\t\"_mutationPerc\": 0.1,\n\t\t\"_elitarism\": true,\n\t\t\"_initialSelectionNumber\": 1000,\n\t\t\"_initialSelectionRandom\": false\n\t},\n\t\"stopConditions\": {\n\t\t\"maxIterations\": -1,\n\t\t\"maxLifetimeMs\": 3000000,\n\t\t\"maxIdenticalFitnesses\": -1\n\t},\n\t\"monitoringConfiguration\": {\n\t\t\"verbose\": false\n\t}\n}"
+							"raw": "{\n\t\"applicationSpecifics\": {\n\t\t\"target\" : {\n\t\t\t\"TARGET_EXPRESSION_RESULT\" : 235000\n\t\t},\n\t\t\"params\" : {\n\t\t\t\"MAX_OPERAND_VALUE\" : \"1000\"\n\t\t}\n\t},\n\t\"parameters\": {\n\t\t\"recombinationPerc\": 0.8,\n\t\t\"mutationPerc\": 0.2,\n\t\t\"elitarism\": true,\n\t\t\"initialSelectionNumber\": 100,\n\t\t\"initialSelectionRandom\": true\n\t},\n\t\"stopConditions\": {\n\t\t\"maxIterations\": -1,\n\t\t\"maxLifetimeMs\": 3000,\n\t\t\"maxIdenticalFitnesses\": -1\n\t},\n\t\"monitoringConfiguration\": {\n\t\t\"verbose\": false\n\t}\n}"
 						},
 						"description": ""
 					},
@@ -84,16 +84,16 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n\t\"applicationSpecifics\": {\n\t\t\"target\" : {\n\t\t\t\"TARGET_EXPRESSION_RESULT\" : 235000\n\t\t},\n\t\t\"params\" : {\n\t\t\t\"MAX_OPERAND_VALUE\" : \"1000\"\n\t\t}\n\t},\n\t\"parameters\": {\n\t\t\"_recombinationPerc\": 0.8,\n\t\t\"_mutationPerc\": 0.1,\n\t\t\"_elitarism\": true,\n\t\t\"_initialSelectionNumber\": 10000,\n\t\t\"_initialSelectionRandom\": true\n\t},\n\t\"stopConditions\": {\n\t\t\"maxIterations\": 1000,\n\t\t\"maxLifetimeMs\": 3000,\n\t\t\"maxIdenticalFitnesses\": -1\n\t},\n\t\"monitoringConfiguration\": {\n\t\t\"verbose\": false\n\t}\n}"
+							"raw": "{\n\t\"applicationSpecifics\": {\n\t\t\"target\" : {\n\t\t\t\"TARGET_EXPRESSION_RESULT\" : 235000\n\t\t},\n\t\t\"params\" : {\n\t\t\t\"MAX_OPERAND_VALUE\" : \"1000\"\n\t\t}\n\t},\n\t\"parameters\": {\n\t\t\"recombinationPerc\": 0.8,\n\t\t\"mutationPerc\": 0.2,\n\t\t\"elitarism\": true,\n\t\t\"initialSelectionNumber\": 100,\n\t\t\"initialSelectionRandom\": true\n\t},\n\t\"stopConditions\": {\n\t\t\"maxIterations\": -1,\n\t\t\"maxLifetimeMs\": 3000,\n\t\t\"maxIdenticalFitnesses\": -1\n\t},\n\t\"monitoringConfiguration\": {\n\t\t\"verbose\": false\n\t}\n}"
 						},
 						"description": ""
 					},
 					"response": []
 				},
 				{
-					"name": "/benchmark/expressions",
+					"name": "/trial/expressions",
 					"request": {
-						"url": "http://{{ip}}:{{port}}/benchmark/expressions/5",
+						"url": "http://{{ip}}:{{port}}/trial/expressions/5",
 						"method": "POST",
 						"header": [
 							{
@@ -104,7 +104,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n\t\"applicationSpecifics\": {\n\t\t\"target\" : {\n\t\t\t\"TARGET_EXPRESSION_RESULT\" : 235000\n\t\t},\n\t\t\"params\" : {\n\t\t\t\"MAX_OPERAND_VALUE\" : \"1000\"\n\t\t}\n\t},\n\t\"parameters\": {\n\t\t\"_initialSelectionNumber\": 10000,\n\t\t\"_initialSelectionRandom\": true\n\t},\n\t\"stopConditions\": {\n\t\t\"maxIterations\": 1000,\n\t\t\"maxLifetimeMs\": 3000\n\t},\n\t\"monitoringConfiguration\": {\n\t}\n}"
+							"raw": "{\n\t\"applicationSpecifics\": {\n\t\t\"target\" : {\n\t\t\t\"TARGET_EXPRESSION_RESULT\" : 235000\n\t\t},\n\t\t\"params\" : {\n\t\t\t\"MAX_OPERAND_VALUE\" : \"1000\"\n\t\t}\n\t},\n\t\"parameters\": {\n\t\t\"initialSelectionNumber\": 100,\n\t\t\"initialSelectionRandom\": true\n\t},\n\t\"stopConditions\": {\n\t\t\"maxIterations\": -1,\n\t\t\"maxLifetimeMs\": 3000\n\t},\n\t\"monitoringConfiguration\": {\n\t}\n}"
 						},
 						"description": ""
 					},
@@ -135,7 +135,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n\t\"parameters\": {\n\t\t\"_recombinationPerc\": 0.7,\n\t\t\"_mutationPerc\": 0.2,\n\t\t\"_elitarism\": false,\n\t\t\"_initialSelectionNumber\": 10000,\n\t\t\"_initialSelectionRandom\": false\n\t},\n\t\"stopConditions\": {\n\t\t\"maxIterations\": -1,\n\t\t\"maxLifetimeMs\": 3000,\n\t\t\"maxIdenticalFitnesses\": 20\n\t},\n\t\"monitoringConfiguration\": {\n\t\t\"verbose\": false\n\t}\n}"
+							"raw": "{\n\t\"applicationSpecifics\": {\n\t\t\"target\" : {\n\t\t\t\"TARGET_WELLNESS\" : \"happy\"\n\t\t},\n\t\t\"params\" : {\n\t\t\t\"LIMITED_TREES\" : false\n\t\t}\n\t},\n\t\"parameters\": {\n\t\t\"_recombinationPerc\": 0.8,\n\t\t\"_mutationPerc\": 0.2,\n\t\t\"_elitarism\": false,\n\t\t\"_initialSelectionNumber\": 100,\n\t\t\"_initialSelectionRandom\": false\n\t},\n\t\"stopConditions\": {\n\t\t\"maxIterations\": -1,\n\t\t\"maxLifetimeMs\": 3000,\n\t\t\"maxIdenticalFitnesses\": -1\n\t},\n\t\"monitoringConfiguration\": {\n\t\t\"verbose\": false\n\t}\n}"
 						},
 						"description": ""
 					},
@@ -144,7 +144,7 @@
 				{
 					"name": "/analysis/garden",
 					"request": {
-						"url": "http://{{ip}}:{{port}}/analysis/garden/10",
+						"url": "http://{{ip}}:{{port}}/analysis/garden/5",
 						"method": "POST",
 						"header": [
 							{
@@ -155,7 +155,27 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n\t\"parameters\": {\n\t\t\"_recombinationPerc\": 0.8,\n\t\t\"_mutationPerc\": 0.1,\n\t\t\"_elitarism\": true,\n\t\t\"_initialSelectionNumber\": 100,\n\t\t\"_initialSelectionRandom\": true\n\t},\n\t\"stopConditions\": {\n\t\t\"maxIterations\": -1,\n\t\t\"maxLifetimeMs\": 3000,\n\t\t\"maxIdenticalFitnesses\": -1\n\t},\n\t\"monitoringConfiguration\": {\n\t\t\"verbose\": false\n\t}\n}"
+							"raw": "{\n\t\"applicationSpecifics\": {\n\t\t\"target\" : {\n\t\t\t\"TARGET_WELLNESS\" : \"happy\"\n\t\t},\n\t\t\"params\" : {\n\t\t\t\"LIMITED_TREES\" : false\n\t\t}\n\t},\n\t\"parameters\": {\n\t\t\"recombinationPerc\": 0.8,\n\t\t\"mutationPerc\": 0.2,\n\t\t\"elitarism\": true,\n\t\t\"initialSelectionNumber\": 100,\n\t\t\"initialSelectionRandom\": true\n\t},\n\t\"stopConditions\": {\n\t\t\"maxIterations\": -1,\n\t\t\"maxLifetimeMs\": 3000,\n\t\t\"maxIdenticalFitnesses\": -1\n\t},\n\t\"monitoringConfiguration\": {\n\t\t\"verbose\": false\n\t}\n}"
+						},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "/trial/garden",
+					"request": {
+						"url": "http://{{ip}}:{{port}}/trial/garden/5",
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"applicationSpecifics\": {\n\t\t\"target\" : {\n\t\t\t\"TARGET_WELLNESS\" : \"happy\"\n\t\t},\n\t\t\"params\" : {\n\t\t\t\"LIMITED_TREES\" : false\n\t\t}\n\t},\n\t\"parameters\": {\n\t\t\"recombinationPerc\": 0.8,\n\t\t\"mutationPerc\": 0.2,\n\t\t\"elitarism\": false,\n\t\t\"initialSelectionNumber\": 100,\n\t\t\"initialSelectionRandom\": true\n\t},\n\t\"stopConditions\": {\n\t\t\"maxIterations\": -1,\n\t\t\"maxLifetimeMs\": 3000,\n\t\t\"maxIdenticalFitnesses\": -1\n\t},\n\t\"monitoringConfiguration\": {\n\t\t\"verbose\": false\n\t}\n}"
 						},
 						"description": ""
 					},

@@ -42,7 +42,7 @@ public class MegFitnessCalculator implements FitnessCalculator<GenericSolution,P
     	// Grow the offspring to evaluate it
     	solution.phenotype = incubator.grow((SequenceGenotype)solution.genotype);
 //    	List<Double> locationsUnappiness = ((UserPhenotype<GardenWellness>)solution.phenotype).getValue().locationsUnhappyness;
-    	List<Double> locationsUnappiness = ((GardenWellness)solution.phenotype.getValue()).locationsUnhappyness;
+    	List<Double> locationsUnappiness = ((GardenWellness)((UserPhenotype)solution.phenotype).getValue()).locationsUnhappyness;
         
     	// Calculate global garden happiness
 //        	OptionalDouble averageWellness = locationsHappiness.stream().mapToDouble(a -> a).average();
@@ -56,7 +56,7 @@ public class MegFitnessCalculator implements FitnessCalculator<GenericSolution,P
     	}
     	else {
     		BigDecimal bh = new BigDecimal(totalUnhappyness).setScale(20, BigDecimal.ROUND_HALF_UP);
-    		BigDecimal bt = new BigDecimal(target.getMeasure()).setScale(20, BigDecimal.ROUND_HALF_UP);
+    		BigDecimal bt = new BigDecimal(target.getReferenceMeasure()).setScale(20, BigDecimal.ROUND_HALF_UP);
     		if("happy".equals(target.getGoal()) || "maximum".equals(target.getGoal())) {
     			normalized = BigDecimal.ONE.subtract(bh.divide(bt, BigDecimal.ROUND_HALF_UP));
     		}

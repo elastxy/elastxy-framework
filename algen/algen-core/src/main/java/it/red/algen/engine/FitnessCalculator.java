@@ -11,7 +11,6 @@ import it.red.algen.domain.experiment.Target;
  * @param <S>
  * @param <T>
  * @param <F>
- * @param <P>
  */
 public interface FitnessCalculator<S extends Solution, T extends Target, F extends Fitness> {
 
