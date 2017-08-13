@@ -42,12 +42,17 @@ public class StatsExperimentExecutor {
     }
     
     private void addStats(ExperimentStats stats){
-        globalStats.totTime += stats.time;
-        
+    	
+    	// General stats
         if(stats.targetReached){
         	globalStats.successExecutionTimes.add(stats.time);
-        	globalStats.totSuccesses++;;
+        	globalStats.totSuccesses++;
+        	globalStats.bestMatch = Optional.of(stats.lastGeneration.bestMatch.toStringDetails());
         }
+        globalStats.bestMatches.add(stats.lastGeneration.bestMatch.toStringDetails());
+        
+        // Execution stats
+        globalStats.totTime += stats.time;
         globalStats.totGenerations += stats.generations;
         double bestMatchFitness = stats.lastGeneration.bestMatch.getFitness().getValue().doubleValue();
         globalStats.totFitness += bestMatchFitness;
@@ -86,19 +91,22 @@ public class StatsExperimentExecutor {
     	StringBuffer buffer = new StringBuffer();
     	
         outln(buffer, "\n\n@@@@@@@@@@@@  GLOBAL STATS @@@@@@@@@@@");
+        outln(buffer, "EXAMPLE SOLUTION: "+globalStats.bestMatch.orElse("None"));
         outln(buffer, "EXPERIMENTS: "+globalStats.totExperiments);
         outln(buffer, "SUCCESSES: "+globalStats.getPercSuccesses()+"%");
-        outln(buffer, "-- Descriptive Statistics --");
+        
+        outln(buffer, "-- Execution Statistics --");
         outln(buffer, "AVG GEN: "+globalStats.getAvgGenerations());
         outln(buffer, "AVG TIME (ms): "+String.format("%.2f", globalStats.getAvgTime()));
         outln(buffer, "AVG TIME/GEN (ms): "+String.format("%.3f", globalStats.getAvgTimePerGeneration()));
         outln(buffer, "TIME MEAN: "+String.format("%.3f", globalStats.mean.orElse(null)));
         outln(buffer, "TIME STD DEV: "+String.format("%.3f", globalStats.stdDev.orElse(null)));
         outln(buffer, "TIME MEDIAN: "+String.format("%.3f", globalStats.median.orElse(null)));
-        outln(buffer, "-- Results --");
+        outln(buffer, "-- Results Statistics --");
         outln(buffer, "AVG FITNESS: "+String.format("%.10f", globalStats.getAvgFitness()));
         outln(buffer, "MAX FITNESS: "+String.format("%.10f", globalStats.maxFitness.orElse(null)));
         outln(buffer, "MIN FITNESS: "+String.format("%.10f", globalStats.minFitness.orElse(null)));
+        outln(buffer, "BEST MATCHES: "+globalStats.bestMatches);
         
         return buffer.toString();
     }

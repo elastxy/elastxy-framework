@@ -19,18 +19,28 @@ import java.util.Optional;
  * @author grossi
  */
 public class AggregatedStats {
-    public int totExperiments;
+	
+	// Experiment stats
+	public int totExperiments;
     public int totSuccesses;
+
+    // Execution stats
     public int totGenerations;
     public double totTime;
     public double totFitness;
-    public Optional<Double> minFitness = Optional.empty();
-    public Optional<Double> maxFitness = Optional.empty();
-    
+
     public Optional<Double> mean = Optional.empty();
     public Optional<Double> stdDev = Optional.empty();
     public Optional<Double> median = Optional.empty();
     
+	// Experiment solutions
+    public Optional<Double> minFitness = Optional.empty();
+    public Optional<Double> maxFitness = Optional.empty();
+    
+	public Optional<String> bestMatch = Optional.empty();
+	public List<String> bestMatches = new ArrayList<String>();
+
+	
     public transient List<Double> successExecutionTimes = new ArrayList<Double>();
     
     public AggregatedStats() {

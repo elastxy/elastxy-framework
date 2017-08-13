@@ -80,30 +80,12 @@ public class Evolver implements EnvObservable {
         	// SELECTION
         	Population nextGeneration = selection(generationSize);
         	
-        	// BEST MATCH - calculate
-        	List<Solution> bestMatches = BestMatchesSupport.extractBestMatches(nextGeneration, context.parameters.elitarism);
-
-        	// LOOP OVER NON-BEST
-        	for(int s=0; s < generationSize-bestMatches.size(); s=s+2){
-                
-        		// EXTRACT PARENTS
-        		Solution[] parents = {nextGeneration.solutions.get(s), nextGeneration.solutions.get(s+1)};
-
-                
-                // RECOMBINATION
-        		List<Solution> sons = recombination(parents);
-                
-                
-                // MUTATION
-                mutation(sons);
         	
-                // REPLACE PARENTS WITH SONS
-                nextGeneration.solutions.set(s, sons.get(0));
-                nextGeneration.solutions.set(s, sons.get(1));
+        	// For uniform distribution selector skip all
+        	// TODOA: by strategy!
+        	if(!(context.selector instanceof UniformlyDistributedSelector)) {
+        		newGenerationLoop(generationSize, nextGeneration);
         	}
-
-        	// BEST MATCH - reinsert
-        	for(Solution s : bestMatches){ nextGeneration.add(s); }
         	
             // TEST FITNESS - next gen
             Fitness nextGenFitness = fitnessTester.test(env.target, nextGeneration);
@@ -119,6 +101,34 @@ public class Evolver implements EnvObservable {
         
         // END OF EXPERIMENT
     }
+
+
+	private void newGenerationLoop(int generationSize, Population nextGeneration) {
+		// BEST MATCH - extract
+		List<Solution> bestMatches = BestMatchesSupport.extractBestMatches(nextGeneration, context.parameters.elitarism);
+
+		// LOOP OVER NON-BEST
+		for(int s=0; s < generationSize-bestMatches.size(); s=s+2){
+		    
+			// EXTRACT PARENTS
+			Solution[] parents = {nextGeneration.solutions.get(s), nextGeneration.solutions.get(s+1)};
+
+		    
+		    // RECOMBINATION
+			List<Solution> sons = recombination(parents);
+		    
+		    
+		    // MUTATION
+		    mutation(sons);
+		
+		    // REPLACE PARENTS WITH SONS
+		    nextGeneration.solutions.set(s, sons.get(0));
+		    nextGeneration.solutions.set(s, sons.get(1));
+		}
+
+		// BEST MATCH - reinsert
+		for(Solution s : bestMatches){ nextGeneration.add(s); }
+	}
 
 
     

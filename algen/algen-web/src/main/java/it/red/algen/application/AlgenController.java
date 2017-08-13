@@ -103,87 +103,36 @@ public class AlgenController {
 	
 	
 
-//	// TODOM: structured results
-//	@RequestMapping(path = "/analysis/{domain}/{experiments}", method = RequestMethod.POST)
-//	@ResponseBody
-//	public String analysis(
-//			@PathVariable String domain, 
-//			@PathVariable Integer experiments,
-//			@RequestBody AlgorithmContext context) {
-//		
-//		contextSupplier.init(context);
-//		
-//	 	EnvFactory envFactory = null;
-//	 	
-//	 	// TODOM: Make generics default build mode
-//	 	if("garden".equals(domain)){
-//	 		setupGardenContext(context);
-//	 		envFactory = gardenEnvFactory;
-//	 	}
-//	 	else if("expressions".equals(domain)){ 
-//	 		setupExprContext(context);
-//	 		envFactory = exprEnvFactory;
-//	 	}
-//
-//        StatsExperimentExecutor collector = new StatsExperimentExecutor(envFactory, experiments);
-//        beanFactory.autowireBean(collector);
-//        
-//        collector.run();
-//        
-//        contextSupplier.destroy();
-//        
-//        String result = collector.print();
-//        return result;
-//	}
-
-//
-//	private void setupGardenContext(AlgorithmContext context) {
-//		context.fitnessCalculator = new GardenFitnessCalculator();
-//		context.selector = new StandardSelector();
-//		context.selector.setup(context.parameters);
-//		context.mutator = new GardenMutator();
-//		context.recombinator = new GardenRecombinator();
-//	}
-//
+	// TODOM: structured results
+	@RequestMapping(path = "/analysis/{domain}/{experiments}", method = RequestMethod.POST)
+	@ResponseBody
+	public String analysis(
+			@PathVariable String domain, 
+			@PathVariable Integer experiments,
+			@RequestBody AlgorithmContext context) {
+		logger.info("REQUEST Service /analysis/{domain}/{experiments} => "+domain+","+experiments);
+		String result = null;
+	 	if("expressions".equals(domain)){
+	 		result = expressionsService.executeAnalysis(context, experiments);
+	 	}
+		logger.info("RESPONSE Service /analysis/{domain}/{experiments} => "+result);
+        return result;
+	}
 
 
-//	@RequestMapping(path = "/trial/{domain}/{experiments}", method = RequestMethod.POST)
-//	@ResponseBody
-//	public String trialTest(
-//			@PathVariable String domain, 
-//			@PathVariable Integer experiments,
-//			@RequestBody AlgorithmContext context) {
-//		
-//		contextSupplier.init(context);
-//		
-//	 	EnvFactory envFactory = null;
-//	 	
-//	 	// TODOM: Make generics default build mode
-//	 	if("garden".equals(domain)){
-//	 		setupGardenContext(context);
-//	 		envFactory = gardenEnvFactory;
-//	 	}
-//	 	else if("expressions".equals(domain)){ 
-//	 		setupExprContext(context);
-//	 		context.parameters.elitarism = false;
-//	 		context.parameters.mutationPerc = 0.0;
-//	 		context.parameters.recombinationPerc = 0.0;
-//	 		context.parameters.initialSelectionRandom = true;
-//	 		context.selector = new UniformlyDistributedSelector();
-//			context.selector.setup(context.parameters, populationFactory);
-//
-//	 		envFactory = exprEnvFactory;
-//	 	}
-//
-//        StatsExperimentExecutor collector = new StatsExperimentExecutor(envFactory, experiments);
-//        beanFactory.autowireBean(collector);
-//        
-//        collector.run();
-//        
-//        contextSupplier.destroy();
-//        
-//        String result = collector.print();
-//        return result;
-//	}
+	@RequestMapping(path = "/trial/{domain}/{experiments}", method = RequestMethod.POST)
+	@ResponseBody
+	public String trialTest(
+			@PathVariable String domain, 
+			@PathVariable Integer experiments,
+			@RequestBody AlgorithmContext context) {
+		logger.info("REQUEST Service /trial/{domain}/{experiments} => "+domain+","+experiments);
+		String result = null;
+	 	if("expressions".equals(domain)){
+	 		result = expressionsService.executeTrialTest(context, experiments);
+	 	}
+		logger.info("RESPONSE Service /trial/{domain}/{experiments} => "+result);
+        return result;
+	}
 
 }

@@ -14,4 +14,10 @@ public class NumberPhenotype implements Phenotype<Number> {
 		result.value = value; // TODOM check
 		return result;
 	}
+
+
+	@Override
+	public String toString() {
+		return String.format("NumberPhenotype [value=%s]", value==null?"N/A":value.toString());
+	}
 }
