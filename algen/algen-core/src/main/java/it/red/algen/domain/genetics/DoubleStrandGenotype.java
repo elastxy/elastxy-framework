@@ -46,7 +46,12 @@ public class DoubleStrandGenotype implements Genotype {
 
 
 	@Override
-	public void swap(String position, Allele allele) {
+	public void replaceAllele(String position, Allele allele) {
+		throw new UnsupportedOperationException("NYI");
+	}
+
+	@Override
+	public void swapAllele(String position, Allele newAllele) {
 		throw new UnsupportedOperationException("NYI");
 	}
 }

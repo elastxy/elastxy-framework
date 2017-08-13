@@ -3,6 +3,8 @@ package it.red.algen.metaexpressions;
 import java.util.Arrays;
 import java.util.HashMap;
 
+import javax.annotation.Resource;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -27,6 +29,7 @@ public class MexGenomaProvider implements GenomaProvider {
 	private ContextSupplier contextSupplier;
 
 	@Autowired
+	@Resource(name="mexAlleleGenerator")
 	private AlleleGenerator alleleGenerator;
 	
 	private Genoma cachedGenoma;

@@ -31,19 +31,32 @@ public class SequenceGenotype implements Genotype {
 	@Override
 	public List<String> getPositions() {
 		List<String> result = IntStream.
-				range(0, genes.size()-1).
+				range(0, genes.size()).
 				mapToObj(x -> String.valueOf(x)).
 				collect(Collectors.toList());
 		return result;
 	}
 
 	@Override
-	public void swap(String position, Allele allele) {
+	public void replaceAllele(String position, Allele allele) {
 		genes.get(Integer.parseInt(position)).allele = allele;
 	}
 	
 	public String toString(){
 		return genes.toString();
+	}
+
+	@Override
+	public void swapAllele(String position, Allele newAllele) {
+		int oldPosition = Integer.parseInt(position);
+		
+		// Select sibling
+		// TODOM: other strategies...
+		int newPosition = oldPosition==0 ? 1 : oldPosition-1; // sibling to the left
+		
+		// Replace alleles
+		genes.get(newPosition).allele = genes.get(oldPosition).allele;
+		genes.get(oldPosition).allele = newAllele;
 	}
 
 }

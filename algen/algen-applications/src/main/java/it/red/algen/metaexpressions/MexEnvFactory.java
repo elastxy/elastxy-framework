@@ -13,6 +13,8 @@ package it.red.algen.metaexpressions;
 import java.math.BigDecimal;
 import java.util.Arrays;
 
+import javax.annotation.Resource;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -47,6 +49,7 @@ public class MexEnvFactory implements EnvFactory {
     public Env create(){
         
     	// Create initial population
+    	populationFactory.setSolutionsFactory(solutionsFactory);
         Population startGen = populationFactory.createNew();
         
         // Define evolution environment

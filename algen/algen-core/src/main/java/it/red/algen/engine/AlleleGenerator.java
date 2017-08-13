@@ -1,5 +1,7 @@
 package it.red.algen.engine;
 
+import java.util.List;
+
 import it.red.algen.domain.genetics.Allele;
 import it.red.algen.metadata.GeneMetadata;
 
@@ -25,4 +27,13 @@ public interface AlleleGenerator {
 	 * @return
 	 */
 	public Allele generate(GeneMetadata metadata, Object value);
+	
+
+	/*
+	 * Generates a new allele, excluding some specific values.
+	 * 
+	 * Useful for problems where every gene must have a different allele from a predefined set
+	 * 
+	 */
+	public Allele generateExclusive(GeneMetadata metadata, List<Object> exclusions);
 }

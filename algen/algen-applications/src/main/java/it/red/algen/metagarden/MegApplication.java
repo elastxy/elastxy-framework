@@ -1,4 +1,4 @@
-package it.red.algen.metaexpressions;
+package it.red.algen.metagarden;
 
 /**
  * TODOM: external configuration, e.g. properties file
@@ -6,14 +6,14 @@ package it.red.algen.metaexpressions;
  * @author red
  *
  */
-public class MexApplication {
+public class MegApplication {
 	
 	// Application name
-	private static final String APP_NAME = "expressions";
+	private static final String APP_NAME = "garden";
 	
 	// Custom inputs
-	public static final String TARGET_EXPRESSION_RESULT = "TARGET_EXPRESSION_RESULT";
-	public static final String MAX_OPERAND_VALUE = "MAX_OPERAND_VALUE";
+	public static final String TARGET_WELLNESS = "TARGET_WELLNESS"; // happy|unhappy
+	public static final String LIMITED_TREES = "LIMITED_TREES";
 	
     // Data directory
     public static String BASE_DIR = System.getProperty("datadir");

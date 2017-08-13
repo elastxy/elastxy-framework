@@ -1,4 +1,4 @@
-package it.red.algen.metaexpressions;
+package it.red.algen.metagarden;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -9,17 +9,18 @@ import it.red.algen.context.BenchmarkContextBuilder;
 import it.red.algen.engine.SequenceRecombinator;
 import it.red.algen.engine.StandardMutator;
 import it.red.algen.engine.StandardSelector;
+import it.red.algen.metaexpressions.MexApplication;
 import it.red.algen.tracking.CSVReporter;
 
 @Component
-public class MexBenchmark implements BenchmarkContextBuilder {
+public class MegBenchmark implements BenchmarkContextBuilder {
 
 	// Default values
-	private static final int DEFAULT_EXPRESSION_RESULT = 235000;
+	private static final String DEFAULT_TARGET = "happy";
+	private static final boolean DEFAULT_LIMITED_TREES = true;
 	
-	private static final int DEFAULT_MAX_OPERAND_VALUE = 1000;
-	
-    private static final long INITIAL_SELECTION_NUMBER = 10;
+	// Odd number of solutions
+    private static final long INITIAL_SELECTION_NUMBER = 100;
     private static final boolean INITIAL_SELECTION_RANDOM = true;
     
     private static final int MAX_ITERATIONS = -1;
@@ -50,11 +51,11 @@ public class MexBenchmark implements BenchmarkContextBuilder {
 				MAX_IDENTICAL_FITNESSES,
 				VERBOSE, 
 				TRACE_HISTORY,
-				new CSVReporter(MexApplication.STATS_DIR));
+				new CSVReporter(MegApplication.STATS_DIR));
 		
-		context.incubator = new MexIncubator();
+		context.incubator = new MegIncubator();
 
-		context.fitnessCalculator = new MexFitnessCalculator();
+		context.fitnessCalculator = new MegFitnessCalculator();
 		context.fitnessCalculator.setup(context.incubator);
 
 		context.selector = new StandardSelector();
@@ -63,9 +64,9 @@ public class MexBenchmark implements BenchmarkContextBuilder {
 		context.mutator = new StandardMutator();
 		
 		context.recombinator = new SequenceRecombinator();
-		
-		context.applicationSpecifics.putTarget(MexApplication.TARGET_EXPRESSION_RESULT, DEFAULT_EXPRESSION_RESULT);
-		context.applicationSpecifics.putParam(MexApplication.MAX_OPERAND_VALUE, DEFAULT_MAX_OPERAND_VALUE);
+
+		context.applicationSpecifics.putTarget(MegApplication.TARGET_WELLNESS, DEFAULT_TARGET);
+		context.applicationSpecifics.putParam(MegApplication.LIMITED_TREES, DEFAULT_LIMITED_TREES);
 		return context;
 	}
 

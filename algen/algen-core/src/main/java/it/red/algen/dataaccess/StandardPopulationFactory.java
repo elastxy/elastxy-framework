@@ -26,9 +26,13 @@ public class StandardPopulationFactory implements PopulationFactory {
 	@Autowired
 	private ContextSupplier contextSupplier;
 	
-	@Autowired
 	private SolutionsFactory solutionsFactory;
 	
+	@Override
+	public void setSolutionsFactory(SolutionsFactory solutionsFactory) {
+		this.solutionsFactory = solutionsFactory;
+	}
+
 	@Override
     public Population createNew() {
         Population population = new Population();

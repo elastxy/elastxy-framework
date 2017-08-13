@@ -1,5 +1,6 @@
 package it.red.algen.metaexpressions;
 
+import java.util.List;
 import java.util.concurrent.ThreadLocalRandom;
 
 import org.springframework.stereotype.Component;
@@ -53,6 +54,13 @@ public class MexAlleleGenerator implements AlleleGenerator {
 //			throw new IllegalArgumentException("Cannot generate a new Allele: value not allowed ["+value+"]");
 //		}
 		return result;
+	}
+
+
+
+	@Override
+	public Allele generateExclusive(GeneMetadata metadata, List<Object> exclusions) {
+		throw new UnsupportedOperationException("NYI");
 	}
 	
 	

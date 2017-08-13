@@ -17,18 +17,18 @@ import it.red.algen.engine.StandardMutator;
 import it.red.algen.engine.StandardSelector;
 import it.red.algen.engine.UniformlyDistributedSelector;
 import it.red.algen.metaexpressions.MexApplication;
-import it.red.algen.metaexpressions.MexBenchmark;
-import it.red.algen.metaexpressions.MexEnvFactory;
-import it.red.algen.metaexpressions.MexFitnessCalculator;
-import it.red.algen.metaexpressions.MexGenomaProvider;
-import it.red.algen.metaexpressions.MexIncubator;
+import it.red.algen.metagarden.MegBenchmark;
+import it.red.algen.metagarden.MegEnvFactory;
+import it.red.algen.metagarden.MegFitnessCalculator;
+import it.red.algen.metagarden.MegGenomaProvider;
+import it.red.algen.metagarden.MegIncubator;
 import it.red.algen.stats.Experiment;
 import it.red.algen.stats.ExperimentStats;
 import it.red.algen.stats.StatsExperimentExecutor;
 import it.red.algen.tracking.CSVReporter;
 
 @Component
-public class ExpressionsService {
+public class GardenService {
 	private static Logger logger = LoggerFactory.getLogger(AlgenController.class);
 
 	@Autowired
@@ -36,16 +36,16 @@ public class ExpressionsService {
 	
 
 	@Autowired
-	private MexEnvFactory envFactory;
+	private MegEnvFactory envFactory;
 
 	@Autowired
 	private PopulationFactory populationFactory;
 
 	@Autowired
-	private MexGenomaProvider genomaProvider;
+	private MegGenomaProvider genomaProvider;
 	
 	@Autowired
-	private MexBenchmark exprBenchmark;
+	private MegBenchmark benchmark;
 	
 	
 	private @Autowired AutowireCapableBeanFactory beanFactory;
@@ -54,7 +54,7 @@ public class ExpressionsService {
 	public ExperimentStats executeBenchmark(){
 
 		// Context
-		AlgorithmContext context = exprBenchmark.build();
+		AlgorithmContext context = benchmark.build();
 		contextSupplier.init(context);
 
 		Gson gson = new Gson();
@@ -82,7 +82,7 @@ public class ExpressionsService {
 
 		// Context
 		contextSupplier.init(context);
-	 	setupExprContext(context);
+	 	setupGardenContext(context);
 
 	 	Gson gson = new Gson();
 		String json = gson.toJson(context);
@@ -110,7 +110,7 @@ public class ExpressionsService {
 
 		// Context
 		contextSupplier.init(context);
-	 	setupExprContext(context);
+		setupGardenContext(context);
 
 	 	Gson gson = new Gson();
 		String json = gson.toJson(context);
@@ -136,7 +136,7 @@ public class ExpressionsService {
 
 		// Context
 		contextSupplier.init(context);
-	 	setupExprContext(context);
+	 	setupGardenContext(context);
 
 	 	Gson gson = new Gson();
 		String json = gson.toJson(context);
@@ -163,10 +163,10 @@ public class ExpressionsService {
 	}
 	
 
-	private void setupExprContext(AlgorithmContext context) {
-		context.incubator = new MexIncubator();
+	private void setupGardenContext(AlgorithmContext context) {
+		context.incubator = new MegIncubator();
 
-		context.fitnessCalculator = new MexFitnessCalculator();
+		context.fitnessCalculator = new MegFitnessCalculator();
 		context.fitnessCalculator.setup(context.incubator);
 
 		context.selector = new StandardSelector();

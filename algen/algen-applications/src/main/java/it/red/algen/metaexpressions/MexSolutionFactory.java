@@ -3,6 +3,8 @@ package it.red.algen.metaexpressions;
 import java.util.Arrays;
 import java.util.List;
 
+import javax.annotation.Resource;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -17,6 +19,7 @@ import it.red.algen.metadata.MetadataBasedGenoma;
 public class MexSolutionFactory implements SolutionsFactory {
 
     @Autowired
+    @Resource(name="mexGenomaProvider")
     private GenomaProvider genomaProvider;
 
     // TODOM: genotype builders based directly inside in genoma

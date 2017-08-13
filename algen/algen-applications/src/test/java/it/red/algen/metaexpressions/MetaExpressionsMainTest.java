@@ -8,7 +8,7 @@
  * Open. You can then make changes to the template in the Source Editor.
  */
 
-package metaexpressions;
+package it.red.algen.metaexpressions;
 
 import static org.junit.Assert.assertNotNull;
 
@@ -48,7 +48,7 @@ public class MetaExpressionsMainTest {
 	private GenomaProvider genomaProvider;
 	
 	@Autowired
-	private MexBenchmark mexBenchmark;
+	private MexBenchmark benchmark;
 		
 	private @Autowired AutowireCapableBeanFactory beanFactory;
 	
@@ -57,7 +57,7 @@ public class MetaExpressionsMainTest {
 		System.setProperty("datadir", new File("C:\\tmp\\algendata").getAbsolutePath());
 
 		// Context
-		AlgorithmContext context = mexBenchmark.build();
+		AlgorithmContext context = benchmark.build();
 		contextSupplier.init(context);
 		
 		// Genoma

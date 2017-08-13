@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package it.red.algen.application;
+package it.red.algen.controller;
 
 import java.util.Collections;
 import java.util.Map;
@@ -30,8 +30,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import it.red.algen.context.AlgorithmContext;
-import it.red.algen.controller.InfoService;
 import it.red.algen.service.ExpressionsService;
+import it.red.algen.service.GardenService;
 import it.red.algen.stats.ExperimentStats;
 
 @Controller
@@ -44,6 +44,9 @@ public class AlgenController {
 	
 	@Autowired
 	private ExpressionsService expressionsService;
+
+	@Autowired
+	private GardenService gardenService;
 	
 
 	/**
@@ -74,7 +77,7 @@ public class AlgenController {
 	 */
 	@RequestMapping(path = "/experiment/{domain}", method = RequestMethod.POST)
 	@ResponseBody
-	public ExperimentStats calculateWithParams(
+	public ExperimentStats experiment(
 			@PathVariable String domain,  
 			@RequestBody AlgorithmContext context) {
 		logger.info("REQUEST Service /experiment/{domain} => "+domain+""+context);
@@ -83,6 +86,9 @@ public class AlgenController {
 		if("expressions".equals(domain)){ 
 		 	stats = expressionsService.executeExperiment(context);
 		}
+		else if("garden".equals(domain)){ 
+		 	stats = gardenService.executeExperiment(context);
+		}
 		logger.info("RESPONSE Service /experiment/{domain} => "+stats);
 		return stats;
 	}
@@ -90,12 +96,15 @@ public class AlgenController {
 
 	@RequestMapping("/test/{domain}")
 	@ResponseBody
-	public ExperimentStats calculateTest(@PathVariable String domain) {
+	public ExperimentStats test(@PathVariable String domain) {
 		logger.info("REQUEST Service /test/{domain} => "+domain);
 
 		ExperimentStats stats = null;
 		if("expressions".equals(domain)){ 
 		 	stats = expressionsService.executeBenchmark();
+		}
+		else if("garden".equals(domain)){ 
+		 	stats = gardenService.executeBenchmark();
 		}
 		logger.info("RESPONSE Service /test/{domain} => "+stats);
 		return stats;
@@ -115,6 +124,9 @@ public class AlgenController {
 	 	if("expressions".equals(domain)){
 	 		result = expressionsService.executeAnalysis(context, experiments);
 	 	}
+	 	else if("garden".equals(domain)){
+	 		result = gardenService.executeAnalysis(context, experiments);
+	 	}
 		logger.info("RESPONSE Service /analysis/{domain}/{experiments} => "+result);
         return result;
 	}
@@ -130,6 +142,9 @@ public class AlgenController {
 		String result = null;
 	 	if("expressions".equals(domain)){
 	 		result = expressionsService.executeTrialTest(context, experiments);
+	 	}
+	 	else if("garden".equals(domain)){
+	 		result = gardenService.executeTrialTest(context, experiments);
 	 	}
 		logger.info("RESPONSE Service /trial/{domain}/{experiments} => "+result);
         return result;

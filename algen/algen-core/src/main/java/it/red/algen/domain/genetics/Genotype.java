@@ -14,10 +14,16 @@ public interface Genotype {
 
 	
 	/**
-	 * Swaps (mutate an allele with another for the same position)
+	 * Replaces: mutate an allele with another in the same position
 	 */
-	public void swap(String position, Allele allele);
+	public void replaceAllele(String position, Allele allele);
 	
+
+	/**
+	 * Swaps: change position of a given allele with another at sibling position
+	 */
+	public void swapAllele(String position, Allele allele);
+
 	
 	/**
 	 * Encode the genotype in a single String representing the dominant alleles

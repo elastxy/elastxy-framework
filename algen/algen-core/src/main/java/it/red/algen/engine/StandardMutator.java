@@ -31,8 +31,15 @@ public class StandardMutator implements Mutator<Solution> {
 		// Replace an allele to another of genoma for the same position
 		List<String> positions = solution.getGenotype().getPositions();
 		String positionToMutate = positions.get(RANDOMIZER.nextInt(positions.size()));
-		Allele newAllele = genoma.createRandomAllele(positionToMutate);
-		solution.getGenotype().swap(positionToMutate, newAllele);
+		
+		if(genoma.isLimitedAllelesStrategy()){
+			Allele newAllele = genoma.createRandomAllele(positionToMutate);
+			solution.getGenotype().swapAllele(positionToMutate, newAllele);
+		}
+		else {
+			Allele newAllele = genoma.createRandomAllele(positionToMutate);
+			solution.getGenotype().replaceAllele(positionToMutate, newAllele);
+		}
 		return solution;
 	}
 

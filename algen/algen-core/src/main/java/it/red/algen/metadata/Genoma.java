@@ -21,6 +21,11 @@ public interface Genoma {
 	 */
 	public void setupAlleleGenerator(AlleleGenerator generator);
 	
+
+	public boolean isLimitedAllelesStrategy();
+
+	public void setLimitedAllelesStrategy(boolean limitedAllelesStrategy);
+	
 	/**
 	 * Generates a random Allele given the position in the sequence
 	 * 
@@ -38,5 +43,13 @@ public interface Genoma {
 	 * @return
 	 */
 	public List<Allele> createRandomAlleles(List<String> position);
+	
+
+	/**
+	 * Generate a new list of random Alleles for every position
+	 * @param metadataCodes
+	 * @return
+	 */
+	public List<Allele> createRandomAlleles();
 
 }

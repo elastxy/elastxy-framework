@@ -39,6 +39,10 @@ public class ApplicationSpecifics {
 	public String getParamString(String parKey){
 		return getString(params, parKey);
 	}
+	
+	public Boolean getParamBoolean(String parKey){
+		return getBoolean(params, parKey);
+	}
 
 	public Integer getParamInteger(String parKey){
 		return getInteger(params, parKey);
@@ -51,8 +55,21 @@ public class ApplicationSpecifics {
 	private String getString(Map<String, Object> map, String parKey){
 		return map.get(parKey).toString();
 	}
+
 	
-	public Integer getInteger(Map<String, Object> map, String parKey){
+	private Boolean getBoolean(Map<String, Object> map, String parKey){
+		Boolean result = null;
+		Object parValue = map.get(parKey);
+		if(parValue instanceof String) {
+			result = Boolean.parseBoolean((String)parValue);
+		}
+		else if(parValue instanceof Boolean){
+			result = (Boolean)parValue;
+		}
+		return result;
+	}
+	
+	private Integer getInteger(Map<String, Object> map, String parKey){
 		Integer result = null;
 		Object parValue = map.get(parKey);
 		if(parValue instanceof Number) {
@@ -65,7 +82,7 @@ public class ApplicationSpecifics {
 	}
 
 	
-	public Long getLong(Map<String, Object> map, String parKey){
+	private Long getLong(Map<String, Object> map, String parKey){
 		Long result = null;
 		Object parValue = map.get(parKey);
 		if(parValue instanceof Number) {

@@ -1,19 +1,40 @@
 package it.red.algen.metadata;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.Random;
 import java.util.stream.Collectors;
-
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
+import java.util.stream.IntStream;
 
 import it.red.algen.domain.genetics.Allele;
 import it.red.algen.domain.genetics.Gene;
 import it.red.algen.engine.AlleleGenerator;
 
 public class MetadataBasedGenoma implements Genoma {
+
+	
+	/**
+	 * If FALSE
+	 * 
+	 * Any number of Alleles can be created of the same type
+	 * 
+	 * If TRUE
+	 * 
+	 * Limits the number of total Alleles to those predefined at the beginning.
+	 * When generating a set of Alleles for a number of genes, takes care of excluding 
+	 * those already selected
+	 */
+	public boolean limitedAllelesStrategy = false;
+	
+	public boolean isLimitedAllelesStrategy() {
+		return limitedAllelesStrategy;
+	}
+
+
+	public void setLimitedAllelesStrategy(boolean limitedAllelesStrategy) {
+		this.limitedAllelesStrategy = limitedAllelesStrategy;
+	}
 
 	/**
 	 * Metadata of all genes type, indexed by code
@@ -23,6 +44,7 @@ public class MetadataBasedGenoma implements Genoma {
 
 	/**
 	 * Metadata of all genes type, indexed by position, if order is important
+	 * NOTE: hashmap keys are not ordered
 	 */
 	public Map<String,GeneMetadata> genesMetadataByPos = new HashMap<String, GeneMetadata>();
 
@@ -35,34 +57,70 @@ public class MetadataBasedGenoma implements Genoma {
 	}
 
 	
+	private void forbidLimitedAllelesStrategy(){
+		if(limitedAllelesStrategy){
+			throw new IllegalStateException("Cannot generate Allele in limited context: you must use aggregate methods.");
+		}
+	}
+
+	private void nyiLimitedAllelesStrategy(){
+		if(limitedAllelesStrategy){
+			throw new IllegalStateException("Cannot generate Allele in limited context: you must use aggregate methods.");
+		}
+	}
+
+	
+	
+	
 	/**
 	 * Creates a new random allele given the position in the sequence
 	 * TODO: if not ordered, metadata is random
+	 * 
+	 * IMPORTANT: in case of limited resources, client must swap alleles of two different positions
 	 */
 	@Override
 	public Allele createRandomAllele(String position) {
 		return alleleGenerator.generate(getMetadataByPosition(position));
 	}
-
+	
+	
 	
 	/**
-	 * Generate a new set of random Alleles based on metadata codes
-	 * @param metadataCodes
+	 * Generate a new set of random Alleles based on positions
+	 * @param positions
 	 * @return
 	 */
 	@Override
 	public List<Allele> createRandomAlleles(List<String> positions){
+		nyiLimitedAllelesStrategy();
 		return positions.stream().map(s -> createRandomAllele(s)).collect(Collectors.toList());
 	}
 
 	
+	
 	/**
-	 * Generate a new Allele based on a metadata
-	 * @param metadataCode
+	 * Generate a new list of random Alleles for every position
+	 * @param metadataCodes
 	 * @return
 	 */
-	public Allele createRandomAlleleByCode(String metadataCode){
-		return alleleGenerator.generate(getMetadataByCode(metadataCode));
+	@Override
+	public List<Allele> createRandomAlleles(){
+		
+		List<String> positions = IntStream.range(0, genesMetadataByPos.size()).boxed().map(i -> i.toString()).collect(Collectors.toList());
+		List<Allele> result = null;
+		if(!limitedAllelesStrategy){
+			result = createRandomAlleles(positions);
+		}
+		else {
+			result = new ArrayList<Allele>();
+			List<Object> alreadyUsedAlleles = new ArrayList<Object>();
+			for(String pos : positions){
+				Allele newAllele = alleleGenerator.generateExclusive(getMetadataByPosition(pos), alreadyUsedAlleles);
+				alreadyUsedAlleles.add(newAllele.value);
+				result.add(newAllele);
+			}
+		}
+		return result;
 	}
 
 	
@@ -72,9 +130,20 @@ public class MetadataBasedGenoma implements Genoma {
 	 * @return
 	 */
 	public List<Allele> createRandomAllelesByCode(List<String> metadataCodes){
+		forbidLimitedAllelesStrategy();
 		return metadataCodes.stream().map(s -> createRandomAlleleByCode(s)).collect(Collectors.toList());
 	}
 
+	
+	/**
+	 * Generate a new Allele based on a metadata
+	 * @param metadataCode
+	 * @return
+	 */
+	public Allele createRandomAlleleByCode(String metadataCode){
+		forbidLimitedAllelesStrategy();
+		return alleleGenerator.generate(getMetadataByCode(metadataCode));
+	}
 	
 	/**
 	 * Generates a new Allele based on specific value
@@ -82,8 +151,12 @@ public class MetadataBasedGenoma implements Genoma {
 	 * An exception is raise if value is not present between metadata available values
 	 */
 	public Allele createPredefinedAlleleByValue(String metadataCode, Object value){
+		forbidLimitedAllelesStrategy();
 		return alleleGenerator.generate(getMetadataByCode(metadataCode), value);
 	}
+	
+	
+	
 	
 
 	/**
@@ -126,6 +199,20 @@ public class MetadataBasedGenoma implements Genoma {
 	 */
 	public List<Gene> createSequenceByPositions(List<String> positions){
 		return positions.stream().map(p -> createGeneByPosition(p)).collect(Collectors.toList());
+	}
+	
+
+	/**
+	 * Create a list of Genes for all positions
+	 * @param positions
+	 * @return
+	 */
+	public List<Gene> createSequence(){
+		List<Gene> result = new ArrayList<Gene>();
+		for(int pos=0; pos < this.genesMetadataByPos.size(); pos++){
+			result.add(createGeneByPosition(String.valueOf(pos)));
+		}
+		return result;
 	}
 
 	

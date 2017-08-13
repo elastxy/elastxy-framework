@@ -18,6 +18,18 @@ public class PredefinedGenoma implements Genoma {
 	 */
 	public Map<String, List<Allele>> alleles = new HashMap<String, List<Allele>>();
 
+	// TODOA: implmenent the strategy
+	public boolean limitedAllelesStrategy = false;
+	
+	public boolean isLimitedAllelesStrategy() {
+		return limitedAllelesStrategy;
+	}
+
+
+	public void setLimitedAllelesStrategy(boolean limitedAllelesStrategy) {
+		this.limitedAllelesStrategy = limitedAllelesStrategy;
+	}
+	
 	@Override
 	public void setupAlleleGenerator(AlleleGenerator generator){
 	}
@@ -63,6 +75,12 @@ public class PredefinedGenoma implements Genoma {
 		throw new UnsupportedOperationException("NYI");
 //		List<Allele> positionsAlleles = alleles.get(position);
 //		return positionsAlleles.get(RANDOM.nextInt(positionsAlleles.size()));
+	}
+
+
+	@Override
+	public List<Allele> createRandomAlleles() {
+		throw new UnsupportedOperationException("NYI");
 	}
 	
 	
