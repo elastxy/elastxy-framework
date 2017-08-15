@@ -52,7 +52,7 @@ public class MexFitnessCalculator implements FitnessCalculator<GenericSolution,P
         	// Normalize fitness to 1.0
             normalized = BigDecimal.ONE.subtract(new BigDecimal(distance).setScale(20).divide(target.getReferenceMeasure().setScale(20), BigDecimal.ROUND_HALF_UP));
         } catch(IllegalSolutionException ex){ 
-            legalCheck = String.format("Division by 0 not allowed: second operand not valid [%s].",target.getReferenceMeasure());
+            legalCheck = String.format("Division by 0 not allowed: second operand not valid [%.10f].",target.getReferenceMeasure());
             normalized = BigDecimal.ZERO;
         }
         

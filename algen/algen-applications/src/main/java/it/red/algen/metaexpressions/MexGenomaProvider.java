@@ -32,7 +32,7 @@ public class MexGenomaProvider implements GenomaProvider {
 	@Resource(name="mexAlleleGenerator")
 	private AlleleGenerator alleleGenerator;
 	
-	private Genoma cachedGenoma;
+	private MetadataBasedGenoma cachedGenoma;
 	
 	@Override
 	public Genoma getGenoma(){
@@ -44,7 +44,7 @@ public class MexGenomaProvider implements GenomaProvider {
 		if(cachedGenoma!=null){
 			return cachedGenoma;
 		}
-		MetadataBasedGenoma cachedGenoma = new MetadataBasedGenoma();
+		cachedGenoma = new MetadataBasedGenoma();
 		cachedGenoma.setupAlleleGenerator(alleleGenerator);
 		cachedGenoma.genesMetadataByCode = new HashMap<String, GeneMetadata>();
 

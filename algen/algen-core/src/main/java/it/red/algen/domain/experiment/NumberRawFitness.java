@@ -12,4 +12,8 @@ public class NumberRawFitness implements RawFitness {
 	public NumberRawFitness(Number value){
 		this.value = value;
 	}
+	
+	public String toString(){
+		return String.format("%.10f", value);
+	}
 }

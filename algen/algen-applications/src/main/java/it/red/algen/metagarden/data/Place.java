@@ -11,6 +11,7 @@ location
  *
  */
 public class Place {
+
 	private int sunExposure; 	// 0,1,2
 	private int wetLevel; 		// 0,1,2
 	private int windLevel;		// 0,1,2
@@ -59,5 +60,27 @@ public class Place {
 		else if(windLevel==2) result += "V";
 		
 		return result+"]";
+	}
+
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + sunExposure;
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Place other = (Place) obj;
+		if (sunExposure != other.sunExposure)
+			return false;
+		return true;
 	}
 }

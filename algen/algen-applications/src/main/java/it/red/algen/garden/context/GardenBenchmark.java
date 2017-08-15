@@ -13,8 +13,9 @@ import it.red.algen.garden.engine.GardenMutator;
 import it.red.algen.garden.engine.GardenRecombinator;
 import it.red.algen.garden.tracking.GardenCSVReporter;
 
-@Component
-public class GardenBenchmark implements BenchmarkContextBuilder {
+/**
+ * Typical test configuration:
+ * 
 	private static final long INITIAL_SELECTION_NUMBER = 100; // numero pari
 	private static final boolean INITIAL_SELECTION_RANDOM = true;
 	
@@ -24,6 +25,24 @@ public class GardenBenchmark implements BenchmarkContextBuilder {
     
     private static final boolean ELITARISM = true;
 	private static final double RECOMBINANTION_PERC = 0.7;
+    private static final double MUTATION_PERC = 0.2;
+
+    private static final boolean VERBOSE = false;
+    private static final boolean TRACE_HISTORY = false;
+ * @author red
+ *
+ */
+@Component
+public class GardenBenchmark implements BenchmarkContextBuilder {
+	private static final long INITIAL_SELECTION_NUMBER = 100; // numero pari
+	private static final boolean INITIAL_SELECTION_RANDOM = false;
+	
+    private static final int MAX_ITERATIONS = -1;
+    private static final int MAX_LIFETIME_SEC = 3000;
+    private static final Integer MAX_IDENTICAL_FITNESSES = -1;
+    
+    private static final boolean ELITARISM = true;
+	private static final double RECOMBINANTION_PERC = 0.8;
     private static final double MUTATION_PERC = 0.2;
 
     private static final boolean VERBOSE = false;

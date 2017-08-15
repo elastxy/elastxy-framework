@@ -1,10 +1,10 @@
 package it.red.algen.metaexpressions;
 
 import java.util.List;
-import java.util.concurrent.ThreadLocalRandom;
 
 import org.springframework.stereotype.Component;
 
+import it.red.algen.context.Randomizer;
 import it.red.algen.domain.genetics.Allele;
 import it.red.algen.engine.AlleleGenerator;
 import it.red.algen.metadata.GeneMetadata;
@@ -18,11 +18,11 @@ public class MexAlleleGenerator implements AlleleGenerator {
 		Allele result = null;
 		if(metadata.code.equals("operator")){
 			result = new Allele<Character>();
-			result.value = (Character)metadata.values.get(ThreadLocalRandom.current().nextInt(metadata.values.size()));
+			result.value = (Character)metadata.values.get(Randomizer.nextInt(metadata.values.size()));
 		}
 		else if(metadata.code.equals("operand")){
 			result = new Allele<Long>();
-			result.value = ThreadLocalRandom.current().nextLong((Long)metadata.max - (Long)metadata.min + 1) + (Long)metadata.min; // From -max to +max
+			result.value = Randomizer.nextLong((Long)metadata.max - (Long)metadata.min + 1) + (Long)metadata.min; // From -max to +max
 		}
 
 		// Check consistency

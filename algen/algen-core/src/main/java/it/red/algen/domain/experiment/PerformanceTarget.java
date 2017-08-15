@@ -39,11 +39,15 @@ public class PerformanceTarget<G,M> implements Target<G,M> {
 	
 	
 	@Override
-	public BigDecimal getLevel() {
+	public BigDecimal getTargetFitness() {
 		return level;
 	}
 	@Override
-	public void setLevel(BigDecimal level) {
+	public void setTargetFitness(BigDecimal level) {
 		this.level = level;
+	}
+	
+	public String toString(){
+		return String.format("PerformanceTarget: goal %d with required level %.3f", goal, level);
 	}
 }

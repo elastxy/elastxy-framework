@@ -56,7 +56,7 @@ public class GeneMetadata {
 
 	
 	public String toString(){
-		return String.format("Gene:code=%s,name=%s", code, name);
+		return String.format("GeneMetadata:code=%s,name=%s,type=%s", code, name, type);
 	}
 	
 

@@ -1,6 +1,5 @@
 package it.red.algen.engine;
 
-import java.math.BigDecimal;
 import java.util.Iterator;
 
 import it.red.algen.domain.experiment.Fitness;
@@ -24,9 +23,8 @@ public class StandardFitnessTester implements FitnessTester {
 	
 	@Override
     public Fitness test(Target<?,?> target, Population population){
-		
-		// First test: empty bestMatch
-		boolean firstTest = population.bestMatch==null;
+
+		// Reset current bestMatch
     	population.bestMatch = null;
     	
         Iterator<Solution<?,?>> it = population.solutions.iterator();
@@ -36,7 +34,7 @@ public class StandardFitnessTester implements FitnessTester {
             // Skip fitness test for solutions already tested
             if(solution.getFitness()==null || solution.getFitness().getValue()==null){
             	Fitness fitness = calculator.calculate(solution, target);
-            	if(fitness.getLegalCheck()!=null) {
+            	if(fitness.getLegalCheck()!=null) { 
             		fireIllegalSolutionEvent(solution);
             	}
             	else {
@@ -44,18 +42,41 @@ public class StandardFitnessTester implements FitnessTester {
             	}
             }
             
-            // TODOA: manage target.targetFitness
-            if(firstTest ||
-            		(population.bestMatch!=null && solution.getFitness().greaterThan(population.bestMatch.getFitness()))){
+            // Check if it's best match
+            if(isBestMatch(target, population.bestMatch, solution)){
             	population.bestMatch = solution;
             }
         }
         
-        // Order by fitness desc
-        population.orderByFitnessDesc();
+        // No target fitness: Order by fitness desc
+        if(target.getTargetFitness()==null){     
+        	population.orderByFitnessDesc();
+        }
+        // Target fitness set: Order by proximity to the fitness
+        else {
+        	population.orderByFitnessProximity(target.getTargetFitness());
+        }
         
         return population.bestMatch.getFitness();
     }
+
+	private boolean isBestMatch(Target<?, ?> target, Solution<?, ?> currentBestMatch, Solution<?, ?> currentSolution) {
+		boolean bestMatch = false;
+		
+		// First time: TRUE
+		if(currentBestMatch==null){
+			bestMatch = true;
+		}
+		// Target fitness set: Nearer to desired fitness than current best => TRUE
+		else if(target.getTargetFitness()!=null) {
+			bestMatch = currentSolution.getFitness().nearestThan(currentBestMatch.getFitness(), target.getTargetFitness());
+		}
+		// No target fitness: More than current best => TRUE
+		else {
+			bestMatch = currentSolution.getFitness().greaterThan(currentBestMatch.getFitness());
+		}
+		return bestMatch;
+	}
     
 
 

@@ -14,6 +14,31 @@ import it.red.algen.expressions.engine.ExprMutator;
 import it.red.algen.expressions.engine.ExprRecombinator;
 import it.red.algen.tracking.CSVReporter;
 
+/**
+ * Typical test configuration:
+
+	// Default values
+	private static final int DEFAULT_EXPRESSION_RESULT = 235000;
+	
+	private static final int DEFAULT_MAX_OPERAND_VALUE = 1000;
+	
+    private static final long INITIAL_SELECTION_NUMBER = 100;
+    private static final boolean INITIAL_SELECTION_RANDOM = true;
+    
+    private static final int MAX_ITERATIONS = -1;
+    private static final int MAX_LIFETIME_MILLIS = 3000;
+    private static final int MAX_IDENTICAL_FITNESSES = -1;
+
+    private static final boolean ELITARISM = true;
+	private static final double RECOMBINANTION_PERC = 0.8;
+    private static final double MUTATION_PERC = 0.2;
+
+    private static final boolean VERBOSE = false;
+    private static final boolean TRACE_HISTORY = false;
+ * 
+ * @author red
+ *
+ */
 @Component
 public class ExprBenchmark implements BenchmarkContextBuilder {
 

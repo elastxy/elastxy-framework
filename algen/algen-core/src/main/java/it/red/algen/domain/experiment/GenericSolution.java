@@ -4,8 +4,8 @@ import it.red.algen.domain.genetics.Genotype;
 import it.red.algen.domain.genetics.Phenotype;
 
 public class GenericSolution implements Solution {
-	public Genotype genotype;
-	public Phenotype phenotype;
+	public transient Genotype genotype;
+	public transient Phenotype phenotype;
 	public Fitness fitness;
 
 	@Override
@@ -36,15 +36,15 @@ public class GenericSolution implements Solution {
 	@Override
 	public Solution copy() {
 		GenericSolution result = new GenericSolution();
-		result.setFitness(fitness.copy());
-		result.genotype = (Genotype)genotype.copy();
-		result.phenotype = (Phenotype)phenotype.copy();
+		result.setFitness(fitness!=null?fitness.copy():null);
+		result.genotype = (Genotype)genotype!=null?genotype.copy():null;
+		result.phenotype = (Phenotype)phenotype!=null?phenotype.copy():null;
 		return result;
 	}
 
 	@Override
 	public String toString() {
-		return String.format("Genotype: %s => %s", genotype, fitness);
+		return String.format("Genotype %s => Phenotype %s => Fitness %s", genotype, phenotype, fitness);
 	}
 	
 	@Override

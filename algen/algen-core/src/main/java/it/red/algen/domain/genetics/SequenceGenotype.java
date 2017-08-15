@@ -2,6 +2,7 @@ package it.red.algen.domain.genetics;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.OptionalInt;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
@@ -48,15 +49,24 @@ public class SequenceGenotype implements Genotype {
 
 	@Override
 	public void swapAllele(String position, Allele newAllele) {
-		int oldPosition = Integer.parseInt(position);
 		
-		// Select sibling
-		// TODOM: other strategies...
-		int newPosition = oldPosition==0 ? 1 : oldPosition-1; // sibling to the left
+		// If the value is the same, leave it
+		int newPosition = Integer.parseInt(position);
+		if(genes.get(newPosition).allele.equals(newAllele)){
+			return;
+		}
 		
-		// Replace alleles
-		genes.get(newPosition).allele = genes.get(oldPosition).allele;
-		genes.get(oldPosition).allele = newAllele;
+		// Search for old position of the newAllele.. 
+		OptionalInt oldPosition = IntStream.range(0, genes.size())
+			     .filter(i -> newAllele.equals(genes.get(i).allele))
+			     .findFirst();
+		
+		// New position is occupied by another allele..
+		Allele otherAllele = genes.get(newPosition).allele;
+		
+		// That allele will replace new at its old position
+		genes.get(oldPosition.getAsInt()).allele = otherAllele;
+		genes.get(newPosition).allele = newAllele;
 	}
 
 }

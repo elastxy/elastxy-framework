@@ -64,4 +64,8 @@ public class Experiment {
         // Retrieves stats
         stats = evolver.getStats();
     }
+    
+    public String toString(){
+    	return String.format("Experiment stats: %s", stats);
+    }
 }

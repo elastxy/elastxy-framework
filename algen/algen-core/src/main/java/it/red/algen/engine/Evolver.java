@@ -2,10 +2,10 @@ package it.red.algen.engine;
 
 import java.util.Arrays;
 import java.util.List;
-import java.util.Random;
 import java.util.logging.Logger;
 
 import it.red.algen.context.AlgorithmContext;
+import it.red.algen.context.Randomizer;
 import it.red.algen.domain.experiment.Env;
 import it.red.algen.domain.experiment.Fitness;
 import it.red.algen.domain.experiment.Population;
@@ -17,8 +17,6 @@ import it.red.algen.tracking.EnvObserver;
 public class Evolver implements EnvObservable {
 	private static Logger logger = Logger.getLogger(Evolver.class.getName());
 
-    private static Random RANDOMIZER = new Random();
-    
 	// ALGORITHM PARAMETERS
     public AlgorithmContext context;
     private FitnessTester fitnessTester;
@@ -82,8 +80,7 @@ public class Evolver implements EnvObservable {
         	
         	
         	// For uniform distribution selector skip all
-        	// TODOA: by strategy!
-        	if(!(context.selector instanceof UniformlyDistributedSelector)) {
+        	if(!context.parameters.randomEvolution) {
         		newGenerationLoop(generationSize, nextGeneration);
         	}
         	
@@ -123,7 +120,7 @@ public class Evolver implements EnvObservable {
 		
 		    // REPLACE PARENTS WITH SONS
 		    nextGeneration.solutions.set(s, sons.get(0));
-		    nextGeneration.solutions.set(s, sons.get(1));
+		    nextGeneration.solutions.set(s+1, sons.get(1));
 		}
 
 		// BEST MATCH - reinsert
@@ -198,7 +195,7 @@ public class Evolver implements EnvObservable {
 
 	private List<Solution> recombination(Solution[] parents) {
 		List<Solution> sons;
-		boolean crossover = RANDOMIZER.nextDouble() < context.parameters.recombinationPerc;
+		boolean crossover = Randomizer.nextDouble() < context.parameters.recombinationPerc;
 		if(crossover) {
 		    sons = context.recombinator.recombine(Arrays.asList(parents));
 		    fireCrossoverEvent(parents[0], parents[1], sons);
@@ -210,8 +207,8 @@ public class Evolver implements EnvObservable {
 	}
 
 	private void mutation(List<Solution> sons) {
-		boolean mute0 = RANDOMIZER.nextDouble() < context.parameters.mutationPerc;
-		boolean mute1 = RANDOMIZER.nextDouble() < context.parameters.mutationPerc;
+		boolean mute0 = Randomizer.nextDouble() < context.parameters.mutationPerc;
+		boolean mute1 = Randomizer.nextDouble() < context.parameters.mutationPerc;
 		if(mute0) { 
 		    Solution old = sons.get(0);
 		    Solution niu = old.copy();
@@ -261,5 +258,9 @@ public class Evolver implements EnvObservable {
         observer.historyEndedEvent(this);
     }
     
+    
+    public String toString(){
+    	return String.format("Evolver: current Env %s", env);
+    }
     
 }

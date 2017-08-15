@@ -9,11 +9,13 @@
  */
 
 package it.red.algen.domain.experiment;
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
 import it.red.algen.engine.FitnessComparator;
+import it.red.algen.engine.TargetFitnessComparator;
 
 /** Population of solutions
  * 
@@ -27,6 +29,7 @@ public class Population {
 	 * TODOM: make it injectable
 	 */
     private static FitnessComparator FITNESS_COMPARATOR = new FitnessComparator();
+//    private static FitnessComparator TARGET_FITNESS_COMPARATOR = new TargetFitnessComparator();
     
     /**
      * List of all solutions
@@ -61,12 +64,11 @@ public class Population {
     	Collections.sort(solutions, FITNESS_COMPARATOR);
     }
     
+    public void orderByFitnessProximity(BigDecimal targetFitness){
+    	Collections.sort(solutions, new TargetFitnessComparator(targetFitness)); // TODOA: re-create too much expensive!
+    }
     
     public String toString(){
-    	StringBuffer result = new StringBuffer();
-    	for(Solution<?,?> s : solutions){
-    		result.append(s).append("|");
-    	}
-    	return result.toString();
+    	return String.format("BestMatch %s amongst %d solutions", bestMatch, solutions.size());
     }
 }

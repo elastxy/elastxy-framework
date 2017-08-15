@@ -23,6 +23,14 @@ package it.red.algen.conf;
  * @author grossi
  */
 public class OperatorsParameters {
+
+	/*
+	 * ======================================
+	 * EVOLUTION
+	 * ======================================
+	 */
+	public boolean randomEvolution = false;
+	
 	
 	/*
 	 * ======================================

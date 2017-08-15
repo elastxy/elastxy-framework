@@ -53,7 +53,20 @@ public class StandardFitness implements Fitness {
 	 */
 	@Override
     public boolean greaterThan(Fitness other){
-        return compareTo(other.getValue())==1;
+        return compareTo(other.getValue()) > 0;
+    }
+
+	/**
+	 * Evaluates the nearest to the target fitness
+	 * 
+	 * Nearest = the nearer based on absolute value of the distance to fitness
+	 * 
+	 */
+	@Override
+    public boolean nearestThan(Fitness other, BigDecimal targetFitness) {
+		BigDecimal otherDistance = other.getValue().subtract(targetFitness).abs();
+		BigDecimal thisDistance = value.subtract(targetFitness).abs();
+        return otherDistance.compareTo(thisDistance) >  0;
     }
 
 	
@@ -92,6 +105,6 @@ public class StandardFitness implements Fitness {
 
 	@Override
 	public String toString() {
-		return String.valueOf(value);
+		return String.format("Value: %.20f, Check: %b", value, (legalCheck==null));
 	}
 }

@@ -30,7 +30,7 @@ public class DefaultConfiguration {
     public static final double 	DEFAULT_MUTATION_PERC = 0.1;
     
     // STOP CONDITIONS
-    public static final BigDecimal	TARGET_LEVEL = BigDecimal.ONE;
+    public static final BigDecimal	TARGET_LEVEL = null;//BigDecimal.ONE; // Default: not active
     public static final int 		MAX_ITERATIONS = -1;
     public static final int 		MAX_LIFETIME_MS = 60000;
     public static final int 		MAX_IDENTICAL_FITNESSES = -1;

@@ -143,6 +143,7 @@ public class ExpressionsService {
 		logger.info(json);
 		
 		// Trial
+		context.parameters.randomEvolution = true;
  		context.parameters.elitarism = false;
  		context.parameters.mutationPerc = 0.0;
  		context.parameters.recombinationPerc = 0.0;

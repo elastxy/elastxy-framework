@@ -98,7 +98,7 @@ public class GardenSolution implements Solution<GardenSolution, GardenFitness> {
         if(fitness==null){
             return "";
         }
-        String res = fitness.getLegalCheck()!=null ? "###" : String.format("%1.5f", fitness.getValue());
+        String res = fitness.getLegalCheck()!=null ? "###" : String.format("%1.20f", fitness.getValue());
         return " => F:"+res;
     }
 

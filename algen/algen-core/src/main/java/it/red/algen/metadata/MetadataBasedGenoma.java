@@ -11,6 +11,13 @@ import it.red.algen.domain.genetics.Allele;
 import it.red.algen.domain.genetics.Gene;
 import it.red.algen.engine.AlleleGenerator;
 
+
+/**
+ * TODOA: common alleles in a specific strategy (now all genes share the same 1000 values!)
+ * TODOA: reorder and clean methods and responsibility
+ * @author red
+ *
+ */
 public class MetadataBasedGenoma implements Genoma {
 
 	
@@ -65,7 +72,7 @@ public class MetadataBasedGenoma implements Genoma {
 
 	private void nyiLimitedAllelesStrategy(){
 		if(limitedAllelesStrategy){
-			throw new IllegalStateException("Cannot generate Allele in limited context: you must use aggregate methods.");
+			throw new IllegalStateException("NYI");
 		}
 	}
 
@@ -74,7 +81,7 @@ public class MetadataBasedGenoma implements Genoma {
 	
 	/**
 	 * Creates a new random allele given the position in the sequence
-	 * TODO: if not ordered, metadata is random
+	 * TODOM: if not ordered, metadata is random
 	 * 
 	 * IMPORTANT: in case of limited resources, client must swap alleles of two different positions
 	 */
@@ -156,6 +163,18 @@ public class MetadataBasedGenoma implements Genoma {
 	}
 	
 	
+	/**
+	 * Generates one Allele for every possible values of the metadataCode
+	 * 
+	 *TODOA: one list of values shared for all
+	 * @return
+	 */
+	public List<Allele> createPredefinedAlleles(String metadataCode){
+		GeneMetadata geneMetadata = getMetadataByCode(metadataCode);
+		List<Allele> result = (List<Allele>)geneMetadata.values.stream().map(v -> alleleGenerator.generate(geneMetadata, v)).collect(Collectors.toList());
+		return result;
+	}
+	
 	
 	
 
@@ -235,4 +254,7 @@ public class MetadataBasedGenoma implements Genoma {
 	}
 	
 	
+	public String toString(){
+		return String.format("MetadataBasedGenoma: %d metadata, limited alleles %b", genesMetadataByCode.size(), limitedAllelesStrategy);
+	}
 }

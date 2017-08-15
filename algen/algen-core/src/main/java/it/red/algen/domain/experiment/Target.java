@@ -59,11 +59,11 @@ public interface Target<G,M> {
 	
 	
 	/**
-	 * The level of the goal, with respect to normalized fitness:
+	 * The target level of the goal, with respect to normalized fitness:
 	 * 1.0 BEST
 	 * 0.5 AVERAGE
 	 * 0.0 WORST
 	 */
-	public BigDecimal getLevel();
-	public void setLevel(BigDecimal level);
+	public BigDecimal getTargetFitness();
+	public void setTargetFitness(BigDecimal level);
 }

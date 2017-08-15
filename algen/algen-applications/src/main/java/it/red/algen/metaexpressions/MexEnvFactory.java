@@ -13,8 +13,6 @@ package it.red.algen.metaexpressions;
 import java.math.BigDecimal;
 import java.util.Arrays;
 
-import javax.annotation.Resource;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -62,7 +60,7 @@ public class MexEnvFactory implements EnvFactory {
         Long target = context.applicationSpecifics.getTargetLong(MexApplication.TARGET_EXPRESSION_RESULT);
         PerformanceTarget exprTarget = new PerformanceTarget();
         exprTarget.setGoal(target);
-        exprTarget.setLevel(contextSupplier.getContext().stopConditions.targetFitness);
+        exprTarget.setTargetFitness(contextSupplier.getContext().stopConditions.targetFitness);
 
         // Determines goal rough measure by deriving from extreme solutions
         // TODOM concept of boundaries

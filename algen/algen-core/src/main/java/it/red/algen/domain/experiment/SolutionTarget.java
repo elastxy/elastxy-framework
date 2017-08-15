@@ -34,11 +34,15 @@ public class SolutionTarget implements Target<Solution<?,?>,Object> {
 	
 	
 	@Override
-	public BigDecimal getLevel() {
+	public BigDecimal getTargetFitness() {
 		return level;
 	}
 	@Override
-	public void setLevel(BigDecimal level) {
+	public void setTargetFitness(BigDecimal level) {
 		this.level = level;
+	}
+	
+	public String toString(){
+		return String.format("SolutionTarget: goal %s with required level %.3f", goal, level);
 	}
 }

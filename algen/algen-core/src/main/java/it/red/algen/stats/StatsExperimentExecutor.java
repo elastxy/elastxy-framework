@@ -47,7 +47,7 @@ public class StatsExperimentExecutor {
         if(stats.targetReached){
         	globalStats.successExecutionTimes.add(stats.time);
         	globalStats.totSuccesses++;
-        	globalStats.bestMatch = Optional.of(stats.lastGeneration.bestMatch.toStringDetails());
+        	globalStats.bestMatch = Optional.of(stats.lastGeneration.bestMatch.toString());
         }
         globalStats.bestMatches.add(stats.lastGeneration.bestMatch.toStringDetails());
         

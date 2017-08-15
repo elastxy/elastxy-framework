@@ -24,11 +24,13 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import it.red.algen.TestConfig;
 import it.red.algen.context.AlgorithmContext;
 import it.red.algen.context.ContextSupplier;
+import it.red.algen.metadata.Genoma;
 import it.red.algen.stats.Experiment;
 
 
 /**
- *
+ * TODOA: complete test coverage
+ * TODOA: put setup code into Service!
  * @author grossi
  */
 @RunWith(SpringJUnit4ClassRunner.class)
@@ -58,7 +60,9 @@ public class MetaGardenMainTest {
 		contextSupplier.init(context);
 		
 		// Genoma
-		context.mutator.setGenoma(genomaProvider.collect());
+		Genoma genoma = genomaProvider.collect();
+//		genoma.setLimitedAllelesStrategy(false);
+		context.mutator.setGenoma(genoma);
 
 		// Experiment
 		Experiment e = new Experiment(envFactory);

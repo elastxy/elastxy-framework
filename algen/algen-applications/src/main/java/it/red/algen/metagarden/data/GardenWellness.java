@@ -2,6 +2,7 @@ package it.red.algen.metagarden.data;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.OptionalDouble;
 
 
 /**
@@ -11,4 +12,10 @@ import java.util.List;
  */
 public class GardenWellness {
 	public List<Double> locationsUnhappyness = new ArrayList<Double>();
+	
+	public String toString(){
+		OptionalDouble average = locationsUnhappyness.stream().mapToDouble(l -> l).average();
+		long total = locationsUnhappyness.stream().filter(u -> u > 1.0).count();
+		return String.format("Unhappyness: tot=%d;avg=%.2f", total, average.isPresent()?average.getAsDouble():-1.0);
+	}
 }

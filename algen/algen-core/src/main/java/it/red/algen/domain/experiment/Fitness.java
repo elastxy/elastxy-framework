@@ -69,6 +69,14 @@ public interface Fitness {
 
 
     /**
+     * Returns true if this fitness value is nearest to the desired fitness than the other
+     * @param other
+     * @return
+     */
+    public boolean nearestThan(Fitness other, BigDecimal targetFitness);
+    
+
+    /**
      * Returns true if this fitness value is equals to a given one
      * @param other
      * @return

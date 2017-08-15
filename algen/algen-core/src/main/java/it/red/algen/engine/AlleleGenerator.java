@@ -22,7 +22,6 @@ public interface AlleleGenerator {
 	/**
 	 * Generate a new allele with specific value
 	 * 
-	 * TODO: in some cases is to be check the presence in metadata values
 	 * @param metadata
 	 * @return
 	 */

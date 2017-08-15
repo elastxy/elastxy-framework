@@ -3,22 +3,21 @@ package it.red.algen.metadata;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.Random;
 import java.util.Set;
 import java.util.stream.Collectors;
 
+import it.red.algen.context.Randomizer;
 import it.red.algen.domain.genetics.Allele;
 import it.red.algen.engine.AlleleGenerator;
 
 public class PredefinedGenoma implements Genoma {
-	private static Random RANDOM = new Random();
 
 	/**
 	 * Map of predefined alleles by position.
 	 */
 	public Map<String, List<Allele>> alleles = new HashMap<String, List<Allele>>();
 
-	// TODOA: implmenent the strategy
+	// TODOM: by strategy
 	public boolean limitedAllelesStrategy = false;
 	
 	public boolean isLimitedAllelesStrategy() {
@@ -43,7 +42,7 @@ public class PredefinedGenoma implements Genoma {
 	@Override
 	public Allele createRandomAllele(String position){
 		List<Allele> positionsAlleles = alleles.get(position);
-		return positionsAlleles.get(RANDOM.nextInt(positionsAlleles.size()));
+		return positionsAlleles.get(Randomizer.nextInt(positionsAlleles.size()));
 	}
 
 	
@@ -74,7 +73,7 @@ public class PredefinedGenoma implements Genoma {
 	public Set<Allele> getAlleles(String position){
 		throw new UnsupportedOperationException("NYI");
 //		List<Allele> positionsAlleles = alleles.get(position);
-//		return positionsAlleles.get(RANDOM.nextInt(positionsAlleles.size()));
+//		return positionsAlleles.get(Randomizer.nextInt(positionsAlleles.size()));
 	}
 
 
@@ -83,6 +82,9 @@ public class PredefinedGenoma implements Genoma {
 		throw new UnsupportedOperationException("NYI");
 	}
 	
-	
+
+	public String toString(){
+		return String.format("PredefinedGenoma: %d alleles, limitedAllelesStrategy %b", alleles.size(), limitedAllelesStrategy);
+	}
 
 }

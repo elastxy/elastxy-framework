@@ -1,9 +1,7 @@
 package it.red.algen.engine;
 
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-import java.util.Random;
 
 import it.red.algen.conf.OperatorsParameters;
 import it.red.algen.domain.experiment.Solution;
@@ -11,8 +9,6 @@ import it.red.algen.domain.genetics.Gene;
 import it.red.algen.domain.genetics.SequenceGenotype;
 
 public class SequenceRecombinator implements Recombinator<Solution> {
-    private static Random RANDOMIZER = new Random();
-    
     private OperatorsParameters parameters;
     
     
@@ -57,10 +53,19 @@ public class SequenceRecombinator implements Recombinator<Solution> {
 	
 
 	private void cutAndSwapGenotypes(SequenceGenotype off0, SequenceGenotype off1, int crossoverPoint){
-		List<Gene> new0 = new ArrayList<Gene>(off0.genes.subList(0, crossoverPoint));
-		new0.addAll(off1.genes.subList(crossoverPoint, off1.genes.size()-1));
-		
-		List<Gene> new1 = new ArrayList<Gene>(off1.genes.subList(0, crossoverPoint));
-		new1.addAll(off0.genes.subList(crossoverPoint, off0.genes.size()-1));
+		int sequenceEnd = off0.genes.size();
+
+		for(int pos=0; pos < sequenceEnd; pos++){
+			if(pos < crossoverPoint){
+				Gene tmp = off0.genes.get(pos);
+				off0.genes.set(pos, off1.genes.get(pos));
+				off1.genes.set(pos, tmp);
+			}
+			else {
+				Gene tmp = off1.genes.get(pos);
+				off1.genes.set(pos, off0.genes.get(pos));
+				off0.genes.set(pos, tmp);
+			}
+		}
 	}
 }

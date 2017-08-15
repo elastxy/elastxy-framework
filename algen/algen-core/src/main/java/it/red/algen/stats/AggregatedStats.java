@@ -62,4 +62,13 @@ public class AggregatedStats {
         return totFitness / (double)totExperiments;
     }
     
+    
+    public String toString(){
+    	return String.format("AggrStats: successes %d of experiments %d, fitness: max %.20f, avg %.20f, BestMatch: %s", 
+    			totSuccesses, 
+    			totExperiments,
+    			maxFitness,
+    			getAvgFitness(),
+    			bestMatch);
+    }
 }

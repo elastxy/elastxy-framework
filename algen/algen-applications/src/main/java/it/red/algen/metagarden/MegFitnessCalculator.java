@@ -28,7 +28,7 @@ public class MegFitnessCalculator implements FitnessCalculator<GenericSolution,P
 	 * Produces the performing data of the individual.
 	 * E.g. for the expression individual, is the computed value of its expression
 	 * 
-	 * TODOA: remove redundancies
+	 * TODOA: remove redundancy
 	 * TODOM: manage no-goal problems
 	 * @return
 	 */
@@ -52,7 +52,7 @@ public class MegFitnessCalculator implements FitnessCalculator<GenericSolution,P
     	BigDecimal normalized = null;
     	
     	if(totalUnhappyness.compareTo(0.0)==0){
-    		normalized = BigDecimal.ZERO;
+    		normalized = BigDecimal.ONE;
     	}
     	else {
     		BigDecimal bh = new BigDecimal(totalUnhappyness).setScale(20, BigDecimal.ROUND_HALF_UP);

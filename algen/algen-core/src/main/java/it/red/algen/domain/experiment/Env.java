@@ -39,4 +39,9 @@ public class Env {
     	this.currentGen = currentGen;
     }
         
+    
+    public String toString(){
+    	return String.format("Env [Target: %s, GenNumber: %d, Identical Fit: %d]", target, currentGenNumber, totIdenticalFitnesses);
+    }
+    
 }

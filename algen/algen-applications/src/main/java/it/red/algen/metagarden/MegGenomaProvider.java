@@ -29,6 +29,7 @@ import it.red.algen.metagarden.data.PlaceProperty;
  */
 @Component
 public class MegGenomaProvider implements GenomaProvider {
+//	private GardenDatabase db = new GardenDatabaseInMemory();
 	private GardenDatabase db = new GardenDatabaseCSV(MegApplication.DATABASE_DIR);
 
 	@Autowired
@@ -53,10 +54,9 @@ public class MegGenomaProvider implements GenomaProvider {
 		}
 		MetadataBasedGenoma cachedGenoma = new MetadataBasedGenoma();
 		cachedGenoma.setupAlleleGenerator(alleleGenerator);
-		cachedGenoma.limitedAllelesStrategy = contextSupplier.getContext().applicationSpecifics.getParamBoolean(MegApplication.LIMITED_TREES);
+		cachedGenoma.setLimitedAllelesStrategy(contextSupplier.getContext().applicationSpecifics.getParamBoolean(MegApplication.LIMITED_TREES));
 		cachedGenoma.genesMetadataByCode = new HashMap<String, GeneMetadata>();
 
-//		GardenDatabaseInMemory db = new GardenDatabaseInMemory();
 		Place[] places = db.getAllPlaces();
 		
 		for(int pos=0; pos < places.length; pos++){
@@ -78,6 +78,7 @@ public class MegGenomaProvider implements GenomaProvider {
 			cachedGenoma.genesMetadataByPos.put(String.valueOf(pos), metadata);
 		}
 		
+		this.cachedGenoma = cachedGenoma;
 		return cachedGenoma;
 	}
 
