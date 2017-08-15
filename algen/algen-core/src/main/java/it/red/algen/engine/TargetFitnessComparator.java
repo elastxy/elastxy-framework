@@ -37,8 +37,11 @@ public class TargetFitnessComparator implements Comparator<Solution> {
 		else if(fitness1==null && fitness2==null){
 			result = 0;
 		}
+		else if(fitness1.compareTo(fitness2)==0){
+			result = 0;
+		}
 		else {
-			result = arg1.getFitness().nearestThan(arg2.getFitness(), targetFitness) ? 1 : -1; 
+			result = arg1.getFitness().nearestThan(arg2.getFitness(), targetFitness) ? 2 : -2; 
 		}
 		
 		// MINUS SIGN => reverse order, from higher to lower
