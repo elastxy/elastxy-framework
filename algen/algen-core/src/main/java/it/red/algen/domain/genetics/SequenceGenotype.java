@@ -6,6 +6,8 @@ import java.util.OptionalInt;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
+import org.springframework.cache.annotation.Cacheable;
+
 /**
  * Simple sequence of Genes
  * 
@@ -29,6 +31,7 @@ public class SequenceGenotype implements Genotype {
 		return result;
 	}
 
+//	@Cacheable(value = "genotype_positions") TODOA: cache
 	@Override
 	public List<String> getPositions() {
 		List<String> result = IntStream.

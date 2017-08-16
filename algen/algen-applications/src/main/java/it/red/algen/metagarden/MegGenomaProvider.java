@@ -17,7 +17,6 @@ import it.red.algen.metadata.Genoma;
 import it.red.algen.metadata.MetadataBasedGenoma;
 import it.red.algen.metagarden.data.GardenDatabase;
 import it.red.algen.metagarden.data.GardenDatabaseCSV;
-import it.red.algen.metagarden.data.GardenDatabaseInMemory;
 import it.red.algen.metagarden.data.Place;
 import it.red.algen.metagarden.data.PlaceProperty;
 
@@ -35,24 +34,26 @@ public class MegGenomaProvider implements GenomaProvider {
 	@Autowired
 	private ContextSupplier contextSupplier;
 
-	private Genoma cachedGenoma;
+	private MetadataBasedGenoma cachedGenoma;
 	
 	@Autowired
 	@Resource(name="megAlleleGenerator")
 	private AlleleGenerator alleleGenerator;
 
-	
+
+//	@Cacheable(value = "genoma") TODOA: cache
 	@Override
 	public Genoma getGenoma(){
+		if(cachedGenoma==null){
+			collect();
+		}
 		return cachedGenoma;
 	}
-
+	
+//	@Cacheable(value = "genoma")
 	@Override
 	public Genoma collect() {
-		if(cachedGenoma!=null){
-			return cachedGenoma;
-		}
-		MetadataBasedGenoma cachedGenoma = new MetadataBasedGenoma();
+		cachedGenoma = new MetadataBasedGenoma();
 		cachedGenoma.setupAlleleGenerator(alleleGenerator);
 		cachedGenoma.setLimitedAllelesStrategy(contextSupplier.getContext().applicationSpecifics.getParamBoolean(MegApplication.LIMITED_TREES));
 		cachedGenoma.genesMetadataByCode = new HashMap<String, GeneMetadata>();

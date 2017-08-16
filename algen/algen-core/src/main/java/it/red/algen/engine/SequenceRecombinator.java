@@ -37,6 +37,11 @@ public class SequenceRecombinator implements Recombinator<Solution> {
 		// Define parents and children as initial clones of the parents
 		Solution offspring0 = parents.get(0).copy();
         Solution offspring1 = parents.get(1).copy();
+        
+        // Reset Fitness values
+        offspring0.setFitness(null);
+        offspring1.setFitness(null);
+        
 		Solution[] offsprings = new Solution[2];
 		offsprings[0] = offspring0;
 		offsprings[1] = offspring1;

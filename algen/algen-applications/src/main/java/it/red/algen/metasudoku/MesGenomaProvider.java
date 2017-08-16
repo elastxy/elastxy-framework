@@ -1,7 +1,8 @@
-package it.red.algen.metaexpressions;
+package it.red.algen.metasudoku;
 
-import java.util.Arrays;
 import java.util.HashMap;
+import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 
 import javax.annotation.Resource;
 
@@ -18,18 +19,25 @@ import it.red.algen.metadata.MetadataBasedGenoma;
 
 
 /**
+ * 
+ * Positions in sudoku matrix are: 
+ * 	first row: 	0 to 8 (incl.)
+ *  second row: 9 to 17 (incl.)
+ *  ..
+ *  ninth row: 72 to 80 (incl.)
+ *  
  * TODOA: cache!
  * @author red
  *
  */
 @Component
-public class MexGenomaProvider implements GenomaProvider {
+public class MesGenomaProvider implements GenomaProvider {
 
 	@Autowired
 	private ContextSupplier contextSupplier;
 
 	@Autowired
-	@Resource(name="mexAlleleGenerator")
+	@Resource(name="mesAlleleGenerator")
 	private AlleleGenerator alleleGenerator;
 	
 	private MetadataBasedGenoma cachedGenoma;
@@ -49,23 +57,15 @@ public class MexGenomaProvider implements GenomaProvider {
 		cachedGenoma.genesMetadataByCode = new HashMap<String, GeneMetadata>();
 
 		GeneMetadata metadata = new GeneMetadata();
-		metadata.code = "operand";
-		metadata.name = "operand";
+		metadata.code = "cell";
+		metadata.name = "cell";
 		metadata.type = GeneMetadataType.INTEGER;
-		Long maxValue = contextSupplier.getContext().applicationSpecifics.getParamLong(MexApplication.MAX_OPERAND_VALUE);
-		metadata.max = maxValue;
-		metadata.min = -1L * maxValue;
+		metadata.values = IntStream.rangeClosed(0, 9).boxed().map(i -> i).collect(Collectors.toList());
 		cachedGenoma.genesMetadataByCode.put(metadata.code, metadata);
-		cachedGenoma.genesMetadataByPos.put("0", metadata);
-		cachedGenoma.genesMetadataByPos.put("2", metadata);
+		for(int cell=0; cell < 81; cell++){
+			cachedGenoma.genesMetadataByPos.put(String.valueOf(cell), metadata);
+		}
 		
-		metadata = new GeneMetadata();
-		metadata.code = "operator";
-		metadata.name = "operator";
-		metadata.type = GeneMetadataType.CHAR;
-		metadata.values = Arrays.asList('+', '-', '*', '/');
-		cachedGenoma.genesMetadataByCode.put(metadata.code, metadata);
-		cachedGenoma.genesMetadataByPos.put("1", metadata);
 		
 		return cachedGenoma;
 	}

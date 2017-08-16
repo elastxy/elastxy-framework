@@ -34,7 +34,7 @@ public class MegSolutionsFactory implements SolutionsFactory {
      * IMPORTANT: infinite Trees!
      */
     public Solution createRandom() {
-    	MetadataBasedGenoma genoma = (MetadataBasedGenoma)genomaProvider.collect();
+    	MetadataBasedGenoma genoma = (MetadataBasedGenoma)genomaProvider.getGenoma();
     	GenericSolution solution = new GenericSolution();
 
     	SequenceGenotype genotype = new SequenceGenotype();
@@ -55,7 +55,7 @@ public class MegSolutionsFactory implements SolutionsFactory {
      */
     @Override
     public Solution createBaseModel() {
-    	MetadataBasedGenoma genoma = (MetadataBasedGenoma)genomaProvider.collect();
+    	MetadataBasedGenoma genoma = (MetadataBasedGenoma)genomaProvider.getGenoma();
     	GenericSolution solution = new GenericSolution();
     	
     	SequenceGenotype genotype = new SequenceGenotype();

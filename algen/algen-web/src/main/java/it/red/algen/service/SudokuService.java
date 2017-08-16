@@ -16,19 +16,18 @@ import it.red.algen.engine.SequenceRecombinator;
 import it.red.algen.engine.StandardMutator;
 import it.red.algen.engine.StandardSelector;
 import it.red.algen.engine.UniformlyDistributedSelector;
-import it.red.algen.metaexpressions.MexApplication;
-import it.red.algen.metagarden.MegBenchmark;
-import it.red.algen.metagarden.MegEnvFactory;
-import it.red.algen.metagarden.MegFitnessCalculator;
-import it.red.algen.metagarden.MegGenomaProvider;
-import it.red.algen.metagarden.MegIncubator;
+import it.red.algen.metasudoku.MesBenchmark;
+import it.red.algen.metasudoku.MesEnvFactory;
+import it.red.algen.metasudoku.MesFitnessCalculator;
+import it.red.algen.metasudoku.MesGenomaProvider;
+import it.red.algen.metasudoku.MesIncubator;
+import it.red.algen.metasudoku.MesSolutionRenderer;
 import it.red.algen.stats.Experiment;
 import it.red.algen.stats.ExperimentStats;
 import it.red.algen.stats.StatsExperimentExecutor;
-import it.red.algen.tracking.CSVReporter;
 
 @Component
-public class GardenService {
+public class SudokuService {
 	private static Logger logger = LoggerFactory.getLogger(AlgenController.class);
 
 	@Autowired
@@ -36,16 +35,16 @@ public class GardenService {
 	
 
 	@Autowired
-	private MegEnvFactory envFactory;
+	private MesEnvFactory envFactory;
 
 	@Autowired
 	private PopulationFactory populationFactory;
 
 	@Autowired
-	private MegGenomaProvider genomaProvider;
+	private MesGenomaProvider genomaProvider;
 	
 	@Autowired
-	private MegBenchmark benchmark;
+	private MesBenchmark benchmark;
 	
 	
 	private @Autowired AutowireCapableBeanFactory beanFactory;
@@ -110,7 +109,7 @@ public class GardenService {
 
 		// Context
 		contextSupplier.init(context);
-		setupContext(context);
+	 	setupContext(context);
 
 	 	Gson gson = new Gson();
 		String json = gson.toJson(context);
@@ -165,9 +164,9 @@ public class GardenService {
 	
 
 	private void setupContext(AlgorithmContext context) {
-		context.incubator = new MegIncubator();
+		context.incubator = new MesIncubator();
 
-		context.fitnessCalculator = new MegFitnessCalculator();
+		context.fitnessCalculator = new MesFitnessCalculator();
 		context.fitnessCalculator.setup(context.incubator);
 
 		context.selector = new StandardSelector();
@@ -177,7 +176,7 @@ public class GardenService {
 		
 		context.recombinator = new SequenceRecombinator();
 
-		context.monitoringConfiguration.reporter = new CSVReporter(MexApplication.STATS_DIR);
+		context.monitoringConfiguration.solutionRenderer = new MesSolutionRenderer();
 	}
 	
 }

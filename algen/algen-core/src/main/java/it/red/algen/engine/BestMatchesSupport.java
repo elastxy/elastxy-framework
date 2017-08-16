@@ -29,9 +29,6 @@ public class BestMatchesSupport {
 	    if(generationSize > 1 && generationSize % 2 == 0){
 	    	bestMatches.add(nextGeneration.solutions.remove(0));;
 	    }
-
-        // Shuffles the other solutions
-        Collections.shuffle(nextGeneration.solutions);
 		return bestMatches;
 	}
 	

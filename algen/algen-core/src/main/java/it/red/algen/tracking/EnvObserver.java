@@ -28,9 +28,17 @@ import it.red.algen.stats.ExperimentStats;
 public class EnvObserver {
 	
     private AlgorithmContext context;
+    private SolutionRenderer renderer = new DefaultSolutionRenderer();
     
     public EnvObserver(AlgorithmContext context){
         this.context = context;
+        if(context.monitoringConfiguration.solutionRenderer!=null){
+        	this.renderer = context.monitoringConfiguration.solutionRenderer;
+        }
+    }
+    
+    public void setRenderer(SolutionRenderer renderer){
+    	this.renderer = renderer;
     }
     
     public void newGenerationEvent(int number, Population newGen){
@@ -72,7 +80,8 @@ public class EnvObserver {
     	Logger log = context.monitoringConfiguration.logger;
         log.out("\n##################### STATS #####################");
         ExperimentStats stats = evolver.getStats();
-        log.out("Best match:"+stats.lastGeneration.bestMatch);
+        log.out("Best match:");
+        log.out(renderer.render(stats.lastGeneration.bestMatch));
         log.out("Number of generations: "+stats.generations);
         log.out("Total time (ms): "+stats.time);
         if(context.parameters.elitarism) {

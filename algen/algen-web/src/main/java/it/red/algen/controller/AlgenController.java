@@ -32,6 +32,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import it.red.algen.context.AlgorithmContext;
 import it.red.algen.service.ExpressionsService;
 import it.red.algen.service.GardenService;
+import it.red.algen.service.SudokuService;
 import it.red.algen.stats.ExperimentStats;
 
 @Controller
@@ -47,6 +48,9 @@ public class AlgenController {
 
 	@Autowired
 	private GardenService gardenService;
+
+	@Autowired
+	private SudokuService sudokuService;
 	
 
 	/**
@@ -89,6 +93,9 @@ public class AlgenController {
 		else if("garden".equals(domain)){ 
 		 	stats = gardenService.executeExperiment(context);
 		}
+		else if("sudoku".equals(domain)){ 
+		 	stats = sudokuService.executeExperiment(context);
+		}
 		logger.info("RESPONSE Service /experiment/{domain} => "+stats);
 		return stats;
 	}
@@ -105,6 +112,9 @@ public class AlgenController {
 		}
 		else if("garden".equals(domain)){ 
 		 	stats = gardenService.executeBenchmark();
+		}
+		else if("sudoku".equals(domain)){ 
+		 	stats = sudokuService.executeBenchmark();
 		}
 		logger.info("RESPONSE Service /test/{domain} => "+stats);
 		return stats;
@@ -127,6 +137,9 @@ public class AlgenController {
 	 	else if("garden".equals(domain)){
 	 		result = gardenService.executeAnalysis(context, experiments);
 	 	}
+		else if("sudoku".equals(domain)){ 
+			result = sudokuService.executeAnalysis(context, experiments);
+		}
 		logger.info("RESPONSE Service /analysis/{domain}/{experiments} => "+result);
         return result;
 	}
@@ -146,6 +159,9 @@ public class AlgenController {
 	 	else if("garden".equals(domain)){
 	 		result = gardenService.executeTrialTest(context, experiments);
 	 	}
+		else if("sudoku".equals(domain)){ 
+			result = sudokuService.executeTrialTest(context, experiments);
+		}
 		logger.info("RESPONSE Service /trial/{domain}/{experiments} => "+result);
         return result;
 	}

@@ -1,6 +1,7 @@
 package it.red.algen.engine;
 
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 import java.util.logging.Logger;
 
@@ -63,6 +64,7 @@ public class Evolver implements EnvObservable {
     public void evolve(){
     	
     	EnvSupport.startTime(env);
+    	if(context.monitoringConfiguration.verbose) env.generationsHistory.add(env.currentGen);
         
         
     	// TEST FITNESS - initial gen
@@ -77,6 +79,7 @@ public class Evolver implements EnvObservable {
         	
         	// SELECTION
         	Population nextGeneration = selection(generationSize);
+        	if(context.monitoringConfiguration.verbose) env.generationsHistory.add(nextGeneration);
         	
         	
         	// For uniform distribution selector skip all
@@ -87,11 +90,13 @@ public class Evolver implements EnvObservable {
             // TEST FITNESS - next gen
             Fitness nextGenFitness = fitnessTester.test(env.target, nextGeneration);
 
-            // CHECK END CONDITION
-            endConditionFound = checkEndCondition(nextGenFitness);
-            
+            // Assign new generation
+            Fitness lastGenFitness = env.currentGen.bestMatch.getFitness();
             env.currentGen = nextGeneration;
-            if(context.monitoringConfiguration.verbose) env.generationsHistory.add(env.currentGen);
+            
+            // CHECK END CONDITION
+            endConditionFound = checkEndCondition(lastGenFitness);
+            
             env.currentGenNumber++;
         }
         while(!endConditionFound);
@@ -101,10 +106,12 @@ public class Evolver implements EnvObservable {
 
 
 	private void newGenerationLoop(int generationSize, Population nextGeneration) {
-		// BEST MATCH - extract
+		
+		// BEST MATCHES - extract
 		List<Solution> bestMatches = BestMatchesSupport.extractBestMatches(nextGeneration, context.parameters.elitarism);
 
-		// LOOP OVER NON-BEST
+		// LOOP OVER NON-BEST SHUFFLED
+        Collections.shuffle(nextGeneration.solutions);
 		for(int s=0; s < generationSize-bestMatches.size(); s=s+2){
 		    
 			// EXTRACT PARENTS
@@ -123,7 +130,7 @@ public class Evolver implements EnvObservable {
 		    nextGeneration.solutions.set(s+1, sons.get(1));
 		}
 
-		// BEST MATCH - reinsert
+		// BEST MATCHES - reinsert
 		for(Solution s : bestMatches){ nextGeneration.add(s); }
 	}
 
@@ -138,12 +145,12 @@ public class Evolver implements EnvObservable {
 	 * ============================================================
 	 */
 
-	private boolean checkEndCondition(Fitness nextGenFitness) {
+	private boolean checkEndCondition(Fitness lastGenFitness) {
 		boolean endConditionFound = false;
 		
 		// Check stability of the fitness value
 		if(context.parameters.elitarism){
-		    if(env.currentGen.bestMatch.getFitness().sameOf(nextGenFitness)){
+		    if(env.currentGen.bestMatch.getFitness().sameOf(lastGenFitness)){
 		    	env.totIdenticalFitnesses++;
 		        if(stopVerifier.isStable(env.totIdenticalFitnesses)){
 		        	EnvSupport.stopTime(env);

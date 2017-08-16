@@ -7,7 +7,6 @@ public interface Genotype {
 	
 	/**
 	 * Returns the list of all available positions
-	 * TODOA: cache
 	 * @return
 	 */
 	public List<String> getPositions();

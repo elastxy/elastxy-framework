@@ -24,7 +24,7 @@ public class MexSolutionFactory implements SolutionsFactory {
 
     // TODOM: genotype builders based directly inside in genoma
     public Solution createRandom() {
-    	MetadataBasedGenoma genoma = (MetadataBasedGenoma)genomaProvider.collect();
+    	MetadataBasedGenoma genoma = (MetadataBasedGenoma)genomaProvider.getGenoma();
     	GenericSolution solution = new GenericSolution();
 
     	SequenceGenotype genotype = new SequenceGenotype();
@@ -51,7 +51,7 @@ public class MexSolutionFactory implements SolutionsFactory {
 
     
 	private GenericSolution createByValues(Object operand1, Object operator, Object operand2) {
-    	MetadataBasedGenoma genoma = (MetadataBasedGenoma)genomaProvider.collect();
+    	MetadataBasedGenoma genoma = (MetadataBasedGenoma)genomaProvider.getGenoma();
 		GenericSolution solution = new GenericSolution();
 
     	SequenceGenotype genotype = new SequenceGenotype();
