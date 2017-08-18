@@ -24,7 +24,6 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import it.red.algen.TestConfig;
 import it.red.algen.context.AlgorithmContext;
 import it.red.algen.context.ContextSupplier;
-import it.red.algen.metadata.Genoma;
 import it.red.algen.stats.Experiment;
 
 
@@ -44,9 +43,6 @@ public class MetaGardenMainTest {
 	private MegEnvFactory envFactory;
 	
 	@Autowired
-	private MegGenomaProvider genomaProvider;
-	
-	@Autowired
 	private MegBenchmark benchmark;
 		
 	private @Autowired AutowireCapableBeanFactory beanFactory;
@@ -59,11 +55,6 @@ public class MetaGardenMainTest {
 		AlgorithmContext context = benchmark.build();
 		contextSupplier.init(context);
 		
-		// Genoma
-		Genoma genoma = genomaProvider.collect();
-//		genoma.setLimitedAllelesStrategy(false);
-		context.mutator.setGenoma(genoma);
-
 		// Experiment
 		Experiment e = new Experiment(envFactory);
 		beanFactory.autowireBean(e);

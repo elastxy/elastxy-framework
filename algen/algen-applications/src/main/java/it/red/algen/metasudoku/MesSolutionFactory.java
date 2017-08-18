@@ -1,8 +1,6 @@
 package it.red.algen.metasudoku;
 
 import java.util.List;
-import java.util.OptionalInt;
-import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
 import javax.annotation.Resource;
@@ -15,8 +13,9 @@ import it.red.algen.dataaccess.SolutionsFactory;
 import it.red.algen.domain.experiment.GenericSolution;
 import it.red.algen.domain.experiment.Solution;
 import it.red.algen.domain.genetics.Allele;
+import it.red.algen.domain.genetics.PredefinedGeneFactory;
+import it.red.algen.domain.genetics.PredefinedGenoma;
 import it.red.algen.domain.genetics.SequenceGenotype;
-import it.red.algen.metadata.MetadataBasedGenoma;
 
 @Component
 public class MesSolutionFactory implements SolutionsFactory {
@@ -26,39 +25,40 @@ public class MesSolutionFactory implements SolutionsFactory {
     private GenomaProvider genomaProvider;
 
     public Solution createRandom() {
-    	MetadataBasedGenoma genoma = (MetadataBasedGenoma)genomaProvider.getGenoma();
     	GenericSolution solution = new GenericSolution();
+    	
+    	PredefinedGenoma genoma = (PredefinedGenoma)genomaProvider.getGenoma();
 
     	SequenceGenotype genotype = new SequenceGenotype();
-    	genotype.genes = genoma.createSequenceByPositions(IntStream.range(0, 81).boxed().map(i -> String.valueOf(i)).collect(Collectors.toList()));
+    	genotype.genes = PredefinedGeneFactory.createSequence(genoma);
     	solution.genotype = genotype;
 
-    	List<Allele> alleles = genoma.createRandomAlleles();
+    	List<Allele> alleles = genoma.getRandomAlleles();
     	IntStream.range(0, genotype.genes.size()).forEach(i -> genotype.genes.get(i).allele = alleles.get(i));
-
+    	
     	return solution;
     }
     
     @Override
     public Solution createBaseModel() {
-    	return createEmpty();
+    	GenericSolution solution = new GenericSolution();
+    	
+    	PredefinedGenoma genoma = (PredefinedGenoma)genomaProvider.getGenoma();
+
+    	SequenceGenotype genotype = new SequenceGenotype();
+    	genotype.genes = PredefinedGeneFactory.createSequence(genoma);
+    	solution.genotype = genotype;
+
+    	List<Allele> alleles = genoma.getAllAlleles();
+    	IntStream.range(0, genotype.genes.size()).forEach(i -> genotype.genes.get(i).allele = alleles.get(i));
+    	
+    	return solution;
     }
 
 	@Override
 	public Solution createPredefined(List<Object> alleleValues) {
-		return createEmpty();
+		return createBaseModel();
 	}
 
 
-    
-	private Solution createEmpty() {
-    	MetadataBasedGenoma genoma = (MetadataBasedGenoma)genomaProvider.getGenoma();
-		GenericSolution result = (GenericSolution)createRandom();
-		SequenceGenotype genotype = (SequenceGenotype)result.genotype;
-		for(int i=0; i < genotype.genes.size(); i++){
-			genotype.genes.get(i).allele = genoma.createPredefinedAlleleByValue("cell", 0);
-		}
-		return result;
-	}
-    
 }

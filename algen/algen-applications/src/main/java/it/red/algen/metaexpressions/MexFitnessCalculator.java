@@ -2,6 +2,7 @@ package it.red.algen.metaexpressions;
 
 import java.math.BigDecimal;
 
+import it.red.algen.domain.experiment.Env;
 import it.red.algen.domain.experiment.GenericSolution;
 import it.red.algen.domain.experiment.NumberRawFitness;
 import it.red.algen.domain.experiment.PerformanceTarget;
@@ -16,9 +17,10 @@ public class MexFitnessCalculator implements FitnessCalculator<GenericSolution,P
 
 	
 	private Incubator<SequenceGenotype,NumberPhenotype> incubator;
-	
+
+
 	@Override
-	public void setup(Incubator incubator){
+	public void setup(Incubator incubator, Env environment) {
 		this.incubator = incubator;
 	}
 	
@@ -42,7 +44,7 @@ public class MexFitnessCalculator implements FitnessCalculator<GenericSolution,P
         try { 
         	
         	// Grow the offspring to evaluate it
-        	solution.phenotype = incubator.grow((SequenceGenotype)solution.genotype);
+        	solution.phenotype = incubator.grow((SequenceGenotype)solution.genotype, null);
         	long sValue = ((NumberPhenotype)solution.phenotype).getValue().longValue();
             
         	// Calculate distance from goal
@@ -62,5 +64,6 @@ public class MexFitnessCalculator implements FitnessCalculator<GenericSolution,P
         result.setLegalCheck(legalCheck);
         return result;
     }
+
 
 }

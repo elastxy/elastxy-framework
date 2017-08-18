@@ -19,8 +19,7 @@ import it.red.algen.dataaccess.PopulationFactory;
 import it.red.algen.domain.experiment.Env;
 import it.red.algen.domain.experiment.PerformanceTarget;
 import it.red.algen.domain.experiment.Population;
-import it.red.algen.metagarden.data.GardenDatabase;
-import it.red.algen.metagarden.data.GardenDatabaseCSV;
+import it.red.algen.domain.genetics.Genoma;
 
 /**
  *
@@ -39,25 +38,48 @@ public class MegEnvFactory implements EnvFactory {
 	@Autowired
 	private MegSolutionsFactory solutionsFactory;
 	
+	@Autowired
+	private MegGenomaProvider genomaProvider;
 	
     public Env create(){
-        
+
+    	// Create genoma
+    	createGenoma();
+    	
     	// Create initial population
-    	populationFactory.setSolutionsFactory(solutionsFactory);
-        Population startGen = populationFactory.createNew();
-        
-        // Defines goal representation
-        PerformanceTarget<String,Double> gardenTarget = new PerformanceTarget<String,Double>();
-        gardenTarget.setGoal(contextSupplier.getContext().applicationSpecifics.getTargetString(MegApplication.TARGET_WELLNESS));
-        gardenTarget.setTargetFitness(contextSupplier.getContext().stopConditions.targetFitness);
-        // Determines goal rough measure: minimum possible unhappiness (illness), 0.0
-        gardenTarget.setReferenceMeasure(startGen.solutions.get(0).getGenotype().getPositions().size() * 2.0);  // 2 is the maximum value happiness can reach
-        
-        // Creates environment
-        Env env = new Env(gardenTarget, startGen);
+    	Population startGen = createInitialPopulation();
+    	
+    	// Define target
+    	PerformanceTarget<String, Double> target = defineTarget(startGen);
+
+        // Create environment
+        Env env = new Env(target, startGen);
         
         return env;
     }
+
+
+	private void createGenoma() {
+//    	genomaProvider.reduce(target);
+		Genoma genoma = genomaProvider.collect();
+		contextSupplier.getContext().mutator.setGenoma(genoma);
+	}
+	
+	private PerformanceTarget<String, Double> defineTarget(Population startGen) {
+		PerformanceTarget<String,Double> gardenTarget = new PerformanceTarget<String,Double>();
+    	gardenTarget.setGoal(contextSupplier.getContext().applicationSpecifics.getTargetString(MegApplication.TARGET_WELLNESS));
+    	gardenTarget.setTargetFitness(contextSupplier.getContext().stopConditions.targetFitness);
+    	// Determines goal rough measure: minimum possible unhappiness (illness), 0.0
+    	gardenTarget.setReferenceMeasure(startGen.solutions.get(0).getGenotype().getPositions().size() * 2.0);  // 2 is the maximum value happiness can reach
+		return gardenTarget;
+	}
+
+
+	private Population createInitialPopulation() {
+		populationFactory.setSolutionsFactory(solutionsFactory);
+        Population startGen = populationFactory.createNew();
+		return startGen;
+	}
 
 
 }

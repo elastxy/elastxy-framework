@@ -42,9 +42,6 @@ public class MetaExpressionsMainTest {
 	private MexEnvFactory envFactory;
 	
 	@Autowired
-	private MexGenomaProvider genomaProvider;
-	
-	@Autowired
 	private MexBenchmark benchmark;
 		
 	private @Autowired AutowireCapableBeanFactory beanFactory;
@@ -57,9 +54,6 @@ public class MetaExpressionsMainTest {
 		AlgorithmContext context = benchmark.build();
 		contextSupplier.init(context);
 		
-		// Genoma
-		context.mutator.setGenoma(genomaProvider.collect());
-
 		// Experiment
 		Experiment e = new Experiment(envFactory);
 		beanFactory.autowireBean(e);

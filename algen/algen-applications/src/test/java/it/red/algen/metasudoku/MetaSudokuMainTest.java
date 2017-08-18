@@ -42,9 +42,6 @@ public class MetaSudokuMainTest {
 	private MesEnvFactory envFactory;
 	
 	@Autowired
-	private MesGenomaProvider genomaProvider;
-	
-	@Autowired
 	private MesBenchmark benchmark;
 		
 	private @Autowired AutowireCapableBeanFactory beanFactory;
@@ -57,9 +54,6 @@ public class MetaSudokuMainTest {
 		AlgorithmContext context = benchmark.build();
 		contextSupplier.init(context);
 		
-		// Genoma
-		context.mutator.setGenoma(genomaProvider.collect());
-
 		// Experiment
 		Experiment e = new Experiment(envFactory);
 		beanFactory.autowireBean(e);

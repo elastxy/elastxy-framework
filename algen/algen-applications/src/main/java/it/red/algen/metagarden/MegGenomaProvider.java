@@ -2,6 +2,7 @@ package it.red.algen.metagarden;
 
 import java.util.Arrays;
 import java.util.HashMap;
+import java.util.Map;
 
 import javax.annotation.Resource;
 
@@ -10,11 +11,12 @@ import org.springframework.stereotype.Component;
 
 import it.red.algen.context.ContextSupplier;
 import it.red.algen.dataaccess.GenomaProvider;
+import it.red.algen.domain.experiment.Target;
+import it.red.algen.domain.genetics.Genoma;
 import it.red.algen.engine.AlleleGenerator;
 import it.red.algen.metadata.GeneMetadata;
 import it.red.algen.metadata.GeneMetadataType;
-import it.red.algen.metadata.Genoma;
-import it.red.algen.metadata.MetadataBasedGenoma;
+import it.red.algen.metadata.StandardMetadataGenoma;
 import it.red.algen.metagarden.data.GardenDatabase;
 import it.red.algen.metagarden.data.GardenDatabaseCSV;
 import it.red.algen.metagarden.data.Place;
@@ -34,7 +36,7 @@ public class MegGenomaProvider implements GenomaProvider {
 	@Autowired
 	private ContextSupplier contextSupplier;
 
-	private MetadataBasedGenoma cachedGenoma;
+	private StandardMetadataGenoma cachedGenoma;
 	
 	@Autowired
 	@Resource(name="megAlleleGenerator")
@@ -53,10 +55,11 @@ public class MegGenomaProvider implements GenomaProvider {
 //	@Cacheable(value = "genoma")
 	@Override
 	public Genoma collect() {
-		cachedGenoma = new MetadataBasedGenoma();
+		cachedGenoma = new StandardMetadataGenoma();
 		cachedGenoma.setupAlleleGenerator(alleleGenerator);
 		cachedGenoma.setLimitedAllelesStrategy(contextSupplier.getContext().applicationSpecifics.getParamBoolean(MegApplication.LIMITED_TREES));
-		cachedGenoma.genesMetadataByCode = new HashMap<String, GeneMetadata>();
+		Map<String, GeneMetadata> genesMetadataByCode = new HashMap<String, GeneMetadata>();
+		Map<String, GeneMetadata> genesMetadataByPos = new HashMap<String, GeneMetadata>();
 
 		Place[] places = db.getAllPlaces();
 		
@@ -75,12 +78,20 @@ public class MegGenomaProvider implements GenomaProvider {
 			
 			metadata.values = Arrays.asList(db.getAllTrees());
 			
-			cachedGenoma.genesMetadataByCode.put(metadata.code, metadata);
-			cachedGenoma.genesMetadataByPos.put(String.valueOf(pos), metadata);
+			genesMetadataByCode.put(metadata.code, metadata);
+			genesMetadataByPos.put(String.valueOf(pos), metadata);
+
+			cachedGenoma.initialize(genesMetadataByCode, genesMetadataByPos);
+
 		}
 		
 		this.cachedGenoma = cachedGenoma;
 		return cachedGenoma;
+	}
+
+	@Override
+	public void reduce(Target<?, ?> target) {
+		throw new UnsupportedOperationException("Not available for this GenomaProvider implementation");
 	}
 
 }

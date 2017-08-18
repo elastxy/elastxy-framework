@@ -60,6 +60,7 @@ public class SequenceGenotype implements Genotype {
 		}
 		
 		// Search for old position of the newAllele.. 
+		// TODOA: check if blocked
 		OptionalInt oldPosition = IntStream.range(0, genes.size())
 			     .filter(i -> newAllele.equals(genes.get(i).allele))
 			     .findFirst();

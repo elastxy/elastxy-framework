@@ -1,37 +1,49 @@
 package it.red.algen.metasudoku;
 
 import java.util.Arrays;
-import java.util.Collection;
-import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
 
+import it.red.algen.domain.experiment.Env;
+import it.red.algen.domain.genetics.ComplexPhenotype;
 import it.red.algen.domain.genetics.Gene;
-import it.red.algen.domain.genetics.NumberPhenotype;
 import it.red.algen.domain.genetics.SequenceGenotype;
 import it.red.algen.engine.Incubator;
 
-public class MesIncubator implements Incubator<SequenceGenotype, NumberPhenotype>{
+public class MesIncubator implements Incubator<SequenceGenotype, ComplexPhenotype>{
 	private static final int[] COMPLETED_VALUES = new int[]{1,2,3,4,5,6,7,8,9};
 	
 	/**
-	 * Solution grows to a complete Sudoku matrix: total number of fitting rows/square must be 27
+	 * Solution grows to a complete Sudoku matrix filled with numbers,
+	 * where total number of fitting rows/square could be 27.
+	 * 
+	 * Incubator starts from the genotype representing missing values,
+	 * and fills the original matrix
 	 */	
 	@Override
-	public NumberPhenotype grow(SequenceGenotype genotype) {
-		NumberPhenotype result = new NumberPhenotype();
-		int[][] matrix = convertToMatrix(genotype.genes);
-		result.value = countCompleteRowsSquares(matrix);
+	public ComplexPhenotype grow(SequenceGenotype genotype, Env env) {
+		ComplexPhenotype result = new ComplexPhenotype();
+		int[][] matrix = fillMatrix((int[][])env.target.getGoal(), genotype.genes);
+		double completeness = countCompleteRowsSquares(matrix);
+		result.value.put(MesApplication.PHENOTYPE_MATRIX, matrix);
+		result.value.put(MesApplication.PHENOTYPE_COMPLETENESS, completeness);
 		return result;
 	}
 	
-	public static int[][] convertToMatrix(List<Gene> genes){
-		int size = 9;
+	public static int[][] fillMatrix(int[][] targetMatrix, List<Gene> genes){
+		int size = targetMatrix.length;
 		int[][] matrix = new int[size][size];
-		for (int i = 0; i < genes.size(); i++) {
-			matrix[i / size][i % size] = (int)genes.get(i).allele.value;
+		int i=0;
+		for(int r=0; r < size; r++){
+			for(int c=0; c < size; c++){
+				int targetValue = targetMatrix[r][c];
+				matrix[r][c] = targetValue==0 ? (int)genes.get(i++).allele.value : targetValue;
+			}
 		}
+//		for (int i = 0; i < genes.size(); i++) {
+//			matrix[i / size][i % size] = (int)genes.get(i).allele.value;
+//		}
 		return matrix;
 	}
 	

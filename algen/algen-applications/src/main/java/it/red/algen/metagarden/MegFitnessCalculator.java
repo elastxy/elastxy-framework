@@ -3,6 +3,7 @@ package it.red.algen.metagarden;
 import java.math.BigDecimal;
 import java.util.List;
 
+import it.red.algen.domain.experiment.Env;
 import it.red.algen.domain.experiment.GenericSolution;
 import it.red.algen.domain.experiment.NumberRawFitness;
 import it.red.algen.domain.experiment.PerformanceTarget;
@@ -19,7 +20,7 @@ public class MegFitnessCalculator implements FitnessCalculator<GenericSolution,P
 	private Incubator<SequenceGenotype,UserPhenotype> incubator;
 	
 	@Override
-	public void setup(Incubator incubator){
+	public void setup(Incubator incubator, Env environment){
 		this.incubator = incubator;
 	}
 	
@@ -40,7 +41,7 @@ public class MegFitnessCalculator implements FitnessCalculator<GenericSolution,P
         solution.setFitness(result);
         
     	// Grow the offspring to evaluate it
-    	solution.phenotype = incubator.grow((SequenceGenotype)solution.genotype);
+    	solution.phenotype = incubator.grow((SequenceGenotype)solution.genotype, null);
 //    	List<Double> locationsUnappiness = ((UserPhenotype<GardenWellness>)solution.phenotype).getValue().locationsUnhappyness;
     	List<Double> locationsUnappiness = ((GardenWellness)((UserPhenotype)solution.phenotype).getValue()).locationsUnhappyness;
         

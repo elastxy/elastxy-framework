@@ -1,6 +1,7 @@
 package it.red.algen.metasudoku;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 import org.springframework.stereotype.Component;
 
@@ -22,15 +23,15 @@ public class MesAlleleGenerator implements AlleleGenerator {
 	/**
 	 * A new Allele is one of [1..9] numbers.
 	 * 
-	 * 0 is the empty value, cannot be generated as a new allele.
+	 * The empty value is not present in final solutions, 
+	 * so it cannot be generated as a new allele.
 	 */
 	@Override
 	public Allele<?> generate(GeneMetadata metadata) {
 		Allele result = null;
-		if(metadata.code.equals("cell")){
+		if(metadata.code.equals(MesGenomaProvider.ALLELE_CELL)){
 			result = new Allele<Integer>();
-			// NOTE: '1+': exclude '0'; '-1': include 9 of 10 positions
-			result.value = (Integer)metadata.values.get(1+Randomizer.nextInt(metadata.values.size()-1));
+			result.value = (Integer)metadata.values.get(Randomizer.nextInt(metadata.values.size()));
 		}
 		// Check consistency
 		else {
@@ -44,7 +45,7 @@ public class MesAlleleGenerator implements AlleleGenerator {
 	@Override
 	public Allele<?> generate(GeneMetadata metadata, Object value) {
 		Allele result = null;
-		if(metadata.code.equals("cell")){
+		if(metadata.code.equals(MesGenomaProvider.ALLELE_CELL)){
 			result = new Allele<Integer>();
 			result.value = value;
 		}
@@ -63,7 +64,13 @@ public class MesAlleleGenerator implements AlleleGenerator {
 
 	@Override
 	public Allele generateExclusive(GeneMetadata metadata, List<Object> exclusions) {
-		throw new UnsupportedOperationException("NYI");
+		Allele<Integer> result = new Allele<Integer>();
+		List<Integer> subtracted = (List<Integer>)metadata.values.stream().filter(t -> !exclusions.contains(t)).collect(Collectors.toList());
+		if(subtracted.isEmpty()){
+			throw new IllegalStateException("Remaining values for generating alleles cannot be empty! Maybe allele possibile values are not enough for this gene?");
+		}
+		result.value = (Integer)subtracted.get(Randomizer.nextInt(subtracted.size()));
+		return result;
 	}
 	
 	

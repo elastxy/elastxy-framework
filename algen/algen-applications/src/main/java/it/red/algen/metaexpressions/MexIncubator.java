@@ -1,5 +1,6 @@
 package it.red.algen.metaexpressions;
 
+import it.red.algen.domain.experiment.Env;
 import it.red.algen.domain.genetics.NumberPhenotype;
 import it.red.algen.domain.genetics.SequenceGenotype;
 import it.red.algen.engine.IllegalSolutionException;
@@ -8,7 +9,7 @@ import it.red.algen.engine.Incubator;
 public class MexIncubator implements Incubator<SequenceGenotype, NumberPhenotype>{
 
 	@Override
-	public NumberPhenotype grow(SequenceGenotype genotype) {
+	public NumberPhenotype grow(SequenceGenotype genotype, Env environment) {
 		NumberPhenotype result = new NumberPhenotype();
 		result.value = calculate(
 				(Long)genotype.genes.get(0).allele.value,

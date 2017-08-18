@@ -14,8 +14,8 @@ import it.red.algen.domain.experiment.GenericSolution;
 import it.red.algen.domain.experiment.Solution;
 import it.red.algen.domain.genetics.Allele;
 import it.red.algen.domain.genetics.SequenceGenotype;
-import it.red.algen.metadata.MetadataBasedGenoma;
-import it.red.algen.metagarden.data.Tree;
+import it.red.algen.metadata.MetadataGeneFactory;
+import it.red.algen.metadata.StandardMetadataGenoma;
 
 @Component
 public class MegSolutionsFactory implements SolutionsFactory {
@@ -34,14 +34,14 @@ public class MegSolutionsFactory implements SolutionsFactory {
      * IMPORTANT: infinite Trees!
      */
     public Solution createRandom() {
-    	MetadataBasedGenoma genoma = (MetadataBasedGenoma)genomaProvider.getGenoma();
+    	StandardMetadataGenoma genoma = (StandardMetadataGenoma)genomaProvider.getGenoma();
     	GenericSolution solution = new GenericSolution();
 
     	SequenceGenotype genotype = new SequenceGenotype();
-    	genotype.genes = genoma.createSequence();
+    	genotype.genes = MetadataGeneFactory.createSequence(genoma);
     	solution.genotype = genotype;
     	
-    	List<Allele> alleles = genoma.createRandomAlleles();
+    	List<Allele> alleles = genoma.getRandomAlleles();
     	IntStream.range(0, genotype.genes.size()).forEach(i -> genotype.genes.get(i).allele = alleles.get(i));
     	
     	return solution;
@@ -51,19 +51,19 @@ public class MegSolutionsFactory implements SolutionsFactory {
     /**
      * Garden with every plant on the same initial position
      * 
-     * IMPORTANT: finite Trees of size => than Places!
+     * IMPORTANT: finite Trees of size >= than Places!
      */
     @Override
     public Solution createBaseModel() {
-    	MetadataBasedGenoma genoma = (MetadataBasedGenoma)genomaProvider.getGenoma();
+    	StandardMetadataGenoma genoma = (StandardMetadataGenoma)genomaProvider.getGenoma();
     	GenericSolution solution = new GenericSolution();
     	
     	SequenceGenotype genotype = new SequenceGenotype();
-    	genotype.genes = genoma.createSequence();
+    	genotype.genes = MetadataGeneFactory.createSequence(genoma);
     	solution.genotype = genotype;
 
     	// TODOM: new method of genoma for creating a list of alleles indexed indentically to the gene pos... useful??
-    	List<Allele> alleles = genoma.createPredefinedAlleles(genotype.genes.get(0).metadataCode); // TODOA: get(0) is BAD
+    	List<Allele> alleles = genoma.createRandomAllelesByCode(genotype.genes.get(0).metadataCode); // TODOA: get(0) is BAD
     	
     	if(alleles.size() < genotype.genes.size()){
     		throw new IllegalStateException("Number of possible different alleles less than number of genes creating a base predefined Solution. Check if you need the createRandom instead or try adding alleles");

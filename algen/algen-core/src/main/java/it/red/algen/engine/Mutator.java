@@ -1,7 +1,7 @@
 package it.red.algen.engine;
 
 import it.red.algen.domain.experiment.Solution;
-import it.red.algen.metadata.Genoma;
+import it.red.algen.domain.genetics.Genoma;
 
 @SuppressWarnings("rawtypes")
 public interface Mutator<S extends Solution> {

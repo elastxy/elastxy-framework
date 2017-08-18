@@ -19,7 +19,6 @@ import it.red.algen.engine.UniformlyDistributedSelector;
 import it.red.algen.metasudoku.MesBenchmark;
 import it.red.algen.metasudoku.MesEnvFactory;
 import it.red.algen.metasudoku.MesFitnessCalculator;
-import it.red.algen.metasudoku.MesGenomaProvider;
 import it.red.algen.metasudoku.MesIncubator;
 import it.red.algen.metasudoku.MesSolutionRenderer;
 import it.red.algen.stats.Experiment;
@@ -41,9 +40,6 @@ public class SudokuService {
 	private PopulationFactory populationFactory;
 
 	@Autowired
-	private MesGenomaProvider genomaProvider;
-	
-	@Autowired
 	private MesBenchmark benchmark;
 	
 	
@@ -56,12 +52,10 @@ public class SudokuService {
 		AlgorithmContext context = benchmark.build();
 		contextSupplier.init(context);
 
+		// TODOM: spostare ovunque in context supplier
 		Gson gson = new Gson();
 		String json = gson.toJson(context);
 		logger.info(json);
-
-		// Genoma
-		context.mutator.setGenoma(genomaProvider.collect());
 
 		// Experiment
 		Experiment e = new Experiment(envFactory);
@@ -86,9 +80,6 @@ public class SudokuService {
 	 	Gson gson = new Gson();
 		String json = gson.toJson(context);
 		logger.info(json);
-
-		// Genoma
-		context.mutator.setGenoma(genomaProvider.collect());
 
 		// Experiment
 	 	Experiment e = new Experiment(envFactory);
@@ -115,9 +106,6 @@ public class SudokuService {
 		String json = gson.toJson(context);
 		logger.info(json);
 
-		// Genoma
-		context.mutator.setGenoma(genomaProvider.collect());
-		
 		// Experiments run
         StatsExperimentExecutor collector = new StatsExperimentExecutor(this.envFactory, experiments);
         beanFactory.autowireBean(collector);
@@ -167,7 +155,7 @@ public class SudokuService {
 		context.incubator = new MesIncubator();
 
 		context.fitnessCalculator = new MesFitnessCalculator();
-		context.fitnessCalculator.setup(context.incubator);
+		context.fitnessCalculator.setup(context.incubator, null);
 
 		context.selector = new StandardSelector();
 		context.selector.setup(context.parameters);

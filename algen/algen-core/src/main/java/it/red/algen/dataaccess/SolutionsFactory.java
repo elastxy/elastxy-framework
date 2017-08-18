@@ -11,6 +11,8 @@ public interface SolutionsFactory {
 	 * 
 	 * E.g. '4 * 7'
 	 * 
+	 * Used in random option in PopulationFactory
+	 * 
 	 * @return
 	 */
 	public Solution createRandom();
@@ -20,6 +22,8 @@ public interface SolutionsFactory {
 	 * Create a default, fixed initial solution to be evolved by mutation
 	 * 
 	 * E.g. '0 + 0'
+	 * 
+	 * Used in non-random option in PopulationFactory
 	 * 
 	 * @return
 	 */

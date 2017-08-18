@@ -1,5 +1,6 @@
 package it.red.algen.metagarden;
 
+import it.red.algen.domain.experiment.Env;
 import it.red.algen.domain.genetics.Gene;
 import it.red.algen.domain.genetics.SequenceGenotype;
 import it.red.algen.domain.genetics.UserPhenotype;
@@ -17,7 +18,7 @@ public class MegIncubator implements Incubator<SequenceGenotype, UserPhenotype<G
 	 * Solution grows to a big Garden with its values of wellness, in the interval [0..2]
 	 */
 	@Override
-	public UserPhenotype<GardenWellness> grow(SequenceGenotype genotype) {
+	public UserPhenotype<GardenWellness> grow(SequenceGenotype genotype, Env environment) {
 		UserPhenotype<GardenWellness> result = new UserPhenotype<GardenWellness>();
 		result.value = new GardenWellness();
 		

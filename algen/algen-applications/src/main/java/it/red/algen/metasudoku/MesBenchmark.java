@@ -27,14 +27,14 @@ public class MesBenchmark implements BenchmarkContextBuilder {
     private static final boolean INITIAL_SELECTION_RANDOM = true;
     
     private static final int MAX_ITERATIONS = -1;
-    private static final int MAX_LIFETIME_MILLIS = 5000;
+    private static final int MAX_LIFETIME_MILLIS = 3000;
     private static final int MAX_IDENTICAL_FITNESSES = -1;
 
     private static final boolean ELITARISM = true;
 	private static final double RECOMBINANTION_PERC = 0.8;
     private static final double MUTATION_PERC = 0.2;
 
-    private static final boolean VERBOSE = false;
+    private static final boolean VERBOSE = true;
     private static final boolean TRACE_HISTORY = false;
     
 	@Autowired
@@ -55,11 +55,6 @@ public class MesBenchmark implements BenchmarkContextBuilder {
 				VERBOSE, 
 				TRACE_HISTORY,
 				new CSVReporter(MexApplication.STATS_DIR));
-		
-		context.incubator = new MesIncubator();
-
-		context.fitnessCalculator = new MesFitnessCalculator();
-		context.fitnessCalculator.setup(context.incubator);
 
 		context.selector = new StandardSelector();
 		context.selector.setup(context.parameters);

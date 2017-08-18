@@ -1,9 +1,13 @@
 package it.red.algen.dataaccess;
 
-import it.red.algen.metadata.Genoma;
+import it.red.algen.domain.experiment.Target;
+import it.red.algen.domain.genetics.Genoma;
 
 /**
- * Collects all genoma information from a given source
+ * Collects all genoma information from a given source.
+ * 
+ * Optionally, Genoma view can be restricted to adhere to 
+ * execution goal, for reducing genotype size and better efficiency.
  * 
  * @author red
  *
@@ -21,4 +25,10 @@ public interface GenomaProvider {
 	 * @return
 	 */
 	public Genoma collect();
+	
+	/**
+	 * Reduce to the minimum set of information for building solutions
+	 * @param target
+	 */
+	public void reduce(Target<?,?> target);
 }

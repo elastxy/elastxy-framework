@@ -2,6 +2,7 @@ package it.red.algen.metaexpressions;
 
 import java.util.Arrays;
 import java.util.HashMap;
+import java.util.Map;
 
 import javax.annotation.Resource;
 
@@ -10,11 +11,12 @@ import org.springframework.stereotype.Component;
 
 import it.red.algen.context.ContextSupplier;
 import it.red.algen.dataaccess.GenomaProvider;
+import it.red.algen.domain.experiment.Target;
+import it.red.algen.domain.genetics.Genoma;
 import it.red.algen.engine.AlleleGenerator;
 import it.red.algen.metadata.GeneMetadata;
 import it.red.algen.metadata.GeneMetadataType;
-import it.red.algen.metadata.Genoma;
-import it.red.algen.metadata.MetadataBasedGenoma;
+import it.red.algen.metadata.StandardMetadataGenoma;
 
 
 /**
@@ -32,7 +34,7 @@ public class MexGenomaProvider implements GenomaProvider {
 	@Resource(name="mexAlleleGenerator")
 	private AlleleGenerator alleleGenerator;
 	
-	private MetadataBasedGenoma cachedGenoma;
+	private StandardMetadataGenoma cachedGenoma;
 	
 	@Override
 	public Genoma getGenoma(){
@@ -44,9 +46,10 @@ public class MexGenomaProvider implements GenomaProvider {
 
 	@Override
 	public Genoma collect() {
-		cachedGenoma = new MetadataBasedGenoma();
+		cachedGenoma = new StandardMetadataGenoma();
 		cachedGenoma.setupAlleleGenerator(alleleGenerator);
-		cachedGenoma.genesMetadataByCode = new HashMap<String, GeneMetadata>();
+		Map<String, GeneMetadata> genesMetadataByCode = new HashMap<String, GeneMetadata>();
+		Map<String, GeneMetadata> genesMetadataByPos = new HashMap<String, GeneMetadata>();
 
 		GeneMetadata metadata = new GeneMetadata();
 		metadata.code = "operand";
@@ -55,19 +58,30 @@ public class MexGenomaProvider implements GenomaProvider {
 		Long maxValue = contextSupplier.getContext().applicationSpecifics.getParamLong(MexApplication.MAX_OPERAND_VALUE);
 		metadata.max = maxValue;
 		metadata.min = -1L * maxValue;
-		cachedGenoma.genesMetadataByCode.put(metadata.code, metadata);
-		cachedGenoma.genesMetadataByPos.put("0", metadata);
-		cachedGenoma.genesMetadataByPos.put("2", metadata);
+		genesMetadataByCode.put(metadata.code, metadata);
+		genesMetadataByPos.put("0", metadata);
+		genesMetadataByPos.put("2", metadata);
 		
 		metadata = new GeneMetadata();
 		metadata.code = "operator";
 		metadata.name = "operator";
 		metadata.type = GeneMetadataType.CHAR;
 		metadata.values = Arrays.asList('+', '-', '*', '/');
-		cachedGenoma.genesMetadataByCode.put(metadata.code, metadata);
-		cachedGenoma.genesMetadataByPos.put("1", metadata);
+		genesMetadataByCode.put(metadata.code, metadata);
+		genesMetadataByPos.put("1", metadata);
+		
+		cachedGenoma.initialize(genesMetadataByCode, genesMetadataByPos);
 		
 		return cachedGenoma;
+	}
+
+	
+	/**
+	 * TODOA: reduceable interface....
+	 */
+	@Override
+	public void reduce(Target<?, ?> target) {
+		throw new UnsupportedOperationException("Not available for this GenomaProvider implementation");
 	}
 
 }

@@ -20,7 +20,6 @@ import it.red.algen.metaexpressions.MexApplication;
 import it.red.algen.metagarden.MegBenchmark;
 import it.red.algen.metagarden.MegEnvFactory;
 import it.red.algen.metagarden.MegFitnessCalculator;
-import it.red.algen.metagarden.MegGenomaProvider;
 import it.red.algen.metagarden.MegIncubator;
 import it.red.algen.stats.Experiment;
 import it.red.algen.stats.ExperimentStats;
@@ -42,9 +41,6 @@ public class GardenService {
 	private PopulationFactory populationFactory;
 
 	@Autowired
-	private MegGenomaProvider genomaProvider;
-	
-	@Autowired
 	private MegBenchmark benchmark;
 	
 	
@@ -60,9 +56,6 @@ public class GardenService {
 		Gson gson = new Gson();
 		String json = gson.toJson(context);
 		logger.info(json);
-
-		// Genoma
-		context.mutator.setGenoma(genomaProvider.collect());
 
 		// Experiment
 		Experiment e = new Experiment(envFactory);
@@ -87,9 +80,6 @@ public class GardenService {
 	 	Gson gson = new Gson();
 		String json = gson.toJson(context);
 		logger.info(json);
-
-		// Genoma
-		context.mutator.setGenoma(genomaProvider.collect());
 
 		// Experiment
 	 	Experiment e = new Experiment(envFactory);
@@ -116,9 +106,6 @@ public class GardenService {
 		String json = gson.toJson(context);
 		logger.info(json);
 
-		// Genoma
-		context.mutator.setGenoma(genomaProvider.collect());
-		
 		// Experiments run
         StatsExperimentExecutor collector = new StatsExperimentExecutor(this.envFactory, experiments);
         beanFactory.autowireBean(collector);
@@ -168,7 +155,7 @@ public class GardenService {
 		context.incubator = new MegIncubator();
 
 		context.fitnessCalculator = new MegFitnessCalculator();
-		context.fitnessCalculator.setup(context.incubator);
+		context.fitnessCalculator.setup(context.incubator, null);
 
 		context.selector = new StandardSelector();
 		context.selector.setup(context.parameters);

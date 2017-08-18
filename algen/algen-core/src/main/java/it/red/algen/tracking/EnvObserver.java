@@ -41,8 +41,14 @@ public class EnvObserver {
     	this.renderer = renderer;
     }
     
-    public void newGenerationEvent(int number, Population newGen){
-        if(context.monitoringConfiguration.verbose) context.monitoringConfiguration.logger.out("\n*** Nuova generazione "+number+" > \n"+newGen+"\n");
+    public void newGenerationEvent(int number, Population lastGen, Population newGen){
+        if(context.monitoringConfiguration.verbose) {
+        	context.monitoringConfiguration.logger.out("\n*** Last generation "+number+" > \n"+lastGen+"\n");
+        	if(context.monitoringConfiguration.solutionRenderer!=null && lastGen.bestMatch!=null){
+        		String sol = (String)context.monitoringConfiguration.solutionRenderer.render(lastGen.bestMatch);
+        		context.monitoringConfiguration.logger.out(sol);
+        	}
+        }
     }
     
     public void fitnessCalculatedEvent(Solution s){

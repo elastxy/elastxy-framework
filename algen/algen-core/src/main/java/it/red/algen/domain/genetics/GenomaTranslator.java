@@ -1,6 +1,4 @@
-package it.red.algen.metadata;
-
-import it.red.algen.domain.genetics.Gene;
+package it.red.algen.domain.genetics;
 
 /**
  * Encode/Decode genoma parts

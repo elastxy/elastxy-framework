@@ -191,7 +191,7 @@ public class Evolver implements EnvObservable {
 
 	private Population selection(int generationSize) {
 		Population nextGeneration = context.selector.select(env.currentGen);
-		fireNewGenerationEvent();
+		fireNewGenerationEvent(env.currentGen, nextGeneration);
 		if(generationSize!=nextGeneration.solutions.size()){
 			String msg = String.format("Selected generation size (%d) differs from last (%d)", nextGeneration.solutions.size(), generationSize);
 			logger.severe(msg);
@@ -200,6 +200,8 @@ public class Evolver implements EnvObservable {
 		return nextGeneration;
 	}
 
+	
+	// TODOA: if some genes are blocked, recombination is blocked the same
 	private List<Solution> recombination(Solution[] parents) {
 		List<Solution> sons;
 		boolean crossover = Randomizer.nextDouble() < context.parameters.recombinationPerc;
@@ -213,6 +215,7 @@ public class Evolver implements EnvObservable {
 		return sons;
 	}
 
+	
 	private void mutation(List<Solution> sons) {
 		boolean mute0 = Randomizer.nextDouble() < context.parameters.mutationPerc;
 		boolean mute1 = Randomizer.nextDouble() < context.parameters.mutationPerc;
@@ -241,8 +244,8 @@ public class Evolver implements EnvObservable {
 	 * ============================================================
 	 */
 
-    private void fireNewGenerationEvent(){
-        observer.newGenerationEvent(env.currentGenNumber+1, env.currentGen);
+    private void fireNewGenerationEvent(Population lastGen, Population newGen){
+        observer.newGenerationEvent(env.currentGenNumber+1, lastGen, newGen);
     }
 
     private void fireCrossoverEvent(Solution father, Solution mother, List<Solution> sons){

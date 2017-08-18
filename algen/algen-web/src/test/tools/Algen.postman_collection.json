@@ -40,146 +40,238 @@
 			"description": "",
 			"item": [
 				{
-					"name": "/test/expressions",
-					"request": {
-						"url": "http://{{ip}}:{{port}}/test/expressions",
-						"method": "GET",
-						"header": [],
-						"body": {},
-						"description": ""
-					},
-					"response": []
-				},
-				{
-					"name": "/experiment/expressions",
-					"request": {
-						"url": "http://{{ip}}:{{port}}/experiment/expressions",
-						"method": "POST",
-						"header": [
-							{
-								"key": "Content-Type",
-								"value": "application/json",
+					"name": "expressions",
+					"description": "",
+					"item": [
+						{
+							"name": "/test/expressions",
+							"request": {
+								"url": "http://{{ip}}:{{port}}/test/expressions",
+								"method": "GET",
+								"header": [],
+								"body": {},
 								"description": ""
-							}
-						],
-						"body": {
-							"mode": "raw",
-							"raw": "{\n\t\"applicationSpecifics\": {\n\t\t\"target\" : {\n\t\t\t\"TARGET_EXPRESSION_RESULT\" : 235000\n\t\t},\n\t\t\"params\" : {\n\t\t\t\"MAX_OPERAND_VALUE\" : \"1000\"\n\t\t}\n\t},\n\t\"parameters\": {\n\t\t\"recombinationPerc\": 0.8,\n\t\t\"mutationPerc\": 0.2,\n\t\t\"elitarism\": true,\n\t\t\"initialSelectionNumber\": 100,\n\t\t\"initialSelectionRandom\": true\n\t},\n\t\"stopConditions\": {\n\t\t\"maxIterations\": -1,\n\t\t\"maxLifetimeMs\": 3000,\n\t\t\"maxIdenticalFitnesses\": -1\n\t},\n\t\"monitoringConfiguration\": {\n\t\t\"verbose\": false\n\t}\n}"
+							},
+							"response": []
 						},
-						"description": ""
-					},
-					"response": []
-				},
-				{
-					"name": "/analysis/expressions",
-					"request": {
-						"url": "http://{{ip}}:{{port}}/analysis/expressions/5",
-						"method": "POST",
-						"header": [
-							{
-								"key": "Content-Type",
-								"value": "application/json",
+						{
+							"name": "/experiment/expressions",
+							"request": {
+								"url": "http://{{ip}}:{{port}}/experiment/expressions",
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"description": ""
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n\t\"applicationSpecifics\": {\n\t\t\"target\" : {\n\t\t\t\"TARGET_EXPRESSION_RESULT\" : 235000\n\t\t},\n\t\t\"params\" : {\n\t\t\t\"MAX_OPERAND_VALUE\" : \"1000\"\n\t\t}\n\t},\n\t\"parameters\": {\n\t\t\"recombinationPerc\": 0.8,\n\t\t\"mutationPerc\": 0.2,\n\t\t\"elitarism\": true,\n\t\t\"initialSelectionNumber\": 100,\n\t\t\"initialSelectionRandom\": true\n\t},\n\t\"stopConditions\": {\n\t\t\"targetFitness\" : 0.95,\n\t\t\"maxIterations\": -1,\n\t\t\"maxLifetimeMs\": 3000,\n\t\t\"maxIdenticalFitnesses\": -1\n\t},\n\t\"monitoringConfiguration\": {\n\t\t\"verbose\": false\n\t}\n}"
+								},
 								"description": ""
-							}
-						],
-						"body": {
-							"mode": "raw",
-							"raw": "{\n\t\"applicationSpecifics\": {\n\t\t\"target\" : {\n\t\t\t\"TARGET_EXPRESSION_RESULT\" : 235000\n\t\t},\n\t\t\"params\" : {\n\t\t\t\"MAX_OPERAND_VALUE\" : \"1000\"\n\t\t}\n\t},\n\t\"parameters\": {\n\t\t\"recombinationPerc\": 0.8,\n\t\t\"mutationPerc\": 0.2,\n\t\t\"elitarism\": true,\n\t\t\"initialSelectionNumber\": 100,\n\t\t\"initialSelectionRandom\": true\n\t},\n\t\"stopConditions\": {\n\t\t\"maxIterations\": -1,\n\t\t\"maxLifetimeMs\": 3000,\n\t\t\"maxIdenticalFitnesses\": -1\n\t},\n\t\"monitoringConfiguration\": {\n\t\t\"verbose\": false\n\t}\n}"
+							},
+							"response": []
 						},
-						"description": ""
-					},
-					"response": []
-				},
-				{
-					"name": "/trial/expressions",
-					"request": {
-						"url": "http://{{ip}}:{{port}}/trial/expressions/5",
-						"method": "POST",
-						"header": [
-							{
-								"key": "Content-Type",
-								"value": "application/json",
+						{
+							"name": "/analysis/expressions",
+							"request": {
+								"url": "http://{{ip}}:{{port}}/analysis/expressions/5",
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"description": ""
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n\t\"applicationSpecifics\": {\n\t\t\"target\" : {\n\t\t\t\"TARGET_EXPRESSION_RESULT\" : 235000\n\t\t},\n\t\t\"params\" : {\n\t\t\t\"MAX_OPERAND_VALUE\" : \"1000\"\n\t\t}\n\t},\n\t\"parameters\": {\n\t\t\"recombinationPerc\": 0.8,\n\t\t\"mutationPerc\": 0.2,\n\t\t\"elitarism\": true,\n\t\t\"initialSelectionNumber\": 100,\n\t\t\"initialSelectionRandom\": false\n\t},\n\t\"stopConditions\": {\n\t\t\"maxIterations\": -1,\n\t\t\"maxLifetimeMs\": 3000,\n\t\t\"maxIdenticalFitnesses\": -1\n\t},\n\t\"monitoringConfiguration\": {\n\t\t\"verbose\": false\n\t}\n}"
+								},
 								"description": ""
-							}
-						],
-						"body": {
-							"mode": "raw",
-							"raw": "{\n\t\"applicationSpecifics\": {\n\t\t\"target\" : {\n\t\t\t\"TARGET_EXPRESSION_RESULT\" : 235000\n\t\t},\n\t\t\"params\" : {\n\t\t\t\"MAX_OPERAND_VALUE\" : \"1000\"\n\t\t}\n\t},\n\t\"parameters\": {\n\t\t\"initialSelectionNumber\": 100,\n\t\t\"initialSelectionRandom\": true\n\t},\n\t\"stopConditions\": {\n\t\t\"maxIterations\": -1,\n\t\t\"maxLifetimeMs\": 3000\n\t},\n\t\"monitoringConfiguration\": {\n\t}\n}"
+							},
+							"response": []
 						},
-						"description": ""
-					},
-					"response": []
-				},
-				{
-					"name": "/test/garden",
-					"request": {
-						"url": "http://{{ip}}:{{port}}/test/garden",
-						"method": "GET",
-						"header": [],
-						"body": {},
-						"description": ""
-					},
-					"response": []
-				},
-				{
-					"name": "/experiment/garden",
-					"request": {
-						"url": "http://{{ip}}:{{port}}/experiment/garden",
-						"method": "POST",
-						"header": [
-							{
-								"key": "Content-Type",
-								"value": "application/json",
+						{
+							"name": "/trial/expressions",
+							"request": {
+								"url": "http://{{ip}}:{{port}}/trial/expressions/5",
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"description": ""
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n\t\"applicationSpecifics\": {\n\t\t\"target\" : {\n\t\t\t\"TARGET_EXPRESSION_RESULT\" : 235000\n\t\t},\n\t\t\"params\" : {\n\t\t\t\"MAX_OPERAND_VALUE\" : \"1000\"\n\t\t}\n\t},\n\t\"parameters\": {\n\t\t\"initialSelectionNumber\": 100,\n\t\t\"initialSelectionRandom\": true\n\t},\n\t\"stopConditions\": {\n\t\t\"targetFitness\": 1.0,\n\t\t\"maxIterations\": -1,\n\t\t\"maxLifetimeMs\": 3000\n\t},\n\t\"monitoringConfiguration\": {\n\t}\n}"
+								},
 								"description": ""
-							}
-						],
-						"body": {
-							"mode": "raw",
-							"raw": "{\n\t\"applicationSpecifics\": {\n\t\t\"target\" : {\n\t\t\t\"TARGET_WELLNESS\" : \"happy\"\n\t\t},\n\t\t\"params\" : {\n\t\t\t\"LIMITED_TREES\" : false\n\t\t}\n\t},\n\t\"parameters\": {\n\t\t\"_recombinationPerc\": 0.8,\n\t\t\"_mutationPerc\": 0.2,\n\t\t\"_elitarism\": false,\n\t\t\"_initialSelectionNumber\": 100,\n\t\t\"_initialSelectionRandom\": false\n\t},\n\t\"stopConditions\": {\n\t\t\"maxIterations\": -1,\n\t\t\"maxLifetimeMs\": 3000,\n\t\t\"maxIdenticalFitnesses\": -1\n\t},\n\t\"monitoringConfiguration\": {\n\t\t\"verbose\": false\n\t}\n}"
-						},
-						"description": ""
-					},
-					"response": []
+							},
+							"response": []
+						}
+					],
+					"_postman_isSubFolder": true
 				},
 				{
-					"name": "/analysis/garden",
-					"request": {
-						"url": "http://{{ip}}:{{port}}/analysis/garden/5",
-						"method": "POST",
-						"header": [
-							{
-								"key": "Content-Type",
-								"value": "application/json",
+					"name": "garden",
+					"description": "",
+					"item": [
+						{
+							"name": "/test/garden",
+							"request": {
+								"url": "http://{{ip}}:{{port}}/test/garden",
+								"method": "GET",
+								"header": [],
+								"body": {},
 								"description": ""
-							}
-						],
-						"body": {
-							"mode": "raw",
-							"raw": "{\n\t\"applicationSpecifics\": {\n\t\t\"target\" : {\n\t\t\t\"TARGET_WELLNESS\" : \"happy\"\n\t\t},\n\t\t\"params\" : {\n\t\t\t\"LIMITED_TREES\" : false\n\t\t}\n\t},\n\t\"parameters\": {\n\t\t\"recombinationPerc\": 0.8,\n\t\t\"mutationPerc\": 0.2,\n\t\t\"elitarism\": true,\n\t\t\"initialSelectionNumber\": 100,\n\t\t\"initialSelectionRandom\": true\n\t},\n\t\"stopConditions\": {\n\t\t\"maxIterations\": -1,\n\t\t\"maxLifetimeMs\": 3000,\n\t\t\"maxIdenticalFitnesses\": -1\n\t},\n\t\"monitoringConfiguration\": {\n\t\t\"verbose\": false\n\t}\n}"
+							},
+							"response": []
 						},
-						"description": ""
-					},
-					"response": []
+						{
+							"name": "/experiment/garden",
+							"request": {
+								"url": "http://{{ip}}:{{port}}/experiment/garden",
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"description": ""
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n\t\"applicationSpecifics\": {\n\t\t\"target\" : {\n\t\t\t\"TARGET_WELLNESS\" : \"happy\"\n\t\t},\n\t\t\"params\" : {\n\t\t\t\"LIMITED_TREES\" : false\n\t\t}\n\t},\n\t\"parameters\": {\n\t\t\"recombinationPerc\": 0.8,\n\t\t\"mutationPerc\": 0.2,\n\t\t\"elitarism\": true,\n\t\t\"initialSelectionNumber\": 100,\n\t\t\"initialSelectionRandom\": true\n\t},\n\t\"stopConditions\": {\n\t\t\"maxIterations\": -1,\n\t\t\"maxLifetimeMs\": 10000,\n\t\t\"maxIdenticalFitnesses\": -1\n\t},\n\t\"monitoringConfiguration\": {\n\t\t\"verbose\": false\n\t}\n}"
+								},
+								"description": ""
+							},
+							"response": []
+						},
+						{
+							"name": "/analysis/garden",
+							"request": {
+								"url": "http://{{ip}}:{{port}}/analysis/garden/5",
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"description": ""
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n\t\"applicationSpecifics\": {\n\t\t\"target\" : {\n\t\t\t\"TARGET_WELLNESS\" : \"happy\"\n\t\t},\n\t\t\"params\" : {\n\t\t\t\"LIMITED_TREES\" : false\n\t\t}\n\t},\n\t\"parameters\": {\n\t\t\"recombinationPerc\": 0.8,\n\t\t\"mutationPerc\": 0.2,\n\t\t\"elitarism\": true,\n\t\t\"initialSelectionNumber\": 100,\n\t\t\"initialSelectionRandom\": false\n\t},\n\t\"stopConditions\": {\n\t\t\"maxIterations\": -1,\n\t\t\"maxLifetimeMs\": 3000,\n\t\t\"maxIdenticalFitnesses\": -1\n\t},\n\t\"monitoringConfiguration\": {\n\t\t\"verbose\": false\n\t}\n}"
+								},
+								"description": ""
+							},
+							"response": []
+						},
+						{
+							"name": "/trial/garden",
+							"request": {
+								"url": "http://{{ip}}:{{port}}/trial/garden/5",
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"description": ""
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n\t\"applicationSpecifics\": {\n\t\t\"target\" : {\n\t\t\t\"TARGET_WELLNESS\" : \"happy\"\n\t\t},\n\t\t\"params\" : {\n\t\t\t\"LIMITED_TREES\" : false\n\t\t}\n\t},\n\t\"parameters\": {\n\t\t\"recombinationPerc\": 0.8,\n\t\t\"mutationPerc\": 0.2,\n\t\t\"elitarism\": false,\n\t\t\"initialSelectionNumber\": 100,\n\t\t\"initialSelectionRandom\": true\n\t},\n\t\"stopConditions\": {\n\t\t\"targetFitness\": 1.0,\n\t\t\"maxIterations\": -1,\n\t\t\"maxLifetimeMs\": 3000,\n\t\t\"maxIdenticalFitnesses\": -1\n\t},\n\t\"monitoringConfiguration\": {\n\t\t\"verbose\": false\n\t}\n}"
+								},
+								"description": ""
+							},
+							"response": []
+						}
+					],
+					"_postman_isSubFolder": true
 				},
 				{
-					"name": "/trial/garden",
-					"request": {
-						"url": "http://{{ip}}:{{port}}/trial/garden/5",
-						"method": "POST",
-						"header": [
-							{
-								"key": "Content-Type",
-								"value": "application/json",
+					"name": "sudoku",
+					"description": "",
+					"item": [
+						{
+							"name": "/test/sudoku",
+							"request": {
+								"url": "http://{{ip}}:{{port}}/test/sudoku",
+								"method": "GET",
+								"header": [],
+								"body": {},
 								"description": ""
-							}
-						],
-						"body": {
-							"mode": "raw",
-							"raw": "{\n\t\"applicationSpecifics\": {\n\t\t\"target\" : {\n\t\t\t\"TARGET_WELLNESS\" : \"happy\"\n\t\t},\n\t\t\"params\" : {\n\t\t\t\"LIMITED_TREES\" : false\n\t\t}\n\t},\n\t\"parameters\": {\n\t\t\"recombinationPerc\": 0.8,\n\t\t\"mutationPerc\": 0.2,\n\t\t\"elitarism\": false,\n\t\t\"initialSelectionNumber\": 100,\n\t\t\"initialSelectionRandom\": true\n\t},\n\t\"stopConditions\": {\n\t\t\"maxIterations\": -1,\n\t\t\"maxLifetimeMs\": 3000,\n\t\t\"maxIdenticalFitnesses\": -1\n\t},\n\t\"monitoringConfiguration\": {\n\t\t\"verbose\": false\n\t}\n}"
+							},
+							"response": []
 						},
-						"description": ""
-					},
-					"response": []
+						{
+							"name": "/experiment/sudoku",
+							"request": {
+								"url": "http://{{ip}}:{{port}}/experiment/sudoku",
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"description": ""
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n\t\"applicationSpecifics\": {\n\t},\n\t\"parameters\": {\n\t\t\"recombinationPerc\": 0.8,\n\t\t\"mutationPerc\": 0.3,\n\t\t\"elitarism\": true,\n\t\t\"initialSelectionNumber\": 100,\n\t\t\"initialSelectionRandom\": true\n\t},\n\t\"stopConditions\": {\n\t\t\"maxIterations\": -1,\n\t\t\"maxLifetimeMs\": 5000,\n\t\t\"maxIdenticalFitnesses\": -1\n\t},\n\t\"monitoringConfiguration\": {\n\t\t\"verbose\": false\n\t}\n}"
+								},
+								"description": ""
+							},
+							"response": []
+						},
+						{
+							"name": "/analysis/sudoku",
+							"request": {
+								"url": "http://{{ip}}:{{port}}/analysis/sudoku/5",
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"description": ""
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n\t\"applicationSpecifics\": {\n\t\t\"target\" : {\n\t\t\t\"TARGET_EXPRESSION_RESULT\" : 235000\n\t\t},\n\t\t\"params\" : {\n\t\t\t\"MAX_OPERAND_VALUE\" : \"1000\"\n\t\t}\n\t},\n\t\"parameters\": {\n\t\t\"recombinationPerc\": 0.8,\n\t\t\"mutationPerc\": 0.2,\n\t\t\"elitarism\": true,\n\t\t\"initialSelectionNumber\": 100,\n\t\t\"initialSelectionRandom\": false\n\t},\n\t\"stopConditions\": {\n\t\t\"maxIterations\": -1,\n\t\t\"maxLifetimeMs\": 3000,\n\t\t\"maxIdenticalFitnesses\": -1\n\t},\n\t\"monitoringConfiguration\": {\n\t\t\"verbose\": false\n\t}\n}"
+								},
+								"description": ""
+							},
+							"response": []
+						},
+						{
+							"name": "/trial/sudoku",
+							"request": {
+								"url": "http://{{ip}}:{{port}}/trial/sudoku/5",
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"description": ""
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n\t\"applicationSpecifics\": {\n\t},\n\t\"parameters\": {\n\t\t\"initialSelectionNumber\": 100,\n\t\t\"initialSelectionRandom\": true\n\t},\n\t\"stopConditions\": {\n\t\t\"maxIterations\": -1,\n\t\t\"maxLifetimeMs\": 5000\n\t},\n\t\"monitoringConfiguration\": {\n\t}\n}"
+								},
+								"description": ""
+							},
+							"response": []
+						}
+					],
+					"_postman_isSubFolder": true
 				}
 			]
 		},

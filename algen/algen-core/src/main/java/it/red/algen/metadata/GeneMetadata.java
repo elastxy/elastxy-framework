@@ -41,6 +41,11 @@ public class GeneMetadata {
 
 	
 	/**
+	 * After the Gene is given a new Allele in the Genoma Provider, cannot be modified further
+	 */
+	public boolean blocked;
+	
+	/**
 	 * User defined structure,
 	 * preferably a short serializable YAML/JSON representation
 	 */

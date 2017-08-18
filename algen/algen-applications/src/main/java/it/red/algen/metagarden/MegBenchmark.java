@@ -77,7 +77,7 @@ public class MegBenchmark implements BenchmarkContextBuilder {
 		context.incubator = new MegIncubator();
 
 		context.fitnessCalculator = new MegFitnessCalculator();
-		context.fitnessCalculator.setup(context.incubator);
+		context.fitnessCalculator.setup(context.incubator, null);
 
 		context.selector = new StandardSelector();
 		context.selector.setup(context.parameters);

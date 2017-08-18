@@ -20,7 +20,6 @@ import it.red.algen.metaexpressions.MexApplication;
 import it.red.algen.metaexpressions.MexBenchmark;
 import it.red.algen.metaexpressions.MexEnvFactory;
 import it.red.algen.metaexpressions.MexFitnessCalculator;
-import it.red.algen.metaexpressions.MexGenomaProvider;
 import it.red.algen.metaexpressions.MexIncubator;
 import it.red.algen.stats.Experiment;
 import it.red.algen.stats.ExperimentStats;
@@ -42,9 +41,6 @@ public class ExpressionsService {
 	private PopulationFactory populationFactory;
 
 	@Autowired
-	private MexGenomaProvider genomaProvider;
-	
-	@Autowired
 	private MexBenchmark exprBenchmark;
 	
 	
@@ -60,9 +56,6 @@ public class ExpressionsService {
 		Gson gson = new Gson();
 		String json = gson.toJson(context);
 		logger.info(json);
-
-		// Genoma
-		context.mutator.setGenoma(genomaProvider.collect());
 
 		// Experiment
 		Experiment e = new Experiment(envFactory);
@@ -87,9 +80,6 @@ public class ExpressionsService {
 	 	Gson gson = new Gson();
 		String json = gson.toJson(context);
 		logger.info(json);
-
-		// Genoma
-		context.mutator.setGenoma(genomaProvider.collect());
 
 		// Experiment
 	 	Experiment e = new Experiment(envFactory);
@@ -116,9 +106,6 @@ public class ExpressionsService {
 		String json = gson.toJson(context);
 		logger.info(json);
 
-		// Genoma
-		context.mutator.setGenoma(genomaProvider.collect());
-		
 		// Experiments run
         StatsExperimentExecutor collector = new StatsExperimentExecutor(this.envFactory, experiments);
         beanFactory.autowireBean(collector);
@@ -168,7 +155,7 @@ public class ExpressionsService {
 		context.incubator = new MexIncubator();
 
 		context.fitnessCalculator = new MexFitnessCalculator();
-		context.fitnessCalculator.setup(context.incubator);
+		context.fitnessCalculator.setup(context.incubator, null);
 
 		context.selector = new StandardSelector();
 		context.selector.setup(context.parameters);

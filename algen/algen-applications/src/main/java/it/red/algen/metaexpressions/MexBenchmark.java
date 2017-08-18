@@ -6,6 +6,8 @@ import org.springframework.stereotype.Component;
 import it.red.algen.context.AlgorithmContext;
 import it.red.algen.context.AlgorithmContextBuilder;
 import it.red.algen.context.BenchmarkContextBuilder;
+import it.red.algen.domain.genetics.NumberPhenotype;
+import it.red.algen.domain.genetics.SequenceGenotype;
 import it.red.algen.engine.SequenceRecombinator;
 import it.red.algen.engine.StandardMutator;
 import it.red.algen.engine.StandardSelector;
@@ -82,7 +84,7 @@ public class MexBenchmark implements BenchmarkContextBuilder {
 		context.incubator = new MexIncubator();
 
 		context.fitnessCalculator = new MexFitnessCalculator();
-		context.fitnessCalculator.setup(context.incubator);
+		context.fitnessCalculator.setup(context.incubator, null);
 
 		context.selector = new StandardSelector();
 		context.selector.setup(context.parameters);

@@ -2,11 +2,12 @@ package it.red.algen.metasudoku;
 
 import java.math.BigDecimal;
 
+import it.red.algen.domain.experiment.Env;
 import it.red.algen.domain.experiment.GenericSolution;
 import it.red.algen.domain.experiment.NumberRawFitness;
 import it.red.algen.domain.experiment.PerformanceTarget;
 import it.red.algen.domain.experiment.StandardFitness;
-import it.red.algen.domain.genetics.NumberPhenotype;
+import it.red.algen.domain.genetics.ComplexPhenotype;
 import it.red.algen.domain.genetics.SequenceGenotype;
 import it.red.algen.engine.FitnessCalculator;
 import it.red.algen.engine.IllegalSolutionException;
@@ -14,14 +15,14 @@ import it.red.algen.engine.Incubator;
 
 public class MesFitnessCalculator implements FitnessCalculator<GenericSolution,PerformanceTarget<String,Integer>,StandardFitness> {
 
-	
-	private Incubator<SequenceGenotype,NumberPhenotype> incubator;
+	private Incubator<SequenceGenotype,ComplexPhenotype> incubator;
+	private Env env;
 	
 	@Override
-	public void setup(Incubator incubator){
+	public void setup(Incubator incubator, Env environment){
+		this.env = environment;
 		this.incubator = incubator;
 	}
-	
 	
 	/**
 	 * Produces the performing data of the individual.
@@ -36,21 +37,19 @@ public class MesFitnessCalculator implements FitnessCalculator<GenericSolution,P
         solution.setFitness(result);
         
         // Setup variables
-        long distance = Long.MAX_VALUE;
+        BigDecimal solutionBD = null;
         BigDecimal normalized = BigDecimal.ZERO;
         String legalCheck = null;
         try { 
         	
         	// Grow the offspring to evaluate it
-        	solution.phenotype = incubator.grow((SequenceGenotype)solution.genotype);
-        	int sValue = ((NumberPhenotype)solution.phenotype).getValue().intValue();
+        	solution.phenotype = incubator.grow((SequenceGenotype)solution.genotype, env);
+        	double sValue = (Double)((ComplexPhenotype)solution.phenotype).getValue().get(MesApplication.PHENOTYPE_COMPLETENESS);
             
-        	// Calculate distance from goal
-        	int tValue = target.getReferenceMeasure();
-        	distance = Math.abs(tValue-sValue);
-        	
         	// Normalize fitness to 1.0
-            normalized = BigDecimal.ONE.subtract(new BigDecimal(distance).setScale(20).divide(new BigDecimal(target.getReferenceMeasure()), BigDecimal.ROUND_HALF_UP));
+        	solutionBD = new BigDecimal(sValue).setScale(20, BigDecimal.ROUND_HALF_UP);
+        	BigDecimal targetBD = new BigDecimal(target.getReferenceMeasure()).setScale(20, BigDecimal.ROUND_HALF_UP);
+            normalized = solutionBD.divide(targetBD, BigDecimal.ROUND_HALF_UP);
         } catch(IllegalSolutionException ex){ 
             legalCheck = String.format("Division by 0 not allowed: second operand not valid [%.10f].",target.getReferenceMeasure());
             normalized = BigDecimal.ZERO;
@@ -58,7 +57,7 @@ public class MesFitnessCalculator implements FitnessCalculator<GenericSolution,P
         
         // Create fitness result
         result.setValue(normalized);
-        result.setRawValue(new NumberRawFitness(distance));
+        result.setRawValue(new NumberRawFitness(solutionBD));
         result.setLegalCheck(legalCheck);
         return result;
     }
