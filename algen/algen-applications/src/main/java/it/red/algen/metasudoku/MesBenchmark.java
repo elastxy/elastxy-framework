@@ -34,7 +34,7 @@ public class MesBenchmark implements BenchmarkContextBuilder {
 	private static final double RECOMBINANTION_PERC = 0.8;
     private static final double MUTATION_PERC = 0.2;
 
-    private static final boolean VERBOSE = true;
+    private static final boolean VERBOSE = false;
     private static final boolean TRACE_HISTORY = false;
     
     @Autowired private AlgorithmContextBuilder contextBuilder;

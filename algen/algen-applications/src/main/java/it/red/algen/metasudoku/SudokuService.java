@@ -1,4 +1,4 @@
-package it.red.algen.service;
+package it.red.algen.metasudoku;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -6,52 +6,36 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.config.AutowireCapableBeanFactory;
 import org.springframework.stereotype.Component;
 
-import com.google.gson.Gson;
-
 import it.red.algen.context.AlgorithmContext;
 import it.red.algen.context.ContextSupplier;
-import it.red.algen.controller.AlgenController;
 import it.red.algen.dataaccess.PopulationFactory;
 import it.red.algen.engine.SequenceRecombinator;
 import it.red.algen.engine.StandardMutator;
 import it.red.algen.engine.StandardSelector;
 import it.red.algen.engine.UniformlyDistributedSelector;
-import it.red.algen.metaexpressions.MexApplication;
-import it.red.algen.metaexpressions.MexBenchmark;
-import it.red.algen.metaexpressions.MexEnvFactory;
-import it.red.algen.metaexpressions.MexFitnessCalculator;
-import it.red.algen.metaexpressions.MexIncubator;
 import it.red.algen.stats.Experiment;
 import it.red.algen.stats.ExperimentStats;
 import it.red.algen.stats.StatsExperimentExecutor;
-import it.red.algen.tracking.CSVReporter;
 
 @Component
-public class ExpressionsService {
-	private static Logger logger = LoggerFactory.getLogger(AlgenController.class);
+public class SudokuService {
+	private static Logger logger = LoggerFactory.getLogger(SudokuService.class);
 
 	@Autowired private ContextSupplier contextSupplier;
 	
-	@Autowired private MexEnvFactory envFactory;
+	@Autowired private MesEnvFactory envFactory;
 
 	@Autowired private PopulationFactory populationFactory;
 
-	@Autowired private MexBenchmark exprBenchmark;
+	@Autowired private MesBenchmark benchmark;
 	
-	@Autowired private  AutowireCapableBeanFactory beanFactory;
+	@Autowired private AutowireCapableBeanFactory beanFactory;
 	
 	
 	public ExperimentStats executeBenchmark(){
-
-		// Context
-		AlgorithmContext context = exprBenchmark.build();
+		AlgorithmContext context = benchmark.build();
 		contextSupplier.init(context);
 
-		Gson gson = new Gson();
-		String json = gson.toJson(context);
-		logger.info(json);
-
-		// Experiment
 		Experiment e = new Experiment(envFactory);
 		beanFactory.autowireBean(e);
 		
@@ -60,22 +44,14 @@ public class ExpressionsService {
         ExperimentStats stats = e.getStats();
         
         contextSupplier.destroy();
-
         return stats;
 	}
 	
 	
 	public ExperimentStats executeExperiment(AlgorithmContext context){
-
-		// Context
 		contextSupplier.init(context);
-	 	setupExprContext(context);
+	 	setupContext(context);
 
-	 	Gson gson = new Gson();
-		String json = gson.toJson(context);
-		logger.info(json);
-
-		// Experiment
 	 	Experiment e = new Experiment(envFactory);
 	 	beanFactory.autowireBean(e);
 	 	
@@ -84,23 +60,15 @@ public class ExpressionsService {
         ExperimentStats stats = e.getStats();
         
         contextSupplier.destroy();
-        
         return stats;
 	}
 	
 	
 	// TODOA: remove redundancy
 	public String executeAnalysis(AlgorithmContext context, int experiments){
-
-		// Context
 		contextSupplier.init(context);
-	 	setupExprContext(context);
+	 	setupContext(context);
 
-	 	Gson gson = new Gson();
-		String json = gson.toJson(context);
-		logger.info(json);
-
-		// Experiments run
         StatsExperimentExecutor collector = new StatsExperimentExecutor(this.envFactory, experiments);
         beanFactory.autowireBean(collector);
         
@@ -114,14 +82,8 @@ public class ExpressionsService {
 	
 	
 	public String executeTrialTest(AlgorithmContext context, int experiments){
-
-		// Context
 		contextSupplier.init(context);
-	 	setupExprContext(context);
-
-	 	Gson gson = new Gson();
-		String json = gson.toJson(context);
-		logger.info(json);
+	 	setupContext(context);
 		
 		// Trial
 		context.parameters.randomEvolution = true;
@@ -145,10 +107,10 @@ public class ExpressionsService {
 	}
 	
 
-	private void setupExprContext(AlgorithmContext context) {
-		context.incubator = new MexIncubator();
+	private void setupContext(AlgorithmContext context) {
+		context.incubator = new MesIncubator();
 
-		context.fitnessCalculator = new MexFitnessCalculator();
+		context.fitnessCalculator = new MesFitnessCalculator();
 		context.fitnessCalculator.setup(context.incubator, null);
 
 		context.selector = new StandardSelector();
@@ -158,7 +120,7 @@ public class ExpressionsService {
 		
 		context.recombinator = new SequenceRecombinator();
 
-		context.monitoringConfiguration.reporter = new CSVReporter(MexApplication.STATS_DIR);
+		context.monitoringConfiguration.solutionRenderer = new MesSolutionRenderer();
 	}
 	
 }

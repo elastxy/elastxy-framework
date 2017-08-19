@@ -30,9 +30,9 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import it.red.algen.context.AlgorithmContext;
-import it.red.algen.service.ExpressionsService;
-import it.red.algen.service.GardenService;
-import it.red.algen.service.SudokuService;
+import it.red.algen.metaexpressions.ExpressionsService;
+import it.red.algen.metagarden.GardenService;
+import it.red.algen.metasudoku.SudokuService;
 import it.red.algen.stats.ExperimentStats;
 
 @Controller
