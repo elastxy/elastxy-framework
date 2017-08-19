@@ -112,7 +112,7 @@ public class ExpressionsService {
 		context.incubator = new MexIncubator();
 
 		context.fitnessCalculator = new MexFitnessCalculator();
-		context.fitnessCalculator.setup(context.incubator, null);
+		context.fitnessCalculator.setup(context.incubator);
 
 		context.selector = new StandardSelector();
 		context.selector.setup(context.parameters);

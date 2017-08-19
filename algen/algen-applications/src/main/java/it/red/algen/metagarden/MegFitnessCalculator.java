@@ -20,7 +20,7 @@ public class MegFitnessCalculator implements FitnessCalculator<GenericSolution,S
 	private Incubator<SequenceGenotype,UserPhenotype> incubator;
 	
 	@Override
-	public void setup(Incubator incubator, Env environment){
+	public void setup(Incubator incubator){
 		this.incubator = incubator;
 	}
 	

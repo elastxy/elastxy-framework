@@ -16,11 +16,9 @@ import it.red.algen.engine.Incubator;
 public class MesFitnessCalculator implements FitnessCalculator<GenericSolution,StandardFitness> {
 
 	private Incubator<SequenceGenotype,ComplexPhenotype> incubator;
-	private Env env;
 	
 	@Override
-	public void setup(Incubator incubator, Env environment){
-		this.env = environment;
+	public void setup(Incubator incubator){
 		this.incubator = incubator;
 	}
 	

@@ -20,7 +20,7 @@ public class MexFitnessCalculator implements FitnessCalculator<GenericSolution,S
 
 
 	@Override
-	public void setup(Incubator incubator, Env environment) {
+	public void setup(Incubator incubator) {
 		this.incubator = incubator;
 	}
 	

@@ -53,15 +53,8 @@ public class MesEnvFactory implements EnvFactory {
     	Population startGen = createInitialPopulation(genoma);
 
         // Create environment
-    	// TODOA: distinguere meglio la fasi di runtime da wiring
         Env env = new Env(target, startGen, genoma);
 
-    	AlgorithmContext context = contextSupplier.getContext();
-        context.incubator = new MesIncubator();
-
-		context.fitnessCalculator = new MesFitnessCalculator();
-		context.fitnessCalculator.setup(context.incubator, env);
-		
         return env;
     }
 

@@ -55,6 +55,11 @@ public class MesBenchmark implements BenchmarkContextBuilder {
 				TRACE_HISTORY,
 				new CSVReporter(MexApplication.STATS_DIR));
 
+		context.incubator = new MesIncubator();
+
+		context.fitnessCalculator = new MesFitnessCalculator();
+		context.fitnessCalculator.setup(context.incubator);
+		
 		context.selector = new StandardSelector();
 		context.selector.setup(context.parameters);
 		

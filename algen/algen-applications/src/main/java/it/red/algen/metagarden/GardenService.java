@@ -113,7 +113,7 @@ public class GardenService {
 		context.incubator = new MegIncubator();
 
 		context.fitnessCalculator = new MegFitnessCalculator();
-		context.fitnessCalculator.setup(context.incubator, null);
+		context.fitnessCalculator.setup(context.incubator);
 
 		context.selector = new StandardSelector();
 		context.selector.setup(context.parameters);
