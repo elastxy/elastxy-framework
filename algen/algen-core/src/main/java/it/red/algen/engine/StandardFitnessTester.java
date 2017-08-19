@@ -2,6 +2,7 @@ package it.red.algen.engine;
 
 import java.util.Iterator;
 
+import it.red.algen.domain.experiment.Env;
 import it.red.algen.domain.experiment.Fitness;
 import it.red.algen.domain.experiment.Population;
 import it.red.algen.domain.experiment.Solution;
@@ -22,7 +23,7 @@ public class StandardFitnessTester implements FitnessTester {
 	}
 	
 	@Override
-    public Fitness test(Target<?,?> target, Population population){
+    public Fitness test(Population population, Env env){
 
 		// Reset current bestMatch
     	population.bestMatch = null;
@@ -33,7 +34,7 @@ public class StandardFitnessTester implements FitnessTester {
             
             // Skip fitness test for solutions already tested
             if(solution.getFitness()==null || solution.getFitness().getValue()==null){
-            	Fitness fitness = calculator.calculate(solution, target);
+            	Fitness fitness = calculator.calculate(solution, env);
             	if(fitness.getLegalCheck()!=null) { 
             		fireIllegalSolutionEvent(solution);
             	}
@@ -43,18 +44,18 @@ public class StandardFitnessTester implements FitnessTester {
             }
             
             // Check if it's best match
-            if(isBestMatch(target, population.bestMatch, solution)){
+            if(isBestMatch(env.target, population.bestMatch, solution)){
             	population.bestMatch = solution;
             }
         }
         
         // No target fitness: Order by fitness desc
-        if(target.getTargetFitness()==null){     
+        if(env.target.getTargetFitness()==null){     
         	population.orderByFitnessDesc();
         }
         // Target fitness set: Order by proximity to the fitness
         else {
-        	population.orderByFitnessProximity(target.getTargetFitness());
+        	population.orderByFitnessProximity(env.target.getTargetFitness());
         }
         
         return population.bestMatch.getFitness();

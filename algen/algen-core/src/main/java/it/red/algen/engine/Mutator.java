@@ -4,10 +4,8 @@ import it.red.algen.domain.experiment.Solution;
 import it.red.algen.domain.genetics.Genoma;
 
 @SuppressWarnings("rawtypes")
-public interface Mutator<S extends Solution> {
+public interface Mutator<S extends Solution, G extends Genoma> {
 	
-	public void setGenoma(Genoma genoma);
-
 	/**
 	 * Takes a solution as an input and applies mutator operator,
 	 * returning the original solution mutate
@@ -15,5 +13,5 @@ public interface Mutator<S extends Solution> {
 	 * @param solution
 	 * @return
 	 */
-	public S mutate(S solution);
+	public S mutate(S solution, G genoma);
 }

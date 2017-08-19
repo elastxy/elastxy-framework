@@ -44,14 +44,13 @@ public class MesGenomaProvider implements GenomaProvider {
 		}
 	}
 	
-	private PredefinedGenoma cachedGenoma;
-	
+
+	/**
+	 * Genoma reference to be used is only created by reduce()
+	 */
 	@Override
 	public Genoma getGenoma(){
-		if(cachedGenoma==null){
-			collect();
-		}
-		return cachedGenoma;
+		throw new UnsupportedOperationException("Cannot get a new Genoma: it's completely based on target. Use reduce() and maintain the reference for all execution instead.");
 	}
 
 	
@@ -59,13 +58,8 @@ public class MesGenomaProvider implements GenomaProvider {
 	 * Genoma is intially void: only when target is set can be set up
 	 */
 	@Override
-	public Genoma collect() {
-		cachedGenoma = new PredefinedGenoma();
-		cachedGenoma.setLimitedAllelesStrategy(true); // after determined, alleles are always the same set for every solution
-		return cachedGenoma;
+	public void collect() {
 		
-//		cachedGenoma.genesMetadataByCode = new HashMap<String, GeneMetadata>();
-//
 //		// Free to modify positions
 //		GeneMetadata gene = new GeneMetadata();
 //		gene.code = ALLELE_CELL;
@@ -86,16 +80,16 @@ public class MesGenomaProvider implements GenomaProvider {
 //		return cachedGenoma;
 	}
 
+	
 	/**
-	 * Create a new restricted Genoma for single execution,
+	 * Create a new restricted Genoma for single execution context,
 	 * with only free cells number
-	 * 
-	 * TODOA: next executions will found alleles already reduced 
-	 * based on this target execution!!!
-	 * Must separate runtime from initial genoma setup
 	 */
 	@Override
-	public void reduce(Target<?, ?> target) {
+	public Genoma reduce(Target<?, ?> target) {
+
+		PredefinedGenoma genoma = new PredefinedGenoma();
+		genoma.setLimitedAllelesStrategy(true); // after determined, alleles are always the same set for every solution
 		
 		int[][] matrix = (int[][])target.getGoal();
 
@@ -116,8 +110,10 @@ public class MesGenomaProvider implements GenomaProvider {
 			predefinedAlleles.add(allele);
 		}
 		for(int i=0; i < missingNumbers.size(); i++) {
-			cachedGenoma.alleles.put(String.valueOf(i), predefinedAlleles);
+			genoma.alleles.put(String.valueOf(i), predefinedAlleles);
 		}
+		
+		return genoma;
 	}
 
 	

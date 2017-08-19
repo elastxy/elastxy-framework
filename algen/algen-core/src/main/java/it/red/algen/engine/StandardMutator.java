@@ -12,16 +12,11 @@ import it.red.algen.domain.genetics.Genoma;
  * @author red
  *
  */
-public class StandardMutator implements Mutator<Solution> {
-	private Genoma genoma;
+public class StandardMutator implements Mutator<Solution, Genoma> {
 	
-	@Override
-	public void setGenoma(Genoma genoma) {
-		this.genoma = genoma;
-	}
 
 	@Override
-	public Solution mutate(Solution solution) {
+	public Solution mutate(Solution solution, Genoma genoma) {
 		
 		// Reset fitness so that it must be recalculated
 		solution.setFitness(null);

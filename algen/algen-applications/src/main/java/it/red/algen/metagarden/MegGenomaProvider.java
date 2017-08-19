@@ -37,21 +37,20 @@ public class MegGenomaProvider implements GenomaProvider {
 
 	private StandardMetadataGenoma cachedGenoma;
 
+	
 //	@Cacheable(value = "genoma") TODOA: cache
 	@Override
 	public Genoma getGenoma(){
-		if(cachedGenoma==null){
-			collect();
-		}
 		return cachedGenoma;
 	}
 	
+	
 //	@Cacheable(value = "genoma")
 	@Override
-	public Genoma collect() {
-		cachedGenoma = new StandardMetadataGenoma();
-		cachedGenoma.setupAlleleGenerator(alleleGenerator);
-		cachedGenoma.setLimitedAllelesStrategy(contextSupplier.getContext().applicationSpecifics.getParamBoolean(MegApplication.LIMITED_TREES));
+	public void collect() {
+		StandardMetadataGenoma genoma = new StandardMetadataGenoma();
+		genoma.setupAlleleGenerator(alleleGenerator);
+		genoma.setLimitedAllelesStrategy(contextSupplier.getContext().applicationSpecifics.getParamBoolean(MegApplication.LIMITED_TREES));
 		Map<String, GeneMetadata> genesMetadataByCode = new HashMap<String, GeneMetadata>();
 		Map<String, GeneMetadata> genesMetadataByPos = new HashMap<String, GeneMetadata>();
 
@@ -75,16 +74,15 @@ public class MegGenomaProvider implements GenomaProvider {
 			genesMetadataByCode.put(metadata.code, metadata);
 			genesMetadataByPos.put(String.valueOf(pos), metadata);
 
-			cachedGenoma.initialize(genesMetadataByCode, genesMetadataByPos);
+			genoma.initialize(genesMetadataByCode, genesMetadataByPos);
 
 		}
 		
-		this.cachedGenoma = cachedGenoma;
-		return cachedGenoma;
+		cachedGenoma = genoma;
 	}
 
 	@Override
-	public void reduce(Target<?, ?> target) {
+	public Genoma reduce(Target<?, ?> target) {
 		throw new UnsupportedOperationException("Not available for this GenomaProvider implementation");
 	}
 

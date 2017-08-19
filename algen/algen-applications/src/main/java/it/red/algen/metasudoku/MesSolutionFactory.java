@@ -3,12 +3,8 @@ package it.red.algen.metasudoku;
 import java.util.List;
 import java.util.stream.IntStream;
 
-import javax.annotation.Resource;
-
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import it.red.algen.dataaccess.GenomaProvider;
 import it.red.algen.dataaccess.SolutionsFactory;
 import it.red.algen.domain.experiment.GenericSolution;
 import it.red.algen.domain.experiment.Solution;
@@ -18,15 +14,11 @@ import it.red.algen.domain.genetics.PredefinedGenoma;
 import it.red.algen.domain.genetics.SequenceGenotype;
 
 @Component
-public class MesSolutionFactory implements SolutionsFactory {
+public class MesSolutionFactory implements SolutionsFactory<PredefinedGenoma> {
 
-	@Autowired private MesGenomaProvider genomaProvider;
 
-    public Solution createRandom() {
+    public Solution createRandom(PredefinedGenoma genoma) {
     	GenericSolution solution = new GenericSolution();
-    	
-    	PredefinedGenoma genoma = (PredefinedGenoma)genomaProvider.getGenoma();
-
     	SequenceGenotype genotype = new SequenceGenotype();
     	genotype.genes = PredefinedGeneFactory.createSequence(genoma);
     	solution.genotype = genotype;
@@ -38,11 +30,8 @@ public class MesSolutionFactory implements SolutionsFactory {
     }
     
     @Override
-    public Solution createBaseModel() {
+    public Solution createBaseModel(PredefinedGenoma genoma) {
     	GenericSolution solution = new GenericSolution();
-    	
-    	PredefinedGenoma genoma = (PredefinedGenoma)genomaProvider.getGenoma();
-
     	SequenceGenotype genotype = new SequenceGenotype();
     	genotype.genes = PredefinedGeneFactory.createSequence(genoma);
     	solution.genotype = genotype;
@@ -54,8 +43,8 @@ public class MesSolutionFactory implements SolutionsFactory {
     }
 
 	@Override
-	public Solution createPredefined(List<Object> alleleValues) {
-		return createBaseModel();
+	public Solution createPredefined(PredefinedGenoma genoma, List<Object> alleleValues) {
+		return createBaseModel(genoma);
 	}
 
 

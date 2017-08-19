@@ -13,7 +13,7 @@ import it.red.algen.engine.FitnessCalculator;
 import it.red.algen.engine.IllegalSolutionException;
 import it.red.algen.engine.Incubator;
 
-public class MesFitnessCalculator implements FitnessCalculator<GenericSolution,PerformanceTarget<String,Integer>,StandardFitness> {
+public class MesFitnessCalculator implements FitnessCalculator<GenericSolution,StandardFitness> {
 
 	private Incubator<SequenceGenotype,ComplexPhenotype> incubator;
 	private Env env;
@@ -30,7 +30,7 @@ public class MesFitnessCalculator implements FitnessCalculator<GenericSolution,P
 	 * @return
 	 */
 	@Override
-	public StandardFitness calculate(GenericSolution solution, PerformanceTarget<String,Integer> target) {
+	public StandardFitness calculate(GenericSolution solution, Env env) {
         
 		// Setup fitness
 		StandardFitness result = new StandardFitness();
@@ -39,6 +39,7 @@ public class MesFitnessCalculator implements FitnessCalculator<GenericSolution,P
         // Setup variables
         BigDecimal solutionBD = null;
         BigDecimal normalized = BigDecimal.ZERO;
+        PerformanceTarget<String,Integer> target = (PerformanceTarget<String,Integer>)env.target;
         String legalCheck = null;
         try { 
         	

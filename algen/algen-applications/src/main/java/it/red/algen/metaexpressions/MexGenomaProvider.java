@@ -32,16 +32,13 @@ public class MexGenomaProvider implements GenomaProvider {
 	
 	@Override
 	public Genoma getGenoma(){
-		if(cachedGenoma==null){
-			collect();
-		}
 		return cachedGenoma;
 	}
 
 	@Override
-	public Genoma collect() {
-		cachedGenoma = new StandardMetadataGenoma();
-		cachedGenoma.setupAlleleGenerator(alleleGenerator);
+	public void collect() {
+		StandardMetadataGenoma genoma = new StandardMetadataGenoma();
+		genoma.setupAlleleGenerator(alleleGenerator);
 		Map<String, GeneMetadata> genesMetadataByCode = new HashMap<String, GeneMetadata>();
 		Map<String, GeneMetadata> genesMetadataByPos = new HashMap<String, GeneMetadata>();
 
@@ -64,9 +61,9 @@ public class MexGenomaProvider implements GenomaProvider {
 		genesMetadataByCode.put(metadata.code, metadata);
 		genesMetadataByPos.put("1", metadata);
 		
-		cachedGenoma.initialize(genesMetadataByCode, genesMetadataByPos);
+		genoma.initialize(genesMetadataByCode, genesMetadataByPos);
 		
-		return cachedGenoma;
+		cachedGenoma = genoma;
 	}
 
 	
@@ -74,8 +71,8 @@ public class MexGenomaProvider implements GenomaProvider {
 	 * TODOA: reduceable interface....
 	 */
 	@Override
-	public void reduce(Target<?, ?> target) {
-		throw new UnsupportedOperationException("Not available for this GenomaProvider implementation");
+	public Genoma reduce(Target<?, ?> target) {
+		throw new UnsupportedOperationException("Not available for this GenomaProvider implementation: all Genoma already collected with collect()");
 	}
 
 }

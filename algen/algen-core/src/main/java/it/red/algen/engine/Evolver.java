@@ -68,7 +68,7 @@ public class Evolver implements EnvObservable {
         
         
     	// TEST FITNESS - initial gen
-        fitnessTester.test(env.target, env.currentGen);
+        fitnessTester.test(env.currentGen, env);
         int generationSize = env.currentGen.solutions.size();
         // fireTestedGenerationEvent(); // TODOM
         
@@ -88,7 +88,7 @@ public class Evolver implements EnvObservable {
         	}
         	
             // TEST FITNESS - next gen
-            Fitness nextGenFitness = fitnessTester.test(env.target, nextGeneration);
+            Fitness nextGenFitness = fitnessTester.test(nextGeneration, env);
 
             // Assign new generation
             Fitness lastGenFitness = env.currentGen.bestMatch.getFitness();
@@ -190,7 +190,7 @@ public class Evolver implements EnvObservable {
 	 */
 
 	private Population selection(int generationSize) {
-		Population nextGeneration = context.selector.select(env.currentGen);
+		Population nextGeneration = context.selector.select(env.currentGen, env.genoma);
 		fireNewGenerationEvent(env.currentGen, nextGeneration);
 		if(generationSize!=nextGeneration.solutions.size()){
 			String msg = String.format("Selected generation size (%d) differs from last (%d)", nextGeneration.solutions.size(), generationSize);
@@ -222,14 +222,14 @@ public class Evolver implements EnvObservable {
 		if(mute0) { 
 		    Solution old = sons.get(0);
 		    Solution niu = old.copy();
-		    context.mutator.mutate(niu);
+		    context.mutator.mutate(niu, env.genoma);
 		    sons.set(0, niu);
 		    fireMutationEvent(old, niu);
 		}
 		if(mute1) { 
 		    Solution old = sons.get(1);
 		    Solution niu = old.copy();
-		    context.mutator.mutate(niu);
+		    context.mutator.mutate(niu, env.genoma);
 		    sons.set(1, niu);
 		    fireMutationEvent(old, niu);
 		}

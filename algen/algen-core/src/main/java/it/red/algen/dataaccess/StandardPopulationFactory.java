@@ -15,13 +15,14 @@ import org.springframework.stereotype.Component;
 
 import it.red.algen.context.ContextSupplier;
 import it.red.algen.domain.experiment.Population;
+import it.red.algen.domain.genetics.Genoma;
 
 /**
  *
  * @author grossi
  */
 @Component
-public class StandardPopulationFactory implements PopulationFactory {
+public class StandardPopulationFactory implements PopulationFactory<Genoma> {
 	
 	@Autowired private ContextSupplier contextSupplier;
 	
@@ -33,14 +34,14 @@ public class StandardPopulationFactory implements PopulationFactory {
 	}
 
 	@Override
-    public Population createNew() {
+    public Population createNew(Genoma genoma) {
         Population population = new Population();
         for(int i = 0; i < contextSupplier.getContext().parameters.initialSelectionNumber; i++){
         	if(contextSupplier.getContext().parameters.initialSelectionRandom){
-                population.add(solutionsFactory.createRandom());
+                population.add(solutionsFactory.createRandom(genoma));
         	}
         	else {
-        		population.add(solutionsFactory.createBaseModel());
+        		population.add(solutionsFactory.createBaseModel(genoma));
         	}
         }
         return population;

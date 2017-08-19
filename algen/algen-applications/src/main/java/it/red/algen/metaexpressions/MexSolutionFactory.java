@@ -3,7 +3,6 @@ package it.red.algen.metaexpressions;
 import java.util.Arrays;
 import java.util.List;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import it.red.algen.dataaccess.SolutionsFactory;
@@ -14,13 +13,11 @@ import it.red.algen.metadata.MetadataGeneFactory;
 import it.red.algen.metadata.StandardMetadataGenoma;
 
 @Component
-public class MexSolutionFactory implements SolutionsFactory {
+public class MexSolutionFactory implements SolutionsFactory<StandardMetadataGenoma> {
 
-	@Autowired private MexGenomaProvider genomaProvider;
 
     // TODOM: genotype builders based directly inside in genoma
-    public Solution createRandom() {
-    	StandardMetadataGenoma genoma = (StandardMetadataGenoma)genomaProvider.getGenoma();
+    public Solution createRandom(StandardMetadataGenoma genoma) {
     	GenericSolution solution = new GenericSolution();
 
     	SequenceGenotype genotype = new SequenceGenotype();
@@ -35,19 +32,18 @@ public class MexSolutionFactory implements SolutionsFactory {
     }
     
     @Override
-    public Solution createBaseModel() {
-    	return createByValues(0L, '+', 0L);
+    public Solution createBaseModel(StandardMetadataGenoma genoma) {
+    	return createByValues(genoma, 0L, '+', 0L);
     }
 
 	@Override
-	public Solution createPredefined(List<Object> alleleValues) {
-		return createByValues(alleleValues.get(0), alleleValues.get(1), alleleValues.get(2));
+	public Solution createPredefined(StandardMetadataGenoma genoma, List<Object> alleleValues) {
+		return createByValues(genoma, alleleValues.get(0), alleleValues.get(1), alleleValues.get(2));
 	}
 
 
     
-	private GenericSolution createByValues(Object operand1, Object operator, Object operand2) {
-    	StandardMetadataGenoma genoma = (StandardMetadataGenoma)genomaProvider.getGenoma();
+	private GenericSolution createByValues(StandardMetadataGenoma genoma, Object operand1, Object operator, Object operand2) {
 		GenericSolution solution = new GenericSolution();
 
     	SequenceGenotype genotype = new SequenceGenotype();

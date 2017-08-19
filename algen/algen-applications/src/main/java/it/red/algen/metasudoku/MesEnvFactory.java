@@ -50,11 +50,11 @@ public class MesEnvFactory implements EnvFactory {
     	Genoma genoma = createGenoma(target);
 		
     	// Create initial population
-    	Population startGen = createInitialPopulation();
+    	Population startGen = createInitialPopulation(genoma);
 
         // Create environment
     	// TODOA: distinguere meglio la fasi di runtime da wiring
-        Env env = new Env(target, startGen);
+        Env env = new Env(target, startGen, genoma);
 
     	AlgorithmContext context = contextSupplier.getContext();
         context.incubator = new MesIncubator();
@@ -66,10 +66,8 @@ public class MesEnvFactory implements EnvFactory {
     }
 
 	private Genoma createGenoma(Target target) {
-		Genoma genoma = genomaProvider.collect();
-    	genomaProvider.reduce(target);
-		contextSupplier.getContext().mutator.setGenoma(genoma);
-		return genoma;
+		genomaProvider.collect();
+		return genomaProvider.reduce(target);
 	}
 	
 	private PerformanceTarget defineTarget() {
@@ -87,9 +85,9 @@ public class MesEnvFactory implements EnvFactory {
 		return target;
 	}
 
-	private Population createInitialPopulation() {
+	private Population createInitialPopulation(Genoma genoma) {
 		populationFactory.setSolutionsFactory(solutionsFactory);
-        Population startGen = populationFactory.createNew();
+        Population startGen = populationFactory.createNew(genoma);
 		return startGen;
 	}
     

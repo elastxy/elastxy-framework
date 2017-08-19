@@ -27,6 +27,7 @@ import it.red.algen.domain.experiment.Population;
 import it.red.algen.domain.experiment.Solution;
 import it.red.algen.domain.experiment.Target;
 import it.red.algen.domain.genetics.Genoma;
+import it.red.algen.metadata.StandardMetadataGenoma;
 
 /**
  *
@@ -46,17 +47,17 @@ public class MexEnvFactory implements EnvFactory {
 	
     public Env create(){
 
-    	// Define target
-    	PerformanceTarget target = defineTarget();
-    	
     	// Create genoma
-    	Genoma genoma = createGenoma(target);
-
+    	Genoma genoma = createGenoma(null);
+    	
+    	// Define target
+    	PerformanceTarget target = defineTarget((StandardMetadataGenoma)genoma);
+    	
     	// Create initial population
-    	Population startGen = createInitialPopulation();
+    	Population startGen = createInitialPopulation(genoma);
         
         // Create environment
-        Env env = new Env(target, startGen);
+        Env env = new Env(target, startGen, genoma);
         
         return env;
     }
@@ -64,26 +65,25 @@ public class MexEnvFactory implements EnvFactory {
 
 	private Genoma createGenoma(Target target) {
 //    	genomaProvider.reduce(target);
-		Genoma genoma = genomaProvider.collect();
-		contextSupplier.getContext().mutator.setGenoma(genoma);
-		return genoma;
+		genomaProvider.collect();
+		return genomaProvider.getGenoma();
 	}
 
 
-	private Population createInitialPopulation() {
+	private Population createInitialPopulation(Genoma genoma) {
 		populationFactory.setSolutionsFactory(solutionsFactory);
-        Population startGen = populationFactory.createNew();
+        Population startGen = populationFactory.createNew(genoma);
 		return startGen;
 	}
 
 
-	private PerformanceTarget defineTarget() {
+	private PerformanceTarget defineTarget(StandardMetadataGenoma genoma) {
     	AlgorithmContext context = contextSupplier.getContext();
         
 		// Define boundaries
 		long maxOperandValue = context.applicationSpecifics.getParamLong(MexApplication.MAX_OPERAND_VALUE);
-        Solution minSol = solutionsFactory.createPredefined(Arrays.asList(maxOperandValue, '*', -maxOperandValue));
-        Solution maxSol = solutionsFactory.createPredefined(Arrays.asList(maxOperandValue, '*', maxOperandValue));
+        Solution minSol = solutionsFactory.createPredefined(genoma, Arrays.asList(maxOperandValue, '*', -maxOperandValue));
+        Solution maxSol = solutionsFactory.createPredefined(genoma, Arrays.asList(maxOperandValue, '*', maxOperandValue));
 
 		// Defines goal representation
         Long target = context.applicationSpecifics.getTargetLong(MexApplication.TARGET_EXPRESSION_RESULT);

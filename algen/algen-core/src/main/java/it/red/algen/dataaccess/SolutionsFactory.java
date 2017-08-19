@@ -4,7 +4,7 @@ import java.util.List;
 
 import it.red.algen.domain.experiment.Solution;
 
-public interface SolutionsFactory {
+public interface SolutionsFactory<G> {
 
 	/**
 	 * Create a random solution with random genes from genoma
@@ -15,7 +15,7 @@ public interface SolutionsFactory {
 	 * 
 	 * @return
 	 */
-	public Solution createRandom();
+	public Solution createRandom(G genoma);
 	
 
 	/**
@@ -27,7 +27,7 @@ public interface SolutionsFactory {
 	 * 
 	 * @return
 	 */
-	public Solution createBaseModel();
+	public Solution createBaseModel(G genoma);
 	
 	
 
@@ -39,5 +39,5 @@ public interface SolutionsFactory {
 	 * 
 	 * @return
 	 */
-	public Solution createPredefined(List<Object> alleleValues);
+	public Solution createPredefined(G genoma, List<Object> alleleValues);
 }

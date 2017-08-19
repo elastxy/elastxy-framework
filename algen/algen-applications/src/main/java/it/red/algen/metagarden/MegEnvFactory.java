@@ -40,25 +40,25 @@ public class MegEnvFactory implements EnvFactory {
     public Env create(){
 
     	// Create genoma
-    	createGenoma();
+    	Genoma genoma = createGenoma();
     	
     	// Create initial population
-    	Population startGen = createInitialPopulation();
+    	Population startGen = createInitialPopulation(genoma);
     	
     	// Define target
     	PerformanceTarget<String, Double> target = defineTarget(startGen);
 
         // Create environment
-        Env env = new Env(target, startGen);
+        Env env = new Env(target, startGen, genoma);
         
         return env;
     }
 
 
-	private void createGenoma() {
+	private Genoma createGenoma() {
 //    	genomaProvider.reduce(target);
-		Genoma genoma = genomaProvider.collect();
-		contextSupplier.getContext().mutator.setGenoma(genoma);
+		genomaProvider.collect();
+		return genomaProvider.getGenoma();
 	}
 	
 	private PerformanceTarget<String, Double> defineTarget(Population startGen) {
@@ -71,9 +71,9 @@ public class MegEnvFactory implements EnvFactory {
 	}
 
 
-	private Population createInitialPopulation() {
+	private Population createInitialPopulation(Genoma genoma) {
 		populationFactory.setSolutionsFactory(solutionsFactory);
-        Population startGen = populationFactory.createNew();
+        Population startGen = populationFactory.createNew(genoma);
 		return startGen;
 	}
 

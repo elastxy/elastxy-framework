@@ -3,12 +3,8 @@ package it.red.algen.metagarden;
 import java.util.List;
 import java.util.stream.IntStream;
 
-import javax.annotation.Resource;
-
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import it.red.algen.dataaccess.GenomaProvider;
 import it.red.algen.dataaccess.SolutionsFactory;
 import it.red.algen.domain.experiment.GenericSolution;
 import it.red.algen.domain.experiment.Solution;
@@ -18,21 +14,15 @@ import it.red.algen.metadata.MetadataGeneFactory;
 import it.red.algen.metadata.StandardMetadataGenoma;
 
 @Component
-public class MegSolutionsFactory implements SolutionsFactory {
+public class MegSolutionsFactory implements SolutionsFactory<StandardMetadataGenoma> {
 
-	@Autowired private MegGenomaProvider genomaProvider;
-
-    // TODOM: genotype builders based directly inside in genoma
-    
-    
-    
+	
     /**
      * Create a random solution
      * 
      * IMPORTANT: infinite Trees!
      */
-    public Solution createRandom() {
-    	StandardMetadataGenoma genoma = (StandardMetadataGenoma)genomaProvider.getGenoma();
+    public Solution createRandom(StandardMetadataGenoma genoma) {
     	GenericSolution solution = new GenericSolution();
 
     	SequenceGenotype genotype = new SequenceGenotype();
@@ -46,14 +36,14 @@ public class MegSolutionsFactory implements SolutionsFactory {
     }
     
     
+    
     /**
      * Garden with every plant on the same initial position
      * 
      * IMPORTANT: finite Trees of size >= than Places!
      */
     @Override
-    public Solution createBaseModel() {
-    	StandardMetadataGenoma genoma = (StandardMetadataGenoma)genomaProvider.getGenoma();
+    public Solution createBaseModel(StandardMetadataGenoma genoma) {
     	GenericSolution solution = new GenericSolution();
     	
     	SequenceGenotype genotype = new SequenceGenotype();
@@ -75,8 +65,9 @@ public class MegSolutionsFactory implements SolutionsFactory {
     }
 
     
+    
 	@Override
-	public Solution createPredefined(List<Object> alleleValues) {
+	public Solution createPredefined(StandardMetadataGenoma genoma, List<Object> alleleValues) {
 		throw new UnsupportedOperationException("NYI");
 	}
 

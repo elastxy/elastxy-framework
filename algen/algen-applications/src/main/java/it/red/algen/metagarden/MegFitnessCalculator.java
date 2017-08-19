@@ -14,7 +14,7 @@ import it.red.algen.engine.FitnessCalculator;
 import it.red.algen.engine.Incubator;
 import it.red.algen.metagarden.data.GardenWellness;
 
-public class MegFitnessCalculator implements FitnessCalculator<GenericSolution,PerformanceTarget<String,Double>,StandardFitness> {
+public class MegFitnessCalculator implements FitnessCalculator<GenericSolution,StandardFitness> {
 
 	
 	private Incubator<SequenceGenotype,UserPhenotype> incubator;
@@ -34,7 +34,7 @@ public class MegFitnessCalculator implements FitnessCalculator<GenericSolution,P
 	 * @return
 	 */
 	@Override
-	public StandardFitness calculate(GenericSolution solution, PerformanceTarget<String,Double> target) {
+	public StandardFitness calculate(GenericSolution solution, Env env) {
         
 		// Setup fitness
 		StandardFitness result = new StandardFitness();
@@ -56,6 +56,7 @@ public class MegFitnessCalculator implements FitnessCalculator<GenericSolution,P
     		normalized = BigDecimal.ONE;
     	}
     	else {
+    		PerformanceTarget<String,Double> target = (PerformanceTarget<String,Double>)env.target;
     		BigDecimal bh = new BigDecimal(totalUnhappyness).setScale(20, BigDecimal.ROUND_HALF_UP);
     		BigDecimal bt = new BigDecimal(target.getReferenceMeasure()).setScale(20, BigDecimal.ROUND_HALF_UP);
     		if("happy".equals(target.getGoal()) || "maximum".equals(target.getGoal())) {

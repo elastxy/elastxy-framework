@@ -24,11 +24,12 @@ public interface GenomaProvider {
 	 * Builds or retrieve the whole Genoma
 	 * @return
 	 */
-	public Genoma collect();
+	public void collect();
 	
 	/**
 	 * Reduce to the minimum set of information for building solutions
+	 * during current execution
 	 * @param target
 	 */
-	public void reduce(Target<?,?> target);
+	public Genoma reduce(Target<?,?> target);
 }

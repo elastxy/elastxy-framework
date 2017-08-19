@@ -10,13 +10,21 @@ public class MesSolutionRenderer implements SolutionRenderer<String> {
 	public String render(Solution solution){
 		StringBuffer sb = new StringBuffer(81);
 		ComplexPhenotype phenotype = (ComplexPhenotype)solution.getPhenotype();
+//		TODOB: show changed values in square brackets ((SequenceGenotype)solution.getGenotype()).genes.get(index);
 		int[][] matrix = (int[][])phenotype.getValue().get(MesApplication.PHENOTYPE_MATRIX);
 		
 		int[] columnTotals = new int[9];
 		for (int i=0; i < 9; i++) {
 			int rowTotal = 0;
 			for (int j=0; j < 9; j++) {
-				sb.append(matrix[i][j]==0 ? "   " : String.format(" %d ", matrix[i][j]));
+				String cell = null;
+				if(matrix[i][j]==0){
+					cell = "   ";
+				}
+				else {
+					cell = String.format(" %d ", matrix[i][j]);
+				}
+				sb.append(cell);
 				rowTotal += matrix[i][j];
 				columnTotals[j] += matrix[i][j];
 			}
@@ -31,7 +39,7 @@ public class MesSolutionRenderer implements SolutionRenderer<String> {
 		}
 		sb.append("\n\n");
 		double completeness = (double)phenotype.getValue().get(MesApplication.PHENOTYPE_COMPLETENESS);
-		sb.append(String.format("-> Sudoku completeness: %f.3%n%n", completeness));
+		sb.append(String.format("-> Sudoku completeness: %.3f%n%n", completeness));
 		sb.append("SOLUTION: "+solution+"\n");
 		return sb.toString();
 	}
