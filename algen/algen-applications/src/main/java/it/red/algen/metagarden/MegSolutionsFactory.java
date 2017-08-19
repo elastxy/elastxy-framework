@@ -20,9 +20,7 @@ import it.red.algen.metadata.StandardMetadataGenoma;
 @Component
 public class MegSolutionsFactory implements SolutionsFactory {
 
-    @Autowired
-    @Resource(name="megGenomaProvider")
-    private GenomaProvider genomaProvider;
+	@Autowired private MegGenomaProvider genomaProvider;
 
     // TODOM: genotype builders based directly inside in genoma
     

@@ -35,16 +35,13 @@ import it.red.algen.stats.Experiment;
 @ContextConfiguration(classes = TestConfig.class)
 public class MetaSudokuMainTest {
    
-	@Autowired
-	private ContextSupplier contextSupplier;
+	@Autowired private ContextSupplier contextSupplier;
 	
-	@Autowired
-	private MesEnvFactory envFactory;
+	@Autowired private MesEnvFactory envFactory;
 	
-	@Autowired
-	private MesBenchmark benchmark;
+	@Autowired private MesBenchmark benchmark;
 		
-	private @Autowired AutowireCapableBeanFactory beanFactory;
+	@Autowired private AutowireCapableBeanFactory beanFactory;
 	
 	@Test
     public void simpleRun() {

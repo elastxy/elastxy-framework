@@ -30,21 +30,15 @@ import it.red.algen.tracking.CSVReporter;
 public class ExpressionsService {
 	private static Logger logger = LoggerFactory.getLogger(AlgenController.class);
 
-	@Autowired
-	private ContextSupplier contextSupplier;
+	@Autowired private ContextSupplier contextSupplier;
 	
+	@Autowired private MexEnvFactory envFactory;
 
-	@Autowired
-	private MexEnvFactory envFactory;
+	@Autowired private PopulationFactory populationFactory;
 
-	@Autowired
-	private PopulationFactory populationFactory;
-
-	@Autowired
-	private MexBenchmark exprBenchmark;
+	@Autowired private MexBenchmark exprBenchmark;
 	
-	
-	private @Autowired AutowireCapableBeanFactory beanFactory;
+	@Autowired private  AutowireCapableBeanFactory beanFactory;
 	
 	
 	public ExperimentStats executeBenchmark(){

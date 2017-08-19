@@ -36,16 +36,14 @@ import it.red.algen.stats.Experiment;
 @ContextConfiguration(classes = TestConfig.class)
 public class MetaGardenMainTest {
    
-	@Autowired
-	private ContextSupplier contextSupplier;
+	@Autowired private ContextSupplier contextSupplier;
 	
-	@Autowired
-	private MegEnvFactory envFactory;
+	@Autowired private MegEnvFactory envFactory;
 	
-	@Autowired
-	private MegBenchmark benchmark;
+	@Autowired private MegBenchmark benchmark;
 		
-	private @Autowired AutowireCapableBeanFactory beanFactory;
+	@Autowired private AutowireCapableBeanFactory beanFactory;
+	
 	
 	@Test
     public void simpleRun() {

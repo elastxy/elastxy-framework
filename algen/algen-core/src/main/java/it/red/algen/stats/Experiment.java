@@ -32,8 +32,7 @@ public class Experiment {
     private ExperimentStats stats;
 
 
-    @Autowired
-    private ContextSupplier contextSupplier;
+    @Autowired private ContextSupplier contextSupplier;
     
     public Experiment(EnvFactory factory) {
         this.factory = factory;

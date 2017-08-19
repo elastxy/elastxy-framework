@@ -36,15 +36,14 @@ import it.red.algen.stats.Experiment;
 @ContextConfiguration(classes = TestConfig.class)
 public class GardenMainTest {
     
-	@Autowired
-	private ContextSupplier contextSupplier;
+	@Autowired private ContextSupplier contextSupplier;
 	
-	@Autowired
-	private GardenEnvFactory gardenEnvFactory;
-	@Autowired
-	private GardenBenchmark gardenBenchmark;
+	@Autowired private GardenEnvFactory gardenEnvFactory;
+	
+	@Autowired private GardenBenchmark gardenBenchmark;
 
-	private @Autowired AutowireCapableBeanFactory beanFactory;
+	@Autowired private AutowireCapableBeanFactory beanFactory;
+	
 	
 	@Test
     public void simpleRun() {

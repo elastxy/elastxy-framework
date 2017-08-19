@@ -24,8 +24,7 @@ import it.red.algen.application.ServiceProperties;
 @Component
 public class InfoService {
  
-	@Autowired
-	private ServiceProperties configuration;
+	@Autowired private ServiceProperties configuration;
 
 	public String getInfoMessage() {
 		return "Hello from " + this.configuration.getName() + "! I'm here to serve <!!!>o";

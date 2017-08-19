@@ -40,17 +40,13 @@ public class AlgenController {
 	private static Logger logger = LoggerFactory.getLogger(AlgenController.class);
 
 
-	@Autowired
-	private InfoService infoService;
+	@Autowired private InfoService infoService;
 	
-	@Autowired
-	private ExpressionsService expressionsService;
+	@Autowired private ExpressionsService expressionsService;
 
-	@Autowired
-	private GardenService gardenService;
+	@Autowired private GardenService gardenService;
 
-	@Autowired
-	private SudokuService sudokuService;
+	@Autowired private SudokuService sudokuService;
 	
 
 	/**

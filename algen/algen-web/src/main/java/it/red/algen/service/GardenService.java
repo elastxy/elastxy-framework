@@ -30,19 +30,13 @@ import it.red.algen.tracking.CSVReporter;
 public class GardenService {
 	private static Logger logger = LoggerFactory.getLogger(AlgenController.class);
 
-	@Autowired
-	private ContextSupplier contextSupplier;
-	
+	@Autowired private ContextSupplier contextSupplier;
 
-	@Autowired
-	private MegEnvFactory envFactory;
+	@Autowired private MegEnvFactory envFactory;
 
-	@Autowired
-	private PopulationFactory populationFactory;
+	@Autowired private PopulationFactory populationFactory;
 
-	@Autowired
-	private MegBenchmark benchmark;
-	
+	@Autowired private MegBenchmark benchmark;
 	
 	private @Autowired AutowireCapableBeanFactory beanFactory;
 	

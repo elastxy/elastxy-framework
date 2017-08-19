@@ -35,16 +35,14 @@ import it.red.algen.stats.Experiment;
 @ContextConfiguration(classes = TestConfig.class)
 public class MetaExpressionsMainTest {
    
-	@Autowired
-	private ContextSupplier contextSupplier;
+	@Autowired private ContextSupplier contextSupplier;
 	
-	@Autowired
-	private MexEnvFactory envFactory;
+	@Autowired private MexEnvFactory envFactory;
 	
-	@Autowired
-	private MexBenchmark benchmark;
+	@Autowired private MexBenchmark benchmark;
 		
-	private @Autowired AutowireCapableBeanFactory beanFactory;
+	@Autowired private AutowireCapableBeanFactory beanFactory;
+	
 	
 	@Test
     public void simpleRun() {

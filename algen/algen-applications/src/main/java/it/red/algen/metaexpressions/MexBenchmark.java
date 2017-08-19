@@ -62,8 +62,7 @@ public class MexBenchmark implements BenchmarkContextBuilder {
     private static final boolean VERBOSE = false;
     private static final boolean TRACE_HISTORY = false;
     
-	@Autowired
-	private AlgorithmContextBuilder contextBuilder;
+    @Autowired private AlgorithmContextBuilder contextBuilder;
 	
 	
 	@Override

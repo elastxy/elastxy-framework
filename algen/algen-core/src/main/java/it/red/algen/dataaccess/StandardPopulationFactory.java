@@ -23,8 +23,7 @@ import it.red.algen.domain.experiment.Population;
 @Component
 public class StandardPopulationFactory implements PopulationFactory {
 	
-	@Autowired
-	private ContextSupplier contextSupplier;
+	@Autowired private ContextSupplier contextSupplier;
 	
 	private SolutionsFactory solutionsFactory;
 	

@@ -36,17 +36,13 @@ import it.red.algen.domain.genetics.Genoma;
 public class MexEnvFactory implements EnvFactory {
 	
 	
-	@Autowired
-	private PopulationFactory populationFactory;
+	@Autowired private ContextSupplier contextSupplier;
 	
-	@Autowired
-	private ContextSupplier contextSupplier;
+	@Autowired private PopulationFactory populationFactory;
 	
-	@Autowired
-	private MexSolutionFactory solutionsFactory;
+	@Autowired private MexSolutionFactory solutionsFactory;
 	
-	@Autowired
-	private MexGenomaProvider genomaProvider;
+	@Autowired private MexGenomaProvider genomaProvider;
 	
     public Env create(){
 

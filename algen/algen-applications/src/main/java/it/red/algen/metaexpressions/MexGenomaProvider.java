@@ -4,8 +4,6 @@ import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
 
-import javax.annotation.Resource;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -13,7 +11,6 @@ import it.red.algen.context.ContextSupplier;
 import it.red.algen.dataaccess.GenomaProvider;
 import it.red.algen.domain.experiment.Target;
 import it.red.algen.domain.genetics.Genoma;
-import it.red.algen.engine.AlleleGenerator;
 import it.red.algen.metadata.GeneMetadata;
 import it.red.algen.metadata.GeneMetadataType;
 import it.red.algen.metadata.StandardMetadataGenoma;
@@ -27,12 +24,9 @@ import it.red.algen.metadata.StandardMetadataGenoma;
 @Component
 public class MexGenomaProvider implements GenomaProvider {
 
-	@Autowired
-	private ContextSupplier contextSupplier;
+	@Autowired private ContextSupplier contextSupplier;
 
-	@Autowired
-	@Resource(name="mexAlleleGenerator")
-	private AlleleGenerator alleleGenerator;
+	@Autowired private MexAlleleGenerator alleleGenerator;
 	
 	private StandardMetadataGenoma cachedGenoma;
 	

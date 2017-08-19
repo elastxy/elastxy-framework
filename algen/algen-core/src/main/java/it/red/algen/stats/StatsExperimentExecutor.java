@@ -28,7 +28,7 @@ public class StatsExperimentExecutor {
     
 	private EnvFactory envFactory;
 	
-	private @Autowired AutowireCapableBeanFactory beanFactory;
+	@Autowired private AutowireCapableBeanFactory beanFactory;
 	
     private int experiments;
     

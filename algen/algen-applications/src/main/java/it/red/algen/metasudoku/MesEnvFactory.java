@@ -32,17 +32,14 @@ import it.red.algen.domain.genetics.Genoma;
 public class MesEnvFactory implements EnvFactory {
 	
 	
-	@Autowired
-	private PopulationFactory populationFactory;
+	@Autowired private ContextSupplier contextSupplier;
 	
-	@Autowired
-	private ContextSupplier contextSupplier;
+	@Autowired private PopulationFactory populationFactory;
 	
-	@Autowired
-	private MesSolutionFactory solutionsFactory;
+	@Autowired private MesSolutionFactory solutionsFactory;
 
-	@Autowired
-	private MesGenomaProvider genomaProvider;
+	@Autowired private MesGenomaProvider genomaProvider;
+	
 	
     public Env create(){
 

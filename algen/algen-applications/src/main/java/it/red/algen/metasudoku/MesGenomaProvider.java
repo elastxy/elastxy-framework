@@ -1,21 +1,15 @@
 package it.red.algen.metasudoku;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 
-import javax.annotation.Resource;
-
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import it.red.algen.context.ContextSupplier;
 import it.red.algen.dataaccess.GenomaProvider;
 import it.red.algen.domain.experiment.Target;
 import it.red.algen.domain.genetics.Allele;
 import it.red.algen.domain.genetics.Genoma;
 import it.red.algen.domain.genetics.PredefinedGenoma;
-import it.red.algen.engine.AlleleGenerator;
 
 
 /**
@@ -49,13 +43,6 @@ public class MesGenomaProvider implements GenomaProvider {
 			}
 		}
 	}
-	
-	@Autowired
-	private ContextSupplier contextSupplier;
-
-	@Autowired
-	@Resource(name="mesAlleleGenerator")
-	private AlleleGenerator alleleGenerator;
 	
 	private PredefinedGenoma cachedGenoma;
 	

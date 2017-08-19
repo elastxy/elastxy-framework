@@ -37,8 +37,7 @@ public class MesBenchmark implements BenchmarkContextBuilder {
     private static final boolean VERBOSE = true;
     private static final boolean TRACE_HISTORY = false;
     
-	@Autowired
-	private AlgorithmContextBuilder contextBuilder;
+    @Autowired private AlgorithmContextBuilder contextBuilder;
 	
 	
 	@Override

@@ -20,9 +20,7 @@ import it.red.algen.domain.genetics.SequenceGenotype;
 @Component
 public class MesSolutionFactory implements SolutionsFactory {
 
-    @Autowired
-    @Resource(name="mesGenomaProvider")
-    private GenomaProvider genomaProvider;
+	@Autowired private MesGenomaProvider genomaProvider;
 
     public Solution createRandom() {
     	GenericSolution solution = new GenericSolution();

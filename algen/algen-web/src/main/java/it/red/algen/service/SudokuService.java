@@ -29,21 +29,15 @@ import it.red.algen.stats.StatsExperimentExecutor;
 public class SudokuService {
 	private static Logger logger = LoggerFactory.getLogger(AlgenController.class);
 
-	@Autowired
-	private ContextSupplier contextSupplier;
+	@Autowired private ContextSupplier contextSupplier;
 	
+	@Autowired private MesEnvFactory envFactory;
 
-	@Autowired
-	private MesEnvFactory envFactory;
+	@Autowired private PopulationFactory populationFactory;
 
-	@Autowired
-	private PopulationFactory populationFactory;
-
-	@Autowired
-	private MesBenchmark benchmark;
+	@Autowired private MesBenchmark benchmark;
 	
-	
-	private @Autowired AutowireCapableBeanFactory beanFactory;
+	@Autowired private AutowireCapableBeanFactory beanFactory;
 	
 	
 	public ExperimentStats executeBenchmark(){

@@ -36,15 +36,13 @@ import it.red.algen.stats.Experiment;
 @ContextConfiguration(classes = TestConfig.class)
 public class ExpressionsMainTest {
    
-	@Autowired
-	private ContextSupplier contextSupplier;
+	@Autowired private ContextSupplier contextSupplier;
 	
-	@Autowired
-	private ExprEnvFactory exprEnvFactory;
-	@Autowired
-	private ExprBenchmark exprBenchmark;
+	@Autowired private ExprEnvFactory exprEnvFactory;
+	
+	@Autowired private ExprBenchmark exprBenchmark;
 		
-	private @Autowired AutowireCapableBeanFactory beanFactory;
+	@Autowired private AutowireCapableBeanFactory beanFactory;
 	
 	@Test
     public void simpleRun() {
