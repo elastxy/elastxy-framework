@@ -4,7 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import it.red.algen.context.AlgorithmContext;
-import it.red.algen.context.BenchmarkContextBuilder;
+import it.red.algen.context.ContextBuilder;
 import it.red.algen.dataaccess.EnvFactory;
 import it.red.algen.engine.SequenceRecombinator;
 import it.red.algen.engine.StandardMutator;
@@ -18,17 +18,15 @@ public class ExpressionsService extends AbstractApplicationService{
 
 	@Autowired private MexEnvFactory envFactory;
 
-	@Autowired private MexBenchmark benchmarkContextBuilder;
 	
+	@Override
+	protected String getApplicationName(){
+		return "expressions";
+	}
 
 	@Override
 	protected EnvFactory envFactory(){
 		return envFactory;
-	}
-	
-	@Override
-	protected BenchmarkContextBuilder benchmarkContextBuilder(){
-		return benchmarkContextBuilder;
 	}
 
 	@Override

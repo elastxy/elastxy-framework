@@ -6,7 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.config.AutowireCapableBeanFactory;
 
 import it.red.algen.context.AlgorithmContext;
-import it.red.algen.context.BenchmarkContextBuilder;
+import it.red.algen.context.ContextBuilder;
 import it.red.algen.context.ContextSupplier;
 import it.red.algen.dataaccess.EnvFactory;
 import it.red.algen.dataaccess.PopulationFactory;
@@ -19,6 +19,8 @@ public abstract class AbstractApplicationService {
 	private static Logger logger = LoggerFactory.getLogger(AbstractApplicationService.class);
 
 	@Autowired private ContextSupplier contextSupplier;
+
+	@Autowired private ContextBuilder benchmarkContextBuilder;
 	
 	@Autowired private PopulationFactory populationFactory;
 
@@ -26,7 +28,7 @@ public abstract class AbstractApplicationService {
 	
 
 	public ExperimentStats executeBenchmark(){
-        return executeBenchmark(envFactory(), benchmarkContextBuilder());
+        return executeBenchmark(envFactory());
 	}
 	
 	public ExperimentStats executeExperiment(AlgorithmContext context){
@@ -42,10 +44,8 @@ public abstract class AbstractApplicationService {
 	}
 	
 	protected ExperimentStats executeBenchmark(
-			EnvFactory envFactory,
-			BenchmarkContextBuilder benchmarkContextBuilder
-			){
-		AlgorithmContext context = benchmarkContextBuilder.build();
+			EnvFactory envFactory){
+		AlgorithmContext context = benchmarkContextBuilder.build(getApplicationName(), true);
 		setupContext(context);
 		contextSupplier.init(context);
 
@@ -117,12 +117,12 @@ public abstract class AbstractApplicationService {
         String result = collector.print();
         return result;
 	}
+
 	
+	protected abstract String getApplicationName();
 
 	protected abstract void setupContext(AlgorithmContext context);
 
 	protected abstract EnvFactory envFactory();
-	
-	protected abstract BenchmarkContextBuilder benchmarkContextBuilder();
 
 }

@@ -50,13 +50,6 @@
         	<artifactId>spring-boot-starter-actuator</artifactId>
     	</dependency>
     	
-    	<dependency>
-		    <groupId>com.google.code.gson</groupId>
-		    <artifactId>gson</artifactId>
-		</dependency>
-    	
-    	
-    	
     	<!-- RED Dependencies -->
     	<dependency>
         	<groupId>it.red.algen</groupId>

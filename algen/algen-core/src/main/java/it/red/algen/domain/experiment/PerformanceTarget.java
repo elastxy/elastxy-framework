@@ -42,6 +42,7 @@ public class PerformanceTarget<G,M> implements Target<G,M> {
 	public BigDecimal getTargetFitness() {
 		return level;
 	}
+	// TODOA: when setting level 1.0, property is null => default fitness test more efficient
 	@Override
 	public void setTargetFitness(BigDecimal level) {
 		this.level = level;
