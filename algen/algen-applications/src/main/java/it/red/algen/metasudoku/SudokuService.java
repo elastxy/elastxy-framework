@@ -107,7 +107,7 @@ public class SudokuService {
 	}
 	
 
-	private void setupContext(AlgorithmContext context) {
+	public static void setupContext(AlgorithmContext context) {
 		context.incubator = new MesIncubator();
 
 		context.fitnessCalculator = new MesFitnessCalculator();

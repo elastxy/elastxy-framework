@@ -109,7 +109,7 @@ public class GardenService {
 	}
 	
 
-	private void setupContext(AlgorithmContext context) {
+	public static void setupContext(AlgorithmContext context) {
 		context.incubator = new MegIncubator();
 
 		context.fitnessCalculator = new MegFitnessCalculator();
@@ -121,8 +121,6 @@ public class GardenService {
 		context.mutator = new StandardMutator();
 		
 		context.recombinator = new SequenceRecombinator();
-
-		context.monitoringConfiguration.reporter = new CSVReporter(MexApplication.STATS_DIR);
 	}
 	
 }

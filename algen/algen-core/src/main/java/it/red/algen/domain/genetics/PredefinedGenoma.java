@@ -83,7 +83,6 @@ public class PredefinedGenoma implements Genoma {
 	 */
 	@Override
 	public List<Allele> getRandomAlleles() {
-		// TODOA: pescare da ogni lista di alleli fino a esaurimento
 		List<Allele> result = new ArrayList<Allele>(alleles.get("0")); // TODOA: shared list of all alleles
 		Collections.shuffle(result);
 		return result;

@@ -108,7 +108,7 @@ public class ExpressionsService {
 	}
 	
 
-	private void setupContext(AlgorithmContext context) {
+	public static void setupContext(AlgorithmContext context) {
 		context.incubator = new MexIncubator();
 
 		context.fitnessCalculator = new MexFitnessCalculator();
