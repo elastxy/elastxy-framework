@@ -33,7 +33,7 @@ public class MegGenomaProvider implements GenomaProvider {
 	@Autowired private MegAlleleGenerator alleleGenerator;
 
 //	private GardenDatabase db = new GardenDatabaseInMemory();
-	private GardenDatabase db = new GardenDatabaseCSV(MegApplication.DATABASE_DIR);
+	private GardenDatabase db = new GardenDatabaseCSV();
 
 	private StandardMetadataGenoma cachedGenoma;
 

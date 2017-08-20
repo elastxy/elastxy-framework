@@ -9,7 +9,7 @@ package it.red.algen.metagarden;
 public class MegApplication {
 	
 	// Application name
-	private static final String APP_NAME = "garden";
+	public static final String APP_NAME = "garden";
 	
 	// Custom inputs
 	public static final String TARGET_WELLNESS = "TARGET_WELLNESS"; // happy|unhappy
@@ -17,10 +17,6 @@ public class MegApplication {
 	
     // Data directory
     public static String BASE_DIR = System.getProperty("datadir");
-	static {
-        BASE_DIR = BASE_DIR==null ? "C:\\tmp\\algendata" : BASE_DIR;
-	}
-
     public static final String DATABASE_DIR = 		BASE_DIR + "/"+APP_NAME+"/db";
     public static final String STATS_DIR = 			BASE_DIR + "/"+APP_NAME+"/stats";
     public static final String MASSIVE_STATS_DIR = 	BASE_DIR + "/"+APP_NAME+"/massive-stats";

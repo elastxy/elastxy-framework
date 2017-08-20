@@ -1,26 +1,27 @@
 package it.red.algen.metagarden.data;
 
-import java.io.File;
-import java.io.FileReader;
+import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.List;
 
 import au.com.bytecode.opencsv.CSVReader;
+import it.red.algen.metagarden.MegApplication;
 
+
+/**
+ * Reads sample data from resources classpath
+ * @author red
+ *
+ */
 public class GardenDatabaseCSV implements GardenDatabase{
 	private static final String PLACES_FILENAME = "places.csv";
 	private static final String TREES_FILENAME = "trees.csv";
 	
-	private File baseDir;
-	
-	public GardenDatabaseCSV(String baseDir){
-		this.baseDir = new File(baseDir);
-	}
-	
 	public Tree[] getAllTrees() {
 		try {
 			List<Tree> result = new ArrayList<Tree>();
-			CSVReader reader = new CSVReader(new FileReader(new File(baseDir, TREES_FILENAME)), ';');
+			String resourceName = "/"+MegApplication.APP_NAME+"/"+TREES_FILENAME;
+			CSVReader reader = new CSVReader(new InputStreamReader(getClass().getResourceAsStream(resourceName)), ';');
 			String [] nextLine;
 			// header
 			reader.readNext();
@@ -42,7 +43,8 @@ public class GardenDatabaseCSV implements GardenDatabase{
 	public Place[] getAllPlaces() {
 		try {
 			List<Place> result = new ArrayList<Place>();
-			CSVReader reader = new CSVReader(new FileReader(new File(baseDir, PLACES_FILENAME)), ';');
+			String resourceName = "/"+MegApplication.APP_NAME+"/"+PLACES_FILENAME;
+			CSVReader reader = new CSVReader(new InputStreamReader(getClass().getResourceAsStream(resourceName)), ';');
 			String [] nextLine;
 			// header
 			reader.readNext();
