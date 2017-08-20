@@ -13,13 +13,14 @@ import it.red.algen.engine.SequenceRecombinator;
 import it.red.algen.engine.StandardMutator;
 import it.red.algen.engine.StandardSelector;
 import it.red.algen.engine.UniformlyDistributedSelector;
+import it.red.algen.service.AbstractApplicationService;
 import it.red.algen.stats.Experiment;
 import it.red.algen.stats.ExperimentStats;
 import it.red.algen.stats.StatsExperimentExecutor;
 import it.red.algen.tracking.CSVReporter;
 
 @Component
-public class ExpressionsService {
+public class ExpressionsService extends AbstractApplicationService{
 	private static Logger logger = LoggerFactory.getLogger(ExpressionsService.class);
 
 	@Autowired private ContextSupplier contextSupplier;
@@ -28,24 +29,13 @@ public class ExpressionsService {
 
 	@Autowired private PopulationFactory populationFactory;
 
-	@Autowired private MexBenchmark exprBenchmark;
+	@Autowired private MexBenchmark benchmarkContextBuilder;
 	
 	@Autowired private  AutowireCapableBeanFactory beanFactory;
 	
 	
 	public ExperimentStats executeBenchmark(){
-		AlgorithmContext context = exprBenchmark.build();
-		contextSupplier.init(context);
-
-		Experiment e = new Experiment(envFactory);
-		beanFactory.autowireBean(e);
-		
-        e.run();
-        
-        ExperimentStats stats = e.getStats();
-        
-        contextSupplier.destroy();
-        return stats;
+        return super.executeBenchmark(envFactory, benchmarkContextBuilder);
 	}
 	
 	

@@ -13,12 +13,13 @@ import it.red.algen.engine.SequenceRecombinator;
 import it.red.algen.engine.StandardMutator;
 import it.red.algen.engine.StandardSelector;
 import it.red.algen.engine.UniformlyDistributedSelector;
+import it.red.algen.service.AbstractApplicationService;
 import it.red.algen.stats.Experiment;
 import it.red.algen.stats.ExperimentStats;
 import it.red.algen.stats.StatsExperimentExecutor;
 
 @Component
-public class SudokuService {
+public class SudokuService extends AbstractApplicationService {
 	private static Logger logger = LoggerFactory.getLogger(SudokuService.class);
 
 	@Autowired private ContextSupplier contextSupplier;
@@ -27,24 +28,13 @@ public class SudokuService {
 
 	@Autowired private PopulationFactory populationFactory;
 
-	@Autowired private MesBenchmark benchmark;
+	@Autowired private MesBenchmark benchmarkContextBuilder;
 	
 	@Autowired private AutowireCapableBeanFactory beanFactory;
 	
 	
 	public ExperimentStats executeBenchmark(){
-		AlgorithmContext context = benchmark.build();
-		contextSupplier.init(context);
-
-		Experiment e = new Experiment(envFactory);
-		beanFactory.autowireBean(e);
-		
-        e.run();
-        
-        ExperimentStats stats = e.getStats();
-        
-        contextSupplier.destroy();
-        return stats;
+		return super.executeBenchmark(envFactory, benchmarkContextBuilder);
 	}
 	
 	

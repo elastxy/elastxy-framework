@@ -13,14 +13,13 @@ import it.red.algen.engine.SequenceRecombinator;
 import it.red.algen.engine.StandardMutator;
 import it.red.algen.engine.StandardSelector;
 import it.red.algen.engine.UniformlyDistributedSelector;
-import it.red.algen.metaexpressions.MexApplication;
+import it.red.algen.service.AbstractApplicationService;
 import it.red.algen.stats.Experiment;
 import it.red.algen.stats.ExperimentStats;
 import it.red.algen.stats.StatsExperimentExecutor;
-import it.red.algen.tracking.CSVReporter;
 
 @Component
-public class GardenService {
+public class GardenService extends AbstractApplicationService{
 	private static Logger logger = LoggerFactory.getLogger(GardenService.class);
 
 	@Autowired private ContextSupplier contextSupplier;
@@ -29,24 +28,13 @@ public class GardenService {
 
 	@Autowired private PopulationFactory populationFactory;
 
-	@Autowired private MegBenchmark benchmark;
+	@Autowired private MegBenchmark benchmarkContextBuilder;
 	
 	private @Autowired AutowireCapableBeanFactory beanFactory;
 	
-	
-	public ExperimentStats executeBenchmark(){
-		AlgorithmContext context = benchmark.build();
-		contextSupplier.init(context);
 
-		Experiment e = new Experiment(envFactory);
-		beanFactory.autowireBean(e);
-		
-        e.run();
-        
-        ExperimentStats stats = e.getStats();
-        
-        contextSupplier.destroy();
-        return stats;
+	public ExperimentStats executeBenchmark(){
+        return super.executeBenchmark(envFactory, benchmarkContextBuilder);
 	}
 	
 	
