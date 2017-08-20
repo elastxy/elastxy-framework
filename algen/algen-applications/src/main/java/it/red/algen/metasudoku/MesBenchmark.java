@@ -49,9 +49,6 @@ public class MesBenchmark implements BenchmarkContextBuilder {
 				VERBOSE, 
 				TRACE_HISTORY,
 				new CSVReporter(MexApplication.STATS_DIR));
-
-		SudokuService.setupContext(context);
-		
 		return context;
 	}
 

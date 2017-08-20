@@ -51,9 +51,6 @@ public class MegBenchmark implements BenchmarkContextBuilder {
 				VERBOSE, 
 				TRACE_HISTORY,
 				new CSVReporter(MegApplication.STATS_DIR));
-
-		GardenService.setupContext(context);
-
 		context.applicationSpecifics.putTarget(MegApplication.TARGET_WELLNESS, DEFAULT_TARGET);
 		context.applicationSpecifics.putParam(MegApplication.LIMITED_TREES, DEFAULT_LIMITED_TREES);
 		return context;

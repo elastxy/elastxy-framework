@@ -17,14 +17,11 @@ import java.io.File;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.config.AutowireCapableBeanFactory;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import it.red.algen.TestConfig;
-import it.red.algen.context.AlgorithmContext;
-import it.red.algen.context.ContextSupplier;
-import it.red.algen.stats.Experiment;
+import it.red.algen.stats.ExperimentStats;
 
 
 /**
@@ -34,33 +31,16 @@ import it.red.algen.stats.Experiment;
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(classes = TestConfig.class)
 public class MetaSudokuMainTest {
-   
-	@Autowired private ContextSupplier contextSupplier;
-	
-	@Autowired private MesEnvFactory envFactory;
-	
-	@Autowired private MesBenchmark benchmark;
-		
-	@Autowired private AutowireCapableBeanFactory beanFactory;
+	@Autowired private SudokuService service;
 	
 	@Test
     public void simpleRun() {
 		System.setProperty("datadir", new File("C:\\tmp\\algendata").getAbsolutePath());
 
-		// Context
-		AlgorithmContext context = benchmark.build();
-		contextSupplier.init(context);
+		ExperimentStats stats = service.executeBenchmark();
 		
-		// Experiment
-		Experiment e = new Experiment(envFactory);
-		beanFactory.autowireBean(e);
-		
-        e.run();
-        
-        assertNotNull(e.getStats());
-        assertNotNull(e.getStats().lastGeneration);
-        
-        contextSupplier.destroy();
+        assertNotNull(stats);
+        assertNotNull(stats.lastGeneration);
     }
     
 }

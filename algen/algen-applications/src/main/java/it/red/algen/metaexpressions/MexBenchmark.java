@@ -54,10 +54,9 @@ public class MexBenchmark implements BenchmarkContextBuilder {
 				TRACE_HISTORY,
 				new CSVReporter(MexApplication.STATS_DIR));
 		
-		ExpressionsService.setupContext(context);
-		
 		context.applicationSpecifics.putTarget(MexApplication.TARGET_EXPRESSION_RESULT, DEFAULT_EXPRESSION_RESULT);
 		context.applicationSpecifics.putParam(MexApplication.MAX_OPERAND_VALUE, DEFAULT_MAX_OPERAND_VALUE);
+
 		return context;
 	}
 
