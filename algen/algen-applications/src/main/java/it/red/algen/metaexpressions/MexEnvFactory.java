@@ -18,12 +18,11 @@ import org.springframework.stereotype.Component;
 
 import it.red.algen.context.AlgorithmContext;
 import it.red.algen.context.ContextSupplier;
-import it.red.algen.dataaccess.EnvFactory;
-import it.red.algen.dataaccess.PopulationFactory;
-import it.red.algen.domain.experiment.Env;
+import it.red.algen.dataaccess.AbstractEnvFactory;
+import it.red.algen.dataaccess.GenomaProvider;
+import it.red.algen.dataaccess.SolutionsFactory;
 import it.red.algen.domain.experiment.NumberRawFitness;
 import it.red.algen.domain.experiment.PerformanceTarget;
-import it.red.algen.domain.experiment.Population;
 import it.red.algen.domain.experiment.Solution;
 import it.red.algen.domain.experiment.Target;
 import it.red.algen.domain.genetics.Genoma;
@@ -34,56 +33,28 @@ import it.red.algen.metadata.StandardMetadataGenoma;
  * @author grossi
  */
 @Component
-public class MexEnvFactory implements EnvFactory {
-	
+public class MexEnvFactory extends AbstractEnvFactory<PerformanceTarget, BigDecimal, StandardMetadataGenoma> {
 	
 	@Autowired private ContextSupplier contextSupplier;
-	
-	@Autowired private PopulationFactory populationFactory;
 	
 	@Autowired private MexSolutionFactory solutionsFactory;
 	
 	@Autowired private MexGenomaProvider genomaProvider;
 	
-    public Env create(){
 
-    	// Create genoma
-    	Genoma genoma = createGenoma(null);
-    	
-    	// Define target
-    	PerformanceTarget target = defineTarget((StandardMetadataGenoma)genoma);
-    	
-    	// Create initial population
-    	Population startGen = createInitialPopulation(genoma);
-        
-        // Create environment
-        Env env = new Env(target, startGen, genoma);
-        
-        return env;
-    }
-
-
-	private Genoma createGenoma(Target target) {
-//    	genomaProvider.reduce(target);
-		genomaProvider.collect();
-		return genomaProvider.getGenoma();
+	@Override
+	protected GenomaProvider getGenomaProvider() {
+		return genomaProvider;
 	}
 
-
-	private Population createInitialPopulation(Genoma genoma) {
-		populationFactory.setSolutionsFactory(solutionsFactory);
-        Population startGen = populationFactory.createNew(genoma);
-		return startGen;
-	}
-
-
-	private PerformanceTarget defineTarget(StandardMetadataGenoma genoma) {
-    	AlgorithmContext context = contextSupplier.getContext();
+	@Override
+	protected Target<PerformanceTarget, BigDecimal> defineTarget(Genoma genoma) {
+		AlgorithmContext context = contextSupplier.getContext();
         
 		// Define boundaries
 		long maxOperandValue = context.applicationSpecifics.getParamLong(MexApplication.MAX_OPERAND_VALUE);
-        Solution minSol = solutionsFactory.createPredefined(genoma, Arrays.asList(maxOperandValue, '*', -maxOperandValue));
-        Solution maxSol = solutionsFactory.createPredefined(genoma, Arrays.asList(maxOperandValue, '*', maxOperandValue));
+        Solution minSol = solutionsFactory.createPredefined((StandardMetadataGenoma)genoma, Arrays.asList(maxOperandValue, '*', -maxOperandValue));
+        Solution maxSol = solutionsFactory.createPredefined((StandardMetadataGenoma)genoma, Arrays.asList(maxOperandValue, '*', maxOperandValue));
 
 		// Defines goal representation
         Long target = context.applicationSpecifics.getTargetLong(MexApplication.TARGET_EXPRESSION_RESULT);
@@ -104,5 +75,10 @@ public class MexEnvFactory implements EnvFactory {
 		return exprTarget;
 	}
 
+
+	@Override
+	protected SolutionsFactory<StandardMetadataGenoma> getSolutionsFactory() {
+		return this.solutionsFactory;
+	}
 
 }

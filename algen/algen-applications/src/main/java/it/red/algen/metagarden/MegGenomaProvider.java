@@ -81,9 +81,13 @@ public class MegGenomaProvider implements GenomaProvider {
 		cachedGenoma = genoma;
 	}
 
+	
+	/**
+	 * Does nothing: returns the genoma as is
+	 */
 	@Override
 	public Genoma reduce(Target<?, ?> target) {
-		throw new UnsupportedOperationException("Not available for this GenomaProvider implementation");
+		return getGenoma();
 	}
 
 }

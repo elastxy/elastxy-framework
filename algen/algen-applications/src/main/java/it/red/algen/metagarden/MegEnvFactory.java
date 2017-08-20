@@ -14,67 +14,44 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import it.red.algen.context.ContextSupplier;
-import it.red.algen.dataaccess.EnvFactory;
-import it.red.algen.dataaccess.PopulationFactory;
-import it.red.algen.domain.experiment.Env;
+import it.red.algen.dataaccess.AbstractEnvFactory;
+import it.red.algen.dataaccess.GenomaProvider;
+import it.red.algen.dataaccess.SolutionsFactory;
 import it.red.algen.domain.experiment.PerformanceTarget;
-import it.red.algen.domain.experiment.Population;
 import it.red.algen.domain.genetics.Genoma;
+import it.red.algen.metadata.StandardMetadataGenoma;
 
 /**
  *
  * @author grossi
  */
 @Component
-public class MegEnvFactory implements EnvFactory {
-	
+public class MegEnvFactory extends AbstractEnvFactory<String, Double, StandardMetadataGenoma> {
 	
 	@Autowired private ContextSupplier contextSupplier;
-	
-	@Autowired private PopulationFactory populationFactory;
 	
 	@Autowired private MegSolutionsFactory solutionsFactory;
 	
 	@Autowired private MegGenomaProvider genomaProvider;
 	
-    public Env create(){
-
-    	// Create genoma
-    	Genoma genoma = createGenoma();
-    	
-    	// Create initial population
-    	Population startGen = createInitialPopulation(genoma);
-    	
-    	// Define target
-    	PerformanceTarget<String, Double> target = defineTarget(startGen);
-
-        // Create environment
-        Env env = new Env(target, startGen, genoma);
-        
-        return env;
-    }
-
-
-	private Genoma createGenoma() {
-//    	genomaProvider.reduce(target);
-		genomaProvider.collect();
-		return genomaProvider.getGenoma();
-	}
-	
-	private PerformanceTarget<String, Double> defineTarget(Population startGen) {
+	@Override
+	protected PerformanceTarget<String, Double> defineTarget(Genoma genoma) {
 		PerformanceTarget<String,Double> gardenTarget = new PerformanceTarget<String,Double>();
     	gardenTarget.setGoal(contextSupplier.getContext().applicationSpecifics.getTargetString(MegApplication.TARGET_WELLNESS));
     	gardenTarget.setTargetFitness(contextSupplier.getContext().stopConditions.targetFitness);
     	// Determines goal rough measure: minimum possible unhappiness (illness), 0.0
-    	gardenTarget.setReferenceMeasure(startGen.solutions.get(0).getGenotype().getPositions().size() * 2.0);  // 2 is the maximum value happiness can reach
+    	gardenTarget.setReferenceMeasure(genoma.getPositionsSize() * 2.0);  // 2 is the maximum value happiness can reach
 		return gardenTarget;
 	}
 
+	@Override
+	protected GenomaProvider getGenomaProvider() {
+		return genomaProvider;
+	}
 
-	private Population createInitialPopulation(Genoma genoma) {
-		populationFactory.setSolutionsFactory(solutionsFactory);
-        Population startGen = populationFactory.createNew(genoma);
-		return startGen;
+	@Override
+	protected SolutionsFactory<StandardMetadataGenoma> getSolutionsFactory() {
+		return solutionsFactory;
 	}
 
 

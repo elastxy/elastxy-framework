@@ -15,13 +15,13 @@ import org.springframework.stereotype.Component;
 
 import it.red.algen.context.AlgorithmContext;
 import it.red.algen.context.ContextSupplier;
-import it.red.algen.dataaccess.EnvFactory;
-import it.red.algen.dataaccess.PopulationFactory;
-import it.red.algen.domain.experiment.Env;
+import it.red.algen.dataaccess.AbstractEnvFactory;
+import it.red.algen.dataaccess.GenomaProvider;
+import it.red.algen.dataaccess.SolutionsFactory;
 import it.red.algen.domain.experiment.PerformanceTarget;
-import it.red.algen.domain.experiment.Population;
 import it.red.algen.domain.experiment.Target;
 import it.red.algen.domain.genetics.Genoma;
+import it.red.algen.domain.genetics.PredefinedGenoma;
 
 /**
  * TODOA: remove duplications with other factories
@@ -29,41 +29,25 @@ import it.red.algen.domain.genetics.Genoma;
  * @author grossi
  */
 @Component
-public class MesEnvFactory implements EnvFactory {
+public class MesEnvFactory extends AbstractEnvFactory<int[][], Integer, PredefinedGenoma> {
 	
 	
 	@Autowired private ContextSupplier contextSupplier;
-	
-	@Autowired private PopulationFactory populationFactory;
 	
 	@Autowired private MesSolutionFactory solutionsFactory;
 
 	@Autowired private MesGenomaProvider genomaProvider;
 	
-	
-    public Env create(){
 
-    	// Define target
-    	PerformanceTarget target = defineTarget();
 
-    	// Create genoma
-    	Genoma genoma = createGenoma(target);
-		
-    	// Create initial population
-    	Population startGen = createInitialPopulation(genoma);
-
-        // Create environment
-        Env env = new Env(target, startGen, genoma);
-
-        return env;
-    }
-
-	private Genoma createGenoma(Target target) {
-		genomaProvider.collect();
-		return genomaProvider.reduce(target);
+	@Override
+	protected GenomaProvider getGenomaProvider() {
+		return genomaProvider;
 	}
 	
-	private PerformanceTarget defineTarget() {
+	
+	@Override
+	protected Target<int[][], Integer> defineTarget(Genoma genoma) {
 		// Define evolution environment
     	AlgorithmContext context = contextSupplier.getContext();
     	
@@ -78,21 +62,16 @@ public class MesEnvFactory implements EnvFactory {
 		return target;
 	}
 
-	private Population createInitialPopulation(Genoma genoma) {
-		populationFactory.setSolutionsFactory(solutionsFactory);
-        Population startGen = populationFactory.createNew(genoma);
-		return startGen;
-	}
     
     /**
      * Simple Sudoku matrix
      * 
-     * TODOM: sudoku matrix sent from user
+     * TODOM: sudoku matrix sent from user, or in external file
      * 
      * @return
      */
-    private Object createGoal(){
-
+    private int[][] createGoal(){
+    	
 		int[][] matrix = new int[9][9];
 		matrix[0] = new int[]{1,0,3,0,8,5,6,2,0};
 		matrix[1] = new int[]{0,5,2,1,6,7,8,3,9};
@@ -106,6 +85,12 @@ public class MesEnvFactory implements EnvFactory {
 		
 		return matrix;
     }
+
+
+	@Override
+	protected SolutionsFactory<PredefinedGenoma> getSolutionsFactory() {
+		return solutionsFactory;
+	}
 
 
 }

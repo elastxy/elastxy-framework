@@ -68,11 +68,13 @@ public class MexGenomaProvider implements GenomaProvider {
 
 	
 	/**
+	 * Does nothing: returns the whole genoma
 	 * TODOA: reduceable interface....
 	 */
 	@Override
 	public Genoma reduce(Target<?, ?> target) {
-		throw new UnsupportedOperationException("Not available for this GenomaProvider implementation: all Genoma already collected with collect()");
+		// Does nothing
+		return getGenoma();
 	}
 
 }

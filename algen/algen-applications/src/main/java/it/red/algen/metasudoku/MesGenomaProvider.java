@@ -46,38 +46,20 @@ public class MesGenomaProvider implements GenomaProvider {
 	
 
 	/**
-	 * Genoma reference to be used is only created by reduce()
+	 * Genoma is intially void: only when target is set can be set up by reduce()
 	 */
 	@Override
 	public Genoma getGenoma(){
-		throw new UnsupportedOperationException("Cannot get a new Genoma: it's completely based on target. Use reduce() and maintain the reference for all execution instead.");
+		return null;
+//		throw new UnsupportedOperationException("Cannot get a new Genoma: it's completely based on target. Use reduce() and maintain the reference for all execution instead.");
 	}
 
 	
 	/**
-	 * Genoma is intially void: only when target is set can be set up
+	 * Genoma is intially void: only when target is set can be set up by reduce()
 	 */
 	@Override
 	public void collect() {
-		
-//		// Free to modify positions
-//		GeneMetadata gene = new GeneMetadata();
-//		gene.code = ALLELE_CELL;
-//		gene.name = ALLELE_CELL;
-//		gene.type = GeneMetadataType.INTEGER;
-//		gene.blocked = false;
-//		gene.values = IntStream.rangeClosed(0, 9).boxed().map(i -> i).collect(Collectors.toList());
-//		cachedGenoma.genesMetadataByCode.put(gene.code, gene);
-//
-//    	int cell=0;
-//    	for(int r=0; r < matrix.length; r++){
-//        	for(int c=0; c < matrix.length; c++){
-//        		GeneMetadata m = matrix[r][c]==0 ? gene : gene; 
-//        		cachedGenoma.genesMetadataByPos.put(String.valueOf(cell++), m);
-//        	}    		
-//    	}
-//		
-//		return cachedGenoma;
 	}
 
 	
