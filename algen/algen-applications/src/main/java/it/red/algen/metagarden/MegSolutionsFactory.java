@@ -51,7 +51,7 @@ public class MegSolutionsFactory implements SolutionsFactory<StandardMetadataGen
     	solution.genotype = genotype;
 
     	// TODOM: new method of genoma for creating a list of alleles indexed indentically to the gene pos... useful??
-    	List<Allele> alleles = genoma.createRandomAllelesByCode(genotype.genes.get(0).metadataCode); // TODOA: get(0) is BAD
+    	List<Allele> alleles = genoma.createRandomAllelesByCode(genotype.genes.get(0).metadataCode); // TODOA: get(0) is BAD: add access to list of common alleles
     	
     	if(alleles.size() < genotype.genes.size()){
     		throw new IllegalStateException("Number of possible different alleles less than number of genes creating a base predefined Solution. Check if you need the createRandom instead or try adding alleles");

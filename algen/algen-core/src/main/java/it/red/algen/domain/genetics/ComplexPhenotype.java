@@ -19,7 +19,7 @@ public class ComplexPhenotype implements Phenotype<Map<String,Object>> {
 	
 	public Phenotype<Map<String,Object>> copy(){
 		ComplexPhenotype result = new ComplexPhenotype();
-		result.value = value; // TODOM check, ok if read only
+		result.value = value; // TODOM create a clone? by reference is ok only if read only
 		return result;
 	}
 

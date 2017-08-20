@@ -53,8 +53,6 @@ public class MesIncubator implements Incubator<SequenceGenotype, ComplexPhenotyp
 	 *  - 1.0: if completed
 	 *  OR
 	 * 	- 0.05: for every distinct value beyond 1
-	 * 	OR
-	 *  TODOM- 0.01: if sum is 44,45,46
 	 * 
 	 * @param matrix
 	 * @return

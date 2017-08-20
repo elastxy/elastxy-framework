@@ -23,7 +23,7 @@ import it.red.algen.tracking.EnvObserver;
 
 /**
  *
- *TODOM: collapse with Evolver?
+ *TODOM: assign context and message aware to Environment with Spring interfaces
  *
  * @author grossi
  */

@@ -70,7 +70,7 @@ public class Evolver implements EnvObservable {
     	// TEST FITNESS - initial gen
         fitnessTester.test(env.currentGen, env);
         int generationSize = env.currentGen.solutions.size();
-        // fireTestedGenerationEvent(); // TODOM
+        // fireTestedGenerationEvent(); // TODOB: fire initial fitness calc
         
         
     	// Loops until end condition rises
@@ -108,6 +108,7 @@ public class Evolver implements EnvObservable {
 	private void newGenerationLoop(int generationSize, Population nextGeneration) {
 		
 		// BEST MATCHES - extract
+		// TODOM: reuse some best matches for sharing their genetic material
 		List<Solution> bestMatches = BestMatchesSupport.extractBestMatches(nextGeneration, context.parameters.elitarism);
 
 		// LOOP OVER NON-BEST SHUFFLED
@@ -201,7 +202,6 @@ public class Evolver implements EnvObservable {
 	}
 
 	
-	// TODOA: if some genes are blocked, recombination is blocked the same
 	private List<Solution> recombination(Solution[] parents) {
 		List<Solution> sons;
 		boolean crossover = Randomizer.nextDouble() < context.parameters.recombinationPerc;

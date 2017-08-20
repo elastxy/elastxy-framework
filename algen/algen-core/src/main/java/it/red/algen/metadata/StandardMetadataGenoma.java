@@ -13,8 +13,7 @@ import it.red.algen.engine.AlleleGenerator;
 
 
 /**
- * TODOA: common alleles in a specific strategy (now all genes share the same 1000 values!)
- * TODOA: reorder and clean methods and responsibility
+ * TODOA: add access to list of common alleles in a specific strategy (now all genes share the same 1000 values and must be retrieved with get(0)!)
  * @author red
  */
 public class StandardMetadataGenoma implements MetadataGenoma {
@@ -118,10 +117,6 @@ public class StandardMetadataGenoma implements MetadataGenoma {
 	
 	
 	
-	// ***********************************************************************
-	// TODOA: separate Alleles Factory methods from Genoma
-
-	
 	/**
 	 * Creates a new random allele given the position in the sequence
 	 * TODOM: if not ordered, metadata is random
@@ -216,7 +211,7 @@ public class StandardMetadataGenoma implements MetadataGenoma {
 	/**
 	 * Generates one Allele for every possible values of the metadataCode
 	 * 
-	 *TODOA: one list of values shared for all
+	 *TODOA: add access to list of common alleles
 	 * @return
 	 */
 	public List<Allele> createRandomAllelesByCode(String metadataCode){

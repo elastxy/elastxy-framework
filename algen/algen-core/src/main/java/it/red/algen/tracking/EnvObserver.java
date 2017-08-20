@@ -20,8 +20,12 @@ import it.red.algen.stats.ExperimentStats;
 
 
 
-/** Questa classe raccoglie statistiche sulla base di eventi del sistema.
- *
+/** This class processes many events in the lifecycle of the execution,
+ *  for the purpose of collecting stats and so on.
+ *  
+ *  TODOB: use generic mechanism, such as Spring:
+ *  	- ApplicationEventPublisherAware for publishing events
+ *  	- @EventListener annotation for consuming events
  *
  * @author grossi
  */
@@ -51,6 +55,12 @@ public class EnvObserver {
         }
     }
     
+    
+    /**
+     * TODOM: Incapsulate events under a simple generic interface, 
+     * such as Spring "publishEvent" of ApplicationEventPublisher
+     * @param s
+     */
     public void fitnessCalculatedEvent(Solution s){
 //        if(_verbose) LoggerManager.instance().out(s);
     }

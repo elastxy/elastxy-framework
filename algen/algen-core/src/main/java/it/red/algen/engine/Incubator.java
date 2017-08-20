@@ -11,7 +11,7 @@ public interface Incubator<G extends Genotype, P extends Phenotype> {
 	 * 
 	 *  If needed, the surrounding environment can be provided.
 	 *  
-	 *  TODOA: create an interface EnvironmentAware for injecting Env runtime context
+	 *  TODOM: create an interface EnvironmentAware for injecting Env runtime context without passing in signatures
 	 * @param genotype
 	 * @return
 	 */

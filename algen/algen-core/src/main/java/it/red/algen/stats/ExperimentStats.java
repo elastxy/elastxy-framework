@@ -18,7 +18,7 @@ import it.red.algen.domain.experiment.Population;
  * @author grossi
  */
 public class ExperimentStats  {
-	// TODOM: tipizzato a Target
+	// TODOM: typed to Target
 	public Object target;
     public Population lastGeneration;
     public int generations;

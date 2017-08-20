@@ -7,7 +7,7 @@ public class Allele<T> {
 	public boolean dominant;
 	
 	public String encode(){
-		return value.toString(); // TODOA: encoding in base al tipo
+		return value.toString(); // TODOM: encoding based on type
 	}
 
 	public Allele<T> copy(){

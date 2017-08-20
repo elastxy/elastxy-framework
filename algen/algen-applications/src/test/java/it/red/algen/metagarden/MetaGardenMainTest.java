@@ -29,7 +29,6 @@ import it.red.algen.stats.Experiment;
 
 /**
  * TODOA: complete test coverage
- * TODOA: put setup code into Service!
  * @author grossi
  */
 @RunWith(SpringJUnit4ClassRunner.class)

@@ -29,8 +29,8 @@ public class MegFitnessCalculator implements FitnessCalculator<GenericSolution,S
 	 * Produces the performing data of the individual.
 	 * E.g. for the expression individual, is the computed value of its expression
 	 * 
-	 * TODOA: remove redundancy
-	 * TODOM: manage no-goal problems
+	 * TODOA: remove redundancy with other fitness calculator
+	 * TODOM: manage no-goal problems: concept of fitness boundaries
 	 * @return
 	 */
 	@Override

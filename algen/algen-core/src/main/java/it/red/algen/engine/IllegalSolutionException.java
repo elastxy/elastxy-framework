@@ -11,7 +11,7 @@
 package it.red.algen.engine;
 
 /**
- * TODOM: definire interfaccia per validazioni su bontà della soluzione
+ * TODOB: define better structure for validation rule and breaks
  * 
  * @author grossi
  */

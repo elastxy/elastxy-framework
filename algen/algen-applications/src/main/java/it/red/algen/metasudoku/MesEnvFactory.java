@@ -87,7 +87,7 @@ public class MesEnvFactory implements EnvFactory {
     /**
      * Simple Sudoku matrix
      * 
-     * TODOM: from user
+     * TODOM: sudoku matrix sent from user
      * 
      * @return
      */

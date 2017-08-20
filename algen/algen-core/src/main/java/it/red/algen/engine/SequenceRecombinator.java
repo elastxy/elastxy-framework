@@ -22,7 +22,7 @@ public class SequenceRecombinator implements Recombinator<Solution> {
      * I punti di ricombinazione possono essere all'operatore o al secondo operando
      * Two are the expected parents
      * 
-     * TODOB: more than 2 parents management 
+     * TODOM: more than 2 parents management 
      * 
      * @param other
      * @return
@@ -30,7 +30,7 @@ public class SequenceRecombinator implements Recombinator<Solution> {
 	public List<Solution> recombine(List<Solution> parents){
 		
 		// Define cut point
-		// TODOM: from metadata!
+		// TODOM: define cut point from metadata!
 		SequenceGenotype genotype0 = (SequenceGenotype)parents.get(0).getGenotype();
 		int crossoverPoint = Math.floorDiv(genotype0.genes.size(), 2);
 		

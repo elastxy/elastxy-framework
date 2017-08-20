@@ -1,7 +1,7 @@
 package it.red.algen.metagarden;
 
 /**
- * TODOM: external configuration, e.g. properties file
+ * TODOM: no static attributes, but external configuration, e.g. properties or JSON file
  * TODOA: remove redundancy
  * @author red
  *

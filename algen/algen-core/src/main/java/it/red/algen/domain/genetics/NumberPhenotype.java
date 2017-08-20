@@ -11,7 +11,7 @@ public class NumberPhenotype implements Phenotype<Number> {
 	
 	public NumberPhenotype copy(){
 		NumberPhenotype result = new NumberPhenotype();
-		result.value = value; // TODOM check
+		result.value = value; // TODOM create a clone? by reference is ok only if read only
 		return result;
 	}
 

@@ -28,7 +28,7 @@ public class PredefinedGenoma implements Genoma {
 	 * When generating a set of Alleles for a number of genes, takes care of excluding 
 	 * those already selected
 	 */
-	// TODOM: by strategy
+	// TODOM: manage by strategy
 	public boolean limitedAllelesStrategy = false;
 
 	/**
@@ -84,7 +84,7 @@ public class PredefinedGenoma implements Genoma {
 	@Override
 	public List<Allele> getRandomAlleles() {
 		// TODOA: pescare da ogni lista di alleli fino a esaurimento
-		List<Allele> result = new ArrayList<Allele>(alleles.get("0"));
+		List<Allele> result = new ArrayList<Allele>(alleles.get("0")); // TODOA: shared list of all alleles
 		Collections.shuffle(result);
 		return result;
 //		List<Object> alreadyUsedAlleles = new ArrayList<Object>();
@@ -101,7 +101,7 @@ public class PredefinedGenoma implements Genoma {
 	 * @return
 	 */
 	public List<Allele> getAllAlleles() {
-		return alleles.get("0"); // TODOA: la strategia di alleli comuni è un implementazione di genoma diverso
+		return alleles.get("0"); // TODOA: get(0) is BAD: add access to list of common alleles
 	}
 	
 

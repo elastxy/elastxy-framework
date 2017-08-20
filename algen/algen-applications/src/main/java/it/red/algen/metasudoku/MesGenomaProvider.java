@@ -26,7 +26,7 @@ import it.red.algen.domain.genetics.PredefinedGenoma;
  *  
  *  Set of alleles is F in number, and limited when creating a new solution
  *  
- * TODOA: cache!
+ * TODOM: cache!
  * @author red
  *
  */
@@ -72,7 +72,7 @@ public class MesGenomaProvider implements GenomaProvider {
 //    	int cell=0;
 //    	for(int r=0; r < matrix.length; r++){
 //        	for(int c=0; c < matrix.length; c++){
-//        		GeneMetadata m = matrix[r][c]==0 ? gene : gene; // TODOA: blocked
+//        		GeneMetadata m = matrix[r][c]==0 ? gene : gene; 
 //        		cachedGenoma.genesMetadataByPos.put(String.valueOf(cell++), m);
 //        	}    		
 //    	}

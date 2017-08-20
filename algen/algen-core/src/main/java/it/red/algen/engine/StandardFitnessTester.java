@@ -55,7 +55,7 @@ public class StandardFitnessTester implements FitnessTester {
         }
         // Target fitness set: Order by proximity to the fitness
         else {
-        	population.orderByFitnessProximity(env.target.getTargetFitness());
+        	population.orderByFitnessProximityDesc(env.target.getTargetFitness());
         }
         
         return population.bestMatch.getFitness();

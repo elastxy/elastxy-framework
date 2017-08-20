@@ -7,7 +7,6 @@ public interface PopulationFactory<G extends Genoma> {
 
 	public Population createNew(G genoma);
 	
-	// TODOA: manage by autowiring
 	public void setSolutionsFactory(SolutionsFactory factory);
 	
 }

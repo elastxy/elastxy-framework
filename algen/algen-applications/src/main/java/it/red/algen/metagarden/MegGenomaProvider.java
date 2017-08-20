@@ -21,7 +21,7 @@ import it.red.algen.metagarden.data.PlaceProperty;
 
 
 /**
- * TODOA: cache!
+ * TODOM: cache!
  * @author red
  *
  */
@@ -38,7 +38,7 @@ public class MegGenomaProvider implements GenomaProvider {
 	private StandardMetadataGenoma cachedGenoma;
 
 	
-//	@Cacheable(value = "genoma") TODOA: cache
+//	@Cacheable(value = "genoma") TODOM: cache
 	@Override
 	public Genoma getGenoma(){
 		return cachedGenoma;
