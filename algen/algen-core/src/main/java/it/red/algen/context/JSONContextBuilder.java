@@ -1,12 +1,10 @@
 package it.red.algen.context;
 
-import java.io.IOException;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
+import it.red.algen.conf.ReadConfigSupport;
 
 /**
  * Returns the context given a JSON as a input
@@ -30,19 +28,11 @@ public class JSONContextBuilder implements ContextBuilder {
 	 */
 	@Override
 	public AlgorithmContext build(String applicationName, boolean benchmark) {
-		AlgorithmContext result = null;
 		String fileName = benchmark ? "benchmark" : "experiment";
-		ObjectMapper om = new ObjectMapper();
 		String classpathResource = "/"+applicationName+"/"+fileName+".json";
-		try {
-			result = om.readValue(getClass().getResourceAsStream(classpathResource), AlgorithmContext.class);
-		} catch (IOException e) {
-			String msg = "Error while mapping AlgorithmContext from classpath:"+classpathResource+" Ex:"+e;
-			logger.error(msg);
-			throw new ContextException(msg, e);
-		}
+		
+		AlgorithmContext result = (AlgorithmContext)ReadConfigSupport.readJSON(classpathResource, AlgorithmContext.class);
 		
 		return result;
 	}
-
 }

@@ -10,12 +10,19 @@
 
 package it.red.algen.metasudoku;
 
+import java.io.IOException;
+
+import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
+
+import it.red.algen.conf.ReadConfigSupport;
 import it.red.algen.context.AlgorithmContext;
 import it.red.algen.context.ContextSupplier;
 import it.red.algen.dataaccess.AbstractEnvFactory;
+import it.red.algen.dataaccess.DataAccessException;
 import it.red.algen.dataaccess.GenomaProvider;
 import it.red.algen.dataaccess.SolutionsFactory;
 import it.red.algen.domain.experiment.PerformanceTarget;
@@ -30,6 +37,7 @@ import it.red.algen.domain.genetics.PredefinedGenoma;
  */
 @Component
 public class MesEnvFactory extends AbstractEnvFactory<int[][], Integer, PredefinedGenoma> {
+	private Logger logger = Logger.getLogger(MesEnvFactory.class);
 	
 	
 	@Autowired private ContextSupplier contextSupplier;
@@ -66,24 +74,11 @@ public class MesEnvFactory extends AbstractEnvFactory<int[][], Integer, Predefin
     /**
      * Simple Sudoku matrix
      * 
-     * TODOM: sudoku matrix sent from user, or in external file
-     * 
      * @return
      */
     private int[][] createGoal(){
-    	
-		int[][] matrix = new int[9][9];
-		matrix[0] = new int[]{1,0,3,0,8,5,6,2,0};
-		matrix[1] = new int[]{0,5,2,1,6,7,8,3,9};
-		matrix[2] = new int[]{9,8,6,0,3,4,7,0,1};
-		matrix[3] = new int[]{7,2,0,8,4,3,9,6,5};
-		matrix[4] = new int[]{3,9,5,6,7,0,0,4,8};
-		matrix[5] = new int[]{8,6,0,5,9,0,2,0,3};
-		matrix[6] = new int[]{6,4,0,0,2,9,0,1,7};
-		matrix[7] = new int[]{2,1,7,4,5,8,3,9,6};
-		matrix[8] = new int[]{5,0,9,7,1,0,4,8,0};
-		
-		return matrix;
+		String classpathResource = "/"+MesApplication.APP_NAME+"/target.json";
+		return (int[][])ReadConfigSupport.readJSON(classpathResource, int[][].class);
     }
 
 
