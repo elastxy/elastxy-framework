@@ -4,7 +4,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import it.red.algen.context.AlgorithmContext;
-import it.red.algen.context.ContextBuilder;
 import it.red.algen.dataaccess.EnvFactory;
 import it.red.algen.engine.SequenceRecombinator;
 import it.red.algen.engine.StandardMutator;
@@ -31,17 +30,17 @@ public class ExpressionsService extends AbstractApplicationService{
 
 	@Override
 	protected void setupContext(AlgorithmContext context) {
-		context.incubator = new MexIncubator();
+		context.application.incubator = new MexIncubator();
 
-		context.fitnessCalculator = new MexFitnessCalculator();
-		context.fitnessCalculator.setup(context.incubator);
+		context.application.fitnessCalculator = new MexFitnessCalculator();
+		context.application.fitnessCalculator.setup(context.application.incubator);
 
-		context.selector = new StandardSelector();
-		context.selector.setup(context.parameters);
+		context.application.selector = new StandardSelector();
+		context.application.selector.setup(context.parameters);
 		
-		context.mutator = new StandardMutator();
+		context.application.mutator = new StandardMutator();
 		
-		context.recombinator = new SequenceRecombinator();
+		context.application.recombinator = new SequenceRecombinator();
 
 		context.monitoringConfiguration.reporter = new CSVReporter(MexApplication.STATS_DIR);
 	}

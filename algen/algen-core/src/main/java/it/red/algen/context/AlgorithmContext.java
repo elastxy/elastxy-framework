@@ -1,26 +1,20 @@
 package it.red.algen.context;
 
+import it.red.algen.components.AppComponents;
+import it.red.algen.conf.AlgorithmParameters;
 import it.red.algen.conf.ApplicationSpecifics;
 import it.red.algen.conf.MonitoringConfiguration;
-import it.red.algen.conf.OperatorsParameters;
 import it.red.algen.conf.StopConditions;
-import it.red.algen.engine.FitnessCalculator;
-import it.red.algen.engine.Incubator;
-import it.red.algen.engine.Mutator;
-import it.red.algen.engine.Recombinator;
-import it.red.algen.engine.Selector;
 
 public class AlgorithmContext {
-	public transient FitnessCalculator fitnessCalculator;
 	
-	public OperatorsParameters parameters;
-	public transient Incubator incubator;
-	public transient Selector selector;
-	public transient Mutator mutator;
-	public transient Recombinator recombinator;
+	public transient AppComponents application = new AppComponents(); // TODOA: by bootstrap
+
+	public AlgorithmParameters parameters;  // TODOA: rename to AppParameters
 	
-	public StopConditions stopConditions;
+	public StopConditions stopConditions; // TODOA: move under AppParameters
 	
-	public MonitoringConfiguration monitoringConfiguration;
+	public MonitoringConfiguration monitoringConfiguration; // TODOA: rename to EngineConfigurations
+	
 	public ApplicationSpecifics applicationSpecifics = new ApplicationSpecifics();
 }

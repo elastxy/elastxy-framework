@@ -64,8 +64,8 @@ public class MexEnvFactory extends AbstractEnvFactory<PerformanceTarget, BigDeci
 
         // Determines goal rough measure by deriving from extreme solutions
         // TODOM concept of boundaries
-        Long minSolPerformance = (Long) context.incubator.grow(minSol.getGenotype(), null).getValue();
-        Long maxSolPerformance = (Long) context.incubator.grow(maxSol.getGenotype(), null).getValue();
+        Long minSolPerformance = (Long) context.application.incubator.grow(minSol.getGenotype(), null).getValue();
+        Long maxSolPerformance = (Long) context.application.incubator.grow(maxSol.getGenotype(), null).getValue();
         NumberRawFitness raw = new NumberRawFitness(
         		new BigDecimal(Math.max(target-minSolPerformance, maxSolPerformance-target)));
         if(raw.value.doubleValue() < 0){

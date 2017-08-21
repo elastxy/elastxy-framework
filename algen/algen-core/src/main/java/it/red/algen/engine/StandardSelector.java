@@ -2,7 +2,7 @@ package it.red.algen.engine;
 
 import java.util.ArrayList;
 
-import it.red.algen.conf.OperatorsParameters;
+import it.red.algen.conf.AlgorithmParameters;
 import it.red.algen.dataaccess.PopulationFactory;
 import it.red.algen.domain.experiment.Population;
 import it.red.algen.domain.experiment.Solution;
@@ -10,10 +10,10 @@ import it.red.algen.domain.genetics.Genoma;
 
 public class StandardSelector implements Selector<Genoma> {
 
-    public void setup(OperatorsParameters algParameters) {
+    public void setup(AlgorithmParameters algParameters) {
     }
 
-	public void setup(OperatorsParameters algParameters, PopulationFactory populationFactory){
+	public void setup(AlgorithmParameters algParameters, PopulationFactory populationFactory){
 		
 	}
 

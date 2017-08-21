@@ -103,8 +103,8 @@ public abstract class AbstractApplicationService {
  		context.parameters.mutationPerc = 0.0;
  		context.parameters.recombinationPerc = 0.0;
  		context.parameters.initialSelectionRandom = true;
- 		context.selector = new UniformlyDistributedSelector();
-		context.selector.setup(context.parameters, populationFactory);
+ 		context.application.selector = new UniformlyDistributedSelector();
+		context.application.selector.setup(context.parameters, populationFactory);
 
 		// Experiments run
         StatsExperimentExecutor collector = new StatsExperimentExecutor(envFactory, experiments);

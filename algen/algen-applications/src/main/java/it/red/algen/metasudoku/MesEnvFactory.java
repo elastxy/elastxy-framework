@@ -10,19 +10,14 @@
 
 package it.red.algen.metasudoku;
 
-import java.io.IOException;
-
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
-
-import com.fasterxml.jackson.databind.ObjectMapper;
 
 import it.red.algen.conf.ReadConfigSupport;
 import it.red.algen.context.AlgorithmContext;
 import it.red.algen.context.ContextSupplier;
 import it.red.algen.dataaccess.AbstractEnvFactory;
-import it.red.algen.dataaccess.DataAccessException;
 import it.red.algen.dataaccess.GenomaProvider;
 import it.red.algen.dataaccess.SolutionsFactory;
 import it.red.algen.domain.experiment.PerformanceTarget;

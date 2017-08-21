@@ -3,16 +3,16 @@ package it.red.algen.engine;
 import java.util.Arrays;
 import java.util.List;
 
-import it.red.algen.conf.OperatorsParameters;
+import it.red.algen.conf.AlgorithmParameters;
 import it.red.algen.domain.experiment.Solution;
 import it.red.algen.domain.genetics.Gene;
 import it.red.algen.domain.genetics.SequenceGenotype;
 
 public class SequenceRecombinator implements Recombinator<Solution> {
-    private OperatorsParameters parameters;
+    private AlgorithmParameters parameters;
     
     
-    public void setup(OperatorsParameters parameters) {
+    public void setup(AlgorithmParameters parameters) {
     	this.parameters = parameters;
     }
 

@@ -22,7 +22,7 @@ package it.red.algen.conf;
  * 
  * @author grossi
  */
-public class OperatorsParameters {
+public class AlgorithmParameters {
 
 	/*
 	 * ======================================

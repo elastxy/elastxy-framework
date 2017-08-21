@@ -2,7 +2,7 @@ package it.red.algen.engine;
 
 import java.util.List;
 
-import it.red.algen.conf.OperatorsParameters;
+import it.red.algen.conf.AlgorithmParameters;
 import it.red.algen.domain.experiment.Solution;
 
 
@@ -15,7 +15,7 @@ import it.red.algen.domain.experiment.Solution;
 @SuppressWarnings("rawtypes")
 public interface Recombinator<R extends Solution> {
 
-    public void setup(OperatorsParameters algParameters);
+    public void setup(AlgorithmParameters algParameters);
     
     
     /**

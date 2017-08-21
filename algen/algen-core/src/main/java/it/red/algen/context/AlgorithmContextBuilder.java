@@ -3,7 +3,7 @@ package it.red.algen.context;
 import org.springframework.stereotype.Component;
 
 import it.red.algen.conf.MonitoringConfiguration;
-import it.red.algen.conf.OperatorsParameters;
+import it.red.algen.conf.AlgorithmParameters;
 import it.red.algen.conf.StopConditions;
 import it.red.algen.tracking.Reporter;
 
@@ -24,7 +24,7 @@ public class AlgorithmContextBuilder {
 			Reporter reporter
 			){
 		
-        OperatorsParameters algParameters = new OperatorsParameters();
+        AlgorithmParameters algParameters = new AlgorithmParameters();
         algParameters.recombinationPerc = recombinationPerc;
         algParameters.mutationPerc = mutationPerc;
         algParameters.elitarism = elitarism;

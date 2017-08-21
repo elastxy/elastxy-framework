@@ -38,7 +38,7 @@ public class Evolver implements EnvObservable {
     public Evolver(AlgorithmContext context, Env env){
     	this.context = context;
     	this.env = env;
-    	this.fitnessTester = new StandardFitnessTester(context.fitnessCalculator);
+    	this.fitnessTester = new StandardFitnessTester(context.application.fitnessCalculator);
     	this.stopVerifier = new StopConditionVerifier(context.stopConditions);
     }
     
@@ -191,7 +191,7 @@ public class Evolver implements EnvObservable {
 	 */
 
 	private Population selection(int generationSize) {
-		Population nextGeneration = context.selector.select(env.currentGen, env.genoma);
+		Population nextGeneration = context.application.selector.select(env.currentGen, env.genoma);
 		fireNewGenerationEvent(env.currentGen, nextGeneration);
 		if(generationSize!=nextGeneration.solutions.size()){
 			String msg = String.format("Selected generation size (%d) differs from last (%d)", nextGeneration.solutions.size(), generationSize);
@@ -206,7 +206,7 @@ public class Evolver implements EnvObservable {
 		List<Solution> sons;
 		boolean crossover = Randomizer.nextDouble() < context.parameters.recombinationPerc;
 		if(crossover) {
-		    sons = context.recombinator.recombine(Arrays.asList(parents));
+		    sons = context.application.recombinator.recombine(Arrays.asList(parents));
 		    fireCrossoverEvent(parents[0], parents[1], sons);
 		}
 		else {
@@ -222,14 +222,14 @@ public class Evolver implements EnvObservable {
 		if(mute0) { 
 		    Solution old = sons.get(0);
 		    Solution niu = old.copy();
-		    context.mutator.mutate(niu, env.genoma);
+		    context.application.mutator.mutate(niu, env.genoma);
 		    sons.set(0, niu);
 		    fireMutationEvent(old, niu);
 		}
 		if(mute1) { 
 		    Solution old = sons.get(1);
 		    Solution niu = old.copy();
-		    context.mutator.mutate(niu, env.genoma);
+		    context.application.mutator.mutate(niu, env.genoma);
 		    sons.set(1, niu);
 		    fireMutationEvent(old, niu);
 		}
