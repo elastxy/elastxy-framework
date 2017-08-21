@@ -12,7 +12,13 @@ import java.util.Map;
  */
 public interface AppRegister {
 	
-	
+
+	/**
+	 * Retrieves an application metadata
+	 * @return
+	 */
+	public AlgenApplication find(String applicationName);
+
 	/**
 	 * Retrieves all application metadata
 	 * @return

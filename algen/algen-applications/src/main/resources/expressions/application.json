@@ -1,0 +1,34 @@
+{
+	"name" : "expressions",
+	
+	"solutionsFactory": {
+		"type" : "java",
+		"content" : "it.red.algen.metaexpressions.MexSolutionsFactory"
+	},
+	
+	"incubator": {
+		"type" : "java",
+		"content" : "it.red.algen.metaexpressions.MexIncubator"
+	},
+	"fitnessCalculator": {
+		"type" : "java",
+		"content" : "it.red.algen.metaexpressions.MexFitnessCalculator"
+	},
+	
+	"selector": {
+		"type" : "java",
+		"content" : "it.red.algen.engine.StandardSelector"
+	},
+	"mutator": {
+		"type" : "java",
+		"content" : "it.red.algen.engine.StandardMutator"
+	},
+	"recombinator": {
+		"type" : "java",
+		"content" : "it.red.algen.engine.SequenceRecombinator"
+	},
+	"solutionRenderer": {
+		"type" : "java",
+		"content" : "it.red.algen.tracking.DefaultSolutionRenderer"
+	}
+}

@@ -1,12 +1,11 @@
 package it.red.algen.conf;
 
 import java.io.IOException;
+import java.io.InputStream;
 
 import org.apache.log4j.Logger;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-
-import it.red.algen.dataaccess.DataAccessException;
 
 /**
  * Support class for reading configuration or local JSON files
@@ -16,16 +15,13 @@ import it.red.algen.dataaccess.DataAccessException;
 public class ReadConfigSupport {
 	private static Logger logger = Logger.getLogger(ReadConfigSupport.class);
 
-	public static Object readJSON(String classpathResource, Class type){
+	public static Object readJSON(String classpathResource, Class type) throws IOException {
+		return readJSON(ReadConfigSupport.class.getResourceAsStream(classpathResource), type);
+	}
+	
+	public static Object readJSON(InputStream inputStream, Class type) throws IOException {
     	ObjectMapper om = new ObjectMapper();
-		Object result = null;
-		try {
-			result = om.readValue(ReadConfigSupport.class.getResourceAsStream(classpathResource), type);
-		} catch (IOException e) {
-			String msg = "Error while reading JSON resource from classpath:"+classpathResource+" Ex:"+e;
-			logger.error(msg);
-			throw new DataAccessException(msg, e);
-		}
+		Object result = om.readValue(inputStream, type);
 		return result;
 	}
 	

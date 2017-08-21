@@ -1,9 +1,12 @@
 package it.red.algen.context;
 
+import java.io.IOException;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
 
+import it.red.algen.conf.ConfigurationException;
 import it.red.algen.conf.ReadConfigSupport;
 
 /**
@@ -31,7 +34,14 @@ public class JSONContextBuilder implements ContextBuilder {
 		String fileName = benchmark ? "benchmark" : "experiment";
 		String classpathResource = "/"+applicationName+"/"+fileName+".json";
 		
-		AlgorithmContext result = (AlgorithmContext)ReadConfigSupport.readJSON(classpathResource, AlgorithmContext.class);
+		AlgorithmContext result;
+		try {
+			result = (AlgorithmContext)ReadConfigSupport.readJSON(classpathResource, AlgorithmContext.class);
+		} catch (IOException e) {
+			String msg = "Error while reading JSON from classpath resource "+classpathResource+". Ex: "+e;
+			logger.error(msg, e);
+			throw new ConfigurationException(msg, e);
+		}
 		
 		return result;
 	}

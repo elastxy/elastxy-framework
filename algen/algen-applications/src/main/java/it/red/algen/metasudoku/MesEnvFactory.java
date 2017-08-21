@@ -10,10 +10,13 @@
 
 package it.red.algen.metasudoku;
 
+import java.io.IOException;
+
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import it.red.algen.conf.ConfigurationException;
 import it.red.algen.conf.ReadConfigSupport;
 import it.red.algen.context.AlgorithmContext;
 import it.red.algen.context.ContextSupplier;
@@ -73,7 +76,13 @@ public class MesEnvFactory extends AbstractEnvFactory<int[][], Integer, Predefin
      */
     private int[][] createGoal(){
 		String classpathResource = "/"+MesApplication.APP_NAME+"/target.json";
-		return (int[][])ReadConfigSupport.readJSON(classpathResource, int[][].class);
+		try {
+			return (int[][])ReadConfigSupport.readJSON(classpathResource, int[][].class);
+		} catch (IOException e) {
+			String msg = "Error while reading JSON from classpath resource "+classpathResource+". Ex: "+e;
+			logger.error(msg, e);
+			throw new ConfigurationException(msg, e);
+		}
     }
 
 

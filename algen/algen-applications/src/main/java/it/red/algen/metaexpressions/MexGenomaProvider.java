@@ -28,6 +28,10 @@ public class MexGenomaProvider implements GenomaProvider {
 
 	@Autowired private MexAlleleGenerator alleleGenerator;
 	
+//	public void setAlleleGenerator(AlleleGenerator alleleGenerator){
+//		this.alleleGenerator = alleleGenerator;
+//	}
+	
 	private StandardMetadataGenoma cachedGenoma;
 	
 	@Override

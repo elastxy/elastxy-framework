@@ -28,18 +28,14 @@ public class SudokuService extends AbstractApplicationService {
 	@Override
 	protected void setupContext(AlgorithmContext context) {
 		context.application.incubator = new MesIncubator();
-
 		context.application.fitnessCalculator = new MesFitnessCalculator();
 		context.application.fitnessCalculator.setup(context.application.incubator);
-
 		context.application.selector = new StandardSelector();
-		context.application.selector.setup(context.parameters);
-		
 		context.application.mutator = new StandardMutator();
-		
 		context.application.recombinator = new SequenceRecombinator();
-
 		context.application.solutionRenderer = new MesSolutionRenderer();
+
+		context.application.selector.setup(context.parameters);
 	}
 	
 }

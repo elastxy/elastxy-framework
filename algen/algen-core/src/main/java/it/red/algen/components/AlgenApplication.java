@@ -1,19 +1,17 @@
 package it.red.algen.components;
 
-import it.red.algen.engine.FitnessCalculator;
-import it.red.algen.engine.Incubator;
-import it.red.algen.engine.Mutator;
-import it.red.algen.engine.Recombinator;
-import it.red.algen.engine.Selector;
+import it.red.algen.dataaccess.SolutionsFactory;
+import it.red.algen.engine.AlleleGenerator;
 
 /**
- * Contains all metadata needed for building the application
+ * Contains all static metadata needed for building the application
  * components.
  * 
  * All components are functions with no state giving the behaviour
  * to the algorithm.
  * 
- * These functions are of an application specific types or standard types.
+ * These functions are of an application specific types or standard types:
+ * - fully qualified class name of the specific type
  * 
  * With application bootstrap, they provide metadata for building
  * new AppComponents which are cached and accessible by AppComponentLocator.
@@ -30,11 +28,17 @@ import it.red.algen.engine.Selector;
  *
  */
 public class AlgenApplication {
+	public String name;
 	
-	public FitnessCalculator fitnessCalculator;
-	public Incubator incubator;
-	public Selector selector;
-	public Mutator mutator;
-	public Recombinator recombinator;
+	public ComponentMetadata solutionsFactory;
+	
+	public ComponentMetadata fitnessCalculator;
+	public ComponentMetadata incubator;
+	
+	public ComponentMetadata selector;
+	public ComponentMetadata mutator;
+	public ComponentMetadata recombinator;
+
+	public ComponentMetadata solutionRenderer;
 
 }

@@ -3,8 +3,6 @@ package it.red.algen.metaexpressions;
 import java.util.Arrays;
 import java.util.List;
 
-import org.springframework.stereotype.Component;
-
 import it.red.algen.dataaccess.SolutionsFactory;
 import it.red.algen.domain.experiment.GenericSolution;
 import it.red.algen.domain.experiment.Solution;
@@ -12,8 +10,7 @@ import it.red.algen.domain.genetics.SequenceGenotype;
 import it.red.algen.metadata.MetadataGeneFactory;
 import it.red.algen.metadata.StandardMetadataGenoma;
 
-@Component
-public class MexSolutionFactory implements SolutionsFactory<StandardMetadataGenoma> {
+public class MexSolutionsFactory implements SolutionsFactory<StandardMetadataGenoma> {
 
 
     // TODOM: genotype builders based directly inside in genoma

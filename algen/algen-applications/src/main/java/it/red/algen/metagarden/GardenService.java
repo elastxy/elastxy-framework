@@ -29,16 +29,13 @@ public class GardenService extends AbstractApplicationService{
 	@Override
 	protected void setupContext(AlgorithmContext context) {
 		context.application.incubator = new MegIncubator();
-
 		context.application.fitnessCalculator = new MegFitnessCalculator();
 		context.application.fitnessCalculator.setup(context.application.incubator);
-
 		context.application.selector = new StandardSelector();
-		context.application.selector.setup(context.parameters);
-		
 		context.application.mutator = new StandardMutator();
-		
 		context.application.recombinator = new SequenceRecombinator();
+		
+		context.application.selector.setup(context.parameters);
 	}
 	
 }

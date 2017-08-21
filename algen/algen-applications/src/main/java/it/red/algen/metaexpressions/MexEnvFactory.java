@@ -29,15 +29,13 @@ import it.red.algen.domain.genetics.Genoma;
 import it.red.algen.metadata.StandardMetadataGenoma;
 
 /**
- *
+ * TODOA: bootstrappare
  * @author grossi
  */
 @Component
 public class MexEnvFactory extends AbstractEnvFactory<PerformanceTarget, BigDecimal, StandardMetadataGenoma> {
 	
 	@Autowired private ContextSupplier contextSupplier;
-	
-	@Autowired private MexSolutionFactory solutionsFactory;
 	
 	@Autowired private MexGenomaProvider genomaProvider;
 	
@@ -47,14 +45,15 @@ public class MexEnvFactory extends AbstractEnvFactory<PerformanceTarget, BigDeci
 		return genomaProvider;
 	}
 
+	// TODOM: take outside Target definition code, as a new Component
 	@Override
 	protected Target<PerformanceTarget, BigDecimal> defineTarget(Genoma genoma) {
 		AlgorithmContext context = contextSupplier.getContext();
         
 		// Define boundaries
 		long maxOperandValue = context.applicationSpecifics.getParamLong(MexApplication.MAX_OPERAND_VALUE);
-        Solution minSol = solutionsFactory.createPredefined((StandardMetadataGenoma)genoma, Arrays.asList(maxOperandValue, '*', -maxOperandValue));
-        Solution maxSol = solutionsFactory.createPredefined((StandardMetadataGenoma)genoma, Arrays.asList(maxOperandValue, '*', maxOperandValue));
+        Solution minSol = context.application.solutionsFactory.createPredefined((StandardMetadataGenoma)genoma, Arrays.asList(maxOperandValue, '*', -maxOperandValue));
+        Solution maxSol = context.application.solutionsFactory.createPredefined((StandardMetadataGenoma)genoma, Arrays.asList(maxOperandValue, '*', maxOperandValue));
 
 		// Defines goal representation
         Long target = context.applicationSpecifics.getTargetLong(MexApplication.TARGET_EXPRESSION_RESULT);
@@ -78,7 +77,7 @@ public class MexEnvFactory extends AbstractEnvFactory<PerformanceTarget, BigDeci
 
 	@Override
 	protected SolutionsFactory<StandardMetadataGenoma> getSolutionsFactory() {
-		return this.solutionsFactory;
+		return contextSupplier.getContext().application.solutionsFactory;
 	}
 
 }
