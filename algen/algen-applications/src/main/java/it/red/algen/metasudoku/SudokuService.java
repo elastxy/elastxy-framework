@@ -39,7 +39,7 @@ public class SudokuService extends AbstractApplicationService {
 		
 		context.application.recombinator = new SequenceRecombinator();
 
-		context.monitoringConfiguration.solutionRenderer = new MesSolutionRenderer();
+		context.application.solutionRenderer = new MesSolutionRenderer();
 	}
 	
 }

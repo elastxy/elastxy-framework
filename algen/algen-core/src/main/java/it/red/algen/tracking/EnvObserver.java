@@ -36,8 +36,8 @@ public class EnvObserver {
     
     public EnvObserver(AlgorithmContext context){
         this.context = context;
-        if(context.monitoringConfiguration.solutionRenderer!=null){
-        	this.renderer = context.monitoringConfiguration.solutionRenderer;
+        if(context.application.solutionRenderer!=null){
+        	this.renderer = context.application.solutionRenderer;
         }
     }
     
@@ -48,8 +48,8 @@ public class EnvObserver {
     public void newGenerationEvent(int number, Population lastGen, Population newGen){
         if(context.monitoringConfiguration.verbose) {
         	context.monitoringConfiguration.logger.out("\n*** Last generation "+number+" > \n"+lastGen+"\n");
-        	if(context.monitoringConfiguration.solutionRenderer!=null && lastGen.bestMatch!=null){
-        		String sol = (String)context.monitoringConfiguration.solutionRenderer.render(lastGen.bestMatch);
+        	if(context.application.solutionRenderer!=null && lastGen.bestMatch!=null){
+        		String sol = (String)context.application.solutionRenderer.render(lastGen.bestMatch);
         		context.monitoringConfiguration.logger.out(sol);
         	}
         }

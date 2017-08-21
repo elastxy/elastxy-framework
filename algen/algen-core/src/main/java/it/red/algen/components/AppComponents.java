@@ -5,6 +5,8 @@ import it.red.algen.engine.Incubator;
 import it.red.algen.engine.Mutator;
 import it.red.algen.engine.Recombinator;
 import it.red.algen.engine.Selector;
+import it.red.algen.tracking.DefaultSolutionRenderer;
+import it.red.algen.tracking.SolutionRenderer;
 
 /**
  * Contains all components needed for algorithm to work.
@@ -23,4 +25,5 @@ public class AppComponents {
 	public Selector selector;
 	public Mutator mutator;
 	public Recombinator recombinator;
+	public SolutionRenderer solutionRenderer = new DefaultSolutionRenderer();
 }

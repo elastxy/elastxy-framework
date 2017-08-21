@@ -41,8 +41,6 @@ public class ExpressionsService extends AbstractApplicationService{
 		context.application.mutator = new StandardMutator();
 		
 		context.application.recombinator = new SequenceRecombinator();
-
-		context.monitoringConfiguration.reporter = new CSVReporter(MexApplication.STATS_DIR);
 	}
 	
 }
