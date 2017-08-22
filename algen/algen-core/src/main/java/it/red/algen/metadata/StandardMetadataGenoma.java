@@ -174,7 +174,44 @@ public class StandardMetadataGenoma implements MetadataGenoma {
 		return result;
 	}
 
-	
+
+//	/**
+//	 * Generate a new set of random Alleles based on positions
+//	 * @param positions
+//	 * @return
+//	 */
+//	@Override
+//	public List<Allele> createRandomAlleles(List<String> positions){
+//		nyiLimitedAllelesStrategy();
+//		return positions.stream().map(s -> createRandomAllele(s)).collect(Collectors.toList());
+//	}
+//
+//	
+//	
+//	/**
+//	 * Generate a new list of random Alleles for every position
+//	 * @param metadataCodes
+//	 * @return
+//	 */
+//	@Override
+//	public List<Allele> createRandomAlleles(){
+//		
+//		List<String> positions = IntStream.range(0, genesMetadataByPos.size()).boxed().map(i -> i.toString()).collect(Collectors.toList());
+//		List<Allele> result = null;
+//		if(!limitedAllelesStrategy){
+//			result = createRandomAlleles(positions);
+//		}
+//		else {
+//			result = new ArrayList<Allele>();
+//			List<Object> alreadyUsedAlleles = new ArrayList<Object>();
+//			for(String pos : positions){
+//				Allele newAllele = alleleGenerator.generateExclusive(getMetadataByPosition(pos), alreadyUsedAlleles);
+//				alreadyUsedAlleles.add(newAllele.value);
+//				result.add(newAllele);
+//			}
+//		}
+//		return result;
+//	}
 	
 	/**
 	 * Generate a new list of random Alleles for every position
