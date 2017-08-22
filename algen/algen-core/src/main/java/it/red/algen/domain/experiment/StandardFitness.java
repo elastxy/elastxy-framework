@@ -68,6 +68,15 @@ public class StandardFitness implements Fitness {
 		BigDecimal thisDistance = value.subtract(targetFitness).abs();
         return otherDistance.compareTo(thisDistance) >  0;
     }
+	
+
+	/**
+	 * Returns true if current fitness is (strictly) greater than the desider threshold
+	 */
+	@Override
+    public boolean overThreshold(BigDecimal targetThreshold) {
+		return value.compareTo(targetThreshold) > 0;
+    }
 
 	
 	@Override

@@ -2,8 +2,10 @@ package it.red.algen.metadata;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
+import java.util.Map.Entry;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
@@ -56,6 +58,20 @@ public class StandardMetadataGenoma implements MetadataGenoma {
 	public void initialize(Map<String,GeneMetadata> genesMetadataByCode, Map<String,GeneMetadata> genesMetadataByPos){
 		this.genesMetadataByCode = genesMetadataByCode;
 		this.genesMetadataByPos = genesMetadataByPos;
+	}
+	
+	@Override
+	public void initialize(Genes genes){
+		Iterator<Entry<String, GeneMetadata>> it = genes.metadata.entrySet().iterator();
+		while(it.hasNext()){
+			Entry<String, GeneMetadata> entry = it.next();
+			genesMetadataByCode.put(entry.getKey(), entry.getValue());
+			List<String> positions = genes.positions.get(entry.getKey());
+			for(int p=0; p < positions.size(); p++){
+				genesMetadataByPos.put(String.valueOf(positions.get(p)), entry.getValue());
+			}
+		}
+
 	}
 
 	public boolean isLimitedAllelesStrategy() {
@@ -144,7 +160,7 @@ public class StandardMetadataGenoma implements MetadataGenoma {
 	public List<Allele> getRandomAlleles(List<String> positions){
 		List<Allele> result = null;
 		if(!limitedAllelesStrategy){
-			result = getRandomAlleles(positions);
+			result = getRandomAlleles(positions); // TODOAAA: loop!!!!
 		}
 		else {
 			result = new ArrayList<Allele>();

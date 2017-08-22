@@ -48,6 +48,8 @@ public class AppComponents {
 //	public AlleleGenerator alleleGenerator;
 //	public EnvFactory envFactory;
 //	public PopulationFactory populationFactory;
+
+	public String name;
 	
 	public SolutionsFactory solutionsFactory;
 	

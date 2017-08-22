@@ -38,6 +38,8 @@ public class AppComponentsBuilder {
 //		TODOA result.alleleGenerator = 	(Incubator)constructComponent(applicationMetadata.incubator);
 //		TODOA result.envFactory = 	(Incubator)constructComponent(applicationMetadata.incubator);
 		
+		result.name = 				applicationMetadata.name;
+		
 		result.solutionsFactory = 	(SolutionsFactory)constructComponent(applicationMetadata.solutionsFactory);
 		
 		result.incubator = 			(Incubator)constructComponent(applicationMetadata.incubator);

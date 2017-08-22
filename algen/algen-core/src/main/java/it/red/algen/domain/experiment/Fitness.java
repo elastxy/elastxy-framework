@@ -75,6 +75,10 @@ public interface Fitness {
      */
     public boolean nearestThan(Fitness other, BigDecimal targetFitness);
     
+	/**
+	 * Returns true if current fitness is (strictly) greater than the desider threshold
+	 */
+    public boolean overThreshold(BigDecimal targetThreshold);
 
     /**
      * Returns true if this fitness value is equals to a given one

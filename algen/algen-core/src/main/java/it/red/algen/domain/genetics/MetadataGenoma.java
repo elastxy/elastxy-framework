@@ -5,6 +5,7 @@ import java.util.Map;
 
 import it.red.algen.engine.AlleleGenerator;
 import it.red.algen.metadata.GeneMetadata;
+import it.red.algen.metadata.Genes;
 
 /**
  * A Genoma based on Metadata: every Gene has properties for generating
@@ -30,6 +31,12 @@ public interface MetadataGenoma extends Genoma {
 	 */
 	public void initialize(Map<String,GeneMetadata> genesMetadataByCode, Map<String,GeneMetadata> genesMetadataByPos);
 
+	/**
+	 * Load genes metadata
+	 * @param genes
+	 */
+	public void initialize(Genes genes);
+	
 	/**
 	 * Get the metadata by code
 	 * @param metadataCode

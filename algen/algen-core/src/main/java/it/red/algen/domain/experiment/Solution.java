@@ -41,6 +41,7 @@ public interface Solution<S extends Solution, F extends Fitness> {
 	 * @return
 	 */
 	public Phenotype getPhenotype();
+	public void setPhenotype(Phenotype phenotype);
 	
 	
 	/**

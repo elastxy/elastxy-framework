@@ -24,6 +24,11 @@ public class GenericSolution implements Solution {
 	}
 
 	@Override
+	public void setPhenotype(Phenotype phenotype) {
+		this.phenotype = phenotype;
+	}
+
+	@Override
 	public Fitness getFitness() {
 		return fitness;
 	}

@@ -1,0 +1,31 @@
+{
+	"metadata" : {
+		"operand" : {
+			"code" : "operand",
+			"name" : "operand",
+			"type" : "INTEGER",
+			"values": [],
+			"min" : -1000000,
+			"max" : 1000000,
+			"userStructure": null,
+			"userProperties": {	
+			}
+		},
+		"operator" : {
+			"code" : "operator",
+			"name" : "operator",
+			"type" : "CHAR",
+			"values" : ["+","-","*","/"],
+			"min": null,
+			"max": null,
+			"userStructure": null,
+			"userProperties": {	
+			}
+		}
+	},
+	
+	"positions" : {
+		"operand" : ["0","2"],
+		"operator" : ["1"]	
+	}
+}

@@ -1,18 +1,24 @@
 package it.red.algen.metaexpressions;
 
-import java.util.Arrays;
+import java.io.IOException;
 import java.util.HashMap;
+import java.util.Iterator;
+import java.util.List;
 import java.util.Map;
+import java.util.Map.Entry;
 
+import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import it.red.algen.conf.ConfigurationException;
+import it.red.algen.conf.ReadConfigSupport;
 import it.red.algen.context.ContextSupplier;
 import it.red.algen.dataaccess.GenomaProvider;
 import it.red.algen.domain.experiment.Target;
 import it.red.algen.domain.genetics.Genoma;
 import it.red.algen.metadata.GeneMetadata;
-import it.red.algen.metadata.GeneMetadataType;
+import it.red.algen.metadata.Genes;
 import it.red.algen.metadata.StandardMetadataGenoma;
 
 
@@ -23,6 +29,7 @@ import it.red.algen.metadata.StandardMetadataGenoma;
  */
 @Component
 public class MexGenomaProvider implements GenomaProvider {
+	private static Logger logger = Logger.getLogger(MexGenomaProvider.class);
 
 	@Autowired private ContextSupplier contextSupplier;
 
@@ -39,35 +46,41 @@ public class MexGenomaProvider implements GenomaProvider {
 		return cachedGenoma;
 	}
 
+	
+	
 	@Override
 	public void collect() {
+		
+		// Instantiate Genoma
 		StandardMetadataGenoma genoma = new StandardMetadataGenoma();
 		genoma.setupAlleleGenerator(alleleGenerator);
-		Map<String, GeneMetadata> genesMetadataByCode = new HashMap<String, GeneMetadata>();
-		Map<String, GeneMetadata> genesMetadataByPos = new HashMap<String, GeneMetadata>();
-
-		GeneMetadata metadata = new GeneMetadata();
-		metadata.code = "operand";
-		metadata.name = "operand";
-		metadata.type = GeneMetadataType.INTEGER;
+		
+		// Retrieves metadata
+		Genes genes = retrieveGenesMetadata();
+		
+		// Add context specific values
 		Long maxValue = contextSupplier.getContext().applicationSpecifics.getParamLong(MexApplication.MAX_OPERAND_VALUE);
-		metadata.max = maxValue;
-		metadata.min = -1L * maxValue;
-		genesMetadataByCode.put(metadata.code, metadata);
-		genesMetadataByPos.put("0", metadata);
-		genesMetadataByPos.put("2", metadata);
-		
-		metadata = new GeneMetadata();
-		metadata.code = "operator";
-		metadata.name = "operator";
-		metadata.type = GeneMetadataType.CHAR;
-		metadata.values = Arrays.asList('+', '-', '*', '/');
-		genesMetadataByCode.put(metadata.code, metadata);
-		genesMetadataByPos.put("1", metadata);
-		
-		genoma.initialize(genesMetadataByCode, genesMetadataByPos);
-		
+		genes.metadata.get("operand").max = maxValue;
+		genes.metadata.get("operand").min = -1L * maxValue;
+
+		// Initialize Genoma
+		genoma.initialize(genes);
 		cachedGenoma = genoma;
+	}
+
+
+
+	private Genes retrieveGenesMetadata() {
+		Genes genes;
+		String classpathResource = "/"+this.contextSupplier.getContext().application.name+"/genes.json";
+		try {
+			genes = (Genes)ReadConfigSupport.readJSON(classpathResource, Genes.class);
+		} catch (IOException e) {
+			String msg = "Error while getting classpath resource "+classpathResource+". Ex: "+e;
+			logger.error(msg, e);
+			throw new ConfigurationException(msg, e);
+		}
+		return genes;
 	}
 
 	

@@ -74,6 +74,7 @@ public class Evolver implements EnvObservable {
         
         
     	// Loops until end condition rises
+        // TODOA: maybe first population has already the solution! must be checked before!
         boolean endConditionFound = false;
         do {
         	
@@ -149,14 +150,21 @@ public class Evolver implements EnvObservable {
 	private boolean checkEndCondition(Fitness lastGenFitness) {
 		boolean endConditionFound = false;
 		
+		// Check threshold
+		if(context.stopConditions.targetThreshold != null &&
+				env.currentGen.bestMatch.getFitness().overThreshold(context.stopConditions.targetThreshold)){
+			endConditionFound = goalReached();
+		}
+		
 		// Check stability of the fitness value
-		if(context.parameters.elitarism){
+		if(!endConditionFound && context.parameters.elitarism){
 		    if(env.currentGen.bestMatch.getFitness().sameOf(lastGenFitness)){
 		    	env.totIdenticalFitnesses++;
 		        if(stopVerifier.isStable(env.totIdenticalFitnesses)){
 		        	EnvSupport.stopTime(env);
-		        	fireStableSolutionEvent();
+				    env.targetReached = true;
 		        	endConditionFound = true;
+		        	fireStableSolutionEvent();
 		        }
 		    }
 		    else {
@@ -166,10 +174,7 @@ public class Evolver implements EnvObservable {
 		
 		// Check goal reached
 		if(!endConditionFound && env.currentGen.bestMatch.getFitness().fit()){
-			EnvSupport.stopTime(env);
-		    env.targetReached = true;
-		    endConditionFound = true;
-		    fireGoalReachedEvent();
+			endConditionFound = goalReached();
 		}
 		
 		// Check time stop
@@ -178,6 +183,16 @@ public class Evolver implements EnvObservable {
 			endConditionFound = true;
 		    fireHistoryEndedEvent();
 		}
+		return endConditionFound;
+	}
+
+
+	private boolean goalReached() {
+		boolean endConditionFound;
+		EnvSupport.stopTime(env);
+		env.targetReached = true;
+		endConditionFound = true;
+		fireGoalReachedEvent();
 		return endConditionFound;
 	}
 	

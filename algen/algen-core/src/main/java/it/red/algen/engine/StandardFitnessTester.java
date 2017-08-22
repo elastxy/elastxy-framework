@@ -47,6 +47,12 @@ public class StandardFitnessTester implements FitnessTester {
             if(isBestMatch(env.target, population.bestMatch, solution)){
             	population.bestMatch = solution;
             }
+            
+            // Else remove phenotype to free memory: not useful anymore
+            // TODOM: configurable
+            else {
+            	solution.setPhenotype(null);
+            }
         }
         
         // No target fitness: Order by fitness desc

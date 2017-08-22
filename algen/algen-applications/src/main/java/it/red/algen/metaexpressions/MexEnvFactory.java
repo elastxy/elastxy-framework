@@ -52,8 +52,8 @@ public class MexEnvFactory extends AbstractEnvFactory<PerformanceTarget, BigDeci
         
 		// Define boundaries
 		long maxOperandValue = context.applicationSpecifics.getParamLong(MexApplication.MAX_OPERAND_VALUE);
-        Solution minSol = context.application.solutionsFactory.createPredefined((StandardMetadataGenoma)genoma, Arrays.asList(maxOperandValue, '*', -maxOperandValue));
-        Solution maxSol = context.application.solutionsFactory.createPredefined((StandardMetadataGenoma)genoma, Arrays.asList(maxOperandValue, '*', maxOperandValue));
+        Solution minSol = context.application.solutionsFactory.createPredefined((StandardMetadataGenoma)genoma, Arrays.asList(maxOperandValue, "*", -maxOperandValue));
+        Solution maxSol = context.application.solutionsFactory.createPredefined((StandardMetadataGenoma)genoma, Arrays.asList(maxOperandValue, "*", maxOperandValue));
 
 		// Defines goal representation
         Long target = context.applicationSpecifics.getTargetLong(MexApplication.TARGET_EXPRESSION_RESULT);
