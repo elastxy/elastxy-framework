@@ -55,11 +55,11 @@ public class StandardFitnessTester implements FitnessTester {
             	population.bestMatch = solution;
             }
             
-            // Else remove phenotype to free memory: not useful anymore
-            // TODOM: configurable
-            else {
-            	solution.setPhenotype(null);
-            }
+//            // Else remove phenotype to free memory: not useful anymore
+//            // TODOM: configurable
+//            else {
+//            	solution.setPhenotype(null);
+//            }
         }
         
         // No target fitness: Order by fitness desc

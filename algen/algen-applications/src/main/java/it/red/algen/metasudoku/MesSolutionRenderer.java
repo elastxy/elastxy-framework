@@ -1,15 +1,24 @@
 package it.red.algen.metasudoku;
 
+import org.apache.log4j.Logger;
+
 import it.red.algen.domain.experiment.Solution;
 import it.red.algen.domain.genetics.ComplexPhenotype;
 import it.red.algen.tracking.SolutionRenderer;
 
 public class MesSolutionRenderer implements SolutionRenderer<String> {
-
+	public static Logger logger = Logger.getLogger(MesSolutionRenderer.class);
+	
+			
 	@Override
 	public String render(Solution solution){
 		StringBuffer sb = new StringBuffer(81);
 		ComplexPhenotype phenotype = (ComplexPhenotype)solution.getPhenotype();
+		if(phenotype==null){
+			logger.error("Cannot render solution. Phenotype null for solution: "+solution);
+			return "No phenotype to visualize.";
+		}
+		
 //		TODOB: show changed values in square brackets ((SequenceGenotype)solution.getGenotype()).genes.get(index);
 		int[][] matrix = (int[][])phenotype.getValue().get(MesApplication.PHENOTYPE_MATRIX);
 		

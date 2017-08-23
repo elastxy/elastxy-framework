@@ -93,11 +93,11 @@ public class Evolver implements EnvObservable {
 
             // Assign new generation
             Fitness lastGenFitness = env.currentGen.bestMatch.getFitness();
-            env.currentGen = nextGeneration;
             
             // CHECK END CONDITION
             endConditionFound = checkEndCondition(lastGenFitness);
             
+            env.currentGen = nextGeneration;
             env.currentGenNumber++;
         }
         while(!endConditionFound);
