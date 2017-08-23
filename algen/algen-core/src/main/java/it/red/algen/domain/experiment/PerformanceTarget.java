@@ -16,6 +16,7 @@ public class PerformanceTarget<G,M> implements Target<G,M> {
 	public G goal;
 	public M measure;
 	public BigDecimal level;
+	public BigDecimal threshold;
 
 	
 	@Override
@@ -37,7 +38,8 @@ public class PerformanceTarget<G,M> implements Target<G,M> {
 		this.measure = measure;
 	}
 	
-	
+
+
 	@Override
 	public BigDecimal getTargetFitness() {
 		return level;
@@ -48,7 +50,18 @@ public class PerformanceTarget<G,M> implements Target<G,M> {
 		this.level = level;
 	}
 	
+	
+	@Override
+	public BigDecimal getTargetThreshold() {
+		return threshold;
+	}
+	@Override
+	public void setTargetThreshold(BigDecimal threshold) {
+		this.threshold = threshold;
+	}
+	
+	
 	public String toString(){
-		return String.format("PerformanceTarget: goal %d with required level %.3f", goal, level);
+		return String.format("PerformanceTarget[goal=%d;level=%.3f,threshold=%.3f", goal, level, threshold);
 	}
 }

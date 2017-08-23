@@ -147,11 +147,13 @@ public class StandardMetadataGenoma implements MetadataGenoma {
 	
 	
 	/**
-	 * Generate a new set of random Alleles based on positions
+	 * Generate a new set of random Alleles based on positions.
 	 * 
-	 * If alleles are limited, allele generator is given the list
-	 * of already generated allele at each creation of a new allele
-	 * for restricting the possible values
+	 * If alleles are limited, for restricting the possible values,
+	 * allele generator is given the list of already generated allele 
+	 * at each creation of a new allele.
+	 * 
+	 * Else, completely random alleles with repetitions are created.
 	 * 
 	 * @param positions
 	 * @return
@@ -160,7 +162,7 @@ public class StandardMetadataGenoma implements MetadataGenoma {
 	public List<Allele> getRandomAlleles(List<String> positions){
 		List<Allele> result = null;
 		if(!limitedAllelesStrategy){
-			result = getRandomAlleles(positions); // TODOAAA: loop!!!!
+			result = positions.stream().map(s -> getRandomAllele(s)).collect(Collectors.toList());
 		}
 		else {
 			result = new ArrayList<Allele>();
@@ -175,44 +177,6 @@ public class StandardMetadataGenoma implements MetadataGenoma {
 	}
 
 
-//	/**
-//	 * Generate a new set of random Alleles based on positions
-//	 * @param positions
-//	 * @return
-//	 */
-//	@Override
-//	public List<Allele> createRandomAlleles(List<String> positions){
-//		nyiLimitedAllelesStrategy();
-//		return positions.stream().map(s -> createRandomAllele(s)).collect(Collectors.toList());
-//	}
-//
-//	
-//	
-//	/**
-//	 * Generate a new list of random Alleles for every position
-//	 * @param metadataCodes
-//	 * @return
-//	 */
-//	@Override
-//	public List<Allele> createRandomAlleles(){
-//		
-//		List<String> positions = IntStream.range(0, genesMetadataByPos.size()).boxed().map(i -> i.toString()).collect(Collectors.toList());
-//		List<Allele> result = null;
-//		if(!limitedAllelesStrategy){
-//			result = createRandomAlleles(positions);
-//		}
-//		else {
-//			result = new ArrayList<Allele>();
-//			List<Object> alreadyUsedAlleles = new ArrayList<Object>();
-//			for(String pos : positions){
-//				Allele newAllele = alleleGenerator.generateExclusive(getMetadataByPosition(pos), alreadyUsedAlleles);
-//				alreadyUsedAlleles.add(newAllele.value);
-//				result.add(newAllele);
-//			}
-//		}
-//		return result;
-//	}
-	
 	/**
 	 * Generate a new list of random Alleles for every position
 	 * 

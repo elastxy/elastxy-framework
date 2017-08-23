@@ -14,8 +14,8 @@ import it.red.algen.metagarden.MegApplication;
  *
  */
 public class GardenDatabaseCSV implements GardenDatabase{
-	private static final String PLACES_FILENAME = "places.csv";
-	private static final String TREES_FILENAME = "trees.csv";
+	private static final String PLACES_FILENAME = 	"places.csv";
+	private static final String TREES_FILENAME = 	"trees.csv";
 	
 	public Tree[] getAllTrees() {
 		try {

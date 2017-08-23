@@ -42,9 +42,16 @@ public class StandardFitnessTester implements FitnessTester {
             		fireFitnessCalculatedEvent(solution);
             	}
             }
+
+    		// Target threshold set: Over the threshold => It does not calculate other solution (TODOM: configurable?)
+    		if(env.target.getTargetThreshold()!=null &&
+    				solution.getFitness().overThreshold(env.target.getTargetThreshold())) {
+    			population.bestMatch = solution;
+    			break;
+    		}
             
             // Check if it's best match
-            if(isBestMatch(env.target, population.bestMatch, solution)){
+    		else if(isBestMatch(env.target, population.bestMatch, solution)){
             	population.bestMatch = solution;
             }
             
@@ -74,6 +81,7 @@ public class StandardFitnessTester implements FitnessTester {
 		if(currentBestMatch==null){
 			bestMatch = true;
 		}
+		
 		// Target fitness set: Nearer to desired fitness than current best => TRUE
 		else if(target.getTargetFitness()!=null) {
 			bestMatch = currentSolution.getFitness().nearestThan(currentBestMatch.getFitness(), target.getTargetFitness());

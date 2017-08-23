@@ -56,22 +56,23 @@ public class MexEnvFactory extends AbstractEnvFactory<PerformanceTarget, BigDeci
         Solution maxSol = context.application.solutionsFactory.createPredefined((StandardMetadataGenoma)genoma, Arrays.asList(maxOperandValue, "*", maxOperandValue));
 
 		// Defines goal representation
-        Long target = context.applicationSpecifics.getTargetLong(MexApplication.TARGET_EXPRESSION_RESULT);
-        PerformanceTarget exprTarget = new PerformanceTarget();
-        exprTarget.setGoal(target);
-        exprTarget.setTargetFitness(contextSupplier.getContext().stopConditions.targetFitness);
+        Long targetValue = context.applicationSpecifics.getTargetLong(MexApplication.TARGET_EXPRESSION_RESULT);
+        PerformanceTarget target = new PerformanceTarget();
+        target.setGoal(targetValue);
+        target.setTargetFitness(contextSupplier.getContext().stopConditions.targetFitness);
+    	target.setTargetThreshold(contextSupplier.getContext().stopConditions.targetThreshold); // TODOA: commons to all envfactory
 
         // Determines goal rough measure by deriving from extreme solutions
         // TODOM concept of boundaries
         Long minSolPerformance = (Long) context.application.incubator.grow(minSol.getGenotype(), null).getValue();
         Long maxSolPerformance = (Long) context.application.incubator.grow(maxSol.getGenotype(), null).getValue();
         NumberRawFitness raw = new NumberRawFitness(
-        		new BigDecimal(Math.max(target-minSolPerformance, maxSolPerformance-target)));
+        		new BigDecimal(Math.max(targetValue-minSolPerformance, maxSolPerformance-targetValue)));
         if(raw.value.doubleValue() < 0){
         	throw new RuntimeException("Negative distance not allowed: check numbers precision.");
         }
-        exprTarget.setReferenceMeasure(raw.value);
-		return exprTarget;
+        target.setReferenceMeasure(raw.value);
+		return target;
 	}
 
 

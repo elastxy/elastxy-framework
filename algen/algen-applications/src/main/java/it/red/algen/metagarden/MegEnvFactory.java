@@ -36,12 +36,13 @@ public class MegEnvFactory extends AbstractEnvFactory<String, Double, StandardMe
 	
 	@Override
 	protected PerformanceTarget<String, Double> defineTarget(Genoma genoma) {
-		PerformanceTarget<String,Double> gardenTarget = new PerformanceTarget<String,Double>();
-    	gardenTarget.setGoal(contextSupplier.getContext().applicationSpecifics.getTargetString(MegApplication.TARGET_WELLNESS));
-    	gardenTarget.setTargetFitness(contextSupplier.getContext().stopConditions.targetFitness);
+		PerformanceTarget<String,Double> target = new PerformanceTarget<String,Double>();
+    	target.setGoal(contextSupplier.getContext().applicationSpecifics.getTargetString(MegApplication.TARGET_WELLNESS));
+    	target.setTargetFitness(contextSupplier.getContext().stopConditions.targetFitness);
+    	target.setTargetThreshold(contextSupplier.getContext().stopConditions.targetThreshold); // TODOA: commons to all envfactory
     	// Determines goal rough measure: minimum possible unhappiness (illness), 0.0
-    	gardenTarget.setReferenceMeasure(genoma.getPositionsSize() * 2.0);  // 2 is the maximum value happiness can reach
-		return gardenTarget;
+    	target.setReferenceMeasure(genoma.getPositionsSize() * 2.0);  // 2 is the maximum value happiness can reach
+		return target;
 	}
 
 	@Override

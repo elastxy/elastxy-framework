@@ -13,6 +13,7 @@ public class SolutionTarget implements Target<Solution<?,?>,Object> {
 	public Solution<?,?> goal;
 	public Object measure;
 	public BigDecimal level;
+	public BigDecimal threshold;
 	
 
 	@Override
@@ -40,6 +41,16 @@ public class SolutionTarget implements Target<Solution<?,?>,Object> {
 	@Override
 	public void setTargetFitness(BigDecimal level) {
 		this.level = level;
+	}
+
+	
+	@Override
+	public BigDecimal getTargetThreshold() {
+		return threshold;
+	}
+	@Override
+	public void setTargetThreshold(BigDecimal threshold) {
+		this.threshold = threshold;
 	}
 	
 	public String toString(){

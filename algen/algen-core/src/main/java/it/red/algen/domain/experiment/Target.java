@@ -63,7 +63,18 @@ public interface Target<G,M> {
 	 * 1.0 BEST
 	 * 0.5 AVERAGE
 	 * 0.0 WORST
+	 * 
+	 * The engine tries to reach exactly this value: the nearest solution wins.
 	 */
 	public BigDecimal getTargetFitness();
 	public void setTargetFitness(BigDecimal level);
+	
+
+	/**
+	 * The target threshold of the goal, with respect to normalized fitness.
+	 * Reached this value, solution is the best match and engine stops its execution.
+	 * 
+	 */
+	public BigDecimal getTargetThreshold();
+	public void setTargetThreshold(BigDecimal level);
 }
