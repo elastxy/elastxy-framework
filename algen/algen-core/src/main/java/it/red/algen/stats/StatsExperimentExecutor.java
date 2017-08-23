@@ -56,7 +56,7 @@ public class StatsExperimentExecutor {
         globalStats.totGenerations += stats.generations;
         double bestMatchFitness = stats.lastGeneration.bestMatch.getFitness().getValue().doubleValue();
         globalStats.totFitness += bestMatchFitness;
-        globalStats.maxFitness = Optional.of(globalStats.minFitness.isPresent() ? Math.max(globalStats.minFitness.get(), bestMatchFitness) : bestMatchFitness);
+        globalStats.maxFitness = Optional.of(globalStats.maxFitness.isPresent() ? Math.max(globalStats.minFitness.get(), bestMatchFitness) : bestMatchFitness);
         globalStats.minFitness = Optional.of(globalStats.minFitness.isPresent() ? Math.min(globalStats.minFitness.get(), bestMatchFitness) : bestMatchFitness);
     }
     
