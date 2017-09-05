@@ -40,7 +40,16 @@ public abstract class AbstractApplicationService {
 	}
 	
 	public String executeTrialTest(AlgorithmContext context, int experiments){
-        return executeTrialTest(envFactory(), context, experiments);
+		return executeTrialTest(envFactory(), context, experiments);
+		
+		// TODOM: execute test trial beside normal analysis to compare results
+//		StringBuffer result = new StringBuffer();
+//		result
+//		.append("\n\n*********** NORMAL TEST ***********")
+//		.append(executeAnalysis(envFactory(), context, experiments))
+//		.append("*********** RANDOM TEST ***********")
+//		.append(executeTrialTest(envFactory(), context, experiments));
+//		return result.toString();
 	}
 	
 	protected ExperimentStats executeBenchmark(
