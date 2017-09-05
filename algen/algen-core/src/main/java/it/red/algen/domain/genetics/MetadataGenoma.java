@@ -2,6 +2,7 @@ package it.red.algen.domain.genetics;
 
 import java.util.List;
 import java.util.Map;
+import java.util.SortedMap;
 
 import it.red.algen.engine.AlleleGenerator;
 import it.red.algen.metadata.GeneMetadata;
@@ -12,6 +13,13 @@ import it.red.algen.metadata.Genes;
  * new Alleles, within a Gene specific set, range or totally random based
  * on its characteristics.
  * 
+ * Position codification depends entirely on genotype type.
+ * 
+ * E.g. when multiple chromosomes are involved, positions are in the form of "x.y" instead of "x".
+ * See also: {@link SequenceGenotype}, {@link ChromosomeGenotype}, {@link DoubleStrandGenotype}
+ * 
+ * TODOM: evaluate if it's useful to create a specific MetadataGenoma type "ChromosomeMetadataGenoma"
+ * composing multiple "StandardMetadataGenoma", one for each chromosome...
  * 
  * @author red
  *
@@ -77,7 +85,7 @@ public interface MetadataGenoma extends Genoma {
 	@Override
 	public List<Allele> getRandomAlleles(List<String> positions);
 
-	
+
 	
 	/**
 	 * Generate a new list of random Alleles for every position
@@ -92,7 +100,12 @@ public interface MetadataGenoma extends Genoma {
 	@Override
 	public List<Allele> getRandomAlleles();
 
-	
+	/**
+	 * The same as above but indexed by String position
+	 * @return
+	 */
+	public SortedMap<String, Allele> getRandomAllelesAsMap();
+
 	/**
 	 * Generate new Allele list based on given metadata
 	 * 

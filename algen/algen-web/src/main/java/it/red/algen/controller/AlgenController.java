@@ -29,6 +29,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import it.red.algen.algofrigerator.AlgofrigeratorService;
 import it.red.algen.context.AlgorithmContext;
 import it.red.algen.metaexpressions.ExpressionsService;
 import it.red.algen.metagarden.GardenService;
@@ -47,6 +48,8 @@ public class AlgenController {
 	@Autowired private GardenService gardenService;
 
 	@Autowired private SudokuService sudokuService;
+
+	@Autowired private AlgofrigeratorService algofrigeratorService;
 	
 
 	/**
@@ -72,6 +75,7 @@ public class AlgenController {
 	}
 
 	
+	
 	/**
 	 * ********************* EXPERIMENT CONTROLLER *********************
 	 */
@@ -92,9 +96,13 @@ public class AlgenController {
 		else if("sudoku".equals(domain)){ 
 		 	stats = sudokuService.executeExperiment(context);
 		}
+		else if("algofrigerator".equals(domain)){ 
+		 	stats = algofrigeratorService.executeExperiment(context);
+		}
 		logger.info("RESPONSE Service /experiment/{domain} => "+stats);
 		return stats;
 	}
+	
 
 
 	@RequestMapping("/test/{domain}")
@@ -111,6 +119,9 @@ public class AlgenController {
 		}
 		else if("sudoku".equals(domain)){ 
 		 	stats = sudokuService.executeBenchmark();
+		}
+		else if("algofrigerator".equals(domain)){ 
+		 	stats = algofrigeratorService.executeBenchmark();
 		}
 		logger.info("RESPONSE Service /test/{domain} => "+stats);
 		return stats;
@@ -136,6 +147,9 @@ public class AlgenController {
 		else if("sudoku".equals(domain)){ 
 			result = sudokuService.executeAnalysis(context, experiments);
 		}
+		else if("algofrigerator".equals(domain)){ 
+			result = algofrigeratorService.executeAnalysis(context, experiments);
+		}
 		logger.info("RESPONSE Service /analysis/{domain}/{experiments} => "+result);
         return result;
 	}
@@ -157,6 +171,9 @@ public class AlgenController {
 	 	}
 		else if("sudoku".equals(domain)){ 
 			result = sudokuService.executeTrialTest(context, experiments);
+		}
+		else if("algofrigerator".equals(domain)){ 
+			result = algofrigeratorService.executeTrialTest(context, experiments);
 		}
 		logger.info("RESPONSE Service /trial/{domain}/{experiments} => "+result);
         return result;

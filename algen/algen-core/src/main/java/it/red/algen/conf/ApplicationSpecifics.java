@@ -26,6 +26,11 @@ public class ApplicationSpecifics {
 		return getInteger(target, parKey);
 	}
 
+	public Integer getTargetInteger(String parKey, Integer defaultValue){
+		Integer result = getInteger(target, parKey);
+		return result==null ? defaultValue : result;
+	}
+
 	public Long getTargetLong(String parKey){
 		return getLong(target, parKey);
 	}
@@ -40,12 +45,32 @@ public class ApplicationSpecifics {
 		return getString(params, parKey);
 	}
 	
+	public String getParamString(String parKey, String defaultValue){
+		String result = getString(params, parKey);
+		return result==null ? defaultValue : result;
+	}
+	
 	public Boolean getParamBoolean(String parKey){
 		return getBoolean(params, parKey);
 	}
-
+	
+	public Boolean getParamBoolean(String parKey, Boolean defaultValue){
+		Boolean result = getBoolean(params, parKey);
+		return result==null ? defaultValue : result;
+	}
+	
 	public Integer getParamInteger(String parKey){
 		return getInteger(params, parKey);
+	}
+
+	public Integer getParamInteger(String parKey, Integer defaultValue){
+		Integer result = getInteger(params, parKey);
+		return result==null ? defaultValue : result;
+	}
+	
+	public Long getParamLong(String parKey, Long defaultValue){
+		Long result = getLong(params, parKey);
+		return result==null ? defaultValue : result;
 	}
 	
 	public Long getParamLong(String parKey){

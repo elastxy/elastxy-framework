@@ -1,0 +1,25 @@
+{
+	"metadata" : {
+		"SA_recipe" : {
+			"code" : "SA",
+			"name" : "Savoury recipe id",
+			"type" : "INTEGER"
+		},
+		"SW_recipe" : {
+			"code" : "SW",
+			"name" : "Sweet recipe id",
+			"type" : "INTEGER"
+		},
+		"NE_recipe" : {
+			"code" : "NE",
+			"name" : "Neutral recipe id",
+			"type" : "INTEGER"
+		}
+	},
+	
+	"positions" : {
+		"SA_recipe" :	["0."],
+		"SW_recipe" : 	["1."],
+		"NE_recipe" :	["2."]
+	}
+}

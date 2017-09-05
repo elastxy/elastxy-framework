@@ -1,7 +1,9 @@
 package it.red.algen.metasudoku;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.stereotype.Component;
 
@@ -85,6 +87,7 @@ public class MesGenomaProvider implements GenomaProvider {
     	}
 		
 		// Create restricted genoma
+		Map<String, List<Allele>> alleles = new HashMap<String, List<Allele>>();
 		List<Allele> predefinedAlleles = new ArrayList<Allele>();
 		for(int i=0; i < missingNumbers.size(); i++){
 			Allele<Integer> allele = new Allele<Integer>();
@@ -92,8 +95,10 @@ public class MesGenomaProvider implements GenomaProvider {
 			predefinedAlleles.add(allele);
 		}
 		for(int i=0; i < missingNumbers.size(); i++) {
-			genoma.alleles.put(String.valueOf(i), predefinedAlleles);
+			alleles.put(String.valueOf(i), predefinedAlleles);
 		}
+		
+		genoma.initialize(alleles);
 		
 		return genoma;
 	}

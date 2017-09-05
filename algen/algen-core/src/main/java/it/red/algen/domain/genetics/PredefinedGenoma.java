@@ -6,6 +6,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 
 import it.red.algen.context.Randomizer;
 
@@ -34,11 +35,24 @@ public class PredefinedGenoma implements Genoma {
 	/**
 	 * Map of predefined alleles by position.
 	 */
-	public Map<String, List<Allele>> alleles = new HashMap<String, List<Allele>>();
+	private Map<String, List<Allele>> alleles = new HashMap<String, List<Allele>>();
 
+	
+	public void initialize(Map<String, List<Allele>> alleles){
+		this.alleles = alleles;
+	}
+	
+	
 	@Override
 	public int getPositionsSize(){
 		return alleles.size();
+	}
+
+
+	@Override
+	public List<String> getPositions() {
+		List<String> positions = IntStream.range(0, alleles.size()).boxed().map(i -> i.toString()).collect(Collectors.toList());
+		return positions;
 	}
 
 	@Override
@@ -106,6 +120,24 @@ public class PredefinedGenoma implements Genoma {
 
 	public String toString(){
 		return String.format("PredefinedGenoma: %d alleles, limitedAllelesStrategy %b", alleles.size(), limitedAllelesStrategy);
+	}
+
+
+//	@Override
+//	public int getNumberOfStrands() {
+//		return 0;
+//	}
+
+
+	@Override
+	public int getNumberOfChromosomes() {
+		return 1;
+	}
+
+
+	@Override
+	public int getNumberOfGenes(int chromosome) {
+		return alleles.size();
 	}
 
 }

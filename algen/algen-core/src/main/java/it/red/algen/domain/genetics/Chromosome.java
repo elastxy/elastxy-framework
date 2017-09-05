@@ -16,4 +16,8 @@ public class Chromosome {
 	public String encode(){
 		return genes.stream().map(g -> g.encode()).collect(Collectors.joining());
 	}
+	
+	public String toString(){
+		return genes.toString();
+	}
 }

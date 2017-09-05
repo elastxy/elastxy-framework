@@ -1,25 +1,31 @@
 package it.red.algen.metadata;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
+import java.util.SortedMap;
+import java.util.TreeMap;
 import java.util.stream.Collectors;
-import java.util.stream.IntStream;
 
 import it.red.algen.domain.genetics.Allele;
+import it.red.algen.domain.genetics.GenomaPositionComparator;
 import it.red.algen.domain.genetics.MetadataGenoma;
 import it.red.algen.engine.AlleleGenerator;
 
 
 /**
- * TODOA: add access to list of common alleles in a specific strategy (now all genes share the same 1000 values and must be retrieved with get(0)!)
+ * A Genoma based on metadata, representing type of gene allocated in the postions.
+ * 
+ * TODOA: add access to list of common alleles in a specific strategy
+ * (now all genes share the same 1000 values and must be retrieved with get(0)!)
  * @author red
  */
 public class StandardMetadataGenoma implements MetadataGenoma {
-
+	private static final GenomaPositionComparator POSITIONS_COMPARATOR = new GenomaPositionComparator();
 	
 	/**
 	 * Metadata of all genes type, indexed by code
@@ -28,13 +34,9 @@ public class StandardMetadataGenoma implements MetadataGenoma {
 	
 
 	/**
-	 * Metadata of all genes type, indexed by position
-	 * 
-	 * Used if order is important
-	 * 
-	 * NOTE: hashmap keys are not ordered
+	 * Metadata of all genes type, indexed and ordered by position
 	 */
-	private Map<String,GeneMetadata> genesMetadataByPos = new HashMap<String, GeneMetadata>();
+	private SortedMap<String,GeneMetadata> genesMetadataByPos = new TreeMap<String, GeneMetadata>(POSITIONS_COMPARATOR);
 
 
 	/**
@@ -45,6 +47,22 @@ public class StandardMetadataGenoma implements MetadataGenoma {
 
 	private boolean limitedAllelesStrategy;
 
+//	/**
+//	 * number of strands: 0 is a sequence
+//	 */
+//	private int numberOfStrands = 0;
+	
+	/**
+	 * number of chromosomes: 1 is a sequence
+	 */
+	private Integer numberOfChromosomes = null;
+	
+	/**
+	 * number of genes per chromosome: a list of one value for a sequence
+	 */
+	private List<Integer> numberOfGenes = null;
+	
+	
 	/**
 	 * Inject an allele generator implementation
 	 * @param generator
@@ -57,7 +75,9 @@ public class StandardMetadataGenoma implements MetadataGenoma {
 	@Override
 	public void initialize(Map<String,GeneMetadata> genesMetadataByCode, Map<String,GeneMetadata> genesMetadataByPos){
 		this.genesMetadataByCode = genesMetadataByCode;
-		this.genesMetadataByPos = genesMetadataByPos;
+		this.genesMetadataByPos = new TreeMap<String, GeneMetadata>(POSITIONS_COMPARATOR);
+		this.genesMetadataByPos.putAll(genesMetadataByPos);
+		countElements();
 	}
 	
 	@Override
@@ -65,13 +85,49 @@ public class StandardMetadataGenoma implements MetadataGenoma {
 		Iterator<Entry<String, GeneMetadata>> it = genes.metadata.entrySet().iterator();
 		while(it.hasNext()){
 			Entry<String, GeneMetadata> entry = it.next();
-			genesMetadataByCode.put(entry.getKey(), entry.getValue());
+			genesMetadataByCode.put(entry.getKey(), entry.getValue()); // yes, may be overwritten
 			List<String> positions = genes.positions.get(entry.getKey());
 			for(int p=0; p < positions.size(); p++){
 				genesMetadataByPos.put(String.valueOf(positions.get(p)), entry.getValue());
 			}
 		}
+		countElements();
+	}
+	
+	
+	/**
+	 * Counts elements of all positions
+	 * 
+	 * 
+	 */
+	private void countElements(){
+		List<String> positions = getPositions();
+		for(int p=0; p < positions.size(); p++){
+			String[] splitted = positions.get(p).split("\\.");
+			
+			// Sequence
+			if(splitted.length==1){
+//				numberOfStrands = 0; // no strands
+				numberOfChromosomes = 1; // one chromosome
+				numberOfGenes = Arrays.asList(positions.size()); // one gene per position
+				break;
+			}
+			
+			// Chromosome single strand
+			else if(splitted.length==2){
+//				numberOfStrands = 1; // one strand
+				numberOfChromosomes = new Integer(splitted[0])+1; // at the end will be the higher
+				
+				if(numberOfGenes==null) numberOfGenes = new ArrayList<Integer>(); // first gene of first chromosome
+				if(numberOfGenes.size() < numberOfChromosomes) numberOfGenes.add(new Integer(1));
+				numberOfGenes.set(numberOfChromosomes-1, new Integer(splitted[1])+1);
+			}
 
+			// TODOM: Double strand
+			else if(splitted.length==3){
+				throw new UnsupportedOperationException("NYI");
+			}
+		}
 	}
 
 	public boolean isLimitedAllelesStrategy() {
@@ -86,6 +142,12 @@ public class StandardMetadataGenoma implements MetadataGenoma {
 	@Override
 	public int getPositionsSize(){
 		return genesMetadataByPos.size();
+	}
+	
+
+	@Override
+	public List<String> getPositions() {
+		return new ArrayList<String>(genesMetadataByPos.keySet());
 	}
 
 
@@ -175,6 +237,7 @@ public class StandardMetadataGenoma implements MetadataGenoma {
 		}
 		return result;
 	}
+	
 
 
 	/**
@@ -189,8 +252,22 @@ public class StandardMetadataGenoma implements MetadataGenoma {
 	 */
 	@Override
 	public List<Allele> getRandomAlleles(){
-		List<String> positions = IntStream.range(0, genesMetadataByPos.size()).boxed().map(i -> i.toString()).collect(Collectors.toList());
+		List<String> positions = new ArrayList<String>(genesMetadataByPos.keySet());
+				//IntStream.range(0, genesMetadataByPos.size()).boxed().map(i -> i.toString()).collect(Collectors.toList());
 		return getRandomAlleles(positions);
+	}
+
+
+	@Override
+	public SortedMap<String, Allele> getRandomAllelesAsMap(){
+		List<String> positions = new ArrayList<String>(genesMetadataByPos.keySet());
+		//IntStream.range(0, genesMetadataByPos.size()).boxed().map(i -> i.toString()).collect(Collectors.toList());
+		List<Allele> allelesList = getRandomAlleles(positions);
+		SortedMap<String, Allele> result = new TreeMap<String, Allele>(POSITIONS_COMPARATOR);
+		for(int a=0; a < allelesList.size(); a++){
+			result.put(positions.get(a), allelesList.get(a));
+		}
+		return result;
 	}
 
 	
@@ -250,9 +327,25 @@ public class StandardMetadataGenoma implements MetadataGenoma {
 		forbidLimitedAllelesStrategy();
 		return alleleGenerator.generate(getMetadataByCode(metadataCode), value);
 	}
-	
+
 	
 	public String toString(){
 		return String.format("MetadataGenoma: %d metadata, limited alleles %b", genesMetadataByCode.size(), limitedAllelesStrategy);
 	}
+
+//	@Override
+//	public int getNumberOfStrands() {
+//		return numberOfStrands;
+//	}
+
+	@Override
+	public int getNumberOfChromosomes() {
+		return numberOfChromosomes;
+	}
+
+	@Override
+	public int getNumberOfGenes(int chromosome) {
+		return numberOfGenes.get(chromosome);
+	}
+
 }

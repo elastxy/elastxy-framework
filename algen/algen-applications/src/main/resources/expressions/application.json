@@ -21,7 +21,7 @@
 	},
 	"mutator": {
 		"type" : "java",
-		"content" : "it.red.algen.engine.StandardMutator"
+		"content" : "it.red.algen.engine.SequenceMutator"
 	},
 	"recombinator": {
 		"type" : "java",

@@ -29,6 +29,7 @@ public interface GenomaProvider {
 	/**
 	 * Reduce to the minimum set of information for building solutions
 	 * during current execution
+	 * TODOA: call it "restrict"
 	 * @param target
 	 */
 	public Genoma reduce(Target<?,?> target);

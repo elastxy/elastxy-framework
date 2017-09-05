@@ -35,6 +35,10 @@ import java.math.BigDecimal;
  * Thus, target is often synthesized with a simple piece of information,
  * for avoiding to recalculate it everytime.
  * 
+ * MULTIOBJECTIVE
+ * In some cases, a weights array proportions many different goal,
+ * such as when many chromosomes are involved, each one with its own fitness
+ * 
  * @author grossi
  */
 public interface Target<G,M> {
@@ -59,12 +63,26 @@ public interface Target<G,M> {
 	
 	
 	/**
+	 * Ordered weights in case of multiobjective goal
+	 * @return
+	 */
+	public Double[] getWeights();
+
+	
+	/**
+	 * Set weights of multiobjective goals
+	 * @param weights
+	 */
+	public void setWeights(Double... weights);
+	
+	/**
 	 * The target level of the goal, with respect to normalized fitness:
 	 * 1.0 BEST
 	 * 0.5 AVERAGE
 	 * 0.0 WORST
 	 * 
 	 * The engine tries to reach exactly this value: the nearest solution wins.
+	 * TODOA: move to StopConditions
 	 */
 	public BigDecimal getTargetFitness();
 	public void setTargetFitness(BigDecimal level);

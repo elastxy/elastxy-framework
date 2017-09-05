@@ -1,0 +1,34 @@
+{
+	"name" : "algofrigerator",
+	
+	"solutionsFactory": {
+		"type" : "java",
+		"content" : "it.red.algen.algofrigerator.MefSolutionsFactory"
+	},
+	
+	"incubator": {
+		"type" : "java",
+		"content" : "it.red.algen.algofrigerator.MefIncubator"
+	},
+	"fitnessCalculator": {
+		"type" : "java",
+		"content" : "it.red.algen.algofrigerator.MefFitnessCalculator"
+	},
+	
+	"selector": {
+		"type" : "java",
+		"content" : "it.red.algen.engine.StandardSelector"
+	},
+	"mutator": {
+		"type" : "java",
+		"content" : "it.red.algen.engine.ChromosomeMutator"
+	},
+	"recombinator": {
+		"type" : "java",
+		"content" : "it.red.algen.engine.ChromosomeRecombinator"
+	},
+	"solutionRenderer": {
+		"type" : "java",
+		"content" : "it.red.algen.algofrigerator.MefSolutionRenderer"
+	}
+}

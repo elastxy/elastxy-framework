@@ -5,10 +5,20 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import org.apache.log4j.Logger;
+
+import it.red.algen.domain.genetics.Chromosome;
 import it.red.algen.domain.genetics.Gene;
 import it.red.algen.domain.genetics.MetadataGenoma;
 
+
+/**
+ * Creates Genotype genes by metadata.
+ * @author red
+ *
+ */
 public class MetadataGeneFactory {
+	private static final Logger logger = Logger.getLogger(MetadataGeneFactory.class);
 
 	/**
 	 * Create a new Gene structure without Allele from metadata
@@ -57,12 +67,46 @@ public class MetadataGeneFactory {
 		return result;
 	}
 	
+	
+	/**
+	 * Create a new gene by metadata
+	 * @param metadataCode
+	 * @param position
+	 * @param metadata
+	 * @return
+	 */
 	private static Gene createGene(String metadataCode, String position, GeneMetadata metadata) {
 		Gene gene = new Gene();
 		gene.metadataCode = metadataCode;
 		gene.pos = position;
 		gene.locationProperties = new HashMap<String, Object>(metadata.userProperties);
 		return gene;
+	}
+	
+	
+	/**
+	 * Creates a new strand composed by chromosomes given genoma positions
+	 * @param genoma
+	 * @return
+	 */
+	public static List<Chromosome> createStrand(MetadataGenoma genoma){
+		List<Chromosome> result = new ArrayList<Chromosome>();
+//		if(genoma.getNumberOfStrands()!=1){
+//			String msg = "Cannot create strand. Genoma with number of strands different from one: "+genoma.getNumberOfStrands();
+//			logger.error(msg);
+//			throw new IllegalArgumentException(msg);
+//		}
+		
+		for(int c=0; c < genoma.getNumberOfChromosomes(); c++){
+			Chromosome chromosome = new Chromosome();
+			for(int g=0; g < genoma.getNumberOfGenes(c); g++){
+				Gene gene = createGeneByPosition(genoma, c+"."+g);
+				chromosome.genes.add(gene);
+			}
+			result.add(chromosome);
+		}
+		//		IntStream.range(0, genesMetadataByPos.size()).boxed().map(i -> i.toString()).collect(Collectors.toList());
+		return result;
 	}
 
 }

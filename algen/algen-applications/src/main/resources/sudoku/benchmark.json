@@ -15,7 +15,7 @@
 		"initialSelectionRandom": true
 	},
 	"stopConditions": {
-		"targetFitness" : 0.9,
+		"targetFitness" : 1.0,
 		"maxIterations": -1,
 		"maxLifetimeMs": 3000,
 		"maxIdenticalFitnesses": -1

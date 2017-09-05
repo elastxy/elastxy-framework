@@ -32,11 +32,18 @@ public class SequenceRecombinator implements Recombinator<Solution> {
 		// Define cut point
 		// TODOM: define cut point from metadata!
 		SequenceGenotype genotype0 = (SequenceGenotype)parents.get(0).getGenotype();
-		int crossoverPoint = Math.floorDiv(genotype0.genes.size(), 2);
+		List<Gene> genes = genotype0.genes;
+		
+		
+		
+		
+		int crossoverPoint = Math.floorDiv(genes.size(), 2);
 		
 		// Define parents and children as initial clones of the parents
 		Solution offspring0 = parents.get(0).copy();
         Solution offspring1 = parents.get(1).copy();
+        List<Gene> offspring0Genes = ((SequenceGenotype)offspring0.getGenotype()).genes;
+        List<Gene> offspring1Genes = ((SequenceGenotype)offspring1.getGenotype()).genes;
         
         // Reset Fitness values
         offspring0.setFitness(null);
@@ -46,31 +53,11 @@ public class SequenceRecombinator implements Recombinator<Solution> {
 		offsprings[0] = offspring0;
 		offsprings[1] = offspring1;
         
+		
         // Recombine redistributing genotype on two offsprings
-		cutAndSwapGenotypes(
-				(SequenceGenotype)offspring0.getGenotype(), 
-				(SequenceGenotype)offspring1.getGenotype(), 
-				crossoverPoint);
+		RecombinatorLogics.cutAndSwapSequence(offspring0Genes, offspring1Genes, crossoverPoint);
 		
 		// Returns the array
         return Arrays.asList(offsprings);
     }
-	
-
-	private void cutAndSwapGenotypes(SequenceGenotype off0, SequenceGenotype off1, int crossoverPoint){
-		int sequenceEnd = off0.genes.size();
-
-		for(int pos=0; pos < sequenceEnd; pos++){
-			if(pos < crossoverPoint){
-				Gene tmp = off0.genes.get(pos);
-				off0.genes.set(pos, off1.genes.get(pos));
-				off1.genes.set(pos, tmp);
-			}
-			else {
-				Gene tmp = off1.genes.get(pos);
-				off1.genes.set(pos, off0.genes.get(pos));
-				off0.genes.set(pos, tmp);
-			}
-		}
-	}
 }

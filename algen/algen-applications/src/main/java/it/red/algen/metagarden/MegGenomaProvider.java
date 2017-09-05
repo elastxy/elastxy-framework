@@ -73,10 +73,8 @@ public class MegGenomaProvider implements GenomaProvider {
 			
 			genesMetadataByCode.put(metadata.code, metadata);
 			genesMetadataByPos.put(String.valueOf(pos), metadata);
-
-			genoma.initialize(genesMetadataByCode, genesMetadataByPos);
-
 		}
+		genoma.initialize(genesMetadataByCode, genesMetadataByPos);
 		
 		cachedGenoma = genoma;
 	}

@@ -7,24 +7,12 @@ import it.red.algen.domain.experiment.Solution;
 import it.red.algen.domain.genetics.Allele;
 import it.red.algen.domain.genetics.Genoma;
 
-/**
- * Standard mutator based on metadata
- * @author red
- *
- */
-public class StandardMutator implements Mutator<Solution, Genoma> {
-	
+public class MutatorLogics {
 
-	@Override
-	public Solution mutate(Solution solution, Genoma genoma) {
-		
-		// Reset fitness so that it must be recalculated
-		solution.setFitness(null);
-		
-		// Replace an allele to another of genoma for the same position
-		List<String> positions = solution.getGenotype().getPositions();
+	
+	public static void mutate(Solution solution, Genoma genoma, List<String> positions) {
+		// TODOM: remove redundancies, next rows are common to SequenceMutator
 		String positionToMutate = positions.get(Randomizer.nextInt(positions.size()));
-		
 		if(genoma.isLimitedAllelesStrategy()){
 			Allele newAllele = genoma.getRandomAllele(positionToMutate);
 			solution.getGenotype().swapAllele(positionToMutate, newAllele);
@@ -33,7 +21,7 @@ public class StandardMutator implements Mutator<Solution, Genoma> {
 			Allele newAllele = genoma.getRandomAllele(positionToMutate);
 			solution.getGenotype().replaceAllele(positionToMutate, newAllele);
 		}
-		return solution;
 	}
-
+	
+	
 }

@@ -6,7 +6,7 @@ import org.springframework.stereotype.Component;
 import it.red.algen.context.AlgorithmContext;
 import it.red.algen.dataaccess.EnvFactory;
 import it.red.algen.engine.SequenceRecombinator;
-import it.red.algen.engine.StandardMutator;
+import it.red.algen.engine.SequenceMutator;
 import it.red.algen.engine.StandardSelector;
 import it.red.algen.service.AbstractApplicationService;
 
@@ -32,7 +32,7 @@ public class GardenService extends AbstractApplicationService{
 		context.application.fitnessCalculator = new MegFitnessCalculator();
 		context.application.fitnessCalculator.setup(context.application.incubator);
 		context.application.selector = new StandardSelector();
-		context.application.mutator = new StandardMutator();
+		context.application.mutator = new SequenceMutator();
 		context.application.recombinator = new SequenceRecombinator();
 		
 		context.application.selector.setup(context.parameters);

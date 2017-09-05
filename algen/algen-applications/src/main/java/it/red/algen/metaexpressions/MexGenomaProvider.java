@@ -56,7 +56,7 @@ public class MexGenomaProvider implements GenomaProvider {
 		genoma.setupAlleleGenerator(alleleGenerator);
 		
 		// Retrieves metadata
-		Genes genes = retrieveGenesMetadata();
+		Genes genes = ReadConfigSupport.retrieveGenesMetadata(this.contextSupplier.getContext().application.name);
 		
 		// Add context specific values
 		Long maxValue = contextSupplier.getContext().applicationSpecifics.getParamLong(MexApplication.MAX_OPERAND_VALUE);
@@ -66,21 +66,6 @@ public class MexGenomaProvider implements GenomaProvider {
 		// Initialize Genoma
 		genoma.initialize(genes);
 		cachedGenoma = genoma;
-	}
-
-
-
-	private Genes retrieveGenesMetadata() {
-		Genes genes;
-		String classpathResource = "/"+this.contextSupplier.getContext().application.name+"/genes.json";
-		try {
-			genes = (Genes)ReadConfigSupport.readJSON(classpathResource, Genes.class);
-		} catch (IOException e) {
-			String msg = "Error while getting classpath resource "+classpathResource+". Ex: "+e;
-			logger.error(msg, e);
-			throw new ConfigurationException(msg, e);
-		}
-		return genes;
 	}
 
 	

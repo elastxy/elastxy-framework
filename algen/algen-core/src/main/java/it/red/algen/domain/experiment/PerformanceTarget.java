@@ -15,6 +15,9 @@ import java.math.BigDecimal;
 public class PerformanceTarget<G,M> implements Target<G,M> {
 	public G goal;
 	public M measure;
+	
+	public Double[] weights;
+	
 	public BigDecimal level;
 	public BigDecimal threshold;
 
@@ -63,5 +66,13 @@ public class PerformanceTarget<G,M> implements Target<G,M> {
 	
 	public String toString(){
 		return String.format("PerformanceTarget[goal=%d;level=%.3f,threshold=%.3f", goal, level, threshold);
+	}
+	@Override
+	public Double[] getWeights() {
+		return weights;
+	}
+	@Override
+	public void setWeights(Double... weights) {
+		this.weights = weights;
 	}
 }
