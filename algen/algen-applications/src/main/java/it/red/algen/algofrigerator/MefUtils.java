@@ -30,6 +30,8 @@ public class MefUtils {
 	/**
 	 * Check if recipe is covered fully, partially, none.
 	 * 
+	 * Partial: at least 50% of ingredients must be present
+	 * 
 	 * TODOA: pantry+refrigerator foods
 	 */
 	public static IngredientsCoverage checkCoverage(Recipe recipe, List<String> refrigeratorFoods){
@@ -40,7 +42,7 @@ public class MefUtils {
 		if(notAvailable.isEmpty()){
 			recipe.coverage = IngredientsCoverage.FULL;
 		}
-		else if(notAvailable.size()==recipe.ingredients.size()){
+		else if(notAvailable.size() >= Math.floor(recipe.ingredients.size() / 2.0)){
 			recipe.coverage = IngredientsCoverage.NONE;
 		}
 		else {

@@ -85,7 +85,7 @@
 								],
 								"body": {
 									"mode": "raw",
-									"raw": "{\n\t\"applicationSpecifics\": {\n\t\t\"target\" : {\n\t\t\t\"TARGET_EXPRESSION_RESULT\" : 235000000000\n\t\t},\n\t\t\"params\" : {\n\t\t\t\"MAX_OPERAND_VALUE\" : \"1000000\"\n\t\t}\n\t},\n\t\"parameters\": {\n\t\t\"recombinationPerc\": 0.8,\n\t\t\"mutationPerc\": 0.2,\n\t\t\"elitarism\": true,\n\t\t\"initialSelectionNumber\": 100,\n\t\t\"initialSelectionRandom\": true\n\t},\n\t\"stopConditions\": {\n\t\t\"targetFitness\" : 0.9,\n\t\t\"maxIterations\": -1,\n\t\t\"maxLifetimeMs\": 3000,\n\t\t\"maxIdenticalFitnesses\": -1\n\t},\n\t\"monitoringConfiguration\": {\n\t\t\"verbose\": false\n\t}\n}"
+									"raw": "{\n\t\"applicationSpecifics\": {\n\t\t\"target\" : {\n\t\t\t\"TARGET_EXPRESSION_RESULT\" : 235000\n\t\t},\n\t\t\"params\" : {\n\t\t\t\"MAX_OPERAND_VALUE\" : \"1000\"\n\t\t}\n\t},\n\t\"parameters\": {\n\t\t\"recombinationPerc\": 0.8,\n\t\t\"mutationPerc\": 0.2,\n\t\t\"elitarism\": true,\n\t\t\"initialSelectionNumber\": 10,\n\t\t\"initialSelectionRandom\": true\n\t},\n\t\"stopConditions\": {\n\t\t\"maxIterations\": -1,\n\t\t\"maxLifetimeMs\": 3000,\n\t\t\"maxIdenticalFitnesses\": -1\n\t},\n\t\"monitoringConfiguration\": {\n\t\t\"verbose\": false\n\t}\n}"
 								},
 								"description": ""
 							},
@@ -125,7 +125,7 @@
 								],
 								"body": {
 									"mode": "raw",
-									"raw": "{\n\t\"applicationSpecifics\": {\n\t\t\"target\" : {\n\t\t\t\"TARGET_EXPRESSION_RESULT\" : 235000\n\t\t},\n\t\t\"params\" : {\n\t\t\t\"MAX_OPERAND_VALUE\" : \"1000\"\n\t\t}\n\t},\n\t\"parameters\": {\n\t\t\"initialSelectionNumber\": 100,\n\t\t\"initialSelectionRandom\": true\n\t},\n\t\"stopConditions\": {\n\t\t\"targetFitness\": 1.0,\n\t\t\"maxIterations\": -1,\n\t\t\"maxLifetimeMs\": 1000\n\t},\n\t\"monitoringConfiguration\": {\n\t}\n}"
+									"raw": "{\n\t\"applicationSpecifics\": {\n\t\t\"target\" : {\n\t\t\t\"TARGET_EXPRESSION_RESULT\" : 235000\n\t\t},\n\t\t\"params\" : {\n\t\t\t\"MAX_OPERAND_VALUE\" : \"1000\"\n\t\t}\n\t},\n\t\"parameters\": {\n\t\t\"initialSelectionNumber\": 10,\n\t\t\"initialSelectionRandom\": true\n\t},\n\t\"stopConditions\": {\n\t\t\"targetFitness\": 1.0,\n\t\t\"targetThreshold\": 0.999,\n\t\t\"maxIterations\": -1,\n\t\t\"maxLifetimeMs\": 2000\n\t},\n\t\"monitoringConfiguration\": {\n\t}\n}"
 								},
 								"description": ""
 							},
@@ -163,7 +163,7 @@
 								],
 								"body": {
 									"mode": "raw",
-									"raw": "{\n\t\"applicationSpecifics\": {\n\t\t\"target\" : {\n\t\t\t\"TARGET_WELLNESS\" : \"happy\"\n\t\t},\n\t\t\"params\" : {\n\t\t\t\"LIMITED_TREES\" : true\n\t\t}\n\t},\n\t\"parameters\": {\n\t\t\"recombinationPerc\": 0.8,\n\t\t\"mutationPerc\": 0.2,\n\t\t\"elitarism\": true,\n\t\t\"initialSelectionNumber\": 100,\n\t\t\"initialSelectionRandom\": true\n\t},\n\t\"stopConditions\": {\n\t\t\"maxIterations\": -1,\n\t\t\"maxLifetimeMs\": 3000,\n\t\t\"maxIdenticalFitnesses\": -1\n\t},\n\t\"monitoringConfiguration\": {\n\t\t\"verbose\": false\n\t}\n}"
+									"raw": "{\n\t\"applicationSpecifics\": {\n\t\t\"target\" : {\n\t\t\t\"TARGET_WELLNESS\" : \"happy\"\n\t\t},\n\t\t\"params\" : {\n\t\t\t\"LIMITED_TREES\" : false\n\t\t}\n\t},\n\t\"parameters\": {\n\t\t\"recombinationPerc\": 0.8,\n\t\t\"mutationPerc\": 0.2,\n\t\t\"elitarism\": true,\n\t\t\"initialSelectionNumber\": 10,\n\t\t\"initialSelectionRandom\": true\n\t},\n\t\"stopConditions\": {\n\t\t\"maxIterations\": -1,\n\t\t\"maxLifetimeMs\": 3000,\n\t\t\"maxIdenticalFitnesses\": -1\n\t},\n\t\"monitoringConfiguration\": {\n\t\t\"verbose\": false\n\t}\n}"
 								},
 								"description": ""
 							},
@@ -261,7 +261,7 @@
 								],
 								"body": {
 									"mode": "raw",
-									"raw": "{\n\t\"parameters\": {\n\t\t\"recombinationPerc\": 0.8,\n\t\t\"mutationPerc\": 0.2,\n\t\t\"elitarism\": true,\n\t\t\"initialSelectionNumber\": 100,\n\t\t\"initialSelectionRandom\": true\n\t},\n\t\"stopConditions\": {\n\t\t\"maxIterations\": -1,\n\t\t\"maxLifetimeMs\": 5000,\n\t\t\"maxIdenticalFitnesses\": -1\n\t},\n\t\"monitoringConfiguration\": {\n\t\t\"verbose\": false\n\t}\n}"
+									"raw": "{\n\t\"parameters\": {\n\t\t\"recombinationPerc\": 0.8,\n\t\t\"mutationPerc\": 0.2,\n\t\t\"elitarism\": true,\n\t\t\"initialSelectionNumber\": 100,\n\t\t\"initialSelectionRandom\": true\n\t},\n\t\"stopConditions\": {\n\t\t\"maxIterations\": -1,\n\t\t\"maxLifetimeMs\": 3000,\n\t\t\"maxIdenticalFitnesses\": -1\n\t},\n\t\"monitoringConfiguration\": {\n\t\t\"verbose\": false\n\t}\n}"
 								},
 								"description": ""
 							},
@@ -282,6 +282,137 @@
 								"body": {
 									"mode": "raw",
 									"raw": "{\n\t\"applicationSpecifics\": {\n\t},\n\t\"parameters\": {\n\t\t\"initialSelectionNumber\": 100,\n\t\t\"initialSelectionRandom\": true\n\t},\n\t\"stopConditions\": {\n\t\t\"maxIterations\": -1,\n\t\t\"maxLifetimeMs\": 5000\n\t},\n\t\"monitoringConfiguration\": {\n\t}\n}"
+								},
+								"description": ""
+							},
+							"response": []
+						}
+					],
+					"_postman_isSubFolder": true
+				},
+				{
+					"name": "algorifero",
+					"description": "",
+					"item": [
+						{
+							"name": "/test/algofrigerator",
+							"request": {
+								"url": "http://{{ip}}:{{port}}/test/algofrigerator",
+								"method": "GET",
+								"header": [],
+								"body": {},
+								"description": ""
+							},
+							"response": []
+						},
+						{
+							"name": "/experiment/algofrigerator",
+							"request": {
+								"url": "http://{{ip}}:{{port}}/experiment/algofrigerator",
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"description": ""
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n\t\"applicationSpecifics\": {\n\t\t\"target\" : {\n\t\t\t\"TARGET_DESIRED_MEALS\" : 10,\n\t\t\t\"TARGET_SAVOURY_PROPORTION\" : 70,\n\t\t\t\"TARGET_SWEET_PROPORTION\" : 30\n\t\t},\n\t\t\"params\" : {\n\t\t\t\"REFRIGERATOR_FOODS\" : [ \"milk\",\"eggs\",\"parmesan\"],\n\t\t\t\"PANTRY_FOODS\" : [ \"salt\",\"sugar\",\"oil\",\"pepper\",\"flour\",\"bread\",\"pasta\",\"coffee\",\"jam\",\"peas\"]\n\t\t}\n\t},\n\t\"parameters\": {\n\t\t\"recombinationPerc\": 0.8,\n\t\t\"mutationPerc\": 0.2,\n\t\t\"elitarism\": true,\n\t\t\"initialSelectionNumber\": 5,\n\t\t\"initialSelectionRandom\": true\n\t},\n\t\"stopConditions\": {\n\t\t\"targetFitness\" : 1.0,\n\t\t\"maxIterations\": -1,\n\t\t\"maxLifetimeMs\": 3000,\n\t\t\"maxIdenticalFitnesses\": -1\n\t},\n\t\"monitoringConfiguration\": {\n\t\t\"verbose\": false,\n\t\t\"traceHistory\": false\n\t}\n}"
+								},
+								"description": ""
+							},
+							"response": [
+								{
+									"id": "e44f13a9-8293-482d-b460-40176320d836",
+									"name": "Complete foods",
+									"originalRequest": {
+										"url": "http://{{ip}}:{{port}}/experiment/algofrigerator",
+										"method": "POST",
+										"header": [
+											{
+												"key": "Content-Type",
+												"value": "application/json",
+												"description": ""
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n\t\"applicationSpecifics\": {\n\t\t\"target\" : {\n\t\t\t\"TARGET_DESIRED_MEALS\" : 10,\n\t\t\t\"TARGET_SAVOURY_PROPORTION\" : 70,\n\t\t\t\"TARGET_SWEET_PROPORTION\" : 30\n\t\t},\n\t\t\"params\" : {\n\t\t\t\"REFRIGERATOR_FOODS\" : \"[\\\"eggs\\\",\\\"milk\\\",\\\"tomatoes\\\"]\",\n\t\t\t\"PANTRY_FOODS\" : \"[\\\"salt\\\",\\\"sugar\\\",\\\"oil\\\",\\\"pepper\\\",\\\"flour\\\",\\\"semola\\\",\\\"bread\\\",\\\"coffee\\\"]\"\n\t\t}\n\t},\n\t\"parameters\": {\n\t\t\"recombinationPerc\": 0.8,\n\t\t\"mutationPerc\": 0.2,\n\t\t\"elitarism\": true,\n\t\t\"initialSelectionNumber\": 5,\n\t\t\"initialSelectionRandom\": true\n\t},\n\t\"stopConditions\": {\n\t\t\"targetFitness\" : 1.0,\n\t\t\"maxIterations\": -1,\n\t\t\"maxLifetimeMs\": 3000,\n\t\t\"maxIdenticalFitnesses\": -1\n\t},\n\t\"monitoringConfiguration\": {\n\t\t\"verbose\": false,\n\t\t\"traceHistory\": false\n\t}\n}"
+										}
+									},
+									"status": "OK",
+									"code": 200,
+									"_postman_previewlanguage": "json",
+									"_postman_previewtype": "text",
+									"header": [
+										{
+											"name": "content-type",
+											"key": "content-type",
+											"value": "application/json;charset=UTF-8",
+											"description": "The mime type of this content"
+										},
+										{
+											"name": "date",
+											"key": "date",
+											"value": "Tue, 05 Sep 2017 21:12:29 GMT",
+											"description": "The date and time that the message was sent"
+										},
+										{
+											"name": "transfer-encoding",
+											"key": "transfer-encoding",
+											"value": "chunked",
+											"description": "The form of encoding used to safely transfer the entity to the user. Currently defined methods are: chunked, compress, deflate, gzip, identity."
+										},
+										{
+											"name": "x-application-context",
+											"key": "x-application-context",
+											"value": "application",
+											"description": "Custom header"
+										}
+									],
+									"cookie": [],
+									"responseTime": 3086,
+									"body": "{\"target\":{\"goal\":{\"refrigeratorFoods\":[\"salt\",\"sugar\",\"oil\",\"pepper\",\"flour\",\"semola\",\"bread\",\"coffee\"],\"pantry\":[],\"desiredMeals\":10,\"savouryMeals\":7,\"sweetMeals\":3},\"measure\":null,\"weights\":[0.7,0.3],\"level\":1.0,\"threshold\":null,\"targetFitness\":1.0,\"targetThreshold\":null,\"referenceMeasure\":null},\"lastGeneration\":{\"bestMatch\":{\"genotype\":{\"chromosomes\":[{\"genes\":[{\"pos\":\"0.0\",\"metadataCode\":\"SA\",\"locationProperties\":{},\"allele\":{\"value\":20,\"dominant\":false}},{\"pos\":\"0.1\",\"metadataCode\":\"SA\",\"locationProperties\":{},\"allele\":{\"value\":19,\"dominant\":false}},{\"pos\":\"0.2\",\"metadataCode\":\"SA\",\"locationProperties\":{},\"allele\":{\"value\":4,\"dominant\":false}},{\"pos\":\"0.3\",\"metadataCode\":\"SA\",\"locationProperties\":{},\"allele\":{\"value\":12,\"dominant\":false}},{\"pos\":\"0.4\",\"metadataCode\":\"SA\",\"locationProperties\":{},\"allele\":{\"value\":10,\"dominant\":false}},{\"pos\":\"0.5\",\"metadataCode\":\"SA\",\"locationProperties\":{},\"allele\":{\"value\":21,\"dominant\":false}},{\"pos\":\"0.6\",\"metadataCode\":\"SA\",\"locationProperties\":{},\"allele\":{\"value\":1,\"dominant\":false}}]},{\"genes\":[{\"pos\":\"1.0\",\"metadataCode\":\"SW\",\"locationProperties\":{},\"allele\":{\"value\":5,\"dominant\":false}},{\"pos\":\"1.1\",\"metadataCode\":\"SW\",\"locationProperties\":{},\"allele\":{\"value\":5,\"dominant\":false}},{\"pos\":\"1.2\",\"metadataCode\":\"SW\",\"locationProperties\":{},\"allele\":{\"value\":9,\"dominant\":false}}]},{\"genes\":[{\"pos\":\"2.0\",\"metadataCode\":\"NE\",\"locationProperties\":{},\"allele\":{\"value\":18,\"dominant\":false}},{\"pos\":\"2.1\",\"metadataCode\":\"NE\",\"locationProperties\":{},\"allele\":{\"value\":3,\"dominant\":false}},{\"pos\":\"2.2\",\"metadataCode\":\"NE\",\"locationProperties\":{},\"allele\":{\"value\":3,\"dominant\":false}},{\"pos\":\"2.3\",\"metadataCode\":\"NE\",\"locationProperties\":{},\"allele\":{\"value\":18,\"dominant\":false}},{\"pos\":\"2.4\",\"metadataCode\":\"NE\",\"locationProperties\":{},\"allele\":{\"value\":3,\"dominant\":false}},{\"pos\":\"2.5\",\"metadataCode\":\"NE\",\"locationProperties\":{},\"allele\":{\"value\":3,\"dominant\":false}},{\"pos\":\"2.6\",\"metadataCode\":\"NE\",\"locationProperties\":{},\"allele\":{\"value\":18,\"dominant\":false}},{\"pos\":\"2.7\",\"metadataCode\":\"NE\",\"locationProperties\":{},\"allele\":{\"value\":3,\"dominant\":false}},{\"pos\":\"2.8\",\"metadataCode\":\"NE\",\"locationProperties\":{},\"allele\":{\"value\":18,\"dominant\":false}},{\"pos\":\"2.9\",\"metadataCode\":\"NE\",\"locationProperties\":{},\"allele\":{\"value\":3,\"dominant\":false}}]}],\"numberOfChromosomes\":3,\"positions\":[\"0.0\",\"0.1\",\"0.2\",\"0.3\",\"0.4\",\"0.5\",\"0.6\",\"1.0\",\"1.1\",\"1.2\",\"2.0\",\"2.1\",\"2.2\",\"2.3\",\"2.4\",\"2.5\",\"2.6\",\"2.7\",\"2.8\",\"2.9\"]},\"phenotype\":{\"value\":{\"PHENOTYPE_SWEET_RECIPES\":[{\"id\":5,\"name\":\"porridge\",\"recipeType\":\"SWEET\",\"ingredients\":[\"milk\",\"semola\",\"sugar\"],\"coverage\":\"PARTIAL\",\"notAvailable\":[\"milk\"]},{\"id\":9,\"name\":\"milk\",\"recipeType\":\"SWEET\",\"ingredients\":[\"milk\",\"sugar\"],\"coverage\":\"PARTIAL\",\"notAvailable\":[\"milk\"]},{\"id\":3,\"name\":\"crepes\",\"recipeType\":\"NEUTRAL\",\"ingredients\":[\"eggs\",\"milk\",\"flour\"],\"coverage\":\"PARTIAL\",\"notAvailable\":[\"eggs\",\"milk\"]}],\"PHENOTYPE_COMPLETENESS_POINTS\":5.0,\"PHENOTYPE_SAVOURY_RECIPES\":[{\"id\":1,\"name\":\"pasta al sugo\",\"recipeType\":\"SAVOURY\",\"ingredients\":[\"tomatoes\",\"onion\",\"oil\",\"parmesan\",\"pasta\",\"salt\"],\"coverage\":\"PARTIAL\",\"notAvailable\":[\"tomatoes\",\"onion\",\"parmesan\",\"pasta\"]},{\"id\":4,\"name\":\"panino tonno\",\"recipeType\":\"SAVOURY\",\"ingredients\":[\"bread\",\"tuna\",\"mayo\",\"tomatoes\"],\"coverage\":\"PARTIAL\",\"notAvailable\":[\"tuna\",\"mayo\",\"tomatoes\"]},{\"id\":10,\"name\":\"pasta e acciughe\",\"recipeType\":\"SAVOURY\",\"ingredients\":[\"bread\",\"oil\",\"pasta\",\"rice\",\"milk\",\"anchovies\",\"sugar\"],\"coverage\":\"PARTIAL\",\"notAvailable\":[\"pasta\",\"rice\",\"milk\",\"anchovies\"]},{\"id\":12,\"name\":\"wurstel e patate\",\"recipeType\":\"SAVOURY\",\"ingredients\":[\"salt\",\"wurstel\",\"potatoes\",\"butter\",\"onion\"],\"coverage\":\"PARTIAL\",\"notAvailable\":[\"wurstel\",\"potatoes\",\"butter\",\"onion\"]},{\"id\":19,\"name\":\"pane e prosciutto\",\"recipeType\":\"SAVOURY\",\"ingredients\":[\"bread\",\"ham\"],\"coverage\":\"PARTIAL\",\"notAvailable\":[\"ham\"]},{\"id\":20,\"name\":\"bruschetta\",\"recipeType\":\"SAVOURY\",\"ingredients\":[\"oil\",\"olives\",\"anchovies\",\"tomatoes\"],\"coverage\":\"PARTIAL\",\"notAvailable\":[\"olives\",\"anchovies\",\"tomatoes\"]},{\"id\":21,\"name\":\"frittata\",\"recipeType\":\"SAVOURY\",\"ingredients\":[\"oil\",\"eggs\"],\"coverage\":\"PARTIAL\",\"notAvailable\":[\"eggs\"]}]}},\"fitness\":{\"value\":0.50,\"legalCheck\":null,\"rawValue\":{\"value\":5.0}}}},\"generations\":270,\"time\":3005.0,\"totIdenticalFitnesses\":269,\"targetReached\":false}"
+								}
+							]
+						},
+						{
+							"name": "/analysis/algofrigerator",
+							"request": {
+								"url": "http://{{ip}}:{{port}}/analysis/algofrigerator/3",
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"description": ""
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n\t\"applicationSpecifics\": {\n\t\t\"target\" : {\n\t\t\t\"TARGET_SAVOURY_PROPORTION\" : 70\n\t\t},\n\t\t\"params\" : {\n\t\t\t\"TARGET_SWEET_PROPORTION\" : 30\n\t\t}\n\t},\n\t\"parameters\": {\n\t\t\"recombinationPerc\": 0.8,\n\t\t\"mutationPerc\": 0.2,\n\t\t\"elitarism\": true,\n\t\t\"initialSelectionNumber\": 5,\n\t\t\"initialSelectionRandom\": true\n\t},\n\t\"stopConditions\": {\n\t\t\"targetFitness\" : 1.0,\n\t\t\"maxIterations\": -1,\n\t\t\"maxLifetimeMs\": 3000,\n\t\t\"maxIdenticalFitnesses\": -1\n\t},\n\t\"monitoringConfiguration\": {\n\t\t\"verbose\": false,\n\t\t\"traceHistory\": false\n\t}\n}"
+								},
+								"description": ""
+							},
+							"response": []
+						},
+						{
+							"name": "/trial/algofrigerator",
+							"request": {
+								"url": "http://{{ip}}:{{port}}/trial/algofrigerator/3",
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"description": ""
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n\t\"applicationSpecifics\": {\n\t\t\"target\" : {\n\t\t\t\"TARGET_SAVOURY_PROPORTION\" : 70\n\t\t},\n\t\t\"params\" : {\n\t\t\t\"TARGET_SWEET_PROPORTION\" : 30\n\t\t}\n\t},\n\t\"parameters\": {\n\t\t\"initialSelectionNumber\": 5,\n\t\t\"initialSelectionRandom\": true\n\t},\n\t\"stopConditions\": {\n\t\t\"targetFitness\": 1.0,\n\t\t\"maxIterations\": -1,\n\t\t\"maxLifetimeMs\": 1000\n\t},\n\t\"monitoringConfiguration\": {\n\t}\n}"
 								},
 								"description": ""
 							},

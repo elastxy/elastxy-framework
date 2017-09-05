@@ -11,10 +11,10 @@ RECIPE_ID,RECIPE_TYPE,RECIPE_NAME,INGREDIENT_CODE
 3,NE,crepes,eggs
 3,NE,crepes,milk
 3,NE,crepes,flour
-4,SA,panino tonno,bread
-4,SA,panino tonno,tuna
-4,SA,panino tonno,mayo
-4,SA,panino tonno,tomatoes
+4,SA,panino al tonno,bread
+4,SA,panino al tonno,tuna
+4,SA,panino al tonno,mayo
+4,SA,panino al tonno,tomatoes
 5,SW,porridge,milk
 5,SW,porridge,semola
 5,SW,porridge,sugar
@@ -34,10 +34,7 @@ RECIPE_ID,RECIPE_TYPE,RECIPE_NAME,INGREDIENT_CODE
 10,SA,pasta e acciughe,bread
 10,SA,pasta e acciughe,oil
 10,SA,pasta e acciughe,pasta
-10,SW,rice milk,rice
-10,SW,rice milk,milk
 10,SA,pasta e acciughe,anchovies
-10,SW,rice milk,sugar
 11,SA,uova al tegame,oil
 11,SA,uova al tegame,salt
 11,SA,uova al tegame,eggs
@@ -75,3 +72,10 @@ RECIPE_ID,RECIPE_TYPE,RECIPE_NAME,INGREDIENT_CODE
 21,SA,frittata,eggs
 22,SA,cocktail di scampi,schrimps
 22,SA,cocktail di scampi,mayo
+23,SW,pane e nutella,nutella
+23,SW,pane e nutella,bread
+24,SW,pane e marmellata,jam
+24,SW,pane e marmellata,bread
+25,SW,rice milk,rice
+25,SW,rice milk,milk
+25,SW,rice milk,sugar

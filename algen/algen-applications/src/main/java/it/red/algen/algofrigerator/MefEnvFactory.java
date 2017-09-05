@@ -14,6 +14,7 @@ import java.io.IOException;
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -58,8 +59,8 @@ public class MefEnvFactory extends AbstractEnvFactory<PerformanceTarget, BigDeci
 		Integer desiredMeals = context.applicationSpecifics.getTargetInteger(MefApplication.TARGET_DESIRED_MEALS, MefApplication.DEFAULT_DESIRED_MEALS);
 		Integer savouryProportion = context.applicationSpecifics.getTargetInteger(MefApplication.TARGET_SAVOURY_PROPORTION, MefApplication.DEFAULT_SAVOURY_PROPORTION);
 		Integer sweetProportion = context.applicationSpecifics.getTargetInteger(MefApplication.TARGET_SWEET_PROPORTION, MefApplication.DEFAULT_SWEET_PROPORTION);
-		String 	userFridgeFoods = context.applicationSpecifics.getParamString(MefApplication.PARAM_REFRIGERATOR_FOODS);
-		String 	userPantryFoods = context.applicationSpecifics.getParamString(MefApplication.PARAM_PANTRY_FOODS);
+		List<String> userFridgeFoods = context.applicationSpecifics.getParamList(MefApplication.PARAM_REFRIGERATOR_FOODS);
+		List<String> userPantryFoods = context.applicationSpecifics.getParamList(MefApplication.PARAM_PANTRY_FOODS);
 		
 		// Defines goal representation
     	PerformanceTarget target = new PerformanceTarget();
@@ -85,21 +86,23 @@ public class MefEnvFactory extends AbstractEnvFactory<PerformanceTarget, BigDeci
      * 
      * @return
      */
-    private MefGoal createGoal(Integer desiredMeals, Double[] weights, String userProvidedFoods, String userProvidedPantry){
+    private MefGoal createGoal(Integer desiredMeals, Double[] weights, List<String> userProvidedFoods, List<String> userProvidedPantry){
     	MefGoal result = new MefGoal();
     	
-    	if(userProvidedFoods==null||userProvidedFoods.length()==0){
+    	if(userProvidedFoods==null||userProvidedFoods.size()==0){
     		readFoodsFromFile(result);
     	}
     	else {
-    		readFoodsFromString(result, userProvidedFoods);
+    		result.refrigeratorFoods = userProvidedFoods;
+//    		readFoodsFromString(result, userProvidedFoods);
     	}
 
-    	if(userProvidedPantry==null||userProvidedPantry.length()==0){
+    	if(userProvidedPantry==null||userProvidedPantry.size()==0){
     		readPantryFromFile(result);
     	}
     	else {
-    		readPantryFromString(result, userProvidedPantry);
+    		result.pantry = userProvidedPantry;
+//    		readPantryFromString(result, userProvidedPantry);
     	}
 		
 		result.desiredMeals = desiredMeals;

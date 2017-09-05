@@ -1,6 +1,8 @@
 package it.red.algen.conf;
 
+import java.util.Arrays;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 
@@ -76,6 +78,10 @@ public class ApplicationSpecifics {
 	public Long getParamLong(String parKey){
 		return getLong(params, parKey);
 	}
+
+	public List<String> getParamList(String parKey){
+		return getList(params, parKey);
+	}
 	
 	private String getString(Map<String, Object> map, String parKey){
 		return map.get(parKey).toString();
@@ -115,6 +121,19 @@ public class ApplicationSpecifics {
 		}
 		else if(parValue instanceof String){
 			result = Long.parseLong((String) parValue);
+		}
+		return result;
+	}
+
+
+	private List<String> getList(Map<String, Object> map, String parKey){
+		List<String> result = null;
+		Object parValue = map.get(parKey);
+		if(parValue instanceof List) {
+			result = (List)parValue;
+		}
+		else if(parValue instanceof String[]){
+			result = Arrays.asList((String[])parValue);
 		}
 		return result;
 	}
