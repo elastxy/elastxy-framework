@@ -5,7 +5,6 @@ import java.util.stream.Collectors;
 
 import org.springframework.stereotype.Component;
 
-import it.red.algen.algofrigerator.data.Recipe;
 import it.red.algen.context.Randomizer;
 import it.red.algen.domain.genetics.Allele;
 import it.red.algen.engine.AlleleGenerator;
@@ -25,7 +24,11 @@ public class MefAlleleGenerator implements AlleleGenerator {
 	@Override
 	public Allele<?> generate(GeneMetadata metadata) {
 		Allele<Long> result = new Allele<Long>();
-		result.value = (Long)metadata.values.get(Randomizer.nextInt(metadata.values.size()));
+		int possibleValues = metadata.values.size();
+		if(possibleValues<=0){
+			throw new IllegalArgumentException("Cannot generate an allele from metadata values: list is empty!");
+		}
+		result.value = (Long)metadata.values.get(Randomizer.nextInt(possibleValues));
 		return result;
 	}
 	

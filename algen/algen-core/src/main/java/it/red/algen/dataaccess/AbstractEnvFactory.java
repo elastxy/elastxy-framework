@@ -28,16 +28,28 @@ public abstract class AbstractEnvFactory<T extends Object, R extends Object, G e
 	@Autowired private PopulationFactory populationFactory;
 	
     public Env create(){
-
+    	
+    	// Setup the data algorithm is based on
+    	// TODOA: now coupled with genomaprovider: must be separated
+//    	WorkingDataset workingDataset = setupWorkingDataset();
+    	
+    	// Retrieve GenomaProvider
+		GenomaProvider genomaProvider = getGenomaProvider();
+		
     	// Create genoma
-    	Genoma genoma = createGenoma();
+    	Genoma genoma = createGenoma(genomaProvider);
     	
     	// Define target
-    	Target<T,R> target = defineTarget(genoma);
+    	// TODOA: remove genoma as parameter of target, use working data set instead
+    	// and push target definition above
+    	Target<T,R> target = defineTarget(genoma); 
 
-    	// Recuce Genoma based on target
-    	genoma = reduceGenoma(target);
+    	// Reduce Genoma based on target
+    	genoma = reduceGenoma(genomaProvider, target);
 
+//    	// Setup incubator
+//    	setupIncubator(genoma);
+    	
     	// Create initial population
     	Population startGen = createInitialPopulation(genoma);
         
@@ -47,14 +59,12 @@ public abstract class AbstractEnvFactory<T extends Object, R extends Object, G e
         return env;
     }
 
-	private Genoma createGenoma() {
-		GenomaProvider genomaProvider = getGenomaProvider();
+	private Genoma createGenoma(GenomaProvider genomaProvider) {
 		genomaProvider.collect();
 		return genomaProvider.getGenoma();
 	}
 
-	private Genoma reduceGenoma(Target<T,R> target) {
-		GenomaProvider genomaProvider = getGenomaProvider();
+	private Genoma reduceGenoma(GenomaProvider genomaProvider, Target<T,R> target) {
 		return genomaProvider.reduce(target);
 	}
 
@@ -65,6 +75,11 @@ public abstract class AbstractEnvFactory<T extends Object, R extends Object, G e
 	}
 
 	protected abstract GenomaProvider getGenomaProvider();
+	
+//	/**
+//	 * Optional
+//	 */
+//	protected void setupIncubator(Genoma genoma){}
 
 	protected abstract Target<T,R> defineTarget(Genoma genoma);
 

@@ -1,7 +1,5 @@
 package it.red.algen.algofrigerator;
 
-import it.red.algen.algofrigerator.data.RecipeType;
-
 /**
  * 
  * ALGORIFERO
@@ -80,10 +78,12 @@ public class MefApplication {
 	
 	public static final String PARAM_REFRIGERATOR_FOODS 	= "REFRIGERATOR_FOODS"; // e.g. ["milk","butter"]
 	public static final String PARAM_PANTRY_FOODS 			= "PANTRY_FOODS"; // e.g. ["pepper","salt"]
+	public static final String PARAM_DATABASE 				= "DATABASE"; // e.g. "EN"
 
 	public static final Integer DEFAULT_DESIRED_MEALS 		= 10;
 	public static final Integer DEFAULT_SAVOURY_PROPORTION 	= 70;
 	public static final Integer DEFAULT_SWEET_PROPORTION 	= 30;
+	public static final String DEFAULT_DATABASE 			= "EN";
 	
 	public static final String PHENOTYPE_SAVOURY_RECIPES = 		"PHENOTYPE_SAVOURY_RECIPES";
 	public static final String PHENOTYPE_SWEET_RECIPES = 		"PHENOTYPE_SWEET_RECIPES";

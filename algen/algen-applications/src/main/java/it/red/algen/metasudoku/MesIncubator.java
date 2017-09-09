@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
 
+import it.red.algen.dataaccess.WorkingDataset;
 import it.red.algen.domain.experiment.Env;
 import it.red.algen.domain.genetics.ComplexPhenotype;
 import it.red.algen.domain.genetics.Gene;
@@ -22,7 +23,7 @@ public class MesIncubator implements Incubator<SequenceGenotype, ComplexPhenotyp
 	 * and fills the original matrix
 	 */	
 	@Override
-	public ComplexPhenotype grow(SequenceGenotype genotype, Env env) {
+	public ComplexPhenotype grow(WorkingDataset workingDataset, SequenceGenotype genotype, Env env) {
 		ComplexPhenotype result = new ComplexPhenotype();
 		int[][] matrix = fillMatrix((int[][])env.target.getGoal(), genotype.genes);
 		double completeness = countCompleteRowsSquares(matrix);

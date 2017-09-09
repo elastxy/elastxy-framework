@@ -38,7 +38,7 @@ public class MefFitnessCalculator implements FitnessCalculator<GenericSolution,S
         solution.setFitness(result);
         
     	// Grow the offspring to evaluate it
-    	solution.phenotype = incubator.grow((ChromosomeGenotype)solution.genotype, env);
+    	solution.phenotype = incubator.grow(env.genoma.getWorkingDataset(), (ChromosomeGenotype)solution.genotype, env);
         
     	// Get points
     	Double completeMeals = (Double)((Map<String,Object>)solution.phenotype.getValue()).get(MefApplication.PHENOTYPE_COMPLETENESS_POINTS);

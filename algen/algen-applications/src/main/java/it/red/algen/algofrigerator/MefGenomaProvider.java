@@ -1,26 +1,27 @@
 package it.red.algen.algofrigerator;
 
-import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
+import java.util.TreeMap;
 import java.util.stream.Collectors;
 
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import it.red.algen.algofrigerator.data.IngredientsCoverage;
+import it.red.algen.algofrigerator.data.MefWorkingDataset;
 import it.red.algen.algofrigerator.data.Recipe;
 import it.red.algen.algofrigerator.data.RecipeType;
 import it.red.algen.algofrigerator.data.RecipesDatabase;
 import it.red.algen.algofrigerator.data.RecipesDatabaseCSV;
-import it.red.algen.conf.ConfigurationException;
 import it.red.algen.conf.ReadConfigSupport;
 import it.red.algen.context.ContextSupplier;
+import it.red.algen.dataaccess.DataAccessException;
 import it.red.algen.dataaccess.GenomaProvider;
 import it.red.algen.domain.experiment.Target;
 import it.red.algen.domain.genetics.Genoma;
@@ -59,13 +60,24 @@ public class MefGenomaProvider implements GenomaProvider {
 
 	@Autowired private ContextSupplier contextSupplier;
 	
+	/**
+	 *  Original raw data
+	 */
+	private RecipesDatabase db = null;
 
-	private RecipesDatabase db = new RecipesDatabaseCSV();
 	
 	/**
-	 * List of available Recipe by type
+	 * Extracted Recipe by type
 	 */
 	private Map<RecipeType, List<Recipe>> recipes = new HashMap<RecipeType, List<Recipe>>();
+	
+	
+	/**
+	 * Reduced execution-scope data
+	 */
+	private MefWorkingDataset workingDataset = null;
+
+	
 	
 	
 	
@@ -85,8 +97,19 @@ public class MefGenomaProvider implements GenomaProvider {
 	@Override
 	public void collect() {
 
+		// Recipes are read-only
+		if(!recipes.isEmpty()){
+			logger.debug("Found "+recipes.size()+" recipes in cache: no further reading is needed.");
+			return;
+		}
+		
+		recipes = new HashMap<RecipeType, List<Recipe>>();
+		
 		// Load recipes from file
+		String database = contextSupplier.getContext().applicationSpecifics.getParamString(MefApplication.PARAM_DATABASE, MefApplication.DEFAULT_DATABASE);
+		db = new RecipesDatabaseCSV(database);
 		List<Recipe> recipesFromFile = db.getAllRecipes();
+		logger.debug("Found "+recipesFromFile.size()+" from file.");
 		
 		// Classify recipes by type
 		recipes.put(RecipeType.SAVOURY, new ArrayList<Recipe>());
@@ -95,6 +118,10 @@ public class MefGenomaProvider implements GenomaProvider {
 		for(int r = 0; r < recipesFromFile.size(); r++){
 			Recipe recipe = recipesFromFile.get(r);
 			recipes.get(recipe.recipeType).add(recipe);
+		}
+
+		for(RecipeType type : RecipeType.values()){
+			logger.debug("Classified "+recipes.get(type).size()+" "+type+" recipes.");
 		}
 	}
 
@@ -106,22 +133,29 @@ public class MefGenomaProvider implements GenomaProvider {
 	 */
 	@Override
 	public Genoma reduce(Target<?, ?> target) {
+		logger.debug("Reducing the number of recipes and collecting info.");
 		
 		// Goal
 		MefGoal goal = (MefGoal)target.getGoal();
 		List<String> availableFoods = goal.refrigeratorFoods;
 		availableFoods.addAll(goal.pantry);
+		logger.debug("Requested "+goal.refrigeratorFoods.size()+" foods from refrigerator and "+goal.pantry+" foods from pantry.");
 		
-		// Restricts to feasible recipes
-		Map<RecipeType, List<Recipe>> feasibleByType = restrictToFeasible(availableFoods);
+		// Restricts to feasible recipes and collecting detailed info on coverage
+		logger.debug("Restricting recipes to those feasible with given ingredients.");
+		MefWorkingDataset dataset = new MefWorkingDataset();
+		restrictToFeasible(dataset, availableFoods);
+		for(RecipeType type : RecipeType.values()){
+			logger.debug(type+" type restricted to "+dataset.feasibleByType.get(type).size()+" recipes.");
+		}
 
 		// Add values to metadata based on target
 		// TODOA: check what happens in large set of data if values are with metadata!!! 
 		// maybe it's better to access directly through allelegenerator
-		Map<RecipeType, Integer> mealsByType = calculateMealsByType(target);
+		Map<RecipeType, Integer> targetRecipesByType = calculateRecipesByType(target);
 		
 		// Populate metadata genoma
-		StandardMetadataGenoma genoma = createGenoma(feasibleByType, mealsByType);
+		StandardMetadataGenoma genoma = createGenoma(dataset, targetRecipesByType);
 		
 		return genoma;
 	}
@@ -130,13 +164,35 @@ public class MefGenomaProvider implements GenomaProvider {
 
 
 
+	/**
+	 * Reset any previous execution information from all recipes
+	 * @return
+	 */
+	private void resetExecutionInfo() {
+		Iterator<RecipeType> it = recipes.keySet().iterator();
+		while(it.hasNext()){
+			RecipeType rType = it.next();
+			List<Recipe> recipesByType = recipes.get(rType);
+			for(int r = 0; r < recipesByType.size(); r++){
+				Recipe recipe = recipesByType.get(r);
+				recipe.acknowledgedIngredients = new ArrayList<String>();
+				recipe.coverage = IngredientsCoverage.UNDEFINED;
+				recipe.available = new ArrayList<String>();
+				recipe.notAvailable = new ArrayList<String>();
+			}
+		}
+	}
+
 
 	/**
+	 * Restricts to feasible recipe and clone every recipe for following computations,
+	 * and indicize recipes by id in the meanwhile.
 	 * 
 	 * @param availableFoods
 	 * @return
 	 */
-	private Map<RecipeType, List<Recipe>> restrictToFeasible(List<String> availableFoods) {
+	private void restrictToFeasible(MefWorkingDataset dataset, List<String> availableFoods) {
+		Map<Long, Recipe> recipeById = new TreeMap<Long, Recipe>();
 		Map<RecipeType, List<Recipe>> feasibleByType = new HashMap<RecipeType, List<Recipe>>();
 		feasibleByType.put(RecipeType.SAVOURY, 	new ArrayList<Recipe>());
 		feasibleByType.put(RecipeType.SWEET, 	new ArrayList<Recipe>());
@@ -147,12 +203,29 @@ public class MefGenomaProvider implements GenomaProvider {
 			List<Recipe> recipesByType = recipes.get(rType);
 			for(int r = 0; r < recipesByType.size(); r++){
 				Recipe recipe = recipesByType.get(r);
-				if(MefUtils.feasibleWith(recipe, availableFoods)){
-					feasibleByType.get(rType).add(recipe);
+				Recipe copy = copy(recipe);
+				if(MefUtils.feasibleWith(copy, availableFoods)){
+					feasibleByType.get(rType).add(copy);
+					recipeById.put(copy.id, copy);
 				}
 			}
 		}
-		return feasibleByType;
+		dataset.recipeById = recipeById;
+		dataset.feasibleByType = feasibleByType;
+	}
+
+	/**
+	 * Copy all fixed values, not dependent to execution
+	 * @param original
+	 * @return
+	 */
+	private Recipe copy(Recipe original){
+		Recipe copy = new Recipe();
+		copy.id = original.id;
+		copy.name = original.name;
+		copy.recipeType = original.recipeType;
+		copy.ingredients = original.ingredients;
+		return copy;
 	}
 
 	
@@ -164,15 +237,15 @@ public class MefGenomaProvider implements GenomaProvider {
 	 * @param target
 	 * @return
 	 */
-	private Map<RecipeType, Integer> calculateMealsByType(Target<?, ?> target) {
+	private Map<RecipeType, Integer> calculateRecipesByType(Target<?, ?> target) {
 		MefGoal goal = (MefGoal)target.getGoal(); 
-		Map<RecipeType, Integer> mealsByType = new HashMap<RecipeType, Integer>();
+		Map<RecipeType, Integer> recipesByType = new HashMap<RecipeType, Integer>();
 		
 		// Chromosome length based on desired meals for each type of recipe
-		mealsByType.put(RecipeType.SAVOURY, goal.savouryMeals);
-		mealsByType.put(RecipeType.SWEET, 	goal.sweetMeals);
-		mealsByType.put(RecipeType.NEUTRAL, goal.desiredMeals); // could cover all meals
-		return mealsByType;
+		recipesByType.put(RecipeType.SAVOURY, goal.savouryMeals);
+		recipesByType.put(RecipeType.SWEET, 	goal.sweetMeals);
+		recipesByType.put(RecipeType.NEUTRAL, goal.desiredMeals); // could cover all meals
+		return recipesByType;
 	}
 	
 	
@@ -182,12 +255,13 @@ public class MefGenomaProvider implements GenomaProvider {
 	 * @param mealsByType
 	 * @return
 	 */
-	private StandardMetadataGenoma createGenoma(Map<RecipeType, List<Recipe>> feasibleByType,
+	private StandardMetadataGenoma createGenoma(
+			MefWorkingDataset workingDataset,
 			Map<RecipeType, Integer> mealsByType) {
 		Map<String, GeneMetadata> genesMetadataByCode = new HashMap<String, GeneMetadata>();
 		Map<String, GeneMetadata> genesMetadataByPos = new HashMap<String, GeneMetadata>();
 		Genes genes = ReadConfigSupport.retrieveGenesMetadata(this.contextSupplier.getContext().application.name);
-		Iterator<Map.Entry<RecipeType, List<Recipe>>> it = feasibleByType.entrySet().iterator();
+		Iterator<Map.Entry<RecipeType, List<Recipe>>> it = workingDataset.feasibleByType.entrySet().iterator();
 		while(it.hasNext()){
 			Entry<RecipeType, List<Recipe>> entryType = it.next();
 			String geneCode = entryType.getKey().getCode() + GENE_RECIPE;
@@ -195,6 +269,11 @@ public class MefGenomaProvider implements GenomaProvider {
 			
 			// Alleles: recipes by type
 			metadata.values = (List<Long>)entryType.getValue().stream().map(r -> r.id).collect(Collectors.toList());
+			for(Recipe r : entryType.getValue()){
+				if(r.coverage==null || r.coverage==IngredientsCoverage.UNDEFINED){
+					throw new DataAccessException("Error while setting allele metadata values: recipe has not been setup. Recipe id: "+r.id);
+				}
+			}
 			
 			// Genes by positions
 			for(int meal=0; meal < mealsByType.get(entryType.getKey()); meal++){
@@ -207,6 +286,7 @@ public class MefGenomaProvider implements GenomaProvider {
 		
 		// Create Genoma
 		StandardMetadataGenoma genoma = new StandardMetadataGenoma();
+		genoma.setWorkingDataset(workingDataset);
 		genoma.setupAlleleGenerator(alleleGenerator);
 		genoma.setLimitedAllelesStrategy(false); // TODOM: repetitions of receipt are available: make it configurable!
 		genoma.initialize(genesMetadataByCode, genesMetadataByPos);

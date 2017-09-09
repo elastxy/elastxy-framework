@@ -4,7 +4,8 @@
 			"TARGET_SAVOURY_PROPORTION" : 70
 		},
 		"params" : {
-			"TARGET_SWEET_PROPORTION" : 30
+			"TARGET_SWEET_PROPORTION" : 30,
+			"DATABASE" : "EN"
 		}
 	},
 	"parameters": {

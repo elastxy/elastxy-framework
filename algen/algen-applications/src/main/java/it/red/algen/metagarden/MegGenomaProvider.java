@@ -85,7 +85,7 @@ public class MegGenomaProvider implements GenomaProvider {
 	 */
 	@Override
 	public Genoma reduce(Target<?, ?> target) {
-		return getGenoma();
+		return cachedGenoma;
 	}
 
 }

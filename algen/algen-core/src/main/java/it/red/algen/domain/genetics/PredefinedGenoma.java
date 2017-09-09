@@ -9,6 +9,7 @@ import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
 import it.red.algen.context.Randomizer;
+import it.red.algen.dataaccess.WorkingDataset;
 
 /**
  * A Genoma with a predefined list of Alleles for every Gene position.
@@ -17,7 +18,9 @@ import it.red.algen.context.Randomizer;
  *
  */
 public class PredefinedGenoma implements Genoma {
-
+	
+	public WorkingDataset workingDataset;
+	
 	/**
 	 * If FALSE
 	 * 
@@ -40,6 +43,20 @@ public class PredefinedGenoma implements Genoma {
 	
 	public void initialize(Map<String, List<Allele>> alleles){
 		this.alleles = alleles;
+	}
+
+	
+	/**
+	 * TODOA: separate Genoma role woth working dataset
+	 */
+	@Override
+	public WorkingDataset getWorkingDataset() {
+		return workingDataset;
+	}
+
+	@Override
+	public void setWorkingDataset(WorkingDataset workingDataset) {
+		this.workingDataset = workingDataset;
 	}
 	
 	
@@ -139,5 +156,7 @@ public class PredefinedGenoma implements Genoma {
 	public int getNumberOfGenes(int chromosome) {
 		return alleles.size();
 	}
+
+
 
 }

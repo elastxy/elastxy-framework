@@ -8,22 +8,20 @@ import java.util.List;
 import java.util.Map;
 
 import it.red.algen.algofrigerator.data.IngredientsCoverage;
+import it.red.algen.algofrigerator.data.MefWorkingDataset;
 import it.red.algen.algofrigerator.data.Recipe;
 import it.red.algen.algofrigerator.data.RecipeType;
-import it.red.algen.algofrigerator.data.RecipesDatabase;
-import it.red.algen.algofrigerator.data.RecipesDatabaseCSV;
+import it.red.algen.dataaccess.WorkingDataset;
 import it.red.algen.domain.experiment.Env;
 import it.red.algen.domain.genetics.ChromosomeGenotype;
 import it.red.algen.domain.genetics.ComplexPhenotype;
 import it.red.algen.domain.genetics.Gene;
+import it.red.algen.engine.IllegalSolutionException;
 import it.red.algen.engine.Incubator;
 
 public class MefIncubator implements Incubator<ChromosomeGenotype, ComplexPhenotype>{
 	private static final RecipeCompletenessComparator RECIPE_COMPARATOR = new RecipeCompletenessComparator();
-	
-	
-	// TODOM: inject
-	private RecipesDatabase db = new RecipesDatabaseCSV();
+
 	
 	/**
 	 * Solution grows to a complete list of recipe of two kind, savoury and sweet.
@@ -39,11 +37,11 @@ public class MefIncubator implements Incubator<ChromosomeGenotype, ComplexPhenot
 	 * 
 	 */	
 	@Override
-	public ComplexPhenotype grow(ChromosomeGenotype genotype, Env env) {
-
+	public ComplexPhenotype grow(WorkingDataset workingDataset, ChromosomeGenotype genotype, Env env) {
+		
 		// Create recipes by type
 		RecipeAccumulator accumulator = new RecipeAccumulator();
-		accumulator.calculate(genotype, (MefGoal)env.target.getGoal());
+		accumulator.calculate((MefWorkingDataset)workingDataset, genotype, (MefGoal)env.target.getGoal());
 	
 		// Create phenotype
 		ComplexPhenotype result = new ComplexPhenotype();
@@ -72,14 +70,14 @@ public class MefIncubator implements Incubator<ChromosomeGenotype, ComplexPhenot
 		 * @param goal
 		 * @return
 		 */
-		public void calculate(ChromosomeGenotype genotype, MefGoal goal){
+		public void calculate(MefWorkingDataset workingDataset, ChromosomeGenotype genotype, MefGoal goal){
 			resultingRecipes.put(RecipeType.SAVOURY, new ArrayList<Recipe>());
 			resultingRecipes.put(RecipeType.SWEET, new ArrayList<Recipe>());
 			
 			// Convert Genes to Recipes and calculate coverage
 			allRecipes = new ArrayList<Recipe>();
 			for(int c=0; c <=2; c++){
-				allRecipes.addAll(convertGeneToRecipe(c, genotype, goal));
+				allRecipes.addAll(convertGeneToRecipe(workingDataset, c, genotype, goal));
 			}
 			
 			// Sort by completeness DESC
@@ -112,22 +110,26 @@ public class MefIncubator implements Incubator<ChromosomeGenotype, ComplexPhenot
 		
 		
 		/**
-		 * Convert Gene to a Recipe, calculating also the coverage
+		 * Convert Gene to a Recipe, checking also that the coverage is given before
 		 * @param chromosome
 		 * @param genotype
 		 * @param goal
 		 * @return
 		 */
-		private List<Recipe> convertGeneToRecipe(int chromosome, ChromosomeGenotype genotype, MefGoal goal) {
+		private List<Recipe> convertGeneToRecipe(MefWorkingDataset workingDataset, int chromosome, ChromosomeGenotype genotype, MefGoal goal) {
 			Iterator<Gene> genes = genotype.chromosomes.get(chromosome).genes.iterator();
 			List<Long> recipesIds = new ArrayList<Long>();
 			while(genes.hasNext()){
 				Gene gene = genes.next();
 				recipesIds.add((Long)gene.allele.value);
 			}
-			List<Recipe> recipes = db.getRecipes(recipesIds);
+			List<Recipe> recipes = workingDataset.getRecipes(recipesIds);
 			for(int r=0; r < recipes.size(); r++){
-				MefUtils.checkCoverage(recipes.get(r), goal.refrigeratorFoods);
+				Recipe recipe = recipes.get(r);
+				if(recipe.coverage == null || recipe.coverage == IngredientsCoverage.UNDEFINED){
+					throw new IllegalSolutionException("Cannot convert Gene to Recipe. No coverage found ("+recipe.coverage+") for recipe id: "+recipe.id);
+				}
+//				MefUtils.checkCoverage(recipes.get(r), goal.refrigeratorFoods);
 			}
 			return recipes;
 		}

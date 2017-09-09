@@ -45,7 +45,7 @@ public class MexFitnessCalculator implements FitnessCalculator<GenericSolution,S
         try { 
         	
         	// Grow the offspring to evaluate it
-        	solution.phenotype = incubator.grow((SequenceGenotype)solution.genotype, null);
+        	solution.phenotype = incubator.grow(env.genoma.getWorkingDataset(), (SequenceGenotype)solution.genotype, null);
         	long sValue = ((NumberPhenotype)solution.phenotype).getValue().longValue();
             
         	// Calculate distance from goal

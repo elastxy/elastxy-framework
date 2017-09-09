@@ -11,6 +11,7 @@ import java.util.SortedMap;
 import java.util.TreeMap;
 import java.util.stream.Collectors;
 
+import it.red.algen.dataaccess.WorkingDataset;
 import it.red.algen.domain.genetics.Allele;
 import it.red.algen.domain.genetics.GenomaPositionComparator;
 import it.red.algen.domain.genetics.MetadataGenoma;
@@ -26,6 +27,8 @@ import it.red.algen.engine.AlleleGenerator;
  */
 public class StandardMetadataGenoma implements MetadataGenoma {
 	private static final GenomaPositionComparator POSITIONS_COMPARATOR = new GenomaPositionComparator();
+	
+	public WorkingDataset workingDataset;
 	
 	/**
 	 * Metadata of all genes type, indexed by code
@@ -61,6 +64,21 @@ public class StandardMetadataGenoma implements MetadataGenoma {
 	 * number of genes per chromosome: a list of one value for a sequence
 	 */
 	private List<Integer> numberOfGenes = null;
+	
+	
+	/**
+	 * TODOA: separate Genoma role woth working dataset
+	 */
+	@Override
+	public WorkingDataset getWorkingDataset() {
+		return workingDataset;
+	}
+
+	@Override
+	public void setWorkingDataset(WorkingDataset workingDataset) {
+		this.workingDataset = workingDataset;
+	}
+
 	
 	
 	/**
@@ -347,5 +365,6 @@ public class StandardMetadataGenoma implements MetadataGenoma {
 	public int getNumberOfGenes(int chromosome) {
 		return numberOfGenes.get(chromosome);
 	}
+
 
 }

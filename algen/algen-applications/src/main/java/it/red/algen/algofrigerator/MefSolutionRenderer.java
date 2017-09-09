@@ -47,7 +47,16 @@ public class MefSolutionRenderer implements SolutionRenderer<String> {
 		List<Recipe> recipes = (List<Recipe>)phenotype.getValue().get(type);
 		sb.append(String.format("%s RECIPES [%d]%n", typeDescr, recipes.size()));
 		for(int r=0; r < recipes.size(); r++){
-			sb.append(String.format("%d> %s%n", (r+1), recipes.get(r)));
+			Recipe recipe = recipes.get(r);
+			sb.append(String.format("%d> %s (Coverage:%s)%n", (r+1), recipe.name, recipe.coverage));
+			sb.append("    Ingredients:\n");
+			for(int i=0; i < recipe.ingredients.size();i++){
+				sb.append(String.format("    . %s%n", recipe.ingredients.get(i)));
+			}
+			sb.append("    Available:\n");
+			for(int i=0; i < recipe.available.size();i++){
+				sb.append(String.format("    . %s%n", recipe.available.get(i)));
+			}
 		}
 	}
 	

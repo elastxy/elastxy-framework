@@ -42,7 +42,7 @@ public class MesFitnessCalculator implements FitnessCalculator<GenericSolution,S
         try { 
         	
         	// Grow the offspring to evaluate it
-        	solution.phenotype = incubator.grow((SequenceGenotype)solution.genotype, env);
+        	solution.phenotype = incubator.grow(env.genoma.getWorkingDataset(), (SequenceGenotype)solution.genotype, env);
         	double sValue = (Double)((ComplexPhenotype)solution.phenotype).getValue().get(MesApplication.PHENOTYPE_COMPLETENESS);
             
         	// Normalize fitness to 1.0

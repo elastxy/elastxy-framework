@@ -27,7 +27,7 @@ import it.red.algen.tracking.SolutionRenderer;
  */
 public class AppComponents {
 
-	// TODOA
+	// TODOA: add AppComponents
 //	public static final String GenomaProvider = 	"genomaProvider";
 //	public static final String AlleleGenerator = 	"alleleGenerator";
 //	public static final String EnvFactory = 		"envFactory";
@@ -43,7 +43,7 @@ public class AppComponents {
 	
 	public static final String SolutionRenderer = 	"renderer";
 
-	// TODOA
+	// TODOA: add AppComponents
 //	public GenomaProvider genomaProvider;
 //	public AlleleGenerator alleleGenerator;
 //	public EnvFactory envFactory;

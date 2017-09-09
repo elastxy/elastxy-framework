@@ -3,6 +3,8 @@ package it.red.algen.domain.genetics;
 import java.util.List;
 import java.util.Map;
 
+import it.red.algen.dataaccess.WorkingDataset;
+
 
 /**
  * Maintains the registry of all genetic assets.
@@ -53,6 +55,16 @@ import java.util.Map;
  */
 public interface Genoma {
 
+	
+	/**
+	 * Returns the working data set this Genoma is working on
+	 * TODOA: treat as a separate and parallel concept
+	 * @return
+	 */
+	public WorkingDataset getWorkingDataset();
+	public void setWorkingDataset(WorkingDataset workingDataset);
+
+	
 	/**
 	 * Returns ordered positions codes:
 	 * - progressive int "X" for a sequence

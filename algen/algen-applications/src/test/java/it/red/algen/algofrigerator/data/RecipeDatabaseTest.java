@@ -14,7 +14,7 @@ public class RecipeDatabaseTest
     extends TestCase
 {
 	
-	private RecipesDatabaseCSV reader = new RecipesDatabaseCSV();
+	private RecipesDatabaseCSV reader = new RecipesDatabaseCSV("EN");
 
 	/**
      * Create the test case
@@ -42,7 +42,7 @@ public class RecipeDatabaseTest
     public void testReadAll(){
     	List<Recipe> recipes = reader.getAllRecipes();
     	
-    	assertEquals(22, recipes.size());
+    	assertEquals(25, recipes.size());
     	
     	Recipe first = recipes.get(0);
     	assertEquals(1L, (long)first.id);

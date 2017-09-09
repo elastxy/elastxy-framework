@@ -27,6 +27,7 @@ import it.red.algen.context.ContextSupplier;
 import it.red.algen.dataaccess.AbstractEnvFactory;
 import it.red.algen.dataaccess.GenomaProvider;
 import it.red.algen.dataaccess.SolutionsFactory;
+import it.red.algen.dataaccess.WorkingDataset;
 import it.red.algen.domain.experiment.PerformanceTarget;
 import it.red.algen.domain.experiment.Target;
 import it.red.algen.domain.genetics.Genoma;
@@ -49,6 +50,16 @@ public class MefEnvFactory extends AbstractEnvFactory<PerformanceTarget, BigDeci
 	protected GenomaProvider getGenomaProvider() {
 		return genomaProvider;
 	}
+
+//	/**
+//	 * TODOA: inject properly
+//	 */
+//	@Override
+//	protected void setupIncubator(Genoma genoma) {
+//		MefIncubator incubator = (MefIncubator)contextSupplier.getContext().application.incubator;
+//		incubator.workingDataset = genoma.getWorkingDataset(); 
+//	}
+	
 
 	// TODOM: take outside Target definition code, as a new Component
 	@Override
@@ -116,7 +127,8 @@ public class MefEnvFactory extends AbstractEnvFactory<PerformanceTarget, BigDeci
     
     // TODOA: remove duplicates
 	private void readFoodsFromFile(MefGoal result) {
-		String classpathResource = "/"+MefApplication.APP_NAME+"/target.json";
+		String db = this.contextSupplier.getContext().applicationSpecifics.getParamString(MefApplication.PARAM_DATABASE, MefApplication.DEFAULT_DATABASE);
+		String classpathResource = "/"+MefApplication.APP_NAME+"/"+db+"/target.json";
 		try {
 			result.refrigeratorFoods = new ArrayList<String>();
 			String[] foods = (String[])ReadConfigSupport.readJSON(classpathResource, String[].class);
@@ -130,8 +142,8 @@ public class MefEnvFactory extends AbstractEnvFactory<PerformanceTarget, BigDeci
 	
 
 	private void readPantryFromFile(MefGoal result) {
-		// TODOA: Load all default pantry foods from file
-		String classpathResource = "/"+MefApplication.APP_NAME+"/default_pantry.json";
+		String db = this.contextSupplier.getContext().applicationSpecifics.getParamString(MefApplication.PARAM_DATABASE, MefApplication.DEFAULT_DATABASE);
+		String classpathResource = "/"+MefApplication.APP_NAME+"/"+db+"/pantry.json";
 		try {
 			result.pantry = Arrays.asList((String[])ReadConfigSupport.readJSON(classpathResource, String[].class));
 		} catch (IOException e) {

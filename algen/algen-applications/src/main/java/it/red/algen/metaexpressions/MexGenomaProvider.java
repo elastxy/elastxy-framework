@@ -75,8 +75,7 @@ public class MexGenomaProvider implements GenomaProvider {
 	 */
 	@Override
 	public Genoma reduce(Target<?, ?> target) {
-		// Does nothing
-		return getGenoma();
+		return cachedGenoma;
 	}
 
 }
