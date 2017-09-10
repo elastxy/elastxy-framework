@@ -27,18 +27,26 @@ public class MefUtils {
 		// based on similarity: if YES, add the food string value to the raw values
 		// TODOB: with streams
 		for(int i=0; i < recipe.ingredients.size(); i++){
-//			if(availableFoods.contains(recipe.ingredients.get(i))){
 			String recipeIngredient = recipe.ingredients.get(i);
+			
+			// Check if ingredient is acknowledge amongst available
 			String acknowledgedFood = containsSimilar(availableFoods, recipeIngredient);
 			if(acknowledgedFood != null){ // TODO: check if there are more similar
 				recipe.acknowledgedIngredients.add(acknowledgedFood);
 				recipe.available.add(recipeIngredient);
-//				result = true;
+				
+				// Check if it is a main ingredient
+				if(recipe.mainIngredient!=null && similar(acknowledgedFood, recipe.mainIngredient)){
+					recipe.acknowledgedMainIngredient = acknowledgedFood;
+				}
+
+				
 			}
 			else {
 				recipe.notAvailable.add(recipeIngredient);
 			}
 		}
+
 		
 		// Calculate coverage for this recipe
 		result = checkCoverage(recipe, availableFoods)!=IngredientsCoverage.NONE;
@@ -114,27 +122,16 @@ public class MefUtils {
 	 * genoma pre-process phase.
 	 * 
 	 * TODOA: pantry+refrigerator foods
-	 * TODOM: main ingredient
 	 */
 	public static IngredientsCoverage checkCoverage(Recipe recipe, List<String> refrigeratorFoods){
-		
-//		List<String> notAvailable = new ArrayList<String>(recipe.ingredients);
-//		subtractSimilar(notAvailable, refrigeratorFoods);
-//		notAvailable.removeAll(refrigeratorFoods);
-		
-//		recipe.notAvailable = notAvailable;
-//		List<String> available = new ArrayList<String>(recipe.ingredients);
-//		available.removeAll(recipe.notAvailable);
-//		recipe.available = available;
-
 		if(recipe.notAvailable.isEmpty()){
-			recipe.coverage = IngredientsCoverage.FULL;
+			recipe.coverage = recipe.acknowledgedMainIngredient!=null ? IngredientsCoverage.FULL_MAIN_INGR : IngredientsCoverage.FULL;
 		}
 		else if(recipe.notAvailable.size() >= Math.ceil((double)recipe.ingredients.size() / 2.0)){
-			recipe.coverage = IngredientsCoverage.NONE;
+			recipe.coverage = recipe.acknowledgedMainIngredient!=null ? IngredientsCoverage.ONLY_MAIN_INGR : IngredientsCoverage.NONE;
 		}
 		else {
-			recipe.coverage = IngredientsCoverage.PARTIAL;
+			recipe.coverage = recipe.acknowledgedMainIngredient!=null ? IngredientsCoverage.PARTIAL_MAIN_INGR : IngredientsCoverage.PARTIAL;
 		}
 		return recipe.coverage;
 	}

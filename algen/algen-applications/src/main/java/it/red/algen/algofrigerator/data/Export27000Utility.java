@@ -5,9 +5,6 @@ import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileReader;
 import java.io.FileWriter;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
 
 import au.com.bytecode.opencsv.CSVReader;
 import au.com.bytecode.opencsv.CSVWriter;
@@ -15,7 +12,7 @@ import au.com.bytecode.opencsv.CSVWriter;
 public class Export27000Utility {
 
 	private static final String INPUT_FILENAME = 	"C:\\tmp\\algendata\\algorifero\\ricette_27000.csv";
-	private static final String OUTPUT_FILENAME = 	"C:\\tmp\\algendata\\algorifero\\ingredients_extended.csv";
+	private static final String OUTPUT_FILENAME = 	"C:\\tmp\\algendata\\algorifero\\ingredients.csv";
 
 //	public static void main(String[] args) throws Exception {
 //		String nextLine = "1000 G ==== Carne D'agnello|1/2 Cucchiaino ==== Menta Essiccata|1 Foglia ==== Alloro|5 ==== Semi Di Coriandolo|1/2 Bicchiere ==== Olio D'oliva|1 Cucchiaino ==== Zucchero|2 ==== Limoni|1 Pezzetto ==== Cannella|3 ==== Chiodi Di Garofano|50 G ==== Sale Grosso| ==== Pepe In Grani";
@@ -32,7 +29,7 @@ public class Export27000Utility {
 		// Headers
 		//Nome	Tipo_Piatto	Ingr principale	Persone	Note	Ingredienti	Preparazione
 		reader.readNext();
-		writer.writeNext("RECIPE_ID","RECIPE_TYPE","RECIPE_NAME","INGREDIENTS");
+		writer.writeNext("RECIPE_ID","RECIPE_TYPE","RECIPE_NAME","INGREDIENTS","MAIN_INGREDIENT");
 
 		// Output variables
 		String[] nextLine = null;
@@ -59,7 +56,8 @@ public class Export27000Utility {
 					String.valueOf(id++), 	// id
 					type, 					// type
 					nextLine[1].trim(), 	// name
-					nextLine[6].trim()); 	// ingredients
+					nextLine[6].trim(),		// ingredients
+					nextLine[3].trim()); 	// main ingredient
 		}
 		
 		reader.close();

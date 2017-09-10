@@ -40,6 +40,7 @@ public class RecipesDatabaseCSV implements RecipesDatabase {
 				recipe.recipeType = RecipeType.fromCode(nextLine[1]);
 				recipe.name = nextLine[2];
 				recipe.ingredients = Arrays.asList(nextLine[3].split("(\\|)"));
+				recipe.mainIngredient = nextLine[4];
 				result.add(recipe);
 			}
 			reader.close();

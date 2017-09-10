@@ -164,24 +164,24 @@ public class MefGenomaProvider implements GenomaProvider {
 
 
 
-	/**
-	 * Reset any previous execution information from all recipes
-	 * @return
-	 */
-	private void resetExecutionInfo() {
-		Iterator<RecipeType> it = recipes.keySet().iterator();
-		while(it.hasNext()){
-			RecipeType rType = it.next();
-			List<Recipe> recipesByType = recipes.get(rType);
-			for(int r = 0; r < recipesByType.size(); r++){
-				Recipe recipe = recipesByType.get(r);
-				recipe.acknowledgedIngredients = new ArrayList<String>();
-				recipe.coverage = IngredientsCoverage.UNDEFINED;
-				recipe.available = new ArrayList<String>();
-				recipe.notAvailable = new ArrayList<String>();
-			}
-		}
-	}
+//	/**
+//	 * Reset any previous execution information from all recipes
+//	 * @return
+//	 */
+//	private void resetExecutionInfo() {
+//		Iterator<RecipeType> it = recipes.keySet().iterator();
+//		while(it.hasNext()){
+//			RecipeType rType = it.next();
+//			List<Recipe> recipesByType = recipes.get(rType);
+//			for(int r = 0; r < recipesByType.size(); r++){
+//				Recipe recipe = recipesByType.get(r);
+//				recipe.acknowledgedIngredients = new ArrayList<String>();
+//				recipe.coverage = IngredientsCoverage.UNDEFINED;
+//				recipe.available = new ArrayList<String>();
+//				recipe.notAvailable = new ArrayList<String>();
+//			}
+//		}
+//	}
 
 
 	/**
@@ -203,7 +203,7 @@ public class MefGenomaProvider implements GenomaProvider {
 			List<Recipe> recipesByType = recipes.get(rType);
 			for(int r = 0; r < recipesByType.size(); r++){
 				Recipe recipe = recipesByType.get(r);
-				Recipe copy = copy(recipe);
+				Recipe copy = recipe.copy();
 				if(MefUtils.feasibleWith(copy, availableFoods)){
 					feasibleByType.get(rType).add(copy);
 					recipeById.put(copy.id, copy);
@@ -213,22 +213,6 @@ public class MefGenomaProvider implements GenomaProvider {
 		dataset.recipeById = recipeById;
 		dataset.feasibleByType = feasibleByType;
 	}
-
-	/**
-	 * Copy all fixed values, not dependent to execution
-	 * @param original
-	 * @return
-	 */
-	private Recipe copy(Recipe original){
-		Recipe copy = new Recipe();
-		copy.id = original.id;
-		copy.name = original.name;
-		copy.recipeType = original.recipeType;
-		copy.ingredients = original.ingredients;
-		return copy;
-	}
-
-	
 	
 
 	
