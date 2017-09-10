@@ -39,13 +39,14 @@ public class MefSolutionRenderer implements SolutionRenderer<String> {
 		
 		// Print solution
 		sb.append("SOLUTION: "+solution+"\n");
+		
 		return sb.toString();
 	}
 
 
 	private void printRecipes(StringBuffer sb, ComplexPhenotype phenotype, String type, String typeDescr) {
 		List<Recipe> recipes = (List<Recipe>)phenotype.getValue().get(type);
-		sb.append(String.format("%s RECIPES [%d]%n", typeDescr, recipes.size()));
+		sb.append(String.format("%n%s RECIPES [%d]%n", typeDescr, recipes.size()));
 		for(int r=0; r < recipes.size(); r++){
 			Recipe recipe = recipes.get(r);
 			sb.append(String.format("%d> %s (Coverage:%s)%n", (r+1), recipe.name, recipe.coverage));
@@ -57,6 +58,10 @@ public class MefSolutionRenderer implements SolutionRenderer<String> {
 			for(int i=0; i < recipe.available.size();i++){
 				sb.append(String.format("    . %s%n", recipe.available.get(i)));
 			}
+			sb.append("    Persons: "+recipe.persons+"\n");
+			sb.append("    Note: "+recipe.note+"\n");
+			sb.append("    Preparation:\n");
+			sb.append(recipe.preparation+"\n");
 		}
 	}
 	

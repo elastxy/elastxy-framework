@@ -29,7 +29,7 @@ public class Export27000Utility {
 		// Headers
 		//Nome	Tipo_Piatto	Ingr principale	Persone	Note	Ingredienti	Preparazione
 		reader.readNext();
-		writer.writeNext("RECIPE_ID","RECIPE_TYPE","RECIPE_NAME","INGREDIENTS","MAIN_INGREDIENT");
+		writer.writeNext("RECIPE_ID","RECIPE_TYPE","RECIPE_NAME","INGREDIENTS","MAIN_INGREDIENT","PREPARATION","PERSONS","NOTE");
 
 		// Output variables
 		String[] nextLine = null;
@@ -51,13 +51,27 @@ public class Export27000Utility {
 //			String[] inputIngr = nextLine[6].trim().split("(\\|)");
 //			List<String> ingredients = Arrays.asList(inputIngr);
 
+			// Persons
+			Integer persons = null;
+			try {
+				persons = nextLine[4]==null ? null : Integer.parseInt(nextLine[4].trim());
+			}
+			catch(Exception ex){
+				System.out.println("Error while transforming persons number. Ex:"+ex);
+				// TODO: logger
+			}
+			
 			// Write new line
 			writer.writeNext(
 					String.valueOf(id++), 	// id
 					type, 					// type
 					nextLine[1].trim(), 	// name
 					nextLine[6].trim(),		// ingredients
-					nextLine[3].trim()); 	// main ingredient
+					nextLine[3].trim(),		// main ingredient
+					nextLine[7].trim(),		// preparation
+					String.valueOf(persons),// persons
+					nextLine[5].trim()		// note
+					); 	
 		}
 		
 		reader.close();

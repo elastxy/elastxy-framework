@@ -9,6 +9,9 @@ public class Recipe {
 	public RecipeType recipeType;
 	public List<String> ingredients = new ArrayList<String>();
 	public String mainIngredient;
+	public String preparation;
+	public Integer persons;
+	public String note;
 	
 	public IngredientsCoverage coverage = IngredientsCoverage.UNDEFINED;
 	public List<String> notAvailable = new ArrayList<String>();
@@ -36,6 +39,9 @@ public class Recipe {
 		copy.recipeType = recipeType;
 		copy.ingredients = ingredients;
 		copy.mainIngredient = mainIngredient;
+		copy.preparation = preparation; // TODOA: solo per renderer
+		copy.persons = persons;
+		copy.note = note;
 		return copy;
 	}
 	

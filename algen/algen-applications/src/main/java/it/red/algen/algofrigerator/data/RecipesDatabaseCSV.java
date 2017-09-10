@@ -41,6 +41,9 @@ public class RecipesDatabaseCSV implements RecipesDatabase {
 				recipe.name = nextLine[2];
 				recipe.ingredients = Arrays.asList(nextLine[3].split("(\\|)"));
 				recipe.mainIngredient = nextLine[4];
+				recipe.preparation = nextLine[5];
+				recipe.persons = Integer.parseInt(nextLine[6]);
+				recipe.note = nextLine[7];
 				result.add(recipe);
 			}
 			reader.close();
