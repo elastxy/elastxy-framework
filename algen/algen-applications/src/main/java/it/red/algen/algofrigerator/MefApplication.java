@@ -60,6 +60,9 @@ package it.red.algen.algofrigerator;
  * TODOM: semantic check or affinity between names given by user to foods, and names of recipe ingredients
  * 		(e.g. tomato =~ tomatoes)
  * TODOA: remove redundancy with other applications
+ * 
+ * TODOM: pepe don't find peperoni; plurals; more weight to fridge foods than to pantry
+ * 
  * @author red
  *
  */
@@ -75,6 +78,7 @@ public class MefApplication {
 	public static final String TARGET_DESIRED_MEALS 		= "TARGET_DESIRED_MEALS"; // e.g. 10
 	public static final String TARGET_SAVOURY_PROPORTION 	= "TARGET_SAVOURY_PROPORTION"; // e.g. 70
 	public static final String TARGET_SWEET_PROPORTION 		= "TARGET_SWEET_PROPORTION"; // e.g. 30
+	public static final String TARGET_FRIDGE_MANDATORY 		= "TARGET_FRIDGE_MANDATORY"; // e.g. true
 	
 	public static final String PARAM_REFRIGERATOR_FOODS 	= "REFRIGERATOR_FOODS"; // e.g. ["milk","butter"]
 	public static final String PARAM_PANTRY_FOODS 			= "PANTRY_FOODS"; // e.g. ["pepper","salt"]
@@ -83,9 +87,11 @@ public class MefApplication {
 	public static final Integer DEFAULT_DESIRED_MEALS 		= 10;
 	public static final Integer DEFAULT_SAVOURY_PROPORTION 	= 70;
 	public static final Integer DEFAULT_SWEET_PROPORTION 	= 30;
+	public static final Boolean DEFAULT_FRIDGE_MANDATORY 	= false;
 	public static final String DEFAULT_DATABASE 			= "EN";
 	
 	public static final String PHENOTYPE_SAVOURY_RECIPES = 		"PHENOTYPE_SAVOURY_RECIPES";
 	public static final String PHENOTYPE_SWEET_RECIPES = 		"PHENOTYPE_SWEET_RECIPES";
 	public static final String PHENOTYPE_COMPLETENESS_POINTS = 	"PHENOTYPE_COMPLETENESS_POINTS";
+	public static final String PHENOTYPE_PERCENTAGE_FOOD_FROM_FRIDGE ="PHENOTYPE_USED_FOOD_FROM_FRIDGE";
 }

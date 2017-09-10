@@ -1,5 +1,6 @@
 package it.red.algen.algofrigerator.data;
 
+// TODOA: move partial points to fitness calculator
 public enum IngredientsCoverage {
 	
 	FULL_MAIN_INGR(1.0, 0), 

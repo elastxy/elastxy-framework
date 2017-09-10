@@ -19,6 +19,12 @@ public class ApplicationSpecifics {
 	public Map<String, Object> target = new HashMap<String, Object>();
 	public Map<String, Object> params = new HashMap<String, Object>();
 
+
+
+	public Boolean getTargetBoolean(String parKey, Boolean defaultValue){
+		Boolean result = getBoolean(target, parKey);
+		return result==null ? defaultValue : result;
+	}
 	
 	public String getTargetString(String parKey){
 		return getString(target, parKey);

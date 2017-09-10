@@ -70,6 +70,7 @@ public class MefEnvFactory extends AbstractEnvFactory<PerformanceTarget, BigDeci
 		Integer desiredMeals = context.applicationSpecifics.getTargetInteger(MefApplication.TARGET_DESIRED_MEALS, MefApplication.DEFAULT_DESIRED_MEALS);
 		Integer savouryProportion = context.applicationSpecifics.getTargetInteger(MefApplication.TARGET_SAVOURY_PROPORTION, MefApplication.DEFAULT_SAVOURY_PROPORTION);
 		Integer sweetProportion = context.applicationSpecifics.getTargetInteger(MefApplication.TARGET_SWEET_PROPORTION, MefApplication.DEFAULT_SWEET_PROPORTION);
+		Boolean fridgeMandatory = context.applicationSpecifics.getTargetBoolean(MefApplication.TARGET_FRIDGE_MANDATORY, MefApplication.DEFAULT_FRIDGE_MANDATORY);
 		List<String> userFridgeFoods = context.applicationSpecifics.getParamList(MefApplication.PARAM_REFRIGERATOR_FOODS);
 		List<String> userPantryFoods = context.applicationSpecifics.getParamList(MefApplication.PARAM_PANTRY_FOODS);
 		
@@ -78,7 +79,7 @@ public class MefEnvFactory extends AbstractEnvFactory<PerformanceTarget, BigDeci
     	target.setTargetFitness(contextSupplier.getContext().stopConditions.targetFitness);
     	target.setTargetThreshold(contextSupplier.getContext().stopConditions.targetThreshold); // TODOA: commons to all envfactory
     	target.setWeights(savouryProportion.doubleValue() / 100.0, sweetProportion.doubleValue() / 100.0);
-    	target.setGoal(createGoal(desiredMeals, target.getWeights(), userFridgeFoods, userPantryFoods)); // TODOA: foods will be input parameters!
+    	target.setGoal(createGoal(desiredMeals, target.getWeights(), fridgeMandatory, userFridgeFoods, userPantryFoods)); // TODOA: foods will be input parameters!
     	
     	
 //        target.setReferenceMeasure(totalRecipes); // TODOA: multiobiettivo: distinte per savoury e sweet
@@ -97,7 +98,7 @@ public class MefEnvFactory extends AbstractEnvFactory<PerformanceTarget, BigDeci
      * 
      * @return
      */
-    private MefGoal createGoal(Integer desiredMeals, Double[] weights, List<String> userProvidedFoods, List<String> userProvidedPantry){
+    private MefGoal createGoal(Integer desiredMeals, Double[] weights, boolean fridgeMandatory, List<String> userProvidedFoods, List<String> userProvidedPantry){
     	MefGoal result = new MefGoal();
     	
     	if(userProvidedFoods==null||userProvidedFoods.size()==0){
@@ -121,6 +122,7 @@ public class MefEnvFactory extends AbstractEnvFactory<PerformanceTarget, BigDeci
 		result.savouryMeals = (int)Math.round(desiredMeals * weights[0]);
 		result.sweetMeals 	= desiredMeals - result.savouryMeals;
 		
+		result.fridgeMandatory = fridgeMandatory;
 		return result;
     }
 

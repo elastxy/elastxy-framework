@@ -23,7 +23,7 @@ public class Recipe {
 	 * 
 	 * This list can be used for efficient comparisons during the algorithm execution.
 	 */
-	public List<String> acknowledgedIngredients = new ArrayList<String>();
+	public List<String> ackFridgeIngredients = new ArrayList<String>();
 	public String acknowledgedMainIngredient;
 	
 

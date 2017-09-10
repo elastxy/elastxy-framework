@@ -137,14 +137,13 @@ public class MefGenomaProvider implements GenomaProvider {
 		
 		// Goal
 		MefGoal goal = (MefGoal)target.getGoal();
-		List<String> availableFoods = goal.refrigeratorFoods;
-		availableFoods.addAll(goal.pantry);
+		List<String> fridgeFoods = goal.refrigeratorFoods;
 		logger.debug("Requested "+goal.refrigeratorFoods.size()+" foods from refrigerator and "+goal.pantry+" foods from pantry.");
 		
 		// Restricts to feasible recipes and collecting detailed info on coverage
 		logger.debug("Restricting recipes to those feasible with given ingredients.");
 		MefWorkingDataset dataset = new MefWorkingDataset();
-		restrictToFeasible(dataset, availableFoods);
+		restrictToFeasible(dataset, fridgeFoods, goal.pantry);
 		for(RecipeType type : RecipeType.values()){
 			logger.debug(type+" type restricted to "+dataset.feasibleByType.get(type).size()+" recipes.");
 		}
@@ -191,7 +190,7 @@ public class MefGenomaProvider implements GenomaProvider {
 	 * @param availableFoods
 	 * @return
 	 */
-	private void restrictToFeasible(MefWorkingDataset dataset, List<String> availableFoods) {
+	private void restrictToFeasible(MefWorkingDataset dataset, List<String> fridgeFoods, List<String> pantryFoods) {
 		Map<Long, Recipe> recipeById = new TreeMap<Long, Recipe>();
 		Map<RecipeType, List<Recipe>> feasibleByType = new HashMap<RecipeType, List<Recipe>>();
 		feasibleByType.put(RecipeType.SAVOURY, 	new ArrayList<Recipe>());
@@ -202,9 +201,9 @@ public class MefGenomaProvider implements GenomaProvider {
 			RecipeType rType = it.next();
 			List<Recipe> recipesByType = recipes.get(rType);
 			for(int r = 0; r < recipesByType.size(); r++){
-				Recipe recipe = recipesByType.get(r);
+				Recipe recipe = recipesByType.get(r); // TODOM: avoid cocktails
 				Recipe copy = recipe.copy();
-				if(MefUtils.feasibleWith(copy, availableFoods)){
+				if(MefUtils.feasibleWith(copy, fridgeFoods, pantryFoods)){
 					feasibleByType.get(rType).add(copy);
 					recipeById.put(copy.id, copy);
 				}

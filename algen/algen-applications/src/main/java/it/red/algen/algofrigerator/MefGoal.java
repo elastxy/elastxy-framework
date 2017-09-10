@@ -7,11 +7,12 @@ public class MefGoal {
 	public List<String> refrigeratorFoods = new ArrayList<String>();
 	public List<String> pantry = new ArrayList<String>();
 	public int desiredMeals = 0;
+	public boolean fridgeMandatory = false;
 	
 	public int savouryMeals = 0;
 	public int sweetMeals = 0;
 	
 	public String toString(){
-		return String.format("Goal: %d meals from %d foods from refrigerator", desiredMeals, refrigeratorFoods.size());
+		return String.format("Goal: %d meals from %d foods from refrigerator. Mandatory fridge foods: %b", desiredMeals, refrigeratorFoods.size(), fridgeMandatory);
 	}
 }

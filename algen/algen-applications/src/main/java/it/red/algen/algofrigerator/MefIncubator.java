@@ -48,6 +48,7 @@ public class MefIncubator implements Incubator<ChromosomeGenotype, ComplexPhenot
 		result.value.put(MefApplication.PHENOTYPE_SAVOURY_RECIPES, 		accumulator.resultingRecipes.get(RecipeType.SAVOURY));
 		result.value.put(MefApplication.PHENOTYPE_SWEET_RECIPES, 		accumulator.resultingRecipes.get(RecipeType.SWEET));
 		result.value.put(MefApplication.PHENOTYPE_COMPLETENESS_POINTS, 	accumulator.resultingCompleteness);
+		result.value.put(MefApplication.PHENOTYPE_PERCENTAGE_FOOD_FROM_FRIDGE, 	accumulator.percentageFoodsFromFridge);
 		return result;
 	}
 	
@@ -62,6 +63,7 @@ public class MefIncubator implements Incubator<ChromosomeGenotype, ComplexPhenot
 		// Results
 		private Map<RecipeType, List<Recipe>> resultingRecipes = new HashMap<RecipeType, List<Recipe>>();
 		private double resultingCompleteness = 0.0;
+		private double percentageFoodsFromFridge = 0.0;
 		
 		
 		/**
@@ -84,9 +86,13 @@ public class MefIncubator implements Incubator<ChromosomeGenotype, ComplexPhenot
 			Collections.sort(allRecipes, RECIPE_COMPARATOR);
 			
 			// Select recipes to a maximum number
+			int usedFoodsFromFridge = 0;
+			int totalIngredients = 0;
 			Iterator<Recipe> it = allRecipes.iterator();
 			while(it.hasNext()){
 				Recipe r = it.next();
+				
+				// Points from completeness
 				if(r.recipeType==RecipeType.SAVOURY && resultingRecipes.get(RecipeType.SAVOURY).size() < goal.savouryMeals){
 					resultingRecipes.get(RecipeType.SAVOURY).add(r);
 					resultingCompleteness += r.coverage.getPoints();
@@ -105,7 +111,13 @@ public class MefIncubator implements Incubator<ChromosomeGenotype, ComplexPhenot
 					resultingRecipes.get(RecipeType.SWEET).add(r);
 					resultingCompleteness += r.coverage.getPoints();
 				}
+				
+				// Presence of fridge foods in the recipe
+				usedFoodsFromFridge += r.ackFridgeIngredients.size();
+				totalIngredients += r.ingredients.size();
 			}
+			
+			percentageFoodsFromFridge = (double)usedFoodsFromFridge / (double)totalIngredients;
 		}
 		
 		

@@ -13,15 +13,17 @@ public class MefUtils {
 	 * Returns true if at least a partial coverage is given (50% or more present in available foods list),
 	 * and calculates list of ingredients available, not available, and coverage at the same time.
 	 * 
+	 * Fridge foods are weighted double than pantry
+	 * 
 	 * NOTE: very costly!!! While checking, adds to the raw list of ingredients those 
 	 * present in the list of available foods for future usages (check within algorithm).
 	 * 
 	 * @param availableFoods
 	 * @return
 	 */
-	public static boolean feasibleWith(Recipe recipe, List<String> availableFoods){
+	public static boolean feasibleWith(Recipe recipe, List<String> fridgeFoods, List<String> pantryFoods){
 		boolean result = false;
-		recipe.acknowledgedIngredients = new ArrayList<String>();
+		recipe.ackFridgeIngredients = new ArrayList<String>();
 		
 		// For each ingredient in recipe, check whether is amongst the available
 		// based on similarity: if YES, add the food string value to the raw values
@@ -30,9 +32,16 @@ public class MefUtils {
 			String recipeIngredient = recipe.ingredients.get(i);
 			
 			// Check if ingredient is acknowledge amongst available
-			String acknowledgedFood = containsSimilar(availableFoods, recipeIngredient);
+			// from fridge...
+			String acknowledgedFood = containsSimilar(fridgeFoods, recipeIngredient);
+			if(acknowledgedFood!=null){
+				recipe.ackFridgeIngredients.add(acknowledgedFood);
+			}
+			// or from pantry...
+			else {
+				acknowledgedFood = containsSimilar(pantryFoods, recipeIngredient);
+			}
 			if(acknowledgedFood != null){ // TODO: check if there are more similar
-				recipe.acknowledgedIngredients.add(acknowledgedFood);
 				recipe.available.add(recipeIngredient);
 				
 				// Check if it is a main ingredient
@@ -49,7 +58,7 @@ public class MefUtils {
 
 		
 		// Calculate coverage for this recipe
-		result = checkCoverage(recipe, availableFoods)!=IngredientsCoverage.NONE;
+		result = checkCoverage(recipe)!=IngredientsCoverage.NONE;
 		
 		return result;
 	}
@@ -106,10 +115,8 @@ public class MefUtils {
 	
 	
 	// TODOM: affinity (Levenshtein distance) or semantic affinity
-	public static boolean similar(String s1, String s2){
-		String text1 = s1.toLowerCase();
-		String text2 = s2.toLowerCase();
-		return text1.indexOf(text2)!=-1 || text2.indexOf(text1)!=-1;
+	public static boolean similar(String singleWord, String phrase){
+		return phrase.toLowerCase().matches(".*\\b"+singleWord.toLowerCase()+"\\b.*");
 	}
 	
 	
@@ -123,7 +130,7 @@ public class MefUtils {
 	 * 
 	 * TODOA: pantry+refrigerator foods
 	 */
-	public static IngredientsCoverage checkCoverage(Recipe recipe, List<String> refrigeratorFoods){
+	public static IngredientsCoverage checkCoverage(Recipe recipe){
 		if(recipe.notAvailable.isEmpty()){
 			recipe.coverage = recipe.acknowledgedMainIngredient!=null ? IngredientsCoverage.FULL_MAIN_INGR : IngredientsCoverage.FULL;
 		}

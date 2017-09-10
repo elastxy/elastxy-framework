@@ -5,6 +5,7 @@ import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileReader;
 import java.io.FileWriter;
+import java.util.Arrays;
 
 import au.com.bytecode.opencsv.CSVReader;
 import au.com.bytecode.opencsv.CSVWriter;
@@ -14,11 +15,18 @@ public class Export27000Utility {
 	private static final String INPUT_FILENAME = 	"C:\\tmp\\algendata\\algorifero\\ricette_27000.csv";
 	private static final String OUTPUT_FILENAME = 	"C:\\tmp\\algendata\\algorifero\\ingredients.csv";
 
-//	public static void main(String[] args) throws Exception {
-//		String nextLine = "1000 G ==== Carne D'agnello|1/2 Cucchiaino ==== Menta Essiccata|1 Foglia ==== Alloro|5 ==== Semi Di Coriandolo|1/2 Bicchiere ==== Olio D'oliva|1 Cucchiaino ==== Zucchero|2 ==== Limoni|1 Pezzetto ==== Cannella|3 ==== Chiodi Di Garofano|50 G ==== Sale Grosso| ==== Pepe In Grani";
-//		String[] ingr = nextLine.split("\\|");
-//		System.out.println(Arrays.asList(ingr));
-//	}
+	public static void _main(String[] args) throws Exception {
+		String nextLine = "1000 G ==== Carne D'agnello|1/2 Cucchiaino ==== Menta Essiccata|1 Foglia ==== Alloro|5 ==== Semi Di Coriandolo|1/2 Bicchiere ==== Olio D'oliva|1 Cucchiaino ==== Zucchero|2 ==== Limoni|1 Pezzetto ==== Cannella|3 ==== Chiodi Di Garofano|50 G ==== Sale Grosso| ==== Pepe In Grani";
+		String[] ingr = nextLine.split("\\|");
+		System.out.println(Arrays.asList(ingr));
+	
+		String r = "Vodka alla pesca, acqua";
+		boolean contains = r.matches(".*\\bpesca\\b.*");
+		System.out.println(r +" => "+contains);
+		r = "rana pescatrice";
+		contains = r.matches(".*\\bpesca\\b.*");
+		System.out.println(r +" => "+contains);
+	}
 	
 	public static void main(String[] args) throws Exception {
 		
