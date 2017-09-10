@@ -35,9 +35,8 @@ public interface GenomaProvider {
 	 * 
 	 * Returns a new Genoma for current execution.
 	 * 
-	 * TODOA: call it "restrict"
 	 * @param target
 	 */
-	public Genoma reduce(Target<?,?> target);
+	public Genoma shrink(Target<?,?> target);
 	
 }

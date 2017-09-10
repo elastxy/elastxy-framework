@@ -74,7 +74,7 @@ public class MexGenomaProvider implements GenomaProvider {
 	 * TODOA: reduceable interface....
 	 */
 	@Override
-	public Genoma reduce(Target<?, ?> target) {
+	public Genoma shrink(Target<?, ?> target) {
 		return cachedGenoma;
 	}
 

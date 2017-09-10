@@ -65,7 +65,7 @@ public abstract class AbstractEnvFactory<T extends Object, R extends Object, G e
 	}
 
 	private Genoma reduceGenoma(GenomaProvider genomaProvider, Target<T,R> target) {
-		return genomaProvider.reduce(target);
+		return genomaProvider.shrink(target);
 	}
 
 	private Population createInitialPopulation(Genoma genoma) {

@@ -41,7 +41,7 @@ public class MefUtils {
 			else {
 				acknowledgedFood = containsSimilar(pantryFoods, recipeIngredient);
 			}
-			if(acknowledgedFood != null){ // TODO: check if there are more similar
+			if(acknowledgedFood != null){
 				recipe.available.add(recipeIngredient);
 				
 				// Check if it is a main ingredient

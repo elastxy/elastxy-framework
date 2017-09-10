@@ -1,26 +1,26 @@
-RECIPE_ID,RECIPE_TYPE,RECIPE_NAME,INGREDIENTS
-1,SA,pasta al sugo,tomatoes|onion|oil|parmesan|pasta|salt
-2,SW,caffelatte,coffee|milk|sugar
-3,NE,crepes,eggs|milk|flour
-4,SA,panino al tonno,bread|tuna|mayo|tomatoes
-5,SW,porridge,milk|semola|sugar
-6,SA,pasta in bianco,oil|pasta|parmesan|salt
-7,SA,riso piselli,peas|rice|salt
-8,SW,cream,milk|eggs|vanilla|sugar
-9,SW,milk and sugar,milk|sugar
-10,SA,pasta e acciughe,bread|oil|pasta|anchovies
-11,SA,uova al tegame,oil|salt|eggs
-12,SA,wurstel e patate,salt|wurstel|potatoes|butter|onion
-13,SA,uova e bacon,eggs|bacon|butter
-14,SW,zuppa inglese,eggs|milk|chocolate|biscuits|sugar|flour
-15,SA,branzino al forno,seabass
-16,SW,pesca melba,peach|milk|eggs|sugar
-17,SW,pesca e vino,peach|wine|sugar
-18,NE,carote lesse,salt|carrots
-19,SA,pane e prosciutto,bread|ham
-20,SA,bruschetta,oil|olives|anchovies|tomatoes
-21,SA,frittata,oil|eggs
-22,SA,cocktail di scampi,schrimps|mayo
-23,SW,pane e nutella,nutella|bread
-24,SW,pane e marmellata,jam|bread
-25,SW,rice milk,rice|milk|sugar
+RECIPE_ID,RECIPE_TYPE,RECIPE_NAME,INGREDIENTS,MAIN_INGREDIENT,PREPARATION,PERSONS,NOTE
+1,SA,pasta al sugo,tomatoes|onion|oil|parmesan|pasta|salt,pasta,,,
+2,SW,caffelatte,coffee|milk|sugar,milk,,,
+3,NE,crepes,eggs|milk|flour,flour,,,
+4,SA,panino al tonno,bread|tuna|mayo|tomatoes,tuna,,,
+5,SW,porridge,milk|semola|sugar,semola,,,
+6,SA,pasta in bianco,oil|pasta|parmesan|salt,pasta,,,
+7,SA,riso piselli,peas|rice|salt,peas,,,
+8,SW,cream,milk|eggs|vanilla|sugar,vanilla,,,
+9,SW,milk and sugar,milk|sugar,milk,,,
+10,SA,pasta e acciughe,bread|oil|pasta|anchovies,anchovies,,,
+11,SA,uova al tegame,oil|salt|eggs,eggs,,,
+12,SA,wurstel e patate,salt|wurstel|potatoes|butter|onion,wurstel,,,
+13,SA,uova e bacon,eggs|bacon|butter,eggs,,,
+14,SW,zuppa inglese,eggs|milk|chocolate|biscuits|sugar|flour|vanilla,biscuits,,,
+15,SA,branzino al forno,seabass|onion,seabass,,,
+16,SW,pesca melba,peach|milk|eggs|sugar,peach,,,
+17,SW,pesca e vino,peach|wine|sugar,peach,,,
+18,NE,carote lesse,salt|charrots,charrots,,,
+19,SA,pane e prosciutto,bread|ham,ham,,,
+20,SA,bruschetta,oil|olives|anchovies|tomatoes,tomatoes,,,
+21,SA,frittata,oil|eggs,eggs,,,
+22,SA,cocktail di scampi,schrimps|mayo,schrimps,,,
+23,SW,pane e nutella,nutella|bread,nutella,,,
+24,SW,pane e marmellata,jam|bread,jam,,,
+25,SW,rice milk,rice|milk|sugar,rice,,,

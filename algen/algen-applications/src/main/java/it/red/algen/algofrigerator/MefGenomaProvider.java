@@ -132,7 +132,7 @@ public class MefGenomaProvider implements GenomaProvider {
 	 * with only feasible recipes and genes positions based on desired meals number.
 	 */
 	@Override
-	public Genoma reduce(Target<?, ?> target) {
+	public Genoma shrink(Target<?, ?> target) {
 		logger.debug("Reducing the number of recipes and collecting info.");
 		
 		// Goal

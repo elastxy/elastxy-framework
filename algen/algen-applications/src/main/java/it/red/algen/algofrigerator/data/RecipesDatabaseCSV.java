@@ -42,13 +42,13 @@ public class RecipesDatabaseCSV implements RecipesDatabase {
 				recipe.ingredients = Arrays.asList(nextLine[3].split("(\\|)"));
 				recipe.mainIngredient = nextLine[4];
 				recipe.preparation = nextLine[5];
-				recipe.persons = Integer.parseInt(nextLine[6]);
+				recipe.persons = nextLine[6]==null||"".equals(nextLine[6]) ? 1 : Integer.parseInt(nextLine[6]);
 				recipe.note = nextLine[7];
 				result.add(recipe);
 			}
 			reader.close();
 			
-			// Reduce to those with small number of ingredients (TODOA: configurable)
+			// Reduce to those with small number of ingredients
 //			recipeCache = result.stream().filter(p -> p.ingredients.size()<6).collect(Collectors.toList());
 			return result;
 		}

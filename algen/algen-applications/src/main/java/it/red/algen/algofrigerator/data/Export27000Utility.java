@@ -7,10 +7,13 @@ import java.io.FileReader;
 import java.io.FileWriter;
 import java.util.Arrays;
 
+import org.apache.log4j.Logger;
+
 import au.com.bytecode.opencsv.CSVReader;
 import au.com.bytecode.opencsv.CSVWriter;
 
 public class Export27000Utility {
+	private static Logger logger = Logger.getLogger(Export27000Utility.class);
 
 	private static final String INPUT_FILENAME = 	"C:\\tmp\\algendata\\algorifero\\ricette_27000.csv";
 	private static final String OUTPUT_FILENAME = 	"C:\\tmp\\algendata\\algorifero\\ingredients.csv";
@@ -51,7 +54,7 @@ public class Export27000Utility {
 					RecipeType.SWEET.getCode() :
 					RecipeType.SAVOURY.getCode(); 
 			if(nextLine[6].toLowerCase().indexOf("sale")==-1
-					&& nextLine[6].toLowerCase().indexOf("zucchero")==-1){ // TODOA: scovare ricette neutre
+					&& nextLine[6].toLowerCase().indexOf("zucchero")==-1){ // TODOM: segnare ricette neutre
 				type = RecipeType.NEUTRAL.getCode();
 			}
 			
@@ -65,8 +68,7 @@ public class Export27000Utility {
 				persons = nextLine[4]==null ? null : Integer.parseInt(nextLine[4].trim());
 			}
 			catch(Exception ex){
-				System.out.println("Error while transforming persons number. Ex:"+ex);
-				// TODO: logger
+				logger.error("Error while transforming persons number. Ex:"+ex,ex);
 			}
 			
 			// Write new line

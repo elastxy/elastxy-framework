@@ -70,7 +70,7 @@ public class MesGenomaProvider implements GenomaProvider {
 	 * with only free cells number
 	 */
 	@Override
-	public Genoma reduce(Target<?, ?> target) {
+	public Genoma shrink(Target<?, ?> target) {
 
 		PredefinedGenoma genoma = new PredefinedGenoma();
 		genoma.setLimitedAllelesStrategy(true); // after determined, alleles are always the same set for every solution
