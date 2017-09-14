@@ -18,7 +18,8 @@ public class MexAlleleGenerator implements AlleleGenerator {
 		Allele result = null;
 		if(metadata.code.equals("operator")){
 			result = new Allele<Character>();
-			result.value = (String)metadata.values.get(Randomizer.nextInt(metadata.values.size()));
+			String valueString = (String)metadata.values.get(Randomizer.nextInt(metadata.values.size()));
+			result.value = valueString.charAt(0);
 		}
 		else if(metadata.code.equals("operand")){
 			result = new Allele<Long>();

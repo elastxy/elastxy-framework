@@ -14,24 +14,24 @@ public class MexIncubator implements Incubator<SequenceGenotype, NumberPhenotype
 		NumberPhenotype result = new NumberPhenotype();
 		result.value = calculate(
 				(Long)genotype.genes.get(0).allele.value,
-				(String)genotype.genes.get(1).allele.value, 
+				(Character)genotype.genes.get(1).allele.value, 
 				(Long)genotype.genes.get(2).allele.value);
 		return result;
 	}
 	
-    public long calculate(long val1, String op, long val2) throws IllegalSolutionException {
+    public long calculate(long val1, char op, long val2) throws IllegalSolutionException {
         long result = 0;
         switch(op){
-            case "+":
+            case '+':
                 result = val1 + val2;
                 break;
-            case "-":
+            case '-':
                 result = val1 - val2;
                 break;
-            case "*":
+            case '*':
                 result = val1 * val2;
                 break;
-            case "/":
+            case '/':
                 if(val2==0){
                     throw new IllegalSolutionException("Divisione per zero.");
                 }

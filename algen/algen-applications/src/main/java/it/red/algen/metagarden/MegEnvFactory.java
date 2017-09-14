@@ -16,7 +16,6 @@ import org.springframework.stereotype.Component;
 import it.red.algen.context.ContextSupplier;
 import it.red.algen.dataaccess.AbstractEnvFactory;
 import it.red.algen.dataaccess.GenomaProvider;
-import it.red.algen.dataaccess.SolutionsFactory;
 import it.red.algen.domain.experiment.PerformanceTarget;
 import it.red.algen.domain.genetics.Genoma;
 import it.red.algen.metadata.StandardMetadataGenoma;
@@ -29,8 +28,6 @@ import it.red.algen.metadata.StandardMetadataGenoma;
 public class MegEnvFactory extends AbstractEnvFactory<String, Double, StandardMetadataGenoma> {
 	
 	@Autowired private ContextSupplier contextSupplier;
-	
-	@Autowired private MegSolutionsFactory solutionsFactory;
 	
 	@Autowired private MegGenomaProvider genomaProvider;
 	
@@ -49,11 +46,5 @@ public class MegEnvFactory extends AbstractEnvFactory<String, Double, StandardMe
 	protected GenomaProvider getGenomaProvider() {
 		return genomaProvider;
 	}
-
-	@Override
-	protected SolutionsFactory<StandardMetadataGenoma> getSolutionsFactory() {
-		return solutionsFactory;
-	}
-
 
 }

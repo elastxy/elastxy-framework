@@ -9,7 +9,6 @@ import it.red.algen.context.AlgorithmContext;
 import it.red.algen.context.ContextBuilder;
 import it.red.algen.context.ContextSupplier;
 import it.red.algen.dataaccess.EnvFactory;
-import it.red.algen.dataaccess.PopulationFactory;
 import it.red.algen.engine.UniformlyDistributedSelector;
 import it.red.algen.stats.Experiment;
 import it.red.algen.stats.ExperimentStats;
@@ -22,8 +21,6 @@ public abstract class AbstractApplicationService {
 
 	@Autowired private ContextBuilder benchmarkContextBuilder;
 	
-	@Autowired private PopulationFactory populationFactory;
-
 	@Autowired private  AutowireCapableBeanFactory beanFactory;
 	
 
@@ -113,7 +110,7 @@ public abstract class AbstractApplicationService {
  		context.parameters.recombinationPerc = 0.0;
  		context.parameters.initialSelectionRandom = true;
  		context.application.selector = new UniformlyDistributedSelector();
-		context.application.selector.setup(context.parameters, populationFactory);
+		context.application.selector.setup(context.parameters, context.application.populationFactory);
 
 		// Experiments run
         StatsExperimentExecutor collector = new StatsExperimentExecutor(envFactory, experiments);

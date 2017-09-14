@@ -10,10 +10,6 @@
 
 package it.red.algen.dataaccess;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
-
-import it.red.algen.context.ContextSupplier;
 import it.red.algen.domain.experiment.Population;
 import it.red.algen.domain.genetics.Genoma;
 
@@ -21,10 +17,7 @@ import it.red.algen.domain.genetics.Genoma;
  *
  * @author grossi
  */
-@Component
 public class StandardPopulationFactory implements PopulationFactory<Genoma> {
-	
-	@Autowired private ContextSupplier contextSupplier;
 	
 	private SolutionsFactory solutionsFactory;
 	
@@ -34,10 +27,10 @@ public class StandardPopulationFactory implements PopulationFactory<Genoma> {
 	}
 
 	@Override
-    public Population createNew(Genoma genoma) {
+    public Population createNew(Genoma genoma, long solutions, boolean random) {
         Population population = new Population();
-        for(int i = 0; i < contextSupplier.getContext().parameters.initialSelectionNumber; i++){
-        	if(contextSupplier.getContext().parameters.initialSelectionRandom){
+        for(int i = 0; i < solutions; i++){
+        	if(random){
                 population.add(solutionsFactory.createRandom(genoma));
         	}
         	else {

@@ -6,6 +6,11 @@
 		"content" : "it.red.algen.algofrigerator.MefSolutionsFactory"
 	},
 	
+	"populationFactory": {
+		"type" : "java",
+		"content" : "it.red.algen.dataaccess.StandardPopulationFactory"
+	},
+	
 	"incubator": {
 		"type" : "java",
 		"content" : "it.red.algen.algofrigerator.MefIncubator"

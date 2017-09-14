@@ -1,8 +1,5 @@
 package it.red.algen.components;
 
-import it.red.algen.dataaccess.SolutionsFactory;
-import it.red.algen.engine.AlleleGenerator;
-
 /**
  * Contains all static metadata needed for building the application
  * components.
@@ -29,7 +26,8 @@ import it.red.algen.engine.AlleleGenerator;
  */
 public class AlgenApplication {
 	public String name;
-	
+
+	public ComponentMetadata populationFactory;
 	public ComponentMetadata solutionsFactory;
 	
 	public ComponentMetadata fitnessCalculator;

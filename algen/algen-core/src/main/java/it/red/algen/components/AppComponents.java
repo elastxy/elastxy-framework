@@ -1,10 +1,7 @@
 package it.red.algen.components;
 
-import it.red.algen.dataaccess.EnvFactory;
-import it.red.algen.dataaccess.GenomaProvider;
 import it.red.algen.dataaccess.PopulationFactory;
 import it.red.algen.dataaccess.SolutionsFactory;
-import it.red.algen.engine.AlleleGenerator;
 import it.red.algen.engine.FitnessCalculator;
 import it.red.algen.engine.Incubator;
 import it.red.algen.engine.Mutator;
@@ -20,8 +17,6 @@ import it.red.algen.tracking.SolutionRenderer;
  * it's created at boot time by a builder, than used to supply
  * the finite set of component to the algorithm.
  * 
- * TODO: ApplicationInfo, taken from MexApplication...
- * 
  * @author red
  *
  */
@@ -32,7 +27,7 @@ public class AppComponents {
 //	public static final String AlleleGenerator = 	"alleleGenerator";
 //	public static final String EnvFactory = 		"envFactory";
 //	public static final String SolutionsFactory = 	"solutionsFactory";
-//	public static final String PopulationFactory = 	"populationFactory";
+	public static final String PopulationFactory = 	"populationFactory";
 	
 	public static final String Incubator = 			"incubator";
 	public static final String FitnessCalculator = 	"fitnessCalculator";
@@ -47,10 +42,10 @@ public class AppComponents {
 //	public GenomaProvider genomaProvider;
 //	public AlleleGenerator alleleGenerator;
 //	public EnvFactory envFactory;
-//	public PopulationFactory populationFactory;
 
 	public String name;
 	
+	public PopulationFactory populationFactory;
 	public SolutionsFactory solutionsFactory;
 	
 	public Incubator incubator;

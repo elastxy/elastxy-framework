@@ -26,8 +26,6 @@ import it.red.algen.context.AlgorithmContext;
 import it.red.algen.context.ContextSupplier;
 import it.red.algen.dataaccess.AbstractEnvFactory;
 import it.red.algen.dataaccess.GenomaProvider;
-import it.red.algen.dataaccess.SolutionsFactory;
-import it.red.algen.dataaccess.WorkingDataset;
 import it.red.algen.domain.experiment.PerformanceTarget;
 import it.red.algen.domain.experiment.Target;
 import it.red.algen.domain.genetics.Genoma;
@@ -86,12 +84,6 @@ public class MefEnvFactory extends AbstractEnvFactory<PerformanceTarget, BigDeci
 		return target;
 	}
 
-
-	@Override
-	protected SolutionsFactory<StandardMetadataGenoma> getSolutionsFactory() {
-		return contextSupplier.getContext().application.solutionsFactory;
-	}
-	
 
     /**
      * A list of foods from refrigerator (TODOM: by code, not by name)

@@ -20,7 +20,6 @@ import it.red.algen.context.AlgorithmContext;
 import it.red.algen.context.ContextSupplier;
 import it.red.algen.dataaccess.AbstractEnvFactory;
 import it.red.algen.dataaccess.GenomaProvider;
-import it.red.algen.dataaccess.SolutionsFactory;
 import it.red.algen.domain.experiment.NumberRawFitness;
 import it.red.algen.domain.experiment.PerformanceTarget;
 import it.red.algen.domain.experiment.Solution;
@@ -52,8 +51,8 @@ public class MexEnvFactory extends AbstractEnvFactory<PerformanceTarget, BigDeci
         
 		// Define boundaries
 		long maxOperandValue = context.applicationSpecifics.getParamLong(MexConstants.MAX_OPERAND_VALUE);
-        Solution minSol = context.application.solutionsFactory.createPredefined((StandardMetadataGenoma)genoma, Arrays.asList(maxOperandValue, "*", -maxOperandValue));
-        Solution maxSol = context.application.solutionsFactory.createPredefined((StandardMetadataGenoma)genoma, Arrays.asList(maxOperandValue, "*", maxOperandValue));
+        Solution minSol = context.application.solutionsFactory.createPredefined((StandardMetadataGenoma)genoma, Arrays.asList(maxOperandValue, '*', -maxOperandValue));
+        Solution maxSol = context.application.solutionsFactory.createPredefined((StandardMetadataGenoma)genoma, Arrays.asList(maxOperandValue, '*', maxOperandValue));
 
 		// Defines goal representation
         Long targetValue = context.applicationSpecifics.getTargetLong(MexConstants.TARGET_EXPRESSION_RESULT);
@@ -75,10 +74,5 @@ public class MexEnvFactory extends AbstractEnvFactory<PerformanceTarget, BigDeci
 		return target;
 	}
 
-
-	@Override
-	protected SolutionsFactory<StandardMetadataGenoma> getSolutionsFactory() {
-		return contextSupplier.getContext().application.solutionsFactory;
-	}
 
 }

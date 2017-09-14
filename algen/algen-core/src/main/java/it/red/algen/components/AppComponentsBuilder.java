@@ -4,6 +4,7 @@ import org.apache.log4j.Logger;
 import org.springframework.stereotype.Component;
 
 import it.red.algen.conf.ConfigurationException;
+import it.red.algen.dataaccess.PopulationFactory;
 import it.red.algen.dataaccess.SolutionsFactory;
 import it.red.algen.engine.FitnessCalculator;
 import it.red.algen.engine.Incubator;
@@ -39,7 +40,8 @@ public class AppComponentsBuilder {
 //		TODOA result.envFactory = 	(Incubator)constructComponent(applicationMetadata.incubator);
 		
 		result.name = 				applicationMetadata.name;
-		
+
+		result.populationFactory = 	(PopulationFactory)constructComponent(applicationMetadata.populationFactory);
 		result.solutionsFactory = 	(SolutionsFactory)constructComponent(applicationMetadata.solutionsFactory);
 		
 		result.incubator = 			(Incubator)constructComponent(applicationMetadata.incubator);
@@ -80,6 +82,7 @@ public class AppComponentsBuilder {
 	 * Wires ApplicationComponents up so that they could collaborate
 	 */
 	public AppComponents wire(AppComponents appComponents){
+		appComponents.populationFactory.setSolutionsFactory(appComponents.solutionsFactory);
 		appComponents.fitnessCalculator.setup(appComponents.incubator);
 		return appComponents;
 	}

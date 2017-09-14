@@ -6,6 +6,11 @@
 		"content" : "it.red.algen.metasudoku.MesSolutionsFactory"
 	},
 	
+	"populationFactory": {
+		"type" : "java",
+		"content" : "it.red.algen.dataaccess.StandardPopulationFactory"
+	},
+	
 	"incubator": {
 		"type" : "java",
 		"content" : "it.red.algen.metasudoku.MesIncubator"
