@@ -51,12 +51,12 @@ public class MexEnvFactory extends AbstractEnvFactory<PerformanceTarget, BigDeci
 		AlgorithmContext context = contextSupplier.getContext();
         
 		// Define boundaries
-		long maxOperandValue = context.applicationSpecifics.getParamLong(MexApplication.MAX_OPERAND_VALUE);
+		long maxOperandValue = context.applicationSpecifics.getParamLong(MexConstants.MAX_OPERAND_VALUE);
         Solution minSol = context.application.solutionsFactory.createPredefined((StandardMetadataGenoma)genoma, Arrays.asList(maxOperandValue, "*", -maxOperandValue));
         Solution maxSol = context.application.solutionsFactory.createPredefined((StandardMetadataGenoma)genoma, Arrays.asList(maxOperandValue, "*", maxOperandValue));
 
 		// Defines goal representation
-        Long targetValue = context.applicationSpecifics.getTargetLong(MexApplication.TARGET_EXPRESSION_RESULT);
+        Long targetValue = context.applicationSpecifics.getTargetLong(MexConstants.TARGET_EXPRESSION_RESULT);
         PerformanceTarget target = new PerformanceTarget();
         target.setGoal(targetValue);
         target.setTargetFitness(contextSupplier.getContext().stopConditions.targetFitness);
