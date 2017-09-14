@@ -37,7 +37,7 @@ public class MegEnvFactory extends AbstractEnvFactory<String, Double, StandardMe
 	@Override
 	protected PerformanceTarget<String, Double> defineTarget(Genoma genoma) {
 		PerformanceTarget<String,Double> target = new PerformanceTarget<String,Double>();
-    	target.setGoal(contextSupplier.getContext().applicationSpecifics.getTargetString(MegApplication.TARGET_WELLNESS));
+    	target.setGoal(contextSupplier.getContext().applicationSpecifics.getTargetString(MegConstants.TARGET_WELLNESS));
     	target.setTargetFitness(contextSupplier.getContext().stopConditions.targetFitness);
     	target.setTargetThreshold(contextSupplier.getContext().stopConditions.targetThreshold); // TODOA: commons to all envfactory
     	// Determines goal rough measure: minimum possible unhappiness (illness), 0.0

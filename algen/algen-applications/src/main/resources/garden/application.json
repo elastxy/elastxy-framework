@@ -1,0 +1,34 @@
+{
+	"name" : "garden",
+	
+	"solutionsFactory": {
+		"type" : "java",
+		"content" : "it.red.algen.metagarden.MegSolutionsFactory"
+	},
+	
+	"incubator": {
+		"type" : "java",
+		"content" : "it.red.algen.metagarden.MegIncubator"
+	},
+	"fitnessCalculator": {
+		"type" : "java",
+		"content" : "it.red.algen.metagarden.MegFitnessCalculator"
+	},
+	
+	"selector": {
+		"type" : "java",
+		"content" : "it.red.algen.engine.StandardSelector"
+	},
+	"mutator": {
+		"type" : "java",
+		"content" : "it.red.algen.engine.SequenceMutator"
+	},
+	"recombinator": {
+		"type" : "java",
+		"content" : "it.red.algen.engine.SequenceRecombinator"
+	},
+	"solutionRenderer": {
+		"type" : "java",
+		"content" : "it.red.algen.tracking.DefaultSolutionRenderer"
+	}
+}

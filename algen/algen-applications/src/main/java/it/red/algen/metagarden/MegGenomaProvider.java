@@ -32,8 +32,7 @@ public class MegGenomaProvider implements GenomaProvider {
 
 	@Autowired private MegAlleleGenerator alleleGenerator;
 
-//	private GardenDatabase db = new GardenDatabaseInMemory();
-	private GardenDatabase db = new GardenDatabaseCSV();
+	private GardenDatabase db;
 
 	private StandardMetadataGenoma cachedGenoma;
 
@@ -50,10 +49,11 @@ public class MegGenomaProvider implements GenomaProvider {
 	public void collect() {
 		StandardMetadataGenoma genoma = new StandardMetadataGenoma();
 		genoma.setupAlleleGenerator(alleleGenerator);
-		genoma.setLimitedAllelesStrategy(contextSupplier.getContext().applicationSpecifics.getParamBoolean(MegApplication.LIMITED_TREES));
+		genoma.setLimitedAllelesStrategy(contextSupplier.getContext().applicationSpecifics.getParamBoolean(MegConstants.LIMITED_TREES));
 		Map<String, GeneMetadata> genesMetadataByCode = new HashMap<String, GeneMetadata>();
 		Map<String, GeneMetadata> genesMetadataByPos = new HashMap<String, GeneMetadata>();
-
+		
+		db = new GardenDatabaseCSV(contextSupplier.getContext().application.name);
 		Place[] places = db.getAllPlaces();
 		
 		for(int pos=0; pos < places.length; pos++){

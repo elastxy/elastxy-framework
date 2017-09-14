@@ -5,7 +5,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import au.com.bytecode.opencsv.CSVReader;
-import it.red.algen.metagarden.MegApplication;
 
 
 /**
@@ -17,10 +16,18 @@ public class GardenDatabaseCSV implements GardenDatabase{
 	private static final String PLACES_FILENAME = 	"places.csv";
 	private static final String TREES_FILENAME = 	"trees.csv";
 	
+	private String name;
+	
+	
+	public GardenDatabaseCSV(String name){
+		this.name = name;
+	}
+	
+	
 	public Tree[] getAllTrees() {
 		try {
 			List<Tree> result = new ArrayList<Tree>();
-			String resourceName = "/"+MegApplication.APP_NAME+"/"+TREES_FILENAME;
+			String resourceName = "/"+name+"/"+TREES_FILENAME;
 			CSVReader reader = new CSVReader(new InputStreamReader(getClass().getResourceAsStream(resourceName)), ';');
 			String [] nextLine;
 			// header
@@ -40,10 +47,11 @@ public class GardenDatabaseCSV implements GardenDatabase{
 		}
 	}
 	
+	
 	public Place[] getAllPlaces() {
 		try {
 			List<Place> result = new ArrayList<Place>();
-			String resourceName = "/"+MegApplication.APP_NAME+"/"+PLACES_FILENAME;
+			String resourceName = "/"+name+"/"+PLACES_FILENAME;
 			CSVReader reader = new CSVReader(new InputStreamReader(getClass().getResourceAsStream(resourceName)), ';');
 			String [] nextLine;
 			// header
@@ -62,6 +70,7 @@ public class GardenDatabaseCSV implements GardenDatabase{
 			throw new RuntimeException("Error reading places from db: "+t, t);
 		}
 	}
+	
 	
 	private int toInt(String s){
 		return Integer.parseInt(s);
