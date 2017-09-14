@@ -40,7 +40,7 @@ public class MesEnvFactory extends AbstractEnvFactory<int[][], Integer, Predefin
 	
 	@Autowired private ContextSupplier contextSupplier;
 	
-	@Autowired private MesSolutionFactory solutionsFactory;
+	@Autowired private MesSolutionsFactory solutionsFactory;
 
 	@Autowired private MesGenomaProvider genomaProvider;
 	
@@ -65,7 +65,7 @@ public class MesEnvFactory extends AbstractEnvFactory<int[][], Integer, Predefin
 
     	// Determines goal rough measure by deriving from extreme solutions
     	// 27 is the number of rows, columns, squares with numbers 1 to 9
-    	target.setReferenceMeasure(MesApplication.TOTAL_COMPLETED);
+    	target.setReferenceMeasure(MesConstants.TOTAL_COMPLETED);
 		return target;
 	}
 
@@ -76,7 +76,7 @@ public class MesEnvFactory extends AbstractEnvFactory<int[][], Integer, Predefin
      * @return
      */
     private int[][] createGoal(){
-		String classpathResource = "/"+MesApplication.APP_NAME+"/target.json";
+		String classpathResource = "/"+contextSupplier.getContext().application.name+"/target.json";
 		try {
 			return (int[][])ReadConfigSupport.readJSON(classpathResource, int[][].class);
 		} catch (IOException e) {

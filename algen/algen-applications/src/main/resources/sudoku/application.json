@@ -1,0 +1,34 @@
+{
+	"name" : "sudoku",
+	
+	"solutionsFactory": {
+		"type" : "java",
+		"content" : "it.red.algen.metasudoku.MesSolutionsFactory"
+	},
+	
+	"incubator": {
+		"type" : "java",
+		"content" : "it.red.algen.metasudoku.MesIncubator"
+	},
+	"fitnessCalculator": {
+		"type" : "java",
+		"content" : "it.red.algen.metasudoku.MesFitnessCalculator"
+	},
+	
+	"selector": {
+		"type" : "java",
+		"content" : "it.red.algen.engine.StandardSelector"
+	},
+	"mutator": {
+		"type" : "java",
+		"content" : "it.red.algen.engine.SequenceMutator"
+	},
+	"recombinator": {
+		"type" : "java",
+		"content" : "it.red.algen.engine.SequenceRecombinator"
+	},
+	"solutionRenderer": {
+		"type" : "java",
+		"content" : "it.red.algen.metasudoku.MesSolutionRenderer"
+	}
+}

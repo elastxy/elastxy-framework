@@ -20,7 +20,7 @@ public class MesSolutionRenderer implements SolutionRenderer<String> {
 		}
 		
 //		TODOB: show changed values in square brackets ((SequenceGenotype)solution.getGenotype()).genes.get(index);
-		int[][] matrix = (int[][])phenotype.getValue().get(MesApplication.PHENOTYPE_MATRIX);
+		int[][] matrix = (int[][])phenotype.getValue().get(MesConstants.PHENOTYPE_MATRIX);
 		
 		int[] columnTotals = new int[9];
 		for (int i=0; i < 9; i++) {
@@ -47,7 +47,7 @@ public class MesSolutionRenderer implements SolutionRenderer<String> {
 			sb.append(String.format(" %2d", columnTotals[c]));
 		}
 		sb.append("\n\n");
-		double completeness = (double)phenotype.getValue().get(MesApplication.PHENOTYPE_COMPLETENESS);
+		double completeness = (double)phenotype.getValue().get(MesConstants.PHENOTYPE_COMPLETENESS);
 		sb.append(String.format("-> Sudoku completeness: %.3f%n%n", completeness));
 		sb.append("SOLUTION: "+solution+"\n");
 		return sb.toString();

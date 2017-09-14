@@ -27,8 +27,8 @@ public class MesIncubator implements Incubator<SequenceGenotype, ComplexPhenotyp
 		ComplexPhenotype result = new ComplexPhenotype();
 		int[][] matrix = fillMatrix((int[][])env.target.getGoal(), genotype.genes);
 		double completeness = countCompleteRowsSquares(matrix);
-		result.value.put(MesApplication.PHENOTYPE_MATRIX, matrix);
-		result.value.put(MesApplication.PHENOTYPE_COMPLETENESS, completeness);
+		result.value.put(MesConstants.PHENOTYPE_MATRIX, matrix);
+		result.value.put(MesConstants.PHENOTYPE_COMPLETENESS, completeness);
 		return result;
 	}
 	

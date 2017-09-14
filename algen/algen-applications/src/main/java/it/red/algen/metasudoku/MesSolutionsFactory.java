@@ -14,7 +14,7 @@ import it.red.algen.domain.genetics.PredefinedGenoma;
 import it.red.algen.domain.genetics.SequenceGenotype;
 
 @Component
-public class MesSolutionFactory implements SolutionsFactory<PredefinedGenoma> {
+public class MesSolutionsFactory implements SolutionsFactory<PredefinedGenoma> {
 
 
     public Solution createRandom(PredefinedGenoma genoma) {
