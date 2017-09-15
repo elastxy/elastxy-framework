@@ -1,6 +1,11 @@
 {
 	"name" : "garden",
 	
+	"alleleGenerator": {
+		"type" : "java",
+		"content" : "it.red.algen.metagarden.MegAlleleGenerator"
+	},
+	
 	"solutionsFactory": {
 		"type" : "java",
 		"content" : "it.red.algen.metagarden.MegSolutionsFactory"

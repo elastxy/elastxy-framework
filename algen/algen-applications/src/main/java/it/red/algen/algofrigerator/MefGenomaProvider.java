@@ -56,8 +56,6 @@ public class MefGenomaProvider implements GenomaProvider {
 	
 	public static final String GENE_RECIPE = "_recipe";
 	
-	@Autowired private MefAlleleGenerator alleleGenerator;
-
 	@Autowired private ContextSupplier contextSupplier;
 	
 	/**
@@ -270,7 +268,7 @@ public class MefGenomaProvider implements GenomaProvider {
 		// Create Genoma
 		StandardMetadataGenoma genoma = new StandardMetadataGenoma();
 		genoma.setWorkingDataset(workingDataset);
-		genoma.setupAlleleGenerator(alleleGenerator);
+		genoma.setupAlleleGenerator(contextSupplier.getContext().application.alleleGenerator);
 		genoma.setLimitedAllelesStrategy(false); // TODOM: repetitions of receipt are available: make it configurable!
 		genoma.initialize(genesMetadataByCode, genesMetadataByPos);
 		return genoma;

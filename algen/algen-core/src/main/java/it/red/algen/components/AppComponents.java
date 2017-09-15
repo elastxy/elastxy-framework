@@ -2,6 +2,7 @@ package it.red.algen.components;
 
 import it.red.algen.dataaccess.PopulationFactory;
 import it.red.algen.dataaccess.SolutionsFactory;
+import it.red.algen.engine.AlleleGenerator;
 import it.red.algen.engine.FitnessCalculator;
 import it.red.algen.engine.Incubator;
 import it.red.algen.engine.Mutator;
@@ -22,11 +23,13 @@ import it.red.algen.tracking.SolutionRenderer;
  */
 public class AppComponents {
 
+//	public static final String EnvFactory = 		"envFactory";
+	
 	// TODOA: add AppComponents
 //	public static final String GenomaProvider = 	"genomaProvider";
-//	public static final String AlleleGenerator = 	"alleleGenerator";
-//	public static final String EnvFactory = 		"envFactory";
-//	public static final String SolutionsFactory = 	"solutionsFactory";
+	public static final String AlleleGenerator = 	"alleleGenerator";
+	
+	public static final String SolutionsFactory = 	"solutionsFactory";
 	public static final String PopulationFactory = 	"populationFactory";
 	
 	public static final String Incubator = 			"incubator";
@@ -38,12 +41,14 @@ public class AppComponents {
 	
 	public static final String SolutionRenderer = 	"renderer";
 
-	// TODOA: add AppComponents
-//	public GenomaProvider genomaProvider;
-//	public AlleleGenerator alleleGenerator;
-//	public EnvFactory envFactory;
 
 	public String name;
+	
+	// TODOA: add AppComponents
+//	public EnvFactory envFactory;
+	
+//	public GenomaProvider genomaProvider;
+	public AlleleGenerator alleleGenerator;
 	
 	public PopulationFactory populationFactory;
 	public SolutionsFactory solutionsFactory;

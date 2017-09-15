@@ -24,8 +24,6 @@ public class MexGenomaProvider implements GenomaProvider {
 
 	@Autowired private ContextSupplier contextSupplier;
 
-	@Autowired private MexAlleleGenerator alleleGenerator;
-	
 //	public void setAlleleGenerator(AlleleGenerator alleleGenerator){
 //		this.alleleGenerator = alleleGenerator;
 //	}
@@ -44,7 +42,7 @@ public class MexGenomaProvider implements GenomaProvider {
 		
 		// Instantiate Genoma
 		StandardMetadataGenoma genoma = new StandardMetadataGenoma();
-		genoma.setupAlleleGenerator(alleleGenerator);
+		genoma.setupAlleleGenerator(contextSupplier.getContext().application.alleleGenerator);
 		
 		// Retrieves metadata
 		Genes genes = ReadConfigSupport.retrieveGenesMetadata(this.contextSupplier.getContext().application.name);

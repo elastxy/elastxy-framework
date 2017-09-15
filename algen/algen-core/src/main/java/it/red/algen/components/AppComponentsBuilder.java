@@ -6,6 +6,7 @@ import org.springframework.stereotype.Component;
 import it.red.algen.conf.ConfigurationException;
 import it.red.algen.dataaccess.PopulationFactory;
 import it.red.algen.dataaccess.SolutionsFactory;
+import it.red.algen.engine.AlleleGenerator;
 import it.red.algen.engine.FitnessCalculator;
 import it.red.algen.engine.Incubator;
 import it.red.algen.engine.Mutator;
@@ -34,12 +35,14 @@ public class AppComponentsBuilder {
 		
 		AppComponents result = new AppComponents();
 
-		// TODOM: not by reference: indirection with name
-//		TODOA result.genomaProvider = 	(Incubator)constructComponent(applicationMetadata.incubator);
-//		TODOA result.alleleGenerator = 	(Incubator)constructComponent(applicationMetadata.incubator);
-//		TODOA result.envFactory = 	(Incubator)constructComponent(applicationMetadata.incubator);
 		
 		result.name = 				applicationMetadata.name;
+
+//		TODOA result.envFactory = 	(Incubator)constructComponent(applicationMetadata.incubator);
+		
+		// TODOM: not by reference: indirection with name
+//		TODOA result.genomaProvider = 	(Incubator)constructComponent(applicationMetadata.incubator);
+		result.alleleGenerator = 	(AlleleGenerator)constructComponent(applicationMetadata.alleleGenerator);
 
 		result.populationFactory = 	(PopulationFactory)constructComponent(applicationMetadata.populationFactory);
 		result.solutionsFactory = 	(SolutionsFactory)constructComponent(applicationMetadata.solutionsFactory);

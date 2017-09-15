@@ -1,6 +1,11 @@
 {
 	"name" : "expressions",
 	
+	"alleleGenerator": {
+		"type" : "java",
+		"content" : "it.red.algen.metaexpressions.MexAlleleGenerator"
+	},
+	
 	"solutionsFactory": {
 		"type" : "java",
 		"content" : "it.red.algen.metaexpressions.MexSolutionsFactory"

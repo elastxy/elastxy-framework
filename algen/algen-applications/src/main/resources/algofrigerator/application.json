@@ -1,6 +1,11 @@
 {
 	"name" : "algofrigerator",
 	
+	"alleleGenerator": {
+		"type" : "java",
+		"content" : "it.red.algen.algofrigerator.MefAlleleGenerator"
+	},
+	
 	"solutionsFactory": {
 		"type" : "java",
 		"content" : "it.red.algen.algofrigerator.MefSolutionsFactory"

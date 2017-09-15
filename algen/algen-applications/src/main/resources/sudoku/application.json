@@ -1,6 +1,11 @@
 {
 	"name" : "sudoku",
 	
+	"alleleGenerator": {
+		"type" : "java",
+		"content" : "it.red.algen.metasudoku.MesAlleleGenerator"
+	},
+	
 	"solutionsFactory": {
 		"type" : "java",
 		"content" : "it.red.algen.metasudoku.MesSolutionsFactory"
