@@ -1,15 +1,12 @@
 package it.red.algen.engine;
 
-import it.red.algen.conf.AlgorithmParameters;
-import it.red.algen.dataaccess.PopulationFactory;
+import it.red.algen.context.AlgorithmContext;
 import it.red.algen.domain.experiment.Population;
 import it.red.algen.domain.genetics.Genoma;
 
 public interface Selector<G extends Genoma> {
 
-	public void setup(AlgorithmParameters algParameters);
-    
-	public void setup(AlgorithmParameters algParameters, PopulationFactory populationFactory);
+	public void setup(AlgorithmContext context);
 
 	/**
 	 * Selects the next generation from a current based on specific strategy

@@ -2,6 +2,7 @@ package it.red.algen.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.config.AutowireCapableBeanFactory;
+import org.springframework.stereotype.Component;
 
 import it.red.algen.components.AppComponentsLocator;
 import it.red.algen.context.AlgorithmContext;
@@ -12,7 +13,8 @@ import it.red.algen.stats.Experiment;
 import it.red.algen.stats.ExperimentStats;
 import it.red.algen.stats.StatsExperimentExecutor;
 
-public abstract class AbstractApplicationService {
+@Component
+public class ApplicationService {
 //	private static Logger logger = LoggerFactory.getLogger(AbstractApplicationService.class);
 
 	@Autowired private ContextSupplier contextSupplier;
@@ -23,22 +25,10 @@ public abstract class AbstractApplicationService {
 
 	@Autowired private AppComponentsLocator appComponentsLocator;
 
-	
-	protected abstract String getApplicationName();
 
-	
-	private void setupContext(AlgorithmContext context) {
-		context.application = appComponentsLocator.get(getApplicationName());
-		context.application.genomaProvider.setup(context);
-		context.application.selector.setup(context.parameters);
-		context.application.envFactory.setup(context);
-	}
-	
-
-	
-
-	public ExperimentStats executeBenchmark(){
-		AlgorithmContext context = benchmarkContextBuilder.build(getApplicationName(), true);
+	public ExperimentStats executeBenchmark(String applicationName){
+		AlgorithmContext context = benchmarkContextBuilder.build(applicationName, true);
+		context.application.name = applicationName;
 		setupContext(context);
 		contextSupplier.init(context);
 
@@ -55,8 +45,8 @@ public abstract class AbstractApplicationService {
 	
 	
 	public ExperimentStats executeExperiment(AlgorithmContext context){
-		contextSupplier.init(context);
 	 	setupContext(context);
+	 	contextSupplier.init(context);
 
 	 	Experiment e = new Experiment(context.application.envFactory);
 	 	beanFactory.autowireBean(e);
@@ -71,8 +61,8 @@ public abstract class AbstractApplicationService {
 	
 	
 	public String executeAnalysis(AlgorithmContext context, int experiments){
-		contextSupplier.init(context);
 	 	setupContext(context);
+	 	contextSupplier.init(context);
 
         StatsExperimentExecutor collector = new StatsExperimentExecutor(context.application.envFactory, experiments);
         beanFactory.autowireBean(collector);
@@ -90,14 +80,16 @@ public abstract class AbstractApplicationService {
 		contextSupplier.init(context);
 	 	setupContext(context);
 		
-		// Trial
+		// Trial parameters
 		context.parameters.randomEvolution = true;
  		context.parameters.elitarism = false;
  		context.parameters.mutationPerc = 0.0;
  		context.parameters.recombinationPerc = 0.0;
  		context.parameters.initialSelectionRandom = true;
+ 		
+ 		// Substitute Selector bean with uniform random pick
  		context.application.selector = new UniformlyDistributedSelector();
-		context.application.selector.setup(context.parameters, context.application.populationFactory);
+		context.application.selector.setup(context);
 
 		// Experiments run
         StatsExperimentExecutor collector = new StatsExperimentExecutor(context.application.envFactory, experiments);
@@ -122,6 +114,14 @@ public abstract class AbstractApplicationService {
         
         return result;
 	}
+	
 
+	private void setupContext(AlgorithmContext context) {
+		context.application = appComponentsLocator.get(context.application.name);
+		context.application.genomaProvider.setup(context);
+		context.application.selector.setup(context);
+		context.application.envFactory.setup(context);
+	}
+	
 
 }

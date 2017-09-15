@@ -60,4 +60,33 @@ public class AppComponents {
 	public Recombinator recombinator;
 	
 	public SolutionRenderer solutionRenderer;
+	
+	
+	/**
+	 * Creates a copy for redefining at runtime some behaviour
+	 * @return
+	 */
+	public AppComponents copy(){
+		AppComponents result = new AppComponents();
+		
+		result.name = name;
+		
+		result.envFactory = envFactory;
+		
+		result.genomaProvider = genomaProvider;
+		result.alleleGenerator = alleleGenerator;
+		
+		result.populationFactory = populationFactory;
+		result.solutionsFactory = solutionsFactory;
+		
+		result.incubator = incubator;
+		result.fitnessCalculator = fitnessCalculator;
+		
+		result.selector = selector;
+		result.mutator = mutator;
+		result.recombinator = recombinator;
+		
+		result.solutionRenderer = solutionRenderer;
+		return result;
+	}
 }

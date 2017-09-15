@@ -29,11 +29,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import it.red.algen.algofrigerator.AlgofrigeratorService;
 import it.red.algen.context.AlgorithmContext;
-import it.red.algen.metaexpressions.ExpressionsService;
-import it.red.algen.metagarden.GardenService;
-import it.red.algen.metasudoku.SudokuService;
+import it.red.algen.service.ApplicationService;
 import it.red.algen.stats.ExperimentStats;
 
 @Controller
@@ -43,14 +40,8 @@ public class AlgenController {
 
 	@Autowired private InfoService infoService;
 	
-	@Autowired private ExpressionsService expressionsService;
+	@Autowired private ApplicationService applicationService;
 
-	@Autowired private GardenService gardenService;
-
-	@Autowired private SudokuService sudokuService;
-
-	@Autowired private AlgofrigeratorService algofrigeratorService;
-	
 
 	/**
 	 * ********************* MONITOR CONTROLLER *********************
@@ -79,103 +70,64 @@ public class AlgenController {
 	/**
 	 * ********************* EXPERIMENT CONTROLLER *********************
 	 */
-	@RequestMapping(path = "/experiment/{domain}", method = RequestMethod.POST)
+	@RequestMapping(path = "/experiment/{application}", method = RequestMethod.POST)
 	@ResponseBody
 	public ExperimentStats experiment(
-			@PathVariable String domain,  
+			@PathVariable String application,  
 			@RequestBody AlgorithmContext context) {
-		logger.info("REQUEST Service /experiment/{domain} => "+domain+""+context);
+		logger.info("REQUEST Service /experiment/{application} => "+application+""+context);
 
-		ExperimentStats stats = null;
-		if("expressions".equals(domain)){ 
-		 	stats = expressionsService.executeExperiment(context);
-		}
-		else if("garden".equals(domain)){ 
-		 	stats = gardenService.executeExperiment(context);
-		}
-		else if("sudoku".equals(domain)){ 
-		 	stats = sudokuService.executeExperiment(context);
-		}
-		else if("algofrigerator".equals(domain)){ 
-		 	stats = algofrigeratorService.executeExperiment(context);
-		}
-		logger.info("RESPONSE Service /experiment/{domain} => "+stats);
+		context.application.name = application;
+		ExperimentStats stats = applicationService.executeExperiment(context);
+		
+		logger.info("RESPONSE Service /experiment/{application} => "+stats);
 		return stats;
 	}
 	
 
 
-	@RequestMapping("/test/{domain}")
+	@RequestMapping("/test/{application}")
 	@ResponseBody
-	public ExperimentStats test(@PathVariable String domain) {
-		logger.info("REQUEST Service /test/{domain} => "+domain);
+	public ExperimentStats test(@PathVariable String application) {
+		logger.info("REQUEST Service /test/{application} => "+application);
 
-		ExperimentStats stats = null;
-		if("expressions".equals(domain)){ 
-		 	stats = expressionsService.executeBenchmark();
-		}
-		else if("garden".equals(domain)){ 
-		 	stats = gardenService.executeBenchmark();
-		}
-		else if("sudoku".equals(domain)){ 
-		 	stats = sudokuService.executeBenchmark();
-		}
-		else if("algofrigerator".equals(domain)){ 
-		 	stats = algofrigeratorService.executeBenchmark();
-		}
-		logger.info("RESPONSE Service /test/{domain} => "+stats);
+		ExperimentStats stats = applicationService.executeBenchmark(application);
+		
+		logger.info("RESPONSE Service /test/{application} => "+stats);
 		return stats;
 	}
 	
 	
 
 	// TODOM: structured results
-	@RequestMapping(path = "/analysis/{domain}/{experiments}", method = RequestMethod.POST)
+	@RequestMapping(path = "/analysis/{application}/{experiments}", method = RequestMethod.POST)
 	@ResponseBody
 	public String analysis(
-			@PathVariable String domain, 
+			@PathVariable String application, 
 			@PathVariable Integer experiments,
 			@RequestBody AlgorithmContext context) {
-		logger.info("REQUEST Service /analysis/{domain}/{experiments} => "+domain+","+experiments);
-		String result = null;
-	 	if("expressions".equals(domain)){
-	 		result = expressionsService.executeAnalysis(context, experiments);
-	 	}
-	 	else if("garden".equals(domain)){
-	 		result = gardenService.executeAnalysis(context, experiments);
-	 	}
-		else if("sudoku".equals(domain)){ 
-			result = sudokuService.executeAnalysis(context, experiments);
-		}
-		else if("algofrigerator".equals(domain)){ 
-			result = algofrigeratorService.executeAnalysis(context, experiments);
-		}
+		logger.info("REQUEST Service /analysis/{application}/{experiments} => "+application+","+experiments);
+		
+		context.application.name = application;
+		String result = applicationService.executeAnalysis(context, experiments);
+		
 		logger.info("RESPONSE Service /analysis/{domain}/{experiments} => "+result);
         return result;
 	}
 
 
-	@RequestMapping(path = "/trial/{domain}/{experiments}", method = RequestMethod.POST)
+	@RequestMapping(path = "/trial/{application}/{experiments}", method = RequestMethod.POST)
 	@ResponseBody
 	public String trialTest(
-			@PathVariable String domain, 
+			@PathVariable String application, 
 			@PathVariable Integer experiments,
 			@RequestBody AlgorithmContext context) {
-		logger.info("REQUEST Service /trial/{domain}/{experiments} => "+domain+","+experiments);
-		String result = null;
-	 	if("expressions".equals(domain)){
-	 		result = expressionsService.executeTrialTest(context, experiments);
-	 	}
-	 	else if("garden".equals(domain)){
-	 		result = gardenService.executeTrialTest(context, experiments);
-	 	}
-		else if("sudoku".equals(domain)){ 
-			result = sudokuService.executeTrialTest(context, experiments);
-		}
-		else if("algofrigerator".equals(domain)){ 
-			result = algofrigeratorService.executeTrialTest(context, experiments);
-		}
-		logger.info("RESPONSE Service /trial/{domain}/{experiments} => "+result);
+		logger.info("REQUEST Service /trial/{application}/{experiments} => "+application+","+experiments);
+
+		context.application.name = application;
+		String result = applicationService.executeTrialTest(context, experiments);
+
+		logger.info("RESPONSE Service /trial/{application}/{experiments} => "+result);
         return result;
 	}
 

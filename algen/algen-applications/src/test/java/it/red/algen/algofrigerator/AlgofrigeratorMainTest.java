@@ -21,6 +21,7 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import it.red.algen.TestConfig;
+import it.red.algen.service.ApplicationService;
 import it.red.algen.stats.ExperimentStats;
 
 
@@ -31,13 +32,13 @@ import it.red.algen.stats.ExperimentStats;
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(classes = TestConfig.class)
 public class AlgofrigeratorMainTest {
-	@Autowired private AlgofrigeratorService service;
+	@Autowired private ApplicationService service;
 	
 	@Test
     public void simpleRun() {
 		System.setProperty("datadir", new File("C:\\tmp\\algendata").getAbsolutePath());
 
-		ExperimentStats stats = service.executeBenchmark();
+		ExperimentStats stats = service.executeBenchmark("algofrigerator");
 		
         assertNotNull(stats);
         assertNotNull(stats.lastGeneration);

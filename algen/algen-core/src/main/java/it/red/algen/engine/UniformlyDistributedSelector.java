@@ -1,27 +1,26 @@
 package it.red.algen.engine;
 
-import it.red.algen.conf.AlgorithmParameters;
+import it.red.algen.context.AlgorithmContext;
 import it.red.algen.dataaccess.PopulationFactory;
 import it.red.algen.domain.experiment.Population;
 import it.red.algen.domain.genetics.Genoma;
 
 public class UniformlyDistributedSelector implements Selector<Genoma> {
-	private AlgorithmParameters parameters;
-	private PopulationFactory populationFactory;
+	private AlgorithmContext context;
 	
-    public void setup(AlgorithmParameters parameters) {
-    	this.parameters = parameters;
-    }
-    
-    public void setup(AlgorithmParameters algParameters, PopulationFactory populationFactory) {
-    	this.populationFactory = populationFactory;
+	public void setup(AlgorithmContext context){
+		this.context = context;
     }
 
     /** SELECTION
      *  Creates a new random population
      */
     public Population select(Population actualGeneration, Genoma genoma){
-    	Population nextGen = populationFactory.createNew(genoma, parameters.initialSelectionNumber, parameters.initialSelectionRandom);
+    	PopulationFactory populationFactory = context.application.populationFactory;
+    	Population nextGen = populationFactory.createNew(
+    			genoma, 
+    			context.parameters.initialSelectionNumber, 
+    			context.parameters.initialSelectionRandom);
         return nextGen;
     }
 	    
