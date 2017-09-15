@@ -1,5 +1,6 @@
 package it.red.algen.components;
 
+import it.red.algen.dataaccess.EnvFactory;
 import it.red.algen.dataaccess.GenomaProvider;
 import it.red.algen.dataaccess.PopulationFactory;
 import it.red.algen.dataaccess.SolutionsFactory;
@@ -9,7 +10,6 @@ import it.red.algen.engine.Incubator;
 import it.red.algen.engine.Mutator;
 import it.red.algen.engine.Recombinator;
 import it.red.algen.engine.Selector;
-import it.red.algen.tracking.DefaultSolutionRenderer;
 import it.red.algen.tracking.SolutionRenderer;
 
 /**
@@ -24,19 +24,18 @@ import it.red.algen.tracking.SolutionRenderer;
  */
 public class AppComponents {
 
-	// TODOA: add AppComponents
-//	public static final String EnvFactory = 		"envFactory";
+	public static final String EnvFactory = 		"envFactory"; // Context-dependent
 	
-	public static final String GenomaProvider = 	"genomaProvider";
+	public static final String GenomaProvider = 	"genomaProvider"; // Context-dependent
 	public static final String AlleleGenerator = 	"alleleGenerator";
 	
-	public static final String SolutionsFactory = 	"solutionsFactory";
 	public static final String PopulationFactory = 	"populationFactory";
+	public static final String SolutionsFactory = 	"solutionsFactory";
 	
-	public static final String Incubator = 			"incubator";
 	public static final String FitnessCalculator = 	"fitnessCalculator";
+	public static final String Incubator = 			"incubator";
 	
-	public static final String Selector = 			"selector";
+	public static final String Selector = 			"selector"; // Context-dependent
 	public static final String Mutator = 			"mutator";
 	public static final String Recombinator = 		"recombinator";
 	
@@ -45,8 +44,7 @@ public class AppComponents {
 
 	public String name;
 	
-	// TODOA: add AppComponents
-//	public EnvFactory envFactory;
+	public EnvFactory envFactory;
 	
 	public GenomaProvider genomaProvider;
 	public AlleleGenerator alleleGenerator;
@@ -61,5 +59,5 @@ public class AppComponents {
 	public Mutator mutator;
 	public Recombinator recombinator;
 	
-	public SolutionRenderer solutionRenderer = new DefaultSolutionRenderer(); // TODOM: move default to another class..
+	public SolutionRenderer solutionRenderer;
 }

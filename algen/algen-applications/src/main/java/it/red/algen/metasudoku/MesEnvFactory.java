@@ -13,13 +13,9 @@ package it.red.algen.metasudoku;
 import java.io.IOException;
 
 import org.apache.log4j.Logger;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
 
 import it.red.algen.conf.ConfigurationException;
 import it.red.algen.conf.ReadConfigSupport;
-import it.red.algen.context.AlgorithmContext;
-import it.red.algen.context.ContextSupplier;
 import it.red.algen.dataaccess.AbstractEnvFactory;
 import it.red.algen.domain.experiment.PerformanceTarget;
 import it.red.algen.domain.experiment.Target;
@@ -31,23 +27,16 @@ import it.red.algen.domain.genetics.PredefinedGenoma;
  *
  * @author grossi
  */
-@Component
 public class MesEnvFactory extends AbstractEnvFactory<int[][], Integer, PredefinedGenoma> {
 	private Logger logger = Logger.getLogger(MesEnvFactory.class);
 	
-	
-	@Autowired private ContextSupplier contextSupplier;
-	
 	@Override
 	protected Target<int[][], Integer> defineTarget(Genoma genoma) {
-		// Define evolution environment
-    	AlgorithmContext context = contextSupplier.getContext();
-    	
     	// Defines goal representation
     	PerformanceTarget target = new PerformanceTarget();
     	target.setGoal(createGoal());
-    	target.setTargetFitness(contextSupplier.getContext().stopConditions.targetFitness);
-    	target.setTargetThreshold(contextSupplier.getContext().stopConditions.targetThreshold); // TODOA: commons to all envfactory
+    	target.setTargetFitness(context.stopConditions.targetFitness);
+    	target.setTargetThreshold(context.stopConditions.targetThreshold); // TODOA: commons to all envfactory
 
     	// Determines goal rough measure by deriving from extreme solutions
     	// 27 is the number of rows, columns, squares with numbers 1 to 9
@@ -62,7 +51,7 @@ public class MesEnvFactory extends AbstractEnvFactory<int[][], Integer, Predefin
      * @return
      */
     private int[][] createGoal(){
-		String classpathResource = "/"+contextSupplier.getContext().application.name+"/target.json";
+		String classpathResource = "/"+context.application.name+"/target.json";
 		try {
 			return (int[][])ReadConfigSupport.readJSON(classpathResource, int[][].class);
 		} catch (IOException e) {

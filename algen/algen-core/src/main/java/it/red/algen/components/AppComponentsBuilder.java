@@ -4,6 +4,7 @@ import org.apache.log4j.Logger;
 import org.springframework.stereotype.Component;
 
 import it.red.algen.conf.ConfigurationException;
+import it.red.algen.dataaccess.EnvFactory;
 import it.red.algen.dataaccess.GenomaProvider;
 import it.red.algen.dataaccess.PopulationFactory;
 import it.red.algen.dataaccess.SolutionsFactory;
@@ -39,7 +40,7 @@ public class AppComponentsBuilder {
 		
 		result.name = 				applicationMetadata.name;
 
-//		TODOA result.envFactory = 	(Incubator)constructComponent(applicationMetadata.incubator);
+		result.envFactory = 		(EnvFactory)constructComponent(applicationMetadata.envFactory);
 		
 		// TODOM: not by reference: indirection with name
 		result.genomaProvider = 	(GenomaProvider)constructComponent(applicationMetadata.genomaProvider);

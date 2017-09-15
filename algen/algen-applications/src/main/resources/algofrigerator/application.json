@@ -1,6 +1,11 @@
 {
 	"name" : "algofrigerator",
 	
+	"envFactory": {
+		"type" : "java",
+		"content" : "it.red.algen.algofrigerator.MefEnvFactory"
+	},
+	
 	"genomaProvider": {
 		"type" : "java",
 		"content" : "it.red.algen.algofrigerator.MefGenomaProvider"
@@ -11,37 +16,41 @@
 		"content" : "it.red.algen.algofrigerator.MefAlleleGenerator"
 	},
 	
+	"populationFactory": {
+		"type" : "java",
+		"content" : "it.red.algen.dataaccess.StandardPopulationFactory"
+	},
+	
 	"solutionsFactory": {
 		"type" : "java",
 		"content" : "it.red.algen.algofrigerator.MefSolutionsFactory"
 	},
 	
-	"populationFactory": {
+	"fitnessCalculator": {
 		"type" : "java",
-		"content" : "it.red.algen.dataaccess.StandardPopulationFactory"
+		"content" : "it.red.algen.algofrigerator.MefFitnessCalculator"
 	},
 	
 	"incubator": {
 		"type" : "java",
 		"content" : "it.red.algen.algofrigerator.MefIncubator"
 	},
-	"fitnessCalculator": {
-		"type" : "java",
-		"content" : "it.red.algen.algofrigerator.MefFitnessCalculator"
-	},
 	
 	"selector": {
 		"type" : "java",
 		"content" : "it.red.algen.engine.StandardSelector"
 	},
+	
 	"mutator": {
 		"type" : "java",
 		"content" : "it.red.algen.engine.ChromosomeMutator"
 	},
+	
 	"recombinator": {
 		"type" : "java",
 		"content" : "it.red.algen.engine.ChromosomeRecombinator"
 	},
+	
 	"solutionRenderer": {
 		"type" : "java",
 		"content" : "it.red.algen.algofrigerator.MefSolutionRenderer"

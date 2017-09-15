@@ -27,7 +27,7 @@ package it.red.algen.components;
 public class AlgenApplication {
 	public String name;
 
-//	TODOA public ComponentMetadata envFactory;
+	public ComponentMetadata envFactory;
 	
 	public ComponentMetadata genomaProvider;
 	public ComponentMetadata alleleGenerator;

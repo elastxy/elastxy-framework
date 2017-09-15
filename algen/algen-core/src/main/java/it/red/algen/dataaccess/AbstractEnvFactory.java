@@ -10,10 +10,7 @@
 
 package it.red.algen.dataaccess;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
-
-import it.red.algen.context.ContextSupplier;
+import it.red.algen.context.AlgorithmContext;
 import it.red.algen.domain.experiment.Env;
 import it.red.algen.domain.experiment.Population;
 import it.red.algen.domain.experiment.Target;
@@ -23,10 +20,16 @@ import it.red.algen.domain.genetics.Genoma;
  *
  * @author grossi
  */
-@Component
 public abstract class AbstractEnvFactory<T extends Object, R extends Object, G extends Genoma> implements EnvFactory {
 	
-	@Autowired private ContextSupplier contextSupplier;
+	protected AlgorithmContext context;
+	
+	public void setup(AlgorithmContext context){
+		this.context = context;
+	}
+
+	protected abstract Target<T,R> defineTarget(Genoma genoma);
+
 	
     public Env create(){
     	
@@ -35,7 +38,7 @@ public abstract class AbstractEnvFactory<T extends Object, R extends Object, G e
 //    	WorkingDataset workingDataset = setupWorkingDataset();
     	
     	// Retrieve GenomaProvider
-		GenomaProvider genomaProvider = getGenomaProvider();
+		GenomaProvider genomaProvider = context.application.genomaProvider;
 		
     	// Create genoma
     	Genoma genoma = createGenoma(genomaProvider);
@@ -70,21 +73,10 @@ public abstract class AbstractEnvFactory<T extends Object, R extends Object, G e
 	}
 
 	private Population createInitialPopulation(Genoma genoma) {
-		long solutions = contextSupplier.getContext().parameters.initialSelectionNumber;
-		boolean random = contextSupplier.getContext().parameters.initialSelectionRandom;
-        Population startGen = contextSupplier.getContext().application.populationFactory.createNew(genoma, solutions, random);
+		long solutions = 		context.parameters.initialSelectionNumber;
+		boolean random = 		context.parameters.initialSelectionRandom;
+        Population startGen = 	context.application.populationFactory.createNew(genoma, solutions, random);
 		return startGen;
 	}
-
-	protected GenomaProvider getGenomaProvider() {
-		return contextSupplier.getContext().application.genomaProvider;
-	}
-	
-//	/**
-//	 * Optional
-//	 */
-//	protected void setupIncubator(Genoma genoma){}
-
-	protected abstract Target<T,R> defineTarget(Genoma genoma);
 
 }

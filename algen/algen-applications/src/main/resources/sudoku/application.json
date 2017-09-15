@@ -1,6 +1,11 @@
 {
 	"name" : "sudoku",
 	
+	"envFactory": {
+		"type" : "java",
+		"content" : "it.red.algen.metasudoku.MesEnvFactory"
+	},
+	
 	"genomaProvider": {
 		"type" : "java",
 		"content" : "it.red.algen.metasudoku.MesGenomaProvider"

@@ -17,36 +17,25 @@ import java.util.Arrays;
 import java.util.List;
 
 import org.apache.log4j.Logger;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
 
 import it.red.algen.conf.ConfigurationException;
 import it.red.algen.conf.ReadConfigSupport;
-import it.red.algen.context.AlgorithmContext;
-import it.red.algen.context.ContextSupplier;
 import it.red.algen.dataaccess.AbstractEnvFactory;
-import it.red.algen.dataaccess.GenomaProvider;
 import it.red.algen.domain.experiment.PerformanceTarget;
 import it.red.algen.domain.experiment.Target;
 import it.red.algen.domain.genetics.Genoma;
 import it.red.algen.metadata.StandardMetadataGenoma;
 
 /**
- * TODOA: bootstrappare
  * @author grossi
  */
-@Component
 public class MefEnvFactory extends AbstractEnvFactory<PerformanceTarget, BigDecimal, StandardMetadataGenoma> {
 	private static Logger logger = Logger.getLogger(MefEnvFactory.class);
 	
-	@Autowired private ContextSupplier contextSupplier;
-	
-
 	// TODOM: take outside Target definition code, as a new Component
 	@Override
 	protected Target<PerformanceTarget, BigDecimal> defineTarget(Genoma genoma) {
-		AlgorithmContext context = contextSupplier.getContext();
-        
+
 		// User parameters
 		Integer desiredMeals = context.applicationSpecifics.getTargetInteger(MefApplication.TARGET_DESIRED_MEALS, MefApplication.DEFAULT_DESIRED_MEALS);
 		Integer savouryProportion = context.applicationSpecifics.getTargetInteger(MefApplication.TARGET_SAVOURY_PROPORTION, MefApplication.DEFAULT_SAVOURY_PROPORTION);
@@ -57,8 +46,8 @@ public class MefEnvFactory extends AbstractEnvFactory<PerformanceTarget, BigDeci
 		
 		// Defines goal representation
     	PerformanceTarget target = new PerformanceTarget();
-    	target.setTargetFitness(contextSupplier.getContext().stopConditions.targetFitness);
-    	target.setTargetThreshold(contextSupplier.getContext().stopConditions.targetThreshold); // TODOA: commons to all envfactory
+    	target.setTargetFitness(context.stopConditions.targetFitness);
+    	target.setTargetThreshold(context.stopConditions.targetThreshold); // TODOA: commons to all envfactory
     	target.setWeights(savouryProportion.doubleValue() / 100.0, sweetProportion.doubleValue() / 100.0);
     	target.setGoal(createGoal(desiredMeals, target.getWeights(), fridgeMandatory, userFridgeFoods, userPantryFoods)); // TODOA: foods will be input parameters!
     	
@@ -104,7 +93,7 @@ public class MefEnvFactory extends AbstractEnvFactory<PerformanceTarget, BigDeci
     
     // TODOA: remove duplicates
 	private void readFoodsFromFile(MefGoal result) {
-		String db = this.contextSupplier.getContext().applicationSpecifics.getParamString(MefApplication.PARAM_DATABASE, MefApplication.DEFAULT_DATABASE);
+		String db = this.context.applicationSpecifics.getParamString(MefApplication.PARAM_DATABASE, MefApplication.DEFAULT_DATABASE);
 		String classpathResource = "/"+MefApplication.APP_NAME+"/"+db+"/target.json";
 		try {
 			result.refrigeratorFoods = new ArrayList<String>();
@@ -119,7 +108,7 @@ public class MefEnvFactory extends AbstractEnvFactory<PerformanceTarget, BigDeci
 	
 
 	private void readPantryFromFile(MefGoal result) {
-		String db = this.contextSupplier.getContext().applicationSpecifics.getParamString(MefApplication.PARAM_DATABASE, MefApplication.DEFAULT_DATABASE);
+		String db = context.applicationSpecifics.getParamString(MefApplication.PARAM_DATABASE, MefApplication.DEFAULT_DATABASE);
 		String classpathResource = "/"+MefApplication.APP_NAME+"/"+db+"/pantry.json";
 		try {
 			result.pantry = Arrays.asList((String[])ReadConfigSupport.readJSON(classpathResource, String[].class));

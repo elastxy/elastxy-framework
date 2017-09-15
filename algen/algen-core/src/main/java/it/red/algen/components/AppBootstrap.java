@@ -44,25 +44,21 @@ public class AppBootstrap {
 		while(itApps.hasNext()){
 			String applicationName = itApps.next();
 			
-			logger.info("Building application '"+applicationName+"'");
+			logger.info("Bootstrapping application '"+applicationName+"'");
 			AlgenApplication app = apps.get(applicationName);
 		
 			logger.info("Building components..");
 			AppComponents appComponents = builder.construct(app);
-			logger.info("DONE");
 	
 			logger.info("Wiring components..");
 			appComponents = builder.wire(appComponents);
-			logger.info("DONE");
 			
 			logger.info("Initializing components..");
 			appComponents = builder.init(appComponents);
-			logger.info("DONE");
 			
 			locator.put(applicationName, appComponents);
-			logger.info("Welcome to '"+applicationName+"' application! <!!!>o");
+			logger.info(">> Welcome to '"+applicationName+"' application! <!!!>o");
 		}
-		
 		
 		logger.info("Bootstrap AliGen DONE.");
 	}

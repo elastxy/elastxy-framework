@@ -1,7 +1,5 @@
 package it.red.algen.service;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.config.AutowireCapableBeanFactory;
 
@@ -9,71 +7,42 @@ import it.red.algen.components.AppComponentsLocator;
 import it.red.algen.context.AlgorithmContext;
 import it.red.algen.context.ContextBuilder;
 import it.red.algen.context.ContextSupplier;
-import it.red.algen.dataaccess.EnvFactory;
 import it.red.algen.engine.UniformlyDistributedSelector;
 import it.red.algen.stats.Experiment;
 import it.red.algen.stats.ExperimentStats;
 import it.red.algen.stats.StatsExperimentExecutor;
 
 public abstract class AbstractApplicationService {
-	private static Logger logger = LoggerFactory.getLogger(AbstractApplicationService.class);
+//	private static Logger logger = LoggerFactory.getLogger(AbstractApplicationService.class);
 
 	@Autowired private ContextSupplier contextSupplier;
 
 	@Autowired private ContextBuilder benchmarkContextBuilder;
 	
-	@Autowired private  AutowireCapableBeanFactory beanFactory;
+	@Autowired private AutowireCapableBeanFactory beanFactory;
 
 	@Autowired private AppComponentsLocator appComponentsLocator;
 
 	
-
-	
 	protected abstract String getApplicationName();
 
-	protected abstract EnvFactory envFactory();
 	
-	protected void setupContext(AlgorithmContext context) {
+	private void setupContext(AlgorithmContext context) {
 		context.application = appComponentsLocator.get(getApplicationName());
 		context.application.genomaProvider.setup(context);
 		context.application.selector.setup(context.parameters);
+		context.application.envFactory.setup(context);
 	}
 	
 
 	
 
 	public ExperimentStats executeBenchmark(){
-        return executeBenchmark(envFactory());
-	}
-	
-	public ExperimentStats executeExperiment(AlgorithmContext context){
-        return executeExperiment(envFactory(), context);
-	}
-	
-	public String executeAnalysis(AlgorithmContext context, int experiments){
-        return executeAnalysis(envFactory(), context, experiments);
-	}
-	
-	public String executeTrialTest(AlgorithmContext context, int experiments){
-		return executeTrialTest(envFactory(), context, experiments);
-		
-		// TODOM: execute test trial beside normal analysis to compare results
-//		StringBuffer result = new StringBuffer();
-//		result
-//		.append("\n\n*********** NORMAL TEST ***********")
-//		.append(executeAnalysis(envFactory(), context, experiments))
-//		.append("*********** RANDOM TEST ***********")
-//		.append(executeTrialTest(envFactory(), context, experiments));
-//		return result.toString();
-	}
-	
-	protected ExperimentStats executeBenchmark(
-			EnvFactory envFactory){
 		AlgorithmContext context = benchmarkContextBuilder.build(getApplicationName(), true);
 		setupContext(context);
 		contextSupplier.init(context);
 
-		Experiment e = new Experiment(envFactory);
+		Experiment e = new Experiment(context.application.envFactory);
 		beanFactory.autowireBean(e);
 		
         e.run();
@@ -85,11 +54,11 @@ public abstract class AbstractApplicationService {
 	}
 	
 	
-	public ExperimentStats executeExperiment(EnvFactory envFactory, AlgorithmContext context){
+	public ExperimentStats executeExperiment(AlgorithmContext context){
 		contextSupplier.init(context);
 	 	setupContext(context);
 
-	 	Experiment e = new Experiment(envFactory);
+	 	Experiment e = new Experiment(context.application.envFactory);
 	 	beanFactory.autowireBean(e);
 	 	
         e.run();
@@ -101,11 +70,11 @@ public abstract class AbstractApplicationService {
 	}
 	
 	
-	public String executeAnalysis(EnvFactory envFactory, AlgorithmContext context, int experiments){
+	public String executeAnalysis(AlgorithmContext context, int experiments){
 		contextSupplier.init(context);
 	 	setupContext(context);
 
-        StatsExperimentExecutor collector = new StatsExperimentExecutor(envFactory, experiments);
+        StatsExperimentExecutor collector = new StatsExperimentExecutor(context.application.envFactory, experiments);
         beanFactory.autowireBean(collector);
         
         collector.run();
@@ -117,7 +86,7 @@ public abstract class AbstractApplicationService {
 	}
 	
 	
-	public String executeTrialTest(EnvFactory envFactory, AlgorithmContext context, int experiments){
+	public String executeTrialTest(AlgorithmContext context, int experiments){
 		contextSupplier.init(context);
 	 	setupContext(context);
 		
@@ -131,7 +100,7 @@ public abstract class AbstractApplicationService {
 		context.application.selector.setup(context.parameters, context.application.populationFactory);
 
 		// Experiments run
-        StatsExperimentExecutor collector = new StatsExperimentExecutor(envFactory, experiments);
+        StatsExperimentExecutor collector = new StatsExperimentExecutor(context.application.envFactory, experiments);
         beanFactory.autowireBean(collector);
         
         collector.run();
@@ -139,6 +108,18 @@ public abstract class AbstractApplicationService {
         contextSupplier.destroy();
         
         String result = collector.print();
+        
+		
+		// TODOM: execute test trial beside normal analysis to compare results
+//		StringBuffer result = new StringBuffer();
+//		result
+//		.append("\n\n*********** NORMAL TEST ***********")
+//		.append(executeAnalysis(envFactory(), context, experiments))
+//		.append("*********** RANDOM TEST ***********")
+//		.append(executeTrialTest(envFactory(), context, experiments));
+//		return result.toString();
+
+        
         return result;
 	}
 

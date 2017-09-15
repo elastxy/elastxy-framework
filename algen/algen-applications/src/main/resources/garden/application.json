@@ -1,6 +1,11 @@
 {
 	"name" : "garden",
 	
+	"envFactory": {
+		"type" : "java",
+		"content" : "it.red.algen.metagarden.MegEnvFactory"
+	},
+	
 	"genomaProvider": {
 		"type" : "java",
 		"content" : "it.red.algen.metagarden.MegGenomaProvider"
@@ -11,37 +16,41 @@
 		"content" : "it.red.algen.metagarden.MegAlleleGenerator"
 	},
 	
+	"populationFactory": {
+		"type" : "java",
+		"content" : "it.red.algen.dataaccess.StandardPopulationFactory"
+	},
+	
 	"solutionsFactory": {
 		"type" : "java",
 		"content" : "it.red.algen.metagarden.MegSolutionsFactory"
 	},
 	
-	"populationFactory": {
+	"fitnessCalculator": {
 		"type" : "java",
-		"content" : "it.red.algen.dataaccess.StandardPopulationFactory"
+		"content" : "it.red.algen.metagarden.MegFitnessCalculator"
 	},
 	
 	"incubator": {
 		"type" : "java",
 		"content" : "it.red.algen.metagarden.MegIncubator"
 	},
-	"fitnessCalculator": {
-		"type" : "java",
-		"content" : "it.red.algen.metagarden.MegFitnessCalculator"
-	},
 	
 	"selector": {
 		"type" : "java",
 		"content" : "it.red.algen.engine.StandardSelector"
 	},
+	
 	"mutator": {
 		"type" : "java",
 		"content" : "it.red.algen.engine.SequenceMutator"
 	},
+	
 	"recombinator": {
 		"type" : "java",
 		"content" : "it.red.algen.engine.SequenceRecombinator"
 	},
+	
 	"solutionRenderer": {
 		"type" : "java",
 		"content" : "it.red.algen.tracking.DefaultSolutionRenderer"

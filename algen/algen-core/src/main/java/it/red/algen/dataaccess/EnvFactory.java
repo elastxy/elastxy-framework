@@ -10,6 +10,7 @@
 
 package it.red.algen.dataaccess;
 
+import it.red.algen.context.AlgorithmContext;
 import it.red.algen.domain.experiment.Env;
 
 /**
@@ -17,6 +18,8 @@ import it.red.algen.domain.experiment.Env;
  * @author grossi
  */
 public interface EnvFactory {
+	
+	public void setup(AlgorithmContext context);
     
 	public Env create();
 }
