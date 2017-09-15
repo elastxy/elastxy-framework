@@ -19,7 +19,6 @@ import org.springframework.stereotype.Component;
 import it.red.algen.context.AlgorithmContext;
 import it.red.algen.context.ContextSupplier;
 import it.red.algen.dataaccess.AbstractEnvFactory;
-import it.red.algen.dataaccess.GenomaProvider;
 import it.red.algen.domain.experiment.NumberRawFitness;
 import it.red.algen.domain.experiment.PerformanceTarget;
 import it.red.algen.domain.experiment.Solution;
@@ -36,14 +35,6 @@ public class MexEnvFactory extends AbstractEnvFactory<PerformanceTarget, BigDeci
 	
 	@Autowired private ContextSupplier contextSupplier;
 	
-	@Autowired private MexGenomaProvider genomaProvider;
-	
-
-	@Override
-	protected GenomaProvider getGenomaProvider() {
-		return genomaProvider;
-	}
-
 	// TODOM: take outside Target definition code, as a new Component
 	@Override
 	protected Target<PerformanceTarget, BigDecimal> defineTarget(Genoma genoma) {

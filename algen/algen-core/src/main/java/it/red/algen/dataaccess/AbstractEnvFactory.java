@@ -76,7 +76,9 @@ public abstract class AbstractEnvFactory<T extends Object, R extends Object, G e
 		return startGen;
 	}
 
-	protected abstract GenomaProvider getGenomaProvider();
+	protected GenomaProvider getGenomaProvider() {
+		return contextSupplier.getContext().application.genomaProvider;
+	}
 	
 //	/**
 //	 * Optional

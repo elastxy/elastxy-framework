@@ -41,23 +41,6 @@ public class MefEnvFactory extends AbstractEnvFactory<PerformanceTarget, BigDeci
 	
 	@Autowired private ContextSupplier contextSupplier;
 	
-	@Autowired private MefGenomaProvider genomaProvider;
-	
-
-	@Override
-	protected GenomaProvider getGenomaProvider() {
-		return genomaProvider;
-	}
-
-//	/**
-//	 * TODOA: inject properly
-//	 */
-//	@Override
-//	protected void setupIncubator(Genoma genoma) {
-//		MefIncubator incubator = (MefIncubator)contextSupplier.getContext().application.incubator;
-//		incubator.workingDataset = genoma.getWorkingDataset(); 
-//	}
-	
 
 	// TODOM: take outside Target definition code, as a new Component
 	@Override

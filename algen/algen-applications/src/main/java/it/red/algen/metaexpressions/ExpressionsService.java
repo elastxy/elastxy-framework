@@ -29,6 +29,7 @@ public class ExpressionsService extends AbstractApplicationService{
 	@Override
 	protected void setupContext(AlgorithmContext context) {
 		context.application = appComponentsLocator.get(getApplicationName());
+		context.application.genomaProvider.setup(context);
 		context.application.selector.setup(context.parameters);
 	}
 	

@@ -1,6 +1,11 @@
 {
 	"name" : "expressions",
 	
+	"genomaProvider": {
+		"type" : "java",
+		"content" : "it.red.algen.metaexpressions.MexGenomaProvider"
+	},
+	
 	"alleleGenerator": {
 		"type" : "java",
 		"content" : "it.red.algen.metaexpressions.MexAlleleGenerator"

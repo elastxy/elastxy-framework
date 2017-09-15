@@ -5,6 +5,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.config.AutowireCapableBeanFactory;
 
+import it.red.algen.components.AppComponentsLocator;
 import it.red.algen.context.AlgorithmContext;
 import it.red.algen.context.ContextBuilder;
 import it.red.algen.context.ContextSupplier;
@@ -22,6 +23,23 @@ public abstract class AbstractApplicationService {
 	@Autowired private ContextBuilder benchmarkContextBuilder;
 	
 	@Autowired private  AutowireCapableBeanFactory beanFactory;
+
+	@Autowired private AppComponentsLocator appComponentsLocator;
+
+	
+
+	
+	protected abstract String getApplicationName();
+
+	protected abstract EnvFactory envFactory();
+	
+	protected void setupContext(AlgorithmContext context) {
+		context.application = appComponentsLocator.get(getApplicationName());
+		context.application.genomaProvider.setup(context);
+		context.application.selector.setup(context.parameters);
+	}
+	
+
 	
 
 	public ExperimentStats executeBenchmark(){
@@ -124,11 +142,5 @@ public abstract class AbstractApplicationService {
         return result;
 	}
 
-	
-	protected abstract String getApplicationName();
-
-	protected abstract void setupContext(AlgorithmContext context);
-
-	protected abstract EnvFactory envFactory();
 
 }

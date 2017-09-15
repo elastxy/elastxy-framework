@@ -2,7 +2,6 @@ package it.red.algen.algofrigerator;
 
 import java.util.List;
 import java.util.SortedMap;
-import java.util.stream.IntStream;
 
 import org.springframework.stereotype.Component;
 

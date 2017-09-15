@@ -5,8 +5,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import org.springframework.stereotype.Component;
-
+import it.red.algen.context.AlgorithmContext;
 import it.red.algen.dataaccess.GenomaProvider;
 import it.red.algen.domain.experiment.Target;
 import it.red.algen.domain.genetics.Allele;
@@ -32,9 +31,15 @@ import it.red.algen.domain.genetics.PredefinedGenoma;
  * @author red
  *
  */
-@Component
 public class MesGenomaProvider implements GenomaProvider {
 	public static final String ALLELE_CELL = "cell";
+
+	private AlgorithmContext context;
+
+	@Override
+	public void setup(AlgorithmContext context) {
+		this.context = context;
+	}
 	
 	public static final List<Integer> COMPLETE_NUMBERS = new ArrayList<Integer>();
 	static {

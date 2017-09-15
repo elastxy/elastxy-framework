@@ -10,8 +10,6 @@ import java.util.TreeMap;
 import java.util.stream.Collectors;
 
 import org.apache.log4j.Logger;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
 
 import it.red.algen.algofrigerator.data.IngredientsCoverage;
 import it.red.algen.algofrigerator.data.MefWorkingDataset;
@@ -20,7 +18,7 @@ import it.red.algen.algofrigerator.data.RecipeType;
 import it.red.algen.algofrigerator.data.RecipesDatabase;
 import it.red.algen.algofrigerator.data.RecipesDatabaseCSV;
 import it.red.algen.conf.ReadConfigSupport;
-import it.red.algen.context.ContextSupplier;
+import it.red.algen.context.AlgorithmContext;
 import it.red.algen.dataaccess.DataAccessException;
 import it.red.algen.dataaccess.GenomaProvider;
 import it.red.algen.domain.experiment.Target;
@@ -50,13 +48,12 @@ import it.red.algen.metadata.StandardMetadataGenoma;
  * @author red
  *
  */
-@Component
 public class MefGenomaProvider implements GenomaProvider {
 	private static Logger logger = Logger.getLogger(MefGenomaProvider.class);
 	
 	public static final String GENE_RECIPE = "_recipe";
 	
-	@Autowired private ContextSupplier contextSupplier;
+	private AlgorithmContext context;
 	
 	/**
 	 *  Original raw data
@@ -77,7 +74,10 @@ public class MefGenomaProvider implements GenomaProvider {
 
 	
 	
-	
+
+	public void setup(AlgorithmContext context){
+		this.context = context;
+	}
 	
 	/**
 	 * Genoma is intially void: only when target is set can be set up by reduce()
@@ -104,7 +104,7 @@ public class MefGenomaProvider implements GenomaProvider {
 		recipes = new HashMap<RecipeType, List<Recipe>>();
 		
 		// Load recipes from file
-		String database = contextSupplier.getContext().applicationSpecifics.getParamString(MefApplication.PARAM_DATABASE, MefApplication.DEFAULT_DATABASE);
+		String database = context.applicationSpecifics.getParamString(MefApplication.PARAM_DATABASE, MefApplication.DEFAULT_DATABASE);
 		db = new RecipesDatabaseCSV(database);
 		List<Recipe> recipesFromFile = db.getAllRecipes();
 		logger.debug("Found "+recipesFromFile.size()+" from file.");
@@ -241,7 +241,7 @@ public class MefGenomaProvider implements GenomaProvider {
 			Map<RecipeType, Integer> mealsByType) {
 		Map<String, GeneMetadata> genesMetadataByCode = new HashMap<String, GeneMetadata>();
 		Map<String, GeneMetadata> genesMetadataByPos = new HashMap<String, GeneMetadata>();
-		Genes genes = ReadConfigSupport.retrieveGenesMetadata(this.contextSupplier.getContext().application.name);
+		Genes genes = ReadConfigSupport.retrieveGenesMetadata(context.application.name);
 		Iterator<Map.Entry<RecipeType, List<Recipe>>> it = workingDataset.feasibleByType.entrySet().iterator();
 		while(it.hasNext()){
 			Entry<RecipeType, List<Recipe>> entryType = it.next();
@@ -268,7 +268,7 @@ public class MefGenomaProvider implements GenomaProvider {
 		// Create Genoma
 		StandardMetadataGenoma genoma = new StandardMetadataGenoma();
 		genoma.setWorkingDataset(workingDataset);
-		genoma.setupAlleleGenerator(contextSupplier.getContext().application.alleleGenerator);
+		genoma.setupAlleleGenerator(context.application.alleleGenerator);
 		genoma.setLimitedAllelesStrategy(false); // TODOM: repetitions of receipt are available: make it configurable!
 		genoma.initialize(genesMetadataByCode, genesMetadataByPos);
 		return genoma;

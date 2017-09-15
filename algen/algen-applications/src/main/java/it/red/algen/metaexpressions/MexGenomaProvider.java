@@ -1,11 +1,9 @@
 package it.red.algen.metaexpressions;
 
 import org.apache.log4j.Logger;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
 
 import it.red.algen.conf.ReadConfigSupport;
-import it.red.algen.context.ContextSupplier;
+import it.red.algen.context.AlgorithmContext;
 import it.red.algen.dataaccess.GenomaProvider;
 import it.red.algen.domain.experiment.Target;
 import it.red.algen.domain.genetics.Genoma;
@@ -18,17 +16,18 @@ import it.red.algen.metadata.StandardMetadataGenoma;
  * @author red
  *
  */
-@Component
 public class MexGenomaProvider implements GenomaProvider {
 	private static Logger logger = Logger.getLogger(MexGenomaProvider.class);
 
-	@Autowired private ContextSupplier contextSupplier;
-
-//	public void setAlleleGenerator(AlleleGenerator alleleGenerator){
-//		this.alleleGenerator = alleleGenerator;
-//	}
-	
 	private StandardMetadataGenoma cachedGenoma;
+
+	private AlgorithmContext context;
+
+	@Override
+	public void setup(AlgorithmContext context) {
+		this.context = context;
+	}
+	
 	
 	@Override
 	public Genoma getGenoma(){
@@ -42,13 +41,13 @@ public class MexGenomaProvider implements GenomaProvider {
 		
 		// Instantiate Genoma
 		StandardMetadataGenoma genoma = new StandardMetadataGenoma();
-		genoma.setupAlleleGenerator(contextSupplier.getContext().application.alleleGenerator);
+		genoma.setupAlleleGenerator(context.application.alleleGenerator);
 		
 		// Retrieves metadata
-		Genes genes = ReadConfigSupport.retrieveGenesMetadata(this.contextSupplier.getContext().application.name);
+		Genes genes = ReadConfigSupport.retrieveGenesMetadata(context.application.name);
 		
 		// Add context specific values
-		Long maxValue = contextSupplier.getContext().applicationSpecifics.getParamLong(MexConstants.MAX_OPERAND_VALUE);
+		Long maxValue = context.applicationSpecifics.getParamLong(MexConstants.MAX_OPERAND_VALUE);
 		genes.metadata.get("operand").max = maxValue;
 		genes.metadata.get("operand").min = -1L * maxValue;
 
@@ -66,5 +65,7 @@ public class MexGenomaProvider implements GenomaProvider {
 	public Genoma shrink(Target<?, ?> target) {
 		return cachedGenoma;
 	}
+
+
 
 }

@@ -1,6 +1,11 @@
 {
 	"name" : "sudoku",
 	
+	"genomaProvider": {
+		"type" : "java",
+		"content" : "it.red.algen.metasudoku.MesGenomaProvider"
+	},
+	
 	"alleleGenerator": {
 		"type" : "java",
 		"content" : "it.red.algen.metasudoku.MesAlleleGenerator"

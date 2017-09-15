@@ -4,10 +4,7 @@ import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
-
-import it.red.algen.context.ContextSupplier;
+import it.red.algen.context.AlgorithmContext;
 import it.red.algen.dataaccess.GenomaProvider;
 import it.red.algen.domain.experiment.Target;
 import it.red.algen.domain.genetics.Genoma;
@@ -25,14 +22,18 @@ import it.red.algen.metagarden.data.PlaceProperty;
  * @author red
  *
  */
-@Component
 public class MegGenomaProvider implements GenomaProvider {
-
-	@Autowired private ContextSupplier contextSupplier;
 
 	private GardenDatabase db;
 
 	private StandardMetadataGenoma cachedGenoma;
+
+	private AlgorithmContext context;
+
+	@Override
+	public void setup(AlgorithmContext context) {
+		this.context = context;
+	}
 
 	
 //	@Cacheable(value = "genoma") TODOM: cache
@@ -46,12 +47,12 @@ public class MegGenomaProvider implements GenomaProvider {
 	@Override
 	public void collect() {
 		StandardMetadataGenoma genoma = new StandardMetadataGenoma();
-		genoma.setupAlleleGenerator(contextSupplier.getContext().application.alleleGenerator);
-		genoma.setLimitedAllelesStrategy(contextSupplier.getContext().applicationSpecifics.getParamBoolean(MegConstants.LIMITED_TREES));
+		genoma.setupAlleleGenerator(context.application.alleleGenerator);
+		genoma.setLimitedAllelesStrategy(context.applicationSpecifics.getParamBoolean(MegConstants.LIMITED_TREES));
 		Map<String, GeneMetadata> genesMetadataByCode = new HashMap<String, GeneMetadata>();
 		Map<String, GeneMetadata> genesMetadataByPos = new HashMap<String, GeneMetadata>();
 		
-		db = new GardenDatabaseCSV(contextSupplier.getContext().application.name);
+		db = new GardenDatabaseCSV(context.application.name);
 		Place[] places = db.getAllPlaces();
 		
 		for(int pos=0; pos < places.length; pos++){

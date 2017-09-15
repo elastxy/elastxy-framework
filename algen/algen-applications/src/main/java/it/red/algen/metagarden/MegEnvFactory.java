@@ -15,7 +15,6 @@ import org.springframework.stereotype.Component;
 
 import it.red.algen.context.ContextSupplier;
 import it.red.algen.dataaccess.AbstractEnvFactory;
-import it.red.algen.dataaccess.GenomaProvider;
 import it.red.algen.domain.experiment.PerformanceTarget;
 import it.red.algen.domain.genetics.Genoma;
 import it.red.algen.metadata.StandardMetadataGenoma;
@@ -28,9 +27,7 @@ import it.red.algen.metadata.StandardMetadataGenoma;
 public class MegEnvFactory extends AbstractEnvFactory<String, Double, StandardMetadataGenoma> {
 	
 	@Autowired private ContextSupplier contextSupplier;
-	
-	@Autowired private MegGenomaProvider genomaProvider;
-	
+
 	@Override
 	protected PerformanceTarget<String, Double> defineTarget(Genoma genoma) {
 		PerformanceTarget<String,Double> target = new PerformanceTarget<String,Double>();
@@ -40,11 +37,6 @@ public class MegEnvFactory extends AbstractEnvFactory<String, Double, StandardMe
     	// Determines goal rough measure: minimum possible unhappiness (illness), 0.0
     	target.setReferenceMeasure(genoma.getPositionsSize() * 2.0);  // 2 is the maximum value happiness can reach
 		return target;
-	}
-
-	@Override
-	protected GenomaProvider getGenomaProvider() {
-		return genomaProvider;
 	}
 
 }

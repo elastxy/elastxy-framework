@@ -28,8 +28,8 @@ public class AlgenApplication {
 	public String name;
 
 //	TODOA public ComponentMetadata envFactory;
-//	TODOA public ComponentMetadata genomaProvider;
 	
+	public ComponentMetadata genomaProvider;
 	public ComponentMetadata alleleGenerator;
 	
 	public ComponentMetadata populationFactory;

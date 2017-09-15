@@ -1,7 +1,9 @@
 package it.red.algen.dataaccess;
 
+import it.red.algen.context.AlgorithmContext;
 import it.red.algen.domain.experiment.Target;
 import it.red.algen.domain.genetics.Genoma;
+import it.red.algen.engine.AlleleGenerator;
 
 /**
  * Collects all genoma information from a given source.
@@ -15,6 +17,13 @@ import it.red.algen.domain.genetics.Genoma;
  *
  */
 public interface GenomaProvider {
+	
+	/**
+	 * Setup runtime context for this component
+	 * TODOM: ContextAware interface
+	 * @return
+	 */
+	public void setup(AlgorithmContext context);
 	
 	/**
 	 * Returns a reference to the Genoma previously generated.

@@ -21,7 +21,6 @@ import it.red.algen.conf.ReadConfigSupport;
 import it.red.algen.context.AlgorithmContext;
 import it.red.algen.context.ContextSupplier;
 import it.red.algen.dataaccess.AbstractEnvFactory;
-import it.red.algen.dataaccess.GenomaProvider;
 import it.red.algen.domain.experiment.PerformanceTarget;
 import it.red.algen.domain.experiment.Target;
 import it.red.algen.domain.genetics.Genoma;
@@ -38,16 +37,6 @@ public class MesEnvFactory extends AbstractEnvFactory<int[][], Integer, Predefin
 	
 	
 	@Autowired private ContextSupplier contextSupplier;
-	
-	@Autowired private MesGenomaProvider genomaProvider;
-	
-
-
-	@Override
-	protected GenomaProvider getGenomaProvider() {
-		return genomaProvider;
-	}
-	
 	
 	@Override
 	protected Target<int[][], Integer> defineTarget(Genoma genoma) {

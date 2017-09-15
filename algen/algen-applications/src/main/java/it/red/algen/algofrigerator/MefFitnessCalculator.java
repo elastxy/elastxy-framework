@@ -3,7 +3,6 @@ package it.red.algen.algofrigerator;
 import java.math.BigDecimal;
 import java.util.Map;
 
-import it.red.algen.algofrigerator.data.IngredientsCoverage;
 import it.red.algen.domain.experiment.Env;
 import it.red.algen.domain.experiment.GenericSolution;
 import it.red.algen.domain.experiment.NumberRawFitness;
