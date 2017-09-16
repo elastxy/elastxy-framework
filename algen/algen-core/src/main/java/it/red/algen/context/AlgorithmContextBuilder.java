@@ -43,7 +43,7 @@ public class AlgorithmContextBuilder {
         
         AlgorithmContext context = new AlgorithmContext();
         context.parameters = algParameters;
-        context.stopConditions = stopConditions;
+        context.parameters.stopConditions = stopConditions;
         context.monitoringConfiguration = monitoringConfiguration;
         
         return context;

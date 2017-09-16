@@ -4,17 +4,34 @@ import it.red.algen.components.AppComponents;
 import it.red.algen.conf.AlgorithmParameters;
 import it.red.algen.conf.ApplicationSpecifics;
 import it.red.algen.conf.MonitoringConfiguration;
-import it.red.algen.conf.StopConditions;
 
+/**
+ * Context of a single execution: application functions, parameters, custom input, monitoring conf.
+ * 
+ * @author red
+ */
 public class AlgorithmContext {
 	
-	public transient AppComponents application = new AppComponents(); // TODOA: by bootstrap
+	/**
+	 * Application components bootstrapped (copy created for this specific execution).
+	 */
+	public transient AppComponents application = new AppComponents();
 
-	public AlgorithmParameters parameters;  // TODOA: rename to AppParameters
-	
-	public StopConditions stopConditions; // TODOA: move under AppParameters
-	
-	public MonitoringConfiguration monitoringConfiguration; // TODOA: rename to EngineConfigurations
-	
+	/**
+	 * Specifics coming from an application for a given execution: custom parameters 
+	 * to be used in the application specific component.
+	 */
 	public ApplicationSpecifics applicationSpecifics = new ApplicationSpecifics();
+	
+	/**
+	 * Parameters to drive algorithm engine.
+	 */
+	public AlgorithmParameters parameters = new AlgorithmParameters();
+	
+	
+	/**
+	 * Configurations related to log, monitoring, etc.
+	 */
+	public MonitoringConfiguration monitoringConfiguration = new MonitoringConfiguration();
+	
 }

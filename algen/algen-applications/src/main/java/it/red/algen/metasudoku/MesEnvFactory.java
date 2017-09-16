@@ -35,8 +35,8 @@ public class MesEnvFactory extends AbstractEnvFactory<int[][], Integer, Predefin
     	// Defines goal representation
     	PerformanceTarget target = new PerformanceTarget();
     	target.setGoal(createGoal());
-    	target.setTargetFitness(context.stopConditions.targetFitness);
-    	target.setTargetThreshold(context.stopConditions.targetThreshold); // TODOA: commons to all envfactory
+    	target.setTargetFitness(context.parameters.stopConditions.targetFitness);
+    	target.setTargetThreshold(context.parameters.stopConditions.targetThreshold); // TODOA: commons to all envfactory
 
     	// Determines goal rough measure by deriving from extreme solutions
     	// 27 is the number of rows, columns, squares with numbers 1 to 9

@@ -30,7 +30,8 @@ public class AlgorithmParameters {
 	 * ======================================
 	 */
 	public boolean randomEvolution = false;
-	
+
+	public StopConditions stopConditions;
 	
 	/*
 	 * ======================================
@@ -84,6 +85,7 @@ public class AlgorithmParameters {
 	 * ======================================
 	 */
 	public double mutationPerc = DefaultConfiguration.DEFAULT_MUTATION_PERC;
+
 	
 	// TODOM: Auto (decrease based on current results and genes alphabet length if available), Fixed ratio
 	//	public MutationDecreaseType mutationDecreaseType =  = DefaultConfiguration.DEFAULT_MUTATION_DECREASE_TYPE; 

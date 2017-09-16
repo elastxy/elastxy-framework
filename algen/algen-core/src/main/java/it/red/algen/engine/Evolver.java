@@ -39,7 +39,7 @@ public class Evolver implements EnvObservable {
     	this.context = context;
     	this.env = env;
     	this.fitnessTester = new StandardFitnessTester(context.application.fitnessCalculator);
-    	this.stopVerifier = new StopConditionVerifier(context.stopConditions);
+    	this.stopVerifier = new StopConditionVerifier(context.parameters.stopConditions);
     }
     
     
@@ -151,8 +151,8 @@ public class Evolver implements EnvObservable {
 		boolean endConditionFound = false;
 		
 		// Check threshold
-		if(context.stopConditions.targetThreshold != null &&
-				env.currentGen.bestMatch.getFitness().overThreshold(context.stopConditions.targetThreshold)){
+		if(context.parameters.stopConditions.targetThreshold != null &&
+				env.currentGen.bestMatch.getFitness().overThreshold(context.parameters.stopConditions.targetThreshold)){
 			endConditionFound = goalReached();
 		}
 		
