@@ -13,13 +13,13 @@
 		"mutationPerc": 0.2,
 		"elitarism": true,
 		"initialSelectionNumber": 5,
-		"initialSelectionRandom": true
-	},
-	"stopConditions": {
-		"targetFitness" : 1.0,
-		"maxIterations": -1,
-		"maxLifetimeMs": 3000,
-		"maxIdenticalFitnesses": -1
+		"initialSelectionRandom": true,
+		"stopConditions": {
+			"targetFitness" : 1.0,
+			"maxIterations": -1,
+			"maxLifetimeMs": 3000,
+			"maxIdenticalFitnesses": -1
+		}
 	},
 	"monitoringConfiguration": {
 		"verbose": false,

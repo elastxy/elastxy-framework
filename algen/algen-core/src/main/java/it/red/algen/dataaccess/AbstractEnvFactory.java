@@ -46,7 +46,7 @@ public abstract class AbstractEnvFactory<T extends Object, R extends Object, G e
     	// Define target
     	// TODOA: remove genoma as parameter of target, use working data set instead
     	// and push target definition above
-    	Target<T,R> target = defineTarget(genoma); 
+    	Target<T,R> target = createTarget(genoma); 
 
     	// Reduce Genoma based on target
     	genoma = reduceGenoma(genomaProvider, target);
@@ -66,6 +66,13 @@ public abstract class AbstractEnvFactory<T extends Object, R extends Object, G e
 	private Genoma createGenoma(GenomaProvider genomaProvider) {
 		genomaProvider.collect();
 		return genomaProvider.getGenoma();
+	}
+	
+	private Target<T,R> createTarget(Genoma genoma){
+		Target<T,R> target = defineTarget(genoma);
+		target.setTargetFitness(context.parameters.stopConditions.targetFitness);
+    	target.setTargetThreshold(context.parameters.stopConditions.targetThreshold);
+    	return target;
 	}
 
 	private Genoma reduceGenoma(GenomaProvider genomaProvider, Target<T,R> target) {

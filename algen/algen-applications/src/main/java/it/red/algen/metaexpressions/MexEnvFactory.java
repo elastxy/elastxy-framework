@@ -39,8 +39,6 @@ public class MexEnvFactory extends AbstractEnvFactory<PerformanceTarget, BigDeci
         Long targetValue = context.applicationSpecifics.getTargetLong(MexConstants.TARGET_EXPRESSION_RESULT);
         PerformanceTarget target = new PerformanceTarget();
         target.setGoal(targetValue);
-        target.setTargetFitness(context.parameters.stopConditions.targetFitness);
-    	target.setTargetThreshold(context.parameters.stopConditions.targetThreshold); // TODOA: commons to all envfactory
 
         // Determines goal rough measure by deriving from extreme solutions
         // TODOM concept of boundaries

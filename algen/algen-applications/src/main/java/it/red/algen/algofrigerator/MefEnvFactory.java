@@ -46,8 +46,6 @@ public class MefEnvFactory extends AbstractEnvFactory<PerformanceTarget, BigDeci
 		
 		// Defines goal representation
     	PerformanceTarget target = new PerformanceTarget();
-    	target.setTargetFitness(context.parameters.stopConditions.targetFitness);
-    	target.setTargetThreshold(context.parameters.stopConditions.targetThreshold); // TODOA: commons to all envfactory
     	target.setWeights(savouryProportion.doubleValue() / 100.0, sweetProportion.doubleValue() / 100.0);
     	target.setGoal(createGoal(desiredMeals, target.getWeights(), fridgeMandatory, userFridgeFoods, userPantryFoods)); // TODOA: foods will be input parameters!
     	
