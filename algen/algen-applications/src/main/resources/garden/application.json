@@ -13,7 +13,7 @@
 	
 	"alleleGenerator": {
 		"type" : "java",
-		"content" : "it.red.algen.metagarden.MegAlleleGenerator"
+		"content" : "it.red.algen.engine.MetadataAlleleGenerator"
 	},
 	
 	"populationFactory": {

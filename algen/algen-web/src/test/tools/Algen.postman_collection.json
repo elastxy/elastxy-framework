@@ -85,7 +85,7 @@
 								],
 								"body": {
 									"mode": "raw",
-									"raw": "{\n\t\"applicationSpecifics\": {\n\t\t\"target\" : {\n\t\t\t\"TARGET_EXPRESSION_RESULT\" : 235000\n\t\t},\n\t\t\"params\" : {\n\t\t\t\"MAX_OPERAND_VALUE\" : \"1000\"\n\t\t}\n\t},\n\t\"parameters\": {\n\t\t\"recombinationPerc\": 0.8,\n\t\t\"mutationPerc\": 0.2,\n\t\t\"elitarism\": true,\n\t\t\"initialSelectionNumber\": 10,\n\t\t\"initialSelectionRandom\": true\n\t},\n\t\"stopConditions\": {\n\t\t\"maxIterations\": -1,\n\t\t\"maxLifetimeMs\": 3000,\n\t\t\"maxIdenticalFitnesses\": -1\n\t},\n\t\"monitoringConfiguration\": {\n\t\t\"verbose\": false\n\t}\n}"
+									"raw": "{\n\t\"applicationSpecifics\": {\n\t\t\"target\" : {\n\t\t\t\"TARGET_EXPRESSION_RESULT\" : 235000\n\t\t},\n\t\t\"params\" : {\n\t\t\t\"MAX_OPERAND_VALUE\" : \"1000\"\n\t\t}\n\t},\n\t\"parameters\": {\n\t\t\"recombinationPerc\": 0.8,\n\t\t\"mutationPerc\": 0.2,\n\t\t\"elitarism\": true,\n\t\t\"initialSelectionNumber\": 100,\n\t\t\"initialSelectionRandom\": true,\n\t\t\"stopConditions\": {\n\t\t\t\"maxIterations\": -1,\n\t\t\t\"maxLifetimeMs\": 3000,\n\t\t\t\"maxIdenticalFitnesses\": -1\n\t\t}\n\t},\n\t\"monitoringConfiguration\": {\n\t\t\"verbose\": false\n\t}\n}"
 								},
 								"description": ""
 							},
@@ -105,7 +105,7 @@
 								],
 								"body": {
 									"mode": "raw",
-									"raw": "{\n\t\"applicationSpecifics\": {\n\t\t\"target\" : {\n\t\t\t\"TARGET_EXPRESSION_RESULT\" : 235000\n\t\t},\n\t\t\"params\" : {\n\t\t\t\"MAX_OPERAND_VALUE\" : \"1000\"\n\t\t}\n\t},\n\t\"parameters\": {\n\t\t\"recombinationPerc\": 0.8,\n\t\t\"mutationPerc\": 0.2,\n\t\t\"elitarism\": true,\n\t\t\"initialSelectionNumber\": 100,\n\t\t\"initialSelectionRandom\": false\n\t},\n\t\"stopConditions\": {\n\t\t\"maxIterations\": -1,\n\t\t\"maxLifetimeMs\": 3000,\n\t\t\"maxIdenticalFitnesses\": -1\n\t},\n\t\"monitoringConfiguration\": {\n\t\t\"verbose\": false\n\t}\n}"
+									"raw": "{\n\t\"applicationSpecifics\": {\n\t\t\"target\" : {\n\t\t\t\"TARGET_EXPRESSION_RESULT\" : 235000\n\t\t},\n\t\t\"params\" : {\n\t\t\t\"MAX_OPERAND_VALUE\" : \"1000\"\n\t\t}\n\t},\n\t\"parameters\": {\n\t\t\"recombinationPerc\": 0.8,\n\t\t\"mutationPerc\": 0.2,\n\t\t\"elitarism\": true,\n\t\t\"initialSelectionNumber\": 100,\n\t\t\"initialSelectionRandom\": false,\n\t\t\"stopConditions\": {\n\t\t\t\"maxIterations\": -1,\n\t\t\t\"maxLifetimeMs\": 3000,\n\t\t\t\"maxIdenticalFitnesses\": -1\n\t\t}\n\t},\n\t\"monitoringConfiguration\": {\n\t\t\"verbose\": false\n\t}\n}"
 								},
 								"description": ""
 							},
@@ -125,7 +125,7 @@
 								],
 								"body": {
 									"mode": "raw",
-									"raw": "{\n\t\"applicationSpecifics\": {\n\t\t\"target\" : {\n\t\t\t\"TARGET_EXPRESSION_RESULT\" : 235000\n\t\t},\n\t\t\"params\" : {\n\t\t\t\"MAX_OPERAND_VALUE\" : \"1000\"\n\t\t}\n\t},\n\t\"parameters\": {\n\t\t\"initialSelectionNumber\": 10,\n\t\t\"initialSelectionRandom\": true\n\t},\n\t\"stopConditions\": {\n\t\t\"maxIterations\": -1,\n\t\t\"maxLifetimeMs\": 3000,\n\t\t\"maxIdenticalFitnesses\": -1\n\t},\n\t\"monitoringConfiguration\": {\n\t}\n}"
+									"raw": "{\n\t\"applicationSpecifics\": {\n\t\t\"target\" : {\n\t\t\t\"TARGET_EXPRESSION_RESULT\" : 235000\n\t\t},\n\t\t\"params\" : {\n\t\t\t\"MAX_OPERAND_VALUE\" : \"1000\"\n\t\t}\n\t},\n\t\"parameters\": {\n\t\t\"initialSelectionNumber\": 10,\n\t\t\"initialSelectionRandom\": true,\n\t\t\"stopConditions\": {\n\t\t\t\"maxIterations\": -1,\n\t\t\t\"maxLifetimeMs\": 3000,\n\t\t\t\"maxIdenticalFitnesses\": -1\n\t\t}\n\t},\n\t\"monitoringConfiguration\": {\n\t}\n}"
 								},
 								"description": ""
 							},
@@ -163,7 +163,7 @@
 								],
 								"body": {
 									"mode": "raw",
-									"raw": "{\n\t\"applicationSpecifics\": {\n\t\t\"target\" : {\n\t\t\t\"TARGET_WELLNESS\" : \"happy\"\n\t\t},\n\t\t\"params\" : {\n\t\t\t\"LIMITED_TREES\" : false\n\t\t}\n\t},\n\t\"parameters\": {\n\t\t\"recombinationPerc\": 0.8,\n\t\t\"mutationPerc\": 0.2,\n\t\t\"elitarism\": true,\n\t\t\"initialSelectionNumber\": 10,\n\t\t\"initialSelectionRandom\": true\n\t},\n\t\"stopConditions\": {\n\t\t\"maxIterations\": -1,\n\t\t\"maxLifetimeMs\": 3000,\n\t\t\"maxIdenticalFitnesses\": -1\n\t},\n\t\"monitoringConfiguration\": {\n\t\t\"verbose\": false\n\t}\n}"
+									"raw": "{\n\t\"applicationSpecifics\": {\n\t\t\"target\" : {\n\t\t\t\"TARGET_WELLNESS\" : \"happy\"\n\t\t},\n\t\t\"params\" : {\n\t\t\t\"LIMITED_TREES\" : false\n\t\t}\n\t},\n\t\"parameters\": {\n\t\t\"recombinationPerc\": 0.8,\n\t\t\"mutationPerc\": 0.2,\n\t\t\"elitarism\": true,\n\t\t\"initialSelectionNumber\": 10,\n\t\t\"initialSelectionRandom\": true,\n\t\t\"stopConditions\": {\n\t\t\t\"maxIterations\": -1,\n\t\t\t\"maxLifetimeMs\": 3000,\n\t\t\t\"maxIdenticalFitnesses\": -1\n\t\t}\n\t},\n\t\"monitoringConfiguration\": {\n\t\t\"verbose\": false\n\t}\n}"
 								},
 								"description": ""
 							},
@@ -183,7 +183,7 @@
 								],
 								"body": {
 									"mode": "raw",
-									"raw": "{\n\t\"applicationSpecifics\": {\n\t\t\"target\" : {\n\t\t\t\"TARGET_WELLNESS\" : \"happy\"\n\t\t},\n\t\t\"params\" : {\n\t\t\t\"LIMITED_TREES\" : false\n\t\t}\n\t},\n\t\"parameters\": {\n\t\t\"recombinationPerc\": 0.8,\n\t\t\"mutationPerc\": 0.2,\n\t\t\"elitarism\": true,\n\t\t\"initialSelectionNumber\": 100,\n\t\t\"initialSelectionRandom\": false\n\t},\n\t\"stopConditions\": {\n\t\t\"maxIterations\": -1,\n\t\t\"maxLifetimeMs\": 3000,\n\t\t\"maxIdenticalFitnesses\": -1\n\t},\n\t\"monitoringConfiguration\": {\n\t\t\"verbose\": false\n\t}\n}"
+									"raw": "{\n\t\"applicationSpecifics\": {\n\t\t\"target\" : {\n\t\t\t\"TARGET_WELLNESS\" : \"happy\"\n\t\t},\n\t\t\"params\" : {\n\t\t\t\"LIMITED_TREES\" : false\n\t\t}\n\t},\n\t\"parameters\": {\n\t\t\"recombinationPerc\": 0.8,\n\t\t\"mutationPerc\": 0.2,\n\t\t\"elitarism\": true,\n\t\t\"initialSelectionNumber\": 100,\n\t\t\"initialSelectionRandom\": false,\n\t\t\"stopConditions\": {\n\t\t\t\"maxIterations\": -1,\n\t\t\t\"maxLifetimeMs\": 3000,\n\t\t\t\"maxIdenticalFitnesses\": -1\n\t\t}\n\t},\n\t\"monitoringConfiguration\": {\n\t\t\"verbose\": false\n\t}\n}"
 								},
 								"description": ""
 							},
@@ -203,7 +203,7 @@
 								],
 								"body": {
 									"mode": "raw",
-									"raw": "{\n\t\"applicationSpecifics\": {\n\t\t\"target\" : {\n\t\t\t\"TARGET_WELLNESS\" : \"happy\"\n\t\t},\n\t\t\"params\" : {\n\t\t\t\"LIMITED_TREES\" : false\n\t\t}\n\t},\n\t\"parameters\": {\n\t\t\"recombinationPerc\": 0.8,\n\t\t\"mutationPerc\": 0.2,\n\t\t\"elitarism\": false,\n\t\t\"initialSelectionNumber\": 100,\n\t\t\"initialSelectionRandom\": true\n\t},\n\t\"stopConditions\": {\n\t\t\"targetFitness\": 1.0,\n\t\t\"maxIterations\": -1,\n\t\t\"maxLifetimeMs\": 3000,\n\t\t\"maxIdenticalFitnesses\": -1\n\t},\n\t\"monitoringConfiguration\": {\n\t\t\"verbose\": false\n\t}\n}"
+									"raw": "{\n\t\"applicationSpecifics\": {\n\t\t\"target\" : {\n\t\t\t\"TARGET_WELLNESS\" : \"happy\"\n\t\t},\n\t\t\"params\" : {\n\t\t\t\"LIMITED_TREES\" : false\n\t\t}\n\t},\n\t\"parameters\": {\n\t\t\"recombinationPerc\": 0.8,\n\t\t\"mutationPerc\": 0.2,\n\t\t\"elitarism\": false,\n\t\t\"initialSelectionNumber\": 100,\n\t\t\"initialSelectionRandom\": true,\n\t\t\"stopConditions\": {\n\t\t\t\"targetFitness\": 1.0,\n\t\t\t\"maxIterations\": -1,\n\t\t\t\"maxLifetimeMs\": 3000,\n\t\t\t\"maxIdenticalFitnesses\": -1\n\t\t}\n\t},\n\t\"monitoringConfiguration\": {\n\t\t\"verbose\": false\n\t}\n}"
 								},
 								"description": ""
 							},
@@ -241,7 +241,7 @@
 								],
 								"body": {
 									"mode": "raw",
-									"raw": "{\n\t\"applicationSpecifics\": {\n\t},\n\t\"parameters\": {\n\t\t\"recombinationPerc\": 0.8,\n\t\t\"mutationPerc\": 0.2,\n\t\t\"elitarism\": true,\n\t\t\"initialSelectionNumber\": 100,\n\t\t\"initialSelectionRandom\": true\n\t},\n\t\"stopConditions\": {\n\t\t\"maxIterations\": -1,\n\t\t\"maxLifetimeMs\": 3000,\n\t\t\"maxIdenticalFitnesses\": -1\n\t},\n\t\"monitoringConfiguration\": {\n\t\t\"verbose\": false\n\t}\n}"
+									"raw": "{\n\t\"applicationSpecifics\": {\n\t},\n\t\"parameters\": {\n\t\t\"recombinationPerc\": 0.8,\n\t\t\"mutationPerc\": 0.2,\n\t\t\"elitarism\": true,\n\t\t\"initialSelectionNumber\": 100,\n\t\t\"initialSelectionRandom\": true,\n\t\t\"stopConditions\": {\n\t\t\t\"maxIterations\": -1,\n\t\t\t\"maxLifetimeMs\": 3000,\n\t\t\t\"maxIdenticalFitnesses\": -1\n\t\t}\n\t},\n\t\"monitoringConfiguration\": {\n\t\t\"verbose\": false\n\t}\n}"
 								},
 								"description": ""
 							},
@@ -261,7 +261,7 @@
 								],
 								"body": {
 									"mode": "raw",
-									"raw": "{\n\t\"parameters\": {\n\t\t\"recombinationPerc\": 0.8,\n\t\t\"mutationPerc\": 0.2,\n\t\t\"elitarism\": true,\n\t\t\"initialSelectionNumber\": 100,\n\t\t\"initialSelectionRandom\": true\n\t},\n\t\"stopConditions\": {\n\t\t\"maxIterations\": -1,\n\t\t\"maxLifetimeMs\": 3000,\n\t\t\"maxIdenticalFitnesses\": -1\n\t},\n\t\"monitoringConfiguration\": {\n\t\t\"verbose\": false\n\t}\n}"
+									"raw": "{\n\t\"parameters\": {\n\t\t\"recombinationPerc\": 0.8,\n\t\t\"mutationPerc\": 0.2,\n\t\t\"elitarism\": true,\n\t\t\"initialSelectionNumber\": 100,\n\t\t\"initialSelectionRandom\": true,\n\t\t\"stopConditions\": {\n\t\t\t\"maxIterations\": -1,\n\t\t\t\"maxLifetimeMs\": 3000,\n\t\t\t\"maxIdenticalFitnesses\": -1\n\t\t}\n\t},\n\t\"monitoringConfiguration\": {\n\t\t\"verbose\": false\n\t}\n}"
 								},
 								"description": ""
 							},
@@ -281,7 +281,7 @@
 								],
 								"body": {
 									"mode": "raw",
-									"raw": "{\n\t\"applicationSpecifics\": {\n\t},\n\t\"parameters\": {\n\t\t\"initialSelectionNumber\": 100,\n\t\t\"initialSelectionRandom\": true\n\t},\n\t\"stopConditions\": {\n\t\t\"maxIterations\": -1,\n\t\t\"maxLifetimeMs\": 3000\n\t},\n\t\"monitoringConfiguration\": {\n\t}\n}"
+									"raw": "{\n\t\"applicationSpecifics\": {\n\t},\n\t\"parameters\": {\n\t\t\"initialSelectionNumber\": 100,\n\t\t\"initialSelectionRandom\": true,\n\t\t\"stopConditions\": {\n\t\t\t\"maxIterations\": -1,\n\t\t\t\"maxLifetimeMs\": 3000,\n\t\t\t\"maxIdenticalFitnesses\": -1\n\t\t}\n\t},\n\t\"monitoringConfiguration\": {\n\t}\n}"
 								},
 								"description": ""
 							},
@@ -319,13 +319,13 @@
 								],
 								"body": {
 									"mode": "raw",
-									"raw": "{\n\t\"applicationSpecifics\": {\n\t\t\"target\" : {\n\t\t\t\"TARGET_DESIRED_MEALS\" : 10,\n\t\t\t\"TARGET_SAVOURY_PROPORTION\" : 70,\n\t\t\t\"TARGET_SWEET_PROPORTION\" : 30,\n\t\t\t\"TARGET_FRIDGE_MANDATORY\" : true\n\t\t},\n\t\t\"params\" : {\n\t\t\t\"REFRIGERATOR_FOODS\" : [ \"yogurth\", \"banana\",  \"banane\"  ],\n\t\t\t\"PANTRY_FOODS\" : [ \n ],\n\t\t\t\"DATABASE\" : \"IT\"\n\t\t}\n\t},\n\t\"parameters\": {\n\t\t\"recombinationPerc\": 0.8,\n\t\t\"mutationPerc\": 0.2,\n\t\t\"elitarism\": true,\n\t\t\"initialSelectionNumber\": 10,\n\t\t\"initialSelectionRandom\": true\n\t},\n\t\"stopConditions\": {\n\t\t\"targetFitness\" : 1.0,\n\t\t\"maxIterations\": -1,\n\t\t\"maxLifetimeMs\": 3000,\n\t\t\"maxIdenticalFitnesses\": -1\n\t},\n\t\"monitoringConfiguration\": {\n\t\t\"verbose\": false,\n\t\t\"traceHistory\": false\n\t}\n}"
+									"raw": "{\n\t\"applicationSpecifics\": {\n\t\t\"target\" : {\n\t\t\t\"TARGET_DESIRED_MEALS\" : 10,\n\t\t\t\"TARGET_SAVOURY_PROPORTION\" : 70,\n\t\t\t\"TARGET_SWEET_PROPORTION\" : 30,\n\t\t\t\"TARGET_FRIDGE_MANDATORY\" : true\n\t\t},\n\t\t\"params\" : {\n\t\t\t\"REFRIGERATOR_FOODS\" : [ \"yogurth\", \"banana\",  \"banane\"  ],\n\t\t\t\"PANTRY_FOODS\" : [ \n ],\n\t\t\t\"DATABASE\" : \"IT\"\n\t\t}\n\t},\n\t\"parameters\": {\n\t\t\"recombinationPerc\": 0.8,\n\t\t\"mutationPerc\": 0.2,\n\t\t\"elitarism\": true,\n\t\t\"initialSelectionNumber\": 10,\n\t\t\"initialSelectionRandom\": true,\n\t\t\"stopConditions\": {\n\t\t\t\"maxIterations\": -1,\n\t\t\t\"maxLifetimeMs\": 3000,\n\t\t\t\"maxIdenticalFitnesses\": -1\n\t\t}\n\t},\n\t\"monitoringConfiguration\": {\n\t\t\"verbose\": false,\n\t\t\"traceHistory\": false\n\t}\n}"
 								},
 								"description": ""
 							},
 							"response": [
 								{
-									"id": "8b6b1214-8a07-4c3c-b5f3-606d5c001da3",
+									"id": "0c3533a7-3432-443a-b076-5ae5c43f205e",
 									"name": "Database EN",
 									"originalRequest": {
 										"url": "http://{{ip}}:{{port}}/experiment/algofrigerator",
@@ -352,7 +352,7 @@
 									"body": ""
 								},
 								{
-									"id": "99df10c9-b0e5-4ece-b381-0fe8614f89f7",
+									"id": "c296e39c-fd10-477b-a8f2-dba088d4712b",
 									"name": "Database IT",
 									"originalRequest": {
 										"url": "http://{{ip}}:{{port}}/experiment/algofrigerator",
@@ -379,7 +379,7 @@
 									"body": ""
 								},
 								{
-									"id": "a627c4f6-180f-40e9-845f-908f4328b69d",
+									"id": "78fa649a-e051-4c3d-8f1d-a289d97fa2d3",
 									"name": "Dispensa Rossi",
 									"originalRequest": {
 										"url": "http://{{ip}}:{{port}}/experiment/algofrigerator",
@@ -446,7 +446,7 @@
 								],
 								"body": {
 									"mode": "raw",
-									"raw": "{\n\t\"applicationSpecifics\": {\n\t\t\"target\" : {\n\t\t\t\"TARGET_DESIRED_MEALS\" : 10,\n\t\t\t\"TARGET_SAVOURY_PROPORTION\" : 70,\n\t\t\t\"TARGET_SWEET_PROPORTION\" : 30\n\t\t},\n\t\t\"params\" : {\n\t\t\t\"REFRIGERATOR_FOODS\" : [ \"latte\",\"uova\",\"formaggio\",\"burro\",\"carote\",\"peperoni\",\"pomodor\",\"acciughe\"],\n\t\t\t\"PANTRY_FOODS\" : [ \"sale\",\"zucchero\",\"olio\",\"pepe\",\"farina\",\"pane\",\"pasta\",\"caffè\",\"piselli\"],\n\t\t\t\"DATABASE\" : \"IT\"\n\t\t}\n\t},\n\t\"parameters\": {\n\t\t\"recombinationPerc\": 0.8,\n\t\t\"mutationPerc\": 0.2,\n\t\t\"elitarism\": true,\n\t\t\"initialSelectionNumber\": 100,\n\t\t\"initialSelectionRandom\": true\n\t},\n\t\"stopConditions\": {\n\t\t\"targetFitness\" : 1.0,\n\t\t\"maxIterations\": -1,\n\t\t\"maxLifetimeMs\": 3000,\n\t\t\"maxIdenticalFitnesses\": -1\n\t},\n\t\"monitoringConfiguration\": {\n\t\t\"verbose\": false,\n\t\t\"traceHistory\": false\n\t}\n}"
+									"raw": "{\n\t\"applicationSpecifics\": {\n\t\t\"target\" : {\n\t\t\t\"TARGET_DESIRED_MEALS\" : 10,\n\t\t\t\"TARGET_SAVOURY_PROPORTION\" : 70,\n\t\t\t\"TARGET_SWEET_PROPORTION\" : 30\n\t\t},\n\t\t\"params\" : {\n\t\t\t\"REFRIGERATOR_FOODS\" : [ \"latte\",\"uova\",\"formaggio\",\"burro\",\"carote\",\"peperoni\",\"pomodor\",\"acciughe\"],\n\t\t\t\"PANTRY_FOODS\" : [ \"sale\",\"zucchero\",\"olio\",\"pepe\",\"farina\",\"pane\",\"pasta\",\"caffè\",\"piselli\"],\n\t\t\t\"DATABASE\" : \"IT\"\n\t\t}\n\t},\n\t\"parameters\": {\n\t\t\"recombinationPerc\": 0.8,\n\t\t\"mutationPerc\": 0.2,\n\t\t\"elitarism\": true,\n\t\t\"initialSelectionNumber\": 100,\n\t\t\"initialSelectionRandom\": true,\n\t\t\"stopConditions\": {\n\t\t\t\"maxIterations\": -1,\n\t\t\t\"maxLifetimeMs\": 3000,\n\t\t\t\"maxIdenticalFitnesses\": -1\n\t\t}\n\t},\n\t\"monitoringConfiguration\": {\n\t\t\"verbose\": false,\n\t\t\"traceHistory\": false\n\t}\n}"
 								},
 								"description": ""
 							},
@@ -466,7 +466,7 @@
 								],
 								"body": {
 									"mode": "raw",
-									"raw": "{\n\t\"applicationSpecifics\": {\n\t\t\"target\" : {\n\t\t\t\"TARGET_DESIRED_MEALS\" : 10,\n\t\t\t\"TARGET_SAVOURY_PROPORTION\" : 70,\n\t\t\t\"TARGET_SWEET_PROPORTION\" : 30,\n\t\t\t\"TARGET_FRIDGE_MANDATORY\" : true\n\t\t},\n\t\t\"params\" : {\n\t\t\t\"REFRIGERATOR_FOODS\" : [ \"yogurth\", \"banana\",  \"banane\"  ],\n\t\t\t\"PANTRY_FOODS\" : [ \n ],\n\t\t\t\"DATABASE\" : \"IT\"\n\t\t}\n\t},\n\t\"parameters\": {\n\t\t\"initialSelectionNumber\": 5,\n\t\t\"initialSelectionRandom\": true\n\t},\n\t\"stopConditions\": {\n\t\t\"targetFitness\": 1.0,\n\t\t\"maxIterations\": -1,\n\t\t\"maxLifetimeMs\": 3000\n\t},\n\t\"monitoringConfiguration\": {\n\t}\n}"
+									"raw": "{\n\t\"applicationSpecifics\": {\n\t\t\"target\" : {\n\t\t\t\"TARGET_DESIRED_MEALS\" : 10,\n\t\t\t\"TARGET_SAVOURY_PROPORTION\" : 70,\n\t\t\t\"TARGET_SWEET_PROPORTION\" : 30,\n\t\t\t\"TARGET_FRIDGE_MANDATORY\" : true\n\t\t},\n\t\t\"params\" : {\n\t\t\t\"REFRIGERATOR_FOODS\" : [ \"yogurth\", \"banana\",  \"banane\"  ],\n\t\t\t\"PANTRY_FOODS\" : [ \n ],\n\t\t\t\"DATABASE\" : \"IT\"\n\t\t}\n\t},\n\t\"parameters\": {\n\t\t\"initialSelectionNumber\": 5,\n\t\t\"initialSelectionRandom\": true,\n\t\t\"stopConditions\": {\n\t\t\t\"maxIterations\": -1,\n\t\t\t\"maxLifetimeMs\": 3000,\n\t\t\t\"maxIdenticalFitnesses\": -1\n\t\t}\n\t},\n\t\"monitoringConfiguration\": {\n\t}\n}"
 								},
 								"description": ""
 							},

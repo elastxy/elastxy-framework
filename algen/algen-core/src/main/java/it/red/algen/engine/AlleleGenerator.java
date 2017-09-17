@@ -17,7 +17,7 @@ public interface AlleleGenerator {
 	 * @param metadata
 	 * @return
 	 */
-	public Allele generate(GeneMetadata metadata);
+	public <T> Allele<T> generate(GeneMetadata metadata);
 	
 	/**
 	 * Generate a new allele with specific value
@@ -25,7 +25,7 @@ public interface AlleleGenerator {
 	 * @param metadata
 	 * @return
 	 */
-	public Allele generate(GeneMetadata metadata, Object value);
+	public <T> Allele<T> generate(GeneMetadata metadata, T value);
 	
 
 	/*
@@ -34,5 +34,5 @@ public interface AlleleGenerator {
 	 * Useful for problems where every gene must have a different allele from a predefined set
 	 * 
 	 */
-	public Allele generateExclusive(GeneMetadata metadata, List<Object> exclusions);
+	public <T> Allele<T> generateExclusive(GeneMetadata metadata, List<T> exclusions);
 }

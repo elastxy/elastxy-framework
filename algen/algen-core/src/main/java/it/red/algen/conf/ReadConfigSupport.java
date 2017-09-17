@@ -1,14 +1,16 @@
 package it.red.algen.conf;
 
-import java.io.ByteArrayInputStream;
 import java.io.IOException;
 import java.io.InputStream;
-import java.nio.charset.StandardCharsets;
+import java.util.ArrayList;
+import java.util.List;
 
 import org.apache.log4j.Logger;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 
+import it.red.algen.metadata.GeneMetadata;
+import it.red.algen.metadata.GeneMetadataType;
 import it.red.algen.metadata.Genes;
 
 /**
@@ -29,7 +31,22 @@ public class ReadConfigSupport {
 			logger.error(msg, e);
 			throw new ConfigurationException(msg, e);
 		}
+		
+		// Correct CHARACTER types converting String to Character
+		genes.metadata.entrySet().stream().
+			filter(e -> e.getValue().type==GeneMetadataType.CHAR).
+			forEach(e -> convertStringToChar(e.getValue()));
+		
 		return genes;
+	}
+	
+	private static void convertStringToChar(GeneMetadata metadata){
+		List<Character> charValues = new ArrayList<Character>(metadata.values.size());
+		for(Object value  : metadata.values){
+			charValues.add(((String)value).charAt(0));
+		}
+		metadata.values = charValues;
+//		metadata.values.stream().forEach(v -> ((String)v).charAt(0));
 	}
 	
 	public static Object readJSON(String classpathResource, Class type) throws IOException {

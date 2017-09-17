@@ -13,7 +13,7 @@
 	
 	"alleleGenerator": {
 		"type" : "java",
-		"content" : "it.red.algen.metasudoku.MesAlleleGenerator"
+		"content" : "it.red.algen.engine.MetadataAlleleGenerator"
 	},
 	
 	"solutionsFactory": {

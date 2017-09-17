@@ -21,4 +21,8 @@ public class Randomizer {
 	public static final double nextDouble(){
 		return GENERATOR.nextDouble();
 	}
+
+	public static final double nextDouble(double bound){
+		return GENERATOR.nextDouble() * bound;
+	}
 }

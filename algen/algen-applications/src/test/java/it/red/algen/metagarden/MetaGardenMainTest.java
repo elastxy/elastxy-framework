@@ -26,7 +26,7 @@ import it.red.algen.stats.ExperimentStats;
 
 
 /**
- * TODOA: complete test coverage
+ * TODOM: complete test coverage
  * @author grossi
  */
 @RunWith(SpringJUnit4ClassRunner.class)
