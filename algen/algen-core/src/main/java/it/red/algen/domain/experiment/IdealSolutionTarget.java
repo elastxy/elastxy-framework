@@ -9,14 +9,13 @@ import java.math.BigDecimal;
  * @author red
  *
  */
-public class SolutionTarget implements Target<Solution<?,?>,Object> {
+public class IdealSolutionTarget implements MultiObjectiveTarget<Solution<?,?>,Object> {
 	public Solution<?,?> goal;
 	public Object measure;
 	public BigDecimal level;
 	public BigDecimal threshold;
-	
+
 	public Double[] weights;
-	
 
 	@Override
 	public Solution<?,?> getGoal() {
@@ -54,6 +53,7 @@ public class SolutionTarget implements Target<Solution<?,?>,Object> {
 	public void setTargetThreshold(BigDecimal threshold) {
 		this.threshold = threshold;
 	}
+
 	
 	@Override
 	public Double[] getWeights() {
@@ -64,7 +64,6 @@ public class SolutionTarget implements Target<Solution<?,?>,Object> {
 	public void setWeights(Double... weights) {
 		this.weights = weights;
 	}
-
 	
 	public String toString(){
 		return String.format("SolutionTarget: goal %s with required level %.3f", goal, level);

@@ -35,9 +35,10 @@ import java.math.BigDecimal;
  * Thus, target is often synthesized with a simple piece of information,
  * for avoiding to recalculate it everytime.
  * 
- * MULTIOBJECTIVE
- * In some cases, a weights array proportions many different goal,
- * such as when many chromosomes are involved, each one with its own fitness
+ * Fitness and goal:
+ * - target fitness is the "exact" value to achieve (or to tends toward)
+ * E.g. 0.5 should reflect the middle of a optimum fitness
+ * - target threshold is the "minimum" value to achieve, execution is then stopped
  * 
  * @author grossi
  */
@@ -46,7 +47,7 @@ public interface Target<G,M> {
 	/**
 	 * The goal to achieve in its raw format
 	 * 
-	 * E.g. a text string, a mathematic function
+	 * E.g. a text string, a mathematic function, a sudoku complete matrix, a number of recipes..
 	 * 
 	 * @return
 	 */
@@ -55,25 +56,16 @@ public interface Target<G,M> {
 	
 	
 	/**
-	 * The simple measure value to compare solutions performance to
+	 * The simple measure value to compare solutions performance to.
+	 * 
+	 * E.g. in Sudoku target is the 9x9 target matrix, but reference measure 
+	 * is total rows, columns, squares completed (27)
+	 * 
 	 * @return
 	 */
 	public M getReferenceMeasure();
 	public void setReferenceMeasure(M p);
 	
-	
-	/**
-	 * Ordered weights in case of multiobjective goal
-	 * @return
-	 */
-	public Double[] getWeights();
-
-	
-	/**
-	 * Set weights of multiobjective goals
-	 * @param weights
-	 */
-	public void setWeights(Double... weights);
 	
 	/**
 	 * The target level of the goal, with respect to normalized fitness:

@@ -67,12 +67,4 @@ public class PerformanceTarget<G,M> implements Target<G,M> {
 	public String toString(){
 		return String.format("PerformanceTarget[goal=%d;level=%.3f,threshold=%.3f", goal, level, threshold);
 	}
-	@Override
-	public Double[] getWeights() {
-		return weights;
-	}
-	@Override
-	public void setWeights(Double... weights) {
-		this.weights = weights;
-	}
 }

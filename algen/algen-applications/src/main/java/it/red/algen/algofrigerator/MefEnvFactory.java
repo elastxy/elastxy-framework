@@ -21,6 +21,7 @@ import org.apache.log4j.Logger;
 import it.red.algen.conf.ConfigurationException;
 import it.red.algen.conf.ReadConfigSupport;
 import it.red.algen.dataaccess.AbstractEnvFactory;
+import it.red.algen.domain.experiment.PerformanceMultiObjectiveTarget;
 import it.red.algen.domain.experiment.PerformanceTarget;
 import it.red.algen.domain.experiment.Target;
 import it.red.algen.domain.genetics.Genoma;
@@ -45,7 +46,7 @@ public class MefEnvFactory extends AbstractEnvFactory<PerformanceTarget, BigDeci
 		List<String> userPantryFoods = context.applicationSpecifics.getParamList(MefApplication.PARAM_PANTRY_FOODS);
 		
 		// Defines goal representation
-    	PerformanceTarget target = new PerformanceTarget();
+		PerformanceMultiObjectiveTarget target = new PerformanceMultiObjectiveTarget();
     	target.setWeights(savouryProportion.doubleValue() / 100.0, sweetProportion.doubleValue() / 100.0);
     	target.setGoal(createGoal(desiredMeals, target.getWeights(), fridgeMandatory, userFridgeFoods, userPantryFoods)); // TODOA: foods will be input parameters!
     	
