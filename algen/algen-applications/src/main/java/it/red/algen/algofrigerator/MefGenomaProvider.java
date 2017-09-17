@@ -104,7 +104,7 @@ public class MefGenomaProvider implements GenomaProvider {
 		recipes = new HashMap<RecipeType, List<Recipe>>();
 		
 		// Load recipes from file
-		String database = context.applicationSpecifics.getParamString(MefApplication.PARAM_DATABASE, MefApplication.DEFAULT_DATABASE);
+		String database = context.applicationSpecifics.getParamString(MefConstants.PARAM_DATABASE, MefConstants.DEFAULT_DATABASE);
 		db = new RecipesDatabaseCSV(database);
 		List<Recipe> recipesFromFile = db.getAllRecipes();
 		logger.debug("Found "+recipesFromFile.size()+" from file.");

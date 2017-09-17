@@ -38,12 +38,12 @@ public class MefEnvFactory extends AbstractEnvFactory<PerformanceTarget, BigDeci
 	protected Target<PerformanceTarget, BigDecimal> defineTarget(Genoma genoma) {
 
 		// User parameters
-		Integer desiredMeals = context.applicationSpecifics.getTargetInteger(MefApplication.TARGET_DESIRED_MEALS, MefApplication.DEFAULT_DESIRED_MEALS);
-		Integer savouryProportion = context.applicationSpecifics.getTargetInteger(MefApplication.TARGET_SAVOURY_PROPORTION, MefApplication.DEFAULT_SAVOURY_PROPORTION);
-		Integer sweetProportion = context.applicationSpecifics.getTargetInteger(MefApplication.TARGET_SWEET_PROPORTION, MefApplication.DEFAULT_SWEET_PROPORTION);
-		Boolean fridgeMandatory = context.applicationSpecifics.getTargetBoolean(MefApplication.TARGET_FRIDGE_MANDATORY, MefApplication.DEFAULT_FRIDGE_MANDATORY);
-		List<String> userFridgeFoods = context.applicationSpecifics.getParamList(MefApplication.PARAM_REFRIGERATOR_FOODS);
-		List<String> userPantryFoods = context.applicationSpecifics.getParamList(MefApplication.PARAM_PANTRY_FOODS);
+		Integer desiredMeals = context.applicationSpecifics.getTargetInteger(MefConstants.TARGET_DESIRED_MEALS, MefConstants.DEFAULT_DESIRED_MEALS);
+		Integer savouryProportion = context.applicationSpecifics.getTargetInteger(MefConstants.TARGET_SAVOURY_PROPORTION, MefConstants.DEFAULT_SAVOURY_PROPORTION);
+		Integer sweetProportion = context.applicationSpecifics.getTargetInteger(MefConstants.TARGET_SWEET_PROPORTION, MefConstants.DEFAULT_SWEET_PROPORTION);
+		Boolean fridgeMandatory = context.applicationSpecifics.getTargetBoolean(MefConstants.TARGET_FRIDGE_MANDATORY, MefConstants.DEFAULT_FRIDGE_MANDATORY);
+		List<String> userFridgeFoods = context.applicationSpecifics.getParamList(MefConstants.PARAM_REFRIGERATOR_FOODS);
+		List<String> userPantryFoods = context.applicationSpecifics.getParamList(MefConstants.PARAM_PANTRY_FOODS);
 		
 		// Defines goal representation
 		PerformanceMultiObjectiveTarget target = new PerformanceMultiObjectiveTarget();
@@ -87,8 +87,8 @@ public class MefEnvFactory extends AbstractEnvFactory<PerformanceTarget, BigDeci
 
     
 	private void readFoodsFromFile(MefGoal result) {
-		String db = this.context.applicationSpecifics.getParamString(MefApplication.PARAM_DATABASE, MefApplication.DEFAULT_DATABASE);
-		String classpathResource = "/"+MefApplication.APP_NAME+"/"+db+"/target.json";
+		String db = this.context.applicationSpecifics.getParamString(MefConstants.PARAM_DATABASE, MefConstants.DEFAULT_DATABASE);
+		String classpathResource = "/"+MefConstants.APP_NAME+"/"+db+"/target.json";
 		try {
 			result.refrigeratorFoods = new ArrayList<String>();
 			String[] foods = (String[])ReadConfigSupport.readJSON(classpathResource, String[].class);
@@ -102,8 +102,8 @@ public class MefEnvFactory extends AbstractEnvFactory<PerformanceTarget, BigDeci
 	
 
 	private void readPantryFromFile(MefGoal result) {
-		String db = context.applicationSpecifics.getParamString(MefApplication.PARAM_DATABASE, MefApplication.DEFAULT_DATABASE);
-		String classpathResource = "/"+MefApplication.APP_NAME+"/"+db+"/pantry.json";
+		String db = context.applicationSpecifics.getParamString(MefConstants.PARAM_DATABASE, MefConstants.DEFAULT_DATABASE);
+		String classpathResource = "/"+MefConstants.APP_NAME+"/"+db+"/pantry.json";
 		try {
 			result.pantry = Arrays.asList((String[])ReadConfigSupport.readJSON(classpathResource, String[].class));
 		} catch (IOException e) {

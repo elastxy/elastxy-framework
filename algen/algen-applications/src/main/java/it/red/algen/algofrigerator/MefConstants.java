@@ -59,14 +59,12 @@ package it.red.algen.algofrigerator;
  * 
  * TODOM: semantic check or affinity between names given by user to foods, and names of recipe ingredients
  * 		(e.g. tomato =~ tomatoes)
- * TODOA: remove redundancy with other applications
- * 
  * TODOM: pepe don't find peperoni; plurals; more weight to fridge foods than to pantry
  * 
  * @author red
  *
  */
-public class MefApplication {
+public class MefConstants {
 	
 	// Application name
 	public static final String APP_NAME = "algofrigerator";

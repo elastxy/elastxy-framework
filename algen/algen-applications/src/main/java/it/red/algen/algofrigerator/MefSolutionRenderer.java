@@ -26,14 +26,14 @@ public class MefSolutionRenderer implements SolutionRenderer<String> {
 		sb.append("\n");
 		
 		// Print recipes
-		printRecipes(sb, phenotype, MefApplication.PHENOTYPE_SAVOURY_RECIPES, "SAVOURY");
+		printRecipes(sb, phenotype, MefConstants.PHENOTYPE_SAVOURY_RECIPES, "SAVOURY");
 		sb.append("\n");
 
-		printRecipes(sb, phenotype, MefApplication.PHENOTYPE_SWEET_RECIPES, "SWEET");
+		printRecipes(sb, phenotype, MefConstants.PHENOTYPE_SWEET_RECIPES, "SWEET");
 		sb.append("\n");
 		
 		// Print completeness
-		double completeness = (double)phenotype.getValue().get(MefApplication.PHENOTYPE_COMPLETENESS_POINTS);
+		double completeness = (double)phenotype.getValue().get(MefConstants.PHENOTYPE_COMPLETENESS_POINTS);
 		sb.append(String.format("-> Algorifero completeness: %.3f%n%n", completeness));
 		sb.append("\n");
 		

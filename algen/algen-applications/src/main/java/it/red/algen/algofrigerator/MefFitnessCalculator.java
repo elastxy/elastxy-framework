@@ -48,7 +48,7 @@ public class MefFitnessCalculator implements FitnessCalculator<GenericSolution,S
     	MefGoal goal = (MefGoal)env.target.getGoal();
 
     	// Check foods from fridge
-    	BigDecimal foodsFromFridge = new BigDecimal((Double)((Map<String,Object>)solution.phenotype.getValue()).get(MefApplication.PHENOTYPE_PERCENTAGE_FOOD_FROM_FRIDGE)).setScale(3,  BigDecimal.ROUND_HALF_UP);
+    	BigDecimal foodsFromFridge = new BigDecimal((Double)((Map<String,Object>)solution.phenotype.getValue()).get(MefConstants.PHENOTYPE_PERCENTAGE_FOOD_FROM_FRIDGE)).setScale(3,  BigDecimal.ROUND_HALF_UP);
     	if(goal.fridgeMandatory && foodsFromFridge.setScale(3).equals(BigDecimal.ZERO.setScale(3))){
     		normalizedFitness = BigDecimal.ZERO;
             result.setValue(normalizedFitness);
@@ -58,7 +58,7 @@ public class MefFitnessCalculator implements FitnessCalculator<GenericSolution,S
 
     	// Check completeness
     	BigDecimal completeness = null;
-    	Double completeMeals = (Double)((Map<String,Object>)solution.phenotype.getValue()).get(MefApplication.PHENOTYPE_COMPLETENESS_POINTS);
+    	Double completeMeals = (Double)((Map<String,Object>)solution.phenotype.getValue()).get(MefConstants.PHENOTYPE_COMPLETENESS_POINTS);
     	BigDecimal completeMealsBD = new BigDecimal(completeMeals).setScale(2, BigDecimal.ROUND_HALF_UP);
     	BigDecimal desiredMealsBD = new BigDecimal(goal.desiredMeals).setScale(2, BigDecimal.ROUND_HALF_UP);;
     	completeness = completeMealsBD.compareTo(desiredMealsBD)==0 ? 

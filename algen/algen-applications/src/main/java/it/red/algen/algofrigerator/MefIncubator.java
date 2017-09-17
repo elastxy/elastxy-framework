@@ -45,10 +45,10 @@ public class MefIncubator implements Incubator<ChromosomeGenotype, ComplexPhenot
 	
 		// Create phenotype
 		ComplexPhenotype result = new ComplexPhenotype();
-		result.value.put(MefApplication.PHENOTYPE_SAVOURY_RECIPES, 		accumulator.resultingRecipes.get(RecipeType.SAVOURY));
-		result.value.put(MefApplication.PHENOTYPE_SWEET_RECIPES, 		accumulator.resultingRecipes.get(RecipeType.SWEET));
-		result.value.put(MefApplication.PHENOTYPE_COMPLETENESS_POINTS, 	accumulator.resultingCompleteness);
-		result.value.put(MefApplication.PHENOTYPE_PERCENTAGE_FOOD_FROM_FRIDGE, 	accumulator.percentageFoodsFromFridge);
+		result.value.put(MefConstants.PHENOTYPE_SAVOURY_RECIPES, 		accumulator.resultingRecipes.get(RecipeType.SAVOURY));
+		result.value.put(MefConstants.PHENOTYPE_SWEET_RECIPES, 		accumulator.resultingRecipes.get(RecipeType.SWEET));
+		result.value.put(MefConstants.PHENOTYPE_COMPLETENESS_POINTS, 	accumulator.resultingCompleteness);
+		result.value.put(MefConstants.PHENOTYPE_PERCENTAGE_FOOD_FROM_FRIDGE, 	accumulator.percentageFoodsFromFridge);
 		return result;
 	}
 	

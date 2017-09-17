@@ -7,7 +7,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 import au.com.bytecode.opencsv.CSVReader;
-import it.red.algen.algofrigerator.MefApplication;
+import it.red.algen.algofrigerator.MefConstants;
 
 
 // TODOM: cache
@@ -29,7 +29,7 @@ public class RecipesDatabaseCSV implements RecipesDatabase {
 		}
 		try {
 			List<Recipe> result = new ArrayList<Recipe>();
-			String resourceName = "/"+MefApplication.APP_NAME+"/"+database+"/"+DB_FILENAME;
+			String resourceName = "/"+MefConstants.APP_NAME+"/"+database+"/"+DB_FILENAME;
 			CSVReader reader = new CSVReader(new InputStreamReader(getClass().getResourceAsStream(resourceName)), ',');
 			String [] nextLine;
 			// header

@@ -39,7 +39,7 @@ public class Recipe {
 		copy.recipeType = recipeType;
 		copy.ingredients = ingredients;
 		copy.mainIngredient = mainIngredient;
-		copy.preparation = preparation; // TODOA: only for renderer
+		copy.preparation = preparation; // TODOA: only for renderer: separate with rendered domain
 		copy.persons = persons;
 		copy.note = note;
 		return copy;
