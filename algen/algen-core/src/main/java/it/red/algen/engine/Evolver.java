@@ -70,29 +70,27 @@ public class Evolver implements EnvObservable {
     	// TEST FITNESS - initial gen
         fitnessTester.test(env.currentGen, env);
         int generationSize = env.currentGen.solutions.size();
-        // fireTestedGenerationEvent(); // TODOB: fire initial fitness calc
+        Fitness lastGenFitness = env.currentGen.bestMatch.getFitness();
+        boolean endConditionFound = checkEndCondition(lastGenFitness);
         
         
     	// Loops until end condition rises
-        // TODOA: maybe first population has already the solution! must be checked before!
-        boolean endConditionFound = false;
-        do {
+        while(!endConditionFound) {
         	
         	// SELECTION
         	Population nextGeneration = selection(generationSize);
         	if(context.monitoringConfiguration.verbose) env.generationsHistory.add(nextGeneration);
         	
-        	
-        	// For uniform distribution selector skip all
+        	// For uniform distribution selector skip genetic operators
         	if(!context.parameters.randomEvolution) {
-        		newGenerationLoop(generationSize, nextGeneration);
+        		applyGeneticOperators(generationSize, nextGeneration);
         	}
         	
             // TEST FITNESS - next gen
-            Fitness nextGenFitness = fitnessTester.test(nextGeneration, env);
+            fitnessTester.test(nextGeneration, env);
 
             // Assign new generation
-            Fitness lastGenFitness = env.currentGen.bestMatch.getFitness();
+            lastGenFitness = env.currentGen.bestMatch.getFitness();
             
             // CHECK END CONDITION
             endConditionFound = checkEndCondition(lastGenFitness);
@@ -100,13 +98,12 @@ public class Evolver implements EnvObservable {
             env.currentGen = nextGeneration;
             env.currentGenNumber++;
         }
-        while(!endConditionFound);
         
         // END OF EXPERIMENT
     }
 
 
-	private void newGenerationLoop(int generationSize, Population nextGeneration) {
+	private void applyGeneticOperators(int generationSize, Population nextGeneration) {
 		
 		// BEST MATCHES - extract
 		// TODOM: reuse some best matches for sharing their genetic material
