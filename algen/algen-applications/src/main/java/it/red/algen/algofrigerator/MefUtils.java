@@ -128,7 +128,7 @@ public class MefUtils {
 	 * but equalness only to the list of acknowledge ingredients during
 	 * genoma pre-process phase.
 	 * 
-	 * TODOA: pantry+refrigerator foods
+	 * TODOM: check separate availability pantry+refrigerator foods
 	 */
 	public static IngredientsCoverage checkCoverage(Recipe recipe){
 		if(recipe.notAvailable.isEmpty()){

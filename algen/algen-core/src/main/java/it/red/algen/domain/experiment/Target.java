@@ -74,7 +74,6 @@ public interface Target<G,M> {
 	 * 0.0 WORST
 	 * 
 	 * The engine tries to reach exactly this value: the nearest solution wins.
-	 * TODOA: move to StopConditions
 	 */
 	public BigDecimal getTargetFitness();
 	public void setTargetFitness(BigDecimal level);

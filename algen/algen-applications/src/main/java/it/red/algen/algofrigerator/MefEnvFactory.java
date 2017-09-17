@@ -48,10 +48,8 @@ public class MefEnvFactory extends AbstractEnvFactory<PerformanceTarget, BigDeci
 		// Defines goal representation
 		PerformanceMultiObjectiveTarget target = new PerformanceMultiObjectiveTarget();
     	target.setWeights(savouryProportion.doubleValue() / 100.0, sweetProportion.doubleValue() / 100.0);
-    	target.setGoal(createGoal(desiredMeals, target.getWeights(), fridgeMandatory, userFridgeFoods, userPantryFoods)); // TODOA: foods will be input parameters!
+    	target.setGoal(createGoal(desiredMeals, target.getWeights(), fridgeMandatory, userFridgeFoods, userPantryFoods));
     	
-    	
-//        target.setReferenceMeasure(totalRecipes); // TODOA: multiobiettivo: distinte per savoury e sweet
 		return target;
 	}
 
@@ -69,7 +67,6 @@ public class MefEnvFactory extends AbstractEnvFactory<PerformanceTarget, BigDeci
     	}
     	else {
     		result.refrigeratorFoods = userProvidedFoods;
-//    		readFoodsFromString(result, userProvidedFoods);
     	}
 
     	if(userProvidedPantry==null||userProvidedPantry.size()==0){
@@ -77,7 +74,6 @@ public class MefEnvFactory extends AbstractEnvFactory<PerformanceTarget, BigDeci
     	}
     	else {
     		result.pantry = userProvidedPantry;
-//    		readPantryFromString(result, userProvidedPantry);
     	}
 		
 		result.desiredMeals = desiredMeals;
@@ -90,7 +86,6 @@ public class MefEnvFactory extends AbstractEnvFactory<PerformanceTarget, BigDeci
     }
 
     
-    // TODOA: remove duplicates
 	private void readFoodsFromFile(MefGoal result) {
 		String db = this.context.applicationSpecifics.getParamString(MefApplication.PARAM_DATABASE, MefApplication.DEFAULT_DATABASE);
 		String classpathResource = "/"+MefApplication.APP_NAME+"/"+db+"/target.json";
@@ -119,28 +114,28 @@ public class MefEnvFactory extends AbstractEnvFactory<PerformanceTarget, BigDeci
 	}
 
 
-	private void readFoodsFromString(MefGoal result, String userProvidedFoods) {
-		try {
-			result.refrigeratorFoods = new ArrayList<String>();
-			String[] foods = (String[])ReadConfigSupport.readJSONString(userProvidedFoods, String[].class);
-			result.refrigeratorFoods.addAll(Arrays.asList(foods));
-		} catch (IOException e) {
-			String msg = "Error while reading JSON from input String ["+userProvidedFoods+"]. Ex: "+e;
-			logger.error(msg, e);
-			throw new ConfigurationException(msg, e);
-		}
-	}
-
-	private void readPantryFromString(MefGoal result, String userProvidedPantry) {
-		try {
-			result.pantry = new ArrayList<String>();
-			String[] foods = (String[])ReadConfigSupport.readJSONString(userProvidedPantry, String[].class);
-			result.pantry.addAll(Arrays.asList(foods));
-		} catch (IOException e) {
-			String msg = "Error while reading JSON from input String ["+userProvidedPantry+"]. Ex: "+e;
-			logger.error(msg, e);
-			throw new ConfigurationException(msg, e);
-		}
-	}
+//	private void readFoodsFromString(MefGoal result, String userProvidedFoods) {
+//		try {
+//			result.refrigeratorFoods = new ArrayList<String>();
+//			String[] foods = (String[])ReadConfigSupport.readJSONString(userProvidedFoods, String[].class);
+//			result.refrigeratorFoods.addAll(Arrays.asList(foods));
+//		} catch (IOException e) {
+//			String msg = "Error while reading JSON from input String ["+userProvidedFoods+"]. Ex: "+e;
+//			logger.error(msg, e);
+//			throw new ConfigurationException(msg, e);
+//		}
+//	}
+//
+//	private void readPantryFromString(MefGoal result, String userProvidedPantry) {
+//		try {
+//			result.pantry = new ArrayList<String>();
+//			String[] foods = (String[])ReadConfigSupport.readJSONString(userProvidedPantry, String[].class);
+//			result.pantry.addAll(Arrays.asList(foods));
+//		} catch (IOException e) {
+//			String msg = "Error while reading JSON from input String ["+userProvidedPantry+"]. Ex: "+e;
+//			logger.error(msg, e);
+//			throw new ConfigurationException(msg, e);
+//		}
+//	}
 
 }

@@ -1,6 +1,5 @@
 package it.red.algen.domain.genetics;
 
-import java.awt.Choice;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;

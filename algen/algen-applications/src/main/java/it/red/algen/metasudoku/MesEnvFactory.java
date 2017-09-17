@@ -23,7 +23,6 @@ import it.red.algen.domain.genetics.Genoma;
 import it.red.algen.domain.genetics.PredefinedGenoma;
 
 /**
- * TODOA: remove duplications with other factories
  *
  * @author grossi
  */
