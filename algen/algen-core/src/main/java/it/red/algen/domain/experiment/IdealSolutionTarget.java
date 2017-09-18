@@ -39,9 +39,15 @@ public class IdealSolutionTarget implements MultiObjectiveTarget<Solution<?,?>,O
 	public BigDecimal getTargetFitness() {
 		return level;
 	}
+
 	@Override
 	public void setTargetFitness(BigDecimal level) {
-		this.level = level;
+		if(level!=null && level.setScale(10).compareTo(BigDecimal.ONE.setScale(10))==0){
+			this.level = null;
+		}
+		else {
+			this.level = level;
+		}
 	}
 
 	

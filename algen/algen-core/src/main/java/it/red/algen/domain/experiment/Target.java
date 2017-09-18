@@ -76,6 +76,13 @@ public interface Target<G,M> {
 	 * The engine tries to reach exactly this value: the nearest solution wins.
 	 */
 	public BigDecimal getTargetFitness();
+	
+	/**
+	 * Set the target fitness: if value ONE is passed, target fitness is null
+	 * and algorithm tries to reach the maximum possible without checking
+	 * everytime if it's near to ONE (more efficient)
+	 * @param level
+	 */
 	public void setTargetFitness(BigDecimal level);
 	
 

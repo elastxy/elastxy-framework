@@ -1,6 +1,7 @@
 package it.red.algen.domain.experiment;
 
 import java.math.BigDecimal;
+import java.math.RoundingMode;
 
 /**
  * A generic target class expressing a generic performance index as a goal
@@ -47,10 +48,15 @@ public class PerformanceTarget<G,M> implements Target<G,M> {
 	public BigDecimal getTargetFitness() {
 		return level;
 	}
-	// TODOA: when setting level 1.0, property is null => default fitness test more efficient
+
 	@Override
 	public void setTargetFitness(BigDecimal level) {
-		this.level = level;
+		if(level!=null && level.setScale(10, RoundingMode.CEILING).compareTo(BigDecimal.ONE.setScale(10, RoundingMode.CEILING))==0){
+			this.level = null;
+		}
+		else {
+			this.level = level;
+		}
 	}
 	
 	
