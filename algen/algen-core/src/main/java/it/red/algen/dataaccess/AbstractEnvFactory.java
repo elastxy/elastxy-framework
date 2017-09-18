@@ -70,8 +70,8 @@ public abstract class AbstractEnvFactory<T extends Object, R extends Object, G e
 	
 	private Target<T,R> createTarget(Genoma genoma){
 		Target<T,R> target = defineTarget(genoma);
-		target.setTargetFitness(context.parameters.stopConditions.targetFitness);
-    	target.setTargetThreshold(context.parameters.stopConditions.targetThreshold);
+		target.setTargetFitness(context.algorithmParameters.stopConditions.targetFitness);
+    	target.setTargetThreshold(context.algorithmParameters.stopConditions.targetThreshold);
     	return target;
 	}
 
@@ -80,8 +80,8 @@ public abstract class AbstractEnvFactory<T extends Object, R extends Object, G e
 	}
 
 	private Population createInitialPopulation(Genoma genoma) {
-		long solutions = 		context.parameters.initialSelectionNumber;
-		boolean random = 		context.parameters.initialSelectionRandom;
+		long solutions = 		context.algorithmParameters.initialSelectionNumber;
+		boolean random = 		context.algorithmParameters.initialSelectionRandom;
         Population startGen = 	context.application.populationFactory.createNew(genoma, solutions, random);
 		return startGen;
 	}

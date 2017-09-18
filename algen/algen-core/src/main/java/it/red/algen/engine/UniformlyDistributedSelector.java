@@ -19,8 +19,8 @@ public class UniformlyDistributedSelector implements Selector<Genoma> {
     	PopulationFactory populationFactory = context.application.populationFactory;
     	Population nextGen = populationFactory.createNew(
     			genoma, 
-    			context.parameters.initialSelectionNumber, 
-    			context.parameters.initialSelectionRandom);
+    			context.algorithmParameters.initialSelectionNumber, 
+    			context.algorithmParameters.initialSelectionRandom);
         return nextGen;
     }
 	    

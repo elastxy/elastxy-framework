@@ -81,11 +81,11 @@ public class ApplicationService {
 	 	setupContext(context);
 		
 		// Trial parameters
-		context.parameters.randomEvolution = true;
- 		context.parameters.elitarism = false;
- 		context.parameters.mutationPerc = 0.0;
- 		context.parameters.recombinationPerc = 0.0;
- 		context.parameters.initialSelectionRandom = true;
+		context.algorithmParameters.randomEvolution = true;
+ 		context.algorithmParameters.elitarism = false;
+ 		context.algorithmParameters.mutationPerc = 0.0;
+ 		context.algorithmParameters.recombinationPerc = 0.0;
+ 		context.algorithmParameters.initialSelectionRandom = true;
  		
  		// Substitute Selector bean with uniform random pick
  		context.application.selector = new UniformlyDistributedSelector();

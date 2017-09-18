@@ -39,7 +39,7 @@ public class Evolver implements EnvObservable {
     	this.context = context;
     	this.env = env;
     	this.fitnessTester = new StandardFitnessTester(context.application.fitnessCalculator);
-    	this.stopVerifier = new StopConditionVerifier(context.parameters.stopConditions);
+    	this.stopVerifier = new StopConditionVerifier(context.algorithmParameters.stopConditions);
     }
     
     
@@ -82,7 +82,7 @@ public class Evolver implements EnvObservable {
         	if(context.monitoringConfiguration.verbose) env.generationsHistory.add(nextGeneration);
         	
         	// For uniform distribution selector skip genetic operators
-        	if(!context.parameters.randomEvolution) {
+        	if(!context.algorithmParameters.randomEvolution) {
         		applyGeneticOperators(generationSize, nextGeneration);
         	}
         	
@@ -107,7 +107,7 @@ public class Evolver implements EnvObservable {
 		
 		// BEST MATCHES - extract
 		// TODOM: reuse some best matches for sharing their genetic material
-		List<Solution> bestMatches = BestMatchesSupport.extractBestMatches(nextGeneration, context.parameters.elitarism);
+		List<Solution> bestMatches = BestMatchesSupport.extractBestMatches(nextGeneration, context.algorithmParameters.elitarism);
 
 		// LOOP OVER NON-BEST SHUFFLED
         Collections.shuffle(nextGeneration.solutions);
@@ -148,13 +148,13 @@ public class Evolver implements EnvObservable {
 		boolean endConditionFound = false;
 		
 		// Check threshold
-		if(context.parameters.stopConditions.targetThreshold != null &&
-				env.currentGen.bestMatch.getFitness().overThreshold(context.parameters.stopConditions.targetThreshold)){
+		if(context.algorithmParameters.stopConditions.targetThreshold != null &&
+				env.currentGen.bestMatch.getFitness().overThreshold(context.algorithmParameters.stopConditions.targetThreshold)){
 			endConditionFound = goalReached();
 		}
 		
 		// Check stability of the fitness value
-		if(!endConditionFound && context.parameters.elitarism){
+		if(!endConditionFound && context.algorithmParameters.elitarism){
 		    if(env.currentGen.bestMatch.getFitness().sameOf(lastGenFitness)){
 		    	env.totIdenticalFitnesses++;
 		        if(stopVerifier.isStable(env.totIdenticalFitnesses)){
@@ -216,7 +216,7 @@ public class Evolver implements EnvObservable {
 	
 	private List<Solution> recombination(Solution[] parents) {
 		List<Solution> sons;
-		boolean crossover = Randomizer.nextDouble() < context.parameters.recombinationPerc;
+		boolean crossover = Randomizer.nextDouble() < context.algorithmParameters.recombinationPerc;
 		if(crossover) {
 		    sons = context.application.recombinator.recombine(Arrays.asList(parents));
 		    fireCrossoverEvent(parents[0], parents[1], sons);
@@ -229,8 +229,8 @@ public class Evolver implements EnvObservable {
 
 	
 	private void mutation(List<Solution> sons) {
-		boolean mute0 = Randomizer.nextDouble() < context.parameters.mutationPerc;
-		boolean mute1 = Randomizer.nextDouble() < context.parameters.mutationPerc;
+		boolean mute0 = Randomizer.nextDouble() < context.algorithmParameters.mutationPerc;
+		boolean mute1 = Randomizer.nextDouble() < context.algorithmParameters.mutationPerc;
 		if(mute0) { 
 		    Solution old = sons.get(0);
 		    Solution niu = old.copy();

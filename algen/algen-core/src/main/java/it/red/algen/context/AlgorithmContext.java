@@ -26,7 +26,7 @@ public class AlgorithmContext {
 	/**
 	 * Parameters to drive algorithm engine.
 	 */
-	public AlgorithmParameters parameters = new AlgorithmParameters();
+	public AlgorithmParameters algorithmParameters = new AlgorithmParameters();
 	
 	
 	/**

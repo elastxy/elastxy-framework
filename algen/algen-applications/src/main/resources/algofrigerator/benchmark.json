@@ -8,7 +8,7 @@
 			"DATABASE" : "EN"
 		}
 	},
-	"parameters": {
+	"algorithmParameters": {
 		"recombinationPerc": 0.8,
 		"mutationPerc": 0.2,
 		"elitarism": true,

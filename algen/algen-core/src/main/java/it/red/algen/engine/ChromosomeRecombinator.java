@@ -9,11 +9,11 @@ import it.red.algen.domain.genetics.ChromosomeGenotype;
 import it.red.algen.domain.genetics.Gene;
 
 public class ChromosomeRecombinator implements Recombinator<Solution> {
-    private AlgorithmParameters parameters;
+    private AlgorithmParameters algorithmParameters;
     
     
     public void setup(AlgorithmParameters parameters) {
-    	this.parameters = parameters;
+    	this.algorithmParameters = parameters;
     }
 
     

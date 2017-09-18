@@ -42,8 +42,8 @@ public class AlgorithmContextBuilder {
         monitoringConfiguration.reporter = reporter;
         
         AlgorithmContext context = new AlgorithmContext();
-        context.parameters = algParameters;
-        context.parameters.stopConditions = stopConditions;
+        context.algorithmParameters = algParameters;
+        context.algorithmParameters.stopConditions = stopConditions;
         context.monitoringConfiguration = monitoringConfiguration;
         
         return context;
