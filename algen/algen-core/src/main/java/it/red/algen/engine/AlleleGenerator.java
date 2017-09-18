@@ -17,7 +17,7 @@ public interface AlleleGenerator {
 	 * @param metadata
 	 * @return
 	 */
-	public <T> Allele<T> generate(GeneMetadata metadata);
+	public <T> Allele<T> generateRandom(GeneMetadata metadata);
 	
 	/**
 	 * Generate a new allele with specific value
@@ -25,7 +25,7 @@ public interface AlleleGenerator {
 	 * @param metadata
 	 * @return
 	 */
-	public <T> Allele<T> generate(GeneMetadata metadata, T value);
+	public <T> Allele<T> generateFromValue(GeneMetadata metadata, T value);
 	
 
 	/*
@@ -35,4 +35,12 @@ public interface AlleleGenerator {
 	 * 
 	 */
 	public <T> Allele<T> generateExclusive(GeneMetadata metadata, List<T> exclusions);
+	
+
+	/**
+	 * Generate the Allele with the first value available in metadata values
+	 * @param metadata
+	 * @return
+	 */
+	public <T> Allele<T> generateFirst(GeneMetadata metadata);
 }

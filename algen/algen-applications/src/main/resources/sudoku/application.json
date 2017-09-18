@@ -18,7 +18,7 @@
 	
 	"solutionsFactory": {
 		"type" : "java",
-		"content" : "it.red.algen.metasudoku.MesSolutionsFactory"
+		"content" : "it.red.algen.dataaccess.PredefinedGenomaSolutionsFactory"
 	},
 	
 	"populationFactory": {

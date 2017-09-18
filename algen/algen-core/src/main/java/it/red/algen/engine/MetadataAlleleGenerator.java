@@ -10,7 +10,7 @@ import it.red.algen.metadata.GeneMetadata;
 public class MetadataAlleleGenerator implements AlleleGenerator {
 
 	@Override
-	public <T> Allele<T> generate(GeneMetadata metadata) {
+	public <T> Allele<T> generateRandom(GeneMetadata metadata) {
 		Allele<T> result = new Allele<T>();
 		result.value = (T)metadata.randomPick();
 		return result;
@@ -18,7 +18,7 @@ public class MetadataAlleleGenerator implements AlleleGenerator {
 	
 	
 	@Override
-	public <T> Allele<T> generate(GeneMetadata metadata, T value) {
+	public <T> Allele<T> generateFromValue(GeneMetadata metadata, T value) {
 		Allele<T> result = new Allele<T>();
 		result.value = (T)value;
 		return result;
@@ -36,4 +36,11 @@ public class MetadataAlleleGenerator implements AlleleGenerator {
 		return result;
 	}
 
+	
+	@Override
+	public <T> Allele<T> generateFirst(GeneMetadata metadata) {
+		Allele<T> result = new Allele<T>();
+		result.value = (T)metadata.pickFirst();
+		return result;
+	}
 }

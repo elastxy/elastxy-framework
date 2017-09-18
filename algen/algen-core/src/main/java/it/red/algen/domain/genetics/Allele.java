@@ -6,6 +6,12 @@ public class Allele<T> {
 	
 	public boolean dominant;
 	
+	public Allele(){}
+	
+	public Allele(T value){
+		this.value = value;
+	}
+	
 	public String encode(){
 		return value.toString(); // TODOM: encoding based on type
 	}

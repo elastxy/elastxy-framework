@@ -11,12 +11,10 @@
 package it.red.algen.metaexpressions;
 
 import java.math.BigDecimal;
-import java.util.Arrays;
 
 import it.red.algen.dataaccess.AbstractEnvFactory;
 import it.red.algen.domain.experiment.NumberRawFitness;
 import it.red.algen.domain.experiment.PerformanceTarget;
-import it.red.algen.domain.experiment.Solution;
 import it.red.algen.domain.experiment.Target;
 import it.red.algen.domain.genetics.Genoma;
 import it.red.algen.metadata.StandardMetadataGenoma;
@@ -30,11 +28,6 @@ public class MexEnvFactory extends AbstractEnvFactory<PerformanceTarget, BigDeci
 	@Override
 	protected Target<PerformanceTarget, BigDecimal> defineTarget(Genoma genoma) {
         
-		// Define boundaries
-		long maxOperandValue = context.applicationSpecifics.getParamLong(MexConstants.MAX_OPERAND_VALUE);
-        Solution minSol = context.application.solutionsFactory.createPredefined((StandardMetadataGenoma)genoma, Arrays.asList(maxOperandValue, '*', -maxOperandValue));
-        Solution maxSol = context.application.solutionsFactory.createPredefined((StandardMetadataGenoma)genoma, Arrays.asList(maxOperandValue, '*', maxOperandValue));
-
 		// Defines goal representation
         Long targetValue = context.applicationSpecifics.getTargetLong(MexConstants.TARGET_EXPRESSION_RESULT);
         PerformanceTarget target = new PerformanceTarget();
@@ -42,10 +35,9 @@ public class MexEnvFactory extends AbstractEnvFactory<PerformanceTarget, BigDeci
 
         // Determines goal rough measure by deriving from extreme solutions
         // TODOM concept of boundaries
-        Long minSolPerformance = (Long) context.application.incubator.grow(null, minSol.getGenotype(), null).getValue();
-        Long maxSolPerformance = (Long) context.application.incubator.grow(null, maxSol.getGenotype(), null).getValue();
+        long maxOperandValue = context.applicationSpecifics.getParamLong(MexConstants.MAX_OPERAND_VALUE);
         NumberRawFitness raw = new NumberRawFitness(
-        		new BigDecimal(Math.max(targetValue-minSolPerformance, maxSolPerformance-targetValue)));
+        		new BigDecimal(Math.max((maxOperandValue*maxOperandValue)+targetValue, (maxOperandValue*maxOperandValue)-targetValue)));
         if(raw.value.doubleValue() < 0){
         	throw new RuntimeException("Negative distance not allowed: check numbers precision.");
         }

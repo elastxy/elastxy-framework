@@ -106,6 +106,14 @@ public interface MetadataGenoma extends Genoma {
 	 */
 	public SortedMap<String, Allele> getRandomAllelesAsMap();
 
+
+	/**
+	 * Create a list of Alleles with the first of the list values
+	 * @return
+	 */
+	public List<Allele> getFirstAlleles();
+	
+	
 	/**
 	 * Generate new Allele list based on given metadata
 	 * 

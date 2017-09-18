@@ -1,11 +1,8 @@
 package it.red.algen.metagarden;
 
 import java.util.List;
-import java.util.stream.IntStream;
 
-import org.springframework.stereotype.Component;
-
-import it.red.algen.dataaccess.SolutionsFactory;
+import it.red.algen.dataaccess.MetadataSolutionsFactory;
 import it.red.algen.domain.experiment.GenericSolution;
 import it.red.algen.domain.experiment.Solution;
 import it.red.algen.domain.genetics.Allele;
@@ -13,30 +10,9 @@ import it.red.algen.domain.genetics.SequenceGenotype;
 import it.red.algen.metadata.MetadataGeneFactory;
 import it.red.algen.metadata.StandardMetadataGenoma;
 
-@Component
-public class MegSolutionsFactory implements SolutionsFactory<StandardMetadataGenoma> {
+public class MegSolutionsFactory extends MetadataSolutionsFactory {
 
 	
-    /**
-     * Create a random solution
-     * 
-     * IMPORTANT: infinite Trees!
-     */
-    public Solution createRandom(StandardMetadataGenoma genoma) {
-    	GenericSolution solution = new GenericSolution();
-
-    	SequenceGenotype genotype = new SequenceGenotype();
-    	genotype.genes = MetadataGeneFactory.createSequence(genoma);
-    	solution.genotype = genotype;
-    	
-    	List<Allele> alleles = genoma.getRandomAlleles();
-    	IntStream.range(0, genotype.genes.size()).forEach(i -> genotype.genes.get(i).allele = alleles.get(i));
-    	
-    	return solution;
-    }
-    
-    
-    
     /**
      * Garden with every plant on the same initial position
      * 
@@ -64,7 +40,6 @@ public class MegSolutionsFactory implements SolutionsFactory<StandardMetadataGen
     	return solution;
     }
 
-    
     
 	@Override
 	public Solution createPredefined(StandardMetadataGenoma genoma, List<Object> alleleValues) {

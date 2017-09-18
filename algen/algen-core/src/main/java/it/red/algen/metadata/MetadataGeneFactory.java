@@ -44,14 +44,14 @@ public class MetadataGeneFactory {
 	}
 
 	
-	/**
-	 * Create a list of Genes from a list of positions
-	 * @param positions
-	 * @return
-	 */
-	public static List<Gene> createSequenceByPositions(MetadataGenoma genoma, List<String> positions){
-		return positions.stream().map(p -> createGeneByPosition(genoma, p)).collect(Collectors.toList());
-	}
+//	/**
+//	 * Create a list of Genes from a list of positions
+//	 * @param positions
+//	 * @return
+//	 */
+//	public static List<Gene> createSequenceByPositions(MetadataGenoma genoma, List<String> positions){
+//		return positions.stream().map(p -> createGeneByPosition(genoma, p)).collect(Collectors.toList());
+//	}
 	
 
 	/**

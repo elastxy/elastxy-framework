@@ -96,6 +96,43 @@ public class GeneMetadata {
 		}
 	}
 	
+	
+
+	/**
+	 * If values not empty, returns the first in list (always returns the same value).
+	 * If values are empty, returns the default value based on type.
+	 * @return
+	 */
+	public Object pickFirst(){
+		Object result = null;
+		int size = values.size();
+		if(size > 0){
+			return values.get(0);
+		}
+		else {
+			if(type==GeneMetadataType.BOOLEAN){
+				result = false;
+			}
+			else if(type==GeneMetadataType.CHAR){
+				result = 'a';
+			}
+			else if(type==GeneMetadataType.INTEGER){
+				result = 0L;
+			}
+			else if(type==GeneMetadataType.DECIMAL){
+				result = 0.0;
+			}
+			else if(type==GeneMetadataType.STRING){
+				result = "a";
+			}
+			else if(type==GeneMetadataType.USER){
+				throw new IllegalStateException("Cannot pick from a User metadata type: first value not defined.");
+			}
+		}
+		return result;
+	}
+	
+	
 	public String toString(){
 		return String.format("GeneMetadata:code=%s,name=%s,type=%s", code, name, type);
 	}

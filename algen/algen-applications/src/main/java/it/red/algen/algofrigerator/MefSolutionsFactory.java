@@ -3,8 +3,6 @@ package it.red.algen.algofrigerator;
 import java.util.List;
 import java.util.SortedMap;
 
-import org.springframework.stereotype.Component;
-
 import it.red.algen.dataaccess.SolutionsFactory;
 import it.red.algen.domain.experiment.GenericSolution;
 import it.red.algen.domain.experiment.Solution;
@@ -13,7 +11,6 @@ import it.red.algen.domain.genetics.ChromosomeGenotype;
 import it.red.algen.metadata.MetadataGeneFactory;
 import it.red.algen.metadata.StandardMetadataGenoma;
 
-@Component
 public class MefSolutionsFactory implements SolutionsFactory<StandardMetadataGenoma> {
 
 
@@ -34,13 +31,11 @@ public class MefSolutionsFactory implements SolutionsFactory<StandardMetadataGen
     @Override
     public Solution createBaseModel(StandardMetadataGenoma genoma) {
     	throw new UnsupportedOperationException("NYI");
-//    	return createByValues(genoma, 0L, '+', 0L);
     }
 
 	@Override
 	public Solution createPredefined(StandardMetadataGenoma genoma, List<Object> alleleValues) {
     	throw new UnsupportedOperationException("NYI");
-//		return createByValues(genoma, alleleValues.get(0), alleleValues.get(1), alleleValues.get(2));
 	}
 
 

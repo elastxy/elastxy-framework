@@ -221,7 +221,7 @@ public class StandardMetadataGenoma implements MetadataGenoma {
 	 */
 	@Override
 	public Allele getRandomAllele(String position) {
-		return alleleGenerator.generate(getMetadataByPosition(position));
+		return alleleGenerator.generateRandom(getMetadataByPosition(position));
 	}
 	
 	
@@ -274,7 +274,7 @@ public class StandardMetadataGenoma implements MetadataGenoma {
 				//IntStream.range(0, genesMetadataByPos.size()).boxed().map(i -> i.toString()).collect(Collectors.toList());
 		return getRandomAlleles(positions);
 	}
-
+	
 
 	@Override
 	public SortedMap<String, Allele> getRandomAllelesAsMap(){
@@ -316,7 +316,7 @@ public class StandardMetadataGenoma implements MetadataGenoma {
 	 */
 	public Allele createRandomAlleleByCode(String metadataCode){
 		forbidLimitedAllelesStrategy();
-		return alleleGenerator.generate(getMetadataByCode(metadataCode));
+		return alleleGenerator.generateRandom(getMetadataByCode(metadataCode));
 	}
 	
 
@@ -328,12 +328,25 @@ public class StandardMetadataGenoma implements MetadataGenoma {
 	 */
 	public List<Allele> createRandomAllelesByCode(String metadataCode){
 		GeneMetadata geneMetadata = getMetadataByCode(metadataCode);
-		List<Allele> result = (List<Allele>)geneMetadata.values.stream().map(v -> alleleGenerator.generate(geneMetadata, v)).collect(Collectors.toList());
+		List<Allele> result = (List<Allele>)geneMetadata.values.stream().map(v -> alleleGenerator.generateFromValue(geneMetadata, v)).collect(Collectors.toList());
 		return result;
 	}
 	
 	
 
+	@Override
+	public List<Allele> getFirstAlleles(){
+		List<String> positions = new ArrayList<String>(genesMetadataByPos.keySet());
+		List<Allele> result = positions.stream().map(s -> getFirstAllele(s)).collect(Collectors.toList());
+		return result;
+	}
+	
+	public Allele getFirstAllele(String position) {
+		return alleleGenerator.generateRandom(getMetadataByPosition(position));
+	}
+
+	
+	
 	/**
 	 * Generates a new Allele based on specific value
 	 * 
@@ -343,7 +356,7 @@ public class StandardMetadataGenoma implements MetadataGenoma {
 	 */
 	public Allele createAlleleByValue(String metadataCode, Object value){
 		forbidLimitedAllelesStrategy();
-		return alleleGenerator.generate(getMetadataByCode(metadataCode), value);
+		return alleleGenerator.generateFromValue(getMetadataByCode(metadataCode), value);
 	}
 
 	
