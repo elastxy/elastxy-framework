@@ -21,21 +21,21 @@ import org.apache.log4j.Logger;
 import it.red.algen.conf.ConfigurationException;
 import it.red.algen.conf.ReadConfigSupport;
 import it.red.algen.dataaccess.AbstractEnvFactory;
-import it.red.algen.domain.experiment.PerformanceMultiObjectiveTarget;
-import it.red.algen.domain.experiment.PerformanceTarget;
+import it.red.algen.domain.experiment.MultiplePerformanceTarget;
 import it.red.algen.domain.experiment.Target;
+import it.red.algen.domain.experiment.TargetType;
 import it.red.algen.domain.genetics.Genoma;
 import it.red.algen.metadata.StandardMetadataGenoma;
 
 /**
  * @author grossi
  */
-public class MefEnvFactory extends AbstractEnvFactory<PerformanceTarget, BigDecimal, StandardMetadataGenoma> {
+public class MefEnvFactory extends AbstractEnvFactory<MultiplePerformanceTarget, BigDecimal, StandardMetadataGenoma> {
 	private static Logger logger = Logger.getLogger(MefEnvFactory.class);
 	
 	// TODOM: take outside Target definition code, as a new Component
 	@Override
-	protected Target<PerformanceTarget, BigDecimal> defineTarget(Genoma genoma) {
+	protected Target<MultiplePerformanceTarget, BigDecimal> defineTarget(Genoma genoma) {
 
 		// User parameters
 		Integer desiredMeals = context.applicationSpecifics.getTargetInteger(MefConstants.TARGET_DESIRED_MEALS, MefConstants.DEFAULT_DESIRED_MEALS);
@@ -46,7 +46,8 @@ public class MefEnvFactory extends AbstractEnvFactory<PerformanceTarget, BigDeci
 		List<String> userPantryFoods = context.applicationSpecifics.getParamList(MefConstants.PARAM_PANTRY_FOODS);
 		
 		// Defines goal representation
-		PerformanceMultiObjectiveTarget target = new PerformanceMultiObjectiveTarget();
+		MultiplePerformanceTarget target = new MultiplePerformanceTarget();
+		target.setTargetType(TargetType.AGGREGATE);
     	target.setWeights(savouryProportion.doubleValue() / 100.0, sweetProportion.doubleValue() / 100.0);
     	target.setGoal(createGoal(desiredMeals, target.getWeights(), fridgeMandatory, userFridgeFoods, userPantryFoods));
     	
