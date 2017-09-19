@@ -67,7 +67,7 @@ public class StandardMetadataGenoma implements MetadataGenoma {
 	
 	
 	/**
-	 * TODOA: separate Genoma role woth working dataset
+	 * TODOA: separate Genoma role with working dataset
 	 */
 	@Override
 	public WorkingDataset getWorkingDataset() {
