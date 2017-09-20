@@ -24,7 +24,7 @@ import it.red.algen.dataaccess.GenomaProvider;
 import it.red.algen.domain.experiment.Target;
 import it.red.algen.domain.genetics.Genoma;
 import it.red.algen.metadata.GeneMetadata;
-import it.red.algen.metadata.Genes;
+import it.red.algen.metadata.GenesMetadataConfiguration;
 import it.red.algen.metadata.StandardMetadataGenoma;
 
 
@@ -241,7 +241,7 @@ public class MefGenomaProvider implements GenomaProvider {
 			Map<RecipeType, Integer> mealsByType) {
 		Map<String, GeneMetadata> genesMetadataByCode = new HashMap<String, GeneMetadata>();
 		Map<String, GeneMetadata> genesMetadataByPos = new HashMap<String, GeneMetadata>();
-		Genes genes = ReadConfigSupport.retrieveGenesMetadata(context.application.name);
+		GenesMetadataConfiguration genes = ReadConfigSupport.retrieveGenesMetadata(context.application.name);
 		Iterator<Map.Entry<RecipeType, List<Recipe>>> it = workingDataset.feasibleByType.entrySet().iterator();
 		while(it.hasNext()){
 			Entry<RecipeType, List<Recipe>> entryType = it.next();

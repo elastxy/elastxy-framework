@@ -7,7 +7,7 @@ import it.red.algen.context.AlgorithmContext;
 import it.red.algen.dataaccess.GenomaProvider;
 import it.red.algen.domain.experiment.Target;
 import it.red.algen.domain.genetics.Genoma;
-import it.red.algen.metadata.Genes;
+import it.red.algen.metadata.GenesMetadataConfiguration;
 import it.red.algen.metadata.StandardMetadataGenoma;
 
 
@@ -44,7 +44,7 @@ public class MexGenomaProvider implements GenomaProvider {
 		genoma.setupAlleleGenerator(context.application.alleleGenerator);
 		
 		// Retrieves metadata
-		Genes genes = ReadConfigSupport.retrieveGenesMetadata(context.application.name);
+		GenesMetadataConfiguration genes = ReadConfigSupport.retrieveGenesMetadata(context.application.name);
 		
 		// Add context specific values
 		Long maxValue = context.applicationSpecifics.getParamLong(MexConstants.MAX_OPERAND_VALUE);

@@ -8,7 +8,7 @@ import it.red.algen.domain.experiment.GenericSolution;
 import it.red.algen.domain.experiment.Solution;
 import it.red.algen.domain.genetics.Allele;
 import it.red.algen.domain.genetics.SequenceGenotype;
-import it.red.algen.metadata.MetadataGeneFactory;
+import it.red.algen.metadata.MetadataGeneticMaterialFactory;
 import it.red.algen.metadata.StandardMetadataGenoma;
 
 public class MegSolutionsFactory extends MetadataSolutionsFactory {
@@ -24,7 +24,7 @@ public class MegSolutionsFactory extends MetadataSolutionsFactory {
     	GenericSolution solution = new GenericSolution();
     	
     	SequenceGenotype genotype = new SequenceGenotype();
-    	genotype.genes = MetadataGeneFactory.createSequence(genoma);
+    	genotype.genes = MetadataGeneticMaterialFactory.createSequence(genoma);
     	solution.genotype = genotype;
 
     	// TODOM: new method of genoma for creating a list of alleles indexed indentically to the gene pos... useful??

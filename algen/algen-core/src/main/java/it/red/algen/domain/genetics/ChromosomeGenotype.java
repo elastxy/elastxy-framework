@@ -9,7 +9,7 @@ import java.util.SortedMap;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
-import it.red.algen.engine.operators.GeneticsUtils;
+import it.red.algen.engine.operators.MutatorLogics;
 
 /**
  * Chromosome grouped lists of genes
@@ -83,7 +83,7 @@ public class ChromosomeGenotype implements Genotype{
 	public void swapAllele(String position, Allele newAllele) {
 		String[] splitted = position.split("\\.");
 		Chromosome chromosome = chromosomes.get(new Integer(splitted[0]));
-		GeneticsUtils.swapAllele(chromosome.genes, position, newAllele);
+		MutatorLogics.swapAllele(chromosome.genes, position, newAllele);
 	}
 	
 	public void assignAlleles(SortedMap<String,Allele> alleles){

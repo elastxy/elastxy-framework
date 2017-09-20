@@ -8,7 +8,7 @@ import java.util.stream.IntStream;
 
 import org.springframework.cache.annotation.Cacheable;
 
-import it.red.algen.engine.operators.GeneticsUtils;
+import it.red.algen.engine.operators.MutatorLogics;
 
 /**
  * Simple sequence of Genes
@@ -54,7 +54,7 @@ public class SequenceGenotype implements Genotype {
 
 	@Override
 	public void swapAllele(String position, Allele newAllele) {
-		GeneticsUtils.swapAllele(genes, position, newAllele);
+		MutatorLogics.swapAllele(genes, position, newAllele);
 	}
 
 }

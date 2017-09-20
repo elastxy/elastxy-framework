@@ -1,12 +1,10 @@
 package it.red.algen.domain.genetics;
 
-import java.util.Map;
-
-
 /**
- * Gene is a position within a Chromosome, bringing an allele value
+ * Gene is a position within a Chromosome instance, bringing an Allele value.
  * 
- * TODOM: BuildingBlock concept to optionally group/cluster many genes
+ * TODOM: BuildingBlock concept to optionally group/cluster many genes, 
+ * beyond chromosomes
  *
  * @author grossi
  */
@@ -32,22 +30,25 @@ public class Gene {
 	 */
 	public String metadataCode;
 	
-	
-	/**
-	 * Location specific properties of the Gene: they are not typed,
-	 * as they depend on the structure of the problem.
-	 * 
-	 * Also, they are not related to the mutating features of the solution (alleles)
-	 * but they are intrinsic to the position of the gene in the sequence
-	 * and they do not vary over time.
-	 * 
-	 * E.g. the umidity, temperature and wind properties for a location in the garden terrace
-	 */
-	public Map<String,Object> locationProperties;
+
+//	/**
+//	 * MOVED FROM GENE (they are static and linked to metadata,
+// 	 * should not be replicated on every Gene!
+//	 *
+//	 * Location specific properties of the Gene: they are not typed,
+//	 * as they depend on the structure of the problem.
+//	 * 
+//	 * Also, they are not related to the mutating features of the solution (alleles)
+//	 * but they are intrinsic to the position of the gene in the sequence
+//	 * and they do not vary over time.
+//	 * 
+//	 * E.g. the umidity, temperature and wind properties for a location in the garden terrace.
+//	 */
+//	public Map<String,Object> locationProperties;
 
 	
 	/**
-	 * The value the Gene assumes currently
+	 * The value the Gene assumes currently.
 	 */
 	public Allele allele;
 	
@@ -63,7 +64,7 @@ public class Gene {
 		result.pos = pos;
 		result.metadataCode = metadataCode;
 		result.allele = allele.copy();
-		result.locationProperties = locationProperties; // NOTE: we assume they are immutable! 
+//		result.locationProperties = locationProperties; // NOTE: we assume they are immutable! 
 		return result;
 	}
 	

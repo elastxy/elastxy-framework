@@ -3,9 +3,11 @@ package it.red.algen.metagarden;
 import it.red.algen.dataaccess.WorkingDataset;
 import it.red.algen.domain.experiment.Env;
 import it.red.algen.domain.genetics.Gene;
+import it.red.algen.domain.genetics.MetadataGenoma;
 import it.red.algen.domain.genetics.SequenceGenotype;
 import it.red.algen.domain.genetics.UserPhenotype;
 import it.red.algen.engine.fitness.Incubator;
+import it.red.algen.metadata.GeneMetadata;
 import it.red.algen.metagarden.data.GardenWellness;
 import it.red.algen.metagarden.data.PlaceProperty;
 import it.red.algen.metagarden.data.Tree;
@@ -23,8 +25,10 @@ public class MegIncubator implements Incubator<SequenceGenotype, UserPhenotype<G
 		UserPhenotype<GardenWellness> result = new UserPhenotype<GardenWellness>();
 		result.value = new GardenWellness();
 		
+		MetadataGenoma genoma = (MetadataGenoma)environment.genoma;
 		for(Gene gene : genotype.genes){
-			result.value.locationsUnhappyness.add(calculateUnhappiness(gene));
+			GeneMetadata metadata = genoma.getMetadataByCode(gene.metadataCode);
+			result.value.locationsUnhappyness.add(calculateUnhappiness(gene, metadata));
 		}
 		return result;
 	}
@@ -41,13 +45,13 @@ public class MegIncubator implements Incubator<SequenceGenotype, UserPhenotype<G
 	 * 
 	 * @return
 	 */
-	public Double calculateUnhappiness(Gene gene){
+	public Double calculateUnhappiness(Gene gene, GeneMetadata metadata){
 		double unhappiness = 0;
 		
 		// TODOM: remove redundancy
 		
 		// distanza della richiesta dalla pianta alla fornita dal posto
-		int sunExposure = (int)gene.locationProperties.get(PlaceProperty.SUN_EXPOSURE.name());
+		int sunExposure = (int)metadata.userProperties.get(PlaceProperty.SUN_EXPOSURE.name());
 		int sunRequest = ((Tree)gene.allele.value).getSunRequest();
 		int sunRequestDifference = Math.abs(sunExposure-sunRequest);
 		boolean dead = sunRequestDifference==2;
@@ -55,14 +59,14 @@ public class MegIncubator implements Incubator<SequenceGenotype, UserPhenotype<G
 		
 		
 		// umidita' in eccesso rispetto a quella accettata dalla pianta
-		int wetLevel = (int)gene.locationProperties.get(PlaceProperty.WET_LEVEL.name());
+		int wetLevel = (int)metadata.userProperties.get(PlaceProperty.WET_LEVEL.name());
 		int wetAllowed = ((Tree)gene.allele.value).getWetAllowed();
 		int wetRequestDifference = Math.abs(wetLevel - wetAllowed);
 //		dead |= wetRequestDifference==2;
 		unhappiness += wetRequestDifference * FITNESS_WEIGHT_WET;
 		
 		// vento in eccesso rispetto a quello ammesso dalla pianta
-		int windLevel = (int)gene.locationProperties.get(PlaceProperty.WIND_LEVEL.name());
+		int windLevel = (int)metadata.userProperties.get(PlaceProperty.WIND_LEVEL.name());
 		int windAllowed = ((Tree)gene.allele.value).getWindAllowed();
 		int windRequestDifference = Math.abs(windLevel - windAllowed);
 //		dead |= windRequestDifference==2;

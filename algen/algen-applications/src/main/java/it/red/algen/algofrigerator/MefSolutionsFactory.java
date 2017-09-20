@@ -8,7 +8,7 @@ import it.red.algen.domain.experiment.GenericSolution;
 import it.red.algen.domain.experiment.Solution;
 import it.red.algen.domain.genetics.Allele;
 import it.red.algen.domain.genetics.ChromosomeGenotype;
-import it.red.algen.metadata.MetadataGeneFactory;
+import it.red.algen.metadata.MetadataGeneticMaterialFactory;
 import it.red.algen.metadata.StandardMetadataGenoma;
 
 public class MefSolutionsFactory implements SolutionsFactory<StandardMetadataGenoma> {
@@ -19,7 +19,7 @@ public class MefSolutionsFactory implements SolutionsFactory<StandardMetadataGen
     	GenericSolution solution = new GenericSolution();
 
     	ChromosomeGenotype genotype = new ChromosomeGenotype();
-    	genotype.chromosomes = MetadataGeneFactory.createStrand(genoma);
+    	genotype.chromosomes = MetadataGeneticMaterialFactory.createStrand(genoma);
     	
     	SortedMap<String,Allele> alleles = genoma.getRandomAllelesAsMap();
     	genotype.assignAlleles(alleles);

@@ -15,6 +15,7 @@ import it.red.algen.dataaccess.WorkingDataset;
 import it.red.algen.domain.genetics.Allele;
 import it.red.algen.domain.genetics.GenomaPositionComparator;
 import it.red.algen.domain.genetics.MetadataGenoma;
+import it.red.algen.engine.AlgorithmException;
 
 
 /**
@@ -98,7 +99,7 @@ public class StandardMetadataGenoma implements MetadataGenoma {
 	}
 	
 	@Override
-	public void initialize(Genes genes){
+	public void initialize(GenesMetadataConfiguration genes){
 		Iterator<Entry<String, GeneMetadata>> it = genes.metadata.entrySet().iterator();
 		while(it.hasNext()){
 			Entry<String, GeneMetadata> entry = it.next();
@@ -327,7 +328,7 @@ public class StandardMetadataGenoma implements MetadataGenoma {
 	 */
 	public List<Allele> createRandomAllelesByCode(String metadataCode){
 		GeneMetadata geneMetadata = getMetadataByCode(metadataCode);
-		List<Allele> result = (List<Allele>)geneMetadata.values.stream().map(v -> alleleGenerator.generateFromValue(geneMetadata, v)).collect(Collectors.toList());
+		List<Allele> result = (List<Allele>)geneMetadata.values.stream().map(v -> alleleGenerator.generateFromValue(v)).collect(Collectors.toList());
 		return result;
 	}
 	
@@ -355,7 +356,11 @@ public class StandardMetadataGenoma implements MetadataGenoma {
 	 */
 	public Allele createAlleleByValue(String metadataCode, Object value){
 		forbidLimitedAllelesStrategy();
-		return alleleGenerator.generateFromValue(getMetadataByCode(metadataCode), value);
+		GeneMetadata metadata = getMetadataByCode(metadataCode);
+		if(!metadata.values.contains(value)){
+			throw new AlgorithmException("Cannot create an Allele with given value: it's not included in those of metadata.");
+		}
+		return alleleGenerator.generateFromValue(value);
 	}
 
 	

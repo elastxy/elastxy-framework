@@ -1,9 +1,7 @@
 package it.red.algen.metadata;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.stream.Collectors;
 
 import org.apache.log4j.Logger;
 
@@ -13,45 +11,28 @@ import it.red.algen.domain.genetics.MetadataGenoma;
 
 
 /**
- * Creates Genotype genes by metadata.
+ * Creates Genotype genes pieces by metadata.
  * @author red
  *
  */
-public class MetadataGeneFactory {
-	private static final Logger logger = Logger.getLogger(MetadataGeneFactory.class);
-
-	/**
-	 * Create a new Gene structure without Allele from metadata
-	 * @param metadataCode
-	 * @param position
-	 * @return
-	 */
-	public static Gene createGeneByCode(MetadataGenoma genoma, String metadataCode, String position){
-		GeneMetadata metadata =  genoma.getMetadataByCode(metadataCode);
-		return createGene(metadataCode, position, metadata);
-	}
+public class MetadataGeneticMaterialFactory {
+	private static final Logger logger = Logger.getLogger(MetadataGeneticMaterialFactory.class);
 
 
 	/**
-	 * Create a new Gene structure without Allele from position
+	 * Create a new gene by metadata
 	 * @param metadataCode
 	 * @param position
+	 * @param metadata
 	 * @return
 	 */
-	public static Gene createGeneByPosition(MetadataGenoma genoma, String position){
-		GeneMetadata metadata =  genoma.getMetadataByPosition(position);
-		return createGene(metadata.code, position, metadata);
+	private static Gene createGene(String metadataCode, String position) {
+		Gene gene = new Gene();
+		gene.metadataCode = metadataCode;
+		gene.pos = position;
+		return gene;
 	}
-
 	
-//	/**
-//	 * Create a list of Genes from a list of positions
-//	 * @param positions
-//	 * @return
-//	 */
-//	public static List<Gene> createSequenceByPositions(MetadataGenoma genoma, List<String> positions){
-//		return positions.stream().map(p -> createGeneByPosition(genoma, p)).collect(Collectors.toList());
-//	}
 	
 
 	/**
@@ -65,22 +46,6 @@ public class MetadataGeneFactory {
 			result.add(createGeneByPosition(genoma, String.valueOf(pos)));
 		}
 		return result;
-	}
-	
-	
-	/**
-	 * Create a new gene by metadata
-	 * @param metadataCode
-	 * @param position
-	 * @param metadata
-	 * @return
-	 */
-	private static Gene createGene(String metadataCode, String position, GeneMetadata metadata) {
-		Gene gene = new Gene();
-		gene.metadataCode = metadataCode;
-		gene.pos = position;
-		gene.locationProperties = new HashMap<String, Object>(metadata.userProperties);
-		return gene;
 	}
 	
 	
@@ -109,4 +74,30 @@ public class MetadataGeneFactory {
 		return result;
 	}
 
+	
+
+	/**
+	 * Create a new Gene structure without Allele from position
+	 * @param metadataCode
+	 * @param position
+	 * @return
+	 */
+	private static Gene createGeneByPosition(MetadataGenoma genoma, String position){
+		GeneMetadata metadata =  genoma.getMetadataByPosition(position);
+		return createGene(metadata.code, position);
+	}
+	
+
+	
+//	/**
+//	 * Create a list of Genes from a list of positions
+//	 * @param positions
+//	 * @return
+//	 */
+//	public static List<Gene> createSequenceByPositions(MetadataGenoma genoma, List<String> positions){
+//		return positions.stream().map(p -> createGeneByPosition(genoma, p)).collect(Collectors.toList());
+//	}
+	
+
+	
 }

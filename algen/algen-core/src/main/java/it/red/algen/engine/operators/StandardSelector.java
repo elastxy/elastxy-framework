@@ -2,9 +2,7 @@ package it.red.algen.engine.operators;
 
 import java.util.ArrayList;
 
-import it.red.algen.conf.AlgorithmParameters;
 import it.red.algen.context.AlgorithmContext;
-import it.red.algen.dataaccess.PopulationFactory;
 import it.red.algen.domain.experiment.Population;
 import it.red.algen.domain.experiment.Solution;
 import it.red.algen.domain.genetics.Genoma;

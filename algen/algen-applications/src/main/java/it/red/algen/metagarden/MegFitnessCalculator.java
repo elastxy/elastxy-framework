@@ -41,7 +41,7 @@ public class MegFitnessCalculator implements FitnessCalculator<GenericSolution,S
         solution.setFitness(result);
         
     	// Grow the offspring to evaluate it
-    	solution.phenotype = incubator.grow(env.genoma.getWorkingDataset(), (SequenceGenotype)solution.genotype, null);
+    	solution.phenotype = incubator.grow(env.genoma.getWorkingDataset(), (SequenceGenotype)solution.genotype, env);
 //    	List<Double> locationsUnappiness = ((UserPhenotype<GardenWellness>)solution.phenotype).getValue().locationsUnhappyness;
     	List<Double> locationsUnappiness = ((GardenWellness)((UserPhenotype)solution.phenotype).getValue()).locationsUnhappyness;
         

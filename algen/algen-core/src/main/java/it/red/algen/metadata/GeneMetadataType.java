@@ -1,5 +1,10 @@
 package it.red.algen.metadata;
 
+/**
+ * Types supported for Allele type for a Gene metadata
+ * @author red
+ *
+ */
 public enum GeneMetadataType {
 	BOOLEAN,	// true|false
 	CHAR,		// java char type

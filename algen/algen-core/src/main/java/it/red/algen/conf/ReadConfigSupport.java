@@ -11,7 +11,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 
 import it.red.algen.metadata.GeneMetadata;
 import it.red.algen.metadata.GeneMetadataType;
-import it.red.algen.metadata.Genes;
+import it.red.algen.metadata.GenesMetadataConfiguration;
 
 /**
  * Support class for reading configuration or local JSON files
@@ -21,11 +21,11 @@ import it.red.algen.metadata.Genes;
 public class ReadConfigSupport {
 	private static Logger logger = Logger.getLogger(ReadConfigSupport.class);
 
-	public static Genes retrieveGenesMetadata(String applicationName) {
-		Genes genes;
+	public static GenesMetadataConfiguration retrieveGenesMetadata(String applicationName) {
+		GenesMetadataConfiguration genes;
 		String classpathResource = "/"+applicationName+"/genes.json";
 		try {
-			genes = (Genes)ReadConfigSupport.readJSON(classpathResource, Genes.class);
+			genes = (GenesMetadataConfiguration)ReadConfigSupport.readJSON(classpathResource, GenesMetadataConfiguration.class);
 		} catch (IOException e) {
 			String msg = "Error while getting classpath resource "+classpathResource+". Ex: "+e;
 			logger.error(msg, e);

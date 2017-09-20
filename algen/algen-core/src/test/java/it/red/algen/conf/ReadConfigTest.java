@@ -4,7 +4,7 @@ import java.io.IOException;
 import java.util.Arrays;
 
 import it.red.algen.metadata.GeneMetadataType;
-import it.red.algen.metadata.Genes;
+import it.red.algen.metadata.GenesMetadataConfiguration;
 import junit.framework.Test;
 import junit.framework.TestCase;
 import junit.framework.TestSuite;
@@ -37,7 +37,7 @@ public class ReadConfigTest
 
     
     public void testMetadata() throws IOException{
-    	Genes genes = (Genes)ReadConfigSupport.retrieveGenesMetadata("testapp");
+    	GenesMetadataConfiguration genes = (GenesMetadataConfiguration)ReadConfigSupport.retrieveGenesMetadata("testapp");
     	
     	// Metadata
     	assertEquals(2, genes.metadata.size());

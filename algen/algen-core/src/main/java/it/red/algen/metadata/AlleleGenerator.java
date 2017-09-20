@@ -19,12 +19,12 @@ public interface AlleleGenerator {
 	public <T> Allele<T> generateRandom(GeneMetadata metadata);
 	
 	/**
-	 * Generate a new allele with specific value
+	 * Generate a new allele with specific value.
 	 * 
 	 * @param metadata
 	 * @return
 	 */
-	public <T> Allele<T> generateFromValue(GeneMetadata metadata, T value);
+	public <T> Allele<T> generateFromValue(T value);
 	
 
 	/*
