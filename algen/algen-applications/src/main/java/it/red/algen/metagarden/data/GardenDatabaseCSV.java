@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import au.com.bytecode.opencsv.CSVReader;
+import it.red.algen.dataaccess.DataAccessException;
 
 
 /**
@@ -43,7 +44,7 @@ public class GardenDatabaseCSV implements GardenDatabase{
 			return (Tree[])result.toArray(new Tree[result.size()]);
 		}
 		catch(Throwable t){
-			throw new RuntimeException("Error reading trees from db. Ex: "+t, t);
+			throw new DataAccessException("Error reading trees from db. Ex: "+t, t);
 		}
 	}
 	
@@ -67,7 +68,7 @@ public class GardenDatabaseCSV implements GardenDatabase{
 			return (Place[])result.toArray(new Place[result.size()]);
 		}
 		catch(Throwable t){
-			throw new RuntimeException("Error reading places from db: "+t, t);
+			throw new DataAccessException("Error reading places from db: "+t, t);
 		}
 	}
 	

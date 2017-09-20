@@ -9,8 +9,8 @@ import it.red.algen.domain.experiment.NumberRawFitness;
 import it.red.algen.domain.experiment.StandardFitness;
 import it.red.algen.domain.genetics.ChromosomeGenotype;
 import it.red.algen.domain.genetics.ComplexPhenotype;
-import it.red.algen.engine.FitnessCalculator;
-import it.red.algen.engine.Incubator;
+import it.red.algen.engine.fitness.FitnessCalculator;
+import it.red.algen.engine.fitness.Incubator;
 
 public class MefFitnessCalculator implements FitnessCalculator<GenericSolution,StandardFitness> {
 	private static BigDecimal WEIGHT_COMPLETENESS 		= new BigDecimal(0.8);

@@ -17,7 +17,7 @@ import it.red.algen.domain.genetics.ChromosomeGenotype;
 import it.red.algen.domain.genetics.ComplexPhenotype;
 import it.red.algen.domain.genetics.Gene;
 import it.red.algen.engine.IllegalSolutionException;
-import it.red.algen.engine.Incubator;
+import it.red.algen.engine.fitness.Incubator;
 
 public class MefIncubator implements Incubator<ChromosomeGenotype, ComplexPhenotype>{
 	private static final RecipeCompletenessComparator RECIPE_COMPARATOR = new RecipeCompletenessComparator();

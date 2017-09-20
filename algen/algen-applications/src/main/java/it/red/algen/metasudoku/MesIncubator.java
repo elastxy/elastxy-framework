@@ -10,7 +10,7 @@ import it.red.algen.domain.experiment.Env;
 import it.red.algen.domain.genetics.ComplexPhenotype;
 import it.red.algen.domain.genetics.Gene;
 import it.red.algen.domain.genetics.SequenceGenotype;
-import it.red.algen.engine.Incubator;
+import it.red.algen.engine.fitness.Incubator;
 
 public class MesIncubator implements Incubator<SequenceGenotype, ComplexPhenotype>{
 	private static final int[] COMPLETED_VALUES = new int[]{1,2,3,4,5,6,7,8,9};

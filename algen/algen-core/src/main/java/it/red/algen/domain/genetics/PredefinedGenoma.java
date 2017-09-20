@@ -8,8 +8,8 @@ import java.util.Map;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
-import it.red.algen.context.Randomizer;
 import it.red.algen.dataaccess.WorkingDataset;
+import it.red.algen.utils.Randomizer;
 
 /**
  * A Genoma with a predefined list of Alleles for every Gene position.

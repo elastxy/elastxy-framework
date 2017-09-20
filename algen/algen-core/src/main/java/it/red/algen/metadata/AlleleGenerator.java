@@ -1,9 +1,8 @@
-package it.red.algen.engine;
+package it.red.algen.metadata;
 
 import java.util.List;
 
 import it.red.algen.domain.genetics.Allele;
-import it.red.algen.metadata.GeneMetadata;
 
 /**
  * Generates a new Allele given metadata

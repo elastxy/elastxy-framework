@@ -5,7 +5,7 @@ import it.red.algen.domain.experiment.Env;
 import it.red.algen.domain.genetics.Gene;
 import it.red.algen.domain.genetics.SequenceGenotype;
 import it.red.algen.domain.genetics.UserPhenotype;
-import it.red.algen.engine.Incubator;
+import it.red.algen.engine.fitness.Incubator;
 import it.red.algen.metagarden.data.GardenWellness;
 import it.red.algen.metagarden.data.PlaceProperty;
 import it.red.algen.metagarden.data.Tree;

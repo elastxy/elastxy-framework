@@ -94,7 +94,7 @@ public class MetadataGeneFactory {
 //		if(genoma.getNumberOfStrands()!=1){
 //			String msg = "Cannot create strand. Genoma with number of strands different from one: "+genoma.getNumberOfStrands();
 //			logger.error(msg);
-//			throw new IllegalArgumentException(msg);
+//			throw new AlgorithmException(msg);
 //		}
 		
 		for(int c=0; c < genoma.getNumberOfChromosomes(); c++){

@@ -1,7 +1,6 @@
 package it.red.algen.engine;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 
 import it.red.algen.domain.experiment.Population;

@@ -5,7 +5,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import it.red.algen.context.Randomizer;
+import it.red.algen.engine.AlgorithmException;
+import it.red.algen.utils.Randomizer;
 
 public class GeneMetadata {
 	
@@ -75,7 +76,7 @@ public class GeneMetadata {
 			return randomPickInterval();
 		}
 		else {
-			throw new IllegalArgumentException("Cannot generate a random value from metadata values: values is empty or min/max values not set!");
+			throw new AlgorithmException("Cannot generate a random value from metadata values: values is empty or min/max values not set!");
 		}
 	}
 	
@@ -92,7 +93,7 @@ public class GeneMetadata {
 			return (Double)min + Randomizer.nextDouble((Double)max - (Double)min);
 		}
 		else {
-			throw new IllegalStateException("Cannot pick from an interval if metadata type is not "+GeneMetadataType.INTEGER+" or "+GeneMetadataType.DECIMAL+". Current:"+type);
+			throw new AlgorithmException("Cannot pick from an interval if metadata type is not "+GeneMetadataType.INTEGER+" or "+GeneMetadataType.DECIMAL+". Current:"+type);
 		}
 	}
 	
@@ -126,7 +127,7 @@ public class GeneMetadata {
 				result = "a";
 			}
 			else if(type==GeneMetadataType.USER){
-				throw new IllegalStateException("Cannot pick from a User metadata type: first value not defined.");
+				throw new AlgorithmException("Cannot pick from a User metadata type: first value not defined.");
 			}
 		}
 		return result;

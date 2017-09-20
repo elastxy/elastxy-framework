@@ -12,6 +12,7 @@ package it.red.algen.metaexpressions;
 
 import java.math.BigDecimal;
 
+import it.red.algen.applications.ApplicationException;
 import it.red.algen.dataaccess.AbstractEnvFactory;
 import it.red.algen.domain.experiment.NumberRawFitness;
 import it.red.algen.domain.experiment.PerformanceTarget;
@@ -39,7 +40,7 @@ public class MexEnvFactory extends AbstractEnvFactory<PerformanceTarget, BigDeci
         NumberRawFitness raw = new NumberRawFitness(
         		new BigDecimal(Math.max((maxOperandValue*maxOperandValue)+targetValue, (maxOperandValue*maxOperandValue)-targetValue)));
         if(raw.value.doubleValue() < 0){
-        	throw new RuntimeException("Negative distance not allowed: check numbers precision.");
+        	throw new ApplicationException("Negative distance not allowed: check numbers precision.");
         }
         target.setReferenceMeasure(raw.value);
 		return target;

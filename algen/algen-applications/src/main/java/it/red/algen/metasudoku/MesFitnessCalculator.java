@@ -9,9 +9,9 @@ import it.red.algen.domain.experiment.PerformanceTarget;
 import it.red.algen.domain.experiment.StandardFitness;
 import it.red.algen.domain.genetics.ComplexPhenotype;
 import it.red.algen.domain.genetics.SequenceGenotype;
-import it.red.algen.engine.FitnessCalculator;
 import it.red.algen.engine.IllegalSolutionException;
-import it.red.algen.engine.Incubator;
+import it.red.algen.engine.fitness.FitnessCalculator;
+import it.red.algen.engine.fitness.Incubator;
 
 public class MesFitnessCalculator implements FitnessCalculator<GenericSolution,StandardFitness> {
 

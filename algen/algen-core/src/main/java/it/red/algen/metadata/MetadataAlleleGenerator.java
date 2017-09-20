@@ -1,11 +1,11 @@
-package it.red.algen.engine;
+package it.red.algen.metadata;
 
 import java.util.List;
 import java.util.stream.Collectors;
 
-import it.red.algen.context.Randomizer;
 import it.red.algen.domain.genetics.Allele;
-import it.red.algen.metadata.GeneMetadata;
+import it.red.algen.engine.AlgorithmException;
+import it.red.algen.utils.Randomizer;
 
 public class MetadataAlleleGenerator implements AlleleGenerator {
 
@@ -30,7 +30,7 @@ public class MetadataAlleleGenerator implements AlleleGenerator {
 		Allele<T> result = new Allele<T>();
 		List<T> subtracted = (List<T>)metadata.values.stream().filter(t -> !exclusions.contains(t)).collect(Collectors.toList());
 		if(subtracted.isEmpty()){
-			throw new IllegalStateException("Remaining values for generating alleles cannot be empty! Maybe allele possibile values are not enough for this gene?");
+			throw new AlgorithmException("Remaining values for generating alleles cannot be empty! Maybe allele possibile values are not enough for this gene?");
 		}
 		result.value = (T)subtracted.get(Randomizer.nextInt(subtracted.size()));
 		return result;

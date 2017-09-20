@@ -6,14 +6,16 @@ import java.util.List;
 import java.util.logging.Logger;
 
 import it.red.algen.context.AlgorithmContext;
-import it.red.algen.context.Randomizer;
 import it.red.algen.domain.experiment.Env;
 import it.red.algen.domain.experiment.Fitness;
 import it.red.algen.domain.experiment.Population;
 import it.red.algen.domain.experiment.Solution;
+import it.red.algen.engine.fitness.FitnessTester;
+import it.red.algen.engine.fitness.StandardFitnessTester;
 import it.red.algen.stats.ExperimentStats;
 import it.red.algen.tracking.EnvObservable;
 import it.red.algen.tracking.EnvObserver;
+import it.red.algen.utils.Randomizer;
 
 public class Evolver implements EnvObservable {
 	private static Logger logger = Logger.getLogger(Evolver.class.getName());

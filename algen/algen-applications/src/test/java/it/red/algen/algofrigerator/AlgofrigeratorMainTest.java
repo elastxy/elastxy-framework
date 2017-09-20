@@ -21,7 +21,7 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import it.red.algen.TestConfig;
-import it.red.algen.service.ApplicationService;
+import it.red.algen.applications.ApplicationService;
 import it.red.algen.stats.ExperimentStats;
 
 

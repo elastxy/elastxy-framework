@@ -8,6 +8,8 @@ import java.util.stream.IntStream;
 
 import org.springframework.cache.annotation.Cacheable;
 
+import it.red.algen.engine.operators.GeneticsUtils;
+
 /**
  * Simple sequence of Genes
  * 

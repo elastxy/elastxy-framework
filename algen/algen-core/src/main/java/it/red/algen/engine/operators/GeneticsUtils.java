@@ -1,8 +1,11 @@
-package it.red.algen.domain.genetics;
+package it.red.algen.engine.operators;
 
 import java.util.List;
 import java.util.OptionalInt;
 import java.util.stream.IntStream;
+
+import it.red.algen.domain.genetics.Allele;
+import it.red.algen.domain.genetics.Gene;
 
 public class GeneticsUtils {
 	

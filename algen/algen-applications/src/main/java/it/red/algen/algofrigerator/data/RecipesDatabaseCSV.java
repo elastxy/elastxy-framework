@@ -8,6 +8,7 @@ import java.util.stream.Collectors;
 
 import au.com.bytecode.opencsv.CSVReader;
 import it.red.algen.algofrigerator.MefConstants;
+import it.red.algen.dataaccess.DataAccessException;
 
 
 // TODOM: cache
@@ -53,7 +54,7 @@ public class RecipesDatabaseCSV implements RecipesDatabase {
 			return result;
 		}
 		catch(Throwable t){
-			throw new RuntimeException("Error reading trees from db. Ex: "+t, t);
+			throw new DataAccessException("Error reading recipes from db. Ex: "+t, t);
 		}
 	}
 

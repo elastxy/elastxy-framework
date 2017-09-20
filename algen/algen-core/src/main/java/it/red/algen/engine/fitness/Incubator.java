@@ -1,4 +1,4 @@
-package it.red.algen.engine;
+package it.red.algen.engine.fitness;
 
 import it.red.algen.dataaccess.WorkingDataset;
 import it.red.algen.domain.experiment.Env;

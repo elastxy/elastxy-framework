@@ -1,9 +1,10 @@
 package it.red.algen.domain.genetics;
 
-import java.util.Arrays;
 import java.util.Comparator;
 
 import org.apache.log4j.Logger;
+
+import it.red.algen.engine.AlgorithmException;
 
 public class GenomaPositionComparator implements Comparator<String> {
 	private static Logger logger = Logger.getLogger(GenomaPositionComparator.class);
@@ -18,7 +19,7 @@ public class GenomaPositionComparator implements Comparator<String> {
 		if(splitted1.length!=splitted2.length){
 			String msg = String.format("Cannot compare two different positions type: [%s][%s]", splitted1.length, splitted2.length);
 			logger.error(msg);
-			throw new IllegalArgumentException(msg);
+			throw new AlgorithmException(msg);
 		}
 		int result = 0;
 		int chunks = splitted1.length;

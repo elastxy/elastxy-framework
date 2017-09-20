@@ -4,12 +4,12 @@ import it.red.algen.dataaccess.EnvFactory;
 import it.red.algen.dataaccess.GenomaProvider;
 import it.red.algen.dataaccess.PopulationFactory;
 import it.red.algen.dataaccess.SolutionsFactory;
-import it.red.algen.engine.AlleleGenerator;
-import it.red.algen.engine.FitnessCalculator;
-import it.red.algen.engine.Incubator;
-import it.red.algen.engine.Mutator;
-import it.red.algen.engine.Recombinator;
-import it.red.algen.engine.Selector;
+import it.red.algen.engine.fitness.FitnessCalculator;
+import it.red.algen.engine.fitness.Incubator;
+import it.red.algen.engine.operators.Mutator;
+import it.red.algen.engine.operators.Recombinator;
+import it.red.algen.engine.operators.Selector;
+import it.red.algen.metadata.AlleleGenerator;
 import it.red.algen.tracking.SolutionRenderer;
 
 /**

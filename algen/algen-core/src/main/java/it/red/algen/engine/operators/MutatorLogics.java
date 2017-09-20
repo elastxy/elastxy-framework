@@ -1,11 +1,11 @@
-package it.red.algen.engine;
+package it.red.algen.engine.operators;
 
 import java.util.List;
 
-import it.red.algen.context.Randomizer;
 import it.red.algen.domain.experiment.Solution;
 import it.red.algen.domain.genetics.Allele;
 import it.red.algen.domain.genetics.Genoma;
+import it.red.algen.utils.Randomizer;
 
 public class MutatorLogics {
 

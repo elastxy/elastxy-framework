@@ -13,7 +13,7 @@
 	
 	"alleleGenerator": {
 		"type" : "java",
-		"content" : "it.red.algen.engine.MetadataAlleleGenerator"
+		"content" : "it.red.algen.metadata.MetadataAlleleGenerator"
 	},
 	
 	"populationFactory": {
@@ -38,17 +38,17 @@
 	
 	"selector": {
 		"type" : "java",
-		"content" : "it.red.algen.engine.StandardSelector"
+		"content" : "it.red.algen.engine.operators.StandardSelector"
 	},
 	
 	"mutator": {
 		"type" : "java",
-		"content" : "it.red.algen.engine.SequenceMutator"
+		"content" : "it.red.algen.engine.operators.SequenceMutator"
 	},
 	
 	"recombinator": {
 		"type" : "java",
-		"content" : "it.red.algen.engine.SequenceRecombinator"
+		"content" : "it.red.algen.engine.operators.SequenceRecombinator"
 	},
 	
 	"solutionRenderer": {

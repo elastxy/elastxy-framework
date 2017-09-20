@@ -14,8 +14,8 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-import it.red.algen.engine.FitnessComparator;
-import it.red.algen.engine.TargetFitnessComparator;
+import it.red.algen.engine.fitness.FitnessComparator;
+import it.red.algen.engine.fitness.TargetFitnessComparator;
 
 /** Population of solutions
  * 

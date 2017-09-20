@@ -29,8 +29,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import it.red.algen.applications.ApplicationService;
 import it.red.algen.context.AlgorithmContext;
-import it.red.algen.service.ApplicationService;
 import it.red.algen.stats.ExperimentStats;
 
 @Controller

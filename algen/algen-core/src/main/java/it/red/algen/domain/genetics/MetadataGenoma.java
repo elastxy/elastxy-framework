@@ -4,7 +4,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.SortedMap;
 
-import it.red.algen.engine.AlleleGenerator;
+import it.red.algen.metadata.AlleleGenerator;
 import it.red.algen.metadata.GeneMetadata;
 import it.red.algen.metadata.Genes;
 

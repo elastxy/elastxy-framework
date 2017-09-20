@@ -8,6 +8,7 @@ import java.util.Calendar;
 import java.util.List;
 
 import au.com.bytecode.opencsv.CSVWriter;
+import it.red.algen.engine.AlgorithmException;
 import it.red.algen.stats.ExperimentStats;
 
 
@@ -39,7 +40,7 @@ public class CSVReporter implements Reporter {
 			writer.writeAll(csv);
 			writer.close();
 		} catch (IOException e) {
-			throw new RuntimeException("Cannot create report. Ex: "+e, e);
+			throw new AlgorithmException("Cannot create report. Ex: "+e, e);
 		}
 	}
 

@@ -1,4 +1,4 @@
-package it.red.algen.engine;
+package it.red.algen.engine.fitness;
 
 import java.util.Iterator;
 

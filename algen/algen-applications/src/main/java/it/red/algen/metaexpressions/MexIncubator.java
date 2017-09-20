@@ -5,7 +5,7 @@ import it.red.algen.domain.experiment.Env;
 import it.red.algen.domain.genetics.NumberPhenotype;
 import it.red.algen.domain.genetics.SequenceGenotype;
 import it.red.algen.engine.IllegalSolutionException;
-import it.red.algen.engine.Incubator;
+import it.red.algen.engine.fitness.Incubator;
 
 public class MexIncubator implements Incubator<SequenceGenotype, NumberPhenotype>{
 
@@ -19,6 +19,8 @@ public class MexIncubator implements Incubator<SequenceGenotype, NumberPhenotype
 		return result;
 	}
 	
+	
+	// TODOB: math expression evaluator (ex. exp4j)
     public long calculate(long val1, char op, long val2) throws IllegalSolutionException {
         long result = 0;
         switch(op){

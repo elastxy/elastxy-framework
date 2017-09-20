@@ -1,4 +1,4 @@
-package it.red.algen.service;
+package it.red.algen.applications;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.config.AutowireCapableBeanFactory;
@@ -8,7 +8,7 @@ import it.red.algen.components.AppComponentsLocator;
 import it.red.algen.context.AlgorithmContext;
 import it.red.algen.context.ContextBuilder;
 import it.red.algen.context.ContextSupplier;
-import it.red.algen.engine.UniformlyDistributedSelector;
+import it.red.algen.engine.operators.UniformlyDistributedSelector;
 import it.red.algen.stats.Experiment;
 import it.red.algen.stats.ExperimentStats;
 import it.red.algen.stats.StatsExperimentExecutor;

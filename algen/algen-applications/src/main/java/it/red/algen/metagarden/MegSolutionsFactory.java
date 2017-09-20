@@ -2,6 +2,7 @@ package it.red.algen.metagarden;
 
 import java.util.List;
 
+import it.red.algen.applications.ApplicationException;
 import it.red.algen.dataaccess.MetadataSolutionsFactory;
 import it.red.algen.domain.experiment.GenericSolution;
 import it.red.algen.domain.experiment.Solution;
@@ -30,7 +31,7 @@ public class MegSolutionsFactory extends MetadataSolutionsFactory {
     	List<Allele> alleles = genoma.createRandomAllelesByCode(genotype.genes.get(0).metadataCode); // TODOA: get(0) is BAD: add access to list of common alleles
     	
     	if(alleles.size() < genotype.genes.size()){
-    		throw new IllegalStateException("Number of possible different alleles less than number of genes creating a base predefined Solution. Check if you need the createRandom instead or try adding alleles");
+    		throw new ApplicationException("Number of possible different alleles less than number of genes creating a base predefined Solution. Check if you need the createRandom instead or try adding alleles");
     	} 
     	
     	for(int i=0; i < alleles.size(); i++){

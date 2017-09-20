@@ -15,7 +15,6 @@ import it.red.algen.dataaccess.WorkingDataset;
 import it.red.algen.domain.genetics.Allele;
 import it.red.algen.domain.genetics.GenomaPositionComparator;
 import it.red.algen.domain.genetics.MetadataGenoma;
-import it.red.algen.engine.AlleleGenerator;
 
 
 /**
