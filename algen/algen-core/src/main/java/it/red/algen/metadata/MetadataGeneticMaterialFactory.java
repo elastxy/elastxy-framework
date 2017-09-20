@@ -5,9 +5,8 @@ import java.util.List;
 
 import org.apache.log4j.Logger;
 
-import it.red.algen.domain.genetics.Chromosome;
-import it.red.algen.domain.genetics.Gene;
-import it.red.algen.domain.genetics.MetadataGenoma;
+import it.red.algen.domain.genetics.genotype.Chromosome;
+import it.red.algen.domain.genetics.genotype.Gene;
 
 
 /**
@@ -42,7 +41,7 @@ public class MetadataGeneticMaterialFactory {
 	 */
 	public static List<Gene> createSequence(MetadataGenoma genoma){
 		List<Gene> result = new ArrayList<Gene>();
-		for(int pos=0; pos < genoma.getPositionsSize(); pos++){
+		for(int pos=0; pos < genoma.getGenotypeStructure().getPositionsSize(); pos++){
 			result.add(createGeneByPosition(genoma, String.valueOf(pos)));
 		}
 		return result;
@@ -62,9 +61,9 @@ public class MetadataGeneticMaterialFactory {
 //			throw new AlgorithmException(msg);
 //		}
 		
-		for(int c=0; c < genoma.getNumberOfChromosomes(); c++){
+		for(int c=0; c < genoma.getGenotypeStructure().getNumberOfChromosomes(); c++){
 			Chromosome chromosome = new Chromosome();
-			for(int g=0; g < genoma.getNumberOfGenes(c); g++){
+			for(int g=0; g < genoma.getGenotypeStructure().getNumberOfGenes(c); g++){
 				Gene gene = createGeneByPosition(genoma, c+"."+g);
 				chromosome.genes.add(gene);
 			}

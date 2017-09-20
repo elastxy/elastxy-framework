@@ -1,9 +1,14 @@
-package it.red.algen.domain.genetics;
+package it.red.algen.domain.genetics.genotype;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
+/**
+ * A sequence of Genes
+ * @author red
+ *
+ */
 public class Chromosome {
 	public List<Gene> genes = new ArrayList<Gene>();
 	

@@ -9,6 +9,8 @@ import java.util.SortedMap;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
+import it.red.algen.domain.genetics.genotype.Allele;
+import it.red.algen.domain.genetics.genotype.Chromosome;
 import it.red.algen.engine.operators.MutatorLogics;
 
 /**

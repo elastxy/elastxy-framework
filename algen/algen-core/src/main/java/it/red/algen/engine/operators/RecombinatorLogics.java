@@ -2,7 +2,7 @@ package it.red.algen.engine.operators;
 
 import java.util.List;
 
-import it.red.algen.domain.genetics.Gene;
+import it.red.algen.domain.genetics.genotype.Gene;
 
 public class RecombinatorLogics {
 

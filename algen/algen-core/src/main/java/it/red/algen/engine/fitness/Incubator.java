@@ -3,7 +3,7 @@ package it.red.algen.engine.fitness;
 import it.red.algen.dataaccess.WorkingDataset;
 import it.red.algen.domain.experiment.Env;
 import it.red.algen.domain.genetics.Genotype;
-import it.red.algen.domain.genetics.Phenotype;
+import it.red.algen.domain.genetics.phenotype.Phenotype;
 
 public interface Incubator<G extends Genotype, P extends Phenotype> {
 

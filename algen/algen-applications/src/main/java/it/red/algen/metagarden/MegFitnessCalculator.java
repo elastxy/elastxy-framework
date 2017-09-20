@@ -9,7 +9,7 @@ import it.red.algen.domain.experiment.NumberRawFitness;
 import it.red.algen.domain.experiment.PerformanceTarget;
 import it.red.algen.domain.experiment.StandardFitness;
 import it.red.algen.domain.genetics.SequenceGenotype;
-import it.red.algen.domain.genetics.UserPhenotype;
+import it.red.algen.domain.genetics.phenotype.UserPhenotype;
 import it.red.algen.engine.fitness.FitnessCalculator;
 import it.red.algen.engine.fitness.Incubator;
 import it.red.algen.metagarden.data.GardenWellness;

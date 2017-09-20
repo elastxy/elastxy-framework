@@ -1,4 +1,4 @@
-package it.red.algen.domain.genetics;
+package it.red.algen.domain.genetics.genotype;
 
 /**
  * Gene is a position within a Chromosome instance, bringing an Allele value.

@@ -6,7 +6,7 @@ import java.util.List;
 import it.red.algen.conf.AlgorithmParameters;
 import it.red.algen.domain.experiment.Solution;
 import it.red.algen.domain.genetics.ChromosomeGenotype;
-import it.red.algen.domain.genetics.Gene;
+import it.red.algen.domain.genetics.genotype.Gene;
 
 public class ChromosomeRecombinator implements Recombinator<Solution> {
     private AlgorithmParameters algorithmParameters;

@@ -26,7 +26,7 @@ public class MegEnvFactory extends AbstractEnvFactory<String, Double, StandardMe
 		PerformanceTarget<String,Double> target = new PerformanceTarget<String,Double>();
     	target.setGoal(context.applicationSpecifics.getTargetString(MegConstants.TARGET_WELLNESS));
     	// Determines goal rough measure: minimum possible unhappiness (illness), 0.0
-    	target.setReferenceMeasure(genoma.getPositionsSize() * 2.0);  // 2 is the maximum value happiness can reach
+    	target.setReferenceMeasure(genoma.getGenotypeStructure().getPositionsSize() * 2.0);  // 2 is the maximum value happiness can reach
 		return target;
 	}
 

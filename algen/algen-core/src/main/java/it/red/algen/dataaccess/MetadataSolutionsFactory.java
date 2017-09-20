@@ -5,9 +5,9 @@ import java.util.stream.IntStream;
 
 import it.red.algen.domain.experiment.GenericSolution;
 import it.red.algen.domain.experiment.Solution;
-import it.red.algen.domain.genetics.Allele;
-import it.red.algen.domain.genetics.Gene;
 import it.red.algen.domain.genetics.SequenceGenotype;
+import it.red.algen.domain.genetics.genotype.Allele;
+import it.red.algen.domain.genetics.genotype.Gene;
 import it.red.algen.metadata.MetadataGeneticMaterialFactory;
 import it.red.algen.metadata.StandardMetadataGenoma;
 

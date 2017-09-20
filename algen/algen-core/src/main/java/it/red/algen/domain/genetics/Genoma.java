@@ -1,13 +1,14 @@
 package it.red.algen.domain.genetics;
 
 import java.util.List;
-import java.util.Map;
 
 import it.red.algen.dataaccess.WorkingDataset;
+import it.red.algen.domain.genetics.genotype.Allele;
 
 
 /**
  * Maintains the registry of all genetic assets.
+ * Exposes and represents the structure of genotype produced by genoma.
  * Allows SolutionFactory to retrieve Alleles for creating the Genotype.
  * 
  * <b>Metadata</b>
@@ -57,55 +58,28 @@ public interface Genoma {
 
 	
 	/**
-	 * Returns the working data set this Genoma is working on
+	 * Returns the working data set this Genoma is working on.
 	 * TODOA: treat as a separate and parallel concept
 	 * @return
 	 */
 	public WorkingDataset getWorkingDataset();
 	public void setWorkingDataset(WorkingDataset workingDataset);
 
-	
-	/**
-	 * Returns ordered positions codes:
-	 * - progressive int "X" for a sequence
-	 * - progressive couple of int "X.Y" for a single strand
-	 * - progressive triple of int "X.Y.Z" for a double strand
-	 * @return
-	 */
-	public List<String> getPositions();
-	
-//	/**
-//	 * Returns the number of chromosomes by strand
-//	 * @return
-//	 */
-//	public int getNumberOfStrands();
 
 	/**
-	 * Returns the number of chromosomes by strand
-	 * TODOM: number of strands
+	 * Returns the Genotype structure.
 	 * @return
 	 */
-	public int getNumberOfChromosomes();
-
-	/**
-	 * Returns the number of chromosomes
-	 * TODOM: number of strands
-	 * @return
-	 */
-	public int getNumberOfGenes(int chromosome);
-
-	/**
-	 * Returns the size of available positions
-	 * @return
-	 */
-	public int getPositionsSize();
+	public GenotypeStructure getGenotypeStructure();
 	
 	
 	/**
-	 * True: the set of possible Allele is finished and predefined.
+	 * True: the set of possible Allele values is limited and predefined.
 	 * 
-	 * When creating or mutating a genotype for a solution is consumed until
-	 * no Allele is present (which it's a client side responsibility to ensure)
+	 * When creating or mutating a genotype for a solution, possible values 
+	 * are consumed until no Allele is present (which it's a client side 
+	 * responsibility to ensure).
+	 * 
 	 * TODOM: limit logics embedded in a Genoma implementation
 	 * 
 	 * @return

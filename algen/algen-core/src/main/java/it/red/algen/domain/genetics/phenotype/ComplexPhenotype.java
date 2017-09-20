@@ -1,4 +1,4 @@
-package it.red.algen.domain.genetics;
+package it.red.algen.domain.genetics.phenotype;
 
 import java.util.HashMap;
 import java.util.Map;

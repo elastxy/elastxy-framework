@@ -6,7 +6,7 @@ import org.apache.log4j.Logger;
 
 import it.red.algen.algofrigerator.data.Recipe;
 import it.red.algen.domain.experiment.Solution;
-import it.red.algen.domain.genetics.ComplexPhenotype;
+import it.red.algen.domain.genetics.phenotype.ComplexPhenotype;
 import it.red.algen.tracking.SolutionRenderer;
 
 public class MefSolutionRenderer implements SolutionRenderer<String> {

@@ -1,7 +1,6 @@
 package it.red.algen.metadata;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
@@ -12,14 +11,17 @@ import java.util.TreeMap;
 import java.util.stream.Collectors;
 
 import it.red.algen.dataaccess.WorkingDataset;
-import it.red.algen.domain.genetics.Allele;
 import it.red.algen.domain.genetics.GenomaPositionComparator;
-import it.red.algen.domain.genetics.MetadataGenoma;
+import it.red.algen.domain.genetics.GenotypeStructure;
+import it.red.algen.domain.genetics.StrandGenotypeStructure;
+import it.red.algen.domain.genetics.genotype.Allele;
 import it.red.algen.engine.AlgorithmException;
 
 
 /**
  * A Genoma based on metadata, representing type of gene allocated in the postions.
+ * 
+ * Multiple Chromosomes Genoma.
  * 
  * TODOA: add access to list of common alleles in a specific strategy
  * (now all genes share the same 1000 values and must be retrieved with get(0)!)
@@ -29,6 +31,7 @@ public class StandardMetadataGenoma implements MetadataGenoma {
 	private static final GenomaPositionComparator POSITIONS_COMPARATOR = new GenomaPositionComparator();
 	
 	public WorkingDataset workingDataset;
+	private StrandGenotypeStructure genotypeStructure;
 	
 	/**
 	 * Metadata of all genes type, indexed by code
@@ -49,22 +52,6 @@ public class StandardMetadataGenoma implements MetadataGenoma {
 	private AlleleGenerator alleleGenerator;
 
 	private boolean limitedAllelesStrategy;
-
-//	/**
-//	 * number of strands: 0 is a sequence
-//	 */
-//	private int numberOfStrands = 0;
-	
-	/**
-	 * number of chromosomes: 1 is a sequence
-	 */
-	private Integer numberOfChromosomes = null;
-	
-	/**
-	 * number of genes per chromosome: a list of one value for a sequence
-	 */
-	private List<Integer> numberOfGenes = null;
-	
 	
 	/**
 	 * TODOA: separate Genoma role with working dataset
@@ -79,7 +66,12 @@ public class StandardMetadataGenoma implements MetadataGenoma {
 		this.workingDataset = workingDataset;
 	}
 
-	
+	@Override
+	public GenotypeStructure getGenotypeStructure() {
+		return genotypeStructure;
+	}
+
+
 	
 	/**
 	 * Inject an allele generator implementation
@@ -95,7 +87,8 @@ public class StandardMetadataGenoma implements MetadataGenoma {
 		this.genesMetadataByCode = genesMetadataByCode;
 		this.genesMetadataByPos = new TreeMap<String, GeneMetadata>(POSITIONS_COMPARATOR);
 		this.genesMetadataByPos.putAll(genesMetadataByPos);
-		countElements();
+		genotypeStructure = new StrandGenotypeStructure();
+		genotypeStructure.build(this.genesMetadataByPos);
 	}
 	
 	@Override
@@ -109,44 +102,11 @@ public class StandardMetadataGenoma implements MetadataGenoma {
 				genesMetadataByPos.put(String.valueOf(positions.get(p)), entry.getValue());
 			}
 		}
-		countElements();
+		genotypeStructure = new StrandGenotypeStructure();
+		genotypeStructure.build(genesMetadataByPos);
 	}
 	
 	
-	/**
-	 * Counts elements of all positions
-	 * 
-	 * 
-	 */
-	private void countElements(){
-		List<String> positions = getPositions();
-		for(int p=0; p < positions.size(); p++){
-			String[] splitted = positions.get(p).split("\\.");
-			
-			// Sequence
-			if(splitted.length==1){
-//				numberOfStrands = 0; // no strands
-				numberOfChromosomes = 1; // one chromosome
-				numberOfGenes = Arrays.asList(positions.size()); // one gene per position
-				break;
-			}
-			
-			// Chromosome single strand
-			else if(splitted.length==2){
-//				numberOfStrands = 1; // one strand
-				numberOfChromosomes = new Integer(splitted[0])+1; // at the end will be the higher
-				
-				if(numberOfGenes==null) numberOfGenes = new ArrayList<Integer>(); // first gene of first chromosome
-				if(numberOfGenes.size() < numberOfChromosomes) numberOfGenes.add(new Integer(1));
-				numberOfGenes.set(numberOfChromosomes-1, new Integer(splitted[1])+1);
-			}
-
-			// TODOM: Double strand
-			else if(splitted.length==3){
-				throw new UnsupportedOperationException("NYI");
-			}
-		}
-	}
 
 	public boolean isLimitedAllelesStrategy() {
 		return limitedAllelesStrategy;
@@ -157,19 +117,6 @@ public class StandardMetadataGenoma implements MetadataGenoma {
 	}
 	
 	
-	@Override
-	public int getPositionsSize(){
-		return genesMetadataByPos.size();
-	}
-	
-
-	@Override
-	public List<String> getPositions() {
-		return new ArrayList<String>(genesMetadataByPos.keySet());
-	}
-
-
-
 	/**
 	 * Get the metadata by code
 	 * @param metadataCode
@@ -367,21 +314,4 @@ public class StandardMetadataGenoma implements MetadataGenoma {
 	public String toString(){
 		return String.format("MetadataGenoma: %d metadata, limited alleles %b", genesMetadataByCode.size(), limitedAllelesStrategy);
 	}
-
-//	@Override
-//	public int getNumberOfStrands() {
-//		return numberOfStrands;
-//	}
-
-	@Override
-	public int getNumberOfChromosomes() {
-		return numberOfChromosomes;
-	}
-
-	@Override
-	public int getNumberOfGenes(int chromosome) {
-		return numberOfGenes.get(chromosome);
-	}
-
-
 }

@@ -1,5 +1,7 @@
 package it.red.algen.domain.genetics;
 
+import it.red.algen.domain.genetics.genotype.Gene;
+
 /**
  * Encode/Decode genoma parts
  * @author red

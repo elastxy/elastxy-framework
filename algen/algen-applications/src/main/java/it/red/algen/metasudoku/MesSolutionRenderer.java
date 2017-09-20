@@ -3,7 +3,7 @@ package it.red.algen.metasudoku;
 import org.apache.log4j.Logger;
 
 import it.red.algen.domain.experiment.Solution;
-import it.red.algen.domain.genetics.ComplexPhenotype;
+import it.red.algen.domain.genetics.phenotype.ComplexPhenotype;
 import it.red.algen.tracking.SolutionRenderer;
 
 public class MesSolutionRenderer implements SolutionRenderer<String> {

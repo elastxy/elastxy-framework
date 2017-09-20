@@ -5,8 +5,8 @@ import java.util.List;
 
 import it.red.algen.conf.AlgorithmParameters;
 import it.red.algen.domain.experiment.Solution;
-import it.red.algen.domain.genetics.Gene;
 import it.red.algen.domain.genetics.SequenceGenotype;
+import it.red.algen.domain.genetics.genotype.Gene;
 
 public class SequenceRecombinator implements Recombinator<Solution> {
     private AlgorithmParameters algorithmParameters;

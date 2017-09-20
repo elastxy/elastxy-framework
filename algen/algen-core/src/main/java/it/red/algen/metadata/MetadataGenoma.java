@@ -1,12 +1,13 @@
-package it.red.algen.domain.genetics;
+package it.red.algen.metadata;
 
 import java.util.List;
 import java.util.Map;
 import java.util.SortedMap;
 
-import it.red.algen.metadata.AlleleGenerator;
-import it.red.algen.metadata.GeneMetadata;
-import it.red.algen.metadata.GenesMetadataConfiguration;
+import it.red.algen.domain.genetics.ChromosomeGenotype;
+import it.red.algen.domain.genetics.Genoma;
+import it.red.algen.domain.genetics.SequenceGenotype;
+import it.red.algen.domain.genetics.genotype.Allele;
 
 /**
  * A Genoma based on Metadata: every Gene has properties for generating

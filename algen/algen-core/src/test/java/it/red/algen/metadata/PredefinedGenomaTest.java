@@ -6,8 +6,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import it.red.algen.domain.genetics.Allele;
 import it.red.algen.domain.genetics.PredefinedGenoma;
+import it.red.algen.domain.genetics.genotype.Allele;
 import junit.framework.Test;
 import junit.framework.TestCase;
 import junit.framework.TestSuite;
@@ -60,14 +60,14 @@ public class PredefinedGenomaTest
     
     
     public void testPositions(){
-    	assertEquals(5, genoma.getPositionsSize());
-    	assertEquals(Arrays.asList("0","1","2","3","4"),genoma.getPositions());
+    	assertEquals(5, genoma.getGenotypeStructure().getPositionsSize());
+    	assertEquals(Arrays.asList("0","1","2","3","4"),genoma.getGenotypeStructure().getPositions());
     }
 
     
     public void testElementsCount(){
-    	assertEquals(1, genoma.getNumberOfChromosomes());
-    	assertEquals(5, genoma.getNumberOfGenes(0)); 
+    	assertEquals(1, genoma.getGenotypeStructure().getNumberOfChromosomes());
+    	assertEquals(5, genoma.getGenotypeStructure().getNumberOfGenes(0)); 
     }
     
 }

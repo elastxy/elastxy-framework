@@ -7,9 +7,9 @@ import java.util.stream.Collectors;
 
 import it.red.algen.dataaccess.WorkingDataset;
 import it.red.algen.domain.experiment.Env;
-import it.red.algen.domain.genetics.ComplexPhenotype;
-import it.red.algen.domain.genetics.Gene;
 import it.red.algen.domain.genetics.SequenceGenotype;
+import it.red.algen.domain.genetics.genotype.Gene;
+import it.red.algen.domain.genetics.phenotype.ComplexPhenotype;
 import it.red.algen.engine.fitness.Incubator;
 
 public class MesIncubator implements Incubator<SequenceGenotype, ComplexPhenotype>{

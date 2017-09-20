@@ -14,8 +14,8 @@ import it.red.algen.algofrigerator.data.RecipeType;
 import it.red.algen.dataaccess.WorkingDataset;
 import it.red.algen.domain.experiment.Env;
 import it.red.algen.domain.genetics.ChromosomeGenotype;
-import it.red.algen.domain.genetics.ComplexPhenotype;
-import it.red.algen.domain.genetics.Gene;
+import it.red.algen.domain.genetics.genotype.Gene;
+import it.red.algen.domain.genetics.phenotype.ComplexPhenotype;
 import it.red.algen.engine.IllegalSolutionException;
 import it.red.algen.engine.fitness.Incubator;
 

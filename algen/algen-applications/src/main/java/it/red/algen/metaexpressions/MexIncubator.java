@@ -2,8 +2,8 @@ package it.red.algen.metaexpressions;
 
 import it.red.algen.dataaccess.WorkingDataset;
 import it.red.algen.domain.experiment.Env;
-import it.red.algen.domain.genetics.NumberPhenotype;
 import it.red.algen.domain.genetics.SequenceGenotype;
+import it.red.algen.domain.genetics.phenotype.NumberPhenotype;
 import it.red.algen.engine.IllegalSolutionException;
 import it.red.algen.engine.fitness.Incubator;
 

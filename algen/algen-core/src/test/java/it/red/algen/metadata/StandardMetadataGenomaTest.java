@@ -58,18 +58,18 @@ public class StandardMetadataGenomaTest
     
     
     public void testPositions(){
-    	assertEquals(9, genoma.getPositionsSize());
+    	assertEquals(9, genoma.getGenotypeStructure().getPositionsSize());
     	assertEquals(Arrays.asList(
     			"0.0","0.1","0.2","0.3","0.4",
     			"1.0","1.1","1.2","1.3"), 
-    			genoma.getPositions());
+    			genoma.getGenotypeStructure().getPositions());
     }
 
     
     public void testElementsCount(){
-    	assertEquals(2, genoma.getNumberOfChromosomes());
-    	assertEquals(5, genoma.getNumberOfGenes(0)); 
-    	assertEquals(4, genoma.getNumberOfGenes(1)); 
+    	assertEquals(2, genoma.getGenotypeStructure().getNumberOfChromosomes());
+    	assertEquals(5, genoma.getGenotypeStructure().getNumberOfGenes(0)); 
+    	assertEquals(4, genoma.getGenotypeStructure().getNumberOfGenes(1)); 
     }
     
 }

@@ -8,6 +8,8 @@ import java.util.stream.IntStream;
 
 import org.springframework.cache.annotation.Cacheable;
 
+import it.red.algen.domain.genetics.genotype.Allele;
+import it.red.algen.domain.genetics.genotype.Gene;
 import it.red.algen.engine.operators.MutatorLogics;
 
 /**

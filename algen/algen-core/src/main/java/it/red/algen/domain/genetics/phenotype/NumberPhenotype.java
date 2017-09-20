@@ -1,4 +1,4 @@
-package it.red.algen.domain.genetics;
+package it.red.algen.domain.genetics.phenotype;
 
 public class NumberPhenotype implements Phenotype<Number> {
 	public Number value;

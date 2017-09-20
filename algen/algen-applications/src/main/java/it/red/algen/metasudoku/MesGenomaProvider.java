@@ -8,9 +8,9 @@ import java.util.Map;
 import it.red.algen.context.AlgorithmContext;
 import it.red.algen.dataaccess.GenomaProvider;
 import it.red.algen.domain.experiment.Target;
-import it.red.algen.domain.genetics.Allele;
 import it.red.algen.domain.genetics.Genoma;
 import it.red.algen.domain.genetics.PredefinedGenoma;
+import it.red.algen.domain.genetics.genotype.Allele;
 
 
 /**

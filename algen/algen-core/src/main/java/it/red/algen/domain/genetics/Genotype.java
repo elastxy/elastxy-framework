@@ -2,6 +2,8 @@ package it.red.algen.domain.genetics;
 
 import java.util.List;
 
+import it.red.algen.domain.genetics.genotype.Allele;
+
 public interface Genotype {
 	
 	

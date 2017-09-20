@@ -6,8 +6,8 @@ import java.util.SortedMap;
 import it.red.algen.dataaccess.SolutionsFactory;
 import it.red.algen.domain.experiment.GenericSolution;
 import it.red.algen.domain.experiment.Solution;
-import it.red.algen.domain.genetics.Allele;
 import it.red.algen.domain.genetics.ChromosomeGenotype;
+import it.red.algen.domain.genetics.genotype.Allele;
 import it.red.algen.metadata.MetadataGeneticMaterialFactory;
 import it.red.algen.metadata.StandardMetadataGenoma;
 

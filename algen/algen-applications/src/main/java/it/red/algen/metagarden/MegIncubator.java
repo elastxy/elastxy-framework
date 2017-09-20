@@ -2,12 +2,12 @@ package it.red.algen.metagarden;
 
 import it.red.algen.dataaccess.WorkingDataset;
 import it.red.algen.domain.experiment.Env;
-import it.red.algen.domain.genetics.Gene;
-import it.red.algen.domain.genetics.MetadataGenoma;
 import it.red.algen.domain.genetics.SequenceGenotype;
-import it.red.algen.domain.genetics.UserPhenotype;
+import it.red.algen.domain.genetics.genotype.Gene;
+import it.red.algen.domain.genetics.phenotype.UserPhenotype;
 import it.red.algen.engine.fitness.Incubator;
 import it.red.algen.metadata.GeneMetadata;
+import it.red.algen.metadata.MetadataGenoma;
 import it.red.algen.metagarden.data.GardenWellness;
 import it.red.algen.metagarden.data.PlaceProperty;
 import it.red.algen.metagarden.data.Tree;

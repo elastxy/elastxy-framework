@@ -6,13 +6,15 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
-import java.util.stream.IntStream;
 
 import it.red.algen.dataaccess.WorkingDataset;
+import it.red.algen.domain.genetics.genotype.Allele;
 import it.red.algen.utils.Randomizer;
 
 /**
  * A Genoma with a predefined list of Alleles for every Gene position.
+ * 
+ * Single Chromosome Genoma.
  * 
  * @author red
  *
@@ -20,6 +22,7 @@ import it.red.algen.utils.Randomizer;
 public class PredefinedGenoma implements Genoma {
 	
 	public WorkingDataset workingDataset;
+	private ChromosomeGenotypeStructure genotypeStructure;
 	
 	/**
 	 * If FALSE
@@ -43,7 +46,16 @@ public class PredefinedGenoma implements Genoma {
 	
 	public void initialize(Map<String, List<Allele>> alleles){
 		this.alleles = alleles;
+		genotypeStructure = new ChromosomeGenotypeStructure();
+		genotypeStructure.build(this.alleles);
 	}
+
+
+	@Override
+	public GenotypeStructure getGenotypeStructure() {
+		return genotypeStructure;
+	}
+
 
 	
 	/**
@@ -58,19 +70,7 @@ public class PredefinedGenoma implements Genoma {
 	public void setWorkingDataset(WorkingDataset workingDataset) {
 		this.workingDataset = workingDataset;
 	}
-	
-	
-	@Override
-	public int getPositionsSize(){
-		return alleles.size();
-	}
 
-
-	@Override
-	public List<String> getPositions() {
-		List<String> positions = IntStream.range(0, alleles.size()).boxed().map(i -> i.toString()).collect(Collectors.toList());
-		return positions;
-	}
 
 	@Override
 	public boolean isLimitedAllelesStrategy() {
@@ -92,7 +92,8 @@ public class PredefinedGenoma implements Genoma {
 			throw new IllegalStateException("Cannot generate Allele in limited context: you must use aggregate methods.");
 		}
 	}
-	
+
+
 	
 	@Override
 	public Allele getRandomAllele(String position){
@@ -138,25 +139,6 @@ public class PredefinedGenoma implements Genoma {
 	public String toString(){
 		return String.format("PredefinedGenoma: %d alleles, limitedAllelesStrategy %b", alleles.size(), limitedAllelesStrategy);
 	}
-
-
-//	@Override
-//	public int getNumberOfStrands() {
-//		return 0;
-//	}
-
-
-	@Override
-	public int getNumberOfChromosomes() {
-		return 1;
-	}
-
-
-	@Override
-	public int getNumberOfGenes(int chromosome) {
-		return alleles.size();
-	}
-
 
 
 }

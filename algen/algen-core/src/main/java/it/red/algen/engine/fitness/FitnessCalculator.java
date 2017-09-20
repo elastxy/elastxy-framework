@@ -4,7 +4,7 @@ import it.red.algen.domain.experiment.Env;
 import it.red.algen.domain.experiment.Fitness;
 import it.red.algen.domain.experiment.Solution;
 import it.red.algen.domain.genetics.Genotype;
-import it.red.algen.domain.genetics.Phenotype;
+import it.red.algen.domain.genetics.phenotype.Phenotype;
 
 /**
  * Calculate the fitness value of a Solution phenotype or genotype 

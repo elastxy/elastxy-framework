@@ -1,5 +1,12 @@
-package it.red.algen.domain.genetics;
+package it.red.algen.domain.genetics.genotype;
 
+
+/**
+ * Represents the value hosted by a single gene in the genotype.
+ * @author red
+ *
+ * @param <T>
+ */
 public class Allele<T> {
 	
 	public T value;
