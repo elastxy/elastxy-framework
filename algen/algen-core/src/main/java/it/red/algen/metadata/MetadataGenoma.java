@@ -4,9 +4,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.SortedMap;
 
-import it.red.algen.domain.genetics.ChromosomeGenotype;
 import it.red.algen.domain.genetics.Genoma;
-import it.red.algen.domain.genetics.SequenceGenotype;
 import it.red.algen.domain.genetics.genotype.Allele;
 
 /**

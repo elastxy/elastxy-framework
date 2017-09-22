@@ -2,7 +2,7 @@ package it.red.algen.metagarden;
 
 import it.red.algen.dataaccess.WorkingDataset;
 import it.red.algen.domain.experiment.Env;
-import it.red.algen.domain.genetics.SequenceGenotype;
+import it.red.algen.domain.genetics.genotype.Chromosome;
 import it.red.algen.domain.genetics.genotype.Gene;
 import it.red.algen.domain.genetics.phenotype.UserPhenotype;
 import it.red.algen.engine.fitness.Incubator;
@@ -12,7 +12,7 @@ import it.red.algen.metagarden.data.GardenWellness;
 import it.red.algen.metagarden.data.PlaceProperty;
 import it.red.algen.metagarden.data.Tree;
 
-public class MegIncubator implements Incubator<SequenceGenotype, UserPhenotype<GardenWellness>>{
+public class MegIncubator implements Incubator<Chromosome, UserPhenotype<GardenWellness>>{
 	private static final double FITNESS_WEIGHT_SUN = 	5.0;
 	private static final double FITNESS_WEIGHT_WIND = 	3.0;
 	private static final double FITNESS_WEIGHT_WET = 	1.0;
@@ -21,7 +21,7 @@ public class MegIncubator implements Incubator<SequenceGenotype, UserPhenotype<G
 	 * Solution grows to a big Garden with its values of wellness, in the interval [0..2]
 	 */
 	@Override
-	public UserPhenotype<GardenWellness> grow(WorkingDataset workingDataset, SequenceGenotype genotype, Env environment) {
+	public UserPhenotype<GardenWellness> grow(WorkingDataset workingDataset, Chromosome genotype, Env environment) {
 		UserPhenotype<GardenWellness> result = new UserPhenotype<GardenWellness>();
 		result.value = new GardenWellness();
 		

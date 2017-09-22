@@ -2,15 +2,15 @@ package it.red.algen.metaexpressions;
 
 import it.red.algen.dataaccess.WorkingDataset;
 import it.red.algen.domain.experiment.Env;
-import it.red.algen.domain.genetics.SequenceGenotype;
+import it.red.algen.domain.genetics.genotype.Chromosome;
 import it.red.algen.domain.genetics.phenotype.NumberPhenotype;
 import it.red.algen.engine.IllegalSolutionException;
 import it.red.algen.engine.fitness.Incubator;
 
-public class MexIncubator implements Incubator<SequenceGenotype, NumberPhenotype>{
+public class MexIncubator implements Incubator<Chromosome, NumberPhenotype>{
 
 	@Override
-	public NumberPhenotype grow(WorkingDataset workingDataset, SequenceGenotype genotype, Env environment) {
+	public NumberPhenotype grow(WorkingDataset workingDataset, Chromosome genotype, Env environment) {
 		NumberPhenotype result = new NumberPhenotype();
 		result.value = calculate(
 				(Long)genotype.genes.get(0).allele.value,

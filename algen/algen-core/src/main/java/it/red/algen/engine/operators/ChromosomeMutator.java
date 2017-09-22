@@ -3,8 +3,8 @@ package it.red.algen.engine.operators;
 import java.util.List;
 
 import it.red.algen.domain.experiment.Solution;
-import it.red.algen.domain.genetics.ChromosomeGenotype;
 import it.red.algen.domain.genetics.Genoma;
+import it.red.algen.domain.genetics.genotype.Strand;
 
 /**
  * Standard mutator based on metadata
@@ -21,7 +21,7 @@ public class ChromosomeMutator implements Mutator<Solution, Genoma> {
 		solution.setFitness(null);
 		
 		// Replace an allele to another for the same position for each chromosome
-		ChromosomeGenotype genotype = (ChromosomeGenotype)solution.getGenotype();
+		Strand genotype = (Strand)solution.getGenotype();
 		for(int c=0; c < genoma.getGenotypeStructure().getNumberOfChromosomes(); c++){
 			List<String> positions = genotype.getPositions(c);
 			MutatorLogics.mutate(solution, genoma, positions);

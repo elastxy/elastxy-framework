@@ -5,8 +5,8 @@ import java.util.List;
 
 import it.red.algen.conf.AlgorithmParameters;
 import it.red.algen.domain.experiment.Solution;
-import it.red.algen.domain.genetics.ChromosomeGenotype;
 import it.red.algen.domain.genetics.genotype.Gene;
+import it.red.algen.domain.genetics.genotype.Strand;
 
 public class ChromosomeRecombinator implements Recombinator<Solution> {
     private AlgorithmParameters algorithmParameters;
@@ -31,7 +31,7 @@ public class ChromosomeRecombinator implements Recombinator<Solution> {
 		
 		// Define cut point
 		// TODOM: define cut point from metadata!
-		ChromosomeGenotype genotype0 = (ChromosomeGenotype)parents.get(0).getGenotype();
+		Strand genotype0 = (Strand)parents.get(0).getGenotype();
 		
 		Solution[] offsprings = null;
 		
@@ -45,8 +45,8 @@ public class ChromosomeRecombinator implements Recombinator<Solution> {
 			// Define parents and children as initial clones of the parents
 			Solution offspring0 = parents.get(0).copy();
 			Solution offspring1 = parents.get(1).copy();
-	        List<Gene> offspring0Genes = ((ChromosomeGenotype)offspring0.getGenotype()).chromosomes.get(c).genes;
-	        List<Gene> offspring1Genes = ((ChromosomeGenotype)offspring1.getGenotype()).chromosomes.get(c).genes;
+	        List<Gene> offspring0Genes = ((Strand)offspring0.getGenotype()).chromosomes.get(c).genes;
+	        List<Gene> offspring1Genes = ((Strand)offspring1.getGenotype()).chromosomes.get(c).genes;
 			
 			// Reset Fitness values
 			offspring0.setFitness(null);

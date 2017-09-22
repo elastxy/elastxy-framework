@@ -7,7 +7,7 @@ import it.red.algen.domain.experiment.Env;
 import it.red.algen.domain.experiment.GenericSolution;
 import it.red.algen.domain.experiment.NumberRawFitness;
 import it.red.algen.domain.experiment.StandardFitness;
-import it.red.algen.domain.genetics.ChromosomeGenotype;
+import it.red.algen.domain.genetics.genotype.Strand;
 import it.red.algen.domain.genetics.phenotype.ComplexPhenotype;
 import it.red.algen.engine.fitness.FitnessCalculator;
 import it.red.algen.engine.fitness.Incubator;
@@ -16,7 +16,7 @@ public class MefFitnessCalculator implements FitnessCalculator<GenericSolution,S
 	private static BigDecimal WEIGHT_COMPLETENESS 		= new BigDecimal(0.8);
 	private static BigDecimal WEIGHT_FOODS_FROM_FRIDGE 	= new BigDecimal(0.2);
 	
-	private Incubator<ChromosomeGenotype,ComplexPhenotype> incubator;
+	private Incubator<Strand,ComplexPhenotype> incubator;
 	
 	@Override
 	public void setup(Incubator incubator){
@@ -42,7 +42,7 @@ public class MefFitnessCalculator implements FitnessCalculator<GenericSolution,S
     	BigDecimal normalizedFitness = null;
         
     	// Grow the offspring to evaluate it
-    	solution.phenotype = incubator.grow(env.genoma.getWorkingDataset(), (ChromosomeGenotype)solution.genotype, env);
+    	solution.phenotype = incubator.grow(env.genoma.getWorkingDataset(), (Strand)solution.genotype, env);
 
     	// Get goal
     	MefGoal goal = (MefGoal)env.target.getGoal();

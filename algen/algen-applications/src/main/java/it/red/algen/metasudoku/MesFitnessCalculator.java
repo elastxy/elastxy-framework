@@ -7,7 +7,7 @@ import it.red.algen.domain.experiment.GenericSolution;
 import it.red.algen.domain.experiment.NumberRawFitness;
 import it.red.algen.domain.experiment.PerformanceTarget;
 import it.red.algen.domain.experiment.StandardFitness;
-import it.red.algen.domain.genetics.SequenceGenotype;
+import it.red.algen.domain.genetics.genotype.Chromosome;
 import it.red.algen.domain.genetics.phenotype.ComplexPhenotype;
 import it.red.algen.engine.IllegalSolutionException;
 import it.red.algen.engine.fitness.FitnessCalculator;
@@ -15,7 +15,7 @@ import it.red.algen.engine.fitness.Incubator;
 
 public class MesFitnessCalculator implements FitnessCalculator<GenericSolution,StandardFitness> {
 
-	private Incubator<SequenceGenotype,ComplexPhenotype> incubator;
+	private Incubator<Chromosome,ComplexPhenotype> incubator;
 	
 	@Override
 	public void setup(Incubator incubator){
@@ -42,7 +42,7 @@ public class MesFitnessCalculator implements FitnessCalculator<GenericSolution,S
         try { 
         	
         	// Grow the offspring to evaluate it
-        	solution.phenotype = incubator.grow(env.genoma.getWorkingDataset(), (SequenceGenotype)solution.genotype, env);
+        	solution.phenotype = incubator.grow(env.genoma.getWorkingDataset(), (Chromosome)solution.genotype, env);
         	double sValue = (Double)((ComplexPhenotype)solution.phenotype).getValue().get(MesConstants.PHENOTYPE_COMPLETENESS);
             
         	// Normalize fitness to 1.0

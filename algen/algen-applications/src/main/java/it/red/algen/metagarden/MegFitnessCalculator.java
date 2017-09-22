@@ -8,7 +8,7 @@ import it.red.algen.domain.experiment.GenericSolution;
 import it.red.algen.domain.experiment.NumberRawFitness;
 import it.red.algen.domain.experiment.PerformanceTarget;
 import it.red.algen.domain.experiment.StandardFitness;
-import it.red.algen.domain.genetics.SequenceGenotype;
+import it.red.algen.domain.genetics.genotype.Chromosome;
 import it.red.algen.domain.genetics.phenotype.UserPhenotype;
 import it.red.algen.engine.fitness.FitnessCalculator;
 import it.red.algen.engine.fitness.Incubator;
@@ -17,7 +17,7 @@ import it.red.algen.metagarden.data.GardenWellness;
 public class MegFitnessCalculator implements FitnessCalculator<GenericSolution,StandardFitness> {
 
 	
-	private Incubator<SequenceGenotype,UserPhenotype> incubator;
+	private Incubator<Chromosome,UserPhenotype> incubator;
 	
 	@Override
 	public void setup(Incubator incubator){
@@ -41,7 +41,7 @@ public class MegFitnessCalculator implements FitnessCalculator<GenericSolution,S
         solution.setFitness(result);
         
     	// Grow the offspring to evaluate it
-    	solution.phenotype = incubator.grow(env.genoma.getWorkingDataset(), (SequenceGenotype)solution.genotype, env);
+    	solution.phenotype = incubator.grow(env.genoma.getWorkingDataset(), (Chromosome)solution.genotype, env);
 //    	List<Double> locationsUnappiness = ((UserPhenotype<GardenWellness>)solution.phenotype).getValue().locationsUnhappyness;
     	List<Double> locationsUnappiness = ((GardenWellness)((UserPhenotype)solution.phenotype).getValue()).locationsUnhappyness;
         

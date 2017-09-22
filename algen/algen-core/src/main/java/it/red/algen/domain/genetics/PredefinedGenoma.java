@@ -44,6 +44,12 @@ public class PredefinedGenoma implements Genoma {
 	private Map<String, List<Allele>> alleles = new HashMap<String, List<Allele>>();
 
 	
+	/**
+	 * Initializes Genoma with a map of genes:
+	 * [position;list of all possible alleles]
+	 * 
+	 * @param alleles
+	 */
 	public void initialize(Map<String, List<Allele>> alleles){
 		this.alleles = alleles;
 		genotypeStructure = new ChromosomeGenotypeStructure();

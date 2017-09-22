@@ -13,13 +13,13 @@ import it.red.algen.algofrigerator.data.Recipe;
 import it.red.algen.algofrigerator.data.RecipeType;
 import it.red.algen.dataaccess.WorkingDataset;
 import it.red.algen.domain.experiment.Env;
-import it.red.algen.domain.genetics.ChromosomeGenotype;
 import it.red.algen.domain.genetics.genotype.Gene;
+import it.red.algen.domain.genetics.genotype.Strand;
 import it.red.algen.domain.genetics.phenotype.ComplexPhenotype;
 import it.red.algen.engine.IllegalSolutionException;
 import it.red.algen.engine.fitness.Incubator;
 
-public class MefIncubator implements Incubator<ChromosomeGenotype, ComplexPhenotype>{
+public class MefIncubator implements Incubator<Strand, ComplexPhenotype>{
 	private static final RecipeCompletenessComparator RECIPE_COMPARATOR = new RecipeCompletenessComparator();
 
 	
@@ -37,7 +37,7 @@ public class MefIncubator implements Incubator<ChromosomeGenotype, ComplexPhenot
 	 * 
 	 */	
 	@Override
-	public ComplexPhenotype grow(WorkingDataset workingDataset, ChromosomeGenotype genotype, Env env) {
+	public ComplexPhenotype grow(WorkingDataset workingDataset, Strand genotype, Env env) {
 		
 		// Create recipes by type
 		RecipeAccumulator accumulator = new RecipeAccumulator();
@@ -72,7 +72,7 @@ public class MefIncubator implements Incubator<ChromosomeGenotype, ComplexPhenot
 		 * @param goal
 		 * @return
 		 */
-		public void calculate(MefWorkingDataset workingDataset, ChromosomeGenotype genotype, MefGoal goal){
+		public void calculate(MefWorkingDataset workingDataset, Strand genotype, MefGoal goal){
 			resultingRecipes.put(RecipeType.SAVOURY, new ArrayList<Recipe>());
 			resultingRecipes.put(RecipeType.SWEET, new ArrayList<Recipe>());
 			
@@ -128,7 +128,7 @@ public class MefIncubator implements Incubator<ChromosomeGenotype, ComplexPhenot
 		 * @param goal
 		 * @return
 		 */
-		private List<Recipe> convertGeneToRecipe(MefWorkingDataset workingDataset, int chromosome, ChromosomeGenotype genotype, MefGoal goal) {
+		private List<Recipe> convertGeneToRecipe(MefWorkingDataset workingDataset, int chromosome, Strand genotype, MefGoal goal) {
 			Iterator<Gene> genes = genotype.chromosomes.get(chromosome).genes.iterator();
 			List<Long> recipesIds = new ArrayList<Long>();
 			while(genes.hasNext()){

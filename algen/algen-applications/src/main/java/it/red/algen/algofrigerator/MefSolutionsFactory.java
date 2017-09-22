@@ -6,8 +6,8 @@ import java.util.SortedMap;
 import it.red.algen.dataaccess.SolutionsFactory;
 import it.red.algen.domain.experiment.GenericSolution;
 import it.red.algen.domain.experiment.Solution;
-import it.red.algen.domain.genetics.ChromosomeGenotype;
 import it.red.algen.domain.genetics.genotype.Allele;
+import it.red.algen.domain.genetics.genotype.Strand;
 import it.red.algen.metadata.MetadataGeneticMaterialFactory;
 import it.red.algen.metadata.StandardMetadataGenoma;
 
@@ -18,7 +18,7 @@ public class MefSolutionsFactory implements SolutionsFactory<StandardMetadataGen
     public Solution createRandom(StandardMetadataGenoma genoma) {
     	GenericSolution solution = new GenericSolution();
 
-    	ChromosomeGenotype genotype = new ChromosomeGenotype();
+    	Strand genotype = new Strand();
     	genotype.chromosomes = MetadataGeneticMaterialFactory.createStrand(genoma);
     	
     	SortedMap<String,Allele> alleles = genoma.getRandomAllelesAsMap();

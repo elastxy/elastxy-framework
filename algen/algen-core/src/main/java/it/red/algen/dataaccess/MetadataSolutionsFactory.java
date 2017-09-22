@@ -5,8 +5,8 @@ import java.util.stream.IntStream;
 
 import it.red.algen.domain.experiment.GenericSolution;
 import it.red.algen.domain.experiment.Solution;
-import it.red.algen.domain.genetics.SequenceGenotype;
 import it.red.algen.domain.genetics.genotype.Allele;
+import it.red.algen.domain.genetics.genotype.Chromosome;
 import it.red.algen.domain.genetics.genotype.Gene;
 import it.red.algen.metadata.MetadataGeneticMaterialFactory;
 import it.red.algen.metadata.StandardMetadataGenoma;
@@ -28,7 +28,7 @@ public class MetadataSolutionsFactory implements SolutionsFactory<StandardMetada
 	private Solution createSolution(StandardMetadataGenoma genoma, List<Allele> alleles) {
 		GenericSolution solution = new GenericSolution();
 
-    	SequenceGenotype genotype = new SequenceGenotype();
+    	Chromosome genotype = new Chromosome();
     	genotype.genes = MetadataGeneticMaterialFactory.createSequence(genoma);
     	solution.genotype = genotype;
     	
@@ -44,7 +44,7 @@ public class MetadataSolutionsFactory implements SolutionsFactory<StandardMetada
 
 	private GenericSolution createByValues(StandardMetadataGenoma genoma, List<Object> values) {
 		GenericSolution solution = new GenericSolution();
-    	SequenceGenotype genotype = new SequenceGenotype();
+    	Chromosome genotype = new Chromosome();
     	genotype.genes = MetadataGeneticMaterialFactory.createSequence(genoma);
     	solution.genotype = genotype;
     	for(int i=0; i < genotype.genes.size(); i++){

@@ -11,7 +11,9 @@ import it.red.algen.engine.AlgorithmException;
 public class ChromosomeGenotypeStructure extends GenotypeStructureImpl {
 	
 	/**
-	 * Builds the structure information.
+	 * Builds the structure information from the list of possible
+	 * alleles, mapped by position.
+	 * .
 	 * @param alleles
 	 */
 	public void build(Map<String, List<Allele>> alleles){

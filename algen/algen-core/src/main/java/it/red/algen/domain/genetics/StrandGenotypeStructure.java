@@ -22,7 +22,11 @@ public class StrandGenotypeStructure extends GenotypeStructureImpl {
 //	private int numberOfStrands = 0;
 	
 	
-	
+	/**
+	 * Builds the structure of the strand, given metadata by position.
+	 * 
+	 * @param genesMetadataByPos
+	 */
 	public void build(Map<String,GeneMetadata> genesMetadataByPos){
 		positionsSize = genesMetadataByPos.size();
 		positions = new ArrayList<String>(genesMetadataByPos.keySet());

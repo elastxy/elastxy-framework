@@ -1,4 +1,4 @@
-package it.red.algen.domain.genetics;
+package it.red.algen.domain.genetics.genotype;
 
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -9,8 +9,7 @@ import java.util.SortedMap;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
-import it.red.algen.domain.genetics.genotype.Allele;
-import it.red.algen.domain.genetics.genotype.Chromosome;
+import it.red.algen.domain.genetics.Genotype;
 import it.red.algen.engine.operators.MutatorLogics;
 
 /**
@@ -20,13 +19,11 @@ import it.red.algen.engine.operators.MutatorLogics;
  * E.g. "0.0", "0.1", .. , "5.4", .. , "M.N" 
  * 
  * TODOA: rework to a GenePosition to represent position
- * TODOA: rework to genetics domain hosting only data and data access, referenced by Genotypes:
- *        Allele, Gene, Chromosome(list of Gene), Strand(list of Chromosome), MultiStrand(list of Strand)
  *
  * @author red
  *
  */
-public class ChromosomeGenotype implements Genotype{
+public class Strand implements Genotype {
 	public List<Chromosome> chromosomes = new ArrayList<Chromosome>();
 
 	/**
@@ -41,8 +38,8 @@ public class ChromosomeGenotype implements Genotype{
 	
 	
 	@Override
-	public ChromosomeGenotype copy() {
-		ChromosomeGenotype result = new ChromosomeGenotype();
+	public Strand copy() {
+		Strand result = new Strand();
 		result.chromosomes = chromosomes.stream().map(c -> c.copy()).collect(Collectors.toList());
 		return result;
 	}
@@ -107,5 +104,4 @@ public class ChromosomeGenotype implements Genotype{
 		}
 		return result.toString();
 	}
-
 }

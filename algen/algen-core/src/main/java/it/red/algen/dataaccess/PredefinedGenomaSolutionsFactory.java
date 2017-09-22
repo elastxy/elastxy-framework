@@ -7,8 +7,8 @@ import it.red.algen.domain.experiment.GenericSolution;
 import it.red.algen.domain.experiment.Solution;
 import it.red.algen.domain.genetics.PredefinedGeneFactory;
 import it.red.algen.domain.genetics.PredefinedGenoma;
-import it.red.algen.domain.genetics.SequenceGenotype;
 import it.red.algen.domain.genetics.genotype.Allele;
+import it.red.algen.domain.genetics.genotype.Chromosome;
 
 public class PredefinedGenomaSolutionsFactory  implements SolutionsFactory<PredefinedGenoma>{
 
@@ -24,7 +24,7 @@ public class PredefinedGenomaSolutionsFactory  implements SolutionsFactory<Prede
 
 	private Solution createSolution(PredefinedGenoma genoma, List<Allele> alleles) {
 		GenericSolution solution = new GenericSolution();
-    	SequenceGenotype genotype = new SequenceGenotype();
+    	Chromosome genotype = new Chromosome();
     	genotype.genes = PredefinedGeneFactory.createSequence(genoma);
     	solution.genotype = genotype;
 
@@ -36,7 +36,7 @@ public class PredefinedGenomaSolutionsFactory  implements SolutionsFactory<Prede
 	@Override
 	public Solution createPredefined(PredefinedGenoma genoma, List<Object> alleleValues) {
 		GenericSolution solution = new GenericSolution();
-    	SequenceGenotype genotype = new SequenceGenotype();
+    	Chromosome genotype = new Chromosome();
     	genotype.genes = PredefinedGeneFactory.createSequence(genoma);
     	solution.genotype = genotype;
 
