@@ -20,6 +20,7 @@ public class AlgorithmContextBuilder {
 			int maxLifetimeMs,
 			int maxIdenticalFitnesses,
 			boolean verbose,
+			boolean showGraph,
 			boolean traceHistory,
 			Reporter reporter
 			){
@@ -38,6 +39,7 @@ public class AlgorithmContextBuilder {
         
         MonitoringConfiguration monitoringConfiguration = new MonitoringConfiguration();
         monitoringConfiguration.verbose = verbose;
+        monitoringConfiguration.showGraph = showGraph;
         monitoringConfiguration.traceHistory = traceHistory;
         monitoringConfiguration.reporter = reporter;
         

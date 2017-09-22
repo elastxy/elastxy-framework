@@ -11,6 +11,8 @@
 package it.red.algen.tracking;
 
 import java.util.List;
+import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 
 import it.red.algen.context.AlgorithmContext;
 import it.red.algen.domain.experiment.Population;
@@ -45,7 +47,7 @@ public class EnvObserver {
     	this.renderer = renderer;
     }
     
-    public void newGenerationEvent(int number, Population lastGen, Population newGen){
+    public void newGenerationEvent(int number, long executionTime, Population lastGen, Population newGen){
         if(context.monitoringConfiguration.verbose) {
         	context.monitoringConfiguration.logger.out("\n*** Last generation "+number+" > \n"+lastGen+"\n");
         	if(context.application.solutionRenderer!=null && lastGen.bestMatch!=null){
@@ -53,8 +55,15 @@ public class EnvObserver {
         		context.monitoringConfiguration.logger.out(sol);
         	}
         }
+        
+        if(context.monitoringConfiguration.showGraph) {
+        	int step = ASCIIGraphRenderer.adaptStepToSpeed(number, executionTime);
+        	String graphStep = ASCIIGraphRenderer.displayGraph(number, lastGen, step);
+	        if(graphStep.length()!=0) context.monitoringConfiguration.logger.out(graphStep);
+        }
     }
-    
+
+
     
     /**
      * TODOM: Incapsulate events under a simple generic interface, 

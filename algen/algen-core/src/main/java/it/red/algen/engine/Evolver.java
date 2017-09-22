@@ -72,33 +72,34 @@ public class Evolver implements EnvObservable {
     	// TEST FITNESS - initial gen
         fitnessTester.test(env.currentGen, env);
         int generationSize = env.currentGen.solutions.size();
-        Fitness lastGenFitness = env.currentGen.bestMatch.getFitness();
-        boolean endConditionFound = checkEndCondition(lastGenFitness);
+        Fitness bestFitness = env.currentGen.bestMatch.getFitness();
+        boolean endConditionFound = checkEndCondition(null, bestFitness);
         
         
     	// Loops until end condition rises
         while(!endConditionFound) {
         	
         	// SELECTION
-        	Population nextGeneration = selection(generationSize);
-        	if(context.monitoringConfiguration.verbose) env.generationsHistory.add(nextGeneration);
+        	Population currentGeneration = selection(generationSize);
+        	if(context.monitoringConfiguration.verbose) env.generationsHistory.add(currentGeneration);
         	
         	// For uniform distribution selector skip genetic operators
         	if(!context.algorithmParameters.randomEvolution) {
-        		applyGeneticOperators(generationSize, nextGeneration);
+        		applyGeneticOperators(generationSize, currentGeneration);
         	}
         	
             // TEST FITNESS - next gen
-            fitnessTester.test(nextGeneration, env);
+            fitnessTester.test(currentGeneration, env);
 
             // Assign new generation
-            lastGenFitness = env.currentGen.bestMatch.getFitness();
+            bestFitness = currentGeneration.bestMatch.getFitness();
+            Fitness lastFitness = env.currentGen.bestMatch.getFitness();
+
+            env.currentGen = currentGeneration;
+            env.currentGenNumber++;
             
             // CHECK END CONDITION
-            endConditionFound = checkEndCondition(lastGenFitness);
-            
-            env.currentGen = nextGeneration;
-            env.currentGenNumber++;
+            endConditionFound = checkEndCondition(lastFitness, bestFitness);
         }
         
         // END OF EXPERIMENT
@@ -146,7 +147,7 @@ public class Evolver implements EnvObservable {
 	 * ============================================================
 	 */
 
-	private boolean checkEndCondition(Fitness lastGenFitness) {
+	private boolean checkEndCondition(Fitness lastGenFitness, Fitness currentGenFitness) {
 		boolean endConditionFound = false;
 		
 		// Check threshold
@@ -157,7 +158,7 @@ public class Evolver implements EnvObservable {
 		
 		// Check stability of the fitness value
 		if(!endConditionFound && context.algorithmParameters.elitarism){
-		    if(env.currentGen.bestMatch.getFitness().sameOf(lastGenFitness)){
+		    if(lastGenFitness!=null && currentGenFitness.sameOf(lastGenFitness)){
 		    	env.totIdenticalFitnesses++;
 		        if(stopVerifier.isStable(env.totIdenticalFitnesses)){
 		        	EnvSupport.stopTime(env);
@@ -172,7 +173,7 @@ public class Evolver implements EnvObservable {
 		}
 		
 		// Check goal reached
-		if(!endConditionFound && env.currentGen.bestMatch.getFitness().fit()){
+		if(!endConditionFound && currentGenFitness.fit()){
 			endConditionFound = goalReached();
 		}
 		
@@ -205,14 +206,14 @@ public class Evolver implements EnvObservable {
 	 */
 
 	private Population selection(int generationSize) {
-		Population nextGeneration = context.application.selector.select(env.currentGen, env.genoma);
-		fireNewGenerationEvent(env.currentGen, nextGeneration);
-		if(generationSize!=nextGeneration.solutions.size()){
-			String msg = String.format("Selected generation size (%d) differs from last (%d)", nextGeneration.solutions.size(), generationSize);
+		Population currentGeneration = context.application.selector.select(env.currentGen, env.genoma);
+		fireNewGenerationEvent(env.currentGen, currentGeneration);
+		if(generationSize!=currentGeneration.solutions.size()){
+			String msg = String.format("Selected generation size (%d) differs from last (%d)", currentGeneration.solutions.size(), generationSize);
 			logger.severe(msg);
 			throw new IllegalStateException(msg);
 		}
-		return nextGeneration;
+		return currentGeneration;
 	}
 
 	
@@ -259,7 +260,7 @@ public class Evolver implements EnvObservable {
 	 */
 
     private void fireNewGenerationEvent(Population lastGen, Population newGen){
-        observer.newGenerationEvent(env.currentGenNumber+1, lastGen, newGen);
+        observer.newGenerationEvent(env.currentGenNumber+1, EnvSupport.getLifeTimeInMillis(env), lastGen, newGen);
     }
 
     private void fireCrossoverEvent(Solution father, Solution mother, List<Solution> sons){
