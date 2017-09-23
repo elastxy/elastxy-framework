@@ -1,5 +1,7 @@
 package it.red.algen.applications;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.config.AutowireCapableBeanFactory;
 import org.springframework.stereotype.Component;
@@ -15,7 +17,7 @@ import it.red.algen.stats.StatsExperimentExecutor;
 
 @Component
 public class ApplicationService {
-//	private static Logger logger = LoggerFactory.getLogger(AbstractApplicationService.class);
+	private static Logger logger = LoggerFactory.getLogger(ApplicationService.class);
 
 	@Autowired private ContextSupplier contextSupplier;
 
