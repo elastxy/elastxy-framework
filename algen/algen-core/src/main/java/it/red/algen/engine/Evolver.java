@@ -68,12 +68,12 @@ public class Evolver implements EnvObservable {
     	EnvSupport.startTime(env);
     	if(context.monitoringConfiguration.verbose) env.generationsHistory.add(env.currentGen);
         
-        
     	// TEST FITNESS - initial gen
         fitnessTester.test(env.currentGen, env);
         int generationSize = env.currentGen.solutions.size();
         Fitness bestFitness = env.currentGen.bestMatch.getFitness();
         boolean endConditionFound = checkEndCondition(null, bestFitness);
+//        fireNewGenerationEvent(null, env.currentGen);
         
         
     	// Loops until end condition rises
@@ -260,7 +260,7 @@ public class Evolver implements EnvObservable {
 	 */
 
     private void fireNewGenerationEvent(Population lastGen, Population newGen){
-        observer.newGenerationEvent(env.currentGenNumber+1, EnvSupport.getLifeTimeInMillis(env), lastGen, newGen);
+        observer.newGenerationEvent(env.currentGenNumber, EnvSupport.getLifeTimeInMillis(env), lastGen, newGen);
     }
 
     private void fireCrossoverEvent(Solution father, Solution mother, List<Solution> sons){

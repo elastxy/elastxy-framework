@@ -3,8 +3,10 @@ package it.red.algen.domain.genetics;
 import java.util.List;
 
 /**
- * Represents the structure of a Genotype produce by the Genoma.
+ * Represents the structure of a Genotype produced by the Genoma.
+ * 
  * It's initialized after creating a Genoma and does not change anymore.
+ * It can be used as a blueprint for creating Genotypes by Genoma.
  *  
  * @author red
  *

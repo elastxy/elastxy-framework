@@ -50,7 +50,7 @@ public class EnvObserver {
     public void newGenerationEvent(int number, long executionTime, Population lastGen, Population newGen){
         if(context.monitoringConfiguration.verbose) {
         	context.monitoringConfiguration.logger.out("\n*** Last generation "+number+" > \n"+lastGen+"\n");
-        	if(context.application.solutionRenderer!=null && lastGen.bestMatch!=null){
+        	if(context.application.solutionRenderer!=null && lastGen!=null && lastGen.bestMatch!=null){
         		String sol = (String)context.application.solutionRenderer.render(lastGen.bestMatch);
         		context.monitoringConfiguration.logger.out(sol);
         	}

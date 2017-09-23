@@ -46,6 +46,7 @@ public interface MetadataGenoma extends Genoma {
 	
 	/**
 	 * Get the metadata by code
+	 * TODOA: move to Structure
 	 * @param metadataCode
 	 * @return
 	 */
@@ -54,6 +55,7 @@ public interface MetadataGenoma extends Genoma {
 
 	/**
 	 * Get the metadata by a given position
+	 * TODOA: move to Structure
 	 * @param metadataCode
 	 * @return
 	 */
