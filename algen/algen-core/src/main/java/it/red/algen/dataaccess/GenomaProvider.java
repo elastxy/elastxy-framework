@@ -3,7 +3,6 @@ package it.red.algen.dataaccess;
 import it.red.algen.context.AlgorithmContext;
 import it.red.algen.domain.experiment.Target;
 import it.red.algen.domain.genetics.Genoma;
-import it.red.algen.metadata.AlleleGenerator;
 
 /**
  * Collects all genoma information from a given source.

@@ -17,7 +17,7 @@ package it.red.algen.domain.genetics.genotype;
 // * @author red
 // *
 // */
-//public class DoubleStrandGenotype implements Genotype {
+//public class MultiStrand implements Genotype {
 //	public List<Chromosome> strand1 = new ArrayList<Chromosome>();
 //	public List<Chromosome> strand2 = new ArrayList<Chromosome>();
 //

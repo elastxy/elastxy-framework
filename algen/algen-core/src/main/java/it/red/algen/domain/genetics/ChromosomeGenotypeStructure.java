@@ -9,19 +9,19 @@ import it.red.algen.domain.genetics.genotype.Allele;
 import it.red.algen.engine.AlgorithmException;
 
 public class ChromosomeGenotypeStructure extends GenotypeStructureImpl {
-	
+
 	/**
 	 * Builds the structure information from the list of possible
-	 * alleles, mapped by position.
+	 * alleles, shared between all positions.
 	 * .
 	 * @param alleles
 	 */
-	public void build(Map<String, List<Allele>> alleles){
-		positionsSize = alleles.size();
-		positions = IntStream.range(0, alleles.size()).boxed().map(i -> i.toString()).collect(Collectors.toList());
+	public void build(int numberOfPositions){
+		positionsSize = numberOfPositions;
+		positions = IntStream.range(0, numberOfPositions).boxed().map(i -> i.toString()).collect(Collectors.toList());
 		numberOfChromosomes = 1;
 	}
-
+	
 	@Override
 	public int getNumberOfGenes(int chromosome){
 		if(chromosome!=0){

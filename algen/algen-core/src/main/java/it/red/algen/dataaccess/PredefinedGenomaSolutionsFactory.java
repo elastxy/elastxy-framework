@@ -5,7 +5,7 @@ import java.util.stream.IntStream;
 
 import it.red.algen.domain.experiment.GenericSolution;
 import it.red.algen.domain.experiment.Solution;
-import it.red.algen.domain.genetics.PredefinedGeneFactory;
+import it.red.algen.domain.genetics.PredefinedGenotypeFactory;
 import it.red.algen.domain.genetics.PredefinedGenoma;
 import it.red.algen.domain.genetics.genotype.Allele;
 import it.red.algen.domain.genetics.genotype.Chromosome;
@@ -24,11 +24,11 @@ public class PredefinedGenomaSolutionsFactory  implements SolutionsFactory<Prede
 
 	private Solution createSolution(PredefinedGenoma genoma, List<Allele> alleles) {
 		GenericSolution solution = new GenericSolution();
-    	Chromosome genotype = new Chromosome();
-    	genotype.genes = PredefinedGeneFactory.createSequence(genoma);
-    	solution.genotype = genotype;
+    	solution.genotype = PredefinedGenotypeFactory.createGenotype(genoma);
 
-    	IntStream.range(0, genotype.genes.size()).forEach(i -> genotype.genes.get(i).allele = alleles.get(i));
+    	// Assign to every Gene an Allele
+    	IntStream.range(0, ((Chromosome)solution.genotype).genes.size()).
+    		forEach(i -> ((Chromosome)solution.genotype).genes.get(i).allele = alleles.get(i));
     	
     	return solution;
 	}
@@ -36,11 +36,10 @@ public class PredefinedGenomaSolutionsFactory  implements SolutionsFactory<Prede
 	@Override
 	public Solution createPredefined(PredefinedGenoma genoma, List<Object> alleleValues) {
 		GenericSolution solution = new GenericSolution();
-    	Chromosome genotype = new Chromosome();
-    	genotype.genes = PredefinedGeneFactory.createSequence(genoma);
-    	solution.genotype = genotype;
+    	solution.genotype = PredefinedGenotypeFactory.createGenotype(genoma);
 
-    	IntStream.range(0, genotype.genes.size()).forEach(i -> genotype.genes.get(i).allele = new Allele(alleleValues.get(i)));
+    	IntStream.range(0, ((Chromosome)solution.genotype).genes.size()).
+    		forEach(i -> ((Chromosome)solution.genotype).genes.get(i).allele = new Allele(alleleValues.get(i)));
     	
     	return solution;
 	}

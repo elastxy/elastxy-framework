@@ -9,6 +9,7 @@ import java.util.stream.Collectors;
 
 import it.red.algen.dataaccess.WorkingDataset;
 import it.red.algen.domain.genetics.genotype.Allele;
+import it.red.algen.engine.AlgorithmException;
 import it.red.algen.utils.Randomizer;
 
 /**
@@ -20,9 +21,15 @@ import it.red.algen.utils.Randomizer;
  *
  */
 public class PredefinedGenoma implements Genoma {
+	/**
+	 * To be used when position is not applicable 
+	 * (same list of alleles shared betweeb genes)
+	 */
+	private final String NO_POSITION = "-1"; 
+	
+	private boolean sharedAlleles = false;
 	
 	public WorkingDataset workingDataset;
-	private ChromosomeGenotypeStructure genotypeStructure;
 	
 	/**
 	 * If FALSE
@@ -43,6 +50,27 @@ public class PredefinedGenoma implements Genoma {
 	 */
 	private Map<String, List<Allele>> alleles = new HashMap<String, List<Allele>>();
 
+	/**
+	 * Structure of genotype
+	 */
+	private ChromosomeGenotypeStructure genotypeStructure;
+
+	
+	/**
+	 * Initializes Genoma with a single list of all possible alleles.
+	 * 
+	 * This list is applicable to all Genes: more efficient when 
+	 * the same list of possible alleles is shared between Genes.
+	 * 
+	 * @param alleles
+	 */
+	public void initialize(int numberOfPositions, List<Allele> alleles){
+		sharedAlleles = true;
+		this.alleles.put(NO_POSITION, alleles);
+		genotypeStructure = new ChromosomeGenotypeStructure();
+		genotypeStructure.build(numberOfPositions);
+	}
+
 	
 	/**
 	 * Initializes Genoma with a map of genes:
@@ -51,9 +79,10 @@ public class PredefinedGenoma implements Genoma {
 	 * @param alleles
 	 */
 	public void initialize(Map<String, List<Allele>> alleles){
+		sharedAlleles = false;
 		this.alleles = alleles;
 		genotypeStructure = new ChromosomeGenotypeStructure();
-		genotypeStructure.build(this.alleles);
+		genotypeStructure.build(this.alleles.size());
 	}
 
 
@@ -98,16 +127,32 @@ public class PredefinedGenoma implements Genoma {
 			throw new IllegalStateException("Cannot generate Allele in limited context: you must use aggregate methods.");
 		}
 	}
-
-
 	
+	private void forbidNotSharedAlleles(){
+		if(!sharedAlleles){
+			throw new AlgorithmException("Same list of alleles are not shared between positions: a position must be specified.");
+		}
+	}
+
+
+
+	/**
+	 * Returns a random allele for given position.
+	 */
 	@Override
 	public Allele getRandomAllele(String position){
+		if(sharedAlleles){
+			position = NO_POSITION;
+		}
 		List<Allele> positionsAlleles = alleles.get(position);
 		return positionsAlleles.get(Randomizer.nextInt(positionsAlleles.size()));
 	}
 
-	
+
+	/**
+	 * Returns random alleles for given positions.
+	 * @return
+	 */
 	@Override
 	public List<Allele> getRandomAlleles(List<String> position){
 		forbidLimitedAllelesStrategy();
@@ -116,12 +161,13 @@ public class PredefinedGenoma implements Genoma {
 	
 
 	/**
-	 * Returns an random allele for every position.
+	 * Returns a random allele for every position, with no duplicates.
 	 * @return
 	 */
 	@Override
 	public List<Allele> getRandomAlleles() {
-		List<Allele> result = new ArrayList<Allele>(alleles.get("0")); // TODOA: shared list of all alleles
+		forbidNotSharedAlleles();
+		List<Allele> result = new ArrayList<Allele>(alleles.get(NO_POSITION));
 		Collections.shuffle(result);
 		return result;
 //		List<Object> alreadyUsedAlleles = new ArrayList<Object>();
@@ -133,12 +179,14 @@ public class PredefinedGenoma implements Genoma {
 //		return alleles.keySet().stream().map(p -> getRandomAllele(p)).collect(Collectors.toList());
 	}
 
+	
 	/**
 	 * Get all available alleles
 	 * @return
 	 */
 	public List<Allele> getAllAlleles() {
-		return alleles.get("0"); // TODOA: get(0) is BAD: add access to list of common alleles
+		forbidNotSharedAlleles();
+		return alleles.get(NO_POSITION);
 	}
 	
 

@@ -9,7 +9,7 @@ import it.red.algen.domain.genetics.genotype.Allele;
 /**
  * Maintains the registry of all genetic assets.
  * Exposes and represents the structure of genotype produced by genoma.
- * Allows SolutionFactory to retrieve Alleles for creating the Genotype.
+ * Allows SolutionsFactory to retrieve Alleles for creating the Genotype.
  * 
  * <b>Metadata</b>
  * 

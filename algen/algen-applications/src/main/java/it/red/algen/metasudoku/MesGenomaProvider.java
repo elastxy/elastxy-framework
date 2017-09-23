@@ -99,11 +99,9 @@ public class MesGenomaProvider implements GenomaProvider {
 			allele.value = missingNumbers.get(i);
 			predefinedAlleles.add(allele);
 		}
-		for(int i=0; i < missingNumbers.size(); i++) {
-			alleles.put(String.valueOf(i), predefinedAlleles);
-		}
-		
-		genoma.initialize(alleles);
+
+		// Init genoma with the shared list of alleles
+		genoma.initialize(missingNumbers.size(), predefinedAlleles);
 		
 		return genoma;
 	}
