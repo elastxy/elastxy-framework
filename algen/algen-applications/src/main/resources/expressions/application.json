@@ -23,7 +23,7 @@
 	
 	"solutionsFactory": {
 		"type" : "java",
-		"content" : "it.red.algen.dataaccess.MetadataSolutionsFactory"
+		"content" : "it.red.algen.metadata.MetadataSolutionsFactory"
 	},
 	
 	"fitnessCalculator": {

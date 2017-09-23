@@ -1,6 +1,5 @@
 package it.red.algen.algofrigerator;
 
-import java.util.List;
 import java.util.SortedMap;
 
 import it.red.algen.dataaccess.SolutionsFactory;
@@ -18,8 +17,7 @@ public class MefSolutionsFactory implements SolutionsFactory<StandardMetadataGen
     public Solution createRandom(StandardMetadataGenoma genoma) {
     	GenericSolution solution = new GenericSolution();
 
-    	Strand genotype = new Strand();
-    	genotype.chromosomes = MetadataGeneticMaterialFactory.createStrand(genoma);
+    	Strand genotype = MetadataGeneticMaterialFactory.createStrand(genoma);
     	
     	SortedMap<String,Allele> alleles = genoma.getRandomAllelesAsMap();
     	genotype.assignAlleles(alleles);
@@ -33,10 +31,10 @@ public class MefSolutionsFactory implements SolutionsFactory<StandardMetadataGen
     	throw new UnsupportedOperationException("NYI");
     }
 
-	@Override
-	public Solution createPredefined(StandardMetadataGenoma genoma, List<Object> alleleValues) {
-    	throw new UnsupportedOperationException("NYI");
-	}
+//	@Override
+//	public Solution createPredefined(StandardMetadataGenoma genoma, List<Object> alleleValues) {
+//    	throw new UnsupportedOperationException("NYI");
+//	}
 
 
 }

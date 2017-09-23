@@ -33,16 +33,16 @@ public class PredefinedGenomaSolutionsFactory  implements SolutionsFactory<Prede
     	return solution;
 	}
 
-	@Override
-	public Solution createPredefined(PredefinedGenoma genoma, List<Object> alleleValues) {
-		GenericSolution solution = new GenericSolution();
-    	solution.genotype = PredefinedGenotypeFactory.createGenotype(genoma);
-
-    	IntStream.range(0, ((Chromosome)solution.genotype).genes.size()).
-    		forEach(i -> ((Chromosome)solution.genotype).genes.get(i).allele = new Allele(alleleValues.get(i)));
-    	
-    	return solution;
-	}
+//	@Override
+//	public Solution createPredefined(PredefinedGenoma genoma, List<Object> alleleValues) {
+//		GenericSolution solution = new GenericSolution();
+//    	solution.genotype = PredefinedGenotypeFactory.createGenotype(genoma);
+//
+//    	IntStream.range(0, ((Chromosome)solution.genotype).genes.size()).
+//    		forEach(i -> ((Chromosome)solution.genotype).genes.get(i).allele = new Allele(alleleValues.get(i)));
+//    	
+//    	return solution;
+//	}
 
 	
 }

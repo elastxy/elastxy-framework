@@ -7,6 +7,7 @@ import org.apache.log4j.Logger;
 
 import it.red.algen.domain.genetics.genotype.Chromosome;
 import it.red.algen.domain.genetics.genotype.Gene;
+import it.red.algen.domain.genetics.genotype.Strand;
 
 
 /**
@@ -39,10 +40,10 @@ public class MetadataGeneticMaterialFactory {
 	 * @param positions
 	 * @return
 	 */
-	public static List<Gene> createSequence(MetadataGenoma genoma){
-		List<Gene> result = new ArrayList<Gene>();
+	public static Chromosome createChromosome(MetadataGenoma genoma){
+		Chromosome result = new Chromosome();
 		for(int pos=0; pos < genoma.getGenotypeStructure().getPositionsSize(); pos++){
-			result.add(createGeneByPosition(genoma, String.valueOf(pos)));
+			result.genes.add(createGeneByPosition(genoma, String.valueOf(pos)));
 		}
 		return result;
 	}
@@ -53,8 +54,8 @@ public class MetadataGeneticMaterialFactory {
 	 * @param genoma
 	 * @return
 	 */
-	public static List<Chromosome> createStrand(MetadataGenoma genoma){
-		List<Chromosome> result = new ArrayList<Chromosome>();
+	public static Strand createStrand(MetadataGenoma genoma){
+		Strand result = new Strand();
 //		if(genoma.getNumberOfStrands()!=1){
 //			String msg = "Cannot create strand. Genoma with number of strands different from one: "+genoma.getNumberOfStrands();
 //			logger.error(msg);
@@ -67,7 +68,7 @@ public class MetadataGeneticMaterialFactory {
 				Gene gene = createGeneByPosition(genoma, c+"."+g);
 				chromosome.genes.add(gene);
 			}
-			result.add(chromosome);
+			result.chromosomes.add(chromosome);
 		}
 		//		IntStream.range(0, genesMetadataByPos.size()).boxed().map(i -> i.toString()).collect(Collectors.toList());
 		return result;

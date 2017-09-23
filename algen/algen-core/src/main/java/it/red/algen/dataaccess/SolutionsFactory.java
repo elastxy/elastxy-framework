@@ -7,11 +7,11 @@ import it.red.algen.domain.experiment.Solution;
 public interface SolutionsFactory<G> {
 
 	/**
-	 * Create a random solution with random genes from genoma
+	 * Create a random Solution with random Alleles from Genoma.
 	 * 
 	 * E.g. '4 * 7'
 	 * 
-	 * Used in random option in PopulationFactory
+	 * Used in random option in PopulationFactory.
 	 * 
 	 * @return
 	 */
@@ -19,7 +19,7 @@ public interface SolutionsFactory<G> {
 	
 
 	/**
-	 * Create a default, fixed initial solution to be evolved by mutation
+	 * Create a default, always the same initial Solution (to be evolved by mutation).
 	 * 
 	 * E.g. '0 + 0'
 	 * 
@@ -31,13 +31,15 @@ public interface SolutionsFactory<G> {
 	
 	
 
-	/**
-	 * Create a solution populated with predefined values
-	 * (useful to create benchmark solutions, or as help to calculate target, boundaries...)
-	 * 
-	 * E.g. '-1000 * 1000'
-	 * 
-	 * @return
-	 */
-	public Solution createPredefined(G genoma, List<Object> alleleValues);
+//	/**
+//	 * Create a solution populated with predefined values.
+//	 * 
+//	 * Useful to create benchmark solutions, or as help to calculate target, 
+//	 * boundaries, etc.
+//	 * 
+//	 * E.g. '-1000 * 1000'
+//	 * 
+//	 * @return
+//	 */
+//	public Solution createPredefined(G genoma, List<Object> alleleValues);
 }
