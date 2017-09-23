@@ -10,6 +10,7 @@ import java.util.stream.Collectors;
 import it.red.algen.dataaccess.WorkingDataset;
 import it.red.algen.domain.genetics.genotype.Allele;
 import it.red.algen.engine.AlgorithmException;
+import it.red.algen.engine.genetics.AbstractGenoma;
 import it.red.algen.utils.Randomizer;
 
 /**
@@ -20,7 +21,7 @@ import it.red.algen.utils.Randomizer;
  * @author red
  *
  */
-public class PredefinedGenoma implements Genoma {
+public class PredefinedGenoma extends AbstractGenoma implements Genoma {
 	/**
 	 * To be used when position is not applicable 
 	 * (same list of alleles shared betweeb genes)
@@ -31,19 +32,6 @@ public class PredefinedGenoma implements Genoma {
 	
 	public WorkingDataset workingDataset;
 	
-	/**
-	 * If FALSE
-	 * 
-	 * Any number of Alleles can be created of the same type
-	 * 
-	 * If TRUE
-	 * 
-	 * Limits the number of total Alleles to those predefined at the beginning.
-	 * When generating a set of Alleles for a number of genes, takes care of excluding 
-	 * those already selected
-	 */
-	// TODOM: manage by strategy
-	public boolean limitedAllelesStrategy = false;
 
 	/**
 	 * Map of predefined alleles by position.
@@ -93,47 +81,12 @@ public class PredefinedGenoma implements Genoma {
 
 
 	
-	/**
-	 * TODOA: separate Genoma role woth working dataset
-	 */
-	@Override
-	public WorkingDataset getWorkingDataset() {
-		return workingDataset;
-	}
-
-	@Override
-	public void setWorkingDataset(WorkingDataset workingDataset) {
-		this.workingDataset = workingDataset;
-	}
-
-
-	@Override
-	public boolean isLimitedAllelesStrategy() {
-		return limitedAllelesStrategy;
-	}
-
-
-	@Override
-	public void setLimitedAllelesStrategy(boolean limitedAllelesStrategy) {
-		this.limitedAllelesStrategy = limitedAllelesStrategy;
-	}
-	
-
-	/**
-	 * Some methods are not allowed when limited alleles strategy is on
-	 */
-	private void forbidLimitedAllelesStrategy(){
-		if(limitedAllelesStrategy){
-			throw new IllegalStateException("Cannot generate Allele in limited context: you must use aggregate methods.");
-		}
-	}
 	
 	private void forbidNotSharedAlleles(){
 		if(!sharedAlleles){
 			throw new AlgorithmException("Same list of alleles are not shared between positions: a position must be specified.");
 		}
 	}
-
 
 
 	/**

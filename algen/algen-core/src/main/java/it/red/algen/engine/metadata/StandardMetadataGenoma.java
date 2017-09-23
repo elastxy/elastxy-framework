@@ -16,6 +16,7 @@ import it.red.algen.domain.genetics.GenotypeStructure;
 import it.red.algen.domain.genetics.StrandGenotypeStructure;
 import it.red.algen.domain.genetics.genotype.Allele;
 import it.red.algen.engine.AlgorithmException;
+import it.red.algen.engine.genetics.AbstractGenoma;
 
 
 /**
@@ -27,10 +28,8 @@ import it.red.algen.engine.AlgorithmException;
  * (now all genes share the same 1000 values and must be retrieved with get(0)!)
  * @author red
  */
-public class StandardMetadataGenoma implements MetadataGenoma {
-	private static final GenomaPositionComparator POSITIONS_COMPARATOR = new GenomaPositionComparator();
+public class StandardMetadataGenoma extends AbstractGenoma implements MetadataGenoma {
 	
-	public WorkingDataset workingDataset;
 	private StrandGenotypeStructure genotypeStructure;
 	
 	/**
@@ -51,20 +50,6 @@ public class StandardMetadataGenoma implements MetadataGenoma {
 	 */
 	private AlleleGenerator alleleGenerator;
 
-	private boolean limitedAllelesStrategy;
-	
-	/**
-	 * TODOA: separate Genoma role with working dataset
-	 */
-	@Override
-	public WorkingDataset getWorkingDataset() {
-		return workingDataset;
-	}
-
-	@Override
-	public void setWorkingDataset(WorkingDataset workingDataset) {
-		this.workingDataset = workingDataset;
-	}
 
 	@Override
 	public GenotypeStructure getGenotypeStructure() {
@@ -81,6 +66,7 @@ public class StandardMetadataGenoma implements MetadataGenoma {
 	public void setupAlleleGenerator(AlleleGenerator generator){
 		alleleGenerator = generator;
 	}
+	
 
 	@Override
 	public void initialize(Map<String,GeneMetadata> genesMetadataByCode, Map<String,GeneMetadata> genesMetadataByPos){
@@ -108,13 +94,9 @@ public class StandardMetadataGenoma implements MetadataGenoma {
 	
 	
 
-	public boolean isLimitedAllelesStrategy() {
-		return limitedAllelesStrategy;
-	}
-
-	public void setLimitedAllelesStrategy(boolean limitedAllelesStrategy) {
-		this.limitedAllelesStrategy = limitedAllelesStrategy;
-	}
+	
+	
+	
 	
 	
 	/**
@@ -137,25 +119,8 @@ public class StandardMetadataGenoma implements MetadataGenoma {
 	}
 	
 
-	/**
-	 * Some methods are not allowed when limited alleles strategy is on
-	 */
-	private void forbidLimitedAllelesStrategy(){
-		if(limitedAllelesStrategy){
-			throw new IllegalStateException("Cannot generate Allele in limited context: you must use aggregate methods.");
-		}
-	}
-
 	
-//	/**
-//	 * Some methods are not available when limited alleles strategy is on because not yet implemented
-//	 */
-//	private void nyiLimitedAllelesStrategy(){
-//		if(limitedAllelesStrategy){
-//			throw new IllegalStateException("NYI");
-//		}
-//	}
-
+	
 	
 	
 	
@@ -235,6 +200,10 @@ public class StandardMetadataGenoma implements MetadataGenoma {
 		return result;
 	}
 
+	
+	
+	
+	
 	
 	/**
 	 * Generate new Allele list based on given metadata

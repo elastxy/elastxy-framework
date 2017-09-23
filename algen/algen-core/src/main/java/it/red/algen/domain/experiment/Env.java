@@ -13,6 +13,7 @@ package it.red.algen.domain.experiment;
 import java.util.ArrayList;
 import java.util.List;
 
+import it.red.algen.dataaccess.WorkingDataset;
 import it.red.algen.domain.genetics.Genoma;
 
 
@@ -29,7 +30,8 @@ public class Env {
 	public Target<?,?> target;
     public Population currentGen;
     public Genoma genoma;
-    
+//    public WorkingDataset workingDataset; // TODOA: workingdataset
+
     public int currentGenNumber = 0; // first generation starts from 0
     public long startTime;
     public long endTime;

@@ -3,13 +3,19 @@ package it.red.algen.domain.genetics;
 import java.util.List;
 
 import it.red.algen.dataaccess.WorkingDataset;
+import it.red.algen.domain.experiment.Solution;
 import it.red.algen.domain.genetics.genotype.Allele;
 
 
 /**
- * Maintains the registry of all genetic assets.
- * Exposes and represents the structure of genotype produced by genoma.
- * Allows SolutionsFactory to retrieve Alleles for creating the Genotype.
+ * RESPOSIBILITIES
+ * - Maintains the registry of all genetic assets created by Genoma Provider.
+ * - Internally represents the structure of genotype produced by genoma provider
+ *  (three types: single chromosome, strand, multiple strand).
+ * - Selection support: builds Genotype using Genotype Structure as a blueprint, 
+ *  using Metadata or Alleles predefined value, depending on implementation.
+ * - Mutation support: mutate a given Genotype.
+ * 
  * 
  * <b>Metadata</b>
  * 
@@ -32,6 +38,9 @@ import it.red.algen.domain.genetics.genotype.Allele;
  * to create and build solution with all 81 cells!
  * Instead, only the N free cells constitute the material useful to solve the problem.
  * 
+ * E.g. Recipes complete objects are not pertinent to genetic algorithm,
+ * so an access to WorkingDataset is needed.
+ * 
  * Nonetheless, the whole genetic material is useful to complete the genotype
  * of a solution when building a phenotype, so it must be accessible
  * from a Incubator, beside the variable part.
@@ -47,9 +56,10 @@ import it.red.algen.domain.genetics.genotype.Allele;
  * 
  * This can be managed by specifying a goal based Genoma, holding only
  * useful alleles relevant to solutions genotype for that goal.
+ * This is accomplished with restrict function of Genoma Provider.
  * 
  * After that, when building phenotype, Incubator can access only 
- * this genetic material.
+ * this genetic material and must add the remaining.
  * 
  * @author red
  *
@@ -84,9 +94,22 @@ public interface Genoma {
 	 * 
 	 * @return
 	 */
-	public boolean isLimitedAllelesStrategy();
-
 	public void setLimitedAllelesStrategy(boolean limitedAllelesStrategy);
+
+	
+	
+
+	/**
+	 * Mutate given positions in the Solution, getting a new Allele 
+	 * or swapping two existing, based on limited allele strategy.
+	 * @param solution
+	 * @param positions
+	 */
+	public void mutate(Solution solution, List<String> positions);
+	
+	
+	
+	
 	
 	/**
 	 * Retrieves a random Allele suitable for the given position in the sequence

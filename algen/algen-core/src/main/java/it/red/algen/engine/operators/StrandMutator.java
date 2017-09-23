@@ -24,7 +24,7 @@ public class StrandMutator implements Mutator<Solution, Genoma> {
 		Strand genotype = (Strand)solution.getGenotype();
 		for(int c=0; c < genoma.getGenotypeStructure().getNumberOfChromosomes(); c++){
 			List<String> positions = genotype.getPositions(c);
-			MutatorLogics.mutate(solution, genoma, positions);
+			genoma.mutate(solution, positions);
 		}
 		
 		return solution;

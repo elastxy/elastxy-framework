@@ -21,7 +21,7 @@ public class ChromosomeMutator implements Mutator<Solution, Genoma> {
 		
 		// Replace an allele to another of genoma for the same position
 		List<String> positions = solution.getGenotype().getPositions();
-		MutatorLogics.mutate(solution, genoma, positions);
+		genoma.mutate(solution, positions);
 		return solution;
 	}
 
