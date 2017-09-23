@@ -2,6 +2,8 @@ package it.red.algen.domain.experiment;
 
 import java.math.BigDecimal;
 
+import it.red.algen.engine.fitness.FitnessUtils;
+
 /**
  * A generic target class expressing a generic performance index as a goal.
  * 
@@ -54,7 +56,7 @@ public class PerformanceTarget<G,M> implements Target<G,M> {
 	 */
 	@Override
 	public void setTargetFitness(BigDecimal fitness) {
-		this.targetFitness = TargetUtils.approximateFitness(fitness);
+		this.targetFitness = FitnessUtils.approximateFitness(fitness);
 	}
 	
 	

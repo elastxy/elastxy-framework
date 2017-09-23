@@ -1,4 +1,4 @@
-package it.red.algen.metadata;
+package it.red.algen.engine.metadata;
 
 import java.util.ArrayList;
 import java.util.HashMap;

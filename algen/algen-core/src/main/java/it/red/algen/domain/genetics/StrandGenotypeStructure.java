@@ -5,7 +5,7 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
 
-import it.red.algen.metadata.GeneMetadata;
+import it.red.algen.engine.metadata.GeneMetadata;
 
 public class StrandGenotypeStructure extends GenotypeStructureImpl {
 	

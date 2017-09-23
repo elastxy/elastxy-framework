@@ -1,9 +1,9 @@
-package it.red.algen.domain.experiment;
+package it.red.algen.engine.fitness;
 
 import java.math.BigDecimal;
 import java.math.RoundingMode;
 
-public class TargetUtils {
+public class FitnessUtils {
 
 	/**
 	 * Approximates fitness to nearest extreme value (ZERO, ONE) if needed.

@@ -1,4 +1,4 @@
-package it.red.algen.metadata;
+package it.red.algen.engine.metadata;
 
 import java.util.List;
 import java.util.Map;
@@ -126,6 +126,14 @@ public interface MetadataGenoma extends Genoma {
 	 */
 	public List<Allele> createRandomAllelesByCode(List<String> metadataCodes);
 
+
+	/**
+	 * Generates one Allele for every possible values of the metadataCode.
+	 * 
+	 *TODOA: add access to list of common alleles
+	 * @return
+	 */
+	public List<Allele> createRandomAllelesByCode(String metadataCode);
 	
 	/**
 	 * Generate a new random Allele based on a metadata

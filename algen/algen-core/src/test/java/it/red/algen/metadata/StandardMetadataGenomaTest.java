@@ -4,6 +4,8 @@ import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
 
+import it.red.algen.engine.metadata.GeneMetadata;
+import it.red.algen.engine.metadata.StandardMetadataGenoma;
 import junit.framework.Test;
 import junit.framework.TestCase;
 import junit.framework.TestSuite;

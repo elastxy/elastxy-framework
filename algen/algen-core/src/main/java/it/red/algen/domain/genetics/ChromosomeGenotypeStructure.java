@@ -1,11 +1,8 @@
 package it.red.algen.domain.genetics;
 
-import java.util.List;
-import java.util.Map;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
-import it.red.algen.domain.genetics.genotype.Allele;
 import it.red.algen.engine.AlgorithmException;
 
 public class ChromosomeGenotypeStructure extends GenotypeStructureImpl {

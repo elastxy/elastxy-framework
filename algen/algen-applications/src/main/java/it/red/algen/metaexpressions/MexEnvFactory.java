@@ -18,7 +18,7 @@ import it.red.algen.domain.experiment.NumberRawFitness;
 import it.red.algen.domain.experiment.PerformanceTarget;
 import it.red.algen.domain.experiment.Target;
 import it.red.algen.domain.genetics.Genoma;
-import it.red.algen.metadata.StandardMetadataGenoma;
+import it.red.algen.engine.metadata.StandardMetadataGenoma;
 
 /**
  * @author grossi

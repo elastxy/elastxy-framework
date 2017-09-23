@@ -6,10 +6,10 @@ import it.red.algen.dataaccess.PopulationFactory;
 import it.red.algen.dataaccess.SolutionsFactory;
 import it.red.algen.engine.fitness.FitnessCalculator;
 import it.red.algen.engine.fitness.Incubator;
+import it.red.algen.engine.metadata.AlleleGenerator;
 import it.red.algen.engine.operators.Mutator;
 import it.red.algen.engine.operators.Recombinator;
 import it.red.algen.engine.operators.Selector;
-import it.red.algen.metadata.AlleleGenerator;
 import it.red.algen.tracking.SolutionRenderer;
 
 /**

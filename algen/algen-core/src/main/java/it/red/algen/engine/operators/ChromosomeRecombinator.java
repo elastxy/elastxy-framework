@@ -5,8 +5,8 @@ import java.util.List;
 
 import it.red.algen.conf.AlgorithmParameters;
 import it.red.algen.domain.experiment.Solution;
+import it.red.algen.domain.genetics.genotype.Chromosome;
 import it.red.algen.domain.genetics.genotype.Gene;
-import it.red.algen.domain.genetics.genotype.Strand;
 
 public class ChromosomeRecombinator implements Recombinator<Solution> {
     private AlgorithmParameters algorithmParameters;
@@ -31,38 +31,33 @@ public class ChromosomeRecombinator implements Recombinator<Solution> {
 		
 		// Define cut point
 		// TODOM: define cut point from metadata!
-		Strand genotype0 = (Strand)parents.get(0).getGenotype();
+		Chromosome genotype0 = (Chromosome)parents.get(0).getGenotype();
+		List<Gene> genes = genotype0.genes;
 		
-		Solution[] offsprings = null;
 		
-		// for each chromosome
-		for(int c=0; c < genotype0.getNumberOfChromosomes(); c++){
-			List<Gene> genes = genotype0.chromosomes.get(c).genes;
-			
-			// TODOM: remove following redundancies with SequenceRecombinator
-			int crossoverPoint = Math.floorDiv(genes.size(), 2);
-			
-			// Define parents and children as initial clones of the parents
-			Solution offspring0 = parents.get(0).copy();
-			Solution offspring1 = parents.get(1).copy();
-	        List<Gene> offspring0Genes = ((Strand)offspring0.getGenotype()).chromosomes.get(c).genes;
-	        List<Gene> offspring1Genes = ((Strand)offspring1.getGenotype()).chromosomes.get(c).genes;
-			
-			// Reset Fitness values
-			offspring0.setFitness(null);
-			offspring1.setFitness(null);
-			
-			offsprings = new Solution[2];
-			offsprings[0] = offspring0;
-			offsprings[1] = offspring1;
-			
-			// Recombine redistributing genotype on two offsprings
-			RecombinatorLogics.cutAndSwapSequence(offspring0Genes, offspring1Genes, crossoverPoint);
-		}
+		
+		
+		int crossoverPoint = Math.floorDiv(genes.size(), 2);
+		
+		// Define parents and children as initial clones of the parents
+		Solution offspring0 = parents.get(0).copy();
+        Solution offspring1 = parents.get(1).copy();
+        List<Gene> offspring0Genes = ((Chromosome)offspring0.getGenotype()).genes;
+        List<Gene> offspring1Genes = ((Chromosome)offspring1.getGenotype()).genes;
+        
+        // Reset Fitness values
+        offspring0.setFitness(null);
+        offspring1.setFitness(null);
+        
+		Solution[] offsprings = new Solution[2];
+		offsprings[0] = offspring0;
+		offsprings[1] = offspring1;
+        
+		
+        // Recombine redistributing genotype on two offsprings
+		RecombinatorLogics.cutAndSwapSequence(offspring0Genes, offspring1Genes, crossoverPoint);
 		
 		// Returns the array
         return Arrays.asList(offsprings);
     }
-	
-
 }

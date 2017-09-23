@@ -1,4 +1,4 @@
-package it.red.algen.metadata;
+package it.red.algen.engine.metadata;
 
 /**
  * Types supported for Allele type for a Gene metadata

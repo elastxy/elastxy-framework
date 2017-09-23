@@ -35,12 +35,12 @@ public class MexIncubator implements Incubator<Chromosome, NumberPhenotype>{
                 break;
             case '/':
                 if(val2==0){
-                    throw new IllegalSolutionException("Divisione per zero.");
+                    throw new IllegalSolutionException("Division by zero.");
                 }
                 result = val1 / val2;
                 break;
             default:
-                throw new IllegalArgumentException("Operatore non ammesso: "+op);
+                throw new IllegalArgumentException("Operator not admitted: "+op);
         }
         return result;
     }

@@ -9,9 +9,9 @@ import org.apache.log4j.Logger;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 
-import it.red.algen.metadata.GeneMetadata;
-import it.red.algen.metadata.GeneMetadataType;
-import it.red.algen.metadata.GenesMetadataConfiguration;
+import it.red.algen.engine.metadata.GeneMetadata;
+import it.red.algen.engine.metadata.GeneMetadataType;
+import it.red.algen.engine.metadata.GenesMetadataConfiguration;
 
 /**
  * Support class for reading configuration or local JSON files

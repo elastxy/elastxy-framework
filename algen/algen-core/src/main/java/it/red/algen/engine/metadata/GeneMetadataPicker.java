@@ -1,4 +1,4 @@
-package it.red.algen.metadata;
+package it.red.algen.engine.metadata;
 
 import it.red.algen.engine.AlgorithmException;
 import it.red.algen.utils.Randomizer;

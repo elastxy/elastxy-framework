@@ -3,8 +3,8 @@ package it.red.algen.conf;
 import java.io.IOException;
 import java.util.Arrays;
 
-import it.red.algen.metadata.GeneMetadataType;
-import it.red.algen.metadata.GenesMetadataConfiguration;
+import it.red.algen.engine.metadata.GeneMetadataType;
+import it.red.algen.engine.metadata.GenesMetadataConfiguration;
 import junit.framework.Test;
 import junit.framework.TestCase;
 import junit.framework.TestSuite;

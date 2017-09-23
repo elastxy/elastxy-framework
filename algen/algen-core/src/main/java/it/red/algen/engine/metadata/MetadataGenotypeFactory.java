@@ -1,10 +1,13 @@
-package it.red.algen.metadata;
+package it.red.algen.engine.metadata;
 
-import java.util.ArrayList;
 import java.util.List;
+import java.util.SortedMap;
+import java.util.stream.IntStream;
 
 import org.apache.log4j.Logger;
 
+import it.red.algen.applications.ApplicationException;
+import it.red.algen.domain.genetics.genotype.Allele;
 import it.red.algen.domain.genetics.genotype.Chromosome;
 import it.red.algen.domain.genetics.genotype.Gene;
 import it.red.algen.domain.genetics.genotype.Strand;
@@ -15,8 +18,8 @@ import it.red.algen.domain.genetics.genotype.Strand;
  * @author red
  *
  */
-public class MetadataGeneticMaterialFactory {
-	private static final Logger logger = Logger.getLogger(MetadataGeneticMaterialFactory.class);
+public class MetadataGenotypeFactory {
+	private static final Logger logger = Logger.getLogger(MetadataGenotypeFactory.class);
 
 
 	/**
@@ -40,21 +43,53 @@ public class MetadataGeneticMaterialFactory {
 	 * @param positions
 	 * @return
 	 */
+	public static Chromosome createChromosome(MetadataGenoma genoma, List<Allele> alleles){
+		Chromosome result = new Chromosome();
+		for(int pos=0; pos < genoma.getGenotypeStructure().getPositionsSize(); pos++){
+			result.genes.add(createGeneByPosition(genoma, String.valueOf(pos)));
+		}
+
+    	IntStream.range(0, result.genes.size()).forEach(i -> result.genes.get(i).allele = alleles.get(i));
+
+		return result;
+	}
+	
+
+	/**
+	 * Create a list of Genes for all positions
+	 * @param positions
+	 * @return
+	 */
 	public static Chromosome createChromosome(MetadataGenoma genoma){
 		Chromosome result = new Chromosome();
 		for(int pos=0; pos < genoma.getGenotypeStructure().getPositionsSize(); pos++){
 			result.genes.add(createGeneByPosition(genoma, String.valueOf(pos)));
 		}
+
+		// TODOM: new method of genoma for creating a list of alleles indexed identically to the gene pos... useful??
+    	List<Allele> alleles = genoma.createRandomAllelesByCode(result.genes.get(0).metadataCode); // TODOM: get(0)?
+    	
+    	if(alleles.size() < result.genes.size()){
+    		throw new ApplicationException("Number of possible different alleles less than number of genes creating a base predefined Solution. Check if you need the createRandom instead or try adding alleles");
+    	} 
+    	
+    	for(int i=0; i < alleles.size(); i++){
+    		result.genes.get(i).allele = alleles.get(i);
+    	}
+
 		return result;
 	}
 	
-	
 	/**
-	 * Creates a new strand composed by chromosomes given genoma positions
+	 * Creates a new strand composed by chromosomes given genoma positions,
+	 * and populate with random alleles.
+	 * 
 	 * @param genoma
 	 * @return
 	 */
 	public static Strand createStrand(MetadataGenoma genoma){
+		
+		// TODOA: copy GenotypeStructure instead
 		Strand result = new Strand();
 //		if(genoma.getNumberOfStrands()!=1){
 //			String msg = "Cannot create strand. Genoma with number of strands different from one: "+genoma.getNumberOfStrands();
@@ -71,6 +106,12 @@ public class MetadataGeneticMaterialFactory {
 			result.chromosomes.add(chromosome);
 		}
 		//		IntStream.range(0, genesMetadataByPos.size()).boxed().map(i -> i.toString()).collect(Collectors.toList());
+
+		
+		// Assign Alleles
+    	SortedMap<String,Allele> alleles = genoma.getRandomAllelesAsMap();
+    	result.assignAlleles(alleles);
+		
 		return result;
 	}
 

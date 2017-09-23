@@ -23,9 +23,9 @@ import it.red.algen.dataaccess.DataAccessException;
 import it.red.algen.dataaccess.GenomaProvider;
 import it.red.algen.domain.experiment.Target;
 import it.red.algen.domain.genetics.Genoma;
-import it.red.algen.metadata.GeneMetadata;
-import it.red.algen.metadata.GenesMetadataConfiguration;
-import it.red.algen.metadata.StandardMetadataGenoma;
+import it.red.algen.engine.metadata.GeneMetadata;
+import it.red.algen.engine.metadata.GenesMetadataConfiguration;
+import it.red.algen.engine.metadata.StandardMetadataGenoma;
 
 
 /**

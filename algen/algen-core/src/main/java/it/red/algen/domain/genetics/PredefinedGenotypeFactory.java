@@ -1,8 +1,5 @@
 package it.red.algen.domain.genetics;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import it.red.algen.domain.genetics.genotype.Chromosome;
 import it.red.algen.domain.genetics.genotype.Gene;
 
@@ -14,7 +11,7 @@ public class PredefinedGenotypeFactory {
 	 * @param positions
 	 * @return
 	 */
-	public static Genotype createGenotype(PredefinedGenoma genoma){
+	public static Chromosome createGenotype(PredefinedGenoma genoma){
 		Chromosome genotype = new Chromosome();
 		for(int pos=0; pos < genoma.getGenotypeStructure().getPositionsSize(); pos++){
 			Gene gene = new Gene();

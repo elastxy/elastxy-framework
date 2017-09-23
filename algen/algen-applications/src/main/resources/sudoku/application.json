@@ -13,7 +13,7 @@
 	
 	"alleleGenerator": {
 		"type" : "java",
-		"content" : "it.red.algen.metadata.MetadataAlleleGenerator"
+		"content" : "it.red.algen.engine.metadata.MetadataAlleleGenerator"
 	},
 	
 	"solutionsFactory": {
@@ -41,11 +41,11 @@
 	},
 	"mutator": {
 		"type" : "java",
-		"content" : "it.red.algen.engine.operators.SequenceMutator"
+		"content" : "it.red.algen.engine.operators.ChromosomeMutator"
 	},
 	"recombinator": {
 		"type" : "java",
-		"content" : "it.red.algen.engine.operators.SequenceRecombinator"
+		"content" : "it.red.algen.engine.operators.ChromosomeRecombinator"
 	},
 	"solutionRenderer": {
 		"type" : "java",

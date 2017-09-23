@@ -1,14 +1,10 @@
 package it.red.algen.algofrigerator;
 
-import java.util.SortedMap;
-
 import it.red.algen.dataaccess.SolutionsFactory;
 import it.red.algen.domain.experiment.GenericSolution;
 import it.red.algen.domain.experiment.Solution;
-import it.red.algen.domain.genetics.genotype.Allele;
-import it.red.algen.domain.genetics.genotype.Strand;
-import it.red.algen.metadata.MetadataGeneticMaterialFactory;
-import it.red.algen.metadata.StandardMetadataGenoma;
+import it.red.algen.engine.metadata.MetadataGenotypeFactory;
+import it.red.algen.engine.metadata.StandardMetadataGenoma;
 
 public class MefSolutionsFactory implements SolutionsFactory<StandardMetadataGenoma> {
 
@@ -16,13 +12,7 @@ public class MefSolutionsFactory implements SolutionsFactory<StandardMetadataGen
     // TODOM: genotype builders based directly inside in genoma
     public Solution createRandom(StandardMetadataGenoma genoma) {
     	GenericSolution solution = new GenericSolution();
-
-    	Strand genotype = MetadataGeneticMaterialFactory.createStrand(genoma);
-    	
-    	SortedMap<String,Allele> alleles = genoma.getRandomAllelesAsMap();
-    	genotype.assignAlleles(alleles);
-    	solution.genotype = genotype;
-
+    	solution.genotype = MetadataGenotypeFactory.createStrand(genoma);
     	return solution;
     }
     

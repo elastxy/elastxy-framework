@@ -8,9 +8,9 @@ import it.red.algen.context.AlgorithmContext;
 import it.red.algen.dataaccess.GenomaProvider;
 import it.red.algen.domain.experiment.Target;
 import it.red.algen.domain.genetics.Genoma;
-import it.red.algen.metadata.GeneMetadata;
-import it.red.algen.metadata.GeneMetadataType;
-import it.red.algen.metadata.StandardMetadataGenoma;
+import it.red.algen.engine.metadata.GeneMetadata;
+import it.red.algen.engine.metadata.GeneMetadataType;
+import it.red.algen.engine.metadata.StandardMetadataGenoma;
 import it.red.algen.metagarden.data.GardenDatabase;
 import it.red.algen.metagarden.data.GardenDatabaseCSV;
 import it.red.algen.metagarden.data.Place;
@@ -46,9 +46,11 @@ public class MegGenomaProvider implements GenomaProvider {
 //	@Cacheable(value = "genoma")
 	@Override
 	public void collect() {
+		
 		StandardMetadataGenoma genoma = new StandardMetadataGenoma();
 		genoma.setupAlleleGenerator(context.application.alleleGenerator);
 		genoma.setLimitedAllelesStrategy(context.applicationSpecifics.getParamBoolean(MegConstants.LIMITED_TREES));
+		
 		Map<String, GeneMetadata> genesMetadataByCode = new HashMap<String, GeneMetadata>();
 		Map<String, GeneMetadata> genesMetadataByPos = new HashMap<String, GeneMetadata>();
 		
