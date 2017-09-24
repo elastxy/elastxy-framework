@@ -69,10 +69,8 @@ public interface Genoma {
 	
 	/**
 	 * Returns the working data set this Genoma is working on.
-	 * TODOA: treat as a separate and parallel concept
 	 * @return
 	 */
-	public WorkingDataset getWorkingDataset();
 	public void setWorkingDataset(WorkingDataset workingDataset);
 
 

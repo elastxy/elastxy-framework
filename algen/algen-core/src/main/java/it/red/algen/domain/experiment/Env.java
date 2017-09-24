@@ -30,7 +30,7 @@ public class Env {
 	public Target<?,?> target;
     public Population currentGen;
     public Genoma genoma;
-//    public WorkingDataset workingDataset; // TODOA: workingdataset
+    public WorkingDataset workingDataset;
 
     public int currentGenNumber = 0; // first generation starts from 0
     public long startTime;
@@ -42,10 +42,11 @@ public class Env {
     // TODOM: move to another entity EnvHistory, Tracking...
     public List<Population> generationsHistory = new ArrayList<Population>();
     
-    public Env(Target<?,?> target, Population currentGen, Genoma genoma){
+    public Env(Target<?,?> target, Population currentGen, Genoma genoma, WorkingDataset workingDataset){
     	this.target = target;
     	this.currentGen = currentGen;
     	this.genoma = genoma;
+    	this.workingDataset = workingDataset;
     }
         
     

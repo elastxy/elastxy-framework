@@ -16,7 +16,7 @@ public abstract class AbstractGenoma implements Genoma {
 	 * Represents the data algorithm is working on, 
 	 * which must not be maintained in solutions because it is too much expensive.
 	 */
-	public WorkingDataset workingDataset;
+	private WorkingDataset workingDataset;
 	
 	/**
 	 * If FALSE
@@ -30,16 +30,8 @@ public abstract class AbstractGenoma implements Genoma {
 	 * those already selected
 	 */
 	// TODOM: manage by strategy
-	public boolean limitedAllelesStrategy = false;
+	protected boolean limitedAllelesStrategy = false;
 
-
-	/**
-	 * TODOA: separate Genoma role with working dataset
-	 */
-	@Override
-	public WorkingDataset getWorkingDataset() {
-		return workingDataset;
-	}
 
 	@Override
 	public void setWorkingDataset(WorkingDataset workingDataset) {

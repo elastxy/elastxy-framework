@@ -66,7 +66,7 @@ public abstract class AbstractEnvFactory<T extends Object, R extends Object, G e
     	Population startGen = createInitialPopulation(genoma);
         
         // Create environment
-        Env env = new Env(target, startGen, genoma);
+        Env env = new Env(target, startGen, genoma, workingDataset);
         
         return env;
     }

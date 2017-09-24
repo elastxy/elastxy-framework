@@ -42,7 +42,7 @@ public class MefFitnessCalculator implements FitnessCalculator<GenericSolution,S
     	BigDecimal normalizedFitness = null;
         
     	// Grow the offspring to evaluate it
-    	solution.phenotype = incubator.grow(env.genoma.getWorkingDataset(), (Strand)solution.genotype, env);
+    	solution.phenotype = incubator.grow(env.workingDataset, (Strand)solution.genotype, env);
 
     	// Get goal
     	MefGoal goal = (MefGoal)env.target.getGoal();
