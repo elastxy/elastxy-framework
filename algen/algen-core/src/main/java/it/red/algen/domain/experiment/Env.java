@@ -30,6 +30,11 @@ public class Env {
 	public Target<?,?> target;
     public Population currentGen;
     public Genoma genoma;
+
+	/**
+	 * Represents the data algorithm is working on, 
+	 * which must not be maintained in solutions because it is too much expensive.
+	 */
     public WorkingDataset workingDataset;
 
     public int currentGenNumber = 0; // first generation starts from 0

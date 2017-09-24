@@ -1,6 +1,5 @@
 package it.red.algen.algofrigerator;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
@@ -14,8 +13,6 @@ import it.red.algen.algofrigerator.data.IngredientsCoverage;
 import it.red.algen.algofrigerator.data.MefWorkingDataset;
 import it.red.algen.algofrigerator.data.Recipe;
 import it.red.algen.algofrigerator.data.RecipeType;
-import it.red.algen.algofrigerator.data.RecipesDatabase;
-import it.red.algen.algofrigerator.data.RecipesDatabaseCSV;
 import it.red.algen.conf.ReadConfigSupport;
 import it.red.algen.context.AlgorithmContext;
 import it.red.algen.dataaccess.DataAccessException;
@@ -63,8 +60,6 @@ public class MefGenomaProvider implements GenomaProvider {
 	private MefWorkingDataset workingDataset = null;
 
 	
-	
-
 	public void setup(AlgorithmContext context){
 		this.context = context;
 	}
@@ -195,7 +190,6 @@ public class MefGenomaProvider implements GenomaProvider {
 		// Create Genoma
 		StandardMetadataGenoma genoma = new StandardMetadataGenoma();
 		genoma.setupAlleleGenerator(context.application.alleleGenerator);
-		genoma.setWorkingDataset(workingDataset);
 		genoma.setLimitedAllelesStrategy(false); // TODOM: repetitions of receipt are available: make it configurable!
 		genoma.initialize(genesMetadataByCode, genesMetadataByPos);
 		return genoma;

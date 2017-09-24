@@ -68,13 +68,6 @@ public interface Genoma {
 
 	
 	/**
-	 * Returns the working data set this Genoma is working on.
-	 * @return
-	 */
-	public void setWorkingDataset(WorkingDataset workingDataset);
-
-
-	/**
 	 * Returns the Genotype structure.
 	 * @return
 	 */

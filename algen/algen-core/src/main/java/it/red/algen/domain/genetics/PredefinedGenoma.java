@@ -7,7 +7,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 
-import it.red.algen.dataaccess.WorkingDataset;
 import it.red.algen.domain.genetics.genotype.Allele;
 import it.red.algen.engine.AlgorithmException;
 import it.red.algen.engine.genetics.AbstractGenoma;
@@ -29,8 +28,6 @@ public class PredefinedGenoma extends AbstractGenoma implements Genoma {
 	private final String NO_POSITION = "-1"; 
 	
 	private boolean sharedAlleles = false;
-	
-	public WorkingDataset workingDataset;
 	
 
 	/**

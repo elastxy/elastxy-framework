@@ -2,7 +2,6 @@ package it.red.algen.engine.genetics;
 
 import java.util.List;
 
-import it.red.algen.dataaccess.WorkingDataset;
 import it.red.algen.domain.experiment.Solution;
 import it.red.algen.domain.genetics.Genoma;
 import it.red.algen.domain.genetics.GenomaPositionComparator;
@@ -11,12 +10,6 @@ import it.red.algen.utils.Randomizer;
 
 public abstract class AbstractGenoma implements Genoma {
 	protected static final GenomaPositionComparator POSITIONS_COMPARATOR = new GenomaPositionComparator();
-
-	/**
-	 * Represents the data algorithm is working on, 
-	 * which must not be maintained in solutions because it is too much expensive.
-	 */
-	private WorkingDataset workingDataset;
 	
 	/**
 	 * If FALSE
@@ -33,12 +26,6 @@ public abstract class AbstractGenoma implements Genoma {
 	protected boolean limitedAllelesStrategy = false;
 
 
-	@Override
-	public void setWorkingDataset(WorkingDataset workingDataset) {
-		this.workingDataset = workingDataset;
-	}
-	
-	
 	@Override
 	public void setLimitedAllelesStrategy(boolean limitedAllelesStrategy) {
 		this.limitedAllelesStrategy = limitedAllelesStrategy;
