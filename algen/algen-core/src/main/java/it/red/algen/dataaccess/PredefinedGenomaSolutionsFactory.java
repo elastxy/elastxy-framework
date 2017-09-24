@@ -19,7 +19,7 @@ public class PredefinedGenomaSolutionsFactory  implements SolutionsFactory<Prede
     
 	@Override
     public Solution createBaseModel(PredefinedGenoma genoma) {
-    	return createSolution(genoma, genoma.getAllAlleles());
+    	return createSolution(genoma, genoma.getOrderedAlleles());
     }
 
 	private Solution createSolution(PredefinedGenoma genoma, List<Allele> alleles) {

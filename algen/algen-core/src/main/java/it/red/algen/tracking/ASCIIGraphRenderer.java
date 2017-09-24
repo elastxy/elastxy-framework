@@ -50,7 +50,7 @@ public class ASCIIGraphRenderer {
 				line = line.append(String.format("%8d|", number));
 				line.append(pointsChars);
 				line.append(emptyChars);
-				line.append(String.format("| %.3f",lastFitness));
+				line.append(String.format("| %.10f",lastFitness));
 				result = result.append(line.toString());
 		}
 		

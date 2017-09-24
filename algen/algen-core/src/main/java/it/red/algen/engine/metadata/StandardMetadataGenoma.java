@@ -10,12 +10,8 @@ import java.util.SortedMap;
 import java.util.TreeMap;
 import java.util.stream.Collectors;
 
-import it.red.algen.dataaccess.WorkingDataset;
-import it.red.algen.domain.genetics.GenomaPositionComparator;
-import it.red.algen.domain.genetics.GenotypeStructure;
 import it.red.algen.domain.genetics.StrandGenotypeStructure;
 import it.red.algen.domain.genetics.genotype.Allele;
-import it.red.algen.engine.AlgorithmException;
 import it.red.algen.engine.genetics.AbstractGenoma;
 
 
@@ -30,7 +26,6 @@ import it.red.algen.engine.genetics.AbstractGenoma;
  */
 public class StandardMetadataGenoma extends AbstractGenoma implements MetadataGenoma {
 	
-	private StrandGenotypeStructure genotypeStructure;
 	
 	/**
 	 * Metadata of all genes type, indexed by code
@@ -50,13 +45,6 @@ public class StandardMetadataGenoma extends AbstractGenoma implements MetadataGe
 	 */
 	private AlleleGenerator alleleGenerator;
 
-
-	@Override
-	public GenotypeStructure getGenotypeStructure() {
-		return genotypeStructure;
-	}
-
-
 	
 	/**
 	 * Inject an allele generator implementation
@@ -74,7 +62,7 @@ public class StandardMetadataGenoma extends AbstractGenoma implements MetadataGe
 		this.genesMetadataByPos = new TreeMap<String, GeneMetadata>(POSITIONS_COMPARATOR);
 		this.genesMetadataByPos.putAll(genesMetadataByPos);
 		genotypeStructure = new StrandGenotypeStructure();
-		genotypeStructure.build(this.genesMetadataByPos);
+		((StrandGenotypeStructure)genotypeStructure).build(this.genesMetadataByPos);
 	}
 	
 	@Override
@@ -89,7 +77,7 @@ public class StandardMetadataGenoma extends AbstractGenoma implements MetadataGe
 			}
 		}
 		genotypeStructure = new StrandGenotypeStructure();
-		genotypeStructure.build(genesMetadataByPos);
+		((StrandGenotypeStructure)genotypeStructure).build(genesMetadataByPos);
 	}
 	
 	
@@ -122,7 +110,61 @@ public class StandardMetadataGenoma extends AbstractGenoma implements MetadataGe
 	
 	
 	
+
+	/**
+	 * Get alleles always in the same order, picking default values from each.
+	 * 
+	 * @return
+	 */
+	@Override
+	public List<Allele> getOrderedAlleles() {
+		List<Allele> result = new ArrayList<Allele>();
+		result = genesMetadataByPos.values().stream().
+				map(m -> ((MetadataAlleleGenerator)alleleGenerator).generateFirst(m)).
+				collect(Collectors.toList());
+		return result;
+	}
+
+
+//	@Override
+//	public List<Allele> getFirstAlleles(){
+//		List<String> positions = new ArrayList<String>(genesMetadataByPos.keySet());
+//		List<Allele> result = positions.stream().map(s -> getFirstAllele(s)).collect(Collectors.toList());
+//		return result;
+//	}
+//	
+//	public Allele getFirstAllele(String position) {
+//		return alleleGenerator.generateRandom(getMetadataByPosition(position));
+//	}
 	
+	
+	/**
+	 * Generate a new list of random Alleles for every position
+	 * 
+	 * If alleles are limited, allele generator is given the list
+	 * of already generated allele at each creation of a new allele
+	 * for restricting the possible values
+	 * 
+	 * @param metadataCodes
+	 * @return
+	 */
+	@Override
+	public List<Allele> getRandomAlleles(){
+		List<String> positions = new ArrayList<String>(genesMetadataByPos.keySet());
+		return getRandomAlleles(positions);
+	}
+
+
+	@Override
+	public SortedMap<String, Allele> getRandomAllelesAsMap(){
+		List<String> positions = new ArrayList<String>(genesMetadataByPos.keySet());
+		List<Allele> allelesList = getRandomAlleles(positions);
+		SortedMap<String, Allele> result = new TreeMap<String, Allele>(POSITIONS_COMPARATOR);
+		for(int a=0; a < allelesList.size(); a++){
+			result.put(positions.get(a), allelesList.get(a));
+		}
+		return result;
+	}
 	
 	
 	/**
@@ -135,7 +177,6 @@ public class StandardMetadataGenoma extends AbstractGenoma implements MetadataGe
 	public Allele getRandomAllele(String position) {
 		return alleleGenerator.generateRandom(getMetadataByPosition(position));
 	}
-	
 	
 	
 	/**
@@ -170,74 +211,29 @@ public class StandardMetadataGenoma extends AbstractGenoma implements MetadataGe
 	
 
 
-	/**
-	 * Generate a new list of random Alleles for every position
-	 * 
-	 * If alleles are limited, allele generator is given the list
-	 * of already generated allele at each creation of a new allele
-	 * for restricting the possible values
-	 * 
-	 * @param metadataCodes
-	 * @return
-	 */
-	@Override
-	public List<Allele> getRandomAlleles(){
-		List<String> positions = new ArrayList<String>(genesMetadataByPos.keySet());
-				//IntStream.range(0, genesMetadataByPos.size()).boxed().map(i -> i.toString()).collect(Collectors.toList());
-		return getRandomAlleles(positions);
-	}
-	
-
-	@Override
-	public SortedMap<String, Allele> getRandomAllelesAsMap(){
-		List<String> positions = new ArrayList<String>(genesMetadataByPos.keySet());
-		//IntStream.range(0, genesMetadataByPos.size()).boxed().map(i -> i.toString()).collect(Collectors.toList());
-		List<Allele> allelesList = getRandomAlleles(positions);
-		SortedMap<String, Allele> result = new TreeMap<String, Allele>(POSITIONS_COMPARATOR);
-		for(int a=0; a < allelesList.size(); a++){
-			result.put(positions.get(a), allelesList.get(a));
-		}
-		return result;
-	}
 
 	
 	
-	
-	
-	
-	/**
-	 * Generate new Allele list based on given metadata
-	 * 
-	 * It cannot be performed if allele are limited, because it's not position based
-	 * and can be arbitrary called N times
-	 * 
-	 * @param metadataCode
-	 * @return
-	 */
-	@Override
-	public List<Allele> createRandomAllelesByCode(List<String> metadataCodes){
-		forbidLimitedAllelesStrategy();
-		return metadataCodes.stream().map(s -> createRandomAlleleByCode(s)).collect(Collectors.toList());
-	}
-	
 
 	
-	/**
-	 * Generate a new random Allele based on a metadata
-	 * 
-	 * It cannot be performed if allele are limited, because it's not position based
-	 * and can be arbitrary called N times
-	 * 
-	 * @param metadataCode
-	 * @return
-	 */
-	@Override
-	public Allele createRandomAlleleByCode(String metadataCode){
-		forbidLimitedAllelesStrategy();
-		return alleleGenerator.generateRandom(getMetadataByCode(metadataCode));
-	}
+//	/**
+//	 * Generates a new Allele based on specific value
+//	 * 
+//	 * It cannot be performed if allele are limited, because it can be arbitrary called
+//	 * 
+//	 * An exception is raise if value is not present between metadata available values
+//	 */
+//	@Override
+//	public Allele createAlleleByValue(String metadataCode, Object value){
+//		forbidLimitedAllelesStrategy();
+//		GeneMetadata metadata = getMetadataByCode(metadataCode);
+//		if(!metadata.values.contains(value)){
+//			throw new AlgorithmException("Cannot create an Allele with given value: it's not included in those of metadata.");
+//		}
+//		return alleleGenerator.generateFromValue(value);
+//	}
 	
-
+	
 	/**
 	 * Generates one Allele for every possible values of the metadataCode
 	 * 
@@ -251,36 +247,38 @@ public class StandardMetadataGenoma extends AbstractGenoma implements MetadataGe
 		return result;
 	}
 	
+//	/**
+//	 * Generate new Allele list based on given metadata
+//	 * 
+//	 * It cannot be performed if allele are limited, because it's not position based
+//	 * and can be arbitrary called N times
+//	 * 
+//	 * @param metadataCode
+//	 * @return
+//	 */
+//	@Override
+//	public List<Allele> createRandomAllelesByCodes(List<String> metadataCodes){
+//		forbidLimitedAllelesStrategy();
+//		return metadataCodes.stream().map(s -> createRandomAlleleByCode(s)).collect(Collectors.toList());
+//	}
+//	
+//	/**
+//	 * Generate a new random Allele based on a metadata
+//	 * 
+//	 * It cannot be performed if allele are limited, because it's not position based
+//	 * and can be arbitrary called N times
+//	 * 
+//	 * @param metadataCode
+//	 * @return
+//	 */
+//	private Allele createRandomAlleleByCode(String metadataCode){
+//		//forbidLimitedAllelesStrategy();
+//		return alleleGenerator.generateRandom(getMetadataByCode(metadataCode));
+//	}
 	
 
-	@Override
-	public List<Allele> getFirstAlleles(){
-		List<String> positions = new ArrayList<String>(genesMetadataByPos.keySet());
-		List<Allele> result = positions.stream().map(s -> getFirstAllele(s)).collect(Collectors.toList());
-		return result;
-	}
-	
-	public Allele getFirstAllele(String position) {
-		return alleleGenerator.generateRandom(getMetadataByPosition(position));
-	}
-
 	
 	
-	/**
-	 * Generates a new Allele based on specific value
-	 * 
-	 * It cannot be performed if allele are limited, because it can be arbitrary called
-	 * 
-	 * An exception is raise if value is not present between metadata available values
-	 */
-	public Allele createAlleleByValue(String metadataCode, Object value){
-		forbidLimitedAllelesStrategy();
-		GeneMetadata metadata = getMetadataByCode(metadataCode);
-		if(!metadata.values.contains(value)){
-			throw new AlgorithmException("Cannot create an Allele with given value: it's not included in those of metadata.");
-		}
-		return alleleGenerator.generateFromValue(value);
-	}
 
 	
 	public String toString(){

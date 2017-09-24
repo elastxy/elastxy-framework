@@ -1,8 +1,8 @@
 package it.red.algen.domain.genetics;
 
 import java.util.List;
+import java.util.SortedMap;
 
-import it.red.algen.dataaccess.WorkingDataset;
 import it.red.algen.domain.experiment.Solution;
 import it.red.algen.domain.genetics.genotype.Allele;
 
@@ -100,7 +100,29 @@ public interface Genoma {
 	
 	
 	
+	/**
+	 * Get all available alleles always in the same order.
+	 * 
+	 * Used to create a default initial population, for test purposes for example.
+	 * 
+	 * @return
+	 */
+	public List<Allele> getOrderedAlleles();
 	
+
+	/**
+	 * Generate a new list of random Alleles for every position
+	 * 
+	 * @param metadataCodes
+	 * @return
+	 */
+	public List<Allele> getRandomAlleles();
+
+	/**
+	 * The same as above but indexed by String position
+	 * @return
+	 */
+	public SortedMap<String, Allele> getRandomAllelesAsMap();
 	
 	/**
 	 * Retrieves a random Allele suitable for the given position in the sequence
@@ -121,13 +143,5 @@ public interface Genoma {
 	 */
 	public List<Allele> getRandomAlleles(List<String> position);
 	
-
-	/**
-	 * Generate a new list of random Alleles for every position
-	 * 
-	 * @param metadataCodes
-	 * @return
-	 */
-	public List<Allele> getRandomAlleles();
 
 }

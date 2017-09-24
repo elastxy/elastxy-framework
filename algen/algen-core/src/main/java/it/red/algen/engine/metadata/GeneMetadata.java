@@ -5,9 +5,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import it.red.algen.engine.AlgorithmException;
-import it.red.algen.utils.Randomizer;
-
 public class GeneMetadata {
 	
 	/**

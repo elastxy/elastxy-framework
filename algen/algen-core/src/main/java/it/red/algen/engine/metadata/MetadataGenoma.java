@@ -2,7 +2,6 @@ package it.red.algen.engine.metadata;
 
 import java.util.List;
 import java.util.Map;
-import java.util.SortedMap;
 
 import it.red.algen.domain.genetics.Genoma;
 import it.red.algen.domain.genetics.genotype.Allele;
@@ -44,6 +43,8 @@ public interface MetadataGenoma extends Genoma {
 	 */
 	public void initialize(GenesMetadataConfiguration genes);
 	
+	
+	
 	/**
 	 * Get the metadata by code
 	 * TODOA: move to Structure
@@ -61,71 +62,9 @@ public interface MetadataGenoma extends Genoma {
 	 */
 	public GeneMetadata getMetadataByPosition(String position);
 	
-
-	/**
-	 * Creates a new random allele given the position in the sequence
-	 * TODOM: if not ordered, metadata is random
-	 * 
-	 * IMPORTANT: in case of limited resources, client must swap alleles of two different positions
-	 */
-	@Override
-	public Allele getRandomAllele(String position);
 	
 	
 	
-	/**
-	 * Generate a new set of random Alleles based on positions
-	 * 
-	 * If alleles are limited, allele generator is given the list
-	 * of already generated allele at each creation of a new allele
-	 * for restricting the possible values
-	 * 
-	 * @param positions
-	 * @return
-	 */
-	@Override
-	public List<Allele> getRandomAlleles(List<String> positions);
-
-
-	
-	/**
-	 * Generate a new list of random Alleles for every position
-	 * 
-	 * If alleles are limited, allele generator is given the list
-	 * of already generated allele at each creation of a new allele
-	 * for restricting the possible values
-	 * 
-	 * @param metadataCodes
-	 * @return
-	 */
-	@Override
-	public List<Allele> getRandomAlleles();
-
-	/**
-	 * The same as above but indexed by String position
-	 * @return
-	 */
-	public SortedMap<String, Allele> getRandomAllelesAsMap();
-
-
-	/**
-	 * Create a list of Alleles with the first of the list values
-	 * @return
-	 */
-	public List<Allele> getFirstAlleles();
-	
-	
-	/**
-	 * Generate new Allele list based on given metadata
-	 * 
-	 * It cannot be performed if allele are limited, because it's not position based
-	 * and can be arbitrary called N times
-	 * 
-	 * @param metadataCode
-	 * @return
-	 */
-	public List<Allele> createRandomAllelesByCode(List<String> metadataCodes);
-
 
 	/**
 	 * Generates one Allele for every possible values of the metadataCode.
@@ -135,25 +74,25 @@ public interface MetadataGenoma extends Genoma {
 	 */
 	public List<Allele> createRandomAllelesByCode(String metadataCode);
 	
-	/**
-	 * Generate a new random Allele based on a metadata
-	 * 
-	 * It cannot be performed if allele are limited, because it's not position based
-	 * and can be arbitrary called N times
-	 * 
-	 * @param metadataCode
-	 * @return
-	 */
-	public Allele createRandomAlleleByCode(String metadataCode);
-	
+//	/**
+//	 * Generate new Allele list based on given metadata.
+//	 * 
+//	 * It cannot be performed if allele are limited, because it's not position based
+//	 * and can be arbitrary called N times.
+//	 * 
+//	 * @param metadataCode
+//	 * @return
+//	 */
+//	public List<Allele> createRandomAllelesByCodes(List<String> metadataCodes);
 
-	/**
-	 * Generates a new Allele based on specific value
-	 * 
-	 * It cannot be performed if allele are limited, because it can be arbitrary called
-	 * 
-	 * An exception is raise if value is not present between metadata available values
-	 */
-	public Allele createAlleleByValue(String metadataCode, Object value);
+//	/**
+//	 * Generates a new Allele based on specific value.
+//	 * 
+//	 * It cannot be performed if allele are limited, because it can be arbitrary called.
+//	 * 
+//	 * An exception is raise if value is not present between metadata available values.
+//	 */
+//	public Allele createAlleleByValue(String metadataCode, Object value);
+	
 	
 }

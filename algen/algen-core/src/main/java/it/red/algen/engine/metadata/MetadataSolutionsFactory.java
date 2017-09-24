@@ -18,7 +18,7 @@ public class MetadataSolutionsFactory implements SolutionsFactory<StandardMetada
     
     @Override
     public Solution createBaseModel(StandardMetadataGenoma genoma) {
-    	return createSolution(genoma, genoma.getFirstAlleles());
+    	return createSolution(genoma, genoma.getOrderedAlleles());
     }
 
 	private Solution createSolution(StandardMetadataGenoma genoma, List<Allele> alleles) {
