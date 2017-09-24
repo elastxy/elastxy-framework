@@ -7,6 +7,7 @@ import java.util.Map;
 
 import it.red.algen.context.AlgorithmContext;
 import it.red.algen.dataaccess.GenomaProvider;
+import it.red.algen.dataaccess.WorkingDataset;
 import it.red.algen.domain.experiment.Target;
 import it.red.algen.domain.genetics.Genoma;
 import it.red.algen.domain.genetics.PredefinedGenoma;
@@ -39,6 +40,10 @@ public class MesGenomaProvider implements GenomaProvider {
 	@Override
 	public void setup(AlgorithmContext context) {
 		this.context = context;
+	}
+
+	@Override
+	public void setWorkingDataset(WorkingDataset workingDataset) {
 	}
 	
 	public static final List<Integer> COMPLETE_NUMBERS = new ArrayList<Integer>();
@@ -106,6 +111,5 @@ public class MesGenomaProvider implements GenomaProvider {
 		return genoma;
 	}
 
-	
 	
 }

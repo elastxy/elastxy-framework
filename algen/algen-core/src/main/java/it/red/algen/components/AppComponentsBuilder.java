@@ -8,6 +8,7 @@ import it.red.algen.dataaccess.EnvFactory;
 import it.red.algen.dataaccess.GenomaProvider;
 import it.red.algen.dataaccess.PopulationFactory;
 import it.red.algen.dataaccess.SolutionsFactory;
+import it.red.algen.dataaccess.DatasetProvider;
 import it.red.algen.engine.fitness.FitnessCalculator;
 import it.red.algen.engine.fitness.Incubator;
 import it.red.algen.engine.metadata.AlleleGenerator;
@@ -43,6 +44,7 @@ public class AppComponentsBuilder {
 		result.envFactory = 		(EnvFactory)constructComponent(applicationMetadata.envFactory);
 		
 		// TODOM: not by reference: indirection with name
+		result.datasetProvider = (DatasetProvider)constructComponent(applicationMetadata.datasetProvider);
 		result.genomaProvider = 	(GenomaProvider)constructComponent(applicationMetadata.genomaProvider);
 		result.alleleGenerator = 	(AlleleGenerator)constructComponent(applicationMetadata.alleleGenerator);
 
@@ -63,7 +65,10 @@ public class AppComponentsBuilder {
 	
 	private Object constructComponent(ComponentMetadata metadata){
 		Object result = null;
-		if(metadata.type==null || ComponentMetadata.TYPE_JAVA.equals(metadata.type)){
+		if(metadata==null){
+			result = null;
+		}
+		else if(metadata.type==null || ComponentMetadata.TYPE_JAVA.equals(metadata.type)){
 			Class<?> clazz;
 			try {
 				clazz = Class.forName(metadata.content);

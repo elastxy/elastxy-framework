@@ -21,6 +21,7 @@ import org.apache.log4j.Logger;
 import it.red.algen.conf.ConfigurationException;
 import it.red.algen.conf.ReadConfigSupport;
 import it.red.algen.dataaccess.AbstractEnvFactory;
+import it.red.algen.dataaccess.WorkingDataset;
 import it.red.algen.domain.experiment.MultiplePerformanceTarget;
 import it.red.algen.domain.experiment.Target;
 import it.red.algen.domain.experiment.TargetType;
@@ -35,7 +36,7 @@ public class MefEnvFactory extends AbstractEnvFactory<MultiplePerformanceTarget,
 	
 	// TODOM: take outside Target definition code, as a new Component
 	@Override
-	protected Target<MultiplePerformanceTarget, BigDecimal> defineTarget(Genoma genoma) {
+	protected Target<MultiplePerformanceTarget, BigDecimal> defineTarget(WorkingDataset dataset) {
 
 		// User parameters
 		Integer desiredMeals = context.applicationSpecifics.getTargetInteger(MefConstants.TARGET_DESIRED_MEALS, MefConstants.DEFAULT_DESIRED_MEALS);

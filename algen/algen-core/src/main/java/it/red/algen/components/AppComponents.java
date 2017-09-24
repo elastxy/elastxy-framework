@@ -4,6 +4,7 @@ import it.red.algen.dataaccess.EnvFactory;
 import it.red.algen.dataaccess.GenomaProvider;
 import it.red.algen.dataaccess.PopulationFactory;
 import it.red.algen.dataaccess.SolutionsFactory;
+import it.red.algen.dataaccess.DatasetProvider;
 import it.red.algen.engine.fitness.FitnessCalculator;
 import it.red.algen.engine.fitness.Incubator;
 import it.red.algen.engine.metadata.AlleleGenerator;
@@ -26,6 +27,7 @@ public class AppComponents {
 
 	public static final String EnvFactory = 		"envFactory"; // Context-dependent
 	
+	public static final String DatasetProvider = 	"datasetProvider"; // Context-dependent
 	public static final String GenomaProvider = 	"genomaProvider"; // Context-dependent
 	public static final String AlleleGenerator = 	"alleleGenerator";
 	
@@ -45,7 +47,8 @@ public class AppComponents {
 	public String name;
 	
 	public EnvFactory envFactory;
-	
+
+	public DatasetProvider datasetProvider;
 	public GenomaProvider genomaProvider;
 	public AlleleGenerator alleleGenerator;
 	
@@ -73,6 +76,7 @@ public class AppComponents {
 		
 		result.envFactory = envFactory;
 		
+		result.datasetProvider = datasetProvider;		
 		result.genomaProvider = genomaProvider;
 		result.alleleGenerator = alleleGenerator;
 		

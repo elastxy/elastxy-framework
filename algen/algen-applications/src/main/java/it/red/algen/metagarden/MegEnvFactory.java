@@ -11,9 +11,10 @@
 package it.red.algen.metagarden;
 
 import it.red.algen.dataaccess.AbstractEnvFactory;
+import it.red.algen.dataaccess.WorkingDataset;
 import it.red.algen.domain.experiment.PerformanceTarget;
-import it.red.algen.domain.genetics.Genoma;
 import it.red.algen.engine.metadata.StandardMetadataGenoma;
+import it.red.algen.metagarden.data.MegWorkingDataset;
 
 /**
  *
@@ -22,11 +23,11 @@ import it.red.algen.engine.metadata.StandardMetadataGenoma;
 public class MegEnvFactory extends AbstractEnvFactory<String, Double, StandardMetadataGenoma> {
 	
 	@Override
-	protected PerformanceTarget<String, Double> defineTarget(Genoma genoma) {
+	protected PerformanceTarget<String, Double> defineTarget(WorkingDataset dataset) {
 		PerformanceTarget<String,Double> target = new PerformanceTarget<String,Double>();
     	target.setGoal(context.applicationSpecifics.getTargetString(MegConstants.TARGET_WELLNESS));
     	// Determines goal rough measure: minimum possible unhappiness (illness), 0.0
-    	target.setReferenceMeasure(genoma.getGenotypeStructure().getPositionsSize() * 2.0);  // 2 is the maximum value happiness can reach
+    	target.setReferenceMeasure(((MegWorkingDataset)dataset).getPlacesNumber() * 2.0);  // 2 is the maximum value happiness can reach
 		return target;
 	}
 

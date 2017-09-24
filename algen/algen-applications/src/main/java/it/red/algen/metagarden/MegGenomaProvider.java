@@ -6,13 +6,13 @@ import java.util.Map;
 
 import it.red.algen.context.AlgorithmContext;
 import it.red.algen.dataaccess.GenomaProvider;
+import it.red.algen.dataaccess.WorkingDataset;
 import it.red.algen.domain.experiment.Target;
 import it.red.algen.domain.genetics.Genoma;
 import it.red.algen.engine.metadata.GeneMetadata;
 import it.red.algen.engine.metadata.GeneMetadataType;
 import it.red.algen.engine.metadata.StandardMetadataGenoma;
-import it.red.algen.metagarden.data.GardenDatabase;
-import it.red.algen.metagarden.data.GardenDatabaseCSV;
+import it.red.algen.metagarden.data.MegWorkingDataset;
 import it.red.algen.metagarden.data.Place;
 import it.red.algen.metagarden.data.PlaceProperty;
 
@@ -23,18 +23,23 @@ import it.red.algen.metagarden.data.PlaceProperty;
  *
  */
 public class MegGenomaProvider implements GenomaProvider {
-
-	private GardenDatabase db;
-
+	
 	private StandardMetadataGenoma cachedGenoma;
 
 	private AlgorithmContext context;
+	
+	private MegWorkingDataset workingDataset;
 
 	@Override
 	public void setup(AlgorithmContext context) {
 		this.context = context;
 	}
 
+
+	@Override
+	public void setWorkingDataset(WorkingDataset workingDataset) {
+		this.workingDataset = (MegWorkingDataset)workingDataset;
+	}
 	
 //	@Cacheable(value = "genoma") TODOM: cache
 	@Override
@@ -54,11 +59,9 @@ public class MegGenomaProvider implements GenomaProvider {
 		Map<String, GeneMetadata> genesMetadataByCode = new HashMap<String, GeneMetadata>();
 		Map<String, GeneMetadata> genesMetadataByPos = new HashMap<String, GeneMetadata>();
 		
-		db = new GardenDatabaseCSV(context.application.name);
-		Place[] places = db.getAllPlaces();
 		
-		for(int pos=0; pos < places.length; pos++){
-			Place place = places[pos];
+		for(int pos=0; pos < workingDataset.places.length; pos++){
+			Place place = workingDataset.places[pos];
 		
 			GeneMetadata metadata = new GeneMetadata();
 			metadata.code = "place"+pos;
@@ -70,7 +73,7 @@ public class MegGenomaProvider implements GenomaProvider {
 			metadata.userProperties.put(PlaceProperty.WET_LEVEL.name(), 	place.getWetLevel());
 			metadata.userProperties.put(PlaceProperty.WIND_LEVEL.name(), 	place.getWindLevel());
 			
-			metadata.values = Arrays.asList(db.getAllTrees());
+			metadata.values = Arrays.asList(workingDataset.trees);
 			
 			genesMetadataByCode.put(metadata.code, metadata);
 			genesMetadataByPos.put(String.valueOf(pos), metadata);
@@ -88,5 +91,6 @@ public class MegGenomaProvider implements GenomaProvider {
 	public Genoma shrink(Target<?, ?> target) {
 		return cachedGenoma;
 	}
+
 
 }

@@ -6,7 +6,6 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
-import java.util.TreeMap;
 import java.util.stream.Collectors;
 
 import org.apache.log4j.Logger;
@@ -21,6 +20,7 @@ import it.red.algen.conf.ReadConfigSupport;
 import it.red.algen.context.AlgorithmContext;
 import it.red.algen.dataaccess.DataAccessException;
 import it.red.algen.dataaccess.GenomaProvider;
+import it.red.algen.dataaccess.WorkingDataset;
 import it.red.algen.domain.experiment.Target;
 import it.red.algen.domain.genetics.Genoma;
 import it.red.algen.engine.metadata.GeneMetadata;
@@ -55,16 +55,6 @@ public class MefGenomaProvider implements GenomaProvider {
 	
 	private AlgorithmContext context;
 	
-	/**
-	 *  Original raw data
-	 */
-	private RecipesDatabase db = null;
-
-	
-	/**
-	 * Extracted Recipe by type
-	 */
-	private Map<RecipeType, List<Recipe>> recipes = new HashMap<RecipeType, List<Recipe>>();
 	
 	
 	/**
@@ -78,6 +68,15 @@ public class MefGenomaProvider implements GenomaProvider {
 	public void setup(AlgorithmContext context){
 		this.context = context;
 	}
+
+	/**
+	 * Assign a working data set for accessing data, if needed.
+	 * @param workingDataset
+	 */
+	public void setWorkingDataset(WorkingDataset workingDataset){
+		this.workingDataset = (MefWorkingDataset)workingDataset;
+	}
+	
 	
 	/**
 	 * Genoma is intially void: only when target is set can be set up by reduce()
@@ -94,33 +93,6 @@ public class MefGenomaProvider implements GenomaProvider {
 	 */
 	@Override
 	public void collect() {
-
-		// Recipes are read-only
-		if(!recipes.isEmpty()){
-			logger.debug("Found "+recipes.size()+" recipes in cache: no further reading is needed.");
-			return;
-		}
-		
-		recipes = new HashMap<RecipeType, List<Recipe>>();
-		
-		// Load recipes from file
-		String database = context.applicationSpecifics.getParamString(MefConstants.PARAM_DATABASE, MefConstants.DEFAULT_DATABASE);
-		db = new RecipesDatabaseCSV(database);
-		List<Recipe> recipesFromFile = db.getAllRecipes();
-		logger.debug("Found "+recipesFromFile.size()+" from file.");
-		
-		// Classify recipes by type
-		recipes.put(RecipeType.SAVOURY, new ArrayList<Recipe>());
-		recipes.put(RecipeType.SWEET, 	new ArrayList<Recipe>());
-		recipes.put(RecipeType.NEUTRAL, new ArrayList<Recipe>());
-		for(int r = 0; r < recipesFromFile.size(); r++){
-			Recipe recipe = recipesFromFile.get(r);
-			recipes.get(recipe.recipeType).add(recipe);
-		}
-
-		for(RecipeType type : RecipeType.values()){
-			logger.debug("Classified "+recipes.get(type).size()+" "+type+" recipes.");
-		}
 	}
 
 	
@@ -132,19 +104,6 @@ public class MefGenomaProvider implements GenomaProvider {
 	@Override
 	public Genoma shrink(Target<?, ?> target) {
 		logger.debug("Reducing the number of recipes and collecting info.");
-		
-		// Goal
-		MefGoal goal = (MefGoal)target.getGoal();
-		List<String> fridgeFoods = goal.refrigeratorFoods;
-		logger.debug("Requested "+goal.refrigeratorFoods.size()+" foods from refrigerator and "+goal.pantry+" foods from pantry.");
-		
-		// Restricts to feasible recipes and collecting detailed info on coverage
-		logger.debug("Restricting recipes to those feasible with given ingredients.");
-		MefWorkingDataset dataset = new MefWorkingDataset();
-		restrictToFeasible(dataset, fridgeFoods, goal.pantry);
-		for(RecipeType type : RecipeType.values()){
-			logger.debug(type+" type restricted to "+dataset.feasibleByType.get(type).size()+" recipes.");
-		}
 
 		// Add values to metadata based on target
 		// TODOA: check what happens in large set of data if values are with metadata!!! 
@@ -152,7 +111,7 @@ public class MefGenomaProvider implements GenomaProvider {
 		Map<RecipeType, Integer> targetRecipesByType = calculateRecipesByType(target);
 		
 		// Populate metadata genoma
-		StandardMetadataGenoma genoma = createGenoma(dataset, targetRecipesByType);
+		StandardMetadataGenoma genoma = createGenoma(targetRecipesByType);
 		
 		return genoma;
 	}
@@ -181,37 +140,6 @@ public class MefGenomaProvider implements GenomaProvider {
 //	}
 
 
-	/**
-	 * Restricts to feasible recipe and clone every recipe for following computations,
-	 * and indicize recipes by id in the meanwhile.
-	 * 
-	 * @param availableFoods
-	 * @return
-	 */
-	private void restrictToFeasible(MefWorkingDataset dataset, List<String> fridgeFoods, List<String> pantryFoods) {
-		Map<Long, Recipe> recipeById = new TreeMap<Long, Recipe>();
-		Map<RecipeType, List<Recipe>> feasibleByType = new HashMap<RecipeType, List<Recipe>>();
-		feasibleByType.put(RecipeType.SAVOURY, 	new ArrayList<Recipe>());
-		feasibleByType.put(RecipeType.SWEET, 	new ArrayList<Recipe>());
-		feasibleByType.put(RecipeType.NEUTRAL, 	new ArrayList<Recipe>());
-		Iterator<RecipeType> it = this.recipes.keySet().iterator();
-		while(it.hasNext()){
-			RecipeType rType = it.next();
-			List<Recipe> recipesByType = recipes.get(rType);
-			for(int r = 0; r < recipesByType.size(); r++){
-				Recipe recipe = recipesByType.get(r); // TODOM: avoid cocktails
-				Recipe copy = recipe.copy();
-				if(MefUtils.feasibleWith(copy, fridgeFoods, pantryFoods)){
-					feasibleByType.get(rType).add(copy);
-					recipeById.put(copy.id, copy);
-				}
-			}
-		}
-		dataset.recipeById = recipeById;
-		dataset.feasibleByType = feasibleByType;
-	}
-	
-
 	
 	/**
 	 * 
@@ -237,7 +165,6 @@ public class MefGenomaProvider implements GenomaProvider {
 	 * @return
 	 */
 	private StandardMetadataGenoma createGenoma(
-			MefWorkingDataset workingDataset,
 			Map<RecipeType, Integer> mealsByType) {
 		Map<String, GeneMetadata> genesMetadataByCode = new HashMap<String, GeneMetadata>();
 		Map<String, GeneMetadata> genesMetadataByPos = new HashMap<String, GeneMetadata>();
@@ -267,8 +194,8 @@ public class MefGenomaProvider implements GenomaProvider {
 		
 		// Create Genoma
 		StandardMetadataGenoma genoma = new StandardMetadataGenoma();
-		genoma.setWorkingDataset(workingDataset);
 		genoma.setupAlleleGenerator(context.application.alleleGenerator);
+		genoma.setWorkingDataset(workingDataset);
 		genoma.setLimitedAllelesStrategy(false); // TODOM: repetitions of receipt are available: make it configurable!
 		genoma.initialize(genesMetadataByCode, genesMetadataByPos);
 		return genoma;

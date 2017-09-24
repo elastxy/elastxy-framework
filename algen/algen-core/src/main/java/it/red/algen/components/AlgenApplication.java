@@ -28,7 +28,8 @@ public class AlgenApplication {
 	public String name;
 
 	public ComponentMetadata envFactory;
-	
+
+	public ComponentMetadata datasetProvider;
 	public ComponentMetadata genomaProvider;
 	public ComponentMetadata alleleGenerator;
 	

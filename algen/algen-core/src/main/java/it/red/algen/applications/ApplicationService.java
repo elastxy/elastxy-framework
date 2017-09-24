@@ -120,6 +120,7 @@ public class ApplicationService {
 
 	private void setupContext(AlgorithmContext context) {
 		context.application = appComponentsLocator.get(context.application.name);
+		if(context.application.datasetProvider!=null) context.application.datasetProvider.setup(context);
 		context.application.genomaProvider.setup(context);
 		context.application.selector.setup(context);
 		context.application.envFactory.setup(context);

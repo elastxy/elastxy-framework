@@ -14,10 +14,10 @@ import java.math.BigDecimal;
 
 import it.red.algen.applications.ApplicationException;
 import it.red.algen.dataaccess.AbstractEnvFactory;
+import it.red.algen.dataaccess.WorkingDataset;
 import it.red.algen.domain.experiment.NumberRawFitness;
 import it.red.algen.domain.experiment.PerformanceTarget;
 import it.red.algen.domain.experiment.Target;
-import it.red.algen.domain.genetics.Genoma;
 import it.red.algen.engine.metadata.StandardMetadataGenoma;
 
 /**
@@ -27,7 +27,7 @@ public class MexEnvFactory extends AbstractEnvFactory<PerformanceTarget, BigDeci
 	
 	// TODOM: take outside Target definition code, as a new Component
 	@Override
-	protected Target<PerformanceTarget, BigDecimal> defineTarget(Genoma genoma) {
+	protected Target<PerformanceTarget, BigDecimal> defineTarget(WorkingDataset dataset) {
         
 		// Defines goal representation
         Long targetValue = context.applicationSpecifics.getTargetLong(MexConstants.TARGET_EXPRESSION_RESULT);

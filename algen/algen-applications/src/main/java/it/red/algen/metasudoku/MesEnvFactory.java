@@ -17,6 +17,7 @@ import org.apache.log4j.Logger;
 import it.red.algen.conf.ConfigurationException;
 import it.red.algen.conf.ReadConfigSupport;
 import it.red.algen.dataaccess.AbstractEnvFactory;
+import it.red.algen.dataaccess.WorkingDataset;
 import it.red.algen.domain.experiment.PerformanceTarget;
 import it.red.algen.domain.experiment.Target;
 import it.red.algen.domain.genetics.Genoma;
@@ -30,7 +31,7 @@ public class MesEnvFactory extends AbstractEnvFactory<int[][], Integer, Predefin
 	private Logger logger = Logger.getLogger(MesEnvFactory.class);
 	
 	@Override
-	protected Target<int[][], Integer> defineTarget(Genoma genoma) {
+	protected Target<int[][], Integer> defineTarget(WorkingDataset dataset) {
     	// Defines goal representation
     	PerformanceTarget target = new PerformanceTarget();
     	target.setGoal(createGoal());

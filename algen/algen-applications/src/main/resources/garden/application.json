@@ -6,6 +6,11 @@
 		"content" : "it.red.algen.metagarden.MegEnvFactory"
 	},
 	
+	"datasetProvider": {
+		"type" : "java",
+		"content" : "it.red.algen.metagarden.data.MegDatasetProvider"
+	},
+	
 	"genomaProvider": {
 		"type" : "java",
 		"content" : "it.red.algen.metagarden.MegGenomaProvider"

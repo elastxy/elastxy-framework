@@ -6,6 +6,11 @@
 		"content" : "it.red.algen.algofrigerator.MefEnvFactory"
 	},
 	
+	"datasetProvider": {
+		"type" : "java",
+		"content" : "it.red.algen.algofrigerator.data.MefDatasetProvider"
+	},
+	
 	"genomaProvider": {
 		"type" : "java",
 		"content" : "it.red.algen.algofrigerator.MefGenomaProvider"

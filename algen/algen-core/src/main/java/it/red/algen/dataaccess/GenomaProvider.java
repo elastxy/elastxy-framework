@@ -25,6 +25,12 @@ public interface GenomaProvider {
 	public void setup(AlgorithmContext context);
 	
 	/**
+	 * Assign a working data set for accessing data, if needed.
+	 * @param workingDataset
+	 */
+	public void setWorkingDataset(WorkingDataset workingDataset);
+	
+	/**
 	 * Returns a reference to the Genoma previously generated.
 	 * @return
 	 */

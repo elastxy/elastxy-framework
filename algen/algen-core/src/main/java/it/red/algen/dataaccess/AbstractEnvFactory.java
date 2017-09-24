@@ -28,25 +28,33 @@ public abstract class AbstractEnvFactory<T extends Object, R extends Object, G e
 		this.context = context;
 	}
 
-	protected abstract Target<T,R> defineTarget(Genoma genoma);
+	protected abstract Target<T,R> defineTarget(WorkingDataset genoma);
 
 	
     public Env create(){
     	
-    	// Setup the data algorithm is based on
-    	// TODOA: now coupled with genomaprovider: must be separated
-//    	WorkingDataset workingDataset = setupWorkingDataset();
-    	
-    	// Retrieve GenomaProvider
-		GenomaProvider genomaProvider = context.application.genomaProvider;
-		
-    	// Create genoma
-    	Genoma genoma = createGenoma(genomaProvider);
+    	// Collect the data algorithm is based on
+    	DatasetProvider datasetProvider = context.application.datasetProvider;
+    	WorkingDataset workingDataset = null;
+    	if(datasetProvider!=null){
+    		datasetProvider.collect();
+    		workingDataset = datasetProvider.getWorkingDataset();
+    	}
     	
     	// Define target
-    	// TODOA: remove genoma as parameter of target, use working data set instead
-    	// and push target definition above
-    	Target<T,R> target = createTarget(genoma); 
+    	Target<T,R> target = createTarget(workingDataset); 
+
+    	// Reduce initial data based on target
+    	if(datasetProvider!=null){
+    		datasetProvider.shrink(target);
+    		workingDataset = datasetProvider.getWorkingDataset();
+    	}
+    	
+    	// Retrieve GenomaProvider
+		GenomaProvider genomaProvider = createGenomaProvider(workingDataset);
+				
+    	// Create genoma
+    	Genoma genoma = createGenoma(genomaProvider);
 
     	// Reduce Genoma based on target
     	genoma = reduceGenoma(genomaProvider, target);
@@ -62,14 +70,21 @@ public abstract class AbstractEnvFactory<T extends Object, R extends Object, G e
         
         return env;
     }
+    
+    
+    private GenomaProvider createGenomaProvider(WorkingDataset workingDataset){
+    	GenomaProvider genomaProvider = context.application.genomaProvider;
+    	genomaProvider.setWorkingDataset(workingDataset);
+    	return genomaProvider;
+    }
 
 	private Genoma createGenoma(GenomaProvider genomaProvider) {
 		genomaProvider.collect();
 		return genomaProvider.getGenoma();
 	}
 	
-	private Target<T,R> createTarget(Genoma genoma){
-		Target<T,R> target = defineTarget(genoma);
+	private Target<T,R> createTarget(WorkingDataset workingDataset){
+		Target<T,R> target = defineTarget(workingDataset);
 		target.setTargetFitness(context.algorithmParameters.stopConditions.targetFitness);
     	target.setTargetThreshold(context.algorithmParameters.stopConditions.targetThreshold);
     	return target;
