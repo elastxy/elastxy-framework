@@ -9,6 +9,7 @@ import it.red.algen.dataaccess.WorkingDataset;
 import it.red.algen.domain.experiment.Target;
 import it.red.algen.domain.genetics.Genoma;
 import it.red.algen.engine.metadata.GenesMetadataConfiguration;
+import it.red.algen.engine.metadata.MetadataGenomaBuilder;
 import it.red.algen.engine.metadata.StandardMetadataGenoma;
 
 
@@ -44,10 +45,6 @@ public class MexGenomaProvider implements GenomaProvider {
 	@Override
 	public void collect() {
 		
-		// Instantiate Genoma
-		StandardMetadataGenoma genoma = new StandardMetadataGenoma();
-		genoma.setupAlleleGenerator(context.application.alleleGenerator);
-		
 		// Retrieves metadata
 		GenesMetadataConfiguration genes = ReadConfigSupport.retrieveGenesMetadata(context.application.name);
 		
@@ -57,7 +54,7 @@ public class MexGenomaProvider implements GenomaProvider {
 		genes.metadata.get("operand").min = -1L * maxValue;
 
 		// Initialize Genoma
-		genoma.initialize(genes);
+		StandardMetadataGenoma genoma = MetadataGenomaBuilder.build(context, genes);
 		cachedGenoma = genoma;
 	}
 

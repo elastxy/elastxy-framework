@@ -1,7 +1,6 @@
 package it.red.algen.engine.metadata;
 
 import java.util.List;
-import java.util.Map;
 
 import it.red.algen.domain.genetics.Genoma;
 import it.red.algen.domain.genetics.genotype.Allele;
@@ -24,26 +23,14 @@ import it.red.algen.domain.genetics.genotype.Allele;
  */
 public interface MetadataGenoma extends Genoma {
 
+	
 	/**
 	 * Inject an allele generator implementation
 	 * @param generator
 	 */
 	public void setupAlleleGenerator(AlleleGenerator generator);
 	
-	/**
-	 * Setup initial data
-	 * @param genesMetadataByCode
-	 * @param genesMetadataByPos
-	 */
-	public void initialize(Map<String,GeneMetadata> genesMetadataByCode, Map<String,GeneMetadata> genesMetadataByPos);
 
-	/**
-	 * Load genes metadata
-	 * @param genes
-	 */
-	public void initialize(GenesMetadataConfiguration genes);
-	
-	
 	
 	/**
 	 * Get the metadata by code

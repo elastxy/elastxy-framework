@@ -73,6 +73,12 @@ public interface Genoma {
 	 */
 	public GenotypeStructure getGenotypeStructure();
 	
+	/**
+	 * Sets the structure.
+	 * @param structure
+	 */
+	public void setGenotypeStructure(GenotypeStructure structure);
+	
 	
 	/**
 	 * True: the set of possible Allele values is limited and predefined.

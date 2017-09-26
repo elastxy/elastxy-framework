@@ -5,6 +5,8 @@ import java.util.HashMap;
 import java.util.Map;
 
 import it.red.algen.engine.metadata.GeneMetadata;
+import it.red.algen.engine.metadata.MetadataGenoma;
+import it.red.algen.engine.metadata.MetadataGenomaBuilder;
 import it.red.algen.engine.metadata.StandardMetadataGenoma;
 import junit.framework.Test;
 import junit.framework.TestCase;
@@ -42,20 +44,17 @@ public class StandardMetadataGenomaTest
      * Two chromosome of 5 and 4 positions each
      */
     public void setUp(){
-		Map<String, GeneMetadata> genesMetadataByCode = new HashMap<String, GeneMetadata>();
-		Map<String, GeneMetadata> genesMetadataByPos = new HashMap<String, GeneMetadata>();
+    	genoma = MetadataGenomaBuilder.create(null);
 		for(int c=1; c >= 0; c--){
 			for(int g=4; g >= 0; g--){
 				if(c==1 && g==4) continue; // skip 5th gene of 2nd chromosome
 				String pos = c+"."+g;
 				GeneMetadata metadata = new GeneMetadata();
 				metadata.code = "m"+pos;
-				genesMetadataByCode.put(metadata.code, metadata);
-				genesMetadataByPos.put(pos, metadata);
+				MetadataGenomaBuilder.addGene(genoma, pos, metadata);
 			}
 		}
-		genoma = new StandardMetadataGenoma();
-		genoma.initialize(genesMetadataByCode, genesMetadataByPos);
+		MetadataGenomaBuilder.finalize(genoma);
     }
     
     

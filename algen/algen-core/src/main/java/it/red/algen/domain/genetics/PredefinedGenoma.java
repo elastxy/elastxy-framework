@@ -28,46 +28,16 @@ public class PredefinedGenoma extends AbstractGenoma implements Genoma {
 	 * To be used when position is not applicable 
 	 * (same list of alleles shared betweeb genes)
 	 */
-	private final String NO_POSITION = "-1"; 
+	public static final String NO_POSITION = "-1"; 
 	
-	private boolean sharedAlleles = false;
+	boolean sharedAlleles = false;
 	
 
 	/**
 	 * Map of predefined alleles by position.
 	 */
-	private Map<String, List<Allele>> alleles = new HashMap<String, List<Allele>>();
+	Map<String, List<Allele>> alleles = new HashMap<String, List<Allele>>();
 
-
-	
-	/**
-	 * Initializes Genoma with a single list of all possible alleles.
-	 * 
-	 * This list is applicable to all Genes: more efficient when 
-	 * the same list of possible alleles is shared between Genes.
-	 * 
-	 * @param alleles
-	 */
-	public void initialize(int numberOfPositions, List<Allele> alleles){
-		sharedAlleles = true;
-		this.alleles.put(NO_POSITION, alleles);
-		genotypeStructure = new ChromosomeGenotypeStructure();
-		((ChromosomeGenotypeStructure)genotypeStructure).build(numberOfPositions);
-	}
-
-	
-	/**
-	 * Initializes Genoma with a map of genes:
-	 * [position;list of all possible alleles]
-	 * 
-	 * @param alleles
-	 */
-	public void initialize(Map<String, List<Allele>> alleles){
-		sharedAlleles = false;
-		this.alleles = alleles;
-		genotypeStructure = new ChromosomeGenotypeStructure();
-		((ChromosomeGenotypeStructure)genotypeStructure).build(this.alleles.size());
-	}
 
 	
 	

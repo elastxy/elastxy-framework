@@ -11,6 +11,7 @@ import it.red.algen.domain.experiment.Target;
 import it.red.algen.domain.genetics.Genoma;
 import it.red.algen.engine.metadata.GeneMetadata;
 import it.red.algen.engine.metadata.GeneMetadataType;
+import it.red.algen.engine.metadata.MetadataGenomaBuilder;
 import it.red.algen.engine.metadata.StandardMetadataGenoma;
 import it.red.algen.metagarden.data.MegWorkingDataset;
 import it.red.algen.metagarden.data.Place;
@@ -52,13 +53,9 @@ public class MegGenomaProvider implements GenomaProvider {
 	@Override
 	public void collect() {
 		
-		StandardMetadataGenoma genoma = new StandardMetadataGenoma();
-		genoma.setupAlleleGenerator(context.application.alleleGenerator);
-		genoma.setLimitedAllelesStrategy(context.applicationSpecifics.getParamBoolean(MegConstants.LIMITED_TREES));
-		
-		Map<String, GeneMetadata> genesMetadataByCode = new HashMap<String, GeneMetadata>();
-		Map<String, GeneMetadata> genesMetadataByPos = new HashMap<String, GeneMetadata>();
-		
+		StandardMetadataGenoma genoma = MetadataGenomaBuilder.create(
+				context,
+				context.applicationSpecifics.getParamBoolean(MegConstants.LIMITED_TREES));
 		
 		for(int pos=0; pos < workingDataset.places.length; pos++){
 			Place place = workingDataset.places[pos];
@@ -75,10 +72,10 @@ public class MegGenomaProvider implements GenomaProvider {
 			
 			metadata.values = Arrays.asList(workingDataset.trees);
 			
-			genesMetadataByCode.put(metadata.code, metadata);
-			genesMetadataByPos.put(String.valueOf(pos), metadata);
+			MetadataGenomaBuilder.addGene(genoma, String.valueOf(pos), metadata); // TODOA: geneposition
 		}
-		genoma.initialize(genesMetadataByCode, genesMetadataByPos);
+
+		MetadataGenomaBuilder.finalize(genoma);
 		
 		cachedGenoma = genoma;
 	}

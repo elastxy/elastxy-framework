@@ -22,6 +22,7 @@ import it.red.algen.domain.experiment.Target;
 import it.red.algen.domain.genetics.Genoma;
 import it.red.algen.engine.metadata.GeneMetadata;
 import it.red.algen.engine.metadata.GenesMetadataConfiguration;
+import it.red.algen.engine.metadata.MetadataGenomaBuilder;
 import it.red.algen.engine.metadata.StandardMetadataGenoma;
 
 
@@ -161,9 +162,13 @@ public class MefGenomaProvider implements GenomaProvider {
 	 */
 	private StandardMetadataGenoma createGenoma(
 			Map<RecipeType, Integer> mealsByType) {
-		Map<String, GeneMetadata> genesMetadataByCode = new HashMap<String, GeneMetadata>();
-		Map<String, GeneMetadata> genesMetadataByPos = new HashMap<String, GeneMetadata>();
+		
 		GenesMetadataConfiguration genes = ReadConfigSupport.retrieveGenesMetadata(context.application.name);
+
+		// Create Genoma
+		// TODOM: repetitions of receipt could be available: make it configurable!
+		StandardMetadataGenoma genoma = MetadataGenomaBuilder.create(context, false);
+		
 		Iterator<Map.Entry<RecipeType, List<Recipe>>> it = workingDataset.feasibleByType.entrySet().iterator();
 		while(it.hasNext()){
 			Entry<RecipeType, List<Recipe>> entryType = it.next();
@@ -180,18 +185,13 @@ public class MefGenomaProvider implements GenomaProvider {
 			
 			// Genes by positions
 			for(int meal=0; meal < mealsByType.get(entryType.getKey()); meal++){
-				genesMetadataByPos.put(genes.positions.get(geneCode).get(0)+meal, metadata); // positions = "x."+"y"
+				String pos = genes.positions.get(geneCode).get(0)+meal; // positions = "x."+"y"
+				MetadataGenomaBuilder.addGene(genoma, pos, metadata); 
 			}
-			
-			// Genes by code
-			genesMetadataByCode.put(metadata.code, metadata);
 		}
 		
-		// Create Genoma
-		StandardMetadataGenoma genoma = new StandardMetadataGenoma();
-		genoma.setupAlleleGenerator(context.application.alleleGenerator);
-		genoma.setLimitedAllelesStrategy(false); // TODOM: repetitions of receipt are available: make it configurable!
-		genoma.initialize(genesMetadataByCode, genesMetadataByPos);
+		MetadataGenomaBuilder.finalize(genoma);
+		
 		return genoma;
 	}
 	

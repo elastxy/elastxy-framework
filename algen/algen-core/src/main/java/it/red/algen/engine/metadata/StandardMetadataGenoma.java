@@ -10,6 +10,7 @@ import java.util.SortedMap;
 import java.util.TreeMap;
 import java.util.stream.Collectors;
 
+import it.red.algen.domain.genetics.GenotypeStructureType;
 import it.red.algen.domain.genetics.StrandGenotypeStructure;
 import it.red.algen.domain.genetics.genotype.Allele;
 import it.red.algen.engine.genetics.AbstractGenoma;
@@ -30,13 +31,13 @@ public class StandardMetadataGenoma extends AbstractGenoma implements MetadataGe
 	/**
 	 * Metadata of all genes type, indexed by code
 	 */
-	private Map<String,GeneMetadata> genesMetadataByCode = new HashMap<String, GeneMetadata>();
+	Map<String,GeneMetadata> genesMetadataByCode = new HashMap<String, GeneMetadata>();
 	
 
 	/**
 	 * Metadata of all genes type, indexed and ordered by position
 	 */
-	private SortedMap<String,GeneMetadata> genesMetadataByPos = new TreeMap<String, GeneMetadata>(POSITIONS_COMPARATOR);
+	SortedMap<String,GeneMetadata> genesMetadataByPos = new TreeMap<String, GeneMetadata>(POSITIONS_COMPARATOR);
 
 
 	/**
@@ -54,37 +55,6 @@ public class StandardMetadataGenoma extends AbstractGenoma implements MetadataGe
 	public void setupAlleleGenerator(AlleleGenerator generator){
 		alleleGenerator = generator;
 	}
-	
-
-	@Override
-	public void initialize(Map<String,GeneMetadata> genesMetadataByCode, Map<String,GeneMetadata> genesMetadataByPos){
-		this.genesMetadataByCode = genesMetadataByCode;
-		this.genesMetadataByPos = new TreeMap<String, GeneMetadata>(POSITIONS_COMPARATOR);
-		this.genesMetadataByPos.putAll(genesMetadataByPos);
-		genotypeStructure = new StrandGenotypeStructure();
-		((StrandGenotypeStructure)genotypeStructure).build(this.genesMetadataByPos);
-	}
-	
-	@Override
-	public void initialize(GenesMetadataConfiguration genes){
-		Iterator<Entry<String, GeneMetadata>> it = genes.metadata.entrySet().iterator();
-		while(it.hasNext()){
-			Entry<String, GeneMetadata> entry = it.next();
-			genesMetadataByCode.put(entry.getKey(), entry.getValue()); // yes, may be overwritten
-			List<String> positions = genes.positions.get(entry.getKey());
-			for(int p=0; p < positions.size(); p++){
-				genesMetadataByPos.put(String.valueOf(positions.get(p)), entry.getValue());
-			}
-		}
-		genotypeStructure = new StrandGenotypeStructure();
-		((StrandGenotypeStructure)genotypeStructure).build(genesMetadataByPos);
-	}
-	
-	
-
-	
-	
-	
 	
 	
 	/**

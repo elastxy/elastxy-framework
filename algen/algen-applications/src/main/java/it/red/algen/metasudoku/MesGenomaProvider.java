@@ -11,6 +11,7 @@ import it.red.algen.dataaccess.WorkingDataset;
 import it.red.algen.domain.experiment.Target;
 import it.red.algen.domain.genetics.Genoma;
 import it.red.algen.domain.genetics.PredefinedGenoma;
+import it.red.algen.domain.genetics.PredefinedGenomaBuilder;
 import it.red.algen.domain.genetics.genotype.Allele;
 
 
@@ -82,9 +83,6 @@ public class MesGenomaProvider implements GenomaProvider {
 	@Override
 	public Genoma shrink(Target<?, ?> target) {
 
-		PredefinedGenoma genoma = new PredefinedGenoma();
-		genoma.setLimitedAllelesStrategy(true); // after determined, alleles are always the same set for every solution
-		
 		int[][] matrix = (int[][])target.getGoal();
 
 		// Count free cells and missing numbers
@@ -106,8 +104,8 @@ public class MesGenomaProvider implements GenomaProvider {
 		}
 
 		// Init genoma with the shared list of alleles
-		genoma.initialize(missingNumbers.size(), predefinedAlleles);
-		
+		// after determined, alleles are always the same set for every solution
+		PredefinedGenoma genoma = PredefinedGenomaBuilder.build(missingNumbers.size(), predefinedAlleles, true);
 		return genoma;
 	}
 
