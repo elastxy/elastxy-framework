@@ -2,16 +2,12 @@ package it.red.algen.engine.metadata;
 
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
-import java.util.Map.Entry;
 import java.util.SortedMap;
 import java.util.TreeMap;
 import java.util.stream.Collectors;
 
-import it.red.algen.domain.genetics.GenotypeStructureType;
-import it.red.algen.domain.genetics.StrandGenotypeStructure;
 import it.red.algen.domain.genetics.genotype.Allele;
 import it.red.algen.engine.genetics.AbstractGenoma;
 

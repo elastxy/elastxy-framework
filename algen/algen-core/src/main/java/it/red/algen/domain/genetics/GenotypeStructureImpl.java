@@ -2,6 +2,13 @@ package it.red.algen.domain.genetics;
 
 import java.util.List;
 
+
+/**
+ * Base implementation of GenotypeStructure.
+ * 
+ * @author red
+ *
+ */
 public abstract class GenotypeStructureImpl implements GenotypeStructure {
 
 	/**

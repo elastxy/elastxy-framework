@@ -35,8 +35,10 @@ public class MetadataGenomaBuilder {
 	
 	
 	/**
-	 * Creates a new instance of Genoma.
+	 * Creates a new instance of Genoma, specifying limited allele strategy.
+	 * 
 	 * @param context
+	 * @param limitedAllelesStrategy
 	 * @return
 	 */
 	public static StandardMetadataGenoma create(AlgorithmContext context, boolean limitedAllelesStrategy){

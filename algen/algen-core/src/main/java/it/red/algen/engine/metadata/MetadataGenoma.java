@@ -56,7 +56,6 @@ public interface MetadataGenoma extends Genoma {
 	/**
 	 * Generates one Allele for every possible values of the metadataCode.
 	 * 
-	 *TODOA: add access to list of common alleles
 	 * @return
 	 */
 	public List<Allele> createRandomAllelesByCode(String metadataCode);

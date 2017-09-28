@@ -3,13 +3,12 @@ package it.red.algen.domain.genetics;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-import java.util.Map;
+import java.util.SortedMap;
 
 import it.red.algen.engine.metadata.GeneMetadata;
 
 public class StrandGenotypeStructure extends GenotypeStructureImpl {
 	
-	private Integer numberOfChromosomes = null;
 	
 	/**
 	 * number of genes per chromosome: a list of one value for a sequence
@@ -27,7 +26,7 @@ public class StrandGenotypeStructure extends GenotypeStructureImpl {
 	 * 
 	 * @param genesMetadataByPos
 	 */
-	public void build(Map<String,GeneMetadata> genesMetadataByPos){
+	public void build(SortedMap<String,GeneMetadata> genesMetadataByPos){
 		positionsSize = genesMetadataByPos.size();
 		positions = new ArrayList<String>(genesMetadataByPos.keySet());
 		countElements();

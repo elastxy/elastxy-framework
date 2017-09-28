@@ -14,8 +14,9 @@ import java.util.List;
 public interface GenotypeStructure {
 
 	/**
-	 * Returns the size of available positions.
-	 * In case of a strand, is the sum of positions of all chromosomes.
+	 * Returns the size of all available positions:
+	 * - chromosome: number of genes
+	 * - strand: sum of the number of genes of all chromosomes
 	 * @return
 	 */
 	public int getPositionsSize();
@@ -31,13 +32,13 @@ public interface GenotypeStructure {
 	
 //	/**
 //	 * Returns the number of chromosomes by strand
+//	 * TODOM: number of strands
 //	 * @return
 //	 */
 //	public int getNumberOfStrands();
 
 	/**
 	 * Returns the number of chromosomes by strand
-	 * TODOM: number of strands
 	 * @return
 	 */
 	public int getNumberOfChromosomes();

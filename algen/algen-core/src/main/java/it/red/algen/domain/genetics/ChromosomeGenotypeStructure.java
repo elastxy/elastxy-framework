@@ -8,10 +8,9 @@ import it.red.algen.engine.AlgorithmException;
 public class ChromosomeGenotypeStructure extends GenotypeStructureImpl {
 
 	/**
-	 * Builds the structure information from the list of possible
-	 * alleles, shared between all positions.
-	 * .
-	 * @param alleles
+	 * Initialize structure by number of positions.
+	 * 
+	 * @param numberOfPositions
 	 */
 	public void build(int numberOfPositions){
 		positionsSize = numberOfPositions;
