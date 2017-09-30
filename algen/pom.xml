@@ -13,6 +13,7 @@
 	 	
 	 	<commons.math.version>3.2</commons.math.version>
 	 	<junit.version>4.12</junit.version>
+	 	<easymock.version>3.4</easymock.version>
 	 	<servlet.version>3.0.1</servlet.version>
 	</properties>
 	
@@ -203,6 +204,13 @@
 			    <scope>test</scope>
 			</dependency>
 			
+			<!-- https://mvnrepository.com/artifact/org.easymock/easymock -->
+			<dependency>
+			    <groupId>org.easymock</groupId>
+			    <artifactId>easymock</artifactId>
+			    <version>${easymock.version}</version>
+			    <scope>test</scope>
+			</dependency>
 		</dependencies>
 	</dependencyManagement>
 
