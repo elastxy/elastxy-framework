@@ -1,5 +1,6 @@
 package it.red.algen.domain.genetics;
 
+import it.red.algen.engine.genetics.GenomaPositionComparator;
 import junit.framework.Test;
 import junit.framework.TestCase;
 import junit.framework.TestSuite;

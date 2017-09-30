@@ -5,10 +5,10 @@ import java.util.stream.IntStream;
 
 import it.red.algen.domain.experiment.GenericSolution;
 import it.red.algen.domain.experiment.Solution;
-import it.red.algen.domain.genetics.PredefinedGenotypeFactory;
 import it.red.algen.domain.genetics.PredefinedGenoma;
 import it.red.algen.domain.genetics.genotype.Allele;
 import it.red.algen.domain.genetics.genotype.Chromosome;
+import it.red.algen.engine.genetics.PredefinedGenotypeFactory;
 
 public class PredefinedGenomaSolutionsFactory  implements SolutionsFactory<PredefinedGenoma>{
 

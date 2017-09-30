@@ -1,5 +1,6 @@
-package it.red.algen.domain.genetics;
+package it.red.algen.engine.genetics;
 
+import it.red.algen.domain.genetics.PredefinedGenoma;
 import it.red.algen.domain.genetics.genotype.Chromosome;
 import it.red.algen.domain.genetics.genotype.Gene;
 

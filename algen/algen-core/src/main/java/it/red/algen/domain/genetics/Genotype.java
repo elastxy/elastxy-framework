@@ -4,6 +4,12 @@ import java.util.List;
 
 import it.red.algen.domain.genetics.genotype.Allele;
 
+
+/**
+ * Represents the genetic material of the individual solution.
+ * @author red
+ *
+ */
 public interface Genotype {
 	
 	

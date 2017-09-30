@@ -1,12 +1,10 @@
-package it.red.algen.engine.genetics;
+package it.red.algen.domain.genetics;
 
 import java.util.List;
 
 import it.red.algen.domain.experiment.Solution;
-import it.red.algen.domain.genetics.Genoma;
-import it.red.algen.domain.genetics.GenomaPositionComparator;
-import it.red.algen.domain.genetics.GenotypeStructure;
 import it.red.algen.domain.genetics.genotype.Allele;
+import it.red.algen.engine.genetics.GenomaPositionComparator;
 import it.red.algen.utils.Randomizer;
 
 public abstract class AbstractGenoma implements Genoma {

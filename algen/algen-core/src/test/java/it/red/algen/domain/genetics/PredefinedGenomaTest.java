@@ -1,4 +1,4 @@
-package it.red.algen.metadata;
+package it.red.algen.domain.genetics;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -7,8 +7,8 @@ import java.util.List;
 import java.util.Map;
 
 import it.red.algen.domain.genetics.PredefinedGenoma;
-import it.red.algen.domain.genetics.PredefinedGenomaBuilder;
 import it.red.algen.domain.genetics.genotype.Allele;
+import it.red.algen.engine.genetics.PredefinedGenomaBuilder;
 import junit.framework.Test;
 import junit.framework.TestCase;
 import junit.framework.TestSuite;

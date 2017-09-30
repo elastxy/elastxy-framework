@@ -1,4 +1,4 @@
-package it.red.algen.domain.genetics;
+package it.red.algen.engine.genetics;
 
 import java.util.Comparator;
 

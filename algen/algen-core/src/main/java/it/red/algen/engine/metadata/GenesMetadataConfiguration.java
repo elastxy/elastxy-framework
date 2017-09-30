@@ -13,5 +13,4 @@ import java.util.Map;
 public class GenesMetadataConfiguration {
 	public Map<String, GeneMetadata> metadata = new HashMap<String, GeneMetadata>(); 
 	public Map<String, List<String>> positions = new HashMap<String, List<String>>(); 
-//	public String allelesProviderClass;
 }

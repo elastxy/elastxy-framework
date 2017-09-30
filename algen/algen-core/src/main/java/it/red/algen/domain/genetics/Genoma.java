@@ -8,7 +8,7 @@ import it.red.algen.domain.genetics.genotype.Allele;
 
 
 /**
- * RESPOSIBILITIES
+ * RESPONSIBILITIES
  * - Maintains the registry of all genetic assets created by Genoma Provider.
  * - Internally represents the structure of genotype produced by genoma provider
  *  (three types: single chromosome, strand, multiple strand).

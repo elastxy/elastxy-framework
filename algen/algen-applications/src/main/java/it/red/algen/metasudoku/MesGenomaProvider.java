@@ -11,8 +11,8 @@ import it.red.algen.dataaccess.WorkingDataset;
 import it.red.algen.domain.experiment.Target;
 import it.red.algen.domain.genetics.Genoma;
 import it.red.algen.domain.genetics.PredefinedGenoma;
-import it.red.algen.domain.genetics.PredefinedGenomaBuilder;
 import it.red.algen.domain.genetics.genotype.Allele;
+import it.red.algen.engine.genetics.PredefinedGenomaBuilder;
 
 
 /**
