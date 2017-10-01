@@ -1,6 +1,6 @@
 {
 	"metadata" : {
-		"operand" : {
+		"operandInt" : {
 			"code" : "operand",
 			"name" : "operand",
 			"type" : "INTEGER",
@@ -21,11 +21,22 @@
 			"userStructure": null,
 			"userProperties": {	
 			}
+		},
+		"operandValues" : {
+			"code" : "operandValues",
+			"name" : "operand values",
+			"type" : "INTEGER",
+			"values": [],
+			"valuesProvider": "operandValuesProvider",
+			"userStructure": null,
+			"userProperties": {	
+			}
 		}
 	},
 	
 	"positions" : {
-		"operand" : ["0","2"],
-		"operator" : ["1"]	
+		"operandInt" : ["0","2"],
+		"operator" : ["1","3"],	
+		"operandValues" : ["4"]
 	}
 }

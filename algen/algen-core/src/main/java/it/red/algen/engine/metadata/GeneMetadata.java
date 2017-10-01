@@ -24,10 +24,17 @@ public class GeneMetadata {
 	
 	/**
 	 * List of admitted possible values, of the specified metadata type.
-	 * TODOM: If content is big, an implementation of an interface 
-	 * GeneMetadataValuesProvider could be provided instead.
+	 * 
+	 * If content is big, the name of a AlleleValuesProvider could be 
+	 * provided instead in the valuesProvider property.
 	 */
 	public List values = new ArrayList();
+
+	/**
+	 * Name of the Provider for Allele values,
+	 * to be retrieved in the registry held by Genoma.
+	 */
+	public String valuesProvider;
 	
 	/**
 	 * The minimum value based on type, if sortable
