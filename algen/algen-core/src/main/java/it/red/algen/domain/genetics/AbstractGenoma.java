@@ -2,8 +2,10 @@ package it.red.algen.domain.genetics;
 
 import java.util.List;
 
+import it.red.algen.dataaccess.AlleleValuesProvider;
 import it.red.algen.domain.experiment.Solution;
 import it.red.algen.domain.genetics.genotype.Allele;
+import it.red.algen.engine.AlgorithmException;
 import it.red.algen.engine.genetics.GenomaPositionComparator;
 import it.red.algen.utils.Randomizer;
 
@@ -28,6 +30,25 @@ public abstract class AbstractGenoma implements Genoma {
 	// TODOM: manage by strategy
 	protected boolean limitedAllelesStrategy = false;
 
+	/**
+	 * True if a single shared list of alleles should be used.
+	 * TODOM: use a Strategy.
+	 */
+	protected boolean sharedAlleles = false;
+	
+	
+	/**
+	 * AlleleProvider maps one Provider if sharedAlleles,
+	 * or one Provider for position, with the name equals to position code.
+	 */
+	protected AlleleValuesProvider alleleValuesProvider = null;
+
+	@Override
+	public void setAlleleValuesProvider(AlleleValuesProvider provider){
+		this.alleleValuesProvider = provider;
+		sharedAlleles = provider.countProviders()==1;
+	}
+	
 
 	@Override
 	public GenotypeStructure getGenotypeStructure() {
@@ -54,6 +75,14 @@ public abstract class AbstractGenoma implements Genoma {
 		}
 	}
 
+	/**
+	 * Some methods are not allowed when there is only a list of possible alleles
+	 */
+	protected void allowOnlySharedAlleles(){
+		if(!sharedAlleles){
+			throw new AlgorithmException("Same list of alleles are not shared between positions: a position must be specified.");
+		}
+	}
 
 	/**
 	 * Mutate given positions in the Solution, getting a new Allele 

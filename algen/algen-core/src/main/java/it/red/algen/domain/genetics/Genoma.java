@@ -3,6 +3,7 @@ package it.red.algen.domain.genetics;
 import java.util.List;
 import java.util.SortedMap;
 
+import it.red.algen.dataaccess.AlleleValuesProvider;
 import it.red.algen.domain.experiment.Solution;
 import it.red.algen.domain.genetics.genotype.Allele;
 
@@ -94,6 +95,12 @@ public interface Genoma {
 	public void setLimitedAllelesStrategy(boolean limitedAllelesStrategy);
 
 	
+
+	/**
+	 * Set the provider where to get allele values.
+	 * @param provider
+	 */
+	public void setAlleleValuesProvider(AlleleValuesProvider provider);
 	
 
 	/**

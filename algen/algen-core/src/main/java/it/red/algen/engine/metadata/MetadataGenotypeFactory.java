@@ -66,9 +66,7 @@ public class MetadataGenotypeFactory {
 			result.genes.add(createGeneByPosition(genoma, String.valueOf(pos)));
 		}
 
-		// TODOM: new method of genoma for creating a list of alleles indexed identically to the gene pos... useful??
-    	List<Allele> alleles = genoma.createRandomAllelesByCode(result.genes.get(0).metadataCode); // TODOM: get(0)?
-    	
+    	List<Allele> alleles = genoma.getRandomAlleles(result.getPositions());
     	if(alleles.size() < result.genes.size()){
     		throw new ApplicationException("Number of possible different alleles less than number of genes creating a base predefined Solution. Check if you need the createRandom instead or try adding alleles");
     	} 

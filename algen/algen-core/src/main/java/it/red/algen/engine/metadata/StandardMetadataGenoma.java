@@ -8,8 +8,10 @@ import java.util.SortedMap;
 import java.util.TreeMap;
 import java.util.stream.Collectors;
 
+import it.red.algen.domain.genetics.AbstractGenoma;
 import it.red.algen.domain.genetics.genotype.Allele;
-import it.red.algen.engine.genetics.AbstractGenoma;
+import it.red.algen.engine.AlgorithmException;
+import it.red.algen.utils.Randomizer;
 
 
 /**
@@ -17,8 +19,6 @@ import it.red.algen.engine.genetics.AbstractGenoma;
  * 
  * Multiple Chromosomes Genoma.
  * 
- * TODOA: add access to list of common alleles in a specific strategy
- * (now all genes share the same 1000 values and must be retrieved with get(0)!)
  * @author red
  */
 public class StandardMetadataGenoma extends AbstractGenoma implements MetadataGenoma {
@@ -38,7 +38,7 @@ public class StandardMetadataGenoma extends AbstractGenoma implements MetadataGe
 
 	/**
 	 * Generator for building a new Allele based on Gene metadata characteristics
-	 * or optionally specifying a Allele value
+	 * or optionally specifying a Allele value.
 	 */
 	private AlleleGenerator alleleGenerator;
 
@@ -50,8 +50,10 @@ public class StandardMetadataGenoma extends AbstractGenoma implements MetadataGe
 	@Override
 	public void setupAlleleGenerator(AlleleGenerator generator){
 		alleleGenerator = generator;
+		alleleGenerator.setup(this);
 	}
 	
+
 	
 	/**
 	 * Get the metadata by code
@@ -86,9 +88,23 @@ public class StandardMetadataGenoma extends AbstractGenoma implements MetadataGe
 	public List<Allele> getOrderedAlleles() {
 		List<Allele> result = new ArrayList<Allele>();
 		result = genesMetadataByPos.values().stream().
-				map(m -> ((MetadataAlleleGenerator)alleleGenerator).generateFirst(m)).
+				map(m -> getFirst(m)).
 				collect(Collectors.toList());
 		return result;
+	}
+	
+	private Allele getFirst(GeneMetadata metadata){
+		Allele result = metadata.valuesProvider==null ? 
+				((MetadataAlleleGenerator)alleleGenerator).generateFirst(metadata) :
+					alleleValuesProvider.getAlleles(metadata.valuesProvider).get(0);
+				;
+		return result;
+	}
+	
+
+	@Override
+	public List<Allele> getAlleles(GeneMetadata metadata) {
+		return alleleValuesProvider.getAlleles(metadata.valuesProvider);
 	}
 
 
@@ -141,7 +157,22 @@ public class StandardMetadataGenoma extends AbstractGenoma implements MetadataGe
 	 */
 	@Override
 	public Allele getRandomAllele(String position) {
-		return alleleGenerator.generateRandom(getMetadataByPosition(position));
+		GeneMetadata metadata = getMetadataByPosition(position);
+		return metadata.valuesProvider==null ? 
+				alleleGenerator.generateRandom(metadata) :
+					getRandomProvided(metadata.valuesProvider);
+	}
+	
+
+	@Override
+	public Allele getRandomAllele(GeneMetadata metadata) {
+		return getRandomProvided(metadata.valuesProvider);
+	}
+	
+	
+	private Allele getRandomProvided(String valuesProvider){
+		List<Allele> alleles = alleleValuesProvider.getAlleles(valuesProvider);
+		return alleles.get(Randomizer.nextInt(alleles.size()));
 	}
 	
 	
@@ -167,13 +198,27 @@ public class StandardMetadataGenoma extends AbstractGenoma implements MetadataGe
 			result = new ArrayList<Allele>();
 			List<Object> alreadyUsedAlleles = new ArrayList<Object>();
 			for(String pos : positions){
-				Allele newAllele = alleleGenerator.generateExclusive(getMetadataByPosition(pos), alreadyUsedAlleles);
+				GeneMetadata metadata = getMetadataByPosition(pos);
+				Allele newAllele = metadata.valuesProvider==null ? 
+						alleleGenerator.generateExclusive(metadata, alreadyUsedAlleles) :
+							generateExclusiveFromProvided(metadata.valuesProvider, alreadyUsedAlleles);
 				alreadyUsedAlleles.add(newAllele.value);
 				result.add(newAllele);
 			}
 		}
 		return result;
 	}
+	
+	public <T> Allele<T> generateExclusiveFromProvided(String valuesProvider, List<T> exclusions) {
+		Allele<T> result = new Allele<T>();
+		List<T> subtracted = (List<T>)alleleValuesProvider.getAlleles(valuesProvider).stream().filter(t -> !exclusions.contains(t)).collect(Collectors.toList());
+		if(subtracted.isEmpty()){
+			throw new AlgorithmException("Remaining values for generating alleles cannot be empty! Maybe allele possibile values are not enough for this gene?");
+		}
+		result.value = (T)subtracted.get(Randomizer.nextInt(subtracted.size()));
+		return result;
+	}
+
 	
 
 
@@ -200,18 +245,24 @@ public class StandardMetadataGenoma extends AbstractGenoma implements MetadataGe
 //	}
 	
 	
-	/**
-	 * Generates one Allele for every possible values of the metadataCode
-	 * 
-	 *TODOA: add access to list of common alleles
-	 * @return
-	 */
-	@Override
-	public List<Allele> createRandomAllelesByCode(String metadataCode){
-		GeneMetadata geneMetadata = getMetadataByCode(metadataCode);
-		List<Allele> result = (List<Allele>)geneMetadata.values.stream().map(v -> alleleGenerator.generateFromValue(v)).collect(Collectors.toList());
-		return result;
-	}
+//	/**
+//	 * Generates one Allele for every possible values for the metadata.
+//	 * 
+//	 * TODOM: change name?
+//	 * 
+//	 * @return
+//	 */
+//	@Override
+//	public List<Allele> getRandomAllelesByCode(String metadataCode){
+//		GeneMetadata geneMetadata = getMetadataByCode(metadataCode);
+//		List<Allele> result = geneMetadata.valuesProvider==null ? 
+//				(List<Allele>)geneMetadata.values.stream().map(v -> alleleGenerator.generateFromValue(v)).collect(Collectors.toList()) :
+//				new ArrayList<Allele>(provider.getAlleles(geneMetadata.valuesProvider));
+//		Collections.shuffle(result);
+//		return result;
+//	}
+	
+	
 	
 //	/**
 //	 * Generate new Allele list based on given metadata
@@ -244,10 +295,9 @@ public class StandardMetadataGenoma extends AbstractGenoma implements MetadataGe
 	
 
 	
-	
-
-	
 	public String toString(){
 		return String.format("MetadataGenoma: %d metadata, limited alleles %b", genesMetadataByCode.size(), limitedAllelesStrategy);
 	}
+
+
 }

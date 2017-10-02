@@ -2,16 +2,13 @@ package it.red.algen.domain.genetics;
 
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 import java.util.SortedMap;
 import java.util.TreeMap;
 import java.util.stream.Collectors;
 
 import it.red.algen.domain.genetics.genotype.Allele;
 import it.red.algen.engine.AlgorithmException;
-import it.red.algen.engine.genetics.AbstractGenoma;
 import it.red.algen.utils.Randomizer;
 
 /**
@@ -19,55 +16,39 @@ import it.red.algen.utils.Randomizer;
  * 
  * Single Chromosome Genoma.
  * 
+ * The list of common alleles is maintained in a separate list for efficiency.
+ * 
  * @author red
  *
  */
 public class PredefinedGenoma extends AbstractGenoma implements Genoma {
 
-	/**
-	 * To be used when position is not applicable 
-	 * (same list of alleles shared betweeb genes)
-	 */
-	public static final String NO_POSITION = "-1"; 
-	
-	boolean sharedAlleles = false;
-	
-
-	/**
-	 * Map of predefined alleles by position.
-	 */
-	Map<String, List<Allele>> alleles = new HashMap<String, List<Allele>>();
-
-
-	
-	
-	private void forbidNotSharedAlleles(){
-		if(!sharedAlleles){
-			throw new AlgorithmException("Same list of alleles are not shared between positions: a position must be specified.");
-		}
-	}
-
-
-	
 	
 	/**
-	 * Get all alleles always in the same order, picking 
-	 * the first value everytime.
+	 * Get alleles always in the same order, picking: 
+	 * - the first value from every Provider
+	 * - the first value in shared list
 	 * @return
 	 */
 	@Override
 	public List<Allele> getOrderedAlleles() {
-		forbidNotSharedAlleles();
-		return alleles.get(NO_POSITION);
+		allowOnlySharedAlleles();
 		
-//		forbidNotSharedAlleles();
-//		List<Allele> result = new ArrayList<Allele>();
-//		int positions = ((ChromosomeGenotypeStructure)genotypeStructure).getNumberOfGenes(0);
-//		Allele fixedAllele = alleles.get(NO_POSITION).get(0);
-//		for(int g=0; g < positions; g++){
-//			result.add(fixedAllele);
-//		}
-//		return result;
+		List<Allele> result = new ArrayList<Allele>();
+		int positions = ((ChromosomeGenotypeStructure)genotypeStructure).getNumberOfGenes(0);
+		
+		List<Allele> predefinedAlleles = alleleValuesProvider.getAlleles();
+		
+		for(int pos=0; pos < positions; pos++){
+			if(this.limitedAllelesStrategy){
+				result.add(predefinedAlleles.get(pos));
+			}
+			else {
+				result.add(predefinedAlleles.get(0));
+			}
+		}
+		
+		return result;
 	}
 
 	
@@ -80,14 +61,17 @@ public class PredefinedGenoma extends AbstractGenoma implements Genoma {
 	 */
 	@Override
 	public List<Allele> getRandomAlleles() {
-		forbidNotSharedAlleles();
+		allowOnlySharedAlleles();
 		int positions = ((ChromosomeGenotypeStructure)genotypeStructure).getNumberOfGenes(0);
 		
-		// TODOA: genotype dimension it's NOT the list of Allele (we may have 10 genes
-		// with a list of 7 possible alleles: 10 are the alleles to return, not 7!)
-		List<Allele> result = new ArrayList<Allele>(alleles.get(NO_POSITION));
-		if(positions!=result.size()){
-			throw new AlgorithmException("Shared possible Alleles number differs from genotype positions. Fix NYI.");
+		List<Allele> result = new ArrayList<Allele>(alleleValuesProvider.getAlleles());
+		if(positions > result.size()){
+			for(int pos=result.size(); pos < positions; pos++){
+				result.add(getRandomAllele(String.valueOf(pos)));
+			}
+		}
+		else if(positions < result.size()){
+			throw new AlgorithmException("Shared possible Alleles number more than from genotype positions. Fix TODOM.");
 		}
 		Collections.shuffle(result);
 		return result;
@@ -102,7 +86,7 @@ public class PredefinedGenoma extends AbstractGenoma implements Genoma {
 	
 
 	/**
-	 * Returns a random allele for every position, with no duplicates.
+	 * Returns a random allele for every position.
 	 * TODOA: strategy for admitting duplicates or not?
 	 * 
 	 * Implemented only for shared values.
@@ -111,11 +95,13 @@ public class PredefinedGenoma extends AbstractGenoma implements Genoma {
 	 */
 	@Override
 	public SortedMap<String, Allele> getRandomAllelesAsMap() {
-		forbidNotSharedAlleles();
+		allowOnlySharedAlleles();
+		
 		SortedMap<String, Allele> result = new TreeMap<String, Allele>();
-		List<Allele> geneAlleles = new ArrayList<Allele>(alleles.get(NO_POSITION));
-		for(int pos=0; pos < geneAlleles.size(); pos++){
-			result.put(String.valueOf(pos), geneAlleles.get(pos));
+		List<Allele> geneAlleles = new ArrayList<Allele>(alleleValuesProvider.getAlleles());
+		for(int pos=0; pos < genotypeStructure.getPositionsSize(); pos++){
+			String posString = String.valueOf(pos);
+			result.put(posString, getRandomAllele(posString));
 		}
 		return result;
 	}
@@ -126,10 +112,13 @@ public class PredefinedGenoma extends AbstractGenoma implements Genoma {
 	 */
 	@Override
 	public Allele getRandomAllele(String position){
+		List<Allele> positionsAlleles = null;
 		if(sharedAlleles){
-			position = NO_POSITION;
+			positionsAlleles = alleleValuesProvider.getAlleles();
 		}
-		List<Allele> positionsAlleles = alleles.get(position);
+		else {
+			positionsAlleles = alleleValuesProvider.getAlleles(position);
+		}
 		return positionsAlleles.get(Randomizer.nextInt(positionsAlleles.size()));
 	}
 
@@ -146,7 +135,7 @@ public class PredefinedGenoma extends AbstractGenoma implements Genoma {
 	
 
 	public String toString(){
-		return String.format("PredefinedGenoma: %d alleles, limitedAllelesStrategy %b", alleles.size(), limitedAllelesStrategy);
+		return String.format("PredefinedGenoma: %b sharedAlleles, limitedAllelesStrategy %b", sharedAlleles, limitedAllelesStrategy);
 	}
 
 

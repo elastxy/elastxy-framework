@@ -2,6 +2,7 @@ package it.red.algen.engine.metadata;
 
 import java.util.List;
 
+import it.red.algen.domain.genetics.Genoma;
 import it.red.algen.domain.genetics.genotype.Allele;
 
 /**
@@ -10,6 +11,15 @@ import it.red.algen.domain.genetics.genotype.Allele;
  *
  */
 public interface AlleleGenerator {
+	
+	
+	/**
+	 * Setup AlleleGenerator with access to Genoma.
+	 * 
+	 * @param Genoma
+	 */
+	public void setup(Genoma genoma);
+	
 	
 	/**
 	 * Generate a random allele

@@ -102,8 +102,7 @@ public class MefGenomaProvider implements GenomaProvider {
 		logger.debug("Reducing the number of recipes and collecting info.");
 
 		// Add values to metadata based on target
-		// TODOA: check what happens in large set of data if values are with metadata!!! 
-		// maybe it's better to access directly through allelegenerator
+		// TODOM: refactory with AllelesValueProvider
 		Map<RecipeType, Integer> targetRecipesByType = calculateRecipesByType(target);
 		
 		// Populate metadata genoma

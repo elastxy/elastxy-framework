@@ -25,16 +25,15 @@ public interface MetadataGenoma extends Genoma {
 
 	
 	/**
-	 * Inject an allele generator implementation
+	 * Inject an allele generator implementation.
 	 * @param generator
 	 */
 	public void setupAlleleGenerator(AlleleGenerator generator);
 	
 
-	
 	/**
 	 * Get the metadata by code
-	 * TODOA: move to Structure
+	 * TODOA: move to Structure?
 	 * @param metadataCode
 	 * @return
 	 */
@@ -43,7 +42,7 @@ public interface MetadataGenoma extends Genoma {
 
 	/**
 	 * Get the metadata by a given position
-	 * TODOA: move to Structure
+	 * TODOA: move to Structure?
 	 * @param metadataCode
 	 * @return
 	 */
@@ -53,12 +52,35 @@ public interface MetadataGenoma extends Genoma {
 	
 	
 
+//	/**
+//	 * Generates one Allele for every possible values of the metadata.
+//	 * 
+//	 * @return
+//	 */
+//	public List<Allele> getRandomAllelesByCode(String metadataCode);
+	
+	
+
 	/**
-	 * Generates one Allele for every possible values of the metadataCode.
+	 * Retrieves a random Allele suitable for the given metadata.
 	 * 
+	 * TODOM: by metadatacode String?
+	 * 
+	 * @param metadata
 	 * @return
 	 */
-	public List<Allele> createRandomAllelesByCode(String metadataCode);
+	public Allele getRandomAllele(GeneMetadata metadata);
+
+	
+	/**
+	 * Retrieves the list of Alleles suitable for the given metadata.
+	 * 
+	 * TODOM: by metadatacode String?
+	 * @param metadata
+	 * @return
+	 */
+	public List<Allele> getAlleles(GeneMetadata metadata);
+	
 	
 //	/**
 //	 * Generate new Allele list based on given metadata.

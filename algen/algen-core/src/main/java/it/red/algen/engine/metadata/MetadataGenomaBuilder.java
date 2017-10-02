@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.Map.Entry;
 
 import it.red.algen.context.AlgorithmContext;
+import it.red.algen.dataaccess.AlleleValuesProvider;
 import it.red.algen.domain.genetics.ChromosomeGenotypeStructure;
 import it.red.algen.domain.genetics.StrandGenotypeStructure;
 import it.red.algen.engine.AlgorithmException;
@@ -68,7 +69,7 @@ public class MetadataGenomaBuilder {
 	 * @param genoma
 	 * @param genes
 	 */
-	private static void addGenes(StandardMetadataGenoma genoma, GenesMetadataConfiguration genes){
+	public static void addGenes(StandardMetadataGenoma genoma, GenesMetadataConfiguration genes){
 		Iterator<Entry<String, GeneMetadata>> it = genes.metadata.entrySet().iterator();
 		while(it.hasNext()){
 			Entry<String, GeneMetadata> entry = it.next();
@@ -91,6 +92,35 @@ public class MetadataGenomaBuilder {
 	public static void addGene(StandardMetadataGenoma genoma, String pos, GeneMetadata metadata){
 		genoma.genesMetadataByCode.put(metadata.code, metadata);
 		genoma.genesMetadataByPos.put(pos, metadata);
+	}
+	
+
+//	/**
+//	 * Add the list of possible Alleles to the Genoma for a specified provider
+//	 * found in metadata.
+//	 * 
+//	 * Name is specified in valuesProvider property of GeneMetadata.
+//	 * 
+//	 * @param genoma
+//	 * @param pos
+//	 * @param metadata
+//	 */
+//	public static void addAlleleValues(StandardMetadataGenoma genoma, String provider, List<Allele> alleles){
+//		genoma.insertAlleles(provider, alleles);
+//	}
+	
+
+	/**
+	 * Optionally, adds new AlleleProvider to the Genoma.
+	 * 
+	 * Name is specified in valuesProvider property of GeneMetadata.
+	 * 
+	 * @param genoma
+	 * @param pos
+	 * @param metadata
+	 */
+	public static void setupAlleleValuesProvider(StandardMetadataGenoma genoma, AlleleValuesProvider provider){
+		genoma.setAlleleValuesProvider(provider);;
 	}
 	
 	

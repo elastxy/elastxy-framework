@@ -40,16 +40,17 @@ public class ReadConfigTest
     	GenesMetadataConfiguration genes = (GenesMetadataConfiguration)ReadConfigSupport.retrieveGenesMetadata("testapp");
     	
     	// Metadata
-    	assertEquals(3, genes.metadata.size());
-    	assertEquals(GeneMetadataType.CHAR, genes.metadata.get("operator").type);
-    	assertEquals(4, genes.metadata.get("operator").values.size());
-    	assertEquals(Arrays.asList('+','-','*','/'), genes.metadata.get("operator").values);
+    	assertEquals(4, genes.metadata.size());
+    	assertEquals(GeneMetadataType.CHAR, genes.metadata.get("binaryOperator").type);
+    	assertEquals(Arrays.asList('+','-'), genes.metadata.get("signum").values);
+    	assertEquals("binaryOperatorProvider", genes.metadata.get("binaryOperator").valuesProvider);
 
     	// Positions
-    	assertEquals(3, genes.positions.size());
-    	assertEquals(2, genes.positions.get("operandInt").size());
-    	assertEquals(2, genes.positions.get("operator").size());
-    	assertEquals(1, genes.positions.get("operandValues").size());
+    	assertEquals(4, genes.positions.size());
+    	assertEquals(2, genes.positions.get("signum").size());
+    	assertEquals(4, genes.positions.get("operand").size());
+    	assertEquals(2, genes.positions.get("binaryOperator").size());
+    	assertEquals(1, genes.positions.get("unaryOperator").size());
     }
     
 }

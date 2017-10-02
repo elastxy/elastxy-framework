@@ -7,6 +7,9 @@ public class GeneMetadataPicker {
 
 	/**
 	 * If values not empty, returns a random value, else returns a value between boundaries.
+	 * 
+	 * The random value can be retrieved from Genoma, if a values provider is set.
+	 * 
 	 * @return
 	 */
 	public static Object randomPick(GeneMetadata metadata){
@@ -49,8 +52,7 @@ public class GeneMetadataPicker {
 	 */
 	public static Object pickFirst(GeneMetadata metadata){
 		Object result = null;
-		int size = metadata.values.size();
-		if(size > 0){
+		if(!metadata.values.isEmpty()){
 			return metadata.values.get(0);
 		}
 		else {

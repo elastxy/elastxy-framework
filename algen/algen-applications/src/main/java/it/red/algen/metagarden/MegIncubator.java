@@ -27,7 +27,7 @@ public class MegIncubator implements Incubator<Chromosome, UserPhenotype<GardenW
 		
 		MetadataGenoma genoma = (MetadataGenoma)environment.genoma;
 		for(Gene gene : genotype.genes){
-			GeneMetadata metadata = genoma.getMetadataByCode(gene.metadataCode); // TODOA: get from Structure
+			GeneMetadata metadata = genoma.getMetadataByCode(gene.metadataCode);
 			result.value.locationsUnhappyness.add(calculateUnhappiness(gene, metadata));
 		}
 		return result;

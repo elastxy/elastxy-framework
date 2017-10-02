@@ -63,7 +63,7 @@ public class Population {
     }
     
     public void orderByFitnessProximityDesc(BigDecimal targetFitness){
-    	Collections.sort(solutions, new TargetFitnessComparator(targetFitness)); // TODOA: re-create too much expensive!
+    	Collections.sort(solutions, new TargetFitnessComparator(targetFitness)); // TODOM: re-create too much expensive!
     }
     
     public String toString(){

@@ -1,33 +1,43 @@
 {
 	"metadata" : {
-		"operandInt" : {
+		"signum" : {
+			"code" : "signum",
+			"name" : "signum",
+			"type" : "CHAR",
+			"values": ["+","-"],
+			"userStructure": null,
+			"userProperties": {	
+			}
+		},
+		"operand" : {
 			"code" : "operand",
 			"name" : "operand",
 			"type" : "INTEGER",
 			"values": [],
-			"min" : -1000000,
-			"max" : 1000000,
+			"min" : 0,
+			"max" : 10,
 			"userStructure": null,
 			"userProperties": {	
 			}
 		},
-		"operator" : {
-			"code" : "operator",
+		"binaryOperator" : {
+			"code" : "binaryOperator",
 			"name" : "operator",
 			"type" : "CHAR",
-			"values" : ["+","-","*","/"],
+			"values" : [],
 			"min": null,
 			"max": null,
+			"valuesProvider": "binaryOperatorProvider",
 			"userStructure": null,
 			"userProperties": {	
 			}
 		},
-		"operandValues" : {
-			"code" : "operandValues",
-			"name" : "operand values",
-			"type" : "INTEGER",
+		"unaryOperator" : {
+			"code" : "unaryOperator",
+			"name" : "unary operators",
+			"type" : "STRING",
 			"values": [],
-			"valuesProvider": "operandValuesProvider",
+			"valuesProvider": "unaryOperatorProvider",
 			"userStructure": null,
 			"userProperties": {	
 			}
@@ -35,8 +45,9 @@
 	},
 	
 	"positions" : {
-		"operandInt" : ["0","2"],
-		"operator" : ["1","3"],	
-		"operandValues" : ["4"]
+		"signum" : 			["0.0",	"1.1"],
+		"operand" :			["0.1",	"0.3",	"1.2",	"1.4"],	
+		"binaryOperator" : 	["0.2",	"1.3"],	
+		"unaryOperator" : 	["1.0"]
 	}
 }
