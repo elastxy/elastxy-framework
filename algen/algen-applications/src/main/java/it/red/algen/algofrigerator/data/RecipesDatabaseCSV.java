@@ -24,6 +24,11 @@ public class RecipesDatabaseCSV implements RecipesDatabase {
 	}
 	
 	@Override
+	public String getLanguage(){
+		return database;
+	}
+	
+	@Override
 	public List<Recipe> getAllRecipes() {
 		if(!recipeCache.isEmpty()){
 			return recipeCache;

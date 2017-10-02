@@ -51,8 +51,10 @@ public class MefDatasetProvider implements DatasetProvider {
 	@Override
 	public void collect() {
 
-		// Recipes are read-only
-		if(!recipes.isEmpty()){
+		String database = context.applicationSpecifics.getParamString(MefConstants.PARAM_DATABASE, MefConstants.DEFAULT_DATABASE);
+
+		// Recipes are read-only. Reloaded if user changes database.
+		if(!recipes.isEmpty() && db.getLanguage().equals(database)){
 			logger.debug("Found "+recipes.size()+" recipes in cache: no further reading is needed.");
 			return;
 		}
@@ -60,7 +62,6 @@ public class MefDatasetProvider implements DatasetProvider {
 		recipes = new HashMap<RecipeType, List<Recipe>>();
 		
 		// Load recipes from file
-		String database = context.applicationSpecifics.getParamString(MefConstants.PARAM_DATABASE, MefConstants.DEFAULT_DATABASE);
 		db = new RecipesDatabaseCSV(database);
 		List<Recipe> recipesFromFile = db.getAllRecipes();
 		logger.debug("Found "+recipesFromFile.size()+" from file.");

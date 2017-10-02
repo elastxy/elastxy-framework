@@ -25,7 +25,6 @@ import it.red.algen.dataaccess.WorkingDataset;
 import it.red.algen.domain.experiment.MultiplePerformanceTarget;
 import it.red.algen.domain.experiment.Target;
 import it.red.algen.domain.experiment.TargetType;
-import it.red.algen.domain.genetics.Genoma;
 import it.red.algen.engine.metadata.StandardMetadataGenoma;
 
 /**
