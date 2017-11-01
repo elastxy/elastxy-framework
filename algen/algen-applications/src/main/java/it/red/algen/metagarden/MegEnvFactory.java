@@ -10,9 +10,9 @@
 
 package it.red.algen.metagarden;
 
-import it.red.algen.dataaccess.AbstractEnvFactory;
-import it.red.algen.dataaccess.WorkingDataset;
+import it.red.algen.dataprovider.WorkingDataset;
 import it.red.algen.domain.experiment.PerformanceTarget;
+import it.red.algen.engine.factory.AbstractEnvFactory;
 import it.red.algen.engine.metadata.StandardMetadataGenoma;
 import it.red.algen.metagarden.data.MegWorkingDataset;
 

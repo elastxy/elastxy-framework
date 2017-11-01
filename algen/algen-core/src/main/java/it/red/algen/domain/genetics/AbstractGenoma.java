@@ -2,12 +2,12 @@ package it.red.algen.domain.genetics;
 
 import java.util.List;
 
-import it.red.algen.dataaccess.AlleleValuesProvider;
+import it.red.algen.dataprovider.AlleleValuesProvider;
 import it.red.algen.domain.experiment.Solution;
 import it.red.algen.domain.genetics.genotype.Allele;
-import it.red.algen.engine.AlgorithmException;
+import it.red.algen.engine.core.AlgorithmException;
+import it.red.algen.engine.core.Randomizer;
 import it.red.algen.engine.genetics.GenomaPositionComparator;
-import it.red.algen.utils.Randomizer;
 
 public abstract class AbstractGenoma implements Genoma {
 	protected static final GenomaPositionComparator POSITIONS_COMPARATOR = new GenomaPositionComparator();

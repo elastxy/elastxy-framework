@@ -1,9 +1,9 @@
 package it.red.algen.engine.operators;
 
 import it.red.algen.context.AlgorithmContext;
-import it.red.algen.dataaccess.PopulationFactory;
 import it.red.algen.domain.experiment.Population;
 import it.red.algen.domain.genetics.Genoma;
+import it.red.algen.engine.factory.PopulationFactory;
 
 public class UniformlyDistributedSelector implements Selector<Genoma> {
 	private AlgorithmContext context;

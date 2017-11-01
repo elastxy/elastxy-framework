@@ -3,7 +3,7 @@ package it.red.algen.domain.genetics;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
-import it.red.algen.engine.AlgorithmException;
+import it.red.algen.engine.core.AlgorithmException;
 
 public class ChromosomeGenotypeStructure extends GenotypeStructureImpl {
 

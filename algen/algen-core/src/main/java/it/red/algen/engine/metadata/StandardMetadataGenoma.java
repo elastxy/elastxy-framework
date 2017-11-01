@@ -10,8 +10,8 @@ import java.util.stream.Collectors;
 
 import it.red.algen.domain.genetics.AbstractGenoma;
 import it.red.algen.domain.genetics.genotype.Allele;
-import it.red.algen.engine.AlgorithmException;
-import it.red.algen.utils.Randomizer;
+import it.red.algen.engine.core.AlgorithmException;
+import it.red.algen.engine.core.Randomizer;
 
 
 /**

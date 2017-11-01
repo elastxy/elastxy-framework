@@ -5,10 +5,10 @@ import java.util.List;
 import java.util.Map.Entry;
 
 import it.red.algen.context.AlgorithmContext;
-import it.red.algen.dataaccess.AlleleValuesProvider;
+import it.red.algen.dataprovider.AlleleValuesProvider;
 import it.red.algen.domain.genetics.ChromosomeGenotypeStructure;
 import it.red.algen.domain.genetics.StrandGenotypeStructure;
-import it.red.algen.engine.AlgorithmException;
+import it.red.algen.engine.core.AlgorithmException;
 
 /**
  * Helper class for building a Genoma based on Metadata.

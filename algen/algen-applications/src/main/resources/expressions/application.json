@@ -18,7 +18,7 @@
 	
 	"populationFactory": {
 		"type" : "java",
-		"content" : "it.red.algen.dataaccess.StandardPopulationFactory"
+		"content" : "it.red.algen.engine.factory.StandardPopulationFactory"
 	},
 	
 	"solutionsFactory": {

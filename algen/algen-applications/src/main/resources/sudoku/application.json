@@ -18,12 +18,12 @@
 	
 	"solutionsFactory": {
 		"type" : "java",
-		"content" : "it.red.algen.dataaccess.PredefinedGenomaSolutionsFactory"
+		"content" : "it.red.algen.engine.factory.PredefinedGenomaSolutionsFactory"
 	},
 	
 	"populationFactory": {
 		"type" : "java",
-		"content" : "it.red.algen.dataaccess.StandardPopulationFactory"
+		"content" : "it.red.algen.engine.factory.StandardPopulationFactory"
 	},
 	
 	"incubator": {

@@ -3,8 +3,8 @@ package it.red.algen.metagarden.data;
 import org.apache.log4j.Logger;
 
 import it.red.algen.context.AlgorithmContext;
-import it.red.algen.dataaccess.WorkingDataset;
-import it.red.algen.dataaccess.DatasetProvider;
+import it.red.algen.dataprovider.DatasetProvider;
+import it.red.algen.dataprovider.WorkingDataset;
 import it.red.algen.domain.experiment.Target;
 
 public class MegDatasetProvider implements DatasetProvider {

@@ -1,7 +1,7 @@
 package it.red.algen.engine.metadata;
 
-import it.red.algen.engine.AlgorithmException;
-import it.red.algen.utils.Randomizer;
+import it.red.algen.engine.core.AlgorithmException;
+import it.red.algen.engine.core.Randomizer;
 
 public class GeneMetadataPicker {
 

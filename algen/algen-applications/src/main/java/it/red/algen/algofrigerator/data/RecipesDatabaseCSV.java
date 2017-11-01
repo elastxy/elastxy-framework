@@ -8,7 +8,7 @@ import java.util.stream.Collectors;
 
 import au.com.bytecode.opencsv.CSVReader;
 import it.red.algen.algofrigerator.MefConstants;
-import it.red.algen.dataaccess.DataAccessException;
+import it.red.algen.dataprovider.DataAccessException;
 
 
 // TODOM: cache

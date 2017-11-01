@@ -13,8 +13,8 @@ import it.red.algen.algofrigerator.MefConstants;
 import it.red.algen.algofrigerator.MefGoal;
 import it.red.algen.algofrigerator.MefUtils;
 import it.red.algen.context.AlgorithmContext;
-import it.red.algen.dataaccess.WorkingDataset;
-import it.red.algen.dataaccess.DatasetProvider;
+import it.red.algen.dataprovider.DatasetProvider;
+import it.red.algen.dataprovider.WorkingDataset;
 import it.red.algen.domain.experiment.Target;
 
 public class MefDatasetProvider implements DatasetProvider {

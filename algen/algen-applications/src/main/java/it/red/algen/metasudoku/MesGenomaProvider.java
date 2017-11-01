@@ -6,12 +6,12 @@ import java.util.List;
 import java.util.Map;
 
 import it.red.algen.context.AlgorithmContext;
-import it.red.algen.dataaccess.GenomaProvider;
-import it.red.algen.dataaccess.WorkingDataset;
+import it.red.algen.dataprovider.GenomaProvider;
+import it.red.algen.dataprovider.WorkingDataset;
 import it.red.algen.domain.experiment.Target;
 import it.red.algen.domain.genetics.Genoma;
-import it.red.algen.domain.genetics.PredefinedGenoma;
 import it.red.algen.domain.genetics.genotype.Allele;
+import it.red.algen.engine.genetics.PredefinedGenoma;
 import it.red.algen.engine.genetics.PredefinedGenomaBuilder;
 
 

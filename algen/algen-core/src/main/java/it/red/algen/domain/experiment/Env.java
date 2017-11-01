@@ -13,7 +13,7 @@ package it.red.algen.domain.experiment;
 import java.util.ArrayList;
 import java.util.List;
 
-import it.red.algen.dataaccess.WorkingDataset;
+import it.red.algen.dataprovider.WorkingDataset;
 import it.red.algen.domain.genetics.Genoma;
 
 

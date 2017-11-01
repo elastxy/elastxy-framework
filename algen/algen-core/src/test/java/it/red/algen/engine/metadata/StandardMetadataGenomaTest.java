@@ -5,8 +5,8 @@ import java.util.List;
 
 import it.red.algen.conf.ReadConfigSupport;
 import it.red.algen.context.AlgorithmContext;
-import it.red.algen.dataaccess.AlleleValuesProvider;
-import it.red.algen.dataaccess.InMemoryAlleleValuesProvider;
+import it.red.algen.dataprovider.AlleleValuesProvider;
+import it.red.algen.dataprovider.InMemoryAlleleValuesProvider;
 import it.red.algen.domain.genetics.genotype.Allele;
 import junit.framework.Test;
 import junit.framework.TestCase;

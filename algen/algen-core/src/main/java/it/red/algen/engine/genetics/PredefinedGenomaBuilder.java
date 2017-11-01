@@ -2,10 +2,9 @@ package it.red.algen.engine.genetics;
 
 import java.util.List;
 
-import it.red.algen.dataaccess.AlleleValuesProvider;
-import it.red.algen.dataaccess.InMemoryAlleleValuesProvider;
+import it.red.algen.dataprovider.AlleleValuesProvider;
+import it.red.algen.dataprovider.InMemoryAlleleValuesProvider;
 import it.red.algen.domain.genetics.ChromosomeGenotypeStructure;
-import it.red.algen.domain.genetics.PredefinedGenoma;
 import it.red.algen.domain.genetics.genotype.Allele;
 
 public class PredefinedGenomaBuilder {

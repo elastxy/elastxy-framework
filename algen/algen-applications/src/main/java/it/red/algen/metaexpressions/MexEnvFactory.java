@@ -13,11 +13,11 @@ package it.red.algen.metaexpressions;
 import java.math.BigDecimal;
 
 import it.red.algen.applications.ApplicationException;
-import it.red.algen.dataaccess.AbstractEnvFactory;
-import it.red.algen.dataaccess.WorkingDataset;
+import it.red.algen.dataprovider.WorkingDataset;
 import it.red.algen.domain.experiment.NumberRawFitness;
 import it.red.algen.domain.experiment.PerformanceTarget;
 import it.red.algen.domain.experiment.Target;
+import it.red.algen.engine.factory.AbstractEnvFactory;
 import it.red.algen.engine.metadata.StandardMetadataGenoma;
 
 /**

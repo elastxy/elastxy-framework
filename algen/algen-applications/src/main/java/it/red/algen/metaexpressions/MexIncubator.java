@@ -1,10 +1,10 @@
 package it.red.algen.metaexpressions;
 
-import it.red.algen.dataaccess.WorkingDataset;
+import it.red.algen.dataprovider.WorkingDataset;
 import it.red.algen.domain.experiment.Env;
 import it.red.algen.domain.genetics.genotype.Chromosome;
 import it.red.algen.domain.genetics.phenotype.NumberPhenotype;
-import it.red.algen.engine.IllegalSolutionException;
+import it.red.algen.engine.core.IllegalSolutionException;
 import it.red.algen.engine.fitness.Incubator;
 
 public class MexIncubator implements Incubator<Chromosome, NumberPhenotype>{

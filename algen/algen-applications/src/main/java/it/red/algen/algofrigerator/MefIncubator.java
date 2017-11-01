@@ -11,12 +11,12 @@ import it.red.algen.algofrigerator.data.IngredientsCoverage;
 import it.red.algen.algofrigerator.data.MefWorkingDataset;
 import it.red.algen.algofrigerator.data.Recipe;
 import it.red.algen.algofrigerator.data.RecipeType;
-import it.red.algen.dataaccess.WorkingDataset;
+import it.red.algen.dataprovider.WorkingDataset;
 import it.red.algen.domain.experiment.Env;
 import it.red.algen.domain.genetics.genotype.Gene;
 import it.red.algen.domain.genetics.genotype.Strand;
 import it.red.algen.domain.genetics.phenotype.ComplexPhenotype;
-import it.red.algen.engine.IllegalSolutionException;
+import it.red.algen.engine.core.IllegalSolutionException;
 import it.red.algen.engine.fitness.Incubator;
 
 public class MefIncubator implements Incubator<Strand, ComplexPhenotype>{

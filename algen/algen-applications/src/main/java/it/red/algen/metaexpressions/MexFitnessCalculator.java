@@ -9,7 +9,7 @@ import it.red.algen.domain.experiment.PerformanceTarget;
 import it.red.algen.domain.experiment.StandardFitness;
 import it.red.algen.domain.genetics.genotype.Chromosome;
 import it.red.algen.domain.genetics.phenotype.NumberPhenotype;
-import it.red.algen.engine.IllegalSolutionException;
+import it.red.algen.engine.core.IllegalSolutionException;
 import it.red.algen.engine.fitness.FitnessCalculator;
 import it.red.algen.engine.fitness.Incubator;
 

@@ -3,7 +3,7 @@ package it.red.algen.domain.genetics;
 import java.util.List;
 import java.util.SortedMap;
 
-import it.red.algen.dataaccess.AlleleValuesProvider;
+import it.red.algen.dataprovider.AlleleValuesProvider;
 import it.red.algen.domain.experiment.Solution;
 import it.red.algen.domain.genetics.genotype.Allele;
 

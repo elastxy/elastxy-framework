@@ -4,7 +4,7 @@ import java.util.Comparator;
 
 import org.apache.log4j.Logger;
 
-import it.red.algen.engine.AlgorithmException;
+import it.red.algen.engine.core.AlgorithmException;
 
 public class GenomaPositionComparator implements Comparator<String> {
 	private static Logger logger = Logger.getLogger(GenomaPositionComparator.class);

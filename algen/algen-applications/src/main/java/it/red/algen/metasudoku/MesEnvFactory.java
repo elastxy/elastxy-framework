@@ -16,12 +16,12 @@ import org.apache.log4j.Logger;
 
 import it.red.algen.conf.ConfigurationException;
 import it.red.algen.conf.ReadConfigSupport;
-import it.red.algen.dataaccess.AbstractEnvFactory;
-import it.red.algen.dataaccess.WorkingDataset;
+import it.red.algen.dataprovider.WorkingDataset;
 import it.red.algen.domain.experiment.PerformanceTarget;
 import it.red.algen.domain.experiment.Target;
 import it.red.algen.domain.genetics.Genoma;
-import it.red.algen.domain.genetics.PredefinedGenoma;
+import it.red.algen.engine.factory.AbstractEnvFactory;
+import it.red.algen.engine.genetics.PredefinedGenoma;
 
 /**
  *

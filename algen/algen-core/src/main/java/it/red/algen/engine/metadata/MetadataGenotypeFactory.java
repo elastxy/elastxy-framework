@@ -6,11 +6,11 @@ import java.util.stream.IntStream;
 
 import org.apache.log4j.Logger;
 
-import it.red.algen.applications.ApplicationException;
 import it.red.algen.domain.genetics.genotype.Allele;
 import it.red.algen.domain.genetics.genotype.Chromosome;
 import it.red.algen.domain.genetics.genotype.Gene;
 import it.red.algen.domain.genetics.genotype.Strand;
+import it.red.algen.engine.core.AlgorithmException;
 
 
 /**
@@ -68,7 +68,7 @@ public class MetadataGenotypeFactory {
 
     	List<Allele> alleles = genoma.getRandomAlleles(result.getPositions());
     	if(alleles.size() < result.genes.size()){
-    		throw new ApplicationException("Number of possible different alleles less than number of genes creating a base predefined Solution. Check if you need the createRandom instead or try adding alleles");
+    		throw new AlgorithmException("Number of possible different alleles less than number of genes creating a base predefined Solution. Check if you need the createRandom instead or try adding alleles");
     	} 
     	
     	for(int i=0; i < alleles.size(); i++){

@@ -1,6 +1,6 @@
 package it.red.algen.metagarden.data;
 
-import it.red.algen.dataaccess.WorkingDataset;
+import it.red.algen.dataprovider.WorkingDataset;
 
 public class MegWorkingDataset implements WorkingDataset {
 	public Place[] places;

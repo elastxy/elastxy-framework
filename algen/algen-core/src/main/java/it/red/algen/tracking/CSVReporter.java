@@ -8,7 +8,7 @@ import java.util.Calendar;
 import java.util.List;
 
 import au.com.bytecode.opencsv.CSVWriter;
-import it.red.algen.engine.AlgorithmException;
+import it.red.algen.engine.core.AlgorithmException;
 import it.red.algen.stats.ExperimentStats;
 
 

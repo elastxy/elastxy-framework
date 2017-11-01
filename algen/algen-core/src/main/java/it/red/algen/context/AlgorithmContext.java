@@ -1,6 +1,6 @@
 package it.red.algen.context;
 
-import it.red.algen.components.AppComponents;
+import it.red.algen.applications.components.AppComponents;
 import it.red.algen.conf.AlgorithmParameters;
 import it.red.algen.conf.ApplicationSpecifics;
 import it.red.algen.conf.MonitoringConfiguration;

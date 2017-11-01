@@ -1,8 +1,8 @@
 package it.red.algen.algofrigerator;
 
-import it.red.algen.dataaccess.SolutionsFactory;
 import it.red.algen.domain.experiment.GenericSolution;
 import it.red.algen.domain.experiment.Solution;
+import it.red.algen.engine.factory.SolutionsFactory;
 import it.red.algen.engine.metadata.MetadataGenotypeFactory;
 import it.red.algen.engine.metadata.StandardMetadataGenoma;
 

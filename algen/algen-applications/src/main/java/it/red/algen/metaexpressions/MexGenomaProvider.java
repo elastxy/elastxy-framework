@@ -4,8 +4,8 @@ import org.apache.log4j.Logger;
 
 import it.red.algen.conf.ReadConfigSupport;
 import it.red.algen.context.AlgorithmContext;
-import it.red.algen.dataaccess.GenomaProvider;
-import it.red.algen.dataaccess.WorkingDataset;
+import it.red.algen.dataprovider.GenomaProvider;
+import it.red.algen.dataprovider.WorkingDataset;
 import it.red.algen.domain.experiment.Target;
 import it.red.algen.domain.genetics.Genoma;
 import it.red.algen.engine.metadata.GenesMetadataConfiguration;
