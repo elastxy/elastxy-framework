@@ -60,7 +60,9 @@ public class MefFitnessCalculator implements FitnessCalculator<GenericSolution,S
     	BigDecimal completeness = null;
     	Double completeMeals = (Double)((Map<String,Object>)solution.phenotype.getValue()).get(MefConstants.PHENOTYPE_COMPLETENESS_POINTS);
     	BigDecimal completeMealsBD = new BigDecimal(completeMeals).setScale(2, BigDecimal.ROUND_HALF_UP);
-    	BigDecimal desiredMealsBD = new BigDecimal(goal.desiredMeals).setScale(2, BigDecimal.ROUND_HALF_UP);;
+    	BigDecimal desiredMealsBD = new BigDecimal(goal.desiredMeals).setScale(2, BigDecimal.ROUND_HALF_UP);
+    	
+    	// TODOA: completeness over 0!!!! check Accumulator and neutral recipes usage...
     	completeness = completeMealsBD.compareTo(desiredMealsBD)==0 ? 
     			BigDecimal.ONE : 
     			completeMealsBD.divide(desiredMealsBD, BigDecimal.ROUND_HALF_UP);
