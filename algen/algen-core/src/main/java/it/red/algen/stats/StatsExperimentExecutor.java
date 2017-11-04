@@ -13,11 +13,9 @@ package it.red.algen.stats;
 import java.util.Optional;
 
 import org.apache.commons.math3.stat.descriptive.DescriptiveStatistics;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.config.AutowireCapableBeanFactory;
 
+import it.red.algen.context.AlgorithmContext;
 import it.red.algen.engine.core.Experiment;
-import it.red.algen.engine.factory.EnvFactory;
 
 
 
@@ -27,17 +25,15 @@ import it.red.algen.engine.factory.EnvFactory;
  */
 public class StatsExperimentExecutor {
     
-	private EnvFactory envFactory;
-	
-	@Autowired private AutowireCapableBeanFactory beanFactory;
+	private AlgorithmContext context;
 	
     private int experiments;
     
     private AggregatedStats globalStats;
     
-    public StatsExperimentExecutor(EnvFactory envFactory, int experiments){
-        this.envFactory = envFactory;
-        this.experiments = experiments;
+    public StatsExperimentExecutor(AlgorithmContext context, int experiments){
+        this.context = context;
+    	this.experiments = experiments;
         globalStats = new AggregatedStats();
         globalStats.totExperiments = experiments;
     }
@@ -63,8 +59,7 @@ public class StatsExperimentExecutor {
     
     public void run(){
         for(int i = 0; i < experiments; i++){
-            Experiment e = new Experiment(envFactory);
-            beanFactory.autowireBean(e);
+            Experiment e = new Experiment(context);
             e.run();
             addStats(e.getStats());
         }

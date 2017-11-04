@@ -3,13 +3,11 @@ package it.red.algen.applications;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.config.AutowireCapableBeanFactory;
 import org.springframework.stereotype.Component;
 
 import it.red.algen.applications.components.AppComponentsLocator;
 import it.red.algen.context.AlgorithmContext;
 import it.red.algen.context.ContextBuilder;
-import it.red.algen.context.ContextSupplier;
 import it.red.algen.engine.core.Experiment;
 import it.red.algen.engine.operators.UniformlyDistributedSelector;
 import it.red.algen.stats.ExperimentStats;
@@ -19,12 +17,8 @@ import it.red.algen.stats.StatsExperimentExecutor;
 public class ApplicationService {
 	private static Logger logger = LoggerFactory.getLogger(ApplicationService.class);
 
-	@Autowired private ContextSupplier contextSupplier;
-
 	@Autowired private ContextBuilder benchmarkContextBuilder;
 	
-	@Autowired private AutowireCapableBeanFactory beanFactory;
-
 	@Autowired private AppComponentsLocator appComponentsLocator;
 
 
@@ -32,54 +26,32 @@ public class ApplicationService {
 		AlgorithmContext context = benchmarkContextBuilder.build(applicationName, true);
 		context.application.name = applicationName;
 		setupContext(context);
-		contextSupplier.init(context);
-
-		Experiment e = new Experiment(context.application.envFactory);
-		beanFactory.autowireBean(e);
-		
-        e.run();
-        
-        ExperimentStats stats = e.getStats();
-        
-        contextSupplier.destroy();
+		Experiment e = new Experiment(context);
+		e.run();
+		ExperimentStats stats = e.getStats();
         return stats;
 	}
 	
 	
 	public ExperimentStats executeExperiment(AlgorithmContext context){
 	 	setupContext(context);
-	 	contextSupplier.init(context);
-
-	 	Experiment e = new Experiment(context.application.envFactory);
-	 	beanFactory.autowireBean(e);
-	 	
+	 	Experiment e = new Experiment(context);
         e.run();
-        
         ExperimentStats stats = e.getStats();
-        
-        contextSupplier.destroy();
         return stats;
 	}
 	
 	
 	public String executeAnalysis(AlgorithmContext context, int experiments){
 	 	setupContext(context);
-	 	contextSupplier.init(context);
-
-        StatsExperimentExecutor collector = new StatsExperimentExecutor(context.application.envFactory, experiments);
-        beanFactory.autowireBean(collector);
-        
+        StatsExperimentExecutor collector = new StatsExperimentExecutor(context, experiments);
         collector.run();
-        
-        contextSupplier.destroy();
-        
         String result = collector.print();
         return result;
 	}
 	
 	
 	public String executeTrialTest(AlgorithmContext context, int experiments){
-		contextSupplier.init(context);
 	 	setupContext(context);
 		
 		// Trial parameters
@@ -94,12 +66,8 @@ public class ApplicationService {
 		context.application.selector.setup(context);
 
 		// Experiments run
-        StatsExperimentExecutor collector = new StatsExperimentExecutor(context.application.envFactory, experiments);
-        beanFactory.autowireBean(collector);
-        
+        StatsExperimentExecutor collector = new StatsExperimentExecutor(context, experiments);
         collector.run();
-        
-        contextSupplier.destroy();
         
         String result = collector.print();
         

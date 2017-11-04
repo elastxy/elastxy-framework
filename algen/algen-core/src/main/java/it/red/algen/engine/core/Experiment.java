@@ -10,11 +10,8 @@
 
 package it.red.algen.engine.core;
 
-import org.springframework.beans.factory.annotation.Autowired;
-
-import it.red.algen.context.ContextSupplier;
+import it.red.algen.context.AlgorithmContext;
 import it.red.algen.domain.experiment.Env;
-import it.red.algen.engine.factory.EnvFactory;
 import it.red.algen.stats.ExperimentStats;
 import it.red.algen.tracking.EnvObserver;
 
@@ -28,14 +25,12 @@ import it.red.algen.tracking.EnvObserver;
  * @author grossi
  */
 public class Experiment {
-	private EnvFactory factory;
     private ExperimentStats stats;
 
-
-    @Autowired private ContextSupplier contextSupplier;
+    private AlgorithmContext context;
     
-    public Experiment(EnvFactory factory) {
-        this.factory = factory;
+    public Experiment(AlgorithmContext context) {
+        this.context = context;
         stats = null;
     }
     
@@ -46,14 +41,14 @@ public class Experiment {
     public void run(){
     	
     	// Setups observer
-        EnvObserver observer = new EnvObserver(contextSupplier.getContext());
+        EnvObserver observer = new EnvObserver(context);
         
         // Creates initial environment
-        Env environment = factory.create();
+        Env environment = context.application.envFactory.create();
     	
         // Setups engine
         Evolver evolver = new Evolver(
-        		contextSupplier.getContext(), 
+        		context, 
         		environment);
         evolver.subscribe(observer);
         
