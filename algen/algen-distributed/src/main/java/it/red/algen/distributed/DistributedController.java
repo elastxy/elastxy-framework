@@ -58,6 +58,13 @@ public class DistributedController {
         return new ResponseEntity<>(result, HttpStatus.OK);
     }
     
+
+    @RequestMapping("/test/spark/distributed")
+    public ResponseEntity<String> testSparkDistributed() throws Exception {
+    	String result = sparkHeartbeatTask.runDistributed();
+        return new ResponseEntity<>(result, HttpStatus.OK);
+    }
+    
     
 
 

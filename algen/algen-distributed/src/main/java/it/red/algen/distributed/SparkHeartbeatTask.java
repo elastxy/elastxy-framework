@@ -1,6 +1,9 @@
 package it.red.algen.distributed;
 
 import java.util.Arrays;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 import java.util.concurrent.Callable;
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.ExecutorService;
@@ -15,6 +18,9 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+
+import com.github.ywilkof.sparkrestclient.DriverState;
+import com.github.ywilkof.sparkrestclient.SparkRestClient;
 
 import scala.Tuple2;
 
@@ -78,6 +84,58 @@ public class SparkHeartbeatTask {
         logger.info("File2:"+future2.get());
         
         return "Counts: "+future1.get()+" & "+future2.get();
+    }
+    
+    
+    public String runDistributed() throws Exception {
+    	
+    	// Create client
+    	logger.info("Creating client..");
+    	final Map<String,String> environmentVariables = new HashMap<>();
+    	environmentVariables.put("log4j.configuration","C:/dev/spark-2.2.0-bin-hadoop2.7/conf");
+//    	environmentVariables.put("spark.eventLog.enabled","false");
+//    	environmentVariables.put("spark.eventLog.dir","file:c:///tmp/sparktemp/eventLog");
+//    	environmentVariables.put("spark.history.fs.logDirectory","file:///c:/tmp/sparktemp/eventLog");
+    	final SparkRestClient sparkClient = SparkRestClient.builder()
+        	.masterHost("192.168.1.101")
+        	.sparkVersion("2.2.0")
+        	.environmentVariables(environmentVariables)
+        	.build();
+    	logger.info("Client created on API root: "+sparkClient.getMasterApiRoot());
+    	
+    	// Submit job
+    	logger.info("Submitting job..");
+    	final String submissionId = sparkClient.prepareJobSubmit()
+    		    .appName("MexApplication")
+    		    .appResource("file:///c:/dev/workspaces/ws_scala/Scaligen/target/scala-2.11/Scaligen-assembly-1.0.jar")
+    		    .mainClass("it.red.algen.d.mex.MexApplication")
+    		    .appArgs(Arrays.asList("spark://192.168.1.101:7077"))
+    		.submit();
+    	logger.info("Job submitted, with id: "+submissionId);
+    	
+    	// Check status
+    	logger.info("Checking status every minute or so..");
+    	List<DriverState> endedStates = Arrays.asList(
+    			DriverState.ERROR,
+    			DriverState.FAILED,
+    			DriverState.FINISHED,
+    			DriverState.KILLED,
+    			DriverState.NOT_FOUND
+    			);
+    	DriverState driverState = null;
+    	while (true) {
+    		 driverState = 
+    				 sparkClient
+    				 .checkJobStatus()
+    				 .withSubmissionId(submissionId);
+    		 logger.info("Status: "+driverState);
+             Thread.sleep(5 * 1000);
+             if(endedStates.contains(driverState)){
+            	 logger.info("Job ended with state: "+driverState);
+            	 break;
+             }
+         }
+    	return driverState.toString();
     }
     
     

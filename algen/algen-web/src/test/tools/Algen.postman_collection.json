@@ -85,7 +85,7 @@
 								],
 								"body": {
 									"mode": "raw",
-									"raw": "{\n\t\"applicationSpecifics\": {\n\t\t\"target\" : {\n\t\t\t\"TARGET_EXPRESSION_RESULT\" : 235000\n\t\t},\n\t\t\"params\" : {\n\t\t\t\"MAX_OPERAND_VALUE\" : \"1000\"\n\t\t}\n\t},\n\t\"algorithmParameters\": {\n\t\t\"recombinationPerc\": 0.8,\n\t\t\"mutationPerc\": 0.2,\n\t\t\"elitarism\": true,\n\t\t\"initialSelectionNumber\": 100,\n\t\t\"initialSelectionRandom\": true,\n\t\t\"stopConditions\": {\n\t\t\t\"targetFitness\" : 0.9,\n\t\t\t\"maxIterations\": -1,\n\t\t\t\"maxLifetimeMs\": 3000,\n\t\t\t\"maxIdenticalFitnesses\": -1\n\t\t}\n\t},\n\t\"monitoringConfiguration\": {\n\t\t\"verbose\": false,\n\t\t\"showGraph\": true\n\t}\n}"
+									"raw": "{\n\t\"applicationSpecifics\": {\n\t\t\"target\" : {\n\t\t\t\"TARGET_EXPRESSION_RESULT\" : 235000\n\t\t},\n\t\t\"params\" : {\n\t\t\t\"MAX_OPERAND_VALUE\" : \"1000\"\n\t\t}\n\t},\n\t\"algorithmParameters\": {\n\t\t\"recombinationPerc\": 0.8,\n\t\t\"mutationPerc\": 0.2,\n\t\t\"elitarism\": true,\n\t\t\"initialSelectionNumber\": 10,\n\t\t\"initialSelectionRandom\": true,\n\t\t\"stopConditions\": {\n\t\t\t\"targetFitness\" : 1.0,\n\t\t\t\"maxIterations\": -1,\n\t\t\t\"maxLifetimeMs\": 3000,\n\t\t\t\"maxIdenticalFitnesses\": -1\n\t\t}\n\t},\n\t\"monitoringConfiguration\": {\n\t\t\"verbose\": false,\n\t\t\"showGraph\": true\n\t}\n}"
 								},
 								"description": ""
 							},
@@ -319,13 +319,13 @@
 								],
 								"body": {
 									"mode": "raw",
-									"raw": "{\n\t\"applicationSpecifics\": {\n\t\t\"target\" : {\n\t\t\t\"TARGET_DESIRED_MEALS\" : 10,\n\t\t\t\"TARGET_SAVOURY_PROPORTION\" : 70,\n\t\t\t\"TARGET_SWEET_PROPORTION\" : 30,\n\t\t\t\"TARGET_FRIDGE_MANDATORY\" : true\n\t\t},\n\t\t\"params\" : {\n\t\t\t\"REFRIGERATOR_FOODS\" : [ \"yogurth\", \"banana\", \"banane\"  ],\n\t\t\t\"PANTRY_FOODS\" : [ \n ],\n\t\t\t\"DATABASE\" : \"IT\"\n\t\t}\n\t},\n\t\"algorithmParameters\": {\n\t\t\"recombinationPerc\": 0.8,\n\t\t\"mutationPerc\": 0.2,\n\t\t\"elitarism\": true,\n\t\t\"initialSelectionNumber\": 10,\n\t\t\"initialSelectionRandom\": true,\n\t\t\"stopConditions\": {\n\t\t\t\"targetFitness\": 1.0,\n\t\t\t\"targetThreshold\": 0.9,\n\t\t\t\"maxIterations\": -1,\n\t\t\t\"maxLifetimeMs\": 3000,\n\t\t\t\"maxIdenticalFitnesses\": 300\n\t\t}\n\t},\n\t\"monitoringConfiguration\": {\n\t\t\"verbose\": false,\n\t\t\"showGraph\": true,\n\t\t\"traceHistory\": false\n\t}\n}"
+									"raw": "{\n\t\"applicationSpecifics\": {\n\t\t\"target\" : {\n\t\t\t\"TARGET_DESIRED_MEALS\" : 10,\n\t\t\t\"TARGET_SAVOURY_PROPORTION\" : 20,\n\t\t\t\"TARGET_SWEET_PROPORTION\" : 80,\n\t\t\t\"TARGET_FRIDGE_MANDATORY\" : true\n\t\t},\n\t\t\"params\" : {\n\t\t\t\"REFRIGERATOR_FOODS\" : [ \"yogurth\", \"cacao\", \"uova\"  ],\n\t\t\t\"PANTRY_FOODS\" : [ \n ],\n\t\t\t\"DATABASE\" : \"IT\"\n\t\t}\n\t},\n\t\"algorithmParameters\": {\n\t\t\"recombinationPerc\": 0.8,\n\t\t\"mutationPerc\": 0.2,\n\t\t\"elitarism\": true,\n\t\t\"initialSelectionNumber\": 100,\n\t\t\"initialSelectionRandom\": true,\n\t\t\"stopConditions\": {\n\t\t\t\"targetFitness\": 1.0,\n\t\t\t\"maxIterations\": -1,\n\t\t\t\"maxLifetimeMs\": 60000,\n\t\t\t\"maxIdenticalFitnesses\": 1000000\n\t\t}\n\t},\n\t\"monitoringConfiguration\": {\n\t\t\"verbose\": false,\n\t\t\"showGraph\": true,\n\t\t\"traceHistory\": false\n\t}\n}"
 								},
 								"description": ""
 							},
 							"response": [
 								{
-									"id": "d3ab722d-cc67-4d7d-958d-a2626aedc8cd",
+									"id": "29005c8f-9a2b-4d76-8730-bcf30e55f5d3",
 									"name": "Database EN",
 									"originalRequest": {
 										"url": "http://{{ip}}:{{port}}/experiment/algofrigerator",
@@ -352,7 +352,7 @@
 									"body": ""
 								},
 								{
-									"id": "1aa315d5-8cf7-42c7-b11c-76c2822c3b72",
+									"id": "e405c5fe-b03f-47af-9820-36adb9ce04ec",
 									"name": "Database IT",
 									"originalRequest": {
 										"url": "http://{{ip}}:{{port}}/experiment/algofrigerator",
@@ -379,7 +379,7 @@
 									"body": ""
 								},
 								{
-									"id": "e0f8d5f9-4460-47e7-81c8-4b737944cdda",
+									"id": "54aa9f63-ff29-4709-a8b3-b45f37ced301",
 									"name": "Dispensa Rossi",
 									"originalRequest": {
 										"url": "http://{{ip}}:{{port}}/experiment/algofrigerator",
@@ -452,7 +452,7 @@
 							},
 							"response": [
 								{
-									"id": "c57a6b7c-585c-4ebc-a61b-c955333a0b23",
+									"id": "d4a15425-7b2b-4287-8046-b1d5a79843d2",
 									"name": "Database EN",
 									"originalRequest": {
 										"url": "http://{{ip}}:{{port}}/experiment/algofrigerator",
@@ -479,7 +479,7 @@
 									"body": ""
 								},
 								{
-									"id": "6dc5118e-4df2-477c-8f16-6adfcfe05a21",
+									"id": "18565070-0620-422a-8933-f72745ed9211",
 									"name": "Database IT",
 									"originalRequest": {
 										"url": "http://{{ip}}:{{port}}/experiment/algofrigerator",
@@ -506,7 +506,7 @@
 									"body": ""
 								},
 								{
-									"id": "e0e741c9-c937-42d0-bc28-79ba72bc17f9",
+									"id": "8d482e56-627a-40f0-af4e-ad721f75fbbe",
 									"name": "Dispensa Rossi",
 									"originalRequest": {
 										"url": "http://{{ip}}:{{port}}/experiment/algofrigerator",
@@ -642,12 +642,69 @@
 					"response": []
 				},
 				{
-					"name": "/distributed/evolution",
+					"name": "/distributed/test/spark/distributed",
 					"request": {
-						"url": "http://{{ip}}:{{port}}/distributed/evolution/experiment/expressions",
+						"url": "http://{{ip}}:{{port}}/distributed/test/spark/distributed",
 						"method": "GET",
 						"header": [],
 						"body": {},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "/distributed/evolution",
+					"request": {
+						"url": "http://{{ip}}:{{port}}/distributed/evolution/experiment/sudoku",
+						"method": "GET",
+						"header": [],
+						"body": {},
+						"description": ""
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "spark-control",
+			"description": "",
+			"item": [
+				{
+					"name": "/v1/submissions/create",
+					"request": {
+						"url": "http://192.168.1.101:6066/v1/submissions/create",
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json;charset=UTF-8",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"action\" : \"CreateSubmissionRequest\",\r\n  \"appArgs\" : [ \"spark://192.168.1.101:7077\" ],\r\n  \"appResource\" : \"file:///c:/dev/workspaces/ws_scala/Scaligen/target/scala-2.11/Scaligen-assembly-1.0.jar\",\r\n  \"clientSparkVersion\" : \"1.5.0\",\r\n  \"environmentVariables\" : {\r\n    \"log4j.configuration\" : \"C:/dev/spark-2.2.0-bin-hadoop2.7/conf\"\r\n  },\r\n  \"mainClass\" : \"it.red.algen.d.mex.MexApplication\",\r\n  \"sparkProperties\" : {\r\n    \"spark.driver.supervise\" : \"false\",\r\n    \"spark.app.name\" : \"MexApplication\",\r\n    \"spark.eventLog.enabled\": \"true\",\r\n    \"spark.submit.deployMode\" : \"cluster\",\r\n    \"spark.master\" : \"spark://192.168.1.101:7077\"\r\n  }\r\n}"
+						},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "/v1/submissions/status",
+					"request": {
+						"url": "http://192.168.1.101:6066/v1/submissions/status/driver-20171104154910-0009",
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json;charset=UTF-8",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
 						"description": ""
 					},
 					"response": []
