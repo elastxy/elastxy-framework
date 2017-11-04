@@ -16,13 +16,13 @@ import it.red.algen.applications.ApplicationService;
 import it.red.algen.stats.ExperimentStats;
 
 @Component
-public class DistributedTask {
-	private static Logger logger = LoggerFactory.getLogger(DistributedTask.class);
+public class ConcurrentTask {
+	private static Logger logger = LoggerFactory.getLogger(ConcurrentTask.class);
 
 	
-	@SuppressWarnings("unused")
-	@Autowired
-	private JavaSparkContext sparkContext;
+//	@SuppressWarnings("unused")
+//	@Autowired
+//	private JavaSparkContext sparkContext;
 	
 	@Autowired private ApplicationService applicationService;
     

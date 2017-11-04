@@ -19,6 +19,7 @@ package it.red.algen.distributed;
 import java.util.concurrent.ExecutionException;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
@@ -36,7 +37,28 @@ public class DistributedController {
 	
 
 	@Autowired
-	private DistributedTask evolveTask;
+	private ConcurrentTask evolveTask;
+
+	@Value("${master.uri}")
+	private String masterUri;
+
+	@Value("${master.host}")
+	private String masterHost;
+
+	@Value("${spark.version}")
+	private String sparkVersion;
+
+	@Value("${jars.path}")
+	private String jarsPath;
+
+	@Value("${spark.log4j.configuration}")
+	private String sparkLog4jConfiguration;
+
+	@Value("${spark.history.events.enabled}")
+	private String sparkHistoryEventsEnabled;
+
+	@Value("${spark.history.events.path}")
+	private String sparkHistoryEventsPath;
 
 	
 	@RequestMapping(path = "/access", method = RequestMethod.HEAD)
@@ -44,6 +66,28 @@ public class DistributedController {
 	public String access() {
 		return "OK";
 	}
+
+    @RequestMapping("/test/spark/distributed")
+    public ResponseEntity<String> testSparkDistributed() throws Exception {
+    	
+    	SparkJobConfig config = new SparkJobConfig();
+    	config.masterURI = masterUri;
+    	config.masterHost = masterHost;
+    	config.sparkVersion = sparkVersion;    	
+    	config.log4jConfiguration = sparkLog4jConfiguration;
+    	config.historyEventsEnabled = sparkHistoryEventsEnabled;
+    	config.historyEventsDir = "file:///"+sparkHistoryEventsPath;
+
+    	config.appName = "MexApplication";
+    	config.appJar = "file:///"+jarsPath+"Scaligen-assembly-1.0.jar";
+    	config.mainClass = "it.red.algen.d.mex.MexApplication";
+
+    	String result = sparkHeartbeatTask.runDistributed(config);
+    	
+//    	String result = sparkHeartbeatTask.runDistributed();
+        return new ResponseEntity<>(result, HttpStatus.OK);
+    }
+    
 	
     @RequestMapping("/test/spark/single")
     public ResponseEntity<String> testSparkSingle() {
@@ -57,15 +101,6 @@ public class DistributedController {
     	String result = sparkHeartbeatTask.runConcurrent("C://tmp//algendata//words1.txt", "C://tmp//algendata//words2.txt");
         return new ResponseEntity<>(result, HttpStatus.OK);
     }
-    
-
-    @RequestMapping("/test/spark/distributed")
-    public ResponseEntity<String> testSparkDistributed() throws Exception {
-    	String result = sparkHeartbeatTask.runDistributed();
-        return new ResponseEntity<>(result, HttpStatus.OK);
-    }
-    
-    
 
 
     @RequestMapping("/evolution/experiment/{application}")
