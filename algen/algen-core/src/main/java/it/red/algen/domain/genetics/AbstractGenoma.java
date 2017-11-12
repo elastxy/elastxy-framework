@@ -38,7 +38,7 @@ public abstract class AbstractGenoma implements Genoma {
 	
 	
 	/**
-	 * AlleleProvider maps one Provider if sharedAlleles,
+	 * AlleleProvider maps one Provider for Predefined Genoma if sharedAlleles,
 	 * or one Provider for position, with the name equals to position code.
 	 */
 	protected AlleleValuesProvider alleleValuesProvider = null;
@@ -46,7 +46,6 @@ public abstract class AbstractGenoma implements Genoma {
 	@Override
 	public void setAlleleValuesProvider(AlleleValuesProvider provider){
 		this.alleleValuesProvider = provider;
-		sharedAlleles = provider.countProviders()==1;
 	}
 	
 

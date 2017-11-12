@@ -7,6 +7,7 @@ import java.util.SortedMap;
 import java.util.TreeMap;
 import java.util.stream.Collectors;
 
+import it.red.algen.dataprovider.AlleleValuesProvider;
 import it.red.algen.domain.genetics.AbstractGenoma;
 import it.red.algen.domain.genetics.ChromosomeGenotypeStructure;
 import it.red.algen.domain.genetics.Genoma;
@@ -26,6 +27,17 @@ import it.red.algen.engine.core.Randomizer;
  */
 public class PredefinedGenoma extends AbstractGenoma implements Genoma {
 
+
+	/**For a PredefinedGenoma if a valuesProvider is set, 
+	 * then all alleles must be pulled from that
+	 * TODOM: check sharedAlleles linked to provider number
+	 */
+	@Override
+	public void setAlleleValuesProvider(AlleleValuesProvider provider){
+		super.setAlleleValuesProvider(provider);
+		sharedAlleles = provider.countProviders()==1;
+	}
+	
 	
 	/**
 	 * Get alleles always in the same order, picking: 
