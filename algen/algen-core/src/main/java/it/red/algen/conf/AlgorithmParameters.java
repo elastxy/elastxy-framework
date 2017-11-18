@@ -31,7 +31,7 @@ public class AlgorithmParameters {
 	 */
 	public boolean randomEvolution = false;
 
-	public StopConditions stopConditions;
+	public StopConditions stopConditions = new StopConditions();
 	
 	/*
 	 * ======================================
@@ -86,9 +86,17 @@ public class AlgorithmParameters {
 	 */
 	public double mutationPerc = DefaultConfiguration.DEFAULT_MUTATION_PERC;
 
-	
 	// TODOM: Auto (decrease based on current results and genes alphabet length if available), Fixed ratio
 	//	public MutationDecreaseType mutationDecreaseType =  = DefaultConfiguration.DEFAULT_MUTATION_DECREASE_TYPE; 
 	//	public double mutationDecreaseRatio =  = DefaultConfiguration.DEFAULT_MUTATION_DECREASE_RATIO; 
-    
+
+	/*
+	 * ======================================
+	 * DISTRIBUTED
+	 * ======================================
+	 */
+	public int partitions = 		DefaultConfiguration.DEFAULT_PARTITIONS;
+    public int eraBestMatches = 	DefaultConfiguration.DEFAULT_ERA_BEST_MATCHES;
+    public int reshuffleEveryEras = DefaultConfiguration.DEFAULT_RESHUFFLE_EVERY_ERAS;
+
 }

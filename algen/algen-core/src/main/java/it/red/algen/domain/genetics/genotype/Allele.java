@@ -1,5 +1,6 @@
 package it.red.algen.domain.genetics.genotype;
 
+import java.io.Serializable;
 
 /**
  * Represents the value hosted by a single gene in the genotype.
@@ -7,7 +8,7 @@ package it.red.algen.domain.genetics.genotype;
  *
  * @param <T>
  */
-public class Allele<T> {
+public class Allele<T> implements Serializable {
 	
 	public T value;
 	

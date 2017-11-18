@@ -93,6 +93,8 @@ public class StandardMetadataGenoma extends AbstractGenoma implements MetadataGe
 		return result;
 	}
 	
+	
+	// TODOD: move getFirst method on provider
 	private Allele getFirst(GeneMetadata metadata){
 		Allele result = metadata.valuesProvider==null ? 
 				((MetadataAlleleGenerator)alleleGenerator).generateFirst(metadata) :
@@ -102,6 +104,7 @@ public class StandardMetadataGenoma extends AbstractGenoma implements MetadataGe
 	}
 	
 
+	// TODOD: for big provider, pass number of alleles to retrieve
 	@Override
 	public List<Allele> getAlleles(GeneMetadata metadata) {
 		return alleleValuesProvider.getAlleles(metadata.valuesProvider);
@@ -170,6 +173,7 @@ public class StandardMetadataGenoma extends AbstractGenoma implements MetadataGe
 	}
 	
 	
+	// TODOD: move get random value to Provider
 	private Allele getRandomProvided(String valuesProvider){
 		List<Allele> alleles = alleleValuesProvider.getAlleles(valuesProvider);
 		return alleles.get(Randomizer.nextInt(alleles.size()));
@@ -211,6 +215,8 @@ public class StandardMetadataGenoma extends AbstractGenoma implements MetadataGe
 	
 	public <T> Allele<T> generateExclusiveFromProvided(String valuesProvider, List<T> exclusions) {
 		Allele<T> result = new Allele<T>();
+		
+		// TODOD: move filter logics into provider
 		List<T> subtracted = (List<T>)alleleValuesProvider.getAlleles(valuesProvider).stream().filter(t -> !exclusions.contains(t)).collect(Collectors.toList());
 		if(subtracted.isEmpty()){
 			throw new AlgorithmException("Remaining values for generating alleles cannot be empty! Maybe allele possibile values are not enough for this gene?");

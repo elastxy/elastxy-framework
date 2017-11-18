@@ -1,4 +1,4 @@
-package it.red.algen.distributed;
+package it.red.algen.distributed.sandbox;
 
 import org.apache.spark.SparkConf;
 import org.apache.spark.api.java.JavaSparkContext;

@@ -1,4 +1,4 @@
-package it.red.algen.distributed;
+package it.red.algen.distributed.sandbox;
 
 /**
  * Pseudo code global algorithm

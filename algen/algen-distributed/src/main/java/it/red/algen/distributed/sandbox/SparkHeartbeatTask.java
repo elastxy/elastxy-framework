@@ -1,4 +1,4 @@
-package it.red.algen.distributed;
+package it.red.algen.distributed.sandbox;
 
 import java.util.Arrays;
 import java.util.HashMap;

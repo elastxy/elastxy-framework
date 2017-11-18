@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package it.red.algen.distributed;
+package it.red.algen.distributed.sandbox;
 
 import java.util.concurrent.ExecutionException;
 
@@ -108,5 +108,30 @@ public class DistributedController {
     	String result = evolveTask.run(application);
         return new ResponseEntity<>(result, HttpStatus.OK);
     }
+    
+    
+    
+
+    @RequestMapping("/test/spark/distributed/mexd")
+    public ResponseEntity<String> testSparkDistributedMexd() throws Exception {
+    	
+    	SparkJobConfig config = new SparkJobConfig();
+    	config.masterURI = masterUri;
+    	config.masterHost = masterHost;
+    	config.sparkVersion = sparkVersion;    	
+    	config.log4jConfiguration = sparkLog4jConfiguration;
+    	config.historyEventsEnabled = sparkHistoryEventsEnabled;
+    	config.historyEventsDir = "file:///"+sparkHistoryEventsPath;
+
+    	config.appName = "expressions.d";
+    	config.appJar = "file:///"+jarsPath+"algen-applications-1.0.0-SNAPSHOT.jar";
+    	config.mainClass = "it.red.algen.d.metaexpressions.SparkApplication";
+
+    	String result = sparkHeartbeatTask.runDistributed(config);
+    	
+//    	String result = sparkHeartbeatTask.runDistributed();
+        return new ResponseEntity<>(result, HttpStatus.OK);
+    }
+    
 
 }

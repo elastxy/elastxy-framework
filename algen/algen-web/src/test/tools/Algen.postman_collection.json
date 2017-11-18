@@ -85,7 +85,7 @@
 								],
 								"body": {
 									"mode": "raw",
-									"raw": "{\n\t\"applicationSpecifics\": {\n\t\t\"target\" : {\n\t\t\t\"TARGET_EXPRESSION_RESULT\" : 235000\n\t\t},\n\t\t\"params\" : {\n\t\t\t\"MAX_OPERAND_VALUE\" : \"1000\"\n\t\t}\n\t},\n\t\"algorithmParameters\": {\n\t\t\"recombinationPerc\": 0.8,\n\t\t\"mutationPerc\": 0.2,\n\t\t\"elitarism\": true,\n\t\t\"initialSelectionNumber\": 10,\n\t\t\"initialSelectionRandom\": true,\n\t\t\"stopConditions\": {\n\t\t\t\"targetFitness\" : 1.0,\n\t\t\t\"maxIterations\": -1,\n\t\t\t\"maxLifetimeMs\": 3000,\n\t\t\t\"maxIdenticalFitnesses\": -1\n\t\t}\n\t},\n\t\"monitoringConfiguration\": {\n\t\t\"verbose\": false,\n\t\t\"showGraph\": true\n\t}\n}"
+									"raw": "{\n\t\"applicationSpecifics\": {\n\t\t\"target\" : {\n\t\t\t\"TARGET_EXPRESSION_RESULT\" : 235000\n\t\t},\n\t\t\"params\" : {\n\t\t\t\"MAX_OPERAND_VALUE\" : \"1000\"\n\t\t}\n\t},\n\t\"algorithmParameters\": {\n\t\t\"recombinationPerc\": 0.0,\n\t\t\"mutationPerc\": 0.2,\n\t\t\"elitarism\": true,\n\t\t\"initialSelectionNumber\": 10000,\n\t\t\"initialSelectionRandom\": true,\n\t\t\"stopConditions\": {\n\t\t\t\"targetFitness\" : 1.0,\n\t\t\t\"maxIterations\": 100,\n\t\t\t\"maxLifetimeMs\": -1,\n\t\t\t\"maxIdenticalFitnesses\": -1\n\t\t}\n\t},\n\t\"monitoringConfiguration\": {\n\t\t\"verbose\": false,\n\t\t\"showGraph\": true\n\t}\n}"
 								},
 								"description": ""
 							},
@@ -325,7 +325,7 @@
 							},
 							"response": [
 								{
-									"id": "29005c8f-9a2b-4d76-8730-bcf30e55f5d3",
+									"id": "99e341ad-6a32-4b4b-91bb-bcc74ff0720a",
 									"name": "Database EN",
 									"originalRequest": {
 										"url": "http://{{ip}}:{{port}}/experiment/algofrigerator",
@@ -352,7 +352,7 @@
 									"body": ""
 								},
 								{
-									"id": "e405c5fe-b03f-47af-9820-36adb9ce04ec",
+									"id": "4c7868da-17d6-4b89-be1a-6fab05d1eb00",
 									"name": "Database IT",
 									"originalRequest": {
 										"url": "http://{{ip}}:{{port}}/experiment/algofrigerator",
@@ -379,7 +379,7 @@
 									"body": ""
 								},
 								{
-									"id": "54aa9f63-ff29-4709-a8b3-b45f37ced301",
+									"id": "cd049cdd-60ef-4e37-bd77-6709dde5ecc9",
 									"name": "Dispensa Rossi",
 									"originalRequest": {
 										"url": "http://{{ip}}:{{port}}/experiment/algofrigerator",
@@ -452,7 +452,7 @@
 							},
 							"response": [
 								{
-									"id": "d4a15425-7b2b-4287-8046-b1d5a79843d2",
+									"id": "03c7be92-f043-477d-b5ab-133ff5664db8",
 									"name": "Database EN",
 									"originalRequest": {
 										"url": "http://{{ip}}:{{port}}/experiment/algofrigerator",
@@ -479,7 +479,7 @@
 									"body": ""
 								},
 								{
-									"id": "18565070-0620-422a-8933-f72745ed9211",
+									"id": "46edbc42-b332-4ee2-ab29-416b569b1028",
 									"name": "Database IT",
 									"originalRequest": {
 										"url": "http://{{ip}}:{{port}}/experiment/algofrigerator",
@@ -506,7 +506,7 @@
 									"body": ""
 								},
 								{
-									"id": "8d482e56-627a-40f0-af4e-ad721f75fbbe",
+									"id": "ce23e8e1-19b9-4109-be42-93b221a9974e",
 									"name": "Dispensa Rossi",
 									"originalRequest": {
 										"url": "http://{{ip}}:{{port}}/experiment/algofrigerator",
@@ -620,9 +620,113 @@
 					"response": []
 				},
 				{
-					"name": "/distributed/test/spark/single",
+					"name": "/distributed/experiment/local SMALL",
 					"request": {
-						"url": "http://{{ip}}:{{port}}/distributed/test/spark/single",
+						"url": "http://{{ip}}:{{port}}/distributed/experiment/local/expressions_d",
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n\t\"applicationSpecifics\": {\r\n\t\t\"target\" : {\r\n\t\t\t\"TARGET_EXPRESSION_RESULT\" : 23\r\n\t\t},\r\n\t\t\"params\" : {\r\n\t\t\t\"MAX_OPERAND_VALUE\" : 10\r\n\t\t}\r\n\t},\r\n\t\"algorithmParameters\": {\r\n\t\t\"recombinationPerc\": 0.5,\r\n\t\t\"mutationPerc\": 0.2,\r\n\t\t\"elitarism\": true,\r\n\t\t\"initialSelectionNumber\": 12,\r\n\t\t\"initialSelectionRandom\": true,\r\n\t\t\"stopConditions\": {\r\n\t\t\t\"targetFitness\" : 0.999,\r\n\t\t\t\"maxIterations\": 3,\r\n\t\t\t\"maxLifetimeMs\": 3000,\r\n\t\t\t\"maxIdenticalFitnesses\": -1,\r\n\t\t\t\"maxEras\": 3\r\n\t\t},\r\n\t\t\"partitions\": 3,\r\n\t\t\"eraBestMatches\" : 2,\r\n\t\t\"reshuffleEveryEras\" : 2\r\n\t},\r\n\t\"monitoringConfiguration\": {\r\n\t\t\"verbose\": false,\r\n\t\t\"traceHistory\": false\r\n\t}\r\n}\r\n"
+						},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "/distributed/experiment/local BIG",
+					"request": {
+						"url": "http://{{ip}}:{{port}}/distributed/experiment/local/expressions_d",
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n\t\"applicationSpecifics\": {\r\n\t\t\"target\" : {\r\n\t\t\t\"TARGET_EXPRESSION_RESULT\" : 235000\r\n\t\t},\r\n\t\t\"params\" : {\r\n\t\t\t\"MAX_OPERAND_VALUE\" : 1000\r\n\t\t}\r\n\t},\r\n\t\"algorithmParameters\": {\r\n\t\t\"recombinationPerc\": 0.8,\r\n\t\t\"mutationPerc\": 0.2,\r\n\t\t\"elitarism\": true,\r\n\t\t\"initialSelectionNumber\": 1000,\r\n\t\t\"initialSelectionRandom\": true,\r\n\t\t\"stopConditions\": {\r\n\t\t\t\"targetFitness\" : 0.99999,\r\n\t\t\t\"maxIterations\": 1000,\r\n\t\t\t\"maxLifetimeMs\": 3000,\r\n\t\t\t\"maxIdenticalFitnesses\": -1,\r\n\t\t\t\"maxEras\": 5\r\n\t\t},\r\n\t\t\"partitions\": 8,\r\n\t\t\"eraBestMatches\" : 10,\r\n\t\t\"reshuffleEveryEras\" : 3\r\n\t},\r\n\t\"monitoringConfiguration\": {\r\n\t\t\"verbose\": false,\r\n\t\t\"traceHistory\": false\r\n\t}\r\n}\r\n"
+						},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "/distributed/experiment/cluster",
+					"request": {
+						"url": "http://{{ip}}:{{port}}/distributed/experiment/cluster/expressions.d",
+						"method": "GET",
+						"header": [],
+						"body": {},
+						"description": ""
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "sandbox",
+			"description": "",
+			"item": [
+				{
+					"name": "spark-control",
+					"description": "",
+					"item": [
+						{
+							"name": "/v1/submissions/create",
+							"request": {
+								"url": "http://192.168.1.101:6066/v1/submissions/create",
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json;charset=UTF-8",
+										"description": ""
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"action\" : \"CreateSubmissionRequest\",\r\n  \"appArgs\" : [ \"spark://192.168.1.101:7077\" ],\r\n  \"appResource\" : \"file:///c:/dev/workspaces/ws_scala/Scaligen/target/scala-2.11/Scaligen-assembly-1.0.jar\",\r\n  \"clientSparkVersion\" : \"1.5.0\",\r\n  \"environmentVariables\" : {\r\n    \"log4j.configuration\" : \"C:/dev/spark-2.2.0-bin-hadoop2.7/conf/log4j.properties\",\r\n    \"spark.eventLog.enabled\" : \"false\",\r\n    \"spark.eventLog.dir\" : \"file:///c:/tmp/sparktemp/eventLog\",\r\n    \"spark.history.fs.logDirectory\" : \"file:///c:/tmp/sparktemp/eventLog\"\r\n  },\r\n  \"mainClass\" : \"it.red.algen.d.mex.MexApplication\",\r\n  \"sparkProperties\" : {\r\n    \"spark.driver.supervise\" : \"false\",\r\n    \"spark.app.name\" : \"MexApplication\",\r\n    \"spark.eventLog.enabled\": \"true\",\r\n    \"spark.submit.deployMode\" : \"cluster\",\r\n    \"spark.master\" : \"spark://192.168.1.101:7077\"\r\n  }\r\n}"
+								},
+								"description": ""
+							},
+							"response": []
+						},
+						{
+							"name": "/v1/submissions/status",
+							"request": {
+								"url": "http://192.168.1.101:6066/v1/submissions/status/driver-20171104185357-0002",
+								"method": "GET",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json;charset=UTF-8",
+										"description": ""
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": ""
+								},
+								"description": ""
+							},
+							"response": []
+						}
+					],
+					"_postman_isSubFolder": true
+				},
+				{
+					"name": "/distributed/test/spark/concurrent",
+					"request": {
+						"url": "http://{{ip}}:{{port}}/distributed/test/spark/concurrent",
 						"method": "GET",
 						"header": [],
 						"body": {},
@@ -631,9 +735,9 @@
 					"response": []
 				},
 				{
-					"name": "/distributed/test/spark/concurrent",
+					"name": "/distributed/test/spark/single",
 					"request": {
-						"url": "http://{{ip}}:{{port}}/distributed/test/spark/concurrent",
+						"url": "http://{{ip}}:{{port}}/distributed/test/spark/single",
 						"method": "GET",
 						"header": [],
 						"body": {},
@@ -659,52 +763,6 @@
 						"method": "GET",
 						"header": [],
 						"body": {},
-						"description": ""
-					},
-					"response": []
-				}
-			]
-		},
-		{
-			"name": "spark-control",
-			"description": "",
-			"item": [
-				{
-					"name": "/v1/submissions/create",
-					"request": {
-						"url": "http://192.168.1.101:6066/v1/submissions/create",
-						"method": "POST",
-						"header": [
-							{
-								"key": "Content-Type",
-								"value": "application/json;charset=UTF-8",
-								"description": ""
-							}
-						],
-						"body": {
-							"mode": "raw",
-							"raw": "{\r\n  \"action\" : \"CreateSubmissionRequest\",\r\n  \"appArgs\" : [ \"spark://192.168.1.101:7077\" ],\r\n  \"appResource\" : \"file:///c:/dev/workspaces/ws_scala/Scaligen/target/scala-2.11/Scaligen-assembly-1.0.jar\",\r\n  \"clientSparkVersion\" : \"1.5.0\",\r\n  \"environmentVariables\" : {\r\n    \"log4j.configuration\" : \"C:/dev/spark-2.2.0-bin-hadoop2.7/conf\"\r\n  },\r\n  \"mainClass\" : \"it.red.algen.d.mex.MexApplication\",\r\n  \"sparkProperties\" : {\r\n    \"spark.driver.supervise\" : \"false\",\r\n    \"spark.app.name\" : \"MexApplication\",\r\n    \"spark.eventLog.enabled\": \"true\",\r\n    \"spark.submit.deployMode\" : \"cluster\",\r\n    \"spark.master\" : \"spark://192.168.1.101:7077\"\r\n  }\r\n}"
-						},
-						"description": ""
-					},
-					"response": []
-				},
-				{
-					"name": "/v1/submissions/status",
-					"request": {
-						"url": "http://192.168.1.101:6066/v1/submissions/status/driver-20171104154910-0009",
-						"method": "GET",
-						"header": [
-							{
-								"key": "Content-Type",
-								"value": "application/json;charset=UTF-8",
-								"description": ""
-							}
-						],
-						"body": {
-							"mode": "raw",
-							"raw": ""
-						},
 						"description": ""
 					},
 					"response": []

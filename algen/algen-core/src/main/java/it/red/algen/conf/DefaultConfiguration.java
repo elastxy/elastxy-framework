@@ -30,10 +30,17 @@ public class DefaultConfiguration {
     public static final double 	DEFAULT_MUTATION_PERC = 0.1;
     
     // STOP CONDITIONS
-    public static final BigDecimal	TARGET_LEVEL = null;//BigDecimal.ONE; // Default: maximize
+    public static final BigDecimal	TARGET_LEVEL = null; // Default: maximize
     public static final BigDecimal	TARGET_THRESHOLD = null;//BigDecimal.ONE; // Default: not active
     public static final int 		MAX_ITERATIONS = -1;
     public static final int 		MAX_LIFETIME_MS = 60000;
     public static final int 		MAX_IDENTICAL_FITNESSES = -1;
+    
+    // DISTRIBUTED
+    public static final int 		DEFAULT_MAX_ERAS = 3;
+    public static final int 		DEFAULT_ERA_BEST_MATCHES = 1;
+    public static final int 		DEFAULT_PARTITIONS = 4;
+    public static final int 		DEFAULT_RESHUFFLE_EVERY_ERAS = 2;
+    
 
 }

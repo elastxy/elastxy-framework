@@ -1,0 +1,31 @@
+{
+	"applicationSpecifics": {
+		"target" : {
+			"TARGET_EXPRESSION_RESULT" : 235000
+		},
+		"params" : {
+			"MAX_OPERAND_VALUE" : 1000
+		}
+	},
+	"algorithmParameters": {
+		"recombinationPerc": 0.8,
+		"mutationPerc": 0.2,
+		"elitarism": true,
+		"initialSelectionNumber": 1000,
+		"initialSelectionRandom": true,
+		"stopConditions": {
+			"targetFitness" : 0.9,
+			"maxIterations": 1000,
+			"maxLifetimeMs": 3000,
+			"maxIdenticalFitnesses": -1,
+			"maxEras": 5
+		},
+		"partitions": 8,
+		"eraBestMatches" : 10,
+		"reshuffleEveryEras" : 3
+	},
+	"monitoringConfiguration": {
+		"verbose": false,
+		"traceHistory": false
+	}
+}

@@ -64,5 +64,11 @@ public class ReadConfigSupport {
 		Object result = om.readValue(inputString, type);
 		return result;
 	}
-	
+
+
+	public static String writeJSONString(Object inputObject) throws IOException {
+    	ObjectMapper om = new ObjectMapper();
+		String result = om.writeValueAsString(inputObject);
+		return result;
+	}
 }

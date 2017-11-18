@@ -1,0 +1,63 @@
+{
+	"name" : "expressions_d",
+	
+	"envFactory": {
+		"type" : "java",
+		"content" : "it.red.algen.metaexpressions.MexEnvFactory"
+	},
+	
+	"datasetProvider": {
+		"type" : "java",
+		"content" : "it.red.algen.d.metaexpressions.MexdDatasetProvider"
+	},
+	
+	"genomaProvider": {
+		"type" : "java",
+		"content" : "it.red.algen.d.metaexpressions.MexdGenomaProvider"
+	},
+	
+	"alleleGenerator": {
+		"type" : "java",
+		"content" : "it.red.algen.engine.metadata.MetadataAlleleGenerator"
+	},
+	
+	"populationFactory": {
+		"type" : "java",
+		"content" : "it.red.algen.engine.factory.StandardPopulationFactory"
+	},
+	
+	"solutionsFactory": {
+		"type" : "java",
+		"content" : "it.red.algen.engine.metadata.MetadataSolutionsFactory"
+	},
+	
+	"fitnessCalculator": {
+		"type" : "java",
+		"content" : "it.red.algen.metaexpressions.MexFitnessCalculator"
+	},
+	
+	"incubator": {
+		"type" : "java",
+		"content" : "it.red.algen.metaexpressions.MexIncubator"
+	},
+	
+	"selector": {
+		"type" : "java",
+		"content" : "it.red.algen.engine.operators.StandardSelector"
+	},
+	
+	"mutator": {
+		"type" : "java",
+		"content" : "it.red.algen.engine.operators.ChromosomeMutator"
+	},
+	
+	"recombinator": {
+		"type" : "java",
+		"content" : "it.red.algen.engine.operators.ChromosomeRecombinator"
+	},
+	
+	"solutionRenderer": {
+		"type" : "java",
+		"content" : "it.red.algen.tracking.DefaultSolutionRenderer"
+	}
+}

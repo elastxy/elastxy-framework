@@ -45,4 +45,8 @@ public class AlgenApplication {
 
 	public ComponentMetadata solutionRenderer;
 
+	
+	public String toString(){
+		return name==null ? "Unknown" : name;
+	}
 }
