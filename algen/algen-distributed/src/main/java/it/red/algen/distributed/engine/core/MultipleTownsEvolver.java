@@ -1,4 +1,4 @@
-package it.red.algen.engine.core;
+package it.red.algen.distributed.engine.core;
 
 import java.util.Arrays;
 import java.util.Collections;
@@ -10,13 +10,18 @@ import it.red.algen.domain.experiment.Env;
 import it.red.algen.domain.experiment.Fitness;
 import it.red.algen.domain.experiment.Population;
 import it.red.algen.domain.experiment.Solution;
+import it.red.algen.engine.core.BestMatchesSupport;
+import it.red.algen.engine.core.EnvSupport;
+import it.red.algen.engine.core.Evolver;
+import it.red.algen.engine.core.Randomizer;
+import it.red.algen.engine.core.StopConditionVerifier;
 import it.red.algen.engine.fitness.FitnessTester;
 import it.red.algen.engine.fitness.StandardFitnessTester;
 import it.red.algen.stats.ExperimentStats;
 import it.red.algen.tracking.EnvObserver;
 
-public class SingleTownEvolver implements Evolver {
-	private static Logger logger = Logger.getLogger(SingleTownEvolver.class.getName());
+public class MultipleTownsEvolver implements Evolver {
+	private static Logger logger = Logger.getLogger(MultipleTownsEvolver.class.getName());
 
 	// ALGORITHM PARAMETERS
     public AlgorithmContext context;
@@ -35,7 +40,7 @@ public class SingleTownEvolver implements Evolver {
      * @param context
      * @param env
      */
-    public SingleTownEvolver(AlgorithmContext context, Env env){
+    public MultipleTownsEvolver(AlgorithmContext context, Env env){
     	this.context = context;
     	this.env = env;
     	this.fitnessTester = new StandardFitnessTester(context.application.fitnessCalculator);

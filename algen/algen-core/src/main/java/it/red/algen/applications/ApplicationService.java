@@ -8,6 +8,7 @@ import org.springframework.stereotype.Component;
 import it.red.algen.applications.components.AppComponentsLocator;
 import it.red.algen.context.AlgorithmContext;
 import it.red.algen.context.ContextBuilder;
+import it.red.algen.engine.core.Experiment;
 import it.red.algen.engine.core.SingleTownExperiment;
 import it.red.algen.engine.operators.UniformlyDistributedSelector;
 import it.red.algen.stats.ExperimentStats;
@@ -26,7 +27,7 @@ public class ApplicationService {
 		AlgorithmContext context = benchmarkContextBuilder.build(applicationName, true);
 		context.application.name = applicationName;
 		setupContext(context);
-		SingleTownExperiment e = new SingleTownExperiment(context);
+		Experiment e = new SingleTownExperiment(context);
 		e.run();
 		ExperimentStats stats = e.getStats();
         return stats;
@@ -35,7 +36,7 @@ public class ApplicationService {
 	
 	public ExperimentStats executeExperiment(AlgorithmContext context){
 	 	setupContext(context);
-	 	SingleTownExperiment e = new SingleTownExperiment(context);
+	 	Experiment e = new SingleTownExperiment(context);
         e.run();
         ExperimentStats stats = e.getStats();
         return stats;

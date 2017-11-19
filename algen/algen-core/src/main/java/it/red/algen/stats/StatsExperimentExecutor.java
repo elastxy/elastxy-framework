@@ -15,6 +15,7 @@ import java.util.Optional;
 import org.apache.commons.math3.stat.descriptive.DescriptiveStatistics;
 
 import it.red.algen.context.AlgorithmContext;
+import it.red.algen.engine.core.Experiment;
 import it.red.algen.engine.core.SingleTownExperiment;
 
 
@@ -59,7 +60,7 @@ public class StatsExperimentExecutor {
     
     public void run(){
         for(int i = 0; i < experiments; i++){
-            SingleTownExperiment e = new SingleTownExperiment(context);
+            Experiment e = new SingleTownExperiment(context);
             e.run();
             addStats(e.getStats());
         }

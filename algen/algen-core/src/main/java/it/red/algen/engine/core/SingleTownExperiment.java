@@ -31,7 +31,7 @@ import it.red.algen.tracking.EnvObserver;
  *
  * @author grossi
  */
-public class SingleTownExperiment {
+public class SingleTownExperiment implements Experiment {
     private ExperimentStats stats;
 
     private AlgorithmContext context;
