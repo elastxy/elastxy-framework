@@ -17,7 +17,7 @@ import java.util.stream.IntStream;
 import it.red.algen.context.AlgorithmContext;
 import it.red.algen.domain.experiment.Population;
 import it.red.algen.domain.experiment.Solution;
-import it.red.algen.engine.core.Evolver;
+import it.red.algen.engine.core.SingleTownEvolver;
 import it.red.algen.stats.ExperimentStats;
 
 
@@ -86,22 +86,22 @@ public class EnvObserver {
         if(context.monitoringConfiguration.verbose) context.monitoringConfiguration.logger.out("+++ MUTAZIONE: \n"+original+"\n\t-> \n"+mutated);
     }
     
-    public void goalReachedEvent(Evolver evolver){
+    public void goalReachedEvent(SingleTownEvolver evolver){
     	context.monitoringConfiguration.logger.out("******* SUCCESS *******");
         showResults(evolver);
     }
     
-    public void stableSolutionEvent(Evolver evolver){
+    public void stableSolutionEvent(SingleTownEvolver evolver){
     	context.monitoringConfiguration.logger.out("******* STABLE SOLUTION *******");
         showResults(evolver);
     }
     
-    public void historyEndedEvent(Evolver evolver){
+    public void historyEndedEvent(SingleTownEvolver evolver){
     	context.monitoringConfiguration.logger.out("--- STORY HAS ENDED WITHOUT REACHING GOAL... ---");
         showResults(evolver);
     }
     
-    private void showResults(Evolver evolver){
+    private void showResults(SingleTownEvolver evolver){
     	Logger log = context.monitoringConfiguration.logger;
         log.out("\n##################### STATS #####################");
         ExperimentStats stats = evolver.getStats();

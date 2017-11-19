@@ -19,17 +19,24 @@ import it.red.algen.tracking.EnvObserver;
 
 
 /**
+ *	Local (single town) experiment.
  *
- *TODOM: assign context and message aware to Environment with Spring interfaces
+ *	Defines execution for a locally based algorithm:
+ *  - local events
+ *  - local populations and factory
+ *  - local evolver
+ *  
+ *  No distributed nor concurrent features are available 
+ *  within this Experiment type.
  *
  * @author grossi
  */
-public class Experiment {
+public class SingleTownExperiment {
     private ExperimentStats stats;
 
     private AlgorithmContext context;
     
-    public Experiment(AlgorithmContext context) {
+    public SingleTownExperiment(AlgorithmContext context) {
         this.context = context;
         stats = null;
     }
@@ -47,7 +54,7 @@ public class Experiment {
         Env environment = context.application.envFactory.create();
     	
         // Setups engine
-        Evolver evolver = new Evolver(
+        SingleTownEvolver evolver = new SingleTownEvolver(
         		context, 
         		environment);
         evolver.subscribe(observer);

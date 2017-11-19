@@ -12,7 +12,7 @@ import it.red.algen.applications.components.factory.AppBootstrapRaw;
 import it.red.algen.conf.ReadConfigSupport;
 import it.red.algen.context.AlgorithmContext;
 import it.red.algen.distributed.context.DistributedAlgorithmContext;
-import it.red.algen.engine.core.Experiment;
+import it.red.algen.engine.core.SingleTownExperiment;
 import it.red.algen.stats.ExperimentStats;
 
 public class SparkApplication {
@@ -73,7 +73,7 @@ public class SparkApplication {
 	}
 
 	private static ExperimentStats executeExperiment(AlgorithmContext context){
-	 	Experiment e = new Experiment(context);
+	 	SingleTownExperiment e = new SingleTownExperiment(context);
         e.run();
         ExperimentStats stats = e.getStats();
         return stats;

@@ -47,6 +47,7 @@ public class StandardFitnessTester implements FitnessTester {
     		if(env.target.getTargetThreshold()!=null &&
     				solution.getFitness().overThreshold(env.target.getTargetThreshold())) {
     			population.bestMatch = solution;
+    			population.goalReached = true;
     			break;
     		}
             

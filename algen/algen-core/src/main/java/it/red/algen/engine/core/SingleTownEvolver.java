@@ -16,8 +16,8 @@ import it.red.algen.stats.ExperimentStats;
 import it.red.algen.tracking.EnvObservable;
 import it.red.algen.tracking.EnvObserver;
 
-public class Evolver implements EnvObservable {
-	private static Logger logger = Logger.getLogger(Evolver.class.getName());
+public class SingleTownEvolver implements EnvObservable {
+	private static Logger logger = Logger.getLogger(SingleTownEvolver.class.getName());
 
 	// ALGORITHM PARAMETERS
     public AlgorithmContext context;
@@ -36,7 +36,7 @@ public class Evolver implements EnvObservable {
      * @param context
      * @param env
      */
-    public Evolver(AlgorithmContext context, Env env){
+    public SingleTownEvolver(AlgorithmContext context, Env env){
     	this.context = context;
     	this.env = env;
     	this.fitnessTester = new StandardFitnessTester(context.application.fitnessCalculator);
@@ -151,6 +151,7 @@ public class Evolver implements EnvObservable {
 		boolean endConditionFound = false;
 		
 		// Check threshold
+		// TODOA: is near target fitness checked?
 		if(context.algorithmParameters.stopConditions.targetThreshold != null &&
 				env.currentGen.bestMatch.getFitness().overThreshold(context.algorithmParameters.stopConditions.targetThreshold)){
 			endConditionFound = goalReached();

@@ -37,6 +37,13 @@ public class Population {
 
     
     public Solution<?,?> bestMatch;
+    
+    /**
+     * Goal is reached while processing these population solutions:
+     * - fitness is 1.0 (TODOA: is near target fitness checked?)
+     * - fitness is over threshold
+     */
+    public boolean goalReached = false;
 
     
     /**
