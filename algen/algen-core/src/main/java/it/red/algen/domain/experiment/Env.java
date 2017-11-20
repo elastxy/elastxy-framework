@@ -32,7 +32,7 @@ public class Env {
     public Genoma genoma;
 
 	/**
-	 * Represents the data algorithm is working on, 
+	 * Represents the reference to data algorithm is working on, 
 	 * which must not be maintained in solutions because it is too much expensive.
 	 */
     public WorkingDataset workingDataset;

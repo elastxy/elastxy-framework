@@ -120,7 +120,7 @@ public class MetadataGenomaBuilder {
 	 * @param metadata
 	 */
 	public static void setupAlleleValuesProvider(StandardMetadataGenoma genoma, AlleleValuesProvider provider){
-		genoma.setAlleleValuesProvider(provider);;
+		genoma.setAlleleValuesProvider(provider);
 	}
 	
 	

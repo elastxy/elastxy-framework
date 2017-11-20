@@ -93,7 +93,7 @@ public abstract class AbstractEnvFactory<T extends Object, R extends Object, G e
     	return target;
 	}
 
-	private Genoma reduceGenoma(GenomaProvider genomaProvider, Target<T,R> target) {
+	protected Genoma reduceGenoma(GenomaProvider genomaProvider, Target<T,R> target) {
 		return genomaProvider.shrink(target);
 	}
 
