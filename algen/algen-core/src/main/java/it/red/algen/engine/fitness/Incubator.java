@@ -1,6 +1,5 @@
 package it.red.algen.engine.fitness;
 
-import it.red.algen.dataprovider.WorkingDataset;
 import it.red.algen.domain.experiment.Env;
 import it.red.algen.domain.genetics.Genotype;
 import it.red.algen.domain.genetics.phenotype.Phenotype;
@@ -19,6 +18,6 @@ public interface Incubator<G extends Genotype, P extends Phenotype> {
 	 * @param genotype
 	 * @return
 	 */
-	public P grow(WorkingDataset workingDataset, G genotype, Env environment);
+	public P grow(G genotype, Env environment);
 	
 }

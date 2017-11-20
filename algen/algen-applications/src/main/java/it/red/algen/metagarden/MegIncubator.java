@@ -21,7 +21,7 @@ public class MegIncubator implements Incubator<Chromosome, UserPhenotype<GardenW
 	 * Solution grows to a big Garden with its values of wellness, in the interval [0..2]
 	 */
 	@Override
-	public UserPhenotype<GardenWellness> grow(WorkingDataset workingDataset, Chromosome genotype, Env environment) {
+	public UserPhenotype<GardenWellness> grow(Chromosome genotype, Env environment) {
 		UserPhenotype<GardenWellness> result = new UserPhenotype<GardenWellness>();
 		result.value = new GardenWellness();
 		

@@ -37,11 +37,11 @@ public class MefIncubator implements Incubator<Strand, ComplexPhenotype>{
 	 * 
 	 */	
 	@Override
-	public ComplexPhenotype grow(WorkingDataset workingDataset, Strand genotype, Env env) {
+	public ComplexPhenotype grow(Strand genotype, Env env) {
 		
 		// Create recipes by type
 		RecipeAccumulator accumulator = new RecipeAccumulator();
-		accumulator.calculate((MefWorkingDataset)workingDataset, genotype, (MefGoal)env.target.getGoal());
+		accumulator.calculate((MefWorkingDataset)env.workingDataset, genotype, (MefGoal)env.target.getGoal());
 	
 		// Create phenotype
 		ComplexPhenotype result = new ComplexPhenotype();

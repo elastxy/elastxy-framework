@@ -23,7 +23,7 @@ public class MesIncubator implements Incubator<Chromosome, ComplexPhenotype>{
 	 * and fills the original matrix
 	 */	
 	@Override
-	public ComplexPhenotype grow(WorkingDataset workingDataset, Chromosome genotype, Env env) {
+	public ComplexPhenotype grow(Chromosome genotype, Env env) {
 		ComplexPhenotype result = new ComplexPhenotype();
 		int[][] matrix = fillMatrix((int[][])env.target.getGoal(), genotype.genes);
 		double completeness = countCompleteRowsSquares(matrix);

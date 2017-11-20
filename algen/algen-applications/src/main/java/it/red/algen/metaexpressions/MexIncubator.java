@@ -10,7 +10,7 @@ import it.red.algen.engine.fitness.Incubator;
 public class MexIncubator implements Incubator<Chromosome, NumberPhenotype>{
 
 	@Override
-	public NumberPhenotype grow(WorkingDataset workingDataset, Chromosome genotype, Env environment) {
+	public NumberPhenotype grow(Chromosome genotype, Env environment) {
 		NumberPhenotype result = new NumberPhenotype();
 		result.value = calculate(
 				(Long)genotype.genes.get(0).allele.value,
