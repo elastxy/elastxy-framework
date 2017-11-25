@@ -1,5 +1,7 @@
 package it.red.algen.domain.genetics.genotype;
 
+import java.io.Serializable;
+
 /**
  * Gene is a position within a Chromosome instance, bringing an Allele value.
  * 
@@ -8,7 +10,7 @@ package it.red.algen.domain.genetics.genotype;
  *
  * @author grossi
  */
-public class Gene {
+public class Gene implements Serializable {
 	
 	/**
 	 * Position within solution or chromosome.

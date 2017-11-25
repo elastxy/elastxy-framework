@@ -12,12 +12,12 @@ import it.red.algen.applications.components.factory.AppBootstrapRaw;
 import it.red.algen.conf.ReadConfigSupport;
 import it.red.algen.context.AlgorithmContext;
 import it.red.algen.distributed.context.DistributedAlgorithmContext;
-import it.red.algen.distributed.engine.core.MultipleTownsExperiment;
+import it.red.algen.distributed.engine.core.MultiColonyExperiment;
 import it.red.algen.engine.core.Experiment;
 import it.red.algen.stats.ExperimentStats;
 
-public class SparkApplication {
-	private static Logger logger = Logger.getLogger(SparkApplication.class);
+public class MexdSparkApplication {
+	private static Logger logger = Logger.getLogger(MexdSparkApplication.class);
 	
 	public static void main(String[] args){
 		try {
@@ -29,7 +29,7 @@ public class SparkApplication {
 				return;
 			}
 			logger.info("Arguments found: "+Arrays.asList(args));
-			String applicationName = args[0]; // expressions.d
+			String applicationName = args[0]; // expressions_d
 			logger.info("Initializing application "+applicationName);
 			String sparkHome = args[1]; // "C:/dev/spark-2.2.0-bin-hadoop2.7"
 			String master = args[2]; // "spark://192.168.1.101:7077"
@@ -73,8 +73,8 @@ public class SparkApplication {
 		return sparkContext;
 	}
 
-	private static ExperimentStats executeExperiment(AlgorithmContext context){
-	 	Experiment e = new MultipleTownsExperiment(context);
+	private static ExperimentStats executeExperiment(DistributedAlgorithmContext context){
+	 	Experiment e = new MultiColonyExperiment(context);
         e.run();
         ExperimentStats stats = e.getStats();
         return stats;
@@ -83,8 +83,9 @@ public class SparkApplication {
 	private static void setupContext(DistributedAlgorithmContext context, AppComponentsLocator locator) {
 		context.application = locator.get(context.application.name);
 		if(context.application.datasetProvider!=null) context.application.datasetProvider.setup(context);
-		context.application.genomaProvider.setup(context);
 		context.application.selector.setup(context);
 		context.application.envFactory.setup(context);
+		context.application.multiColonyEnvFactory.setup(context);
+		context.application.distributedGenomaProvider.setup(context);
 	}
 }

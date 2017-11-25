@@ -47,6 +47,11 @@ public abstract class AbstractGenoma implements Genoma {
 	public void setAlleleValuesProvider(AlleleValuesProvider provider){
 		this.alleleValuesProvider = provider;
 	}
+
+	@Override
+	public AlleleValuesProvider getAlleleValuesProvider(){
+		return this.alleleValuesProvider;
+	}
 	
 
 	@Override

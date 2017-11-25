@@ -123,7 +123,7 @@ public class DistributedController {
     	config.historyEventsEnabled = sparkHistoryEventsEnabled;
     	config.historyEventsDir = "file:///"+sparkHistoryEventsPath;
 
-    	config.appName = "expressions.d";
+    	config.appName = "expressions_d";
     	config.appJar = "file:///"+jarsPath+"algen-applications-1.0.0-SNAPSHOT.jar";
     	config.mainClass = "it.red.algen.d.metaexpressions.SparkApplication";
 

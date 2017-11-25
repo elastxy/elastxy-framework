@@ -14,6 +14,6 @@ public class NumberRawFitness implements RawFitness {
 	}
 	
 	public String toString(){
-		return String.format("%.10f", value);
+		return value==null ? null : String.format("%.10f", value.floatValue());
 	}
 }

@@ -1,5 +1,6 @@
 package it.red.algen.conf;
 
+import java.io.Serializable;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
@@ -12,7 +13,7 @@ import java.util.Map;
  * 
  * @author red
  */
-public class ApplicationSpecifics {
+public class ApplicationSpecifics implements Serializable {
 	
 	// TODOM: inheritance
 	// http://www.baeldung.com/jackson-inheritance

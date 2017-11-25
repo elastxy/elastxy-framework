@@ -10,6 +10,7 @@
 
 package it.red.algen.domain.experiment;
 
+import java.io.Serializable;
 import java.math.BigDecimal;
 
 /**
@@ -17,7 +18,7 @@ import java.math.BigDecimal;
  * 
  * @author grossi
  */
-public interface Fitness {
+public interface Fitness extends Serializable {
 	
 	/**
 	 * Value for fitness, normalized in a [0..1] interval

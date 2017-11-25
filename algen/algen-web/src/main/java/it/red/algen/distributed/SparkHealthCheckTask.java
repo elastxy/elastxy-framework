@@ -1,22 +1,21 @@
 package it.red.algen.distributed;
 
+import java.io.Serializable;
 import java.util.Arrays;
+import java.util.List;
 import java.util.stream.Stream;
 
 import org.apache.spark.api.java.JavaPairRDD;
 import org.apache.spark.api.java.JavaSparkContext;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-import org.springframework.stereotype.Component;
 
 import scala.Tuple2;
 
-@Component
-public class SparkHeartbeatTask {
-	private static Logger logger = LoggerFactory.getLogger(SparkHeartbeatTask.class);
+public class SparkHealthCheckTask implements Serializable {
+	
+	private static final long serialVersionUID = -3212690278671841223L;
 
 	
-	public String runSingle(JavaSparkContext sc, String inputFilePath) {
+	public static String run(JavaSparkContext sc, String inputFilePath) {
 //	    final StringBuffer buf = new StringBuffer();
 //	    final List<String> list = new ArrayList<String>();
 
@@ -31,7 +30,8 @@ public class SparkHeartbeatTask {
 //	    String result = wordCount.toDebugString();
 	    
 //	    wordCount.collect().stream(tuple -> write(buf, list, String.format("Word [%s] count [%d].%n", tuple._1, tuple_2)));
-	    Stream<Tuple2<String,Integer>> s1 = wordCount.collect().stream();
+	    List<Tuple2<String,Integer>> wordCountList = wordCount.collect();
+	    Stream<Tuple2<String,Integer>> s1 = wordCountList.stream();
 	    Stream<String> s2 = s1.map(tuple -> String.format("Word [%s] count [%d].%n", tuple._1(), tuple._2));
 //	    s2.forEach(SparkHeartbeatTask::write);
 //	    s2.forEach(action);

@@ -38,6 +38,7 @@ public class DefaultConfiguration {
     
     // DISTRIBUTED
     public static final int 		DEFAULT_MAX_ERAS = 3;
+    public static final int 		DEFAULT_MAX_ERAS_IDENTICAL_FITNESSES = -1;
     public static final int 		DEFAULT_ERA_BEST_MATCHES = 1;
     public static final int 		DEFAULT_PARTITIONS = 4;
     public static final int 		DEFAULT_RESHUFFLE_EVERY_ERAS = 2;

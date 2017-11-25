@@ -9,7 +9,7 @@ import it.red.algen.applications.components.AppComponentsLocator;
 import it.red.algen.context.AlgorithmContext;
 import it.red.algen.context.ContextBuilder;
 import it.red.algen.engine.core.Experiment;
-import it.red.algen.engine.core.SingleTownExperiment;
+import it.red.algen.engine.core.SingleColonyExperiment;
 import it.red.algen.engine.operators.UniformlyDistributedSelector;
 import it.red.algen.stats.ExperimentStats;
 import it.red.algen.stats.StatsExperimentExecutor;
@@ -27,7 +27,7 @@ public class ApplicationService {
 		AlgorithmContext context = benchmarkContextBuilder.build(applicationName, true);
 		context.application.name = applicationName;
 		setupContext(context);
-		Experiment e = new SingleTownExperiment(context);
+		Experiment e = new SingleColonyExperiment(context);
 		e.run();
 		ExperimentStats stats = e.getStats();
         return stats;
@@ -36,7 +36,7 @@ public class ApplicationService {
 	
 	public ExperimentStats executeExperiment(AlgorithmContext context){
 	 	setupContext(context);
-	 	Experiment e = new SingleTownExperiment(context);
+	 	Experiment e = new SingleColonyExperiment(context);
         e.run();
         ExperimentStats stats = e.getStats();
         return stats;
@@ -93,6 +93,10 @@ public class ApplicationService {
 		context.application.genomaProvider.setup(context);
 		context.application.selector.setup(context);
 		context.application.envFactory.setup(context);
+		
+		// Distributed application
+		if(context.application.multiColonyEnvFactory!=null) context.application.multiColonyEnvFactory.setup(context);
+		if(context.application.distributedGenomaProvider!=null) context.application.distributedGenomaProvider.setup(context);
 	}
 	
 

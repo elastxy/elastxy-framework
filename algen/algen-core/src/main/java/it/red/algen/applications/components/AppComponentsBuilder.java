@@ -59,7 +59,12 @@ public class AppComponentsBuilder {
 		result.recombinator = 		(Recombinator)constructComponent(applicationMetadata.recombinator);
 		
 		result.solutionRenderer = 	(SolutionRenderer)constructComponent(applicationMetadata.solutionRenderer);
-		
+
+		// Distributed application
+		// TODOD: one only property (e.g. envFactory) but assigned based on context: LOCAL|DISTRIBUTED
+		result.multiColonyEnvFactory =(EnvFactory)constructComponent(applicationMetadata.multiColonyEnvFactory);
+		result.distributedGenomaProvider =(GenomaProvider)constructComponent(applicationMetadata.distributedGenomaProvider);
+
 		return result;
 	}
 	

@@ -1,11 +1,13 @@
 package it.red.algen.domain.experiment;
 
+import java.io.Serializable;
+
 import it.red.algen.domain.genetics.Genotype;
 import it.red.algen.domain.genetics.phenotype.Phenotype;
 
-public class GenericSolution implements Solution {
-	public transient Genotype genotype;
-	public transient Phenotype phenotype;
+public class GenericSolution implements Solution, Serializable {
+	public Genotype genotype;
+	public Phenotype phenotype;
 	public Fitness fitness;
 
 	@Override

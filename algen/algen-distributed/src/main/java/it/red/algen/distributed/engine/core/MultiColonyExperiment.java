@@ -10,8 +10,10 @@
 
 package it.red.algen.distributed.engine.core;
 
-import it.red.algen.context.AlgorithmContext;
-import it.red.algen.domain.experiment.Env;
+import it.red.algen.distributed.context.DistributedAlgorithmContext;
+import it.red.algen.distributed.engine.factory.MultiColonyEnvFactory;
+import it.red.algen.distributed.experiment.MultiColonyEnv;
+import it.red.algen.distributed.stats.MultiColonyExperimentStats;
 import it.red.algen.engine.core.Experiment;
 import it.red.algen.stats.ExperimentStats;
 import it.red.algen.tracking.EnvObserver;
@@ -23,17 +25,20 @@ import it.red.algen.tracking.EnvObserver;
  * 
  *  INTRO
  *  
- *	Distributed (multiple towns) experiment.
+ *	Distributed (multiple colonies) experiment.
  *
  *	Defines execution for a distributed based algorithm:
  *  - distributed events
  *  - distributed populations and factory
- *  - distributed evolver which collects evolutions of many villages over eras
+ *  - distributed evolver which collects evolutions of many colonies over eras
  *  
  *  The default implementation adopts Spark as distributed computing framework,
- *  where Driver maintains algorithm execution, while Workers evolve separated
- *  populations over time, that from time to time (every N eras) reshuffle
- *  to spread genetic materials while preserving best matches.
+ *  where Driver maintains algorithm execution and references to RDD, 
+ *  while Workers evolve separate populations over time, that reshuffle from time to time 
+ *  (every N eras) to spread genetic materials while preserving best matches.
+ *  
+ *  Every iteration on a single colony should include a number of alleles for mutating
+ *  a percentage of genes.
  *  
  *  
  * ALGORITHM
@@ -41,10 +46,19 @@ import it.red.algen.tracking.EnvObserver;
  * EnvFactory
  * --------------------
  * 0.1 WorkingSet Creation 						DRIVER => RDD[Long]
- * 0.2 Partitions Creation / Shuffle 	DRIVER => Accumulator
- * 0.3 Genoma Extraction (Population) WORKER <= RDDp[Long]
  * 
- * MultipleTownsEvolver
+ * 0.2 Partitions Creation / Shuffle 	DRIVER => Accumulator
+ * 		>> DatasetProvider::collect()
+ * 		>> DatasetProvider::shrink()
+ * 		>> DatasetProvider::getWorkingDataset()
+ * 
+ * 0.3 Genoma Extraction (Population) WORKER <= RDDp[Allele]
+ * 		>> GenomaProvider::setWorkingDataset(-)
+ * 		>> GenomaProvider::collect()
+ * 		>> GenomaProvider::getGenoma()
+ * 		>> createAccumulator()
+ * 
+ * MultiColonyEvolver
  * --------------------
  * LOOP
  * 1.1 Eras Loop (Closure)						DRIVER => RDD[Long]
@@ -65,12 +79,12 @@ import it.red.algen.tracking.EnvObserver;
  *
  * @author grossi
  */
-public class MultipleTownsExperiment implements Experiment {
-    private ExperimentStats stats;
+public class MultiColonyExperiment implements Experiment {
+    private MultiColonyExperimentStats stats;
 
-    private AlgorithmContext context;
+    private transient DistributedAlgorithmContext context;
     
-    public MultipleTownsExperiment(AlgorithmContext context) {
+    public MultiColonyExperiment(DistributedAlgorithmContext context) {
         this.context = context;
         stats = null;
     }
@@ -81,14 +95,16 @@ public class MultipleTownsExperiment implements Experiment {
     
     public void run(){
     	
-    	// Setups observer
+    	// Observer setup
+    	// TODOD: distributed Observer (Kafka?)
         EnvObserver observer = new EnvObserver(context);
         
         // Creates initial environment
-        Env environment = context.application.envFactory.create();
+        MultiColonyEnvFactory envFactory = (MultiColonyEnvFactory)context.application.multiColonyEnvFactory;
+        MultiColonyEnv environment = (MultiColonyEnv)envFactory.createEnv();
     	
         // Setups engine
-        MultipleTownsEvolver evolver = new MultipleTownsEvolver(
+        MultiColonyEvolver evolver = new MultiColonyEvolver(
         		context, 
         		environment);
         evolver.subscribe(observer);
@@ -97,7 +113,7 @@ public class MultipleTownsExperiment implements Experiment {
         evolver.evolve();
         
         // Retrieves stats
-        stats = evolver.getStats();
+        stats = (MultiColonyExperimentStats)evolver.getStats();
     }
     
     public String toString(){

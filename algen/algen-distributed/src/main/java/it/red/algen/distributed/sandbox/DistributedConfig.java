@@ -24,7 +24,7 @@ public class DistributedConfig {
 	@Value("${spark.home}")
 	private String sparkHome;
 	
-	@Value("${master.uri.toberemoved}")
+	@Value("${master.uri}")
 	private String masterUri;
 	
 	@Bean

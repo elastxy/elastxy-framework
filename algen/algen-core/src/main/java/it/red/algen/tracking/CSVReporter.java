@@ -3,6 +3,7 @@ package it.red.algen.tracking;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
@@ -12,7 +13,7 @@ import it.red.algen.engine.core.AlgorithmException;
 import it.red.algen.stats.ExperimentStats;
 
 
-public class CSVReporter implements Reporter {
+public class CSVReporter implements Reporter, Serializable {
 	private String outputDir = null;
 	
 	public CSVReporter(String path){

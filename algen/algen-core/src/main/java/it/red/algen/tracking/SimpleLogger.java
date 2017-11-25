@@ -10,18 +10,25 @@
 
 package it.red.algen.tracking;
 
+import java.io.Serializable;
+
 /**
  *
  * @author grossi
  */
-public class SimpleLogger implements Logger {
-    
+public class SimpleLogger implements Logger, Serializable {
+    public String prefix = "ALiGEN> ";
+	
     public void out(Object msg){
-        System.out.println(msg);
+        System.out.println(prefix()+msg);
     }
     
     public void err(Object msg, Throwable t){
-    	System.out.println(msg);
+    	System.out.println(prefix()+msg);
     	t.printStackTrace();
+    }
+    
+    private final String prefix(){
+    	return "["+Thread.currentThread().getId()+"] "+prefix;
     }
 }

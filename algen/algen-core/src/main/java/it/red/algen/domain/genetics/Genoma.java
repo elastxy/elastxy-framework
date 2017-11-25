@@ -101,6 +101,12 @@ public interface Genoma {
 	 * @param provider
 	 */
 	public void setAlleleValuesProvider(AlleleValuesProvider provider);
+
+	/**
+	 * Gets the AlleleValuesProvider.
+	 * @return
+	 */
+	public AlleleValuesProvider getAlleleValuesProvider();
 	
 
 	/**

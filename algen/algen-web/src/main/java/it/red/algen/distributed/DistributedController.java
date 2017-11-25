@@ -16,10 +16,10 @@
 
 package it.red.algen.distributed;
 
+import org.apache.log4j.Logger;
 import org.apache.spark.SparkConf;
+import org.apache.spark.SparkContext;
 import org.apache.spark.api.java.JavaSparkContext;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpStatus;
@@ -32,22 +32,33 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import it.red.algen.conf.ReadConfigSupport;
-import it.red.algen.d.metaexpressions.SparkApplication;
+import it.red.algen.d.metaexpressions.MexdSparkApplication;
 import it.red.algen.distributed.context.DistributedAlgorithmContext;
 
+
+/**
+ * TODOA: Move Healthcheck to another specific Controller
+ * @author red
+ */
 @Controller
 @RequestMapping(path = "/distributed")
 public class DistributedController {
-	private static Logger logger = LoggerFactory.getLogger(DistributedController.class);
+	private static transient Logger logger = Logger.getLogger(DistributedController.class);
 
+	
+	
 	@Autowired
-	private SparkHeartbeatTask sparkHeartbeatTask;
+	private SparkConf sparkConfLocal;
+	
+	@Autowired
+	private SparkConf sparkConfRemote;
 
-	@Autowired
-	private SparkConf sparkConf;
+	@Value("${test.file.path}")
+	private String testFilePath;
 	
 	
 	
+	// TODOA: mettere ordine!
 	@Value("${spark.home}")
 	private String sparkHome;
 	
@@ -83,12 +94,30 @@ public class DistributedController {
 	}
 
 	
-    // TODOA: remove or turn into an in memory check
+    // TODOA: remove or turn into an in memory check or add distributed test
     @RequestMapping("/healthcheck")
     public ResponseEntity<String> healthCheck() {
-    	String result = sparkHeartbeatTask.runSingle(new JavaSparkContext(sparkConf), "C://tmp//algendata//words.txt");
-        return new ResponseEntity<>(result, HttpStatus.OK);
+    	String localResult = runHealthCheck(sparkConfLocal);
+    	String remoteResult = runHealthCheck(sparkConfRemote);
+        return new ResponseEntity<>("LOCAL: \n"+localResult+"\nREMOTE: \n"+remoteResult, HttpStatus.OK);
     }
+
+
+	private String runHealthCheck(SparkConf sparkConf) {
+		String result;
+		JavaSparkContext context = new JavaSparkContext(sparkConf);
+		try {
+    		result = SparkHealthCheckTask.run(context, testFilePath);
+    	}
+    	catch(Throwable t){
+    		result = "Error calling healthcheck! Ex: "+t;
+    		logger.fatal(result, t);
+    	}
+    	finally {
+    		context.stop();
+    	}
+		return result;
+	}
     
 
     @RequestMapping(path = "/experiment/local/{application}", method = RequestMethod.POST)
@@ -103,7 +132,7 @@ public class DistributedController {
 		String master = "local[*]"; // local[*] | spark://192.168.1.101:7077
 		String contextAsString = ReadConfigSupport.writeJSONString(context);
 		
-    	SparkApplication.main(new String[]{application, sparkHome, master, contextAsString});
+    	MexdSparkApplication.main(new String[]{application, sparkHome, master, contextAsString});
 
     	logger.info("RESPONSE Service /experiment/local/{application}"); // TODOD: results
         String stats = "OK";

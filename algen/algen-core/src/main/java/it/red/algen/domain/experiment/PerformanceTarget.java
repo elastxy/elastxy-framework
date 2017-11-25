@@ -1,5 +1,6 @@
 package it.red.algen.domain.experiment;
 
+import java.io.Serializable;
 import java.math.BigDecimal;
 
 import it.red.algen.engine.fitness.FitnessUtils;
@@ -14,7 +15,7 @@ import it.red.algen.engine.fitness.FitnessUtils;
  * @param <G>
  *
  */
-public class PerformanceTarget<G,M> implements Target<G,M> {
+public class PerformanceTarget<G,M> implements Target<G,M>, Serializable {
 	public G goal;
 	public M referenceMeasure;
 	

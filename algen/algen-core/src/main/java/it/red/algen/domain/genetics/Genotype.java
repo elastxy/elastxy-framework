@@ -1,5 +1,6 @@
 package it.red.algen.domain.genetics;
 
+import java.io.Serializable;
 import java.util.List;
 
 import it.red.algen.domain.genetics.genotype.Allele;
@@ -10,7 +11,7 @@ import it.red.algen.domain.genetics.genotype.Allele;
  * @author red
  *
  */
-public interface Genotype {
+public interface Genotype extends Serializable {
 	
 	
 	/**

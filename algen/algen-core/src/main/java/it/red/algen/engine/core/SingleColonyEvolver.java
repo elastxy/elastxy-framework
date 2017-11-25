@@ -15,8 +15,8 @@ import it.red.algen.engine.fitness.StandardFitnessTester;
 import it.red.algen.stats.ExperimentStats;
 import it.red.algen.tracking.EnvObserver;
 
-public class SingleTownEvolver implements Evolver {
-	private static Logger logger = Logger.getLogger(SingleTownEvolver.class.getName());
+public class SingleColonyEvolver implements Evolver {
+	private static Logger logger = Logger.getLogger(SingleColonyEvolver.class.getName());
 
 	// ALGORITHM PARAMETERS
     public AlgorithmContext context;
@@ -35,7 +35,7 @@ public class SingleTownEvolver implements Evolver {
      * @param context
      * @param env
      */
-    public SingleTownEvolver(AlgorithmContext context, Env env){
+    public SingleColonyEvolver(AlgorithmContext context, Env env){
     	this.context = context;
     	this.env = env;
     	this.fitnessTester = new StandardFitnessTester(context.application.fitnessCalculator);

@@ -1,5 +1,6 @@
 package it.red.algen.domain.genetics.phenotype;
 
+import java.io.Serializable;
 
 /**
  * Exterior manifestation of a Solution, used to calculate fitness.
@@ -8,7 +9,7 @@ package it.red.algen.domain.genetics.phenotype;
  * 
  * @author red
  */
-public interface Phenotype<T> {
+public interface Phenotype<T>  extends Serializable {
 
 	public T getValue();
 	

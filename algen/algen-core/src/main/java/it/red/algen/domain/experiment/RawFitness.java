@@ -1,5 +1,6 @@
 package it.red.algen.domain.experiment;
 
+import java.io.Serializable;
 
 /**
  * Non-normalized fitness interface: it's used to simplify calculations using raw data 
@@ -8,6 +9,6 @@ package it.red.algen.domain.experiment;
  * @author red
  *
  */
-public interface RawFitness {
+public interface RawFitness extends Serializable {
 
 }

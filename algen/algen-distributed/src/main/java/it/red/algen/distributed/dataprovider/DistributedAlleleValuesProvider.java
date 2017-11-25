@@ -1,31 +1,44 @@
-package it.red.algen.d.metaexpressions;
+package it.red.algen.distributed.dataprovider;
 
 import java.util.List;
 
+import org.apache.log4j.Logger;
 import org.apache.spark.api.java.JavaRDD;
 
 import it.red.algen.dataprovider.AlleleValuesProvider;
 import it.red.algen.domain.genetics.genotype.Allele;
 
 /**
- * Maintains RDD of Alleles cached.
+ * Maintains cached RDD of Alleles.
+ * 
+ * IMPORTANT: Alleles RDD is already partitioned based 
+ * on original partitions of working dataset RDD.
  * 
  * @author red
  *
  */
-public class RddNumbersAlleleValuesProvider implements AlleleValuesProvider {
+public class DistributedAlleleValuesProvider implements AlleleValuesProvider {
+	private static Logger logger = Logger.getLogger(DistributedAlleleValuesProvider.class);
+
 	private JavaRDD<Allele> alleles;
 	
-	public RddNumbersAlleleValuesProvider(MexdWorkingDataset dataset){
-		this.alleles = (JavaRDD)dataset.numbers.map(RddNumbersAlleleValuesProvider::toAllele).cache();
+	public DistributedAlleleValuesProvider(JavaRDD<Allele> alleles){
+		this.alleles = alleles;
 	}
 	
+	public JavaRDD<Allele> rdd(){
+		return alleles;
+	}
+
 	@Override
 	public int countProviders() {
 		return 1;
 	}
 
-	// TODOD: method getAlleles(number)
+	/**
+	 * Collects alleles, executing a Spark action on RDD.
+	 * TODOD: method getAlleles(number)
+	 */
 	@Override
 	public List<Allele> getAlleles() {
 		return alleles.collect();
@@ -37,20 +50,15 @@ public class RddNumbersAlleleValuesProvider implements AlleleValuesProvider {
 	}
 	
 	
-	// TODOM: move to a "writable" alleleValuesProvider
+	// TODOM: move to a "writable" alleleValuesProvider or implements a "read only" avp
 	@Override
 	public void insertAlleles(List<Allele> alleles) {
 		if(true) throw new UnsupportedOperationException("Not supported: alleles are retrieved by RDD");
 	}
+	
 	@Override
 	public void insertAlleles(String provider, List<Allele> alleles) {
 		if(true) throw new UnsupportedOperationException("Not supported: alleles are retrieved by RDD");
 	}
 
-
-	private static final Allele<Long> toAllele(Long value){
-		Allele<Long> result = new Allele<Long>();
-		result.value = value;
-		return result;
-	}
 }

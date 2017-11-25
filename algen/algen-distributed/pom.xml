@@ -118,6 +118,7 @@
 					    <excludes>
 					      <exclude>**/example/*.java</exclude>
 					      <exclude>**/sandbox/*.java</exclude>
+					      <exclude>**/lab/*.*</exclude>
 					    </excludes>
 					  </configuration>
 					</plugin>

@@ -7,6 +7,7 @@ import java.util.Map.Entry;
 import it.red.algen.context.AlgorithmContext;
 import it.red.algen.dataprovider.AlleleValuesProvider;
 import it.red.algen.domain.genetics.ChromosomeGenotypeStructure;
+import it.red.algen.domain.genetics.Genoma;
 import it.red.algen.domain.genetics.StrandGenotypeStructure;
 import it.red.algen.engine.core.AlgorithmException;
 
@@ -119,7 +120,7 @@ public class MetadataGenomaBuilder {
 	 * @param pos
 	 * @param metadata
 	 */
-	public static void setupAlleleValuesProvider(StandardMetadataGenoma genoma, AlleleValuesProvider provider){
+	public static void setupAlleleValuesProvider(Genoma genoma, AlleleValuesProvider provider){
 		genoma.setAlleleValuesProvider(provider);
 	}
 	

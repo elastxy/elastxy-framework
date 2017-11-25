@@ -1,5 +1,7 @@
 package it.red.algen.applications.components;
 
+import java.io.Serializable;
+
 import it.red.algen.dataprovider.DatasetProvider;
 import it.red.algen.dataprovider.GenomaProvider;
 import it.red.algen.engine.factory.EnvFactory;
@@ -23,9 +25,10 @@ import it.red.algen.tracking.SolutionRenderer;
  * @author red
  *
  */
-public class AppComponents {
+public class AppComponents implements Serializable {
 
 	public static final String EnvFactory = 		"envFactory"; // Context-dependent
+	public static final String MultiColonyEnvFactory ="multiColonyEnvFactory"; // Context-dependent
 	
 	public static final String DatasetProvider = 	"datasetProvider"; // Context-dependent
 	public static final String GenomaProvider = 	"genomaProvider"; // Context-dependent
@@ -63,7 +66,10 @@ public class AppComponents {
 	public Recombinator recombinator;
 	
 	public SolutionRenderer solutionRenderer;
-	
+
+	// Distributed application
+	public EnvFactory multiColonyEnvFactory; // TODOD: type of MultiColonyEnvFactory
+	public GenomaProvider distributedGenomaProvider; // TODOD: type of DistributedGenomaProvider (another application json???)
 	
 	/**
 	 * Creates a copy for redefining at runtime some behaviour
@@ -73,7 +79,7 @@ public class AppComponents {
 		AppComponents result = new AppComponents();
 		
 		result.name = name;
-		
+
 		result.envFactory = envFactory;
 		
 		result.datasetProvider = datasetProvider;		
@@ -91,6 +97,11 @@ public class AppComponents {
 		result.recombinator = recombinator;
 		
 		result.solutionRenderer = solutionRenderer;
+
+		// Distributed application
+		result.multiColonyEnvFactory = multiColonyEnvFactory;
+		result.distributedGenomaProvider = distributedGenomaProvider;
+		
 		return result;
 	}
 }

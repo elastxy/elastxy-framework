@@ -10,6 +10,8 @@
 
 package it.red.algen.conf;
 
+import java.io.Serializable;
+
 /**
  * Parameters for genetics operators:
  * - selection: directs the search towards promosing regions of the search space
@@ -22,7 +24,7 @@ package it.red.algen.conf;
  * 
  * @author grossi
  */
-public class AlgorithmParameters {
+public class AlgorithmParameters implements Serializable {
 
 	/*
 	 * ======================================

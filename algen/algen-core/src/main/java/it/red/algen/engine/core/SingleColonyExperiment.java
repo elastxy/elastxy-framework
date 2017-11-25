@@ -19,7 +19,7 @@ import it.red.algen.tracking.EnvObserver;
 
 
 /**
- *	Local (single town) experiment.
+ *	Local (single colony) experiment.
  *
  *	Defines execution for a locally based algorithm:
  *  - local events
@@ -28,15 +28,20 @@ import it.red.algen.tracking.EnvObserver;
  *  
  *  No distributed nor concurrent features are available 
  *  within this Experiment type.
+ *  
+ *  In distributed MultiColony context, the SingleColonyExperiment
+ *  runs a big number of generations from an initial population, into an Era 
+ *  within a closure and based on Genoma provided by a distributed broadcast 
+ *  set for mutation and a rdd iterator for initial population.
  *
  * @author grossi
  */
-public class SingleTownExperiment implements Experiment {
+public class SingleColonyExperiment implements Experiment {
     private ExperimentStats stats;
 
     private AlgorithmContext context;
     
-    public SingleTownExperiment(AlgorithmContext context) {
+    public SingleColonyExperiment(AlgorithmContext context) {
         this.context = context;
         stats = null;
     }
@@ -54,7 +59,7 @@ public class SingleTownExperiment implements Experiment {
         Env environment = context.application.envFactory.create();
     	
         // Setups engine
-        SingleTownEvolver evolver = new SingleTownEvolver(
+        SingleColonyEvolver evolver = new SingleColonyEvolver(
         		context, 
         		environment);
         evolver.subscribe(observer);
