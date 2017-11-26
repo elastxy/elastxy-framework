@@ -347,7 +347,7 @@
 							},
 							"response": [
 								{
-									"id": "3c8ad4fe-7327-4d76-a82c-c57a1cd6db9d",
+									"id": "d8955081-b152-4bca-b2f6-3f374a3cb74c",
 									"name": "Database EN",
 									"originalRequest": {
 										"url": "http://{{ip}}:{{port}}/experiment/algofrigerator",
@@ -374,7 +374,7 @@
 									"body": ""
 								},
 								{
-									"id": "7995c6ee-0d6f-4d4b-8fe4-d648f037d8ff",
+									"id": "9f6ac2cb-7dd7-4ffd-a024-4e029b3b6863",
 									"name": "Database IT",
 									"originalRequest": {
 										"url": "http://{{ip}}:{{port}}/experiment/algofrigerator",
@@ -401,7 +401,7 @@
 									"body": ""
 								},
 								{
-									"id": "1437a05c-eb34-4612-aab7-475558847fc2",
+									"id": "81cd31c9-06d5-4b7d-9666-6f19f8c4c56e",
 									"name": "Dispensa Rossi",
 									"originalRequest": {
 										"url": "http://{{ip}}:{{port}}/experiment/algofrigerator",
@@ -474,7 +474,7 @@
 							},
 							"response": [
 								{
-									"id": "457ae5ce-92b1-45b7-8f45-9f5db9368238",
+									"id": "a0d90e4b-c82b-461e-8100-d53a6f019a19",
 									"name": "Database EN",
 									"originalRequest": {
 										"url": "http://{{ip}}:{{port}}/experiment/algofrigerator",
@@ -501,7 +501,7 @@
 									"body": ""
 								},
 								{
-									"id": "cbd988e0-5e8d-4032-a7cd-c823fc31d4d3",
+									"id": "153e65cc-43bd-45ca-b3cc-d55ecdafe0e7",
 									"name": "Database IT",
 									"originalRequest": {
 										"url": "http://{{ip}}:{{port}}/experiment/algofrigerator",
@@ -528,7 +528,7 @@
 									"body": ""
 								},
 								{
-									"id": "5d6e7862-f796-4aaa-8608-3ec95c17b98e",
+									"id": "aac05af1-7c13-406f-a56f-4e1d4f7e493e",
 									"name": "Dispensa Rossi",
 									"originalRequest": {
 										"url": "http://{{ip}}:{{port}}/experiment/algofrigerator",
@@ -635,7 +635,7 @@
 					"description": "",
 					"item": [
 						{
-							"name": "/distributed/experiment/local SMALL",
+							"name": "/distr/exp/local SMALL",
 							"request": {
 								"url": "http://{{ip}}:{{port}}/distributed/experiment/local/expressions_d",
 								"method": "POST",
@@ -648,14 +648,14 @@
 								],
 								"body": {
 									"mode": "raw",
-									"raw": "{\r\n\t\"applicationSpecifics\": {\r\n\t\t\"target\" : {\r\n\t\t\t\"TARGET_EXPRESSION_RESULT\" : 23\r\n\t\t},\r\n\t\t\"params\" : {\r\n\t\t\t\"MAX_OPERAND_VALUE\" : 10\r\n\t\t}\r\n\t},\r\n\t\"algorithmParameters\": {\r\n\t\t\"recombinationPerc\": 0.5,\r\n\t\t\"mutationPerc\": 0.2,\r\n\t\t\"elitarism\": true,\r\n\t\t\"initialSelectionNumber\": 12,\r\n\t\t\"initialSelectionRandom\": true,\r\n\t\t\"stopConditions\": {\r\n\t\t\t\"targetFitness\" : 0.999,\r\n\t\t\t\"maxIterations\": 3,\r\n\t\t\t\"maxLifetimeMs\": 3000,\r\n\t\t\t\"maxIdenticalFitnesses\": -1,\r\n\t\t\t\"maxEras\": 3\r\n\t\t},\r\n\t\t\"partitions\": 3,\r\n\t\t\"eraBestMatches\" : 2,\r\n\t\t\"reshuffleEveryEras\" : 2\r\n\t},\r\n\t\"monitoringConfiguration\": {\r\n\t\t\"verbose\": false,\r\n\t\t\"traceHistory\": false\r\n\t}\r\n}\r\n"
+									"raw": "{\r\n\t\"applicationSpecifics\": {\r\n\t\t\"target\" : {\r\n\t\t\t\"TARGET_EXPRESSION_RESULT\" : 23\r\n\t\t},\r\n\t\t\"params\" : {\r\n\t\t\t\"MAX_OPERAND_VALUE\" : 10\r\n\t\t}\r\n\t},\r\n\t\"algorithmParameters\": {\r\n\t\t\"recombinationPerc\": 0.5,\r\n\t\t\"mutationPerc\": 0.2,\r\n\t\t\"elitarism\": true,\r\n\t\t\"initialSelectionNumber\": 12,\r\n\t\t\"initialSelectionRandom\": true,\r\n\t\t\"stopConditions\": {\r\n\t\t\t\"targetFitness\" : 0.999,\r\n\t\t\t\"maxIterations\": 5,\r\n\t\t\t\"maxLifetimeMs\": 3000,\r\n\t\t\t\"maxIdenticalFitnesses\": -1,\r\n\t\t\t\"maxEras\": 3\r\n\t\t},\r\n\t\t\"partitions\": 3,\r\n\t\t\"eraBestMatches\" : 2,\r\n\t\t\"reshuffleEveryEras\" : 2\r\n\t},\r\n\t\"monitoringConfiguration\": {\r\n\t\t\"verbose\": false,\r\n\t\t\"traceHistory\": false\r\n\t}\r\n}\r\n"
 								},
 								"description": ""
 							},
 							"response": []
 						},
 						{
-							"name": "/distributed/experiment/local BIG",
+							"name": "/distr/exp/local BIG",
 							"request": {
 								"url": "http://{{ip}}:{{port}}/distributed/experiment/local/expressions_d",
 								"method": "POST",
@@ -675,12 +675,41 @@
 							"response": []
 						},
 						{
-							"name": "/distributed/experiment/cluster",
+							"name": "/distr/exp/cluster SMALL",
 							"request": {
-								"url": "http://{{ip}}:{{port}}/distributed/experiment/cluster/expressions.d",
-								"method": "GET",
-								"header": [],
-								"body": {},
+								"url": "http://{{ip}}:{{port}}/distributed/experiment/cluster/expressions_d",
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"description": ""
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n\t\"applicationSpecifics\": {\r\n\t\t\"target\" : {\r\n\t\t\t\"TARGET_EXPRESSION_RESULT\" : 23\r\n\t\t},\r\n\t\t\"params\" : {\r\n\t\t\t\"MAX_OPERAND_VALUE\" : 10\r\n\t\t}\r\n\t},\r\n\t\"algorithmParameters\": {\r\n\t\t\"recombinationPerc\": 0.5,\r\n\t\t\"mutationPerc\": 0.2,\r\n\t\t\"elitarism\": true,\r\n\t\t\"initialSelectionNumber\": 12,\r\n\t\t\"initialSelectionRandom\": true,\r\n\t\t\"stopConditions\": {\r\n\t\t\t\"targetFitness\" : 0.999,\r\n\t\t\t\"maxIterations\": 5,\r\n\t\t\t\"maxLifetimeMs\": 3000,\r\n\t\t\t\"maxIdenticalFitnesses\": -1,\r\n\t\t\t\"maxEras\": 3\r\n\t\t},\r\n\t\t\"partitions\": 3,\r\n\t\t\"eraBestMatches\" : 2,\r\n\t\t\"reshuffleEveryEras\" : 2\r\n\t},\r\n\t\"monitoringConfiguration\": {\r\n\t\t\"verbose\": false,\r\n\t\t\"traceHistory\": false\r\n\t}\r\n}\r\n"
+								},
+								"description": ""
+							},
+							"response": []
+						},
+						{
+							"name": "/distr/exp/cluster BIG",
+							"request": {
+								"url": "http://{{ip}}:{{port}}/distributed/experiment/cluster/expressions_d",
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"description": ""
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n\t\"applicationSpecifics\": {\r\n\t\t\"target\" : {\r\n\t\t\t\"TARGET_EXPRESSION_RESULT\" : 235000\r\n\t\t},\r\n\t\t\"params\" : {\r\n\t\t\t\"MAX_OPERAND_VALUE\" : 1000\r\n\t\t}\r\n\t},\r\n\t\"algorithmParameters\": {\r\n\t\t\"recombinationPerc\": 0.8,\r\n\t\t\"mutationPerc\": 0.2,\r\n\t\t\"elitarism\": true,\r\n\t\t\"initialSelectionNumber\": 1000,\r\n\t\t\"initialSelectionRandom\": true,\r\n\t\t\"stopConditions\": {\r\n\t\t\t\"targetFitness\" : 0.9999999,\r\n\t\t\t\"maxLifetimeMs\": 20000,\r\n\t\t\t\"maxIdenticalFitnesses\": -1,\r\n\t\t\t\"maxEras\": 10\r\n\t\t},\r\n\t\t\"partitions\": 10,\r\n\t\t\"eraBestMatches\" : 20,\r\n\t\t\"reshuffleEveryEras\" : 3\r\n\t},\r\n\t\"monitoringConfiguration\": {\r\n\t\t\"verbose\": false,\r\n\t\t\"traceHistory\": false\r\n\t}\r\n}\r\n"
+								},
 								"description": ""
 							},
 							"response": []
@@ -721,7 +750,27 @@
 						{
 							"name": "/v1/submissions/status",
 							"request": {
-								"url": "http://192.168.1.101:6066/v1/submissions/status/driver-20171104185357-0002",
+								"url": "http://192.168.1.101:6066/v1/submissions/status/driver-20171125234642-0000",
+								"method": "GET",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json;charset=UTF-8",
+										"description": ""
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": ""
+								},
+								"description": ""
+							},
+							"response": []
+						},
+						{
+							"name": "/v1/submissions/kill",
+							"request": {
+								"url": "http://192.168.1.101:6066/v1/submissions/kill/driver-20171125234642-0000",
 								"method": "GET",
 								"header": [
 									{
