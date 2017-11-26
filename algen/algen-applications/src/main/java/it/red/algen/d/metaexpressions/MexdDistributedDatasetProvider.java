@@ -41,7 +41,7 @@ public class MexdDistributedDatasetProvider implements DistributedDatasetProvide
 		// Raw data
 		Long maxValue = context.applicationSpecifics.getParamLong(MexConstants.MAX_OPERAND_VALUE);
 		int partitions = context.algorithmParameters.partitions;
-		List<Long> range = LongStream.rangeClosed(-maxValue*maxValue, +maxValue*maxValue).boxed().collect(Collectors.toList());
+		List<Long> range = LongStream.rangeClosed(-maxValue, maxValue+1).boxed().collect(Collectors.toList());
 		
 		// Partitioned RDD
 		JavaRDD<Long> numbersRDD = context.distributedContext.parallelize(range, partitions);

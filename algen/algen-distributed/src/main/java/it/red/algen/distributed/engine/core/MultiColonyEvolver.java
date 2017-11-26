@@ -129,6 +129,7 @@ public class MultiColonyEvolver implements Evolver {
             
             if(env.currentEraNumber >= context.algorithmParameters.stopConditions.maxEras || checkColoniesGoal()){
             	// TODOD: check max eras identical fitnesses
+              logger.info("   >>> End condition found! Execution will be stopped.");
               stop = true;
             }
             
@@ -136,6 +137,7 @@ public class MultiColonyEvolver implements Evolver {
             else {
               if(env.currentEraNumber % context.algorithmParameters.reshuffleEveryEras == 0){
                 logger.info(String.format("   >>> 1.5 Repartition required [era %d]", env.currentEraNumber));
+                // TODOD: reinsert best matches between eras
                 env = ((MultiColonyAbstractEnvFactory)context.application.multiColonyEnvFactory).newEra(env);
               }
             }
