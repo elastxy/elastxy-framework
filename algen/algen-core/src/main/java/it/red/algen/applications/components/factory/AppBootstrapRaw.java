@@ -7,7 +7,6 @@ import it.red.algen.applications.components.AppComponents;
 import it.red.algen.applications.components.AppComponentsBuilder;
 import it.red.algen.applications.components.AppComponentsLocator;
 import it.red.algen.applications.components.AppRegister;
-import it.red.algen.applications.components.ClasspathRegister;
 
 /**
  * Builds up applications component and makes them available,
@@ -29,7 +28,7 @@ public class AppBootstrapRaw {
 		
 		// Gets all registered apps from Register
 		logger.info("Finding registered application '"+applicationName+"'");
-		AppRegister register = new ClasspathRegister();
+		AppRegister register = new ClasspathRegisterRaw();
 		AlgenApplication app = register.find(applicationName);
 		logger.info("Application found: "+app);
 		

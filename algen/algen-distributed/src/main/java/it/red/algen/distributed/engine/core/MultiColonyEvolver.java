@@ -120,7 +120,7 @@ public class MultiColonyEvolver implements Evolver {
             env.allBestMatches = env.allBestMatches.stream().sorted(
             		new Comparator<Solution>() {
             			public int compare(Solution a, Solution b) {
-            				return (int)-Math.signum(b.getFitness().getValue().subtract(a.getFitness().getValue()).doubleValue());
+            				return (int)Math.signum(b.getFitness().getValue().subtract(a.getFitness().getValue()).doubleValue());
             			}
             		}).
             		limit(context.algorithmParameters.eraBestMatches).
@@ -150,10 +150,6 @@ public class MultiColonyEvolver implements Evolver {
     	
         // END OF EXPERIMENT
     }
-
-//    private void setColoniesGoal(boolean stop) {
-//    	if(env.goalAccumulator.isPresent() && stop) env.goalAccumulator.get().add(1);
-//    }
 
     private boolean checkColoniesGoal() {
         return env.goalAccumulator.isPresent() && env.goalAccumulator.get().value() > 0;

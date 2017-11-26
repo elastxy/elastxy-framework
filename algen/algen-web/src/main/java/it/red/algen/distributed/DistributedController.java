@@ -16,9 +16,11 @@
 
 package it.red.algen.distributed;
 
+import java.util.Arrays;
+import java.util.Base64;
+
 import org.apache.log4j.Logger;
 import org.apache.spark.SparkConf;
-import org.apache.spark.SparkContext;
 import org.apache.spark.api.java.JavaSparkContext;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -71,8 +73,14 @@ public class DistributedController {
 	@Value("${spark.version}")
 	private String sparkVersion;
 
-	@Value("${jars.path}")
-	private String jarsPath;
+	@Value("${app.jar.path}")
+	private String appJarPath;
+
+	@Value("${main.class}")
+	private String mainClass;
+	
+	@Value("${other.jars.path}")
+	private String otherJarsPath;
 
 	@Value("${spark.log4j.configuration}")
 	private String sparkLog4jConfiguration;
@@ -118,6 +126,9 @@ public class DistributedController {
     	}
 		return result;
 	}
+
+	// TODOD: check status & kill jobs
+
     
 
     @RequestMapping(path = "/experiment/local/{application}", method = RequestMethod.POST)
@@ -130,9 +141,12 @@ public class DistributedController {
 		
 		String sparkHome = this.sparkHome; // "C:/dev/spark-2.2.0-bin-hadoop2.7"
 		String master = "local[*]"; // local[*] | spark://192.168.1.101:7077
-		String contextAsString = ReadConfigSupport.writeJSONString(context);
+		byte[] contextBytes = ReadConfigSupport.writeJSONString(context).getBytes(); 
+		String contextAsString = Base64.getEncoder().encodeToString(contextBytes);
 		
-    	MexdSparkApplication.main(new String[]{application, sparkHome, master, contextAsString});
+		String[] params = new String[]{application, sparkHome, master, contextAsString};
+    	logger.info("Submitting job locally with params: "+Arrays.asList(params));
+		MexdSparkApplication.main(params);
 
     	logger.info("RESPONSE Service /experiment/local/{application}"); // TODOD: results
         String stats = "OK";
@@ -153,21 +167,25 @@ public class DistributedController {
     	config.masterURI = masterUri;
     	config.masterHost = masterHost;
     	config.sparkVersion = sparkVersion;    	
+    	config.sparkHome = sparkHome;
     	config.log4jConfiguration = sparkLog4jConfiguration;
     	
     	config.historyEventsEnabled = sparkHistoryEventsEnabled;
     	config.historyEventsDir = sparkHistoryEventsPath;
 
     	config.appName = application;
-    	config.appJar = "file:///"+jarsPath+"algen-applications-1.0.0-SNAPSHOT.jar";
-    	config.mainClass = "it.red.algen.d.metaexpressions.SparkApplication";
-
+    	config.appJarPath = appJarPath;
+    	config.mainClass = mainClass;
+    	config.otherJarsPath = otherJarsPath;
+    	
     	SparkTaskExecutor executor = new SparkTaskExecutor();
     	String stats = executor.runDistributed(config, context); // TODOD: ExperimentStats
     	
     	logger.info("RESPONSE Service /experiment/cluster/{application} => "+stats);
         return new ResponseEntity<>(stats, HttpStatus.OK);
     }
+    
+    
 	
 
 
