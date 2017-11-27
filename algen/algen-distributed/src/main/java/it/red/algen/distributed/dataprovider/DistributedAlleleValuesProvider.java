@@ -2,7 +2,6 @@ package it.red.algen.distributed.dataprovider;
 
 import java.util.List;
 
-import org.apache.log4j.Logger;
 import org.apache.spark.api.java.JavaRDD;
 
 import it.red.algen.dataprovider.AlleleValuesProvider;
@@ -18,7 +17,7 @@ import it.red.algen.domain.genetics.genotype.Allele;
  *
  */
 public class DistributedAlleleValuesProvider implements AlleleValuesProvider {
-	private static Logger logger = Logger.getLogger(DistributedAlleleValuesProvider.class);
+//	private static Logger logger = Logger.getLogger(DistributedAlleleValuesProvider.class);
 
 	private JavaRDD<Allele> alleles;
 	

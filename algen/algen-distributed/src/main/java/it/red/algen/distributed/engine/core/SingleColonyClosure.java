@@ -9,7 +9,6 @@ import org.apache.spark.api.java.function.FlatMapFunction;
 import org.apache.spark.broadcast.Broadcast;
 import org.apache.spark.util.LongAccumulator;
 
-import it.red.algen.applications.components.AppComponents;
 import it.red.algen.applications.components.AppComponentsLocator;
 import it.red.algen.applications.components.factory.AppBootstrapRaw;
 import it.red.algen.context.AlgorithmContext;

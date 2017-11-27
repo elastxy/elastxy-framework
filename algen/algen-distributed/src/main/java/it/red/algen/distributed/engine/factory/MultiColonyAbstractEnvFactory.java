@@ -16,7 +16,6 @@ import it.red.algen.dataprovider.WorkingDataset;
 import it.red.algen.distributed.dataprovider.DistributedDatasetProvider;
 import it.red.algen.distributed.dataprovider.DistributedGenomaProvider;
 import it.red.algen.distributed.experiment.MultiColonyEnv;
-import it.red.algen.domain.experiment.Population;
 import it.red.algen.domain.experiment.Target;
 import it.red.algen.domain.genetics.Genoma;
 
@@ -89,14 +88,6 @@ public abstract class MultiColonyAbstractEnvFactory<T extends Object, R extends 
 		return genomaProvider.shrink(target);
 	}
 
-	private Population createInitialPopulation(Genoma genoma) {
-		long solutions = 		context.algorithmParameters.initialSelectionNumber;
-		boolean random = 		context.algorithmParameters.initialSelectionRandom;
-        Population startGen = 	context.application.populationFactory.createNew(genoma, solutions, random);
-		return startGen;
-	}
-
-	
 	
     /**
      * Updates Environment upgrading to a new Era, redistributing original data.

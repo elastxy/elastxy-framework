@@ -95,6 +95,7 @@ public class MetadataGenotypeFactory {
 //			throw new AlgorithmException(msg);
 //		}
 		
+		// TODOA: all for cycles must not have logics repeated
 		for(int c=0; c < genoma.getGenotypeStructure().getNumberOfChromosomes(); c++){
 			Chromosome chromosome = new Chromosome();
 			for(int g=0; g < genoma.getGenotypeStructure().getNumberOfGenes(c); g++){

@@ -12,7 +12,6 @@ import it.red.algen.distributed.dataprovider.DistributedAlleleValuesProvider;
 import it.red.algen.distributed.dataprovider.DistributedGenomaProvider;
 import it.red.algen.distributed.engine.factory.MultiColonyAbstractEnvFactory;
 import it.red.algen.distributed.experiment.MultiColonyEnv;
-import it.red.algen.distributed.stats.MultiColonyExperimentStats;
 import it.red.algen.domain.experiment.Solution;
 import it.red.algen.domain.genetics.genotype.Allele;
 import it.red.algen.engine.core.Evolver;

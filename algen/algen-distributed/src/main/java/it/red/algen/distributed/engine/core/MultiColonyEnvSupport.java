@@ -4,7 +4,6 @@ import java.util.Calendar;
 
 import it.red.algen.distributed.experiment.MultiColonyEnv;
 import it.red.algen.distributed.stats.MultiColonyExperimentStats;
-import it.red.algen.stats.ExperimentStats;
 
 public class MultiColonyEnvSupport {
 

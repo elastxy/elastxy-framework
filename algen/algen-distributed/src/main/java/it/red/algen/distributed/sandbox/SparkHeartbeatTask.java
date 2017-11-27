@@ -36,15 +36,16 @@ public class SparkHeartbeatTask {
     	    	
     	// Create client
     	logger.info("Creating client..");
-    	final Map<String,String> environmentVariables = new HashMap<>();
-    	environmentVariables.put("log4j.configuration",				config.log4jConfiguration);
-    	environmentVariables.put("spark.eventLog.enabled",			config.historyEventsEnabled);
-    	environmentVariables.put("spark.eventLog.dir",				config.historyEventsDir);
-    	environmentVariables.put("spark.history.fs.logDirectory",	config.historyEventsDir);
+    	// TODOM: env variables as job submit parameter
+//    	final Map<String,String> environmentVariables = new HashMap<>();
+//    	environmentVariables.put("log4j.configuration",				config.log4jConfiguration);
+//    	environmentVariables.put("spark.eventLog.enabled",			config.historyEventsEnabled);
+//    	environmentVariables.put("spark.eventLog.dir",				config.historyEventsDir);
+//    	environmentVariables.put("spark.history.fs.logDirectory",	config.historyEventsDir);
     	final SparkRestClient sparkClient = SparkRestClient.builder()
         	.masterHost(config.masterHost)
         	.sparkVersion(config.sparkVersion)
-        	.environmentVariables(environmentVariables)
+//        	.environmentVariables(environmentVariables)
         	.build();
     	logger.info("Client created on API root: "+sparkClient.getMasterApiRoot());
     	
