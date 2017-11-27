@@ -81,15 +81,15 @@ public class DistributedController {
 	
 	@Value("${other.jars.path}")
 	private String otherJarsPath;
-
-	@Value("${spark.log4j.configuration}")
-	private String sparkLog4jConfiguration;
-
-	@Value("${spark.eventLog.enabled}")
-	private String sparkHistoryEventsEnabled;
-
-	@Value("${spark.eventLog.dir}")
-	private String sparkHistoryEventsPath;
+//
+//	@Value("${spark.log4j.configuration}")
+//	private String sparkLog4jConfiguration;
+//
+//	@Value("${spark.eventLog.enabled}")
+//	private String sparkHistoryEventsEnabled;
+//
+//	@Value("${spark.eventLog.dir}")
+//	private String sparkHistoryEventsPath;
 
 //	@Value("${spark.history.fs.logDirectory}")
 //	private String sparkHistoryEventsLogdir;
@@ -168,10 +168,10 @@ public class DistributedController {
     	config.masterHost = masterHost;
     	config.sparkVersion = sparkVersion;    	
     	config.sparkHome = sparkHome;
-    	config.log4jConfiguration = sparkLog4jConfiguration;
-    	
-    	config.historyEventsEnabled = sparkHistoryEventsEnabled;
-    	config.historyEventsDir = sparkHistoryEventsPath;
+//    	config.log4jConfiguration = sparkLog4jConfiguration;
+//    	
+//    	config.historyEventsEnabled = sparkHistoryEventsEnabled;
+//    	config.historyEventsDir = sparkHistoryEventsPath;
 
     	config.appName = application;
     	config.appJarPath = appJarPath;

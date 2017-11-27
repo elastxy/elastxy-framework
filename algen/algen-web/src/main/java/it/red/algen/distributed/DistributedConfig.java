@@ -41,14 +41,14 @@ public class DistributedConfig {
 	@Value("${jars.path}")
 	private String jarsPath;
 
-	@Value("${spark.log4j.configuration}")
-	private String sparkLog4jConfiguration;
-
-	@Value("${spark.eventLog.enabled}")
-	private String sparkHistoryEventsEnabled;
-
-	@Value("${spark.eventLog.dir}")
-	private String sparkHistoryEventsPath;
+//	@Value("${spark.log4j.configuration}")
+//	private String sparkLog4jConfiguration;
+//
+//	@Value("${spark.eventLog.enabled}")
+//	private String sparkHistoryEventsEnabled;
+//
+//	@Value("${spark.eventLog.dir}")
+//	private String sparkHistoryEventsPath;
 
 //	@Value("${spark.history.fs.logDirectory}")
 //	private String sparkHistoryEventsLogdir;

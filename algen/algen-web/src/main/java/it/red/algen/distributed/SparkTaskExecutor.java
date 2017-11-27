@@ -2,10 +2,8 @@ package it.red.algen.distributed;
 
 import java.util.Arrays;
 import java.util.Base64;
-import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
-import java.util.Map;
 import java.util.Set;
 
 import org.apache.log4j.Logger;
@@ -32,16 +30,18 @@ public class SparkTaskExecutor {
     	
     	// Create client
     	logger.info("Creating client..");
-    	final Map<String,String> environmentVariables = new HashMap<>();
-    	environmentVariables.put("log4j.configuration",				config.log4jConfiguration);
-    	environmentVariables.put("spark.eventLog.enabled",			config.historyEventsEnabled);
-    	environmentVariables.put("spark.eventLog.dir",				config.historyEventsDir);
-    	environmentVariables.put("spark.history.fs.logDirectory",	config.historyEventsDir);
-    	logger.info("Client config: "+Arrays.asList(config.masterHost, config.sparkVersion, environmentVariables));
+    	// TODOM: env configurations from properties
+//    	final Map<String,String> environmentVariables = new HashMap<>();
+//    	environmentVariables.put("log4j.configuration",				config.log4jConfiguration);
+//    	environmentVariables.put("spark.eventLog.enabled",			config.historyEventsEnabled);
+//    	environmentVariables.put("spark.eventLog.dir",				config.historyEventsDir);
+//    	environmentVariables.put("spark.history.fs.logDirectory",	config.historyEventsDir);
+//    	logger.info("Client config: "+Arrays.asList(config.masterHost, config.sparkVersion, environmentVariables));
+    	logger.info("Client config: "+Arrays.asList(config.masterHost, config.sparkVersion));
     	final SparkRestClient sparkClient = SparkRestClient.builder()
         	.masterHost(config.masterHost)
         	.sparkVersion(config.sparkVersion)
-        	.environmentVariables(environmentVariables)
+//        	.environmentVariables(environmentVariables)
         	.build();
     	logger.info("Client created on API root: "+sparkClient.getMasterApiRoot());
     	
@@ -58,11 +58,11 @@ public class SparkTaskExecutor {
     		    .mainClass(config.mainClass)
     		    .usingJars(otherJarsPath)
     		    .appArgs(params)
-    		    .withProperties()
-		    	.put("log4j.configuration", config.log4jConfiguration)
-		    	.put("spark.eventLog.enabled", config.historyEventsEnabled)
-		    	.put("spark.eventLog.dir", config.historyEventsDir)
-		    	.put("spark.history.fs.logDirectory", config.historyEventsDir)
+//    		    .withProperties()
+//		    	.put("log4j.configuration", config.log4jConfiguration)
+//		    	.put("spark.eventLog.enabled", config.historyEventsEnabled)
+//		    	.put("spark.eventLog.dir", config.historyEventsDir)
+//		    	.put("spark.history.fs.logDirectory", config.historyEventsDir)
     		.submit();
     	logger.info("Job submitted, with id: "+submissionId);
     	

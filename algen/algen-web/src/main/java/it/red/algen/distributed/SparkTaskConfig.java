@@ -12,9 +12,9 @@ public class SparkTaskConfig {
 	public String mainClass = null; 			//e.g. "it.red.algen.d.mex.MexApplication";
 	public String otherJarsPath = null; 		//e.g. "file:///c:/stuff/Scaligen-banana-1.0.jar;file:///c:/stuff/Scaligen-pera-1.0.jar";
 	
-	public String log4jConfiguration = null;	//e.g. "c:/dev/spark-2.2.0-bin-hadoop2.7/conf";
-	public String historyEventsEnabled = null; 	//e.g. "false";
-	public String historyEventsDir = null; 		//e.g. "c:/tmp/sparktemp/eventLog";
+//	public String log4jConfiguration = null;	//e.g. "c:/dev/spark-2.2.0-bin-hadoop2.7/conf";
+//	public String historyEventsEnabled = null; 	//e.g. "false";
+//	public String historyEventsDir = null; 		//e.g. "c:/tmp/sparktemp/eventLog";
 
 	public String toString(){
 		StringBuffer sb = new StringBuffer();
@@ -25,9 +25,9 @@ public class SparkTaskConfig {
 		sb.append("appJarPath = "+appJarPath);
 		sb.append("mainClass = "+mainClass);
 		sb.append("otherJarsPath = "+otherJarsPath);
-		sb.append("log4jConfiguration = "+log4jConfiguration);
-		sb.append("historyEventsEnabled = "+historyEventsEnabled);
-		sb.append("historyEventsDir = "+historyEventsDir);
+//		sb.append("log4jConfiguration = "+log4jConfiguration);
+//		sb.append("historyEventsEnabled = "+historyEventsEnabled);
+//		sb.append("historyEventsDir = "+historyEventsDir);
 		return sb.toString();
 	}
 }
