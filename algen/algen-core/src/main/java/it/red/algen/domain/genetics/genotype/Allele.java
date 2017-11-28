@@ -33,7 +33,7 @@ public class Allele<T> implements Serializable {
 	
 	@Override
 	public String toString() {
-		return "Allele [value=" + value + ", dominant=" + dominant + "]";
+		return value==null?"null":value.toString();
 	}
 
 	@Override
