@@ -24,33 +24,33 @@ public class AppBootstrapRaw {
 	 * Starts an Algen registered application
 	 */
 	public AppComponentsLocator boot(String applicationName){
-		logger.info("Bootstrapping AliGen..");
+		logger.info("Bootstrapping AliGen.D..");
 		
 		// Gets all registered apps from Register
-		logger.info("Finding registered application '"+applicationName+"'");
+		if(logger.isDebugEnabled()) logger.debug("Finding registered application '"+applicationName+"'");
 		AppRegister register = new ClasspathRegisterRaw();
 		AlgenApplication app = register.find(applicationName);
-		logger.info("Application found: "+app);
+		if(logger.isDebugEnabled()) logger.debug("Application found: "+app);
 		
 		
 		// Build progressively all the applications
-		logger.info(">> Bootstrapping application '"+applicationName+"'");
+		if(logger.isDebugEnabled()) logger.debug(">> Bootstrapping application '"+applicationName+"'");
 		
-		logger.info("   Building components..");
+		if(logger.isDebugEnabled()) logger.debug("   Building components..");
 		AppComponentsBuilder builder = new AppComponentsBuilder();
 		AppComponents appComponents = builder.construct(app);
 	
-		logger.info("   Wiring components..");
+		if(logger.isDebugEnabled()) logger.debug("   Wiring components..");
 		appComponents = builder.wire(appComponents);
 			
-		logger.info("   Initializing components..");
+		if(logger.isDebugEnabled()) logger.debug("   Initializing components..");
 		appComponents = builder.init(appComponents);
 		
 		AppComponentsLocator locator = new AppComponentsLocator();
 		locator.put(applicationName, appComponents);
-		logger.info("   Welcome to '"+applicationName+"' application! <!!!>o");
+		if(logger.isDebugEnabled()) logger.debug("   Welcome to '"+applicationName+"' application! <!!!>o");
 		
-		logger.info("Bootstrap AliGen.D DONE.");
+		if(logger.isDebugEnabled()) logger.debug("Bootstrap AliGen.D DONE.");
 		return locator;
 	}
 	

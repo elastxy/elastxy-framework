@@ -68,13 +68,16 @@ public class SingleColonyClosure implements FlatMapFunction<Iterator<Allele>, So
 		// Import Alleles from Iterator => new population
 		List<Allele> newPopulationAlleles = new ArrayList<Allele>();
 	    initialGenomaIterator.forEachRemaining(newPopulationAlleles::add);
+		if(logger.isTraceEnabled()) logger.trace(String.format("New population alleles: %.2000s ", newPopulationAlleles));
 	    
 		// Import Alleles from Broadcast variable => new mutations
 		List<Allele> mutationAlleles = mutatedGenesBC.getValue();
-
+		if(logger.isTraceEnabled()) logger.trace(String.format("Alleles for mutation: %.2000s", mutationAlleles));
+			
 	    // TODOD: Creates a local complete Genoma Provider
 	    
 	    // Executes local Experiment
+		if(logger.isTraceEnabled()) logger.trace(String.format(">>> Single Colony Experiment Context %n%s", context));
 		SingleColonyClosureExperiment experiment = new SingleColonyClosureExperiment(
 				context, 
 				target, 

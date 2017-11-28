@@ -48,6 +48,7 @@ public class MexdSparkApplication {
 			String master = args[2]; // "spark://192.168.1.101:7077"
 			String configBase64 = args[3]; // configuration json input from ws
 			String config = new String(Base64.getDecoder().decode(configBase64));
+			info("Application config: "+config);
 			
 			// Register Application
 			info("Bootstrapping application.");

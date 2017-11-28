@@ -29,7 +29,7 @@ public class ASCIIGraphRenderer {
 	}
 	
 
-	public static String displayGraph(int number, Population lastGen, int step) {
+	public static String displayGraph(int number, Population lastGen, int step, boolean showBestMatch) {
 		StringBuffer result = new StringBuffer();
 		
 		// Header
@@ -50,7 +50,8 @@ public class ASCIIGraphRenderer {
 				line = line.append(String.format("%8d|", number));
 				line.append(pointsChars);
 				line.append(emptyChars);
-				line.append(String.format("| %.10f",lastFitness));
+				line.append(String.format("| %.10f |",lastFitness));
+				if(showBestMatch) line.append(String.format("%30.200s", lastGen.bestMatch));
 				result = result.append(line.toString());
 		}
 		

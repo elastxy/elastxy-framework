@@ -56,7 +56,7 @@ public class EnvObserver {
         
         if(context.monitoringConfiguration.showGraph) {
         	int step = ASCIIGraphRenderer.adaptStepToSpeed(number, executionTime);
-        	String graphStep = ASCIIGraphRenderer.displayGraph(number, lastGen, step);
+        	String graphStep = ASCIIGraphRenderer.displayGraph(number, lastGen, step, true);
 	        if(graphStep.length()!=0) context.monitoringConfiguration.logger.out(graphStep);
         }
     }

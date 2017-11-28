@@ -34,7 +34,7 @@ public class AppComponentsBuilder {
 	 * Creates the ApplicationComponents from their definition
 	 */
 	public AppComponents construct(AlgenApplication applicationMetadata){
-		logger.info("Constructing components for application: "+applicationMetadata.name);
+		if(logger.isDebugEnabled()) logger.debug("Constructing components for application: "+applicationMetadata.name);
 		
 		AppComponents result = new AppComponents();
 
