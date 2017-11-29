@@ -41,7 +41,7 @@ public class MexdDistributedDatasetProvider implements DistributedDatasetProvide
 		// Raw data
 		Long maxValue = context.applicationSpecifics.getParamLong(MexConstants.MAX_OPERAND_VALUE);
 		int partitions = context.algorithmParameters.partitions;
-		List<Long> range = LongStream.rangeClosed(-maxValue, maxValue+1).boxed().collect(Collectors.toList());
+		List<Long> range = LongStream.rangeClosed(-maxValue, maxValue).boxed().collect(Collectors.toList());
 		
 		// Partitioned RDD
 		JavaRDD<Long> numbersRDD = context.distributedContext.parallelize(range, partitions);
@@ -53,6 +53,8 @@ public class MexdDistributedDatasetProvider implements DistributedDatasetProvide
 		// Stats (and first execution...)
 		long count = workingDataset.numbersRDD.count();
 		logger.info("   Collected data count="+count);
+		
+
 		if(logger.isTraceEnabled()) {
 			long min = workingDataset.numbersRDD.min(Long::compare);
 			long max = workingDataset.numbersRDD.max(Long::compare);
@@ -73,8 +75,11 @@ public class MexdDistributedDatasetProvider implements DistributedDatasetProvide
 		// Repartitions genoma
 		int partitions = context.algorithmParameters.partitions;
 		if(logger.isDebugEnabled()) logger.debug(String.format("Reshuffling data and spreading genetic material across %d colonies (partitions).", partitions));
-		workingDataset.numbersRDD = workingDataset.numbersRDD.coalesce(partitions, true).cache();
-	
+		workingDataset.numbersRDD = workingDataset.numbersRDD.coalesce(partitions, true);
+		workingDataset.numbersRDD.count();
+		// TODOD: check performance when caching after count()
+		workingDataset.numbersRDD.cache();
+		
 	    //inputData.numbersRDD.collect()
 //	    if(logger.isDebugEnabled()) {
 //	    	val count = inputData.numbersRDD.count()

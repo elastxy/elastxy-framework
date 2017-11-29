@@ -64,7 +64,6 @@ public class MexdDistributedGenomaProvider implements DistributedGenomaProvider 
 		long totAlleles = 2 * context.algorithmParameters.initialSelectionNumber;
 		if(logger.isDebugEnabled()) logger.debug(String.format("Extracting %d random alleles for population", totAlleles));
 	    JavaRDD<Allele> alleles = pickNumbers(workingDataset.numbersRDD, totAlleles).map(DataToAllele::toAllele);
-	    alleles.cache();
 
 		// Transform data to Alleles, exactly 2 for solutions (2 operands)
 		AlleleValuesProvider valuesProvider = new DistributedAlleleValuesProvider(alleles);
@@ -81,11 +80,39 @@ public class MexdDistributedGenomaProvider implements DistributedGenomaProvider 
 	}
 
 	
+	/**
+	 * Mutation is a perc of every generation within an era, plus something for Spark (+0.3).
+	 * E.g. for a 100 individuals population iterating 100 times over an era, with 0.3 mutation perc (hence 30 individuals)
+	 * we need: 100 * 0.2 * 100 * 1.3 = 2600 genes
+	 * 
+	 * In case execution time instead generation number is provided, a number of alleles
+	 * is taken proportional to partitions, plus something for Spark (+0.3).
+	 * E.g. for a 100 individuals population iterating 1 minute over an era, with 0.3 mutation perc (hence 30 individuals)
+	 * and a base of 
+	 * - 200 alleles 		=> we need 200 / 8 * 0.3 * 1.3 = 9.75 = 10 genes.
+	 * - 20000 alleles 	=> we need 20000 / 8 * 0.3 * 1.3 = 975 genes.
+	 * - 2000000 alleles 	=> we need 2000000 / 8 * 0.3 * 1.3 = 97500 genes.
+	 * 
+	 * If total needed alleles is more than available, all are pushed.
+	 * TODOD: check size of memory / network compromise for allele to mutate!
+	 * 
+	 */
 	@Override
 	public List<Allele> collectForMutation() {
-		long solutionsToMutate = Math.round(context.algorithmParameters.initialSelectionNumber*context.algorithmParameters.mutationPerc);
-		long totAlleles = 2 * solutionsToMutate * context.algorithmParameters.reshuffleEveryEras; // a little more choice
-		if(logger.isDebugEnabled()) logger.debug(String.format("Extracting %d random alleles for mutation", totAlleles));
+		double solutionsToMutatePerGen = ((double)context.algorithmParameters.initialSelectionNumber) * context.algorithmParameters.mutationPerc;
+		long countAvailable = workingDataset.numbersRDD.count();
+		// TODOA: what to do when time instead maxIterations is requested? 
+		// If iterations count is not known, by now we take a mutationPerc % of all Alleles in the partitions
+		long neededAlleles = -1;
+		long totAlleles = -1;
+		if(context.algorithmParameters.stopConditions.maxIterations > 0){
+			neededAlleles = Math.round(solutionsToMutatePerGen * (double)context.algorithmParameters.stopConditions.maxIterations); // a little more choice
+		}
+		else {
+			neededAlleles = Math.round(countAvailable / (double)context.algorithmParameters.partitions * context.algorithmParameters.mutationPerc);
+		}
+		totAlleles = neededAlleles < countAvailable ? neededAlleles : countAvailable;
+		if(logger.isInfoEnabled()) logger.info(String.format("Extracting %d random alleles for mutation (needed %d, available %d)", totAlleles, neededAlleles, countAvailable));
 	    JavaRDD<Allele> mutatedGenomaRDD = pickNumbers(workingDataset.numbersRDD, totAlleles).map(DataToAllele::toAllele);
 
 	    List<Allele> mutatedGenomaList = mutatedGenomaRDD.collect();
@@ -100,13 +127,14 @@ public class MexdDistributedGenomaProvider implements DistributedGenomaProvider 
 
 
 	private JavaRDD<Long> pickNumbers(JavaRDD<Long> numbers, Long tot) {
-	    final long totNumbers = numbers.count();
-	    final double percExtract = 1.5 * tot / totNumbers;// a little more
+	    final Long totNumbers = numbers.count();
+	    final double percExtract = 1.3 * tot.doubleValue() / totNumbers.doubleValue();// a little more TODOD: spark plus configurable
 	    // TODOD: logging
 //	    if(logger.isDebugEnabled()) {
 //	      logger.debug(f"Picking perc $percExtract of $totNumbers numbers (was needed $tot)")
 //	    }
 	    JavaRDD<Long> result = numbers.sample(true, percExtract, Randomizer.seed());
+	    result.cache();
 //	    if(logger.isDebugEnabled()) {
 //	      val totPicked = result.count()
 //	      logger.debug(f"Picked rdd of $totPicked numbers")
