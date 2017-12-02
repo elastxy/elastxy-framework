@@ -42,6 +42,7 @@ public class DefaultConfiguration {
     public static final int 		DEFAULT_ERA_BEST_MATCHES = 1;
     public static final int 		DEFAULT_PARTITIONS = 4;
     public static final int 		DEFAULT_RESHUFFLE_EVERY_ERAS = 2;
+    public static final boolean		DEFAULT_MULTICOLONY_ELITARISM = true;
     
 
 }

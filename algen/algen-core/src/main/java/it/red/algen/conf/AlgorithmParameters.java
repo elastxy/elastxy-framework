@@ -100,5 +100,7 @@ public class AlgorithmParameters implements Serializable {
 	public int partitions = 		DefaultConfiguration.DEFAULT_PARTITIONS;
     public int eraBestMatches = 	DefaultConfiguration.DEFAULT_ERA_BEST_MATCHES;
     public int reshuffleEveryEras = DefaultConfiguration.DEFAULT_RESHUFFLE_EVERY_ERAS;
+    // All eraBestMatches are reinserted into ALL colonies to spread their (good) genes around
+    public boolean multicolonyElitarism = DefaultConfiguration.DEFAULT_MULTICOLONY_ELITARISM;
 
 }
