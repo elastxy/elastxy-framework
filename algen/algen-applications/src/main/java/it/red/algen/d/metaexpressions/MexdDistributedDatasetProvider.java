@@ -14,6 +14,11 @@ import it.red.algen.distributed.dataprovider.DistributedDatasetProvider;
 import it.red.algen.domain.experiment.Target;
 import it.red.algen.metaexpressions.MexConstants;
 
+/**
+ * TODOD: bloccare le interfacce in ottica SDK!
+ * @author red
+ *
+ */
 public class MexdDistributedDatasetProvider implements DistributedDatasetProvider {
 	private static Logger logger = Logger.getLogger(MexdDistributedDatasetProvider.class);
 

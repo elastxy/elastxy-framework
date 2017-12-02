@@ -26,6 +26,7 @@ import it.red.algen.engine.metadata.StandardMetadataGenoma;
  * RDD<Allele> cardinality should be enough to cover 
  * a single population: solutionsNumber + 50%
  * 
+ * TODOD: bloccare le interfacce in ottica SDK!
  * @author red
  */
 public class MexdDistributedGenomaProvider implements DistributedGenomaProvider {

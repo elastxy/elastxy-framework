@@ -8,6 +8,7 @@ import it.red.algen.dataprovider.WorkingDataset;
  * Holds the reference of the original RDD within
  * the Driver program.
  * 
+ * TODOD: bloccare le interfacce in ottica SDK!
  * @author red
  *
  */

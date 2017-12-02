@@ -17,6 +17,7 @@ import it.red.algen.domain.genetics.genotype.Allele;
  *
  */
 public class DistributedAlleleValuesProvider implements AlleleValuesProvider {
+	public final static String NAME = "rddProvider";
 //	private static Logger logger = Logger.getLogger(DistributedAlleleValuesProvider.class);
 
 	private JavaRDD<Allele> alleles;
