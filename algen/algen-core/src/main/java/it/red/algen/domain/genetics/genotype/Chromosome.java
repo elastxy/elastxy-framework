@@ -80,4 +80,10 @@ public class Chromosome implements Genotype {
 		return genes.toString();
 	}
 	
+
+	
+	public List<Allele> toAlleleList(){
+		List<Allele> result = genes.stream().map(x -> x.allele).collect(Collectors.toList());
+		return result;
+	}
 }
