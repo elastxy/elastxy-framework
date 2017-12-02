@@ -112,7 +112,7 @@ public class MexdDistributedGenomaProvider implements DistributedGenomaProvider 
 			neededAlleles = Math.round(countAvailable / (double)context.algorithmParameters.partitions * context.algorithmParameters.mutationPerc);
 		}
 		totAlleles = neededAlleles < countAvailable ? neededAlleles : countAvailable;
-		if(logger.isInfoEnabled()) logger.info(String.format("Extracting %d random alleles for mutation (needed %d, available %d)", totAlleles, neededAlleles, countAvailable));
+		if(logger.isDebugEnabled()) logger.debug(String.format("Extracting %d random alleles for mutation (needed %d, available %d)", totAlleles, neededAlleles, countAvailable));
 	    JavaRDD<Allele> mutatedGenomaRDD = pickNumbers(workingDataset.numbersRDD, totAlleles).map(DataToAllele::toAllele);
 
 	    List<Allele> mutatedGenomaList = mutatedGenomaRDD.collect();
