@@ -47,16 +47,6 @@ public class MesGenomaProvider implements GenomaProvider {
 	public void setWorkingDataset(WorkingDataset workingDataset) {
 	}
 	
-	public static final List<Integer> COMPLETE_NUMBERS = new ArrayList<Integer>();
-	static {
-		// Filled numbers
-		for(int n=1; n<10; n++){
-			for(int i=0; i<9; i++){
-				COMPLETE_NUMBERS.add(n);
-			}
-		}
-	}
-	
 
 	/**
 	 * Genoma is intially void: only when target is set can be set up by reduce()
@@ -82,30 +72,9 @@ public class MesGenomaProvider implements GenomaProvider {
 	 */
 	@Override
 	public Genoma shrink(Target<?, ?> target) {
-
-		int[][] matrix = (int[][])target.getGoal();
-
-		// Count free cells and missing numbers
-		List<Integer> missingNumbers = new ArrayList<Integer>(COMPLETE_NUMBERS);
-//		List<Integer> filledNumbers = new ArrayList<Integer>();
-		for(int r=0; r < matrix.length; r++){
-        	for(int c=0; c < matrix.length; c++){
-        		if(matrix[r][c]!=0) missingNumbers.remove(new Integer(matrix[r][c]));
-        	}    		
-    	}
-		
-		// Create restricted genoma
-		Map<String, List<Allele>> alleles = new HashMap<String, List<Allele>>();
-		List<Allele> predefinedAlleles = new ArrayList<Allele>();
-		for(int i=0; i < missingNumbers.size(); i++){
-			Allele<Integer> allele = new Allele<Integer>();
-			allele.value = missingNumbers.get(i);
-			predefinedAlleles.add(allele);
-		}
-
-		// Init genoma with the shared list of alleles
-		// after determined, alleles are always the same set for every solution
-		PredefinedGenoma genoma = PredefinedGenomaBuilder.build(missingNumbers.size(), predefinedAlleles, true);
+		SudokuShrinkCommand cmd = new SudokuShrinkCommand((int[][])target.getGoal());
+		cmd.execute();
+		PredefinedGenoma genoma = PredefinedGenomaBuilder.build(cmd.getMissingNumbers().size(), cmd.getPredefinedAlleles(), true);
 		return genoma;
 	}
 
