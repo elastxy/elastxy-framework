@@ -347,7 +347,7 @@
 							},
 							"response": [
 								{
-									"id": "8f07201d-4c58-4642-a809-b587c8173521",
+									"id": "dd26a160-0adf-4419-9e35-d383f641748b",
 									"name": "Database EN",
 									"originalRequest": {
 										"url": "http://{{ip}}:{{port}}/experiment/algofrigerator",
@@ -374,7 +374,7 @@
 									"body": ""
 								},
 								{
-									"id": "3101accc-72a9-4551-ab31-8593964ccfc2",
+									"id": "f01e4aa0-6694-4533-b7aa-a7af29b8c9cb",
 									"name": "Database IT",
 									"originalRequest": {
 										"url": "http://{{ip}}:{{port}}/experiment/algofrigerator",
@@ -401,7 +401,7 @@
 									"body": ""
 								},
 								{
-									"id": "dcfebe38-a37a-4ba9-99b6-5e2c8b421d3b",
+									"id": "39aa7ec6-f71d-4d00-a2f7-84386e89e852",
 									"name": "Dispensa Rossi",
 									"originalRequest": {
 										"url": "http://{{ip}}:{{port}}/experiment/algofrigerator",
@@ -541,7 +541,7 @@
 								],
 								"body": {
 									"mode": "raw",
-									"raw": "{\r\n\t\"applicationSpecifics\": {\r\n\t\t\"target\" : {\r\n\t\t\t\"TARGET_EXPRESSION_RESULT\" : 235000\r\n\t\t},\r\n\t\t\"params\" : {\r\n\t\t\t\"MAX_OPERAND_VALUE\" : 10000\r\n\t\t}\r\n\t},\r\n\t\"algorithmParameters\": {\r\n\t\t\"recombinationPerc\": 0.5,\r\n\t\t\"mutationPerc\": 0.2,\r\n\t\t\"elitarism\": true,\r\n\t\t\"initialSelectionNumber\": 100,\r\n\t\t\"initialSelectionRandom\": true,\r\n\t\t\"stopConditions\": {\r\n\t\t\t\"targetFitness\" : 1.0,\r\n\t\t\t\"maxIterations\": -1,\r\n\t\t\t\"maxLifetimeMs\": 3000,\r\n\t\t\t\"maxIdenticalFitnesses\": -1,\r\n\t\t\t\"maxEras\": 5\r\n\t\t},\r\n\t\t\"partitions\": 4,\r\n\t\t\"eraBestMatches\" : 10,\r\n\t\t\"reshuffleEveryEras\" : 2,\r\n\t\t\"multicolonyElitarism\" : false\r\n\t},\r\n\t\"monitoringConfiguration\": {\r\n\t\t\"verbose\": false,\r\n\t\t\"traceHistory\": false\r\n\t}\r\n}\r\n"
+									"raw": "{\r\n\t\"applicationSpecifics\": {\r\n\t\t\"target\" : {\r\n\t\t\t\"TARGET_EXPRESSION_RESULT\" : 235000\r\n\t\t},\r\n\t\t\"params\" : {\r\n\t\t\t\"MAX_OPERAND_VALUE\" : 10000\r\n\t\t}\r\n\t},\r\n\t\"algorithmParameters\": {\r\n\t\t\"recombinationPerc\": 0.5,\r\n\t\t\"mutationPerc\": 0.2,\r\n\t\t\"elitarism\": true,\r\n\t\t\"initialSelectionNumber\": 100,\r\n\t\t\"initialSelectionRandom\": true,\r\n\t\t\"stopConditions\": {\r\n\t\t\t\"targetFitness\" : 1.0,\r\n\t\t\t\"maxIterations\": -1,\r\n\t\t\t\"maxLifetimeMs\": 3000,\r\n\t\t\t\"maxIdenticalFitnesses\": -1,\r\n\t\t\t\"maxEras\": 5\r\n\t\t},\r\n\t\t\"partitions\": 4,\r\n\t\t\"eraBestMatches\" : 10,\r\n\t\t\"reshuffleEveryEras\" : 2,\r\n\t\t\"multicolonyElitarism\" : true\r\n\t},\r\n\t\"monitoringConfiguration\": {\r\n\t\t\"verbose\": false,\r\n\t\t\"traceHistory\": false\r\n\t}\r\n}\r\n"
 								},
 								"description": ""
 							},
@@ -581,7 +581,7 @@
 								],
 								"body": {
 									"mode": "raw",
-									"raw": "{\r\n\t\"applicationSpecifics\": {\r\n\t\t\"target\" : {\r\n\t\t\t\"TARGET_EXPRESSION_RESULT\" : 235000\r\n\t\t},\r\n\t\t\"params\" : {\r\n\t\t\t\"MAX_OPERAND_VALUE\" : 10000\r\n\t\t}\r\n\t},\r\n\t\"algorithmParameters\": {\r\n\t\t\"recombinationPerc\": 0.5,\r\n\t\t\"mutationPerc\": 0.2,\r\n\t\t\"elitarism\": true,\r\n\t\t\"initialSelectionNumber\": 100,\r\n\t\t\"initialSelectionRandom\": true,\r\n\t\t\"stopConditions\": {\r\n\t\t\t\"targetFitness\" : 1.0,\r\n\t\t\t\"maxIterations\": -1,\r\n\t\t\t\"maxLifetimeMs\": 3000,\r\n\t\t\t\"maxIdenticalFitnesses\": -1,\r\n\t\t\t\"maxEras\": 5\r\n\t\t},\r\n\t\t\"partitions\": 4,\r\n\t\t\"eraBestMatches\" : 10,\r\n\t\t\"reshuffleEveryEras\" : 2,\r\n\t\t\"multicolonyElitarism\" : true\r\n\t},\r\n\t\"monitoringConfiguration\": {\r\n\t\t\"verbose\": false,\r\n\t\t\"traceHistory\": false\r\n\t}\r\n}\r\n"
+									"raw": "{\r\n\t\"applicationSpecifics\": {\r\n\t\t\"target\" : {\r\n\t\t\t\"TARGET_EXPRESSION_RESULT\" : 235000\r\n\t\t},\r\n\t\t\"params\" : {\r\n\t\t\t\"MAX_OPERAND_VALUE\" : 10000\r\n\t\t}\r\n\t},\r\n\t\"algorithmParameters\": {\r\n\t\t\"recombinationPerc\": 0.8,\r\n\t\t\"mutationPerc\": 0.2,\r\n\t\t\"elitarism\": true,\r\n\t\t\"initialSelectionNumber\": 100,\r\n\t\t\"initialSelectionRandom\": true,\r\n\t\t\"stopConditions\": {\r\n\t\t\t\"targetFitness\" : 1.0,\r\n\t\t\t\"maxIterations\": -1,\r\n\t\t\t\"maxLifetimeMs\": 3000,\r\n\t\t\t\"maxIdenticalFitnesses\": -1,\r\n\t\t\t\"maxEras\": 5\r\n\t\t},\r\n\t\t\"partitions\": 4,\r\n\t\t\"eraBestMatches\" : 10,\r\n\t\t\"reshuffleEveryEras\" : 2,\r\n\t\t\"multicolonyElitarism\" : true\r\n\t},\r\n\t\"monitoringConfiguration\": {\r\n\t\t\"verbose\": false,\r\n\t\t\"traceHistory\": false\r\n\t}\r\n}\r\n"
 								},
 								"description": ""
 							},

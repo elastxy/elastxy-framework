@@ -135,7 +135,8 @@ public class MexdDistributedGenomaProvider implements DistributedGenomaProvider 
 //	      logger.debug(f"Picking perc $percExtract of $totNumbers numbers (was needed $tot)")
 //	    }
 	    JavaRDD<Long> result = numbers.sample(true, percExtract, Randomizer.seed());
-	    result.cache();
+		// TODOD: check performance when caching after count()
+//	    result.cache();
 //	    if(logger.isDebugEnabled()) {
 //	      val totPicked = result.count()
 //	      logger.debug(f"Picked rdd of $totPicked numbers")

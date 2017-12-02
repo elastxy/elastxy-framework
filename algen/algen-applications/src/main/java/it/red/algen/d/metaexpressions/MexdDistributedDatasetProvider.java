@@ -49,16 +49,17 @@ public class MexdDistributedDatasetProvider implements DistributedDatasetProvide
 		List<Long> range = LongStream.rangeClosed(-maxValue, maxValue).boxed().collect(Collectors.toList());
 		
 		// Partitioned RDD
-		JavaRDD<Long> numbersRDD = context.distributedContext.parallelize(range, partitions);
+		// TODOD: check performance when caching after count()
+		JavaRDD<Long> numbersRDD = context.distributedContext.parallelize(range, partitions).cache();
 
 		// Spark numbers RDD
 		workingDataset = new MexdDistributedWorkingDataset();
-		workingDataset.numbersRDD = numbersRDD.cache();
 		
 		// Stats (and first execution...)
-		long count = workingDataset.numbersRDD.count();
-		logger.info("   Collected data count="+count);
-		
+		if(logger.isDebugEnabled()){
+			long count = workingDataset.numbersRDD.count();
+			logger.debug("   Collected data count="+count);
+		}
 
 		if(logger.isTraceEnabled()) {
 			long min = workingDataset.numbersRDD.min(Long::compare);
@@ -80,12 +81,10 @@ public class MexdDistributedDatasetProvider implements DistributedDatasetProvide
 		// Repartitions genoma
 		int partitions = context.algorithmParameters.partitions;
 		if(logger.isDebugEnabled()) logger.debug(String.format("Reshuffling data and spreading genetic material across %d colonies (partitions).", partitions));
-		workingDataset.numbersRDD = workingDataset.numbersRDD.coalesce(partitions, true);
-		workingDataset.numbersRDD.count();
 		// TODOD: check performance when caching after count()
-		workingDataset.numbersRDD.cache();
+		workingDataset.numbersRDD = workingDataset.numbersRDD.coalesce(partitions, true).cache();
+//		workingDataset.numbersRDD.count();
 		
-	    //inputData.numbersRDD.collect()
 //	    if(logger.isDebugEnabled()) {
 //	    	val count = inputData.numbersRDD.count()
 //	      val max = inputData.numbersRDD.max()
