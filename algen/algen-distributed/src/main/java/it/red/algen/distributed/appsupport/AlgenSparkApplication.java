@@ -1,4 +1,4 @@
-package it.red.algen.d.metaexpressions;
+package it.red.algen.distributed.appsupport;
 
 import java.util.Arrays;
 import java.util.Base64;
@@ -15,8 +15,8 @@ import it.red.algen.distributed.engine.core.MultiColonyExperiment;
 import it.red.algen.engine.core.Experiment;
 import it.red.algen.stats.ExperimentStats;
 
-public class MexdSparkApplication {
-	private static Logger logger = Logger.getLogger(MexdSparkApplication.class);
+public class AlgenSparkApplication {
+	private static Logger logger = Logger.getLogger(AlgenSparkApplication.class);
 //	private static org.slf4j.Logger logger2 = org.slf4j.LoggerFactory.getLogger(MexdSparkApplication.class);
 
 	

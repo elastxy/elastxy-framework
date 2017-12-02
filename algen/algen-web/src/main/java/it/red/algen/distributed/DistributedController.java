@@ -34,7 +34,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import it.red.algen.conf.ReadConfigSupport;
-import it.red.algen.d.metaexpressions.MexdSparkApplication;
+import it.red.algen.distributed.appsupport.AlgenSparkApplication;
 import it.red.algen.distributed.context.DistributedAlgorithmContext;
 
 
@@ -146,7 +146,7 @@ public class DistributedController {
 		
 		String[] params = new String[]{application, sparkHome, master, contextAsString};
     	logger.info("Submitting job locally with params: "+Arrays.asList(params));
-		MexdSparkApplication.main(params);
+		AlgenSparkApplication.main(params);
 
     	logger.info("RESPONSE Service /experiment/local/{application}"); // TODOD: results
         String stats = "OK";
