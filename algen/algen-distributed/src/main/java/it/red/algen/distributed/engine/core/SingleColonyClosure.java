@@ -173,6 +173,7 @@ public class SingleColonyClosure implements FlatMapFunction<Iterator<Allele>, So
 		if(context.application.datasetProvider!=null) context.application.datasetProvider.setup(context);
 		context.application.genomaProvider.setup(context);
 		context.application.selector.setup(context);
+		context.application.targetBuilder.setup(context);
 		context.application.envFactory.setup(context);
 	}
 	

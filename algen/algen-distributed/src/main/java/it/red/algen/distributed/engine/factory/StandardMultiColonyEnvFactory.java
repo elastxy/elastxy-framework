@@ -16,8 +16,10 @@ import it.red.algen.dataprovider.WorkingDataset;
 import it.red.algen.distributed.dataprovider.DistributedDatasetProvider;
 import it.red.algen.distributed.dataprovider.DistributedGenomaProvider;
 import it.red.algen.distributed.experiment.MultiColonyEnv;
+import it.red.algen.domain.experiment.Env;
 import it.red.algen.domain.experiment.Target;
 import it.red.algen.domain.genetics.Genoma;
+import it.red.algen.engine.factory.TargetBuilder;
 
 /**
  * 
@@ -25,15 +27,19 @@ import it.red.algen.domain.genetics.Genoma;
  *
  * @author grossi
  */
-public abstract class MultiColonyAbstractEnvFactory<T extends Object, R extends Object, G extends Genoma> implements MultiColonyEnvFactory {
-    
-	protected AlgorithmContext context;
+public class StandardMultiColonyEnvFactory<T extends Object, R extends Object, G extends Genoma> implements MultiColonyEnvFactory {
+	private AlgorithmContext context;
+	private TargetBuilder<T,R> targetBuilder;
 	
+	@Override
 	public void setup(AlgorithmContext context){
 		this.context = context;
 	}
-	
-	protected abstract Target<T,R> defineTarget(WorkingDataset dataset);
+
+	@Override
+	public void setTargetBuilder(TargetBuilder targetBuilder) {
+		this.targetBuilder = targetBuilder;
+	}
 
 	@Override
 	public MultiColonyEnv createEnv(){
@@ -78,7 +84,7 @@ public abstract class MultiColonyAbstractEnvFactory<T extends Object, R extends 
 	}
 	
 	private Target<T,R> createTarget(WorkingDataset workingDataset){
-		Target<T,R> target = defineTarget(workingDataset);
+		Target<T,R> target = targetBuilder.define(workingDataset);
 		target.setTargetFitness(context.algorithmParameters.stopConditions.targetFitness);
     	target.setTargetThreshold(context.algorithmParameters.stopConditions.targetThreshold);
     	return target;
@@ -125,6 +131,12 @@ public abstract class MultiColonyAbstractEnvFactory<T extends Object, R extends 
 
         return env;
     }
+
+
+	@Override
+	public Env create() {
+		throw new UnsupportedOperationException("Use createEnv instead.");
+	}
 
     
 }

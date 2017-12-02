@@ -1,7 +1,5 @@
 package it.red.algen.applications.components;
 
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-
 /**
  * Contains all static metadata needed for building the application
  * components.
@@ -29,6 +27,7 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 public class AlgenApplication {
 	public String name;
 
+	public ComponentMetadata targetBuilder;
 	public ComponentMetadata envFactory;
 
 	public ComponentMetadata datasetProvider;

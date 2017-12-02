@@ -23,16 +23,19 @@ import it.red.algen.domain.genetics.Genoma;
  *
  * @author grossi
  */
-public abstract class AbstractEnvFactory<T extends Object, R extends Object, G extends Genoma> implements EnvFactory {
+public class StandardEnvFactory<T extends Object, R extends Object, G extends Genoma> implements EnvFactory {
+	private AlgorithmContext context;
+	private TargetBuilder targetBuilder;
 	
-	protected AlgorithmContext context;
-	
+	@Override
 	public void setup(AlgorithmContext context){
 		this.context = context;
 	}
-
-	protected abstract Target<T,R> defineTarget(WorkingDataset genoma);
-
+	
+	@Override
+	public void setTargetBuilder(TargetBuilder targetBuilder){
+		this.targetBuilder = targetBuilder;
+	}
 	
     public Env create(){
     	
@@ -87,7 +90,7 @@ public abstract class AbstractEnvFactory<T extends Object, R extends Object, G e
 	}
 	
 	private Target<T,R> createTarget(WorkingDataset workingDataset){
-		Target<T,R> target = defineTarget(workingDataset);
+		Target<T,R> target = targetBuilder.define(workingDataset);
 		target.setTargetFitness(context.algorithmParameters.stopConditions.targetFitness);
     	target.setTargetThreshold(context.algorithmParameters.stopConditions.targetThreshold);
     	return target;

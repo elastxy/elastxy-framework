@@ -50,11 +50,9 @@ public class MexdDistributedDatasetProvider implements DistributedDatasetProvide
 		
 		// Partitioned RDD
 		// TODOD: check performance when caching after count()
-		JavaRDD<Long> numbersRDD = context.distributedContext.parallelize(range, partitions).cache();
-
-		// Spark numbers RDD
 		workingDataset = new MexdDistributedWorkingDataset();
-		
+		workingDataset.numbersRDD = context.distributedContext.parallelize(range, partitions).cache();
+
 		// Stats (and first execution...)
 		if(logger.isDebugEnabled()){
 			long count = workingDataset.numbersRDD.count();

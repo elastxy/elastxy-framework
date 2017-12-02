@@ -11,7 +11,7 @@ import org.apache.spark.broadcast.Broadcast;
 import it.red.algen.distributed.context.DistributedAlgorithmContext;
 import it.red.algen.distributed.dataprovider.DistributedAlleleValuesProvider;
 import it.red.algen.distributed.dataprovider.DistributedGenomaProvider;
-import it.red.algen.distributed.engine.factory.MultiColonyAbstractEnvFactory;
+import it.red.algen.distributed.engine.factory.StandardMultiColonyEnvFactory;
 import it.red.algen.distributed.experiment.MultiColonyEnv;
 import it.red.algen.domain.experiment.Solution;
 import it.red.algen.domain.genetics.genotype.Allele;
@@ -142,7 +142,7 @@ public class MultiColonyEvolver implements Evolver {
               if(env.currentEraNumber % context.algorithmParameters.reshuffleEveryEras == 0){
                 logger.info(String.format("   >>> 1.5 Repartition required [era %d]", env.currentEraNumber));
                 // TODOD: reinsert best matches between reshuffled eras
-                env = ((MultiColonyAbstractEnvFactory)context.application.multiColonyEnvFactory).newEra(env);
+                env = ((StandardMultiColonyEnvFactory)context.application.multiColonyEnvFactory).newEra(env);
               }
             }
             

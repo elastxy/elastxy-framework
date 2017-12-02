@@ -21,5 +21,11 @@ public interface EnvFactory {
 	
 	public void setup(AlgorithmContext context);
     
+	/**
+	 * Class responsible for providing a Target to the environment.
+	 * @param targetBuilder
+	 */
+	public void setTargetBuilder(TargetBuilder targetBuilder);
+	
 	public Env create();
 }

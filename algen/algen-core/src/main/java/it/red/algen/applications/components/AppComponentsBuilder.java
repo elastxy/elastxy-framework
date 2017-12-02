@@ -9,6 +9,7 @@ import it.red.algen.dataprovider.GenomaProvider;
 import it.red.algen.engine.factory.EnvFactory;
 import it.red.algen.engine.factory.PopulationFactory;
 import it.red.algen.engine.factory.SolutionsFactory;
+import it.red.algen.engine.factory.TargetBuilder;
 import it.red.algen.engine.fitness.FitnessCalculator;
 import it.red.algen.engine.fitness.Incubator;
 import it.red.algen.engine.metadata.AlleleGenerator;
@@ -41,6 +42,7 @@ public class AppComponentsBuilder {
 		
 		result.name = 				applicationMetadata.name;
 
+		result.targetBuilder = 		(TargetBuilder)constructComponent(applicationMetadata.targetBuilder);
 		result.envFactory = 		(EnvFactory)constructComponent(applicationMetadata.envFactory);
 		
 		// TODOM: not by reference: indirection with name
@@ -97,6 +99,9 @@ public class AppComponentsBuilder {
 	 * Wires ApplicationComponents up so that they could collaborate
 	 */
 	public AppComponents wire(AppComponents appComponents){
+		appComponents.envFactory.setTargetBuilder(appComponents.targetBuilder);
+		// TODOM: check if it's really needed the target in multicolony... should not be enough in envFactory?
+		if(appComponents.multiColonyEnvFactory!=null) appComponents.multiColonyEnvFactory.setTargetBuilder(appComponents.targetBuilder);
 		appComponents.populationFactory.setSolutionsFactory(appComponents.solutionsFactory);
 		appComponents.fitnessCalculator.setup(appComponents.incubator);
 		return appComponents;

@@ -1,9 +1,14 @@
 {
 	"name" : "sudoku",
 	
+	"targetBuilder": {
+		"type" : "java",
+		"content" : "it.red.algen.metasudoku.MesTargetBuilder"
+	},
+	
 	"envFactory": {
 		"type" : "java",
-		"content" : "it.red.algen.metasudoku.MesEnvFactory"
+		"content" : "it.red.algen.engine.factory.StandardEnvFactory"
 	},
 	
 	"genomaProvider": {

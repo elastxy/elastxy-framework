@@ -7,6 +7,7 @@ import it.red.algen.dataprovider.GenomaProvider;
 import it.red.algen.engine.factory.EnvFactory;
 import it.red.algen.engine.factory.PopulationFactory;
 import it.red.algen.engine.factory.SolutionsFactory;
+import it.red.algen.engine.factory.TargetBuilder;
 import it.red.algen.engine.fitness.FitnessCalculator;
 import it.red.algen.engine.fitness.Incubator;
 import it.red.algen.engine.metadata.AlleleGenerator;
@@ -27,6 +28,7 @@ import it.red.algen.tracking.SolutionRenderer;
  */
 public class AppComponents implements Serializable {
 
+	public static final String TargetBuilder = 		"targetBuilder"; // Context-dependent
 	public static final String EnvFactory = 		"envFactory"; // Context-dependent
 	public static final String MultiColonyEnvFactory ="multiColonyEnvFactory"; // Context-dependent
 	
@@ -49,6 +51,7 @@ public class AppComponents implements Serializable {
 
 	public String name;
 	
+	public TargetBuilder targetBuilder;
 	public EnvFactory envFactory;
 
 	public DatasetProvider datasetProvider;
@@ -80,6 +83,7 @@ public class AppComponents implements Serializable {
 		
 		result.name = name;
 
+		result.targetBuilder = targetBuilder;
 		result.envFactory = envFactory;
 		
 		result.datasetProvider = datasetProvider;		

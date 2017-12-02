@@ -1,9 +1,14 @@
 {
 	"name" : "expressions",
 	
+	"targetBuilder": {
+		"type" : "java",
+		"content" : "it.red.algen.metaexpressions.MexTargetBuilder"
+	},
+	
 	"envFactory": {
 		"type" : "java",
-		"content" : "it.red.algen.metaexpressions.MexEnvFactory"
+		"content" : "it.red.algen.engine.factory.StandardEnvFactory"
 	},
 	
 	"genomaProvider": {

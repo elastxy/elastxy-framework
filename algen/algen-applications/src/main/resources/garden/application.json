@@ -1,9 +1,14 @@
 {
 	"name" : "garden",
 	
+	"targetBuilder": {
+		"type" : "java",
+		"content" : "it.red.algen.metagarden.MegTargetBuilder"
+	},
+	
 	"envFactory": {
 		"type" : "java",
-		"content" : "it.red.algen.metagarden.MegEnvFactory"
+		"content" : "it.red.algen.engine.factory.StandardEnvFactory"
 	},
 	
 	"datasetProvider": {

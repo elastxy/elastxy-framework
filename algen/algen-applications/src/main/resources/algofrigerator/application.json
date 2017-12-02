@@ -1,9 +1,14 @@
 {
 	"name" : "algofrigerator",
 	
+	"targetBuilder": {
+		"type" : "java",
+		"content" : "it.red.algen.algofrigerator.MefTargetBuilder"
+	},
+	
 	"envFactory": {
 		"type" : "java",
-		"content" : "it.red.algen.algofrigerator.MefEnvFactory"
+		"content" : "it.red.algen.engine.factory.StandardEnvFactory"
 	},
 	
 	"datasetProvider": {

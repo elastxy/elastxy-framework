@@ -16,6 +16,7 @@ import it.red.algen.domain.experiment.Target;
 import it.red.algen.domain.genetics.Genoma;
 import it.red.algen.domain.genetics.genotype.Allele;
 import it.red.algen.engine.factory.EnvFactory;
+import it.red.algen.engine.factory.TargetBuilder;
 import it.red.algen.engine.metadata.MetadataGenomaBuilder;
 import it.red.algen.engine.operators.RecombinatorLogics;
 
@@ -39,8 +40,8 @@ public class SingleColonyClosureEnvFactory implements EnvFactory {
 	private List<Allele> mutationAlleles;
 	private List<Allele> newPopulationAlleles;
 	private List<Solution> previousBestMatches;
-	
-	
+
+
 	public SingleColonyClosureEnvFactory(
 			Target target, 
 			List<Allele> newPopulationAlleles,
@@ -57,6 +58,13 @@ public class SingleColonyClosureEnvFactory implements EnvFactory {
 	public void setup(AlgorithmContext context) {
 		this.context = context;
 	}
+
+	@Override
+	public void setTargetBuilder(TargetBuilder targetBuilder) {
+		throw new UnsupportedOperationException("A SingleColonClosure already has the common Multicolony target.");
+	}
+	
+	
 	
     public Env create(){
     	
@@ -101,7 +109,6 @@ public class SingleColonyClosureEnvFactory implements EnvFactory {
         Population startGen = 	context.application.populationFactory.createNew(genoma, solutions, random, previousBestMatches);
 		return startGen;
 	}
-	
 	
 
 }
