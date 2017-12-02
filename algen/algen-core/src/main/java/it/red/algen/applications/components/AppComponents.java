@@ -30,7 +30,6 @@ public class AppComponents implements Serializable {
 
 	public static final String TargetBuilder = 		"targetBuilder"; // Context-dependent
 	public static final String EnvFactory = 		"envFactory"; // Context-dependent
-	public static final String MultiColonyEnvFactory ="multiColonyEnvFactory"; // Context-dependent
 	
 	public static final String DatasetProvider = 	"datasetProvider"; // Context-dependent
 	public static final String GenomaProvider = 	"genomaProvider"; // Context-dependent
@@ -48,7 +47,11 @@ public class AppComponents implements Serializable {
 	
 	public static final String SolutionRenderer = 	"renderer";
 
+	public static final String MultiColonyEnvFactory ="multiColonyEnvFactory"; // Context-dependent
+	public static final String DistributedDatasetProvider = 	"distributedDatasetProvider"; // Context-dependent
+	public static final String DistributedGenomaProvider = 	"distributedGenomaProvider"; // Context-dependent
 
+	
 	public String name;
 	
 	public TargetBuilder targetBuilder;
@@ -72,6 +75,7 @@ public class AppComponents implements Serializable {
 
 	// Distributed application
 	public EnvFactory multiColonyEnvFactory; // TODOD: type of MultiColonyEnvFactory
+	public DatasetProvider distributedDatasetProvider; // TODOD: type of DistributedDatasetProvider (another application json???)
 	public GenomaProvider distributedGenomaProvider; // TODOD: type of DistributedGenomaProvider (another application json???)
 	
 	/**
@@ -104,6 +108,7 @@ public class AppComponents implements Serializable {
 
 		// Distributed application
 		result.multiColonyEnvFactory = multiColonyEnvFactory;
+		result.distributedDatasetProvider = distributedDatasetProvider;
 		result.distributedGenomaProvider = distributedGenomaProvider;
 		
 		return result;

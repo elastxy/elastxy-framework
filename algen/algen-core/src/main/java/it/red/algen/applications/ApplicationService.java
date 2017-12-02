@@ -97,6 +97,7 @@ public class ApplicationService {
 		
 		// Distributed application
 		if(context.application.multiColonyEnvFactory!=null) context.application.multiColonyEnvFactory.setup(context);
+		if(context.application.distributedDatasetProvider!=null) context.application.distributedDatasetProvider.setup(context);
 		if(context.application.distributedGenomaProvider!=null) context.application.distributedGenomaProvider.setup(context);
 	}
 	

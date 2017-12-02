@@ -12,12 +12,18 @@ import org.apache.spark.util.LongAccumulator;
 import it.red.algen.applications.components.AppComponentsLocator;
 import it.red.algen.applications.components.factory.AppBootstrapRaw;
 import it.red.algen.context.AlgorithmContext;
+import it.red.algen.distributed.engine.factory.SingleColonyClosureEnvFactory;
 import it.red.algen.domain.experiment.Solution;
 import it.red.algen.domain.experiment.Target;
 import it.red.algen.domain.genetics.genotype.Allele;
+import it.red.algen.engine.core.SingleColonyExperiment;
+import it.red.algen.engine.factory.EnvFactory;
+import it.red.algen.engine.factory.StandardEnvFactory;
 import it.red.algen.stats.ExperimentStats;
 
 /**
+ * MAIN TRAITS
+ * 
  * Takes one of the source data partition,
  * and uses that data for evolving a new population
  * using standard local algorithm.
@@ -28,6 +34,12 @@ import it.red.algen.stats.ExperimentStats;
  * 
  * When result is found, long accumulator is incremented,
  * signalling to other colonies that one of the best solution is born.
+ * 
+ * PROCESSING-ONLY APPS
+ * 
+ * For processing-only applications, where input RDD partitioned alleles
+ * are not meaningful and data can be retrieved locally (like Sudoku),
+ * The closure leaves execution identical to local.
  * 
  * @author red
  *
@@ -70,31 +82,10 @@ public class SingleColonyClosure implements FlatMapFunction<Iterator<Allele>, So
 		
 		logger.info(String.format(">>> 2.1 Population Creation [era %d] 					WORKER => List[Solution]", currentEraNumber));
 	    
-		// Import Alleles from Iterator => new population
-		List<Allele> newPopulationAlleles = new ArrayList<Allele>();
-	    initialGenomaIterator.forEachRemaining(newPopulationAlleles::add);
-		if(logger.isTraceEnabled()) logger.trace(String.format("New population alleles: %.2000s ", newPopulationAlleles));
-	    
-		// Import Alleles from Broadcast variable => new mutations
-		List<Allele> mutationAlleles = mutatedGenesBC.getValue();
-		if(logger.isTraceEnabled()) logger.trace(String.format("Alleles for mutation: %.2000s", mutationAlleles));
-
-		// Import Solution from Broadcast variable => new best solutions
-		List<Solution> previousBestMatches = previousBestMatchesBC==null ? null : previousBestMatchesBC.getValue();
-		if(logger.isTraceEnabled()) logger.trace(String.format("Solutions from prev best matches: %.2000s", previousBestMatches));
-
-	    // TODOD: Creates a local complete Genoma Provider
-	    
-	    // Executes local Experiment
-		if(logger.isTraceEnabled()) logger.trace(String.format(">>> Single Colony Experiment Context %n%s", context));
-		SingleColonyClosureExperiment experiment = new SingleColonyClosureExperiment(
-				context, 
-				target, 
-				newPopulationAlleles,
-				mutationAlleles,
-				previousBestMatches);
-		experiment.run();
-		ExperimentStats stats = experiment.getStats();
+		boolean processingOnly = applicationName.equals("sudoku_d") ? true : false; // TODOA: cablone!!!!!!!!!!!!!!!!!!!!!
+		ExperimentStats stats = processingOnly ? runIsolatedColonyExperiment() : runLinkedColonyExperiment(initialGenomaIterator);
+		
+		
 		if(stats.targetReached){
 			logger.info(">>> TARGET GOAL REACHED!!! <<<");
 			logger.info(">>> BestMatch: "+stats.lastGeneration.bestMatch+" <<<");
@@ -105,6 +96,7 @@ public class SingleColonyClosure implements FlatMapFunction<Iterator<Allele>, So
 		return bestMatches.iterator();
 
 		
+		// TODOD: remove scala code
 //	    if(logger.isDebugEnabled()) {
 //	    	val length = initialGenomaList.size
 //	      logger.debug(s"    Starting from $length genes")
@@ -155,6 +147,45 @@ public class SingleColonyClosure implements FlatMapFunction<Iterator<Allele>, So
 //	    
 //	    var bestMatches = List(lastPopulation.bestMatch)
 //	    bestMatches.iterator
+	}
+
+	
+	// TODOA: reintroduce previous best matches
+	private ExperimentStats runIsolatedColonyExperiment() {
+		SingleColonyExperiment experiment = new SingleColonyExperiment(context);
+		experiment.run();
+		ExperimentStats stats = experiment.getStats();
+		return stats;
+	}
+
+	private ExperimentStats runLinkedColonyExperiment(Iterator<Allele> initialGenomaIterator) {
+		// TODOA: remove in case of processing only apps
+		// Import Alleles from Iterator => new population
+		List<Allele> newPopulationAlleles = new ArrayList<Allele>();
+	    initialGenomaIterator.forEachRemaining(newPopulationAlleles::add);
+		if(logger.isTraceEnabled()) logger.trace(String.format("New population alleles: %.2000s ", newPopulationAlleles));
+	    
+		// Import Alleles from Broadcast variable => new mutations
+		List<Allele> mutationAlleles = mutatedGenesBC.getValue();
+		if(logger.isTraceEnabled()) logger.trace(String.format("Alleles for mutation: %.2000s", mutationAlleles));
+
+		// Import Solution from Broadcast variable => new best solutions
+		List<Solution> previousBestMatches = previousBestMatchesBC==null ? null : previousBestMatchesBC.getValue();
+		if(logger.isTraceEnabled()) logger.trace(String.format("Solutions from prev best matches: %.2000s", previousBestMatches));
+
+	    // TODOD: Creates a local complete Genoma Provider
+	    
+	    // Executes local Experiment
+		if(logger.isTraceEnabled()) logger.trace(String.format(">>> Single Colony Experiment Context %n%s", context));
+		SingleColonyClosureExperiment experiment = new SingleColonyClosureExperiment(
+				context, 
+				target, 
+				newPopulationAlleles,
+				mutationAlleles,
+				previousBestMatches);
+		experiment.run();
+		ExperimentStats stats = experiment.getStats();
+		return stats;
 	}
 
 

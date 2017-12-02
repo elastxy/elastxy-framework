@@ -1,9 +1,9 @@
 {
-	"name" : "expressions_d",
+	"name" : "sudoku_d",
 	
 	"targetBuilder": {
 		"type" : "java",
-		"content" : "it.red.algen.metaexpressions.MexTargetBuilder"
+		"content" : "it.red.algen.metasudoku.MesTargetBuilder"
 	},
 	
 	"envFactory": {
@@ -13,7 +13,7 @@
 	
 	"genomaProvider": {
 		"type" : "java",
-		"content" : "it.red.algen.metaexpressions.MexGenomaProvider"
+		"content" : "it.red.algen.metasudoku.MesGenomaProvider"
 	},
 	
 	"alleleGenerator": {
@@ -23,7 +23,7 @@
 	
 	"solutionsFactory": {
 		"type" : "java",
-		"content" : "it.red.algen.engine.metadata.MetadataSolutionsFactory"
+		"content" : "it.red.algen.engine.factory.PredefinedGenomaSolutionsFactory"
 	},
 	
 	"populationFactory": {
@@ -31,35 +31,32 @@
 		"content" : "it.red.algen.engine.factory.StandardPopulationFactory"
 	},
 	
-	"fitnessCalculator": {
-		"type" : "java",
-		"content" : "it.red.algen.metaexpressions.MexFitnessCalculator"
-	},
-	
 	"incubator": {
 		"type" : "java",
-		"content" : "it.red.algen.metaexpressions.MexIncubator"
+		"content" : "it.red.algen.metasudoku.MesIncubator"
+	},
+	"fitnessCalculator": {
+		"type" : "java",
+		"content" : "it.red.algen.metasudoku.MesFitnessCalculator"
 	},
 	
 	"selector": {
 		"type" : "java",
 		"content" : "it.red.algen.engine.operators.StandardSelector"
 	},
-	
 	"mutator": {
 		"type" : "java",
 		"content" : "it.red.algen.engine.operators.ChromosomeMutator"
 	},
-	
 	"recombinator": {
 		"type" : "java",
 		"content" : "it.red.algen.engine.operators.ChromosomeRecombinator"
 	},
-	
 	"solutionRenderer": {
 		"type" : "java",
-		"content" : "it.red.algen.tracking.DefaultSolutionRenderer"
+		"content" : "it.red.algen.metasudoku.MesSolutionRenderer"
 	},
+	
 	
 	"multiColonyEnvFactory": {
 		"type" : "java",
@@ -68,12 +65,11 @@
 	
 	"distributedDatasetProvider": {
 		"type" : "java",
-		"content" : "it.red.algen.d.metaexpressions.MexdDistributedDatasetProvider"
+		"content" : "it.red.algen.d.metasudoku.MesdDistributedDatasetProvider"
 	},
 	
 	"distributedGenomaProvider": {
 		"type" : "java",
-		"content" : "it.red.algen.d.metaexpressions.MexdDistributedGenomaProvider"
+		"content" : "it.red.algen.d.metasudoku.MesdDistributedGenomaProvider"
 	}
-	
 }

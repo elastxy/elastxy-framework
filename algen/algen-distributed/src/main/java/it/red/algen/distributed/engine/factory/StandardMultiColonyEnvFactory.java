@@ -45,7 +45,7 @@ public class StandardMultiColonyEnvFactory<T extends Object, R extends Object, G
 	public MultiColonyEnv createEnv(){
 
     	// Collect the data algorithm is based on
-    	DistributedDatasetProvider datasetProvider = (DistributedDatasetProvider)context.application.datasetProvider;
+    	DistributedDatasetProvider datasetProvider = (DistributedDatasetProvider)context.application.distributedDatasetProvider;
     	WorkingDataset workingDataset = null;
     	if(datasetProvider!=null){
     		datasetProvider.collect();
@@ -108,7 +108,7 @@ public class StandardMultiColonyEnvFactory<T extends Object, R extends Object, G
     	
     	// Redistributed the data algorithm is based on
     	WorkingDataset workingDataset = null;
-    	DistributedDatasetProvider datasetProvider = (DistributedDatasetProvider)context.application.datasetProvider;
+    	DistributedDatasetProvider datasetProvider = (DistributedDatasetProvider)context.application.distributedDatasetProvider;
     	if(datasetProvider!=null){
     		datasetProvider.redistribute();
     		workingDataset = datasetProvider.getWorkingDataset();
