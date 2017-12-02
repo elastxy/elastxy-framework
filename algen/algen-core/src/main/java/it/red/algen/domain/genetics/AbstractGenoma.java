@@ -63,6 +63,12 @@ public abstract class AbstractGenoma implements Genoma {
 	public void setGenotypeStructure(GenotypeStructure structure){
 		this.genotypeStructure = structure;
 	}
+
+	
+	@Override
+	public boolean getLimitedAllelesStrategy() {
+		return limitedAllelesStrategy;
+	}
 	
 	@Override
 	public void setLimitedAllelesStrategy(boolean limitedAllelesStrategy) {

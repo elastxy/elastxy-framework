@@ -20,10 +20,14 @@ public interface Recombinator<R extends Solution> {
     
     /**
      * Returns a list of offspring generated from a list of parents,
-     * cross-cutting the genotype as configured by operator parameters
+     * cross-cutting the genotype as configured by operator parameters.
+     * 
+     * If preserveAlleles is set, recombination preserves the (limited) set
+     * of genes of both solutions.
+     * 
      * @param parents
      * @return
      */
-	public List<R> recombine(List<R> parents);
+	public List<R> recombine(List<R> parents, boolean preserveAlleles);
 	
 }

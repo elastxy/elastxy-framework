@@ -221,7 +221,7 @@ public class SingleColonyEvolver implements Evolver {
 		List<Solution> sons;
 		boolean crossover = Randomizer.nextDouble() < context.algorithmParameters.recombinationPerc;
 		if(crossover) {
-		    sons = context.application.recombinator.recombine(Arrays.asList(parents));
+		    sons = context.application.recombinator.recombine(Arrays.asList(parents), env.genoma.getLimitedAllelesStrategy());
 		    fireCrossoverEvent(parents[0], parents[1], sons);
 		}
 		else {

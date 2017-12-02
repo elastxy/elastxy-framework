@@ -19,15 +19,21 @@ public class StrandRecombinator implements Recombinator<Solution> {
     
     
     /**
-     * I punti di ricombinazione possono essere all'operatore o al secondo operando
-     * Two are the expected parents
+     *  Recombination of two Solution. Two are the expected parents.
+     *  
+     * In case of preserving alleles, with cutpoint fixed to half,
+     * all genes will be swapped, leading to poor performance.
+     * TODOM by now it's not implemented
      * 
      * TODOM: more than 2 parents management 
      * 
      * @param other
      * @return
      */
-	public List<Solution> recombine(List<Solution> parents){
+	public List<Solution> recombine(List<Solution> parents, boolean preserveAlleles){
+		if(preserveAlleles){
+			throw new UnsupportedOperationException("Not yet implemented: please set recombination perc to 0");
+		}
 		
 		// Define cut point
 		// TODOM: define cut point from metadata!

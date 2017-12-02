@@ -61,7 +61,7 @@ public class RecombinatorLogics {
 	
 	
 	
-	public static List<Solution> recombineList(Recombinator recombinator, List<Solution> solutions){
+	public static List<Solution> recombineList(Recombinator recombinator, List<Solution> solutions, boolean preserveAlleles){
 		logger.info("*** INPUT"+solutions);
 		// LOOP OVER NON-BEST SHUFFLED
         Collections.shuffle(solutions);
@@ -74,7 +74,7 @@ public class RecombinatorLogics {
 		    // RECOMBINATION
 			List<Solution> parents = Arrays.asList(parentsArray);
 			logger.info("*** RECOMBINING PARENTS "+parents);
-			List<Solution> sons = recombinator.recombine(parents);
+			List<Solution> sons = recombinator.recombine(parents, preserveAlleles);
 			logger.info("*** RECOMBINED SONS "+sons);
 		    
 		    // REPLACE PARENTS WITH SONS

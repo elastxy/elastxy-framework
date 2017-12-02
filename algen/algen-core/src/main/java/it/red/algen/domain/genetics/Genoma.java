@@ -92,8 +92,12 @@ public interface Genoma {
 	 * 
 	 * @return
 	 */
+	public boolean getLimitedAllelesStrategy();
+	
+	
 	public void setLimitedAllelesStrategy(boolean limitedAllelesStrategy);
 
+	
 	
 
 	/**
