@@ -9,8 +9,9 @@ import it.red.algen.conf.ReadConfigSupport;
 import it.red.algen.context.AlgorithmContext;
 import it.red.algen.dataprovider.AlleleValuesProvider;
 import it.red.algen.dataprovider.WorkingDataset;
-import it.red.algen.distributed.dataprovider.DistributedGenomaProvider;
 import it.red.algen.distributed.dataprovider.DistributedAlleleValuesProvider;
+import it.red.algen.distributed.dataprovider.DistributedGenomaProvider;
+import it.red.algen.distributed.dataprovider.RDDDistributedWorkingDataset;
 import it.red.algen.domain.experiment.Target;
 import it.red.algen.domain.genetics.Genoma;
 import it.red.algen.domain.genetics.genotype.Allele;
@@ -36,7 +37,7 @@ public class MexdDistributedGenomaProvider implements DistributedGenomaProvider 
 
 	private AlgorithmContext context;
 
-	private MexdDistributedWorkingDataset workingDataset;
+	private RDDDistributedWorkingDataset<Long> workingDataset;
 	
 	@Override
 	public void setup(AlgorithmContext context) {
@@ -45,7 +46,7 @@ public class MexdDistributedGenomaProvider implements DistributedGenomaProvider 
 	
 	@Override
 	public void setWorkingDataset(WorkingDataset workingDataset) {
-		this.workingDataset = (MexdDistributedWorkingDataset)workingDataset;
+		this.workingDataset = (RDDDistributedWorkingDataset<Long>)workingDataset;
 	}
 
 	
@@ -64,7 +65,7 @@ public class MexdDistributedGenomaProvider implements DistributedGenomaProvider 
 
 		long totAlleles = 2 * context.algorithmParameters.initialSelectionNumber;
 		if(logger.isDebugEnabled()) logger.debug(String.format("Extracting %d random alleles for population", totAlleles));
-	    JavaRDD<Allele> alleles = pickNumbers(workingDataset.numbersRDD, totAlleles).map(DataToAllele::toAllele);
+	    JavaRDD<Allele> alleles = pickNumbers(workingDataset.rdd, totAlleles).map(DataToAllele::toAllele);
 
 		// Transform data to Alleles, exactly 2 for solutions (2 operands)
 		AlleleValuesProvider valuesProvider = new DistributedAlleleValuesProvider(alleles);
@@ -101,7 +102,7 @@ public class MexdDistributedGenomaProvider implements DistributedGenomaProvider 
 	@Override
 	public List<Allele> collectForMutation() {
 		double solutionsToMutatePerGen = ((double)context.algorithmParameters.initialSelectionNumber) * context.algorithmParameters.mutationPerc;
-		long countAvailable = workingDataset.numbersRDD.count();
+		long countAvailable = workingDataset.rdd.count();
 		// TODOA: what to do when time instead maxIterations is requested? 
 		// If iterations count is not known, by now we take a mutationPerc % of all Alleles in the partitions
 		long neededAlleles = -1;
@@ -114,7 +115,7 @@ public class MexdDistributedGenomaProvider implements DistributedGenomaProvider 
 		}
 		totAlleles = neededAlleles < countAvailable ? neededAlleles : countAvailable;
 		if(logger.isDebugEnabled()) logger.debug(String.format("Extracting %d random alleles for mutation (needed %d, available %d)", totAlleles, neededAlleles, countAvailable));
-	    JavaRDD<Allele> mutatedGenomaRDD = pickNumbers(workingDataset.numbersRDD, totAlleles).map(DataToAllele::toAllele);
+	    JavaRDD<Allele> mutatedGenomaRDD = pickNumbers(workingDataset.rdd, totAlleles).map(DataToAllele::toAllele);
 
 	    List<Allele> mutatedGenomaList = mutatedGenomaRDD.collect();
 	 // TODOD: logging

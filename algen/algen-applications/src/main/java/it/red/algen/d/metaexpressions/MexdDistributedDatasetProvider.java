@@ -5,12 +5,12 @@ import java.util.stream.Collectors;
 import java.util.stream.LongStream;
 
 import org.apache.log4j.Logger;
-import org.apache.spark.api.java.JavaRDD;
 
 import it.red.algen.context.AlgorithmContext;
 import it.red.algen.dataprovider.WorkingDataset;
 import it.red.algen.distributed.context.DistributedAlgorithmContext;
 import it.red.algen.distributed.dataprovider.DistributedDatasetProvider;
+import it.red.algen.distributed.dataprovider.RDDDistributedWorkingDataset;
 import it.red.algen.domain.experiment.Target;
 import it.red.algen.metaexpressions.MexConstants;
 
@@ -29,7 +29,7 @@ public class MexdDistributedDatasetProvider implements DistributedDatasetProvide
 		this.context = (DistributedAlgorithmContext)context;
 	}
 	
-	private MexdDistributedWorkingDataset workingDataset;
+	private RDDDistributedWorkingDataset<Long> workingDataset;
 	
 	@Override
 	public WorkingDataset getWorkingDataset(){
@@ -50,18 +50,18 @@ public class MexdDistributedDatasetProvider implements DistributedDatasetProvide
 		
 		// Partitioned RDD
 		// TODOD: check performance when caching after count()
-		workingDataset = new MexdDistributedWorkingDataset();
-		workingDataset.numbersRDD = context.distributedContext.parallelize(range, partitions).cache();
+		workingDataset = new RDDDistributedWorkingDataset<Long>();
+		workingDataset.rdd = context.distributedContext.parallelize(range, partitions).cache();
 
 		// Stats (and first execution...)
 		if(logger.isDebugEnabled()){
-			long count = workingDataset.numbersRDD.count();
+			long count = workingDataset.rdd.count();
 			logger.debug("   Collected data count="+count);
 		}
 
 		if(logger.isTraceEnabled()) {
-			long min = workingDataset.numbersRDD.min(Long::compare);
-			long max = workingDataset.numbersRDD.max(Long::compare);
+			long min = workingDataset.rdd.min(Long::compare);
+			long max = workingDataset.rdd.max(Long::compare);
 			logger.debug("   Interval:["+min+","+max+"]");
 		}
 	}
@@ -80,8 +80,8 @@ public class MexdDistributedDatasetProvider implements DistributedDatasetProvide
 		int partitions = context.algorithmParameters.partitions;
 		if(logger.isDebugEnabled()) logger.debug(String.format("Reshuffling data and spreading genetic material across %d colonies (partitions).", partitions));
 		// TODOD: check performance when caching after count()
-		workingDataset.numbersRDD = workingDataset.numbersRDD.coalesce(partitions, true).cache();
-//		workingDataset.numbersRDD.count();
+		workingDataset.rdd = workingDataset.rdd.coalesce(partitions, true).cache();
+//		workingDataset.rdd.count();
 		
 //	    if(logger.isDebugEnabled()) {
 //	    	val count = inputData.numbersRDD.count()
