@@ -40,6 +40,7 @@ public class MultiColonyEnv {
     // DATA SHARED BETWEEN COLONIES
     public Optional<LongAccumulator> goalAccumulator = Optional.empty();
     public Optional<Broadcast<List<Allele>>> mutationGenesBroadcast = Optional.empty();
+    public Optional<Broadcast<List<Solution>>> previousBestMatchesBroadcast = Optional.empty();
     public JavaRDD<Solution> bestMatchesRDD = null;
 
     // HISTORY

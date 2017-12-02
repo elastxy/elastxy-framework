@@ -41,20 +41,25 @@ public class SingleColonyClosure implements FlatMapFunction<Iterator<Allele>, So
 	private Target target;
     private LongAccumulator coloniesGoalAccumulator;
     private Broadcast<List<Allele>> mutatedGenesBC;
+    private Broadcast<List<Solution>> previousBestMatchesBC;
     
+    
+    // TODOM: ClosureContext instead of many params
 	public SingleColonyClosure(
 			String applicationName,
 			long currentEraNumber,
 			AlgorithmContext context,
 			Target target,
   			LongAccumulator coloniesGoalAccumulator,
-  			Broadcast<List<Allele>> mutatedGenesBC){
+  			Broadcast<List<Allele>> mutatedGenesBC,
+  			Broadcast<List<Solution>> previousBestMatchesBC){
 		this.applicationName = applicationName;
 		this.currentEraNumber = currentEraNumber;
 		this.context = context;
 		this.target = target;
 		this.coloniesGoalAccumulator = coloniesGoalAccumulator;
 		this.mutatedGenesBC = mutatedGenesBC;
+		this.previousBestMatchesBC = previousBestMatchesBC;
 	}
 	
 	
@@ -73,7 +78,11 @@ public class SingleColonyClosure implements FlatMapFunction<Iterator<Allele>, So
 		// Import Alleles from Broadcast variable => new mutations
 		List<Allele> mutationAlleles = mutatedGenesBC.getValue();
 		if(logger.isTraceEnabled()) logger.trace(String.format("Alleles for mutation: %.2000s", mutationAlleles));
-			
+
+		// Import Solution from Broadcast variable => new best solutions
+		List<Solution> previousBestMatches = previousBestMatchesBC==null ? null : previousBestMatchesBC.getValue();
+		if(logger.isTraceEnabled()) logger.trace(String.format("Solutions from prev best matches: %.2000s", previousBestMatches));
+
 	    // TODOD: Creates a local complete Genoma Provider
 	    
 	    // Executes local Experiment
@@ -82,7 +91,8 @@ public class SingleColonyClosure implements FlatMapFunction<Iterator<Allele>, So
 				context, 
 				target, 
 				newPopulationAlleles,
-				mutationAlleles);
+				mutationAlleles,
+				previousBestMatches);
 		experiment.run();
 		ExperimentStats stats = experiment.getStats();
 		if(stats.targetReached){

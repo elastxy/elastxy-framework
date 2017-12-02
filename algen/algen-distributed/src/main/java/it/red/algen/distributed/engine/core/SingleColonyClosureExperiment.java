@@ -15,6 +15,7 @@ import java.util.List;
 import it.red.algen.context.AlgorithmContext;
 import it.red.algen.distributed.engine.factory.SingleColonyClosureEnvFactory;
 import it.red.algen.domain.experiment.Env;
+import it.red.algen.domain.experiment.Solution;
 import it.red.algen.domain.experiment.Target;
 import it.red.algen.domain.genetics.genotype.Allele;
 import it.red.algen.engine.core.Experiment;
@@ -41,6 +42,7 @@ public class SingleColonyClosureExperiment implements Experiment {
 	private Target target;
 	private List<Allele> newPopulationAlleles;
 	private List<Allele> mutationAlleles;
+	private List<Solution> previousBestMatches;
 	
 	private ExperimentStats stats;
 	
@@ -49,11 +51,13 @@ public class SingleColonyClosureExperiment implements Experiment {
 			AlgorithmContext context, 
 			Target target, 
 			List<Allele> newPopulationAlleles,
-			List<Allele> mutationAlleles){
+			List<Allele> mutationAlleles,
+			List<Solution> previousBestMatches){
 		this.context = context;
 		this.target = target;
 		this.newPopulationAlleles = newPopulationAlleles;
 		this.mutationAlleles = mutationAlleles;
+		this.previousBestMatches = previousBestMatches;
 	}
 	
 
@@ -66,7 +70,7 @@ public class SingleColonyClosureExperiment implements Experiment {
         EnvObserver observer = new EnvObserver(context); // TODOD: events like Kafka?
         
         // Creates initial environment
-        EnvFactory envFactory = new SingleColonyClosureEnvFactory(target, newPopulationAlleles, mutationAlleles);
+        EnvFactory envFactory = new SingleColonyClosureEnvFactory(target, newPopulationAlleles, mutationAlleles, previousBestMatches);
         envFactory.setup(context);
         Env environment = envFactory.create();
     	

@@ -6,6 +6,7 @@ import java.util.Optional;
 import java.util.stream.Collectors;
 
 import org.apache.log4j.Logger;
+import org.apache.spark.broadcast.Broadcast;
 
 import it.red.algen.distributed.context.DistributedAlgorithmContext;
 import it.red.algen.distributed.dataprovider.DistributedAlleleValuesProvider;
@@ -98,13 +99,15 @@ public class MultiColonyEvolver implements Evolver {
           	DistributedAlleleValuesProvider alleleValuesProvider = (DistributedAlleleValuesProvider)env.genoma.getAlleleValuesProvider();
           	
           	// NOTE: context passed must be serializable and will be copied to new Java Runtime!
-          	env.bestMatchesRDD = alleleValuesProvider.rdd().mapPartitions(new SingleColonyClosure(
+          	Broadcast<List<Solution>> prevBest = env.previousBestMatchesBroadcast.isPresent() ? env.previousBestMatchesBroadcast.get() : null;
+			env.bestMatchesRDD = alleleValuesProvider.rdd().mapPartitions(new SingleColonyClosure(
           		context.application.name,
           	    env.currentEraNumber,
           	    context,
           	    env.target,
                 env.goalAccumulator.get(),
-                env.mutationGenesBroadcast.get()
+                env.mutationGenesBroadcast.get(),
+                prevBest
           	    ), true);
           	
             if(logger.isDebugEnabled()) logger.debug(">>>>>> Era ACTION START");
@@ -124,8 +127,10 @@ public class MultiColonyEvolver implements Evolver {
             		}).
             		limit(context.algorithmParameters.eraBestMatches).
             		collect(Collectors.toList());
+            if(context.algorithmParameters.multicolonyElitarism) env.previousBestMatchesBroadcast = Optional.of(context.distributedContext.broadcast(env.allBestMatches));
             if(logger.isDebugEnabled()) logger.debug(String.format("     New all best matches %s", env.allBestMatches));
             
+            // TODOM: max number of eras with same best match
             if(env.currentEraNumber >= context.algorithmParameters.stopConditions.maxEras || checkColoniesGoal()){
             	// TODOD: check max eras identical fitnesses
               logger.info("   >>> End condition found! Execution will be stopped.");
@@ -136,11 +141,12 @@ public class MultiColonyEvolver implements Evolver {
             else {
               if(env.currentEraNumber % context.algorithmParameters.reshuffleEveryEras == 0){
                 logger.info(String.format("   >>> 1.5 Repartition required [era %d]", env.currentEraNumber));
-                // TODOD: reinsert best matches between eras
+                // TODOD: reinsert best matches between reshuffled eras
                 env = ((MultiColonyAbstractEnvFactory)context.application.multiColonyEnvFactory).newEra(env);
               }
             }
             
+          	
             env.currentEraNumber++;
         }
             

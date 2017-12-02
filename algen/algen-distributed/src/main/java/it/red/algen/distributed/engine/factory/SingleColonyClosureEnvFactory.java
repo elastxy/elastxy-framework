@@ -2,17 +2,22 @@ package it.red.algen.distributed.engine.factory;
 
 import java.util.List;
 
+import org.apache.log4j.Logger;
+
 import it.red.algen.context.AlgorithmContext;
 import it.red.algen.dataprovider.AlleleValuesProvider;
 import it.red.algen.dataprovider.GenomaProvider;
 import it.red.algen.dataprovider.InMemoryAlleleValuesProvider;
+import it.red.algen.distributed.dataprovider.DistributedAlleleValuesProvider;
 import it.red.algen.domain.experiment.Env;
 import it.red.algen.domain.experiment.Population;
+import it.red.algen.domain.experiment.Solution;
 import it.red.algen.domain.experiment.Target;
 import it.red.algen.domain.genetics.Genoma;
 import it.red.algen.domain.genetics.genotype.Allele;
 import it.red.algen.engine.factory.EnvFactory;
 import it.red.algen.engine.metadata.MetadataGenomaBuilder;
+import it.red.algen.engine.operators.RecombinatorLogics;
 
 
 /**
@@ -27,19 +32,24 @@ import it.red.algen.engine.metadata.MetadataGenomaBuilder;
  *
  */
 public class SingleColonyClosureEnvFactory implements EnvFactory {
+	private static Logger logger = Logger.getLogger(SingleColonyClosureEnvFactory.class);
+	
 	private AlgorithmContext context;
 	private Target target;
 	private List<Allele> mutationAlleles;
 	private List<Allele> newPopulationAlleles;
+	private List<Solution> previousBestMatches;
 	
 	
 	public SingleColonyClosureEnvFactory(
 			Target target, 
 			List<Allele> newPopulationAlleles,
-			List<Allele> mutationAllele){
+			List<Allele> mutationAllele,
+			List<Solution> previousBestMatches){
 		this.target = target;
 		this.newPopulationAlleles = newPopulationAlleles;
 		this.mutationAlleles = mutationAllele;
+		this.previousBestMatches = previousBestMatches;
 	}
 	
 
@@ -53,7 +63,7 @@ public class SingleColonyClosureEnvFactory implements EnvFactory {
     	// Updates Genoma with local Alleles from partition for population creation
         AlleleValuesProvider allelesProviderForPopulation = new InMemoryAlleleValuesProvider();
         // TODOD: name of alleles provider from metadata?
-        allelesProviderForPopulation.insertAlleles("rddProvider", newPopulationAlleles);
+        allelesProviderForPopulation.insertAlleles(DistributedAlleleValuesProvider.NAME, newPopulationAlleles);
         
         GenomaProvider genomaProvider = context.application.genomaProvider;
         genomaProvider.collect();
@@ -61,12 +71,12 @@ public class SingleColonyClosureEnvFactory implements EnvFactory {
         MetadataGenomaBuilder.setupAlleleValuesProvider(genoma, allelesProviderForPopulation);
 
     	// Create initial population
-    	Population startGen = createInitialPopulation(genoma);
+    	Population startGen = createInitialPopulation(genoma, previousBestMatches);
 
     	// Updates Genoma with broadcasted mutation Alleles for mutation
         AlleleValuesProvider allelesProviderForMutation = new InMemoryAlleleValuesProvider();
         // TODOA: where to put constants? how to manage multi alleles provider?
-        allelesProviderForMutation.insertAlleles("rddProvider", mutationAlleles);
+        allelesProviderForMutation.insertAlleles(DistributedAlleleValuesProvider.NAME, mutationAlleles);
     	genoma.setAlleleValuesProvider(allelesProviderForMutation);
         
         // Create environment
@@ -76,12 +86,22 @@ public class SingleColonyClosureEnvFactory implements EnvFactory {
     }
     
 
-	private Population createInitialPopulation(Genoma genoma) {
+	private Population createInitialPopulation(Genoma genoma, List<Solution> previousBestMatches) {
 		long solutions = 		context.algorithmParameters.initialSelectionNumber;
 		boolean random = 		context.algorithmParameters.initialSelectionRandom;
-        Population startGen = 	context.application.populationFactory.createNew(genoma, solutions, random);
+		
+		// Recombines previous best to preserve their genetic material,
+		// while avoiding that every population will reproduce undefinitely the same bests!
+		if(logger.isInfoEnabled()) logger.info("Best matches before recombination: "+previousBestMatches);
+		if(previousBestMatches!=null && previousBestMatches.size()>1){
+			previousBestMatches = RecombinatorLogics.recombineList(context.application.recombinator, previousBestMatches, genoma.getLimitedAllelesStrategy());
+		}
+		if(logger.isInfoEnabled()) logger.info("Best matches after recombination: "+previousBestMatches);
+		
+        Population startGen = 	context.application.populationFactory.createNew(genoma, solutions, random, previousBestMatches);
 		return startGen;
 	}
-
+	
+	
 
 }
