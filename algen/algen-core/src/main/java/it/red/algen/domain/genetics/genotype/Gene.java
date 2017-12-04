@@ -70,6 +70,33 @@ public class Gene implements Serializable {
 		return result;
 	}
 	
+
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((allele == null) ? 0 : allele.hashCode());
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Gene other = (Gene) obj;
+		if (allele == null) {
+			if (other.allele != null)
+				return false;
+		} else if (!allele.equals(other.allele))
+			return false;
+		return true;
+	}
+
+	
 	public String toString(){
 		return String.format("[%s:%s=>%s]", pos, metadataCode, allele!=null?allele.value:null);
 	}
