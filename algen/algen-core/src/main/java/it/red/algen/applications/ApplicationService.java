@@ -60,6 +60,7 @@ public class ApplicationService {
  		context.algorithmParameters.elitarism = false;
  		context.algorithmParameters.mutationPerc = 0.0;
  		context.algorithmParameters.recombinationPerc = 0.0;
+ 		context.algorithmParameters.crossoverPointRandom = false;
  		context.algorithmParameters.initialSelectionRandom = true;
  		
  		// Substitute Selector bean with uniform random pick
@@ -92,6 +93,7 @@ public class ApplicationService {
 		if(context.application.datasetProvider!=null) context.application.datasetProvider.setup(context);
 		context.application.genomaProvider.setup(context);
 		context.application.selector.setup(context);
+		context.application.recombinator.setup(context.algorithmParameters);
 		context.application.targetBuilder.setup(context);
 		context.application.envFactory.setup(context);
 		

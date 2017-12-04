@@ -106,6 +106,7 @@ public class AlgenSparkApplication {
 		context.application = locator.get(context.application.name);
 		if(context.application.datasetProvider!=null) context.application.datasetProvider.setup(context);
 		context.application.selector.setup(context);
+		context.application.recombinator.setup(context.algorithmParameters);
 		context.application.targetBuilder.setup(context);
 		context.application.envFactory.setup(context);
 		context.application.multiColonyEnvFactory.setup(context);

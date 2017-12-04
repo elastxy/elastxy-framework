@@ -25,6 +25,7 @@ public class DefaultConfiguration {
 	
     // RECOMBINATION
     public static final double 	DEFAULT_RECOMBINANTION_PERC = 0.8;
+    public static final boolean DEFAULT_CROSSOVER_POINT_RANDOM = false; // false: 1/2 of the sequence
     
     // MUTATION
     public static final double 	DEFAULT_MUTATION_PERC = 0.1;

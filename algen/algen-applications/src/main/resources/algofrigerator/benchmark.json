@@ -10,6 +10,7 @@
 	},
 	"algorithmParameters": {
 		"recombinationPerc": 0.8,
+		"crossoverPointRandom": false,
 		"mutationPerc": 0.2,
 		"elitarism": true,
 		"initialSelectionNumber": 5,

@@ -73,6 +73,8 @@ public class AlgorithmParameters implements Serializable {
 	 */
 	public double recombinationPerc = DefaultConfiguration.DEFAULT_RECOMBINANTION_PERC;
 	
+	public boolean crossoverPointRandom = DefaultConfiguration.DEFAULT_CROSSOVER_POINT_RANDOM;
+	
 	// TODOM: Ordering: not ordered, ordered (based on natural genes ordering given by application)
 	//	public RecombinationOrderType recombinationOrder = DefaultConfiguration.DEFAULT_RECOMBINANTION_ORDER;
 	

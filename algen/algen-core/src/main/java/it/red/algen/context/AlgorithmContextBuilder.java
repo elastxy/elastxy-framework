@@ -13,6 +13,7 @@ public class AlgorithmContextBuilder {
 	public AlgorithmContext build(
 			long initialSelectionNumber,
 			boolean initialSelectionRandom,
+			boolean crossoverPointRandom,
 			double recombinationPerc,
 			double mutationPerc,
 			boolean elitarism,
@@ -27,6 +28,7 @@ public class AlgorithmContextBuilder {
 		
         AlgorithmParameters algParameters = new AlgorithmParameters();
         algParameters.recombinationPerc = recombinationPerc;
+        algParameters.crossoverPointRandom = crossoverPointRandom;
         algParameters.mutationPerc = mutationPerc;
         algParameters.elitarism = elitarism;
         algParameters.initialSelectionNumber = initialSelectionNumber;
