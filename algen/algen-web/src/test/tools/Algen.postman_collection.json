@@ -347,7 +347,7 @@
 							},
 							"response": [
 								{
-									"id": "7848bdc4-d4b7-4bc4-aa4e-56a190113d7e",
+									"id": "139bc0e5-2cf7-4089-9797-e456161634f6",
 									"name": "Database EN",
 									"originalRequest": {
 										"url": "http://{{ip}}:{{port}}/experiment/algofrigerator",
@@ -374,7 +374,7 @@
 									"body": ""
 								},
 								{
-									"id": "84c0570f-dc60-4bb4-b629-fd2568498967",
+									"id": "43d07ff0-fdc7-4c65-bb4e-d1985bdedd91",
 									"name": "Database IT",
 									"originalRequest": {
 										"url": "http://{{ip}}:{{port}}/experiment/algofrigerator",
@@ -401,7 +401,7 @@
 									"body": ""
 								},
 								{
-									"id": "166f6639-5229-4b70-9954-b3bb83e813e4",
+									"id": "2e14cc4a-fade-4802-8744-d78a876ccd15",
 									"name": "Dispensa Rossi",
 									"originalRequest": {
 										"url": "http://{{ip}}:{{port}}/experiment/algofrigerator",
@@ -615,7 +615,7 @@
 					"description": "",
 					"item": [
 						{
-							"name": "/distr/exp/local SMALL",
+							"name": "/distr/sudoku/local SMALL",
 							"request": {
 								"url": "http://{{ip}}:{{port}}/distributed/experiment/local/sudoku_d",
 								"method": "POST",
@@ -628,14 +628,14 @@
 								],
 								"body": {
 									"mode": "raw",
-									"raw": "{\r\n\t\"algorithmParameters\": {\r\n\t\t\"recombinationPerc\": 0.0,\r\n\t\t\"mutationPerc\": 0.2,\r\n\t\t\"elitarism\": true,\r\n\t\t\"initialSelectionNumber\": 100,\r\n\t\t\"initialSelectionRandom\": true,\r\n\t\t\"stopConditions\": {\r\n\t\t\t\"targetFitness\" : 1.0,\r\n\t\t\t\"maxIterations\": -1,\r\n\t\t\t\"maxLifetimeMs\": 3000,\r\n\t\t\t\"maxIdenticalFitnesses\": -1,\r\n\t\t\t\"maxEras\": 5\r\n\t\t},\r\n\t\t\"partitions\": 4,\r\n\t\t\"eraBestMatches\" : 10,\r\n\t\t\"reshuffleEveryEras\" : 2,\r\n\t\t\"multicolonyElitarism\" : true\r\n\t},\r\n\t\"monitoringConfiguration\": {\r\n\t\t\"verbose\": false,\r\n\t\t\"traceHistory\": false\r\n\t}\r\n}\r\n"
+									"raw": "{\r\n\t\"algorithmParameters\": {\r\n\t\t\"recombinationPerc\": 0.8,\r\n\t\t\"mutationPerc\": 0.2,\r\n\t\t\"elitarism\": true,\r\n\t\t\"initialSelectionNumber\": 10,\r\n\t\t\"initialSelectionRandom\": true,\r\n\t\t\"stopConditions\": {\r\n\t\t\t\"maxIterations\": -1,\r\n\t\t\t\"maxLifetimeMs\": 3000,\r\n\t\t\t\"maxIdenticalFitnesses\": -1,\r\n\t\t\t\"maxEras\": 5\r\n\t\t},\r\n\t\t\"partitions\": 4,\r\n\t\t\"eraBestMatches\" : 10,\r\n\t\t\"reshuffleEveryEras\" : 2,\r\n\t\t\"multicolonyElitarism\" : false\r\n\t},\r\n\t\"monitoringConfiguration\": {\r\n\t\t\"verbose\": false,\r\n\t\t\"traceHistory\": false\r\n\t}\r\n}\r\n"
 								},
 								"description": ""
 							},
 							"response": []
 						},
 						{
-							"name": "/distr/exp/local MEDIUM",
+							"name": "/distr/sudoku/local MEDIUM",
 							"request": {
 								"url": "http://{{ip}}:{{port}}/distributed/experiment/local/sudoku_d",
 								"method": "POST",
@@ -648,14 +648,14 @@
 								],
 								"body": {
 									"mode": "raw",
-									"raw": "{\r\n\t\"algorithmParameters\": {\r\n\t\t\"recombinationPerc\": 0.0,\r\n\t\t\"mutationPerc\": 0.2,\r\n\t\t\"elitarism\": true,\r\n\t\t\"initialSelectionNumber\": 1000,\r\n\t\t\"initialSelectionRandom\": true,\r\n\t\t\"stopConditions\": {\r\n\t\t\t\"targetFitness\" : 1.0,\r\n\t\t\t\"maxIterations\": -1,\r\n\t\t\t\"maxLifetimeMs\": 3000,\r\n\t\t\t\"maxIdenticalFitnesses\": -1,\r\n\t\t\t\"maxEras\": 5\r\n\t\t},\r\n\t\t\"partitions\": 4,\r\n\t\t\"eraBestMatches\" : 100,\r\n\t\t\"reshuffleEveryEras\" : 2,\r\n\t\t\"multicolonyElitarism\" : true\r\n\t},\r\n\t\"monitoringConfiguration\": {\r\n\t\t\"verbose\": false,\r\n\t\t\"traceHistory\": false\r\n\t}\r\n}\r\n"
+									"raw": "{\r\n\t\"algorithmParameters\": {\r\n\t\t\"recombinationPerc\": 0.8,\r\n\t\t\"mutationPerc\": 0.2,\r\n\t\t\"elitarism\": true,\r\n\t\t\"initialSelectionNumber\": 100,\r\n\t\t\"initialSelectionRandom\": true,\r\n\t\t\"stopConditions\": {\r\n\t\t\t\"maxIterations\": -1,\r\n\t\t\t\"maxLifetimeMs\": 3000,\r\n\t\t\t\"maxIdenticalFitnesses\": -1,\r\n\t\t\t\"maxEras\": 5\r\n\t\t},\r\n\t\t\"partitions\": 4,\r\n\t\t\"eraBestMatches\" : 100,\r\n\t\t\"reshuffleEveryEras\" : 2,\r\n\t\t\"multicolonyElitarism\" : true\r\n\t},\r\n\t\"monitoringConfiguration\": {\r\n\t\t\"verbose\": false,\r\n\t\t\"traceHistory\": false\r\n\t}\r\n}\r\n"
 								},
 								"description": ""
 							},
 							"response": []
 						},
 						{
-							"name": "/distr/exp/cluster SMALL",
+							"name": "/distr/sudoku/cluster SMALL",
 							"request": {
 								"url": "http://{{ip}}:{{port}}/distributed/experiment/cluster/sudoku_d",
 								"method": "POST",
@@ -668,14 +668,14 @@
 								],
 								"body": {
 									"mode": "raw",
-									"raw": "{\r\n\t\"algorithmParameters\": {\r\n\t\t\"recombinationPerc\": 0.0,\r\n\t\t\"mutationPerc\": 0.2,\r\n\t\t\"elitarism\": true,\r\n\t\t\"initialSelectionNumber\": 100,\r\n\t\t\"initialSelectionRandom\": true,\r\n\t\t\"stopConditions\": {\r\n\t\t\t\"targetFitness\" : 1.0,\r\n\t\t\t\"maxIterations\": -1,\r\n\t\t\t\"maxLifetimeMs\": 3000,\r\n\t\t\t\"maxIdenticalFitnesses\": -1,\r\n\t\t\t\"maxEras\": 5\r\n\t\t},\r\n\t\t\"partitions\": 4,\r\n\t\t\"eraBestMatches\" : 10,\r\n\t\t\"reshuffleEveryEras\" : 2,\r\n\t\t\"multicolonyElitarism\" : true\r\n\t},\r\n\t\"monitoringConfiguration\": {\r\n\t\t\"verbose\": false,\r\n\t\t\"traceHistory\": false\r\n\t}\r\n}\r\n"
+									"raw": "{\r\n\t\"algorithmParameters\": {\r\n\t\t\"recombinationPerc\": 0.8,\r\n\t\t\"mutationPerc\": 0.2,\r\n\t\t\"elitarism\": true,\r\n\t\t\"initialSelectionNumber\": 10,\r\n\t\t\"initialSelectionRandom\": true,\r\n\t\t\"stopConditions\": {\r\n\t\t\t\"maxIterations\": -1,\r\n\t\t\t\"maxLifetimeMs\": 3000,\r\n\t\t\t\"maxIdenticalFitnesses\": -1,\r\n\t\t\t\"maxEras\": 5\r\n\t\t},\r\n\t\t\"partitions\": 4,\r\n\t\t\"eraBestMatches\" : 10,\r\n\t\t\"reshuffleEveryEras\" : 2,\r\n\t\t\"multicolonyElitarism\" : true\r\n\t},\r\n\t\"monitoringConfiguration\": {\r\n\t\t\"verbose\": false,\r\n\t\t\"traceHistory\": false\r\n\t}\r\n}\r\n"
 								},
 								"description": ""
 							},
 							"response": []
 						},
 						{
-							"name": "/distr/exp/cluster MEDIUM",
+							"name": "/distr/sudoku/cluster MEDIUM",
 							"request": {
 								"url": "http://{{ip}}:{{port}}/distributed/experiment/cluster/sudoku_d",
 								"method": "POST",
@@ -688,14 +688,14 @@
 								],
 								"body": {
 									"mode": "raw",
-									"raw": "{\r\n\t\"algorithmParameters\": {\r\n\t\t\"recombinationPerc\": 0.0,\r\n\t\t\"mutationPerc\": 0.2,\r\n\t\t\"elitarism\": true,\r\n\t\t\"initialSelectionNumber\": 1000,\r\n\t\t\"initialSelectionRandom\": true,\r\n\t\t\"stopConditions\": {\r\n\t\t\t\"targetFitness\" : 1.0,\r\n\t\t\t\"maxIterations\": -1,\r\n\t\t\t\"maxLifetimeMs\": 3000,\r\n\t\t\t\"maxIdenticalFitnesses\": -1,\r\n\t\t\t\"maxEras\": 5\r\n\t\t},\r\n\t\t\"partitions\": 8,\r\n\t\t\"eraBestMatches\" : 100,\r\n\t\t\"reshuffleEveryEras\" : 2,\r\n\t\t\"multicolonyElitarism\" : true\r\n\t},\r\n\t\"monitoringConfiguration\": {\r\n\t\t\"verbose\": false,\r\n\t\t\"traceHistory\": false\r\n\t}\r\n}\r\n"
+									"raw": "{\r\n\t\"algorithmParameters\": {\r\n\t\t\"recombinationPerc\": 0.8,\r\n\t\t\"mutationPerc\": 0.2,\r\n\t\t\"elitarism\": true,\r\n\t\t\"initialSelectionNumber\": 1000,\r\n\t\t\"initialSelectionRandom\": true,\r\n\t\t\"stopConditions\": {\r\n\t\t\t\"maxIterations\": -1,\r\n\t\t\t\"maxLifetimeMs\": 3000,\r\n\t\t\t\"maxIdenticalFitnesses\": -1,\r\n\t\t\t\"maxEras\": 5\r\n\t\t},\r\n\t\t\"partitions\": 8,\r\n\t\t\"eraBestMatches\" : 100,\r\n\t\t\"reshuffleEveryEras\" : 2,\r\n\t\t\"multicolonyElitarism\" : true\r\n\t},\r\n\t\"monitoringConfiguration\": {\r\n\t\t\"verbose\": false,\r\n\t\t\"traceHistory\": false\r\n\t}\r\n}\r\n"
 								},
 								"description": ""
 							},
 							"response": []
 						},
 						{
-							"name": "/distr/exp/cluster BIG",
+							"name": "/distr/sudoku/cluster BIG",
 							"request": {
 								"url": "http://{{ip}}:{{port}}/distributed/experiment/cluster/sudoku_d",
 								"method": "POST",
@@ -708,7 +708,74 @@
 								],
 								"body": {
 									"mode": "raw",
-									"raw": "{\r\n\t\"algorithmParameters\": {\r\n\t\t\"recombinationPerc\": 0.0,\r\n\t\t\"mutationPerc\": 0.8,\r\n\t\t\"elitarism\": true,\r\n\t\t\"initialSelectionNumber\": 100,\r\n\t\t\"initialSelectionRandom\": true,\r\n\t\t\"stopConditions\": {\r\n\t\t\t\"maxIterations\": -1,\r\n\t\t\t\"maxLifetimeMs\": 20000,\r\n\t\t\t\"maxIdenticalFitnesses\": -1,\r\n\t\t\t\"maxEras\": 3\r\n\t\t},\r\n\t\t\"partitions\": 8,\r\n\t\t\"eraBestMatches\" : 10,\r\n\t\t\"reshuffleEveryEras\" : 2,\r\n\t\t\"multicolonyElitarism\" : true\r\n\t},\r\n\t\"monitoringConfiguration\": {\r\n\t\t\"verbose\": false,\r\n\t\t\"traceHistory\": false\r\n\t}\r\n}\r\n"
+									"raw": "{\r\n\t\"algorithmParameters\": {\r\n\t\t\"recombinationPerc\": 0.8,\r\n\t\t\"mutationPerc\": 0.2,\r\n\t\t\"elitarism\": true,\r\n\t\t\"initialSelectionNumber\": 100000,\r\n\t\t\"initialSelectionRandom\": true,\r\n\t\t\"stopConditions\": {\r\n\t\t\t\"maxIterations\": -1,\r\n\t\t\t\"maxLifetimeMs\": 3000,\r\n\t\t\t\"maxIdenticalFitnesses\": -1,\r\n\t\t\t\"maxEras\": 5\r\n\t\t},\r\n\t\t\"partitions\": 8,\r\n\t\t\"eraBestMatches\" : 100,\r\n\t\t\"reshuffleEveryEras\" : 2,\r\n\t\t\"multicolonyElitarism\" : true\r\n\t},\r\n\t\"monitoringConfiguration\": {\r\n\t\t\"verbose\": false,\r\n\t\t\"traceHistory\": false\r\n\t}\r\n}\r\n"
+								},
+								"description": ""
+							},
+							"response": []
+						}
+					],
+					"_postman_isSubFolder": true
+				},
+				{
+					"name": "garden_d",
+					"description": "",
+					"item": [
+						{
+							"name": "/distr/garden/local SMALL",
+							"request": {
+								"url": "http://{{ip}}:{{port}}/distributed/experiment/local/garden_d",
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"description": ""
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n\t\"applicationSpecifics\": {\r\n\t\t\"target\" : {\r\n\t\t\t\"TARGET_WELLNESS\" : \"happy\"\r\n\t\t},\r\n\t\t\"params\" : {\r\n\t\t\t\"LIMITED_TREES\" : false\r\n\t\t}\r\n\t},\r\n\t\"algorithmParameters\": {\r\n\t\t\"recombinationPerc\": 0.5,\r\n\t\t\"mutationPerc\": 0.2,\r\n\t\t\"elitarism\": true,\r\n\t\t\"initialSelectionNumber\": 100,\r\n\t\t\"initialSelectionRandom\": false,\r\n\t\t\"stopConditions\": {\r\n\t\t\t\"maxIterations\": -1,\r\n\t\t\t\"maxLifetimeMs\": 3000,\r\n\t\t\t\"maxIdenticalFitnesses\": -1,\r\n\t\t\t\"maxEras\": 5\r\n\t\t},\r\n\t\t\"partitions\": 4,\r\n\t\t\"eraBestMatches\" : 10,\r\n\t\t\"reshuffleEveryEras\" : 2,\r\n\t\t\"multicolonyElitarism\" : true\r\n\t},\r\n\t\"monitoringConfiguration\": {\r\n\t\t\"verbose\": false,\r\n\t\t\"showGraph\": true\r\n\t}\r\n}"
+								},
+								"description": ""
+							},
+							"response": []
+						},
+						{
+							"name": "/distr/garden/cluster SMALL",
+							"request": {
+								"url": "http://{{ip}}:{{port}}/distributed/experiment/cluster/garden_d",
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"description": ""
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n\t\"applicationSpecifics\": {\r\n\t\t\"target\" : {\r\n\t\t\t\"TARGET_WELLNESS\" : \"happy\"\r\n\t\t},\r\n\t\t\"params\" : {\r\n\t\t\t\"LIMITED_TREES\" : false\r\n\t\t}\r\n\t},\r\n\t\"algorithmParameters\": {\r\n\t\t\"recombinationPerc\": 0.5,\r\n\t\t\"mutationPerc\": 0.2,\r\n\t\t\"elitarism\": true,\r\n\t\t\"initialSelectionNumber\": 100,\r\n\t\t\"initialSelectionRandom\": false,\r\n\t\t\"stopConditions\": {\r\n\t\t\t\"maxIterations\": -1,\r\n\t\t\t\"maxLifetimeMs\": 3000,\r\n\t\t\t\"maxIdenticalFitnesses\": -1,\r\n\t\t\t\"maxEras\": 5\r\n\t\t},\r\n\t\t\"partitions\": 4,\r\n\t\t\"eraBestMatches\" : 10,\r\n\t\t\"reshuffleEveryEras\" : 2,\r\n\t\t\"multicolonyElitarism\" : true\r\n\t},\r\n\t\"monitoringConfiguration\": {\r\n\t\t\"verbose\": false,\r\n\t\t\"showGraph\": true\r\n\t}\r\n}"
+								},
+								"description": ""
+							},
+							"response": []
+						},
+						{
+							"name": "/distr/garden/cluster MEDIUM",
+							"request": {
+								"url": "http://{{ip}}:{{port}}/distributed/experiment/cluster/garden_d",
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"description": ""
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n\t\"applicationSpecifics\": {\r\n\t\t\"target\" : {\r\n\t\t\t\"TARGET_WELLNESS\" : \"happy\"\r\n\t\t},\r\n\t\t\"params\" : {\r\n\t\t\t\"LIMITED_TREES\" : false\r\n\t\t}\r\n\t},\r\n\t\"algorithmParameters\": {\r\n\t\t\"recombinationPerc\": 0.5,\r\n\t\t\"mutationPerc\": 0.2,\r\n\t\t\"elitarism\": true,\r\n\t\t\"initialSelectionNumber\": 1000,\r\n\t\t\"initialSelectionRandom\": false,\r\n\t\t\"stopConditions\": {\r\n\t\t\t\"maxIterations\": -1,\r\n\t\t\t\"maxLifetimeMs\": 10000,\r\n\t\t\t\"maxIdenticalFitnesses\": -1,\r\n\t\t\t\"maxEras\": 5\r\n\t\t},\r\n\t\t\"partitions\": 8,\r\n\t\t\"eraBestMatches\" : 100,\r\n\t\t\"reshuffleEveryEras\" : 2,\r\n\t\t\"multicolonyElitarism\" : true\r\n\t},\r\n\t\"monitoringConfiguration\": {\r\n\t\t\"verbose\": false,\r\n\t\t\"showGraph\": true\r\n\t}\r\n}"
 								},
 								"description": ""
 							},
