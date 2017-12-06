@@ -1,0 +1,34 @@
+{
+	"applicationSpecifics": {
+		"target" : {
+			"TARGET_SAVOURY_PROPORTION" : 70
+		},
+		"params" : {
+			"TARGET_SWEET_PROPORTION" : 30,
+			"DATABASE" : "IT"
+		}
+	},
+	"algorithmParameters": {
+		"recombinationPerc": 0.8,
+		"crossoverPointRandom": false,
+		"mutationPerc": 0.2,
+		"elitarism": true,
+		"initialSelectionNumber": 100,
+		"initialSelectionRandom": true,
+		"stopConditions": {
+			"targetFitness" : 1.0,
+			"maxIterations": -1,
+			"maxLifetimeMs": 3000,
+			"maxIdenticalFitnesses": -1,
+			"maxEras": 5
+		},
+		"partitions": 4,
+		"eraBestMatches" : 10,
+		"reshuffleEveryEras" : 3,
+		"multicolonyElitarism" : true
+	},
+	"monitoringConfiguration": {
+		"verbose": false,
+		"traceHistory": false
+	}
+}

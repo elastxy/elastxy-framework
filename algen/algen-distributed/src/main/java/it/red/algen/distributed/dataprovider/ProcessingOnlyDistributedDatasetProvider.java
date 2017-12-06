@@ -60,7 +60,7 @@ public class ProcessingOnlyDistributedDatasetProvider implements DistributedData
 	}
 	
 	@Override
-	public final void collect() {
+	public void collect() {
 		int partitions = context.algorithmParameters.partitions;
 		if(logger.isInfoEnabled()) logger.info("No data to collect for "+context.application.name+". Only processing on "+partitions+" partitions.");
 		

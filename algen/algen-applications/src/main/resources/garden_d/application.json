@@ -13,7 +13,7 @@
 	
 	"datasetProvider": {
 		"type" : "java",
-		"content" : "it.red.algen.d.metagarden.MegSingleColonyDatasetProvider"
+		"content" : "it.red.algen.metagarden.data.MegDatasetProvider"
 	},
 	
 	"genomaProvider": {
@@ -69,6 +69,11 @@
 	"multiColonyEnvFactory": {
 		"type" : "java",
 		"content" : "it.red.algen.distributed.engine.factory.StandardMultiColonyEnvFactory"
+	},
+	
+	"singleColonyDatasetProvider": {
+		"type" : "java",
+		"content" : "it.red.algen.d.metagarden.MegSingleColonyDatasetProvider"
 	},
 	
 	"distributedDatasetProvider": {

@@ -4,8 +4,8 @@ import java.io.Serializable;
 
 import org.apache.spark.broadcast.Broadcast;
 
-import it.red.algen.dataprovider.WorkingDataset;
-
-public class BroadcastWorkingDataset<D> implements WorkingDataset, Serializable {
+public class BroadcastWorkingDataset<D> implements DistributedWorkingDataset, Serializable {
+	private static final long serialVersionUID = -7770144306600513219L;
+	
 	public Broadcast<D> bc;
 }

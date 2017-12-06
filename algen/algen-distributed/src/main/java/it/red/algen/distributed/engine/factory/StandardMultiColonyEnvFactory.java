@@ -26,7 +26,17 @@ import it.red.algen.engine.factory.TargetBuilder;
 
 /**
  * 
- * Env Factory for creating a MultiColonyEnv or evolving it through Eras
+ * Env Factory for creating a MultiColonyEnv or evolving it through Eras.
+ * 
+ * It can reuse local components for determining global parameters, like Target.
+ * E.g it can reuse MefWorkingDataset to determine Target locally, useful
+ * to restrict (shrink) data to be broadcasted to colonies.
+ *
+ * Types of Dataset to be used:
+ * - distributedDatasetProvider & distributedWorkingDataset 	=> used on Driver to spread data and map partitions
+ * - singleColonyDatasetProvider & distributedWorkingDataset 	=> used on Closure to read broadcast data
+ * - (local)datasetProvider & workingDataset					=> used on Driver to prepare data for shrink, 
+ * 																   and on Closure eventually to process data locally
  *
  * @author grossi
  */
@@ -47,34 +57,40 @@ public class StandardMultiColonyEnvFactory<T extends Object, R extends Object, G
 	@Override
 	public MultiColonyEnv createEnv(){
 
+		// First, it searches for local env context on Driver to be created,
+		// in order to help distributed context to work properly
+		Target<T,R> target = null;
+		if(context.application.datasetProvider!=null){
+			context.application.datasetProvider.collect();
+			WorkingDataset localWorkingDataset = context.application.datasetProvider.getWorkingDataset();
+			// TODOD: evaluate target builder in distributed environment?
+			target = createTarget(localWorkingDataset);
+			context.application.datasetProvider.shrink(target);
+		}
+		
+		
     	// Collect the data algorithm is based on
-    	DistributedDatasetProvider datasetProvider = (DistributedDatasetProvider)context.application.distributedDatasetProvider;
-    	WorkingDataset workingDataset = null;
+    	DistributedDatasetProvider distributedDatasetProvider = (DistributedDatasetProvider)context.application.distributedDatasetProvider;
+    	WorkingDataset distributedWorkingDataset = null;
     	Map<String, BroadcastWorkingDataset> broadcasDatasets = null;
-    	if(datasetProvider!=null){
-    		
-    		// Collect working data for distributed genoma
-    		datasetProvider.collect();
-    		workingDataset = datasetProvider.getWorkingDataset();
-    		
-    		// Broadcast data for common data on single colonies
-    		datasetProvider.broadcast();
-    		broadcasDatasets = datasetProvider.getBroadcastDatasets();
-    	}
     	
-    	// Define target
-    	// TODOD: evaluate target builder in distributed environment?
-//    	Target<T,R> target = createTarget(workingDataset); 
-
+    	// Collect working data for distributed genoma
+    	distributedDatasetProvider.collect();
+    	distributedWorkingDataset = distributedDatasetProvider.getWorkingDataset();
+    	
     	// Reduce initial data based on target
-//    	if(datasetProvider!=null){
-//    		datasetProvider.shrink(target);
-//    		workingDataset = datasetProvider.getWorkingDataset();
-//    	}
-    	
+    	if(target!=null) {
+    		distributedDatasetProvider.shrink(target);
+    	}
+    	distributedWorkingDataset = distributedDatasetProvider.getWorkingDataset();
+		
+    	// Broadcast data for common data on single colonies
+    	distributedDatasetProvider.broadcast();
+    	broadcasDatasets = distributedDatasetProvider.getBroadcastDatasets();
+
     	// Retrieve GenomaProvider
 		DistributedGenomaProvider genomaProvider = (DistributedGenomaProvider)context.application.distributedGenomaProvider;
-    	genomaProvider.setWorkingDataset(workingDataset);
+    	genomaProvider.setWorkingDataset(distributedWorkingDataset);
 				
     	// Create genoma
     	Genoma genoma = createGenoma(genomaProvider);
@@ -92,6 +108,7 @@ public class StandardMultiColonyEnvFactory<T extends Object, R extends Object, G
 		genomaProvider.collect();
 		return genomaProvider.getGenoma();
 	}
+	
 	
 	/**
 	 * In case of MultiColonyEnvFactory, TargetBuilder accepts

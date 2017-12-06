@@ -15,10 +15,16 @@ import it.red.algen.dataprovider.WorkingDataset;
  * E.g. original Recipe is copied into an extended version RecipeDS,
  * hosting all data necessary to execution (coverage, available ingredients).
  * 
+ * TODOD: check if in distributed context feasibleByType could not be transient 
+ * (used only for GenomaProvider)
+ * 
  * @author red
  *
  */
 public class MefWorkingDataset implements WorkingDataset{
+	public final static String ALL_RECIPES = "ALL_RECIPES";
+	public final static String FEASIBLE_RECIPES = "FEASIBLE_RECIPES";
+	
 	public Map<RecipeType, List<Recipe>> feasibleByType = new TreeMap<RecipeType, List<Recipe>>();
 	public Map<Long, Recipe> recipeById = new HashMap<Long, Recipe>();
 	

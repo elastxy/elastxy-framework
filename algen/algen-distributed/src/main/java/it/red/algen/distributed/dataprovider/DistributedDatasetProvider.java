@@ -37,6 +37,8 @@ public interface DistributedDatasetProvider extends DatasetProvider {
 	 * Create broadcast datasets for spreading any needed data 
 	 * across nodes, and assign them to a distributed dataset.
 	 * 
+	 * Eventually, is based on already shrinked data from a local
+	 * working dataset already created and shrinked from MultiColonyEnvFactory.
 	 */
 	public void broadcast();
 	

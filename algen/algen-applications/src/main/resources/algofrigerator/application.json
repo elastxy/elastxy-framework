@@ -26,24 +26,24 @@
 		"content" : "it.red.algen.engine.metadata.MetadataAlleleGenerator"
 	},
 	
-	"populationFactory": {
-		"type" : "java",
-		"content" : "it.red.algen.engine.factory.StandardPopulationFactory"
-	},
-	
 	"solutionsFactory": {
 		"type" : "java",
 		"content" : "it.red.algen.algofrigerator.MefSolutionsFactory"
 	},
 	
-	"fitnessCalculator": {
+	"populationFactory": {
 		"type" : "java",
-		"content" : "it.red.algen.algofrigerator.MefFitnessCalculator"
+		"content" : "it.red.algen.engine.factory.StandardPopulationFactory"
 	},
 	
 	"incubator": {
 		"type" : "java",
 		"content" : "it.red.algen.algofrigerator.MefIncubator"
+	},
+	
+	"fitnessCalculator": {
+		"type" : "java",
+		"content" : "it.red.algen.algofrigerator.MefFitnessCalculator"
 	},
 	
 	"selector": {

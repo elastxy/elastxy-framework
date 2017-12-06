@@ -110,6 +110,7 @@ public class AlgenSparkApplication {
 		context.application.targetBuilder.setup(context);
 		context.application.envFactory.setup(context);
 		context.application.multiColonyEnvFactory.setup(context);
+		if(context.application.singleColonyDatasetProvider!=null) context.application.singleColonyDatasetProvider.setup(context);
 		if(context.application.distributedDatasetProvider!=null) context.application.distributedDatasetProvider.setup(context);
 		context.application.distributedGenomaProvider.setup(context);
 	}

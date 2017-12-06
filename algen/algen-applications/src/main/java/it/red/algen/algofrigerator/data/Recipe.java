@@ -1,9 +1,10 @@
 package it.red.algen.algofrigerator.data;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Recipe {
+public class Recipe implements Serializable{
 	public Long id;
 	public String name;
 	public RecipeType recipeType;

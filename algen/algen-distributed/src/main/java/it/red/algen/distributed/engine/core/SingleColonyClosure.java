@@ -85,7 +85,7 @@ public class SingleColonyClosure implements FlatMapFunction<Iterator<Allele>, So
 		
 		logger.info(String.format(">>> 2.1 Population Creation [era %d] 					WORKER => List[Solution]", currentEraNumber));
 	    
-		boolean processingOnly = applicationName.equals("sudoku_d") || applicationName.equals("garden_d") ? true : false; // TODOA: cablone!!!!!!!!!!!!!!!!!!!!!
+		boolean processingOnly = applicationName.equals("sudoku_d") || applicationName.equals("garden_d")  || applicationName.equals("algofrigerator_d") ? true : false; // TODOA: cablone!!!!!!!!!!!!!!!!!!!!!
 		ExperimentStats stats = processingOnly ? runIsolatedColonyExperiment() : runLinkedColonyExperiment(initialGenomaIterator);
 		
 		
@@ -205,10 +205,11 @@ public class SingleColonyClosure implements FlatMapFunction<Iterator<Allele>, So
 		context.application = locator.get(applicationName);
 		context.application.name = applicationName;
 		if(context.application.datasetProvider!=null) {
-			if(context.application.datasetProvider instanceof BroadcastedDatasetProvider){
-				((BroadcastedDatasetProvider)context.application.datasetProvider).setBroadcastDatasets(broadcastDatasets);
-			}
 			context.application.datasetProvider.setup(context);
+		}
+		if(context.application.singleColonyDatasetProvider!=null && context.application.singleColonyDatasetProvider instanceof BroadcastedDatasetProvider) {
+			((BroadcastedDatasetProvider)context.application.singleColonyDatasetProvider).setBroadcastDatasets(broadcastDatasets);
+			context.application.singleColonyDatasetProvider.setup(context);
 		}
 		context.application.genomaProvider.setup(context);
 		context.application.selector.setup(context);

@@ -1,0 +1,88 @@
+{
+	"name" : "algofrigerator_d",
+	
+	"targetBuilder": {
+		"type" : "java",
+		"content" : "it.red.algen.algofrigerator.MefTargetBuilder"
+	},
+	
+	"envFactory": {
+		"type" : "java",
+		"content" : "it.red.algen.engine.factory.StandardEnvFactory"
+	},
+	
+	"datasetProvider": {
+		"type" : "java",
+		"content" : "it.red.algen.algofrigerator.data.MefDatasetProvider"
+	},
+	
+	"genomaProvider": {
+		"type" : "java",
+		"content" : "it.red.algen.algofrigerator.MefGenomaProvider"
+	},
+	
+	"alleleGenerator": {
+		"type" : "java",
+		"content" : "it.red.algen.engine.metadata.MetadataAlleleGenerator"
+	},
+	
+	"solutionsFactory": {
+		"type" : "java",
+		"content" : "it.red.algen.algofrigerator.MefSolutionsFactory"
+	},
+	
+	"populationFactory": {
+		"type" : "java",
+		"content" : "it.red.algen.engine.factory.StandardPopulationFactory"
+	},
+	
+	"incubator": {
+		"type" : "java",
+		"content" : "it.red.algen.algofrigerator.MefIncubator"
+	},
+	
+	"fitnessCalculator": {
+		"type" : "java",
+		"content" : "it.red.algen.algofrigerator.MefFitnessCalculator"
+	},
+	
+	"selector": {
+		"type" : "java",
+		"content" : "it.red.algen.engine.operators.StandardSelector"
+	},
+	
+	"mutator": {
+		"type" : "java",
+		"content" : "it.red.algen.engine.operators.StrandMutator"
+	},
+	
+	"recombinator": {
+		"type" : "java",
+		"content" : "it.red.algen.engine.operators.StrandRecombinator"
+	},
+	
+	"solutionRenderer": {
+		"type" : "java",
+		"content" : "it.red.algen.algofrigerator.MefSolutionRenderer"
+	},
+	
+	"multiColonyEnvFactory": {
+		"type" : "java",
+		"content" : "it.red.algen.distributed.engine.factory.StandardMultiColonyEnvFactory"
+	},
+	
+	"distributedDatasetProvider": {
+		"type" : "java",
+		"content" : "it.red.algen.d.algofrigerator.MefdDistributedDatasetProvider"
+	},
+	
+	"singleColonyDatasetProvider": {
+		"type" : "java",
+		"content" : "it.red.algen.d.algofrigerator.MefSingleColonyDatasetProvider"
+	},
+	
+	"distributedGenomaProvider": {
+		"type" : "java",
+		"content" : "it.red.algen.distributed.dataprovider.ProcessingOnlyDistributedGenomaProvider"
+	}
+}

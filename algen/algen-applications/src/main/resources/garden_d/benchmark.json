@@ -21,7 +21,7 @@
 			"maxIdenticalFitnesses": -1,
 			"maxEras": 5
 		},
-		"partitions": 8,
+		"partitions": 4,
 		"eraBestMatches" : 10,
 		"reshuffleEveryEras" : 3,
 		"multicolonyElitarism" : true
