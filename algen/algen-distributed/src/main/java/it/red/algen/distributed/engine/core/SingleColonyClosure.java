@@ -97,59 +97,6 @@ public class SingleColonyClosure implements FlatMapFunction<Iterator<Allele>, So
 		List<Solution> bestMatches = new ArrayList<Solution>();
 		bestMatches.add(stats.lastGeneration.bestMatch); // TODOD: a number of bestMatches
 		return bestMatches.iterator();
-
-		
-		// TODOD: remove scala code
-//	    if(logger.isDebugEnabled()) {
-//	    	val length = initialGenomaList.size
-//	      logger.debug(s"    Starting from $length genes")
-//	    }
-	    
-//	    
-//	    var lastPopulation: MexPopulationE = FunctionsE.createInitialPopulation(numberOfSolutions, initialGenomaList)
-//
-//	    var stop:Boolean = false
-//	    var generations = 1
-//	    while(!stop) {
-//	    
-//	      val best = lastPopulation.bestMatch
-//	      logger.info(s"----------->>> Generation $generations [era $era][Last best $best] <<<-----------")
-//	      
-//	      logger.info(">>> 2.2 Population Selection					WORKER => List[Solution]")
-//	      // Elitarism: exclude last best match
-//	    	var newPopulation:MexPopulationE = GeneticFunctionsE.selection(lastPopulation)
-//	    	
-//	      logger.info(">>> 2.3 Genetic Operators							WORKER => List[Solution]")
-//	      if(mutatedGenesBC.isDefined){
-//	        val mutatedGenoma = mutatedGenesBC.get.value
-////	    	newPopulation = GeneticFunctions.recombination(newPopulation, numberOfSolutions, recombinationPerc)
-//	    	  newPopulation = GeneticFunctionsE.mutation(newPopulation, mutatedGenoma, numberOfSolutions, mutationPerc)
-//	      }
-//	    
-//	      logger.info(">>> 2.4 Fitness Calculation						WORKER => List[Solution] WORKER => List[Best]")
-//	      // Elitarism: re-include last best match
-//	      // TODOA: reinclude also in Era
-//	      // TODOA: reinclude a percentage
-//	      if(generations > 1) newPopulation = FunctionsE.reinsertBestMatch(lastPopulation, newPopulation)
-//	      newPopulation = GeneticFunctionsE.testFitness(newPopulation, fitnessTolerance, target, maxOperandValue)
-//	      
-//	      logger.info(">>> 2.5 Check End Condition						WORKER => Accumulator")
-//	      lastPopulation = newPopulation;
-//	      if(newPopulation.goalReached){
-//	        stop = true
-//	        setColoniesGoal(newPopulation.goalReached, coloniesTargetStatus)
-//	      }
-//	      else if(generations >= maxGenerations || checkColoniesGoal(coloniesGoalAccumulator)){
-//	        stop = true
-//	      }
-//	      
-//	      val bestPrint = newPopulation.bestMatch
-//	      logger.info(s"   End of generation [Gen: $generations][Last best $bestPrint][Stop: $stop]")
-//	      generations += 1
-//	    }
-//	    
-//	    var bestMatches = List(lastPopulation.bestMatch)
-//	    bestMatches.iterator
 	}
 
 	
@@ -203,7 +150,7 @@ public class SingleColonyClosure implements FlatMapFunction<Iterator<Allele>, So
 	
 	private void setupContext(AppComponentsLocator locator) {
 		context.application = locator.get(applicationName);
-		context.application.name = applicationName;
+		context.application.appName = applicationName;
 		if(context.application.datasetProvider!=null) {
 			context.application.datasetProvider.setup(context);
 		}

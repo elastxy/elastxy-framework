@@ -35,12 +35,12 @@ public class AppComponentsBuilder {
 	 * Creates the ApplicationComponents from their definition
 	 */
 	public AppComponents construct(AlgenApplication applicationMetadata){
-		if(logger.isDebugEnabled()) logger.debug("Constructing components for application: "+applicationMetadata.name);
+		if(logger.isDebugEnabled()) logger.debug("Constructing components for application: "+applicationMetadata.appName);
 		
 		AppComponents result = new AppComponents();
 
-		
-		result.name = 				applicationMetadata.name;
+		result.appName = 				applicationMetadata.appName;
+		result.appFolder = 				applicationMetadata.appFolder!=null ? "appdata/"+applicationMetadata.appFolder : "appdata/"+applicationMetadata.appName;
 
 		result.targetBuilder = 		(TargetBuilder)constructComponent(applicationMetadata.targetBuilder);
 		result.envFactory = 		(EnvFactory)constructComponent(applicationMetadata.envFactory);

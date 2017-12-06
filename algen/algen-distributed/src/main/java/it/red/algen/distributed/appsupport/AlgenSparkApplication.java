@@ -58,7 +58,7 @@ public class AlgenSparkApplication {
 			// Create application context
 			info("Initializing context.");
 			context = (DistributedAlgorithmContext) ReadConfigSupport.readJSONString(config, DistributedAlgorithmContext.class);
-			context.application.name = applicationName;
+			context.application.appName = applicationName;
 			setupContext(context, locator);
 	
 			// Create distributed context
@@ -103,7 +103,7 @@ public class AlgenSparkApplication {
 	}
 	
 	private static void setupContext(DistributedAlgorithmContext context, AppComponentsLocator locator) {
-		context.application = locator.get(context.application.name);
+		context.application = locator.get(context.application.appName);
 		if(context.application.datasetProvider!=null) context.application.datasetProvider.setup(context);
 		context.application.selector.setup(context);
 		context.application.recombinator.setup(context.algorithmParameters);

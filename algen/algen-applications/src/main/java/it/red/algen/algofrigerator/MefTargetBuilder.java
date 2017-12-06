@@ -85,7 +85,7 @@ public class MefTargetBuilder implements TargetBuilder<MultiplePerformanceTarget
     
 	private void readFoodsFromFile(MefGoal result) {
 		String db = this.context.applicationSpecifics.getParamString(MefConstants.PARAM_DATABASE, MefConstants.DEFAULT_DATABASE);
-		String classpathResource = "/"+MefConstants.APP_NAME+"/"+db+"/target.json";
+		String classpathResource = "/"+this.context.application.appFolder+"/"+db+"/target.json";
 		try {
 			result.refrigeratorFoods = new ArrayList<String>();
 			String[] foods = (String[])ReadConfigSupport.readJSON(classpathResource, String[].class);
@@ -100,7 +100,7 @@ public class MefTargetBuilder implements TargetBuilder<MultiplePerformanceTarget
 
 	private void readPantryFromFile(MefGoal result) {
 		String db = context.applicationSpecifics.getParamString(MefConstants.PARAM_DATABASE, MefConstants.DEFAULT_DATABASE);
-		String classpathResource = "/"+MefConstants.APP_NAME+"/"+db+"/pantry.json";
+		String classpathResource = "/"+this.context.application.appFolder+"/"+db+"/pantry.json";
 		try {
 			result.pantry = Arrays.asList((String[])ReadConfigSupport.readJSON(classpathResource, String[].class));
 		} catch (IOException e) {

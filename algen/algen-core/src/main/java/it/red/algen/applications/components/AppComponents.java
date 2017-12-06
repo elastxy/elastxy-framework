@@ -28,6 +28,9 @@ import it.red.algen.tracking.SolutionRenderer;
  */
 public class AppComponents implements Serializable {
 
+	public static final String ApplicationName = 	"appName";
+	public static final String ApplicationFolder = 	"appFolder";
+	
 	public static final String TargetBuilder = 		"targetBuilder"; // Context-dependent
 	public static final String EnvFactory = 		"envFactory"; // Context-dependent
 	
@@ -53,7 +56,8 @@ public class AppComponents implements Serializable {
 	public static final String DistributedGenomaProvider = 	"distributedGenomaProvider"; // Context-dependent
 
 	
-	public String name;
+	public String appName;
+	public String appFolder;
 	
 	public TargetBuilder targetBuilder;
 	public EnvFactory envFactory;
@@ -88,7 +92,8 @@ public class AppComponents implements Serializable {
 	public AppComponents copy(){
 		AppComponents result = new AppComponents();
 		
-		result.name = name;
+		result.appName = appName;
+		result.appFolder = appFolder;
 
 		result.targetBuilder = targetBuilder;
 		result.envFactory = envFactory;

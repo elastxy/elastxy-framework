@@ -1,5 +1,6 @@
 {
-	"name" : "algofrigerator_d",
+	"appName" : "algofrigerator_d",
+	"appFolder" : "algofrigerator",
 	
 	"targetBuilder": {
 		"type" : "java",

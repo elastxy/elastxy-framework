@@ -1,5 +1,5 @@
 {
-	"name" : "expressions",
+	"appName" : "expressions",
 	
 	"targetBuilder": {
 		"type" : "java",

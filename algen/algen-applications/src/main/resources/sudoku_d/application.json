@@ -1,5 +1,6 @@
 {
-	"name" : "sudoku_d",
+	"appName" : "sudoku_d",
+	"appFolder" : "sudoku",
 	
 	"targetBuilder": {
 		"type" : "java",

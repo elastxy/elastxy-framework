@@ -17,18 +17,18 @@ public class GardenDatabaseCSV implements GardenDatabase{
 	public static final String PLACES_FILENAME = 	"places.csv";
 	public static final String TREES_FILENAME = 	"trees.csv";
 	
-	private String name;
+	private String appfolder;
 	
 	
-	public GardenDatabaseCSV(String name){
-		this.name = name;
+	public GardenDatabaseCSV(String appfolder){
+		this.appfolder = appfolder;
 	}
 	
 	
 	public Tree[] getAllTrees() {
 		try {
 			List<Tree> result = new ArrayList<Tree>();
-			String resourceName = "/"+name+"/"+TREES_FILENAME;
+			String resourceName = "/"+appfolder+"/"+TREES_FILENAME;
 			CSVReader reader = new CSVReader(new InputStreamReader(getClass().getResourceAsStream(resourceName)), ';');
 			String [] nextLine;
 			// header
@@ -52,7 +52,7 @@ public class GardenDatabaseCSV implements GardenDatabase{
 	public Place[] getAllPlaces() {
 		try {
 			List<Place> result = new ArrayList<Place>();
-			String resourceName = "/"+name+"/"+PLACES_FILENAME;
+			String resourceName = "/"+appfolder+"/"+PLACES_FILENAME;
 			CSVReader reader = new CSVReader(new InputStreamReader(getClass().getResourceAsStream(resourceName)), ';');
 			String [] nextLine;
 			// header

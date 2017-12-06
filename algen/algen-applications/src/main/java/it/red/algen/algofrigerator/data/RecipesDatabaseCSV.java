@@ -15,11 +15,13 @@ import it.red.algen.dataprovider.DataAccessException;
 public class RecipesDatabaseCSV implements RecipesDatabase {
 	private static final String DB_FILENAME = 	"ingredients.csv";
 
+	private String appFolder;
 	private String database;
 	
 	private List<Recipe> recipeCache = new ArrayList<Recipe>();
 	
-	public RecipesDatabaseCSV(String database){
+	public RecipesDatabaseCSV(String appFolder, String database){
+		this.appFolder = appFolder;
 		this.database = database;
 	}
 	
@@ -35,7 +37,7 @@ public class RecipesDatabaseCSV implements RecipesDatabase {
 		}
 		try {
 			List<Recipe> result = new ArrayList<Recipe>();
-			String resourceName = "/"+MefConstants.APP_NAME+"/"+database+"/"+DB_FILENAME;
+			String resourceName = "/"+appFolder+"/"+database+"/"+DB_FILENAME;
 			CSVReader reader = new CSVReader(new InputStreamReader(getClass().getResourceAsStream(resourceName)), ',');
 			String [] nextLine;
 			// header

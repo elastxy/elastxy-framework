@@ -62,7 +62,7 @@ public class MefDatasetProvider implements DatasetProvider {
 		recipes = new HashMap<RecipeType, List<Recipe>>();
 		
 		// Load recipes from file
-		db = new RecipesDatabaseCSV(database);
+		db = new RecipesDatabaseCSV(context.application.appFolder, database);
 		List<Recipe> recipesFromFile = db.getAllRecipes();
 		logger.debug("Found "+recipesFromFile.size()+" from file.");
 		

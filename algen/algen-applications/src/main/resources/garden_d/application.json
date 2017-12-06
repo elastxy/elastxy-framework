@@ -1,5 +1,6 @@
 {
-	"name" : "garden_d",
+	"appName" : "garden_d",
+	"appFolder" : "garden",
 	
 	"targetBuilder": {
 		"type" : "java",

@@ -77,7 +77,7 @@ public class AlgenController {
 			@RequestBody AlgorithmContext context) {
 		logger.info("REQUEST Service /experiment/{application} => "+application+""+context);
 
-		context.application.name = application;
+		context.application.appName = application;
 		ExperimentStats stats = applicationService.executeExperiment(context);
 		
 		logger.info("RESPONSE Service /experiment/{application} => "+stats);
@@ -108,7 +108,7 @@ public class AlgenController {
 			@RequestBody AlgorithmContext context) {
 		logger.info("REQUEST Service /analysis/{application}/{experiments} => "+application+","+experiments);
 		
-		context.application.name = application;
+		context.application.appName = application;
 		String result = applicationService.executeAnalysis(context, experiments);
 		
 		logger.info("RESPONSE Service /analysis/{domain}/{experiments} => "+result);
@@ -124,7 +124,7 @@ public class AlgenController {
 			@RequestBody AlgorithmContext context) {
 		logger.info("REQUEST Service /trial/{application}/{experiments} => "+application+","+experiments);
 
-		context.application.name = application;
+		context.application.appName = application;
 		String result = applicationService.executeTrialTest(context, experiments);
 
 		logger.info("RESPONSE Service /trial/{application}/{experiments} => "+result);

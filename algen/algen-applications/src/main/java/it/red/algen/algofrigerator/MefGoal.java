@@ -1,9 +1,10 @@
 package it.red.algen.algofrigerator;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-public class MefGoal {
+public class MefGoal implements Serializable {
 	public List<String> refrigeratorFoods = new ArrayList<String>();
 	public List<String> pantry = new ArrayList<String>();
 	public int desiredMeals = 0;

@@ -72,6 +72,6 @@ public class PerformanceTarget<G,M> implements Target<G,M>, Serializable {
 	
 	
 	public String toString(){
-		return String.format("PerformanceTarget[goal=%d;targetFitness=%.3f,threshold=%.3f", goal, targetFitness, targetThreshold);
+		return String.format("PerformanceTarget[goal=%s;targetFitness=%.3f,threshold=%.3f", goal==null?null:goal.toString(), targetFitness, targetThreshold);
 	}
 }

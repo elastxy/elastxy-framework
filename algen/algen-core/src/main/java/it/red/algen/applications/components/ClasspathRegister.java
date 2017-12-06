@@ -57,7 +57,7 @@ public class ClasspathRegister implements AppRegister {
 			AlgenApplication applicationMetadata;
 			try {
 				applicationMetadata = (AlgenApplication)ReadConfigSupport.readJSON(classpathResource.getInputStream(), AlgenApplication.class);
-				result.put(applicationMetadata.name, applicationMetadata);
+				result.put(applicationMetadata.appName, applicationMetadata);
 			} catch (Throwable e) {
 				String msg = "Error while getting classpath resource "+classpathResource.getFilename()+". Ex: "+e;
 				logger.error(msg, e);

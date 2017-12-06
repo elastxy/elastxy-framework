@@ -66,9 +66,6 @@ package it.red.algen.algofrigerator;
  */
 public class MefConstants {
 	
-	// Application name
-	public static final String APP_NAME = "algofrigerator";
-	
 	// Target
 	// Not set: as much as possible filled or partially filled recipes!	
 

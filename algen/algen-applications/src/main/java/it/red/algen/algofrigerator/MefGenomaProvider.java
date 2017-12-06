@@ -162,7 +162,7 @@ public class MefGenomaProvider implements GenomaProvider {
 	private StandardMetadataGenoma createGenoma(
 			Map<RecipeType, Integer> mealsByType) {
 		
-		GenesMetadataConfiguration genes = ReadConfigSupport.retrieveGenesMetadata(context.application.name);
+		GenesMetadataConfiguration genes = ReadConfigSupport.retrieveGenesMetadata(context.application.appName);
 
 		// Create Genoma
 		// TODOM: repetitions of receipt could be available: make it configurable!

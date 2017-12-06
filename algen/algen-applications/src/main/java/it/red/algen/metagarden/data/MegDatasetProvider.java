@@ -31,7 +31,7 @@ public class MegDatasetProvider implements DatasetProvider {
 	 */
 	@Override
 	public void collect() {
-		db = new GardenDatabaseCSV(context.application.name);
+		db = new GardenDatabaseCSV(context.application.appFolder);
 		workingDataset = new MegWorkingDataset();
 		workingDataset.places = db.getAllPlaces();
 		workingDataset.trees = 	db.getAllTrees();

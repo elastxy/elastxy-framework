@@ -60,12 +60,17 @@ public class StandardMultiColonyEnvFactory<T extends Object, R extends Object, G
 		// First, it searches for local env context on Driver to be created,
 		// in order to help distributed context to work properly
 		Target<T,R> target = null;
+		WorkingDataset localWorkingDataset = null;
 		if(context.application.datasetProvider!=null){
 			context.application.datasetProvider.collect();
-			WorkingDataset localWorkingDataset = context.application.datasetProvider.getWorkingDataset();
-			// TODOD: evaluate target builder in distributed environment?
-			target = createTarget(localWorkingDataset);
-			context.application.datasetProvider.shrink(target);
+			localWorkingDataset = context.application.datasetProvider.getWorkingDataset();
+		}
+		
+		// TODOD: evaluate target builder in distributed environment?
+		target = createTarget(localWorkingDataset);
+			
+		if(context.application.datasetProvider!=null){
+				context.application.datasetProvider.shrink(target);
 		}
 		
 		
@@ -99,7 +104,7 @@ public class StandardMultiColonyEnvFactory<T extends Object, R extends Object, G
 //    	genoma = reduceGenoma(genomaProvider, target);
 
         // Create environment
-        MultiColonyEnv env = new MultiColonyEnv(null, genoma, broadcasDatasets);
+        MultiColonyEnv env = new MultiColonyEnv(target, genoma, broadcasDatasets);
         return env;
 	}
 

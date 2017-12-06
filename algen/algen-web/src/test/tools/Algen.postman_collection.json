@@ -185,7 +185,7 @@
 								],
 								"body": {
 									"mode": "raw",
-									"raw": "{\n\t\"applicationSpecifics\": {\n\t\t\"target\" : {\n\t\t\t\"TARGET_WELLNESS\" : \"happy\"\n\t\t},\n\t\t\"params\" : {\n\t\t\t\"LIMITED_TREES\" : false\n\t\t}\n\t},\n\t\"algorithmParameters\": {\n\t\t\"recombinationPerc\": 0.0,\n\t\t\"mutationPerc\": 0.2,\n\t\t\"elitarism\": true,\n\t\t\"initialSelectionNumber\": 100,\n\t\t\"initialSelectionRandom\": false,\n\t\t\"stopConditions\": {\n\t\t\t\"maxIterations\": -1,\n\t\t\t\"maxLifetimeMs\": 3000,\n\t\t\t\"maxIdenticalFitnesses\": -1\n\t\t}\n\t},\n\t\"monitoringConfiguration\": {\n\t\t\"verbose\": false,\n\t\t\"showGraph\": true\n\t}\n}"
+									"raw": "{\n\t\"applicationSpecifics\": {\n\t\t\"target\" : {\n\t\t\t\"TARGET_WELLNESS\" : \"happy\"\n\t\t},\n\t\t\"params\" : {\n\t\t\t\"LIMITED_TREES\" : false\n\t\t}\n\t},\n\t\"algorithmParameters\": {\n\t\t\"recombinationPerc\": 0.5,\n\t\t\"mutationPerc\": 0.2,\n\t\t\"elitarism\": true,\n\t\t\"initialSelectionNumber\": 100,\n\t\t\"initialSelectionRandom\": false,\n\t\t\"stopConditions\": {\n\t\t\t\"maxIterations\": -1,\n\t\t\t\"maxLifetimeMs\": 3000,\n\t\t\t\"maxIdenticalFitnesses\": -1\n\t\t}\n\t},\n\t\"monitoringConfiguration\": {\n\t\t\"verbose\": false,\n\t\t\"showGraph\": true\n\t}\n}"
 								},
 								"description": ""
 							},
@@ -347,7 +347,7 @@
 							},
 							"response": [
 								{
-									"id": "139bc0e5-2cf7-4089-9797-e456161634f6",
+									"id": "21c4febb-5e40-4297-80ff-b9cef4643580",
 									"name": "Database EN",
 									"originalRequest": {
 										"url": "http://{{ip}}:{{port}}/experiment/algofrigerator",
@@ -374,7 +374,7 @@
 									"body": ""
 								},
 								{
-									"id": "43d07ff0-fdc7-4c65-bb4e-d1985bdedd91",
+									"id": "dd7f97dc-9e7b-4c97-91cb-ff06c40d1856",
 									"name": "Database IT",
 									"originalRequest": {
 										"url": "http://{{ip}}:{{port}}/experiment/algofrigerator",
@@ -401,7 +401,7 @@
 									"body": ""
 								},
 								{
-									"id": "2e14cc4a-fade-4802-8744-d78a876ccd15",
+									"id": "1b05eae0-991e-4997-b877-b522406c2873",
 									"name": "Dispensa Rossi",
 									"originalRequest": {
 										"url": "http://{{ip}}:{{port}}/experiment/algofrigerator",
@@ -561,7 +561,7 @@
 								],
 								"body": {
 									"mode": "raw",
-									"raw": "{\r\n\t\"applicationSpecifics\": {\r\n\t\t\"target\" : {\r\n\t\t\t\"TARGET_EXPRESSION_RESULT\" : 23\r\n\t\t},\r\n\t\t\"params\" : {\r\n\t\t\t\"MAX_OPERAND_VALUE\" : 100\r\n\t\t}\r\n\t},\r\n\t\"algorithmParameters\": {\r\n\t\t\"recombinationPerc\": 0.8,\r\n\t\t\"mutationPerc\": 0.2,\r\n\t\t\"elitarism\": true,\r\n\t\t\"initialSelectionNumber\": 10,\r\n\t\t\"initialSelectionRandom\": true,\r\n\t\t\"stopConditions\": {\r\n\t\t\t\"targetFitness\" : 1.0,\r\n\t\t\t\"maxIterations\": -1,\r\n\t\t\t\"maxLifetimeMs\": 3000,\r\n\t\t\t\"maxIdenticalFitnesses\": -1,\r\n\t\t\t\"maxEras\": 5\r\n\t\t},\r\n\t\t\"partitions\": 4,\r\n\t\t\"eraBestMatches\" : 1,\r\n\t\t\"reshuffleEveryEras\" : 2,\r\n\t\t\"multicolonyElitarism\" : true\r\n\t},\r\n\t\"monitoringConfiguration\": {\r\n\t\t\"verbose\": false,\r\n\t\t\"traceHistory\": false\r\n\t}\r\n}\r\n"
+									"raw": "{\r\n\t\"applicationSpecifics\": {\r\n\t\t\"target\" : {\r\n\t\t\t\"TARGET_EXPRESSION_RESULT\" : 23\r\n\t\t},\r\n\t\t\"params\" : {\r\n\t\t\t\"MAX_OPERAND_VALUE\" : 100\r\n\t\t}\r\n\t},\r\n\t\"algorithmParameters\": {\r\n\t\t\"recombinationPerc\": 0.8,\r\n\t\t\"mutationPerc\": 0.2,\r\n\t\t\"elitarism\": true,\r\n\t\t\"initialSelectionNumber\": 10,\r\n\t\t\"initialSelectionRandom\": true,\r\n\t\t\"stopConditions\": {\r\n\t\t\t\"targetFitness\" : 1.0,\r\n\t\t\t\"maxIterations\": -1,\r\n\t\t\t\"maxLifetimeMs\": 3000,\r\n\t\t\t\"maxIdenticalFitnesses\": -1,\r\n\t\t\t\"maxEras\": 3\r\n\t\t},\r\n\t\t\"partitions\": 4,\r\n\t\t\"eraBestMatches\" : 1,\r\n\t\t\"reshuffleEveryEras\" : 2,\r\n\t\t\"multicolonyElitarism\" : true\r\n\t},\r\n\t\"monitoringConfiguration\": {\r\n\t\t\"verbose\": false,\r\n\t\t\"traceHistory\": false\r\n\t}\r\n}\r\n"
 								},
 								"description": ""
 							},
@@ -776,6 +776,53 @@
 								"body": {
 									"mode": "raw",
 									"raw": "{\r\n\t\"applicationSpecifics\": {\r\n\t\t\"target\" : {\r\n\t\t\t\"TARGET_WELLNESS\" : \"happy\"\r\n\t\t},\r\n\t\t\"params\" : {\r\n\t\t\t\"LIMITED_TREES\" : false\r\n\t\t}\r\n\t},\r\n\t\"algorithmParameters\": {\r\n\t\t\"recombinationPerc\": 0.5,\r\n\t\t\"mutationPerc\": 0.2,\r\n\t\t\"elitarism\": true,\r\n\t\t\"initialSelectionNumber\": 1000,\r\n\t\t\"initialSelectionRandom\": false,\r\n\t\t\"stopConditions\": {\r\n\t\t\t\"maxIterations\": -1,\r\n\t\t\t\"maxLifetimeMs\": 10000,\r\n\t\t\t\"maxIdenticalFitnesses\": -1,\r\n\t\t\t\"maxEras\": 5\r\n\t\t},\r\n\t\t\"partitions\": 8,\r\n\t\t\"eraBestMatches\" : 100,\r\n\t\t\"reshuffleEveryEras\" : 2,\r\n\t\t\"multicolonyElitarism\" : true\r\n\t},\r\n\t\"monitoringConfiguration\": {\r\n\t\t\"verbose\": false,\r\n\t\t\"showGraph\": true\r\n\t}\r\n}"
+								},
+								"description": ""
+							},
+							"response": []
+						}
+					],
+					"_postman_isSubFolder": true
+				},
+				{
+					"name": "algorifero_d",
+					"description": "",
+					"item": [
+						{
+							"name": "/distr/algofrigerator/local SMALL",
+							"request": {
+								"url": "http://{{ip}}:{{port}}/distributed/experiment/local/algofrigerator_d",
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"description": ""
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n\t\"applicationSpecifics\": {\r\n\t\t\"target\" : {\r\n\t\t\t\"TARGET_DESIRED_MEALS\" : 10,\r\n\t\t\t\"TARGET_SAVOURY_PROPORTION\" : 70,\r\n\t\t\t\"TARGET_SWEET_PROPORTION\" : 30,\r\n\t\t\t\"TARGET_FRIDGE_MANDATORY\" : true\r\n\t\t},\r\n\t\t\"params\" : {\r\n\t\t\t\"REFRIGERATOR_FOODS\" : [ \"yogurth\", \"banana\", \"banane\"  ],\r\n\t\t\t\"PANTRY_FOODS\" : [ \r\n ],\r\n\t\t\t\"DATABASE\" : \"IT\"\r\n\t\t}\r\n\t},\r\n\t\"algorithmParameters\": {\r\n\t\t\"recombinationPerc\": 0.8,\r\n\t\t\"mutationPerc\": 0.2,\r\n\t\t\"elitarism\": true,\r\n\t\t\"initialSelectionNumber\": 10,\r\n\t\t\"initialSelectionRandom\": true,\r\n\t\t\"stopConditions\": {\r\n\t\t\t\"targetFitness\": 1.0,\r\n\t\t\t\"targetThreshold\": 0.9,\r\n\t\t\t\"maxIterations\": -1,\r\n\t\t\t\"maxLifetimeMs\": 3000,\r\n\t\t\t\"maxIdenticalFitnesses\": 300,\r\n\t\t\t\"maxEras\": 5\r\n\t\t},\r\n\t\t\"partitions\": 4,\r\n\t\t\"eraBestMatches\" : 10,\r\n\t\t\"reshuffleEveryEras\" : 2,\r\n\t\t\"multicolonyElitarism\" : true\r\n\t},\r\n\t\"monitoringConfiguration\": {\r\n\t\t\"verbose\": false,\r\n\t\t\"showGraph\": true,\r\n\t\t\"traceHistory\": false\r\n\t}\r\n}\r\n"
+								},
+								"description": ""
+							},
+							"response": []
+						},
+						{
+							"name": "/distr/algofrigerator/cluster SMALL",
+							"request": {
+								"url": "http://{{ip}}:{{port}}/distributed/experiment/cluster/algofrigerator_d",
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"description": ""
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n\t\"applicationSpecifics\": {\r\n\t\t\"target\" : {\r\n\t\t\t\"TARGET_DESIRED_MEALS\" : 10,\r\n\t\t\t\"TARGET_SAVOURY_PROPORTION\" : 70,\r\n\t\t\t\"TARGET_SWEET_PROPORTION\" : 30,\r\n\t\t\t\"TARGET_FRIDGE_MANDATORY\" : true\r\n\t\t},\r\n\t\t\"params\" : {\r\n\t\t\t\"REFRIGERATOR_FOODS\" : [ \"yogurth\", \"banana\", \"banane\"  ],\r\n\t\t\t\"PANTRY_FOODS\" : [ \r\n ],\r\n\t\t\t\"DATABASE\" : \"IT\"\r\n\t\t}\r\n\t},\r\n\t\"algorithmParameters\": {\r\n\t\t\"recombinationPerc\": 0.8,\r\n\t\t\"mutationPerc\": 0.2,\r\n\t\t\"elitarism\": true,\r\n\t\t\"initialSelectionNumber\": 10,\r\n\t\t\"initialSelectionRandom\": true,\r\n\t\t\"stopConditions\": {\r\n\t\t\t\"targetFitness\": 1.0,\r\n\t\t\t\"targetThreshold\": 0.9,\r\n\t\t\t\"maxIterations\": -1,\r\n\t\t\t\"maxLifetimeMs\": 3000,\r\n\t\t\t\"maxIdenticalFitnesses\": 300,\r\n\t\t\t\"maxEras\": 5\r\n\t\t},\r\n\t\t\"partitions\": 4,\r\n\t\t\"eraBestMatches\" : 10,\r\n\t\t\"reshuffleEveryEras\" : 2,\r\n\t\t\"multicolonyElitarism\" : true\r\n\t},\r\n\t\"monitoringConfiguration\": {\r\n\t\t\"verbose\": false,\r\n\t\t\"showGraph\": true,\r\n\t\t\"traceHistory\": false\r\n\t}\r\n}\r\n"
 								},
 								"description": ""
 							},

@@ -61,7 +61,7 @@ public class MexdDistributedGenomaProvider implements DistributedGenomaProvider 
 	public void collect() {
 		
 		// Retrieves metadata
-		GenesMetadataConfiguration genes = ReadConfigSupport.retrieveGenesMetadata(context.application.name);
+		GenesMetadataConfiguration genes = ReadConfigSupport.retrieveGenesMetadata(context.application.appName);
 
 		long totAlleles = 2 * context.algorithmParameters.initialSelectionNumber;
 		if(logger.isDebugEnabled()) logger.debug(String.format("Extracting %d random alleles for population", totAlleles));

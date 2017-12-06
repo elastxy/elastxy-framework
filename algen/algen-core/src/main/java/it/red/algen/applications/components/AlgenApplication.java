@@ -25,7 +25,8 @@ package it.red.algen.applications.components;
  *
  */
 public class AlgenApplication {
-	public String name;
+	public String appName;
+	public String appFolder;
 
 	public ComponentMetadata targetBuilder;
 	public ComponentMetadata envFactory;
@@ -54,6 +55,6 @@ public class AlgenApplication {
 	
 	
 	public String toString(){
-		return name==null ? "Unknown" : name;
+		return appName==null ? "Unknown" : appName;
 	}
 }

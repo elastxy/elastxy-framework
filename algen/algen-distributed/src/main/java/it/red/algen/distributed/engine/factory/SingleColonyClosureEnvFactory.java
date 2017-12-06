@@ -77,7 +77,7 @@ public class SingleColonyClosureEnvFactory implements EnvFactory {
         
         GenomaProvider genomaProvider = context.application.genomaProvider;
         genomaProvider.collect();
-        Genoma genoma = genomaProvider.shrink(target);
+        Genoma genoma = genomaProvider.shrink(target); // TODOA: target from context??
         MetadataGenomaBuilder.setupAlleleValuesProvider(genoma, allelesProviderForPopulation);
 
     	// Create initial population

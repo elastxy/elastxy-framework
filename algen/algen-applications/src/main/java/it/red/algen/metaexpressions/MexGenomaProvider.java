@@ -46,7 +46,7 @@ public class MexGenomaProvider implements GenomaProvider {
 	public void collect() {
 		
 		// Retrieves metadata
-		GenesMetadataConfiguration genes = ReadConfigSupport.retrieveGenesMetadata(context.application.name);
+		GenesMetadataConfiguration genes = ReadConfigSupport.retrieveGenesMetadata(context.application.appName);
 		
 		// Add context specific values
 		Long maxValue = context.applicationSpecifics.getParamLong(MexConstants.MAX_OPERAND_VALUE);

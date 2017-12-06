@@ -62,7 +62,7 @@ public class ProcessingOnlyDistributedDatasetProvider implements DistributedData
 	@Override
 	public void collect() {
 		int partitions = context.algorithmParameters.partitions;
-		if(logger.isInfoEnabled()) logger.info("No data to collect for "+context.application.name+". Only processing on "+partitions+" partitions.");
+		if(logger.isInfoEnabled()) logger.info("No data to collect for "+context.application.appName+". Only processing on "+partitions+" partitions.");
 		
 //		int halfPartitions = Math.floorDiv(partitions, 2) + 1;
 //		List<Integer> range = IntStream.rangeClosed(-halfPartitions, partitions-halfPartitions).boxed().collect(Collectors.toList());

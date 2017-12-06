@@ -33,7 +33,7 @@ public class MegdDistributedDatasetProvider extends ProcessingOnlyDistributedDat
 	public void broadcast(){
 		if(logger.isInfoEnabled()) logger.info("Broadcasting trees and places lists to colonies.");
 		
-		GardenDatabaseCSV db = new GardenDatabaseCSV(context.application.name);
+		GardenDatabaseCSV db = new GardenDatabaseCSV(context.application.appFolder);
 		Place[] places = db.getAllPlaces();
 		Tree[] trees = db.getAllTrees();
 		

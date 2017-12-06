@@ -25,7 +25,7 @@ public class ApplicationService {
 
 	public ExperimentStats executeBenchmark(String applicationName){
 		AlgorithmContext context = benchmarkContextBuilder.build(applicationName, true);
-		context.application.name = applicationName;
+		context.application.appName = applicationName;
 		setupContext(context);
 		Experiment e = new SingleColonyExperiment(context);
 		e.run();
@@ -89,7 +89,7 @@ public class ApplicationService {
 	
 
 	private void setupContext(AlgorithmContext context) {
-		context.application = appComponentsLocator.get(context.application.name);
+		context.application = appComponentsLocator.get(context.application.appName);
 		// in distributed context can be null
 		if(context.application.datasetProvider!=null) context.application.datasetProvider.setup(context); 
 		context.application.genomaProvider.setup(context);

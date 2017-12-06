@@ -14,7 +14,7 @@ public class RecipeDatabaseTest
     extends TestCase
 {
 	
-	private RecipesDatabaseCSV reader = new RecipesDatabaseCSV("EN");
+	private RecipesDatabaseCSV reader = new RecipesDatabaseCSV("appdata/algofrigerator", "EN");
 
 	/**
      * Create the test case

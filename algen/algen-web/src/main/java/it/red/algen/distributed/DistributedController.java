@@ -137,7 +137,7 @@ public class DistributedController {
 			@RequestBody DistributedAlgorithmContext context) throws Exception {
     	logger.info("REQUEST Service /experiment/local/{application} => "+application+""+context);
     	
-		context.application.name = application;
+		context.application.appName = application;
 		
 		String sparkHome = this.sparkHome; // "C:/dev/spark-2.2.0-bin-hadoop2.7"
 		String master = "local[*]"; // local[*] | spark://192.168.1.101:7077
@@ -161,7 +161,7 @@ public class DistributedController {
 			@RequestBody DistributedAlgorithmContext context) throws Exception {
 		logger.info("REQUEST Service /experiment/cluster/{application} => "+application+""+context);
     	
-		context.application.name = application;
+		context.application.appName = application;
 		
     	SparkTaskConfig config = new SparkTaskConfig();
     	config.masterURI = masterUri;

@@ -135,6 +135,17 @@
 											<exclude>ch.qos.logback:*</exclude>
 						                </excludes>
 						              </artifactSet>
+						              <!-- TODOD: point to local db files, and exclude from classpath -->
+						              <!-- 
+						              <filters>
+										  <filter>
+										    <artifact>it.red.algen:algen-applications</artifact>
+										    <excludes>
+										      <exclude>appdata/**</exclude>
+										    </excludes>
+										  </filter>
+										</filters>
+										-->
 						            </configuration>
 						        </execution>
 						    </executions>
