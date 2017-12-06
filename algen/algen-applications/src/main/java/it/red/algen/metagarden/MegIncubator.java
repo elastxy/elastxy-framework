@@ -1,6 +1,5 @@
 package it.red.algen.metagarden;
 
-import it.red.algen.dataprovider.WorkingDataset;
 import it.red.algen.domain.experiment.Env;
 import it.red.algen.domain.genetics.genotype.Chromosome;
 import it.red.algen.domain.genetics.genotype.Gene;
