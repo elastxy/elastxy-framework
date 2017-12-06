@@ -1,13 +1,16 @@
 package it.red.algen.distributed.experiment;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 
 import org.apache.spark.api.java.JavaRDD;
 import org.apache.spark.broadcast.Broadcast;
 import org.apache.spark.util.LongAccumulator;
 
+import it.red.algen.distributed.dataprovider.BroadcastWorkingDataset;
 import it.red.algen.domain.experiment.Solution;
 import it.red.algen.domain.experiment.Target;
 import it.red.algen.domain.genetics.Genoma;
@@ -41,19 +44,24 @@ public class MultiColonyEnv {
     public Optional<LongAccumulator> goalAccumulator = Optional.empty();
     public Optional<Broadcast<List<Allele>>> mutationGenesBroadcast = Optional.empty();
     public Optional<Broadcast<List<Solution>>> previousBestMatchesBroadcast = Optional.empty();
+    public Map<String, BroadcastWorkingDataset> broadcastWorkingDatasets = new HashMap<String, BroadcastWorkingDataset>();
+    
     public JavaRDD<Solution> bestMatchesRDD = null;
 
     // HISTORY
     // TODOD: eras history
 //    public List<Population> generationsHistory = new ArrayList<Population>();
     
-    public MultiColonyEnv(Target<?,?> target, Genoma genoma){
+    public MultiColonyEnv(Target<?,?> target, Genoma genoma, Map<String, BroadcastWorkingDataset> broadcastWorkingDatasets){
     	this.target = target;
     	this.genoma = genoma;
+    	this.broadcastWorkingDatasets = broadcastWorkingDatasets;
     }
         
     public String toString(){
-    	return String.format("MultiColonyEnv [Target: %s, EraNumber: %d, Identical Fit: %d]", target, currentEraNumber, totIdenticalFitnesses);
+    	// TODOD: evaluate target builder in distributed environment?
+//    	return String.format("MultiColonyEnv [Target: %s, EraNumber: %d, Identical Fit: %d]", target, currentEraNumber, totIdenticalFitnesses);
+    	return String.format("MultiColonyEnv [EraNumber: %d, Identical Fit: %d]", currentEraNumber, totIdenticalFitnesses);
     }
     
 }

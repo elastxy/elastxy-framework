@@ -3,6 +3,7 @@ package it.red.algen.distributed.engine.core;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Map;
 
 import org.apache.log4j.Logger;
 import org.apache.spark.api.java.function.FlatMapFunction;
@@ -12,13 +13,12 @@ import org.apache.spark.util.LongAccumulator;
 import it.red.algen.applications.components.AppComponentsLocator;
 import it.red.algen.applications.components.factory.AppBootstrapRaw;
 import it.red.algen.context.AlgorithmContext;
-import it.red.algen.distributed.engine.factory.SingleColonyClosureEnvFactory;
+import it.red.algen.distributed.dataprovider.BroadcastWorkingDataset;
+import it.red.algen.distributed.dataprovider.BroadcastedDatasetProvider;
 import it.red.algen.domain.experiment.Solution;
 import it.red.algen.domain.experiment.Target;
 import it.red.algen.domain.genetics.genotype.Allele;
 import it.red.algen.engine.core.SingleColonyExperiment;
-import it.red.algen.engine.factory.EnvFactory;
-import it.red.algen.engine.factory.StandardEnvFactory;
 import it.red.algen.stats.ExperimentStats;
 
 /**
@@ -54,6 +54,7 @@ public class SingleColonyClosure implements FlatMapFunction<Iterator<Allele>, So
     private LongAccumulator coloniesGoalAccumulator;
     private Broadcast<List<Allele>> mutatedGenesBC;
     private Broadcast<List<Solution>> previousBestMatchesBC;
+    private Map<String, BroadcastWorkingDataset> broadcastDatasets;
     
     
     // TODOM: ClosureContext instead of many params
@@ -64,7 +65,8 @@ public class SingleColonyClosure implements FlatMapFunction<Iterator<Allele>, So
 			Target target,
   			LongAccumulator coloniesGoalAccumulator,
   			Broadcast<List<Allele>> mutatedGenesBC,
-  			Broadcast<List<Solution>> previousBestMatchesBC){
+  			Broadcast<List<Solution>> previousBestMatchesBC,
+  			Map<String, BroadcastWorkingDataset> broadcastDatasets){
 		this.applicationName = applicationName;
 		this.currentEraNumber = currentEraNumber;
 		this.context = context;
@@ -72,6 +74,7 @@ public class SingleColonyClosure implements FlatMapFunction<Iterator<Allele>, So
 		this.coloniesGoalAccumulator = coloniesGoalAccumulator;
 		this.mutatedGenesBC = mutatedGenesBC;
 		this.previousBestMatchesBC = previousBestMatchesBC;
+		this.broadcastDatasets = broadcastDatasets;
 	}
 	
 	
@@ -82,7 +85,7 @@ public class SingleColonyClosure implements FlatMapFunction<Iterator<Allele>, So
 		
 		logger.info(String.format(">>> 2.1 Population Creation [era %d] 					WORKER => List[Solution]", currentEraNumber));
 	    
-		boolean processingOnly = applicationName.equals("sudoku_d") ? true : false; // TODOA: cablone!!!!!!!!!!!!!!!!!!!!!
+		boolean processingOnly = applicationName.equals("sudoku_d") || applicationName.equals("garden_d") ? true : false; // TODOA: cablone!!!!!!!!!!!!!!!!!!!!!
 		ExperimentStats stats = processingOnly ? runIsolatedColonyExperiment() : runLinkedColonyExperiment(initialGenomaIterator);
 		
 		
@@ -201,7 +204,12 @@ public class SingleColonyClosure implements FlatMapFunction<Iterator<Allele>, So
 	private void setupContext(AppComponentsLocator locator) {
 		context.application = locator.get(applicationName);
 		context.application.name = applicationName;
-		if(context.application.datasetProvider!=null) context.application.datasetProvider.setup(context);
+		if(context.application.datasetProvider!=null) {
+			if(context.application.datasetProvider instanceof BroadcastedDatasetProvider){
+				((BroadcastedDatasetProvider)context.application.datasetProvider).setBroadcastDatasets(broadcastDatasets);
+			}
+			context.application.datasetProvider.setup(context);
+		}
 		context.application.genomaProvider.setup(context);
 		context.application.selector.setup(context);
 		context.application.recombinator.setup(context.algorithmParameters);

@@ -1,6 +1,7 @@
 package it.red.algen.d.metaexpressions;
 
 import java.util.List;
+import java.util.Map;
 import java.util.stream.Collectors;
 import java.util.stream.LongStream;
 
@@ -9,6 +10,7 @@ import org.apache.log4j.Logger;
 import it.red.algen.context.AlgorithmContext;
 import it.red.algen.dataprovider.WorkingDataset;
 import it.red.algen.distributed.context.DistributedAlgorithmContext;
+import it.red.algen.distributed.dataprovider.BroadcastWorkingDataset;
 import it.red.algen.distributed.dataprovider.DistributedDatasetProvider;
 import it.red.algen.distributed.dataprovider.RDDDistributedWorkingDataset;
 import it.red.algen.domain.experiment.Target;
@@ -35,6 +37,7 @@ public class MexdDistributedDatasetProvider implements DistributedDatasetProvide
 	public WorkingDataset getWorkingDataset(){
 		return workingDataset;
 	}
+
 	
 	/**
 	 * Collects all data in the current partition.
@@ -93,6 +96,16 @@ public class MexdDistributedDatasetProvider implements DistributedDatasetProvide
 //	    }
 //	    inputData 
 
+	}
+
+	@Override
+	public Map<String, BroadcastWorkingDataset> getBroadcastDatasets() {
+		return null;
+	}
+
+
+	@Override
+	public void broadcast() {
 	}
 	
 	

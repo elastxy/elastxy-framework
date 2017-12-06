@@ -22,6 +22,10 @@ public class MegTargetBuilder implements TargetBuilder<String, Double> {
 	
 	@Override
 	public PerformanceTarget<String, Double> define(WorkingDataset dataset) {
+		// TODOD: evaluate target builder in distributed environment?
+		if(!(dataset instanceof MegWorkingDataset)){
+			return null;
+		}
 		PerformanceTarget<String,Double> target = new PerformanceTarget<String,Double>();
     	target.setGoal(context.applicationSpecifics.getTargetString(MegConstants.TARGET_WELLNESS));
     	// Determines goal rough measure: minimum possible unhappiness (illness), 0.0

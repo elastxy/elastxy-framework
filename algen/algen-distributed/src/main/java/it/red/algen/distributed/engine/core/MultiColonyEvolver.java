@@ -10,6 +10,7 @@ import org.apache.spark.broadcast.Broadcast;
 
 import it.red.algen.distributed.context.DistributedAlgorithmContext;
 import it.red.algen.distributed.dataprovider.DistributedAlleleValuesProvider;
+import it.red.algen.distributed.dataprovider.DistributedDatasetProvider;
 import it.red.algen.distributed.dataprovider.DistributedGenomaProvider;
 import it.red.algen.distributed.engine.factory.StandardMultiColonyEnvFactory;
 import it.red.algen.distributed.experiment.MultiColonyEnv;
@@ -92,7 +93,8 @@ public class MultiColonyEvolver implements Evolver {
             logger.info(String.format(">>> 1.2 Genoma Extraction (Mutation) [era %d]",env.currentEraNumber));
             List<Allele> alleles = ((DistributedGenomaProvider)context.application.distributedGenomaProvider).collectForMutation();
             env.mutationGenesBroadcast = Optional.of(context.distributedContext.broadcast(alleles));
-
+            env.broadcastWorkingDatasets = ((DistributedDatasetProvider)context.application.distributedDatasetProvider).getBroadcastDatasets();
+            
           	logger.info(String.format(">>> 1.3 Era Iteration Best Match [era %d]				DRIVER <= RDDb[Best] DRIVER => BEST MATCH", env.currentEraNumber));
           	// TODOD: logging
 //          	if(logger.isTraceEnabled()) Monitoring.printPartitionsGenoma(initialGenomaRDD)
@@ -107,7 +109,8 @@ public class MultiColonyEvolver implements Evolver {
           	    env.target,
                 env.goalAccumulator.get(),
                 env.mutationGenesBroadcast.get(),
-                prevBest
+                prevBest,
+                env.broadcastWorkingDatasets
           	    ), true);
           	
             if(logger.isDebugEnabled()) logger.debug(">>>>>> Era ACTION START");
@@ -116,7 +119,8 @@ public class MultiColonyEvolver implements Evolver {
             if(logger.isDebugEnabled()) logger.debug(String.format("     Era best matches %s", env.eraBestMatches));
             if(logger.isDebugEnabled()) logger.debug(">>>>>> Era ACTION END");
 //            if(logger.isTraceEnabled()) Monitoring.printPartitionsSolutions(bestRDD)
-            
+            Solution eraBestMatch = env.eraBestMatches==null || env.eraBestMatches.isEmpty() ? null : env.eraBestMatches.get(0);
+            logger.info(String.format(">>> 		Era %d best match: %30.200s", env.currentEraNumber, eraBestMatch)); 
             logger.info(String.format(">>> 1.4 Era Check End Condition [era %d]				DRIVER <= Accumulator", env.currentEraNumber));
             env.allBestMatches.addAll(env.eraBestMatches);
             env.allBestMatches = env.allBestMatches.stream().sorted(

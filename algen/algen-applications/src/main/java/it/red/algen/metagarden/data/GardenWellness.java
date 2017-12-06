@@ -1,5 +1,6 @@
 package it.red.algen.metagarden.data;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.OptionalDouble;
@@ -10,7 +11,9 @@ import java.util.OptionalDouble;
  * @author red
  *
  */
-public class GardenWellness {
+public class GardenWellness implements Serializable {
+	private static final long serialVersionUID = -3642158250134755049L;
+
 	public List<Double> locationsUnhappyness = new ArrayList<Double>();
 	
 	public String toString(){

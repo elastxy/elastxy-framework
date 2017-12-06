@@ -11,8 +11,10 @@
 package it.red.algen.distributed.engine.core;
 
 import java.util.List;
+import java.util.Map;
 
 import it.red.algen.context.AlgorithmContext;
+import it.red.algen.distributed.dataprovider.BroadcastWorkingDataset;
 import it.red.algen.distributed.engine.factory.SingleColonyClosureEnvFactory;
 import it.red.algen.domain.experiment.Env;
 import it.red.algen.domain.experiment.Solution;
@@ -70,7 +72,11 @@ public class SingleColonyClosureExperiment implements Experiment {
         EnvObserver observer = new EnvObserver(context); // TODOD: events like Kafka?
         
         // Creates initial environment
-        EnvFactory envFactory = new SingleColonyClosureEnvFactory(target, newPopulationAlleles, mutationAlleles, previousBestMatches);
+        EnvFactory envFactory = new SingleColonyClosureEnvFactory(
+        		target, 
+        		newPopulationAlleles, 
+        		mutationAlleles, 
+        		previousBestMatches);
         envFactory.setup(context);
         Env environment = envFactory.create();
     	

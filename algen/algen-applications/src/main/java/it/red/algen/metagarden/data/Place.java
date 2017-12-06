@@ -1,5 +1,7 @@
 package it.red.algen.metagarden.data;
 
+import java.io.Serializable;
+
 /**
  * 
 Ogni posizione Gi ha le seguenti caratteristiche:
@@ -10,8 +12,9 @@ location
  * @author Gabriele
  *
  */
-public class Place {
-
+public class Place implements Serializable {
+	private static final long serialVersionUID = -4999646790650862071L;
+	
 	private int sunExposure; 	// 0,1,2
 	private int wetLevel; 		// 0,1,2
 	private int windLevel;		// 0,1,2

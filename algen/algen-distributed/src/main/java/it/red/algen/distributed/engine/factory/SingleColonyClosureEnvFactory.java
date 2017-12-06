@@ -1,6 +1,7 @@
 package it.red.algen.distributed.engine.factory;
 
 import java.util.List;
+import java.util.Map;
 
 import org.apache.log4j.Logger;
 
@@ -8,6 +9,7 @@ import it.red.algen.context.AlgorithmContext;
 import it.red.algen.dataprovider.AlleleValuesProvider;
 import it.red.algen.dataprovider.GenomaProvider;
 import it.red.algen.dataprovider.InMemoryAlleleValuesProvider;
+import it.red.algen.distributed.dataprovider.BroadcastWorkingDataset;
 import it.red.algen.distributed.dataprovider.DistributedAlleleValuesProvider;
 import it.red.algen.domain.experiment.Env;
 import it.red.algen.domain.experiment.Population;
@@ -24,7 +26,7 @@ import it.red.algen.engine.operators.RecombinatorLogics;
 /**
  * Starts from data from Driver coordinator, and creates an ad-hoc
  * local context with:
- * - no references to working set (TODOD: Mef needs dataset to grow recipes!)
+ * - references to broadcast working sets, if needed
  * - GenomaProvider not distributed, but AllelesValuesProvider loaded
  *   with broadcast variable from Driver
  * - initial Population created from Alleles List from Driver
@@ -67,7 +69,7 @@ public class SingleColonyClosureEnvFactory implements EnvFactory {
 	
 	
     public Env create(){
-    	
+
     	// Updates Genoma with local Alleles from partition for population creation
         AlleleValuesProvider allelesProviderForPopulation = new InMemoryAlleleValuesProvider();
         // TODOD: name of alleles provider from metadata?

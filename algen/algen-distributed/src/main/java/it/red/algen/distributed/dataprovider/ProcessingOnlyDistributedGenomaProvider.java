@@ -1,4 +1,4 @@
-package it.red.algen.d.metasudoku;
+package it.red.algen.distributed.dataprovider;
 
 import java.util.List;
 
@@ -19,19 +19,21 @@ import it.red.algen.engine.genetics.PredefinedGenomaBuilder;
 
 
 /**
- * For building the first population for a single Sudoku solution,
+ * For building the first population for a single solution,
  * we don't need any distributed Alleles: they will be locally
- * determined by the same Target and same Sudoku matrix everywhere.
+ * determined by the same Target and same environment data everywhere,
+ * plus eventually broadcasted data.
  * 
  * Also mutation involves a number of swaps between numbers
  * already present in the nodes: no BigData this game!
  * 
- * TODOA: build a Dummy GenomaProvider
- * TODOD: evaluate a GenomaProvider broadcasted.
+ * E.g. Sudoku is determined by locally created target list of
+ * integer to fille the matrix, plus the matrix itself,
+ * already present on every node.
  * 
  * @author red
  */
-public class MesdDistributedGenomaProvider implements DistributedGenomaProvider {
+public class ProcessingOnlyDistributedGenomaProvider implements DistributedGenomaProvider {
 //	private static Logger logger = Logger.getLogger(MesdDistributedGenomaProvider.class);
 
 	private AlgorithmContext context;
@@ -67,6 +69,8 @@ public class MesdDistributedGenomaProvider implements DistributedGenomaProvider 
 		return null;
 	}
 
+	
+	// TODOD: evaluate target builder in distributed environment? shrink is useful?
 	@Override
 	public Genoma shrink(Target<?, ?> target) {
 		return genoma;

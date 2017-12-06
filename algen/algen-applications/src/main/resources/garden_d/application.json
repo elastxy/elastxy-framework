@@ -1,9 +1,9 @@
 {
-	"name" : "sudoku_d",
+	"name" : "garden_d",
 	
 	"targetBuilder": {
 		"type" : "java",
-		"content" : "it.red.algen.metasudoku.MesTargetBuilder"
+		"content" : "it.red.algen.metagarden.MegTargetBuilder"
 	},
 	
 	"envFactory": {
@@ -11,9 +11,14 @@
 		"content" : "it.red.algen.engine.factory.StandardEnvFactory"
 	},
 	
+	"datasetProvider": {
+		"type" : "java",
+		"content" : "it.red.algen.d.metagarden.MegSingleColonyDatasetProvider"
+	},
+	
 	"genomaProvider": {
 		"type" : "java",
-		"content" : "it.red.algen.metasudoku.MesGenomaProvider"
+		"content" : "it.red.algen.metagarden.MegGenomaProvider"
 	},
 	
 	"alleleGenerator": {
@@ -23,7 +28,7 @@
 	
 	"solutionsFactory": {
 		"type" : "java",
-		"content" : "it.red.algen.engine.factory.PredefinedGenomaSolutionsFactory"
+		"content" : "it.red.algen.metagarden.MegSolutionsFactory"
 	},
 	
 	"populationFactory": {
@@ -33,31 +38,33 @@
 	
 	"incubator": {
 		"type" : "java",
-		"content" : "it.red.algen.metasudoku.MesIncubator"
+		"content" : "it.red.algen.metagarden.MegIncubator"
 	},
 	
 	"fitnessCalculator": {
 		"type" : "java",
-		"content" : "it.red.algen.metasudoku.MesFitnessCalculator"
+		"content" : "it.red.algen.metagarden.MegFitnessCalculator"
 	},
 	
 	"selector": {
 		"type" : "java",
 		"content" : "it.red.algen.engine.operators.StandardSelector"
 	},
+	
 	"mutator": {
 		"type" : "java",
 		"content" : "it.red.algen.engine.operators.ChromosomeMutator"
 	},
+	
 	"recombinator": {
 		"type" : "java",
 		"content" : "it.red.algen.engine.operators.ChromosomeRecombinator"
 	},
+	
 	"solutionRenderer": {
 		"type" : "java",
-		"content" : "it.red.algen.metasudoku.MesSolutionRenderer"
+		"content" : "it.red.algen.tracking.DefaultSolutionRenderer"
 	},
-	
 	
 	"multiColonyEnvFactory": {
 		"type" : "java",
@@ -66,11 +73,13 @@
 	
 	"distributedDatasetProvider": {
 		"type" : "java",
-		"content" : "it.red.algen.distributed.dataprovider.ProcessingOnlyDistributedDatasetProvider"
+		"content" : "it.red.algen.d.metagarden.MegdDistributedDatasetProvider"
 	},
 	
 	"distributedGenomaProvider": {
 		"type" : "java",
 		"content" : "it.red.algen.distributed.dataprovider.ProcessingOnlyDistributedGenomaProvider"
 	}
+	
+	
 }

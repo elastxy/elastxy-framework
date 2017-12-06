@@ -1,5 +1,7 @@
 package it.red.algen.metagarden.data;
 
+import java.io.Serializable;
+
 /**
  * 
 Ogni pianta ha le seguenti caratteristiche, in base al tipo:
@@ -9,7 +11,9 @@ Pv = sofferenza al vento: totale, alta, bassa, nessuna
  * @author Gabriele
  *
  */
-public class Tree {
+public class Tree implements Serializable {
+	private static final long serialVersionUID = -1854322391694979302L;
+
 	private String code;
 
 	private int sunRequest;	// 0,1,2

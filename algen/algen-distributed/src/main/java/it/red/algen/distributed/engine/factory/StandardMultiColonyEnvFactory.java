@@ -10,9 +10,12 @@
 
 package it.red.algen.distributed.engine.factory;
 
+import java.util.Map;
+
 import it.red.algen.context.AlgorithmContext;
 import it.red.algen.dataprovider.GenomaProvider;
 import it.red.algen.dataprovider.WorkingDataset;
+import it.red.algen.distributed.dataprovider.BroadcastWorkingDataset;
 import it.red.algen.distributed.dataprovider.DistributedDatasetProvider;
 import it.red.algen.distributed.dataprovider.DistributedGenomaProvider;
 import it.red.algen.distributed.experiment.MultiColonyEnv;
@@ -47,19 +50,27 @@ public class StandardMultiColonyEnvFactory<T extends Object, R extends Object, G
     	// Collect the data algorithm is based on
     	DistributedDatasetProvider datasetProvider = (DistributedDatasetProvider)context.application.distributedDatasetProvider;
     	WorkingDataset workingDataset = null;
+    	Map<String, BroadcastWorkingDataset> broadcasDatasets = null;
     	if(datasetProvider!=null){
+    		
+    		// Collect working data for distributed genoma
     		datasetProvider.collect();
     		workingDataset = datasetProvider.getWorkingDataset();
+    		
+    		// Broadcast data for common data on single colonies
+    		datasetProvider.broadcast();
+    		broadcasDatasets = datasetProvider.getBroadcastDatasets();
     	}
     	
     	// Define target
-    	Target<T,R> target = createTarget(workingDataset); 
+    	// TODOD: evaluate target builder in distributed environment?
+//    	Target<T,R> target = createTarget(workingDataset); 
 
     	// Reduce initial data based on target
-    	if(datasetProvider!=null){
-    		datasetProvider.shrink(target);
-    		workingDataset = datasetProvider.getWorkingDataset();
-    	}
+//    	if(datasetProvider!=null){
+//    		datasetProvider.shrink(target);
+//    		workingDataset = datasetProvider.getWorkingDataset();
+//    	}
     	
     	// Retrieve GenomaProvider
 		DistributedGenomaProvider genomaProvider = (DistributedGenomaProvider)context.application.distributedGenomaProvider;
@@ -68,12 +79,11 @@ public class StandardMultiColonyEnvFactory<T extends Object, R extends Object, G
     	// Create genoma
     	Genoma genoma = createGenoma(genomaProvider);
 
-    	// Reduce Genoma based on target
-    	genoma = reduceGenoma(genomaProvider, target);
+//    	// Reduce Genoma based on target
+//    	genoma = reduceGenoma(genomaProvider, target);
 
         // Create environment
-        MultiColonyEnv env = new MultiColonyEnv(target, genoma);
-        
+        MultiColonyEnv env = new MultiColonyEnv(null, genoma, broadcasDatasets);
         return env;
 	}
 
@@ -83,6 +93,18 @@ public class StandardMultiColonyEnvFactory<T extends Object, R extends Object, G
 		return genomaProvider.getGenoma();
 	}
 	
+	/**
+	 * In case of MultiColonyEnvFactory, TargetBuilder accepts
+	 * the RDDDistributedWorkingDataset, which is not useful
+	 * in the Driver by now, only locally.
+	 * 
+	 * E.g. MegWorkingDataset cannot be casted to RDDDistributedDataset...
+	 * 
+	 * Logics should be removed, or if found useful maintained
+	 * declaring a distributedTargetBuilder component...
+	 * 
+	 * TODOD: evaluate target builder in distributed environment?
+	 */
 	private Target<T,R> createTarget(WorkingDataset workingDataset){
 		Target<T,R> target = targetBuilder.define(workingDataset);
 		target.setTargetFitness(context.algorithmParameters.stopConditions.targetFitness);
