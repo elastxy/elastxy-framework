@@ -49,6 +49,7 @@ public class AppComponents implements Serializable {
 
 	public static final String MultiColonyEnvFactory ="multiColonyEnvFactory"; // Context-dependent
 	public static final String DistributedDatasetProvider = 	"distributedDatasetProvider"; // Context-dependent
+	public static final String SingleColonyDatasetProvider = 	"singleColonyDatasetProvider"; // Context-dependent
 	public static final String DistributedGenomaProvider = 	"distributedGenomaProvider"; // Context-dependent
 
 	
@@ -74,8 +75,10 @@ public class AppComponents implements Serializable {
 	public SolutionRenderer solutionRenderer;
 
 	// Distributed application
+	// TODOM: DistributedAppComponents extending this?
 	public EnvFactory multiColonyEnvFactory; // TODOD: type of MultiColonyEnvFactory
 	public DatasetProvider distributedDatasetProvider; // TODOD: type of DistributedDatasetProvider (another application json???)
+	public DatasetProvider singleColonyDatasetProvider; // TODOD: type of BroadcastedDatasetProvider (another application json???)
 	public GenomaProvider distributedGenomaProvider; // TODOD: type of DistributedGenomaProvider (another application json???)
 	
 	/**
@@ -109,6 +112,7 @@ public class AppComponents implements Serializable {
 		// Distributed application
 		result.multiColonyEnvFactory = multiColonyEnvFactory;
 		result.distributedDatasetProvider = distributedDatasetProvider;
+		result.singleColonyDatasetProvider = singleColonyDatasetProvider;
 		result.distributedGenomaProvider = distributedGenomaProvider;
 		
 		return result;

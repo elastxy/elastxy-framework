@@ -66,6 +66,7 @@ public class AppComponentsBuilder {
 		// TODOD: one only property (e.g. envFactory) but assigned based on context: LOCAL|DISTRIBUTED
 		result.multiColonyEnvFactory =(EnvFactory)constructComponent(applicationMetadata.multiColonyEnvFactory);
 		result.distributedDatasetProvider =(DatasetProvider)constructComponent(applicationMetadata.distributedDatasetProvider);
+		result.singleColonyDatasetProvider = (DatasetProvider)constructComponent(applicationMetadata.singleColonyDatasetProvider);
 		result.distributedGenomaProvider =(GenomaProvider)constructComponent(applicationMetadata.distributedGenomaProvider);
 
 		return result;

@@ -90,7 +90,8 @@ public class ApplicationService {
 
 	private void setupContext(AlgorithmContext context) {
 		context.application = appComponentsLocator.get(context.application.name);
-		if(context.application.datasetProvider!=null) context.application.datasetProvider.setup(context);
+		// in distributed context can be null
+		if(context.application.datasetProvider!=null) context.application.datasetProvider.setup(context); 
 		context.application.genomaProvider.setup(context);
 		context.application.selector.setup(context);
 		context.application.recombinator.setup(context.algorithmParameters);
@@ -100,6 +101,7 @@ public class ApplicationService {
 		// Distributed application
 		if(context.application.multiColonyEnvFactory!=null) context.application.multiColonyEnvFactory.setup(context);
 		if(context.application.distributedDatasetProvider!=null) context.application.distributedDatasetProvider.setup(context);
+		if(context.application.singleColonyDatasetProvider!=null) context.application.singleColonyDatasetProvider.setup(context);
 		if(context.application.distributedGenomaProvider!=null) context.application.distributedGenomaProvider.setup(context);
 	}
 	

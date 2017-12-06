@@ -49,6 +49,7 @@ public class AlgenApplication {
 	// Distributed application
 	public ComponentMetadata multiColonyEnvFactory;
 	public ComponentMetadata distributedDatasetProvider;
+	public ComponentMetadata singleColonyDatasetProvider;
 	public ComponentMetadata distributedGenomaProvider;
 	
 	
