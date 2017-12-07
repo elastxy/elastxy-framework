@@ -102,7 +102,8 @@ public class MultiColonyEvolver implements Evolver {
           	
           	// NOTE: context passed must be serializable and will be copied to new Java Runtime!
           	Broadcast<List<Solution>> prevBest = env.previousBestMatchesBroadcast.isPresent() ? env.previousBestMatchesBroadcast.get() : null;
-			env.bestMatchesRDD = alleleValuesProvider.rdd().mapPartitions(new SingleColonyClosure(
+			// TODOD: algorifero is broadcasting every time...
+          	env.bestMatchesRDD = alleleValuesProvider.rdd().mapPartitions(new SingleColonyClosure(
           	    env.currentEraNumber,
           	    context,
           	    env.target,

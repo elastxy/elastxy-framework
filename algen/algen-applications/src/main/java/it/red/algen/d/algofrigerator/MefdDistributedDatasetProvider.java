@@ -48,17 +48,9 @@ public class MefdDistributedDatasetProvider extends ProcessingOnlyDistributedDat
 			logger.error(message);
 			throw new IllegalArgumentException(message);
 		}
-		
 		MefWorkingDataset localDataset = (MefWorkingDataset)context.application.datasetProvider.getWorkingDataset();
 		
-		// TODOA: check if one can be skipped as it's already shrinked
 		broadcastDataset = new HashMap<String, BroadcastWorkingDataset>();
-		
-		BroadcastWorkingDataset<Map<Long,Recipe>> allRecipes = new BroadcastWorkingDataset<Map<Long,Recipe>>();
-		allRecipes.bc = context.distributedContext.broadcast(localDataset.recipeById);
-		broadcastDataset.put(MefWorkingDataset.ALL_RECIPES, allRecipes);
-		
-		
 		BroadcastWorkingDataset<Map<RecipeType,List<Recipe>>> feasibleRecipes = new BroadcastWorkingDataset<Map<RecipeType,List<Recipe>>>();
 		feasibleRecipes.bc = context.distributedContext.broadcast(localDataset.feasibleByType);
 		broadcastDataset.put(MefWorkingDataset.FEASIBLE_RECIPES, feasibleRecipes);

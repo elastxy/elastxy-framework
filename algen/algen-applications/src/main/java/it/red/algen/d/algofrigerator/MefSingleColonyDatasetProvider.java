@@ -46,22 +46,16 @@ public class MefSingleColonyDatasetProvider implements BroadcastedDatasetProvide
 	@Override
 	public void collect() {
 		workingDataset = new MefWorkingDataset();
-		Object allRecipes = broadcastDatasets.get(MefWorkingDataset.ALL_RECIPES).bc.getValue();
 		Object feasibleRecipes = broadcastDatasets.get(MefWorkingDataset.FEASIBLE_RECIPES).bc.getValue();
 		
-		if(allRecipes==null || !(allRecipes instanceof Map<?, ?>)){
-			String message = String.format("Broadcasted variable for all recipes null or wrong typed: %s", allRecipes==null?null:allRecipes.getClass());
-			logger.error(message);
-			throw new IllegalArgumentException(message);
-		}
 		if(feasibleRecipes==null || !(feasibleRecipes instanceof Map<?,?>)){
 			String message = String.format("Broadcasted variable for feasible recipes null or wrong typed: %s", feasibleRecipes==null?null:feasibleRecipes.getClass());
 			logger.error(message);
 			throw new IllegalArgumentException(message);
 		}
 		
-		workingDataset.recipeById = (Map<Long,Recipe>)allRecipes;
 		workingDataset.feasibleByType = (Map<RecipeType,List<Recipe>>)feasibleRecipes;
+		workingDataset.indicize();
 	}
 	
 

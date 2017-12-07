@@ -26,7 +26,7 @@ public class MefWorkingDataset implements WorkingDataset{
 	public final static String FEASIBLE_RECIPES = "FEASIBLE_RECIPES";
 	
 	public Map<RecipeType, List<Recipe>> feasibleByType = new TreeMap<RecipeType, List<Recipe>>();
-	public Map<Long, Recipe> recipeById = new HashMap<Long, Recipe>();
+	public transient Map<Long, Recipe> recipeById = new HashMap<Long, Recipe>();
 	
 	public List<Recipe> getRecipes(List<Long> recipesIds){
 		List<Recipe> result = recipeById.entrySet().stream()
@@ -34,6 +34,16 @@ public class MefWorkingDataset implements WorkingDataset{
 				.map(entry->entry.getValue())
 				.collect(Collectors.toList());
 		return result;
+	}
+	
+	
+	/**
+	 * Create recipeById map to facilitate searches by IDs.
+	 */
+	public void indicize(){
+		recipeById = feasibleByType.values().stream()
+				.flatMap(l -> l.stream())
+				.collect(Collectors.toMap(r -> r.id, r -> r));
 	}
 
 }
