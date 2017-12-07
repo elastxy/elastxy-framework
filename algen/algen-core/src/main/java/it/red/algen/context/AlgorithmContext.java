@@ -23,7 +23,7 @@ public class AlgorithmContext implements Serializable {
 	/**
 	 * Application components bootstrapped (copy created for this specific execution).
 	 */
-	public transient AppComponents application = new AppComponents();
+	public AppComponents application = new AppComponents();
 
 	/**
 	 * Specifics coming from an application for a given execution: custom parameters 

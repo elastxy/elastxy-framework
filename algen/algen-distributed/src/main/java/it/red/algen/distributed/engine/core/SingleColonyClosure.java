@@ -15,6 +15,8 @@ import it.red.algen.applications.components.factory.AppBootstrapRaw;
 import it.red.algen.context.AlgorithmContext;
 import it.red.algen.distributed.dataprovider.BroadcastWorkingDataset;
 import it.red.algen.distributed.dataprovider.BroadcastedDatasetProvider;
+import it.red.algen.distributed.dataprovider.ProcessingOnlyDistributedDatasetProvider;
+import it.red.algen.distributed.dataprovider.ProcessingOnlyDistributedGenomaProvider;
 import it.red.algen.domain.experiment.Solution;
 import it.red.algen.domain.experiment.Target;
 import it.red.algen.domain.genetics.genotype.Allele;
@@ -47,7 +49,6 @@ import it.red.algen.stats.ExperimentStats;
 public class SingleColonyClosure implements FlatMapFunction<Iterator<Allele>, Solution> {
 	private static Logger logger = Logger.getLogger(SingleColonyClosure.class);
 	
-	private String applicationName = null;
 	private long currentEraNumber = 0L;
 	private AlgorithmContext context;
 	private Target target;
@@ -59,7 +60,6 @@ public class SingleColonyClosure implements FlatMapFunction<Iterator<Allele>, So
     
     // TODOM: ClosureContext instead of many params
 	public SingleColonyClosure(
-			String applicationName,
 			long currentEraNumber,
 			AlgorithmContext context,
 			Target target,
@@ -67,7 +67,6 @@ public class SingleColonyClosure implements FlatMapFunction<Iterator<Allele>, So
   			Broadcast<List<Allele>> mutatedGenesBC,
   			Broadcast<List<Solution>> previousBestMatchesBC,
   			Map<String, BroadcastWorkingDataset> broadcastDatasets){
-		this.applicationName = applicationName;
 		this.currentEraNumber = currentEraNumber;
 		this.context = context;
 		this.target = target;
@@ -85,7 +84,7 @@ public class SingleColonyClosure implements FlatMapFunction<Iterator<Allele>, So
 		
 		logger.info(String.format(">>> 2.1 Population Creation [era %d] 					WORKER => List[Solution]", currentEraNumber));
 	    
-		boolean processingOnly = applicationName.equals("sudoku_d") || applicationName.equals("garden_d")  || applicationName.equals("algofrigerator_d") ? true : false; // TODOA: cablone!!!!!!!!!!!!!!!!!!!!!
+		boolean processingOnly = (context.application.distributedGenomaProvider instanceof ProcessingOnlyDistributedGenomaProvider) ? true : false;
 		ExperimentStats stats = processingOnly ? runIsolatedColonyExperiment() : runLinkedColonyExperiment(initialGenomaIterator);
 		
 		
@@ -100,7 +99,15 @@ public class SingleColonyClosure implements FlatMapFunction<Iterator<Allele>, So
 	}
 
 	
-	// TODOA: reintroduce previous best matches
+	/**
+	 * Runs an experiment starting from scratch: no genoma is reintroduced
+	 * beyond best matches of previous generation.
+	 * 
+	 * TODOA: reintroduce previous best matches
+	 * 
+	 * @param initialGenomaIterator
+	 * @return
+	 */
 	private ExperimentStats runIsolatedColonyExperiment() {
 		SingleColonyExperiment experiment = new SingleColonyExperiment(context);
 		experiment.run();
@@ -108,6 +115,13 @@ public class SingleColonyClosure implements FlatMapFunction<Iterator<Allele>, So
 		return stats;
 	}
 
+	
+	/**
+	 * Runs an experiment starting from the map partitions iterator.
+	 * 
+	 * @param initialGenomaIterator
+	 * @return
+	 */
 	private ExperimentStats runLinkedColonyExperiment(Iterator<Allele> initialGenomaIterator) {
 		// TODOA: remove in case of processing only apps
 		// Import Alleles from Iterator => new population
@@ -141,7 +155,7 @@ public class SingleColonyClosure implements FlatMapFunction<Iterator<Allele>, So
 
 	private void bootstrap() {
 		AppBootstrapRaw bootstrap = new AppBootstrapRaw();
-		AppComponentsLocator locator = bootstrap.boot(applicationName);
+		AppComponentsLocator locator = bootstrap.boot(context.application.appName);
 		// TODOM: check if mandatory configurations are present!
 		logger.info("Initializing LOCAL context.");
 		setupContext(locator);
@@ -149,8 +163,7 @@ public class SingleColonyClosure implements FlatMapFunction<Iterator<Allele>, So
 
 	
 	private void setupContext(AppComponentsLocator locator) {
-		context.application = locator.get(applicationName);
-		context.application.appName = applicationName;
+		context.application = locator.get(context.application.appName);
 		if(context.application.datasetProvider!=null) {
 			context.application.datasetProvider.setup(context);
 		}

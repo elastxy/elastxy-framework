@@ -59,31 +59,31 @@ public class AppComponents implements Serializable {
 	public String appName;
 	public String appFolder;
 	
-	public TargetBuilder targetBuilder;
-	public EnvFactory envFactory;
+	public transient TargetBuilder targetBuilder;
+	public transient EnvFactory envFactory;
 
-	public DatasetProvider datasetProvider;
-	public GenomaProvider genomaProvider;
-	public AlleleGenerator alleleGenerator;
+	public transient DatasetProvider datasetProvider;
+	public transient GenomaProvider genomaProvider;
+	public transient AlleleGenerator alleleGenerator;
 	
-	public PopulationFactory populationFactory;
-	public SolutionsFactory solutionsFactory;
+	public transient PopulationFactory populationFactory;
+	public transient SolutionsFactory solutionsFactory;
 	
-	public Incubator incubator;
-	public FitnessCalculator fitnessCalculator;
+	public transient Incubator incubator;
+	public transient FitnessCalculator fitnessCalculator;
 	
-	public Selector selector;
-	public Mutator mutator;
-	public Recombinator recombinator;
+	public transient Selector selector;
+	public transient Mutator mutator;
+	public transient Recombinator recombinator;
 	
-	public SolutionRenderer solutionRenderer;
+	public transient SolutionRenderer solutionRenderer;
 
 	// Distributed application
 	// TODOM: DistributedAppComponents extending this?
-	public EnvFactory multiColonyEnvFactory; // TODOD: type of MultiColonyEnvFactory
-	public DatasetProvider distributedDatasetProvider; // TODOD: type of DistributedDatasetProvider (another application json???)
-	public DatasetProvider singleColonyDatasetProvider; // TODOD: type of BroadcastedDatasetProvider (another application json???)
-	public GenomaProvider distributedGenomaProvider; // TODOD: type of DistributedGenomaProvider (another application json???)
+	public transient EnvFactory multiColonyEnvFactory; // TODOD: type of MultiColonyEnvFactory
+	public transient DatasetProvider distributedDatasetProvider; // TODOD: type of DistributedDatasetProvider (another application json???)
+	public transient DatasetProvider singleColonyDatasetProvider; // TODOD: type of BroadcastedDatasetProvider (another application json???)
+	public transient GenomaProvider distributedGenomaProvider; // TODOD: type of DistributedGenomaProvider (another application json???)
 	
 	/**
 	 * Creates a copy for redefining at runtime some behaviour
