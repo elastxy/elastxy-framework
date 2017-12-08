@@ -48,7 +48,9 @@ public class DistributedController {
 	private static transient Logger logger = Logger.getLogger(DistributedController.class);
 
 	
-	
+	/**
+	 * HEALTHCHECK PARAMETERS
+	 */
 	@Autowired
 	private SparkConf sparkConfLocal;
 	
@@ -59,41 +61,12 @@ public class DistributedController {
 	private String testFilePath;
 	
 	
+	/**
+	 * CLUSTER PARAMETERS
+	 */
+	@Autowired
+	private ApplicationsSparkConfig applicationsSparkConfig;
 	
-	// TODOA: mettere ordine!
-	@Value("${spark.home}")
-	private String sparkHome;
-	
-	@Value("${master.uri}")
-	private String masterUri;
-
-	@Value("${master.host}")
-	private String masterHost;
-
-	@Value("${spark.version}")
-	private String sparkVersion;
-
-	@Value("${app.jar.path}")
-	private String appJarPath;
-
-	@Value("${main.class}")
-	private String mainClass;
-	
-	@Value("${other.jars.path}")
-	private String otherJarsPath;
-//
-//	@Value("${spark.log4j.configuration}")
-//	private String sparkLog4jConfiguration;
-//
-//	@Value("${spark.eventLog.enabled}")
-//	private String sparkHistoryEventsEnabled;
-//
-//	@Value("${spark.eventLog.dir}")
-//	private String sparkHistoryEventsPath;
-
-//	@Value("${spark.history.fs.logDirectory}")
-//	private String sparkHistoryEventsLogdir;
-
 	
 	@RequestMapping(path = "/access", method = RequestMethod.HEAD)
 	@ResponseBody
@@ -102,15 +75,14 @@ public class DistributedController {
 	}
 
 	
-    // TODOA: remove or turn into an in memory check or add distributed test
     @RequestMapping("/healthcheck")
     public ResponseEntity<String> healthCheck() {
     	String localResult = runHealthCheck(sparkConfLocal);
     	String remoteResult = runHealthCheck(sparkConfRemote);
         return new ResponseEntity<>("LOCAL: \n"+localResult+"\nREMOTE: \n"+remoteResult, HttpStatus.OK);
     }
-
-
+    
+    
 	private String runHealthCheck(SparkConf sparkConf) {
 		String result;
 		JavaSparkContext context = new JavaSparkContext(sparkConf);
@@ -127,7 +99,9 @@ public class DistributedController {
 		return result;
 	}
 
-	// TODOD: check status & kill jobs
+	
+	
+	// TODOD-2: check status & kill jobs
 
     
 
@@ -139,16 +113,17 @@ public class DistributedController {
     	
 		context.application.appName = application;
 		
-		String sparkHome = this.sparkHome; // "C:/dev/spark-2.2.0-bin-hadoop2.7"
-		String master = "local[*]"; // local[*] | spark://192.168.1.101:7077
+		SparkTaskConfig taskConfig = applicationsSparkConfig.getTaskConfig(application);
+		
+		String master = "local[*]";
 		byte[] contextBytes = ReadConfigSupport.writeJSONString(context).getBytes(); 
 		String contextAsString = Base64.getEncoder().encodeToString(contextBytes);
 		
-		String[] params = new String[]{application, sparkHome, master, contextAsString};
+		String[] params = new String[]{application, taskConfig.sparkHome, master, contextAsString};
     	logger.info("Submitting job locally with params: "+Arrays.asList(params));
 		AlgenSparkApplication.main(params);
 
-    	logger.info("RESPONSE Service /experiment/local/{application}"); // TODOD: results
+    	logger.info("RESPONSE Service /experiment/local/{application}"); // TODOD: get and return results
         String stats = "OK";
     	return new ResponseEntity<>(stats, HttpStatus.OK);
     }
@@ -162,24 +137,9 @@ public class DistributedController {
 		logger.info("REQUEST Service /experiment/cluster/{application} => "+application+""+context);
     	
 		context.application.appName = application;
-		
-    	SparkTaskConfig config = new SparkTaskConfig();
-    	config.masterURI = masterUri;
-    	config.masterHost = masterHost;
-    	config.sparkVersion = sparkVersion;    	
-    	config.sparkHome = sparkHome;
-//    	config.log4jConfiguration = sparkLog4jConfiguration;
-//    	
-//    	config.historyEventsEnabled = sparkHistoryEventsEnabled;
-//    	config.historyEventsDir = sparkHistoryEventsPath;
-
-    	config.appName = application;
-    	config.appJarPath = appJarPath;
-    	config.mainClass = mainClass;
-    	config.otherJarsPath = otherJarsPath;
     	
     	SparkTaskExecutor executor = new SparkTaskExecutor();
-    	String stats = executor.runDistributed(config, context); // TODOD: ExperimentStats
+    	String stats = executor.runDistributed(applicationsSparkConfig.getTaskConfig(application), context); // TODOD: ExperimentStats
     	
     	logger.info("RESPONSE Service /experiment/cluster/{application} => "+stats);
         return new ResponseEntity<>(stats, HttpStatus.OK);
@@ -187,14 +147,12 @@ public class DistributedController {
     
     
 	
-
-
 //	@RequestMapping("/test/cluster/{application}")
 //	@ResponseBody
 //	public ExperimentStats test(@PathVariable String application) {
 //		logger.info("REQUEST Service /test/cluster/{application} => "+application);
 //
-//		// TODOD
+//		// TODOD /test/cluster
 //		if(true) throw new UnsupportedOperationException("NYI");
 //		String stats = "N/A";
 //		logger.info("RESPONSE Service /test/cluster/{application} => "+stats);
