@@ -3,6 +3,7 @@ package it.red.algen.engine.fitness;
 import it.red.algen.domain.experiment.Env;
 import it.red.algen.domain.genetics.Genotype;
 import it.red.algen.domain.genetics.phenotype.Phenotype;
+import it.red.algen.engine.core.IllegalSolutionException;
 
 public interface Incubator<G extends Genotype, P extends Phenotype> {
 
@@ -18,6 +19,6 @@ public interface Incubator<G extends Genotype, P extends Phenotype> {
 	 * @param genotype
 	 * @return
 	 */
-	public P grow(G genotype, Env environment);
+	public P grow(G genotype, Env environment) throws IllegalSolutionException;
 	
 }

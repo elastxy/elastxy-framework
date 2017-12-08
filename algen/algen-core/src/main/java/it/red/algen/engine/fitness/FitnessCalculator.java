@@ -2,6 +2,7 @@ package it.red.algen.engine.fitness;
 
 import it.red.algen.domain.experiment.Env;
 import it.red.algen.domain.experiment.Fitness;
+import it.red.algen.domain.experiment.GenericSolution;
 import it.red.algen.domain.experiment.Solution;
 import it.red.algen.domain.genetics.Genotype;
 import it.red.algen.domain.genetics.phenotype.Phenotype;

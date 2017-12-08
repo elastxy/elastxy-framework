@@ -11,7 +11,6 @@ import it.red.algen.algofrigerator.data.IngredientsCoverage;
 import it.red.algen.algofrigerator.data.MefWorkingDataset;
 import it.red.algen.algofrigerator.data.Recipe;
 import it.red.algen.algofrigerator.data.RecipeType;
-import it.red.algen.dataprovider.WorkingDataset;
 import it.red.algen.domain.experiment.Env;
 import it.red.algen.domain.genetics.genotype.Gene;
 import it.red.algen.domain.genetics.genotype.Strand;
@@ -37,7 +36,7 @@ public class MefIncubator implements Incubator<Strand, ComplexPhenotype>{
 	 * 
 	 */	
 	@Override
-	public ComplexPhenotype grow(Strand genotype, Env env) {
+	public ComplexPhenotype grow(Strand genotype, Env env) throws IllegalSolutionException {
 		
 		// Create recipes by type
 		RecipeAccumulator accumulator = new RecipeAccumulator();
@@ -72,7 +71,7 @@ public class MefIncubator implements Incubator<Strand, ComplexPhenotype>{
 		 * @param goal
 		 * @return
 		 */
-		public void calculate(MefWorkingDataset workingDataset, Strand genotype, MefGoal goal){
+		public void calculate(MefWorkingDataset workingDataset, Strand genotype, MefGoal goal) throws IllegalSolutionException {
 			resultingRecipes.put(RecipeType.SAVOURY, new ArrayList<Recipe>());
 			resultingRecipes.put(RecipeType.SWEET, new ArrayList<Recipe>());
 			
@@ -128,7 +127,7 @@ public class MefIncubator implements Incubator<Strand, ComplexPhenotype>{
 		 * @param goal
 		 * @return
 		 */
-		private List<Recipe> convertGeneToRecipe(MefWorkingDataset workingDataset, int chromosome, Strand genotype, MefGoal goal) {
+		private List<Recipe> convertGeneToRecipe(MefWorkingDataset workingDataset, int chromosome, Strand genotype, MefGoal goal) throws IllegalSolutionException {
 			Iterator<Gene> genes = genotype.chromosomes.get(chromosome).genes.iterator();
 			List<Long> recipesIds = new ArrayList<Long>();
 			while(genes.hasNext()){
@@ -139,7 +138,8 @@ public class MefIncubator implements Incubator<Strand, ComplexPhenotype>{
 			for(int r=0; r < recipes.size(); r++){
 				Recipe recipe = recipes.get(r);
 				if(recipe.coverage == null || recipe.coverage == IngredientsCoverage.UNDEFINED){
-					throw new IllegalSolutionException("Cannot convert Gene to Recipe. No coverage found ("+recipe.coverage+") for recipe id: "+recipe.id);
+					String legalCheck = "Cannot convert Gene to Recipe. No coverage found ("+recipe.coverage+") for recipe id: "+recipe.id;
+					throw new IllegalSolutionException(legalCheck, legalCheck);
 				}
 //				MefUtils.checkCoverage(recipes.get(r), goal.refrigeratorFoods);
 			}

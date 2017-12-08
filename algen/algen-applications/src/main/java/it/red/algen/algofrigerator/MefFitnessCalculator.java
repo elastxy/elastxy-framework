@@ -3,25 +3,20 @@ package it.red.algen.algofrigerator;
 import java.math.BigDecimal;
 import java.util.Map;
 
+import org.apache.log4j.Logger;
+
 import it.red.algen.domain.experiment.Env;
 import it.red.algen.domain.experiment.GenericSolution;
 import it.red.algen.domain.experiment.NumberRawFitness;
+import it.red.algen.domain.experiment.RawFitness;
 import it.red.algen.domain.experiment.StandardFitness;
-import it.red.algen.domain.genetics.genotype.Strand;
-import it.red.algen.domain.genetics.phenotype.ComplexPhenotype;
-import it.red.algen.engine.fitness.FitnessCalculator;
-import it.red.algen.engine.fitness.Incubator;
+import it.red.algen.engine.fitness.AbstractFitnessCalculator;
 
-public class MefFitnessCalculator implements FitnessCalculator<GenericSolution,StandardFitness> {
+public class MefFitnessCalculator extends  AbstractFitnessCalculator<GenericSolution,StandardFitness> {
+	private static final Logger logger = Logger.getLogger(MefFitnessCalculator.class);
+	
 	private static BigDecimal WEIGHT_COMPLETENESS 		= new BigDecimal(0.8);
 	private static BigDecimal WEIGHT_FOODS_FROM_FRIDGE 	= new BigDecimal(0.2);
-	
-	private Incubator<Strand,ComplexPhenotype> incubator;
-	
-	@Override
-	public void setup(Incubator incubator){
-		this.incubator = incubator;
-	}
 	
 	
 	/**
@@ -34,46 +29,47 @@ public class MefFitnessCalculator implements FitnessCalculator<GenericSolution,S
 	 * @return
 	 */
 	@Override
-	public StandardFitness calculate(GenericSolution solution, Env env) {
-        
-		// Setup fitness
-		StandardFitness result = new StandardFitness();
-        solution.setFitness(result);
-    	BigDecimal normalizedFitness = null;
-        
-    	// Grow the offspring to evaluate it
-    	solution.phenotype = incubator.grow((Strand)solution.genotype, env);
-
-    	// Get goal
-    	MefGoal goal = (MefGoal)env.target.getGoal();
-
+	protected final RawFitness calculateRaw(GenericSolution solution, Env env){
+        RawFitness rawFitness = null;
+		MefGoal goal = (MefGoal)env.target.getGoal();
     	// Check foods from fridge
     	BigDecimal foodsFromFridge = new BigDecimal((Double)((Map<String,Object>)solution.phenotype.getValue()).get(MefConstants.PHENOTYPE_PERCENTAGE_FOOD_FROM_FRIDGE)).setScale(3,  BigDecimal.ROUND_HALF_UP);
-    	if(goal.fridgeMandatory && foodsFromFridge.setScale(3).equals(BigDecimal.ZERO.setScale(3))){
-    		normalizedFitness = BigDecimal.ZERO;
-            result.setValue(normalizedFitness);
-            result.setRawValue(new NumberRawFitness(0.0));
-            return result;
+    	boolean noFridgeFoods = goal.fridgeMandatory && foodsFromFridge.setScale(3).equals(BigDecimal.ZERO.setScale(3));
+    	if(noFridgeFoods){
+    		rawFitness = new NumberRawFitness(0.0);
     	}
-
-    	// Check completeness
-    	BigDecimal completeness = null;
-    	Double completeMeals = (Double)((Map<String,Object>)solution.phenotype.getValue()).get(MefConstants.PHENOTYPE_COMPLETENESS_POINTS);
-    	BigDecimal completeMealsBD = new BigDecimal(completeMeals).setScale(2, BigDecimal.ROUND_HALF_UP);
-    	BigDecimal desiredMealsBD = new BigDecimal(goal.desiredMeals).setScale(2, BigDecimal.ROUND_HALF_UP);
+    	else {
+    		// Check completeness
+    		Double completeMeals = (Double)((Map<String,Object>)solution.phenotype.getValue()).get(MefConstants.PHENOTYPE_COMPLETENESS_POINTS);
+    		rawFitness = new NumberRawFitness(completeMeals);
+    	}
+    	return rawFitness;
+	}
+	
+	@Override
+	protected final BigDecimal normalize(GenericSolution solution, Env env, RawFitness rawFitness){
+        BigDecimal normalizedFitness = null;
+        
+		// TODOA: utilities compare ZERO!
+        MefGoal goal = (MefGoal)env.target.getGoal();
+        BigDecimal completeMeals = new BigDecimal(((NumberRawFitness)rawFitness).value.doubleValue());
+        boolean noFridgeFoods = goal.fridgeMandatory && completeMeals.setScale(3, BigDecimal.ROUND_HALF_UP).equals(BigDecimal.ZERO.setScale(3, BigDecimal.ROUND_HALF_UP));
+    	if(noFridgeFoods){
+    		normalizedFitness = BigDecimal.ZERO;
+    	}
+    	else {
+    		BigDecimal completeMealsBD = new BigDecimal(((NumberRawFitness)rawFitness).value.doubleValue()).setScale(2, BigDecimal.ROUND_HALF_UP);
+    		BigDecimal desiredMealsBD = new BigDecimal(goal.desiredMeals).setScale(2, BigDecimal.ROUND_HALF_UP);
     	
-    	// TODOA-2: completeness over 0!!!! check Accumulator and neutral recipes usage...
-    	completeness = completeMealsBD.compareTo(desiredMealsBD)==0 ? 
+    		// TODOA-2: completeness over 0!!!! check Accumulator and neutral recipes usage...
+    		BigDecimal completeness = completeMealsBD.compareTo(desiredMealsBD)==0 ? 
     			BigDecimal.ONE : 
     			completeMealsBD.divide(desiredMealsBD, BigDecimal.ROUND_HALF_UP);
-        
-    	// Weight different factors
-    	normalizedFitness = completeness.multiply(WEIGHT_COMPLETENESS).add(foodsFromFridge.multiply(WEIGHT_FOODS_FROM_FRIDGE)); 
-    	
-        // Create fitness result
-        result.setValue(normalizedFitness);
-        result.setRawValue(new NumberRawFitness(completeMeals));
-        return result;
-    }
-
+    		// Weight different factors
+    		BigDecimal foodsFromFridge = new BigDecimal((Double)((Map<String,Object>)solution.phenotype.getValue()).get(MefConstants.PHENOTYPE_PERCENTAGE_FOOD_FROM_FRIDGE)).setScale(3,  BigDecimal.ROUND_HALF_UP);
+        	normalizedFitness = completeness.multiply(WEIGHT_COMPLETENESS).add(foodsFromFridge.multiply(WEIGHT_FOODS_FROM_FRIDGE)); 
+    	}
+    	return normalizedFitness;
+	}
+	
 }

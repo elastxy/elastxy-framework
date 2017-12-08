@@ -1,6 +1,5 @@
 package it.red.algen.metaexpressions;
 
-import it.red.algen.dataprovider.WorkingDataset;
 import it.red.algen.domain.experiment.Env;
 import it.red.algen.domain.genetics.genotype.Chromosome;
 import it.red.algen.domain.genetics.phenotype.NumberPhenotype;
@@ -10,12 +9,24 @@ import it.red.algen.engine.fitness.Incubator;
 public class MexIncubator implements Incubator<Chromosome, NumberPhenotype>{
 
 	@Override
-	public NumberPhenotype grow(Chromosome genotype, Env environment) {
+	public NumberPhenotype grow(Chromosome genotype, Env environment) throws IllegalSolutionException{
 		NumberPhenotype result = new NumberPhenotype();
-		result.value = calculate(
+		
+		Character operator = (Character)genotype.genes.get(1).allele.value;
+		Long operand2 = (Long)genotype.genes.get(2).allele.value;
+        try {
+        	result.value = calculate(
 				(Long)genotype.genes.get(0).allele.value,
-				(Character)genotype.genes.get(1).allele.value, 
-				(Long)genotype.genes.get(2).allele.value);
+				operator, 
+				operand2);
+        }
+        catch(IllegalSolutionException ex){
+        	throw ex;
+        }
+        catch(Exception ex){ 
+            String legalCheck = String.format("Generic exception while growing solution genotype: "+genotype);
+			throw new IllegalSolutionException(legalCheck, legalCheck);
+        }
 		return result;
 	}
 	
@@ -35,7 +46,8 @@ public class MexIncubator implements Incubator<Chromosome, NumberPhenotype>{
                 break;
             case '/':
                 if(val2==0){
-                    throw new IllegalSolutionException("Division by zero.");
+                    String legalCheck = "Division by 0 not allowed: second operand not valid in expression ["+val1+""+op+""+val2+"].";
+        			throw new IllegalSolutionException(legalCheck, legalCheck);
                 }
                 result = val1 / val2;
                 break;
