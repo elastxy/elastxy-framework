@@ -86,7 +86,7 @@ public class RecombinatorLogics {
 	 * S2.b = 6
 	 * => (1 * 2 / 6), (4 - 5 + 3)
 	 * 
-	 * TODOA: specific Recombinator implementation: Default, CX
+	 * TODOA-2: specific Recombinator implementation: Default, CX
 	 * 
 	 * @param off0genes
 	 * @param off1genes

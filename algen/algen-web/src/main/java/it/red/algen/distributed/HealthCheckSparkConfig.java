@@ -11,7 +11,6 @@ import org.springframework.core.env.Environment;
 
 
 /**
- * TODOA: Reuse for applications config, not only healthcheck
  * @author red
  *
  */

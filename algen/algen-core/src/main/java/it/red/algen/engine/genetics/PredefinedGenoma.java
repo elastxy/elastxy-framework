@@ -69,9 +69,10 @@ public class PredefinedGenoma extends AbstractGenoma implements Genoma {
 	
 	/**
 	 * Returns a random allele for every position, with no duplicates.
-	 * TODOA: strategy for admitting duplicates or not?
 	 * 
 	 * Implemented only for shared values.
+	 * 
+	 * TODOM-4: strategy for admitting duplicates or not?
 	 * @return
 	 */
 	@Override
@@ -102,9 +103,9 @@ public class PredefinedGenoma extends AbstractGenoma implements Genoma {
 
 	/**
 	 * Returns a random allele for every position.
-	 * TODOA: strategy for admitting duplicates or not?
-	 * 
 	 * Implemented only for shared values.
+	 * 
+	 * TODOM-4: strategy for admitting duplicates or not?
 	 * 
 	 * @return
 	 */

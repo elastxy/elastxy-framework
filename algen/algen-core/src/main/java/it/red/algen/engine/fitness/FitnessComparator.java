@@ -32,7 +32,7 @@ public class FitnessComparator implements Comparator<Solution> {
 			result = 0;
 		}
 		else {
-			result = fitness1.compareTo(fitness2);
+			result = fitness1.compareTo(fitness2); // TODOM-1: check scale
 		}
 		
 		// MINUS SIGN => reverse order, from higher to lower

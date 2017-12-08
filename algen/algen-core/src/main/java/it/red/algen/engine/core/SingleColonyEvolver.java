@@ -67,7 +67,7 @@ public class SingleColonyEvolver implements Evolver {
     	if(context.monitoringConfiguration.verbose) env.generationsHistory.add(env.currentGen);
         
     	// TEST FITNESS - initial gen
-    	// TODOA: selection-operators-fitness-check also for first generation, bypassing operators
+    	// TODOA-4: selection-operators-fitness-check also for first generation, bypassing operators
         fitnessTester.test(env.currentGen, env);
         int generationSize = env.currentGen.solutions.size();
         Fitness bestFitness = env.currentGen.bestMatch.getFitness();

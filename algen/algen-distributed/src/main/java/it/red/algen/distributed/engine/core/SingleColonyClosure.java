@@ -103,7 +103,7 @@ public class SingleColonyClosure implements FlatMapFunction<Iterator<Allele>, So
 	 * Runs an experiment starting from scratch: no genoma is reintroduced
 	 * beyond best matches of previous generation.
 	 * 
-	 * TODOA: reintroduce previous best matches
+	 * TODOA-4: reintroduce previous best matches
 	 * 
 	 * @param initialGenomaIterator
 	 * @return
@@ -123,7 +123,7 @@ public class SingleColonyClosure implements FlatMapFunction<Iterator<Allele>, So
 	 * @return
 	 */
 	private ExperimentStats runLinkedColonyExperiment(Iterator<Allele> initialGenomaIterator) {
-		// TODOA: remove in case of processing only apps
+		
 		// Import Alleles from Iterator => new population
 		List<Allele> newPopulationAlleles = new ArrayList<Allele>();
 	    initialGenomaIterator.forEachRemaining(newPopulationAlleles::add);

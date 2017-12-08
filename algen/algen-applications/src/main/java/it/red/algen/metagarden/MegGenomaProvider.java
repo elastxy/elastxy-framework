@@ -72,7 +72,7 @@ public class MegGenomaProvider implements GenomaProvider {
 			
 			metadata.values = Arrays.asList(workingDataset.trees);
 			
-			MetadataGenomaBuilder.addGene(genoma, String.valueOf(pos), metadata); // TODOA: rework to a GenePosition to represent position
+			MetadataGenomaBuilder.addGene(genoma, String.valueOf(pos), metadata); // TODOM: rework to a GenePosition to represent position
 		}
 
 		MetadataGenomaBuilder.finalize(genoma);

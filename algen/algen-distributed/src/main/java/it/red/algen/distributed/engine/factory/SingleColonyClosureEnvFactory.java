@@ -77,7 +77,7 @@ public class SingleColonyClosureEnvFactory implements EnvFactory {
         
         GenomaProvider genomaProvider = context.application.genomaProvider;
         genomaProvider.collect();
-        Genoma genoma = genomaProvider.shrink(target); // TODOA: target from context??
+        Genoma genoma = genomaProvider.shrink(target); // TODOA-2: target from context??
         MetadataGenomaBuilder.setupAlleleValuesProvider(genoma, allelesProviderForPopulation);
 
     	// Create initial population
@@ -85,7 +85,7 @@ public class SingleColonyClosureEnvFactory implements EnvFactory {
 
     	// Updates Genoma with broadcasted mutation Alleles for mutation
         AlleleValuesProvider allelesProviderForMutation = new InMemoryAlleleValuesProvider();
-        // TODOA: where to put constants? how to manage multi alleles provider?
+        // TODOA-4: how to manage multi alleles provider?
         allelesProviderForMutation.insertAlleles(DistributedAlleleValuesProvider.NAME, mutationAlleles);
     	genoma.setAlleleValuesProvider(allelesProviderForMutation);
         

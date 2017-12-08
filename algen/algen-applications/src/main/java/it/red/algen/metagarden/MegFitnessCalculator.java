@@ -12,6 +12,7 @@ import it.red.algen.domain.experiment.PerformanceTarget;
 import it.red.algen.domain.experiment.RawFitness;
 import it.red.algen.domain.experiment.StandardFitness;
 import it.red.algen.domain.genetics.phenotype.UserPhenotype;
+import it.red.algen.engine.core.MathUtils;
 import it.red.algen.engine.fitness.AbstractFitnessCalculator;
 import it.red.algen.metagarden.data.GardenWellness;
 
@@ -38,7 +39,7 @@ public class MegFitnessCalculator extends  AbstractFitnessCalculator<GenericSolu
 	protected final BigDecimal normalize(GenericSolution solution, Env env, RawFitness rawFitness){
 		BigDecimal result = BigDecimal.ONE;
     	Double unhappyness = ((NumberRawFitness)rawFitness).value.doubleValue();
-    	if(new BigDecimal(unhappyness).setScale(3, BigDecimal.ROUND_HALF_UP).compareTo(BigDecimal.ZERO.setScale(3, BigDecimal.ROUND_HALF_UP))!=0){
+    	if(!MathUtils.equals(new BigDecimal(unhappyness), BigDecimal.ZERO)){
     		PerformanceTarget<String,Double> target = (PerformanceTarget<String,Double>)env.target;
     		BigDecimal bh = new BigDecimal(unhappyness).setScale(20, BigDecimal.ROUND_HALF_UP);
     		BigDecimal bt = new BigDecimal(target.getReferenceMeasure()).setScale(20, BigDecimal.ROUND_HALF_UP);

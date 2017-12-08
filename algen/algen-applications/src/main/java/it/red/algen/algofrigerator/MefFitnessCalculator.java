@@ -10,6 +10,7 @@ import it.red.algen.domain.experiment.GenericSolution;
 import it.red.algen.domain.experiment.NumberRawFitness;
 import it.red.algen.domain.experiment.RawFitness;
 import it.red.algen.domain.experiment.StandardFitness;
+import it.red.algen.engine.core.MathUtils;
 import it.red.algen.engine.fitness.AbstractFitnessCalculator;
 
 public class MefFitnessCalculator extends  AbstractFitnessCalculator<GenericSolution,StandardFitness> {
@@ -25,7 +26,6 @@ public class MefFitnessCalculator extends  AbstractFitnessCalculator<GenericSolu
 	 * - recipes completeness => weight 80%
 	 * - used foods from fridge instead of pantry => weight 20% (dfault) OR mandatory, depends on user choice
 	 * 
-	 * TODOA: remove redundancy with other fitness calculator
 	 * @return
 	 */
 	@Override
@@ -50,10 +50,9 @@ public class MefFitnessCalculator extends  AbstractFitnessCalculator<GenericSolu
 	protected final BigDecimal normalize(GenericSolution solution, Env env, RawFitness rawFitness){
         BigDecimal normalizedFitness = null;
         
-		// TODOA: utilities compare ZERO!
         MefGoal goal = (MefGoal)env.target.getGoal();
         BigDecimal completeMeals = new BigDecimal(((NumberRawFitness)rawFitness).value.doubleValue());
-        boolean noFridgeFoods = goal.fridgeMandatory && completeMeals.setScale(3, BigDecimal.ROUND_HALF_UP).equals(BigDecimal.ZERO.setScale(3, BigDecimal.ROUND_HALF_UP));
+        boolean noFridgeFoods = goal.fridgeMandatory && MathUtils.equals(completeMeals, BigDecimal.ZERO);
     	if(noFridgeFoods){
     		normalizedFitness = BigDecimal.ZERO;
     	}

@@ -103,13 +103,13 @@ public class MexdDistributedGenomaProvider implements DistributedGenomaProvider 
 	public List<Allele> collectForMutation() {
 		double solutionsToMutatePerGen = ((double)context.algorithmParameters.initialSelectionNumber) * context.algorithmParameters.mutationPerc;
 		long countAvailable = workingDataset.rdd.count();
-		// TODOA: what to do when time instead maxIterations is requested? 
-		// If iterations count is not known, by now we take a mutationPerc % of all Alleles in the partitions
 		long neededAlleles = -1;
 		long totAlleles = -1;
 		if(context.algorithmParameters.stopConditions.maxIterations > 0){
 			neededAlleles = Math.round(solutionsToMutatePerGen * (double)context.algorithmParameters.stopConditions.maxIterations); // a little more choice
 		}
+		// If iterations count is not known, by now we take a mutationPerc % of all Alleles in the partitions
+		// TODOM-4: upgrade considering real elapsed generation time (by executing a benchmark, for example)
 		else {
 			neededAlleles = Math.round(countAvailable / (double)context.algorithmParameters.partitions * context.algorithmParameters.mutationPerc);
 		}

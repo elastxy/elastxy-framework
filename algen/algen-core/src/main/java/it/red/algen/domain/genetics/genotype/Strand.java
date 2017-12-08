@@ -18,7 +18,7 @@ import it.red.algen.engine.operators.MutatorLogics;
  * Position: "<chromosome>.<gene>"
  * E.g. "0.0", "0.1", .. , "5.4", .. , "M.N" 
  * 
- * TODOA: rework to a GenePosition to represent position
+ * TODOM: rework to a GenePosition to represent position
  *
  * @author red
  *
