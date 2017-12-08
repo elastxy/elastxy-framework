@@ -14,16 +14,13 @@
  * limitations under the License.
  */
 
-package it.red.algen.distributed;
+package it.red.algen.controller;
 
 import java.util.Arrays;
 import java.util.Base64;
 
 import org.apache.log4j.Logger;
-import org.apache.spark.SparkConf;
-import org.apache.spark.api.java.JavaSparkContext;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
@@ -34,76 +31,25 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import it.red.algen.conf.ReadConfigSupport;
+import it.red.algen.distributed.ApplicationsSparkConfig;
+import it.red.algen.distributed.SparkTaskConfig;
+import it.red.algen.distributed.SparkTaskExecutor;
 import it.red.algen.distributed.appsupport.AlgenSparkApplication;
 import it.red.algen.distributed.context.DistributedAlgorithmContext;
 
 
-/**
- * TODOA: Move Healthcheck to another specific Controller
- * @author red
- */
 @Controller
 @RequestMapping(path = "/distributed")
 public class DistributedController {
 	private static transient Logger logger = Logger.getLogger(DistributedController.class);
 
 	
-	/**
-	 * HEALTHCHECK PARAMETERS
-	 */
-	@Autowired
-	private SparkConf sparkConfLocal;
-	
-	@Autowired
-	private SparkConf sparkConfRemote;
-
-	@Value("${test.file.path}")
-	private String testFilePath;
-	
-	
-	/**
-	 * CLUSTER PARAMETERS
-	 */
 	@Autowired
 	private ApplicationsSparkConfig applicationsSparkConfig;
 	
 	
-	@RequestMapping(path = "/access", method = RequestMethod.HEAD)
-	@ResponseBody
-	public String access() {
-		return "OK";
-	}
-
-	
-    @RequestMapping("/healthcheck")
-    public ResponseEntity<String> healthCheck() {
-    	String localResult = runHealthCheck(sparkConfLocal);
-    	String remoteResult = runHealthCheck(sparkConfRemote);
-        return new ResponseEntity<>("LOCAL: \n"+localResult+"\nREMOTE: \n"+remoteResult, HttpStatus.OK);
-    }
-    
-    
-	private String runHealthCheck(SparkConf sparkConf) {
-		String result;
-		JavaSparkContext context = new JavaSparkContext(sparkConf);
-		try {
-    		result = SparkHealthCheckTask.run(context, testFilePath);
-    	}
-    	catch(Throwable t){
-    		result = "Error calling healthcheck! Ex: "+t;
-    		logger.fatal(result, t);
-    	}
-    	finally {
-    		context.stop();
-    	}
-		return result;
-	}
-
-	
-	
 	// TODOD-2: check status & kill jobs
 
-    
 
     @RequestMapping(path = "/experiment/local/{application}", method = RequestMethod.POST)
     public ResponseEntity<String> executeExperimentLocal(

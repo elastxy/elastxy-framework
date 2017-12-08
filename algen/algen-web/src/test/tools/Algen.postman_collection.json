@@ -8,13 +8,13 @@
 	},
 	"item": [
 		{
-			"name": "control",
+			"name": "monitor",
 			"description": "",
 			"item": [
 				{
-					"name": "/access",
+					"name": "/monitor/access",
 					"request": {
-						"url": "http://{{ip}}:{{port}}/access",
+						"url": "http://{{ip}}:{{port}}/monitor/access",
 						"method": "HEAD",
 						"header": [],
 						"body": {},
@@ -23,20 +23,9 @@
 					"response": []
 				},
 				{
-					"name": "/distributed/access",
+					"name": "/monitor/info",
 					"request": {
-						"url": "http://{{ip}}:{{port}}/distributed/access",
-						"method": "HEAD",
-						"header": [],
-						"body": {},
-						"description": ""
-					},
-					"response": []
-				},
-				{
-					"name": "/hello",
-					"request": {
-						"url": "http://{{ip}}:{{port}}/hello",
+						"url": "http://{{ip}}:{{port}}/monitor/info",
 						"method": "GET",
 						"header": [],
 						"body": {},
@@ -45,9 +34,9 @@
 					"response": []
 				},
 				{
-					"name": "/distributed/healthcheck",
+					"name": "/monitor/healthcheck",
 					"request": {
-						"url": "http://{{ip}}:{{port}}/distributed/healthcheck",
+						"url": "http://{{ip}}:{{port}}/monitor/healthcheck",
 						"method": "GET",
 						"header": [],
 						"body": {},
@@ -85,7 +74,7 @@
 						{
 							"name": "/test/expressions",
 							"request": {
-								"url": "http://{{ip}}:{{port}}/test/expressions",
+								"url": "http://{{ip}}:{{port}}/local/test/expressions",
 								"method": "GET",
 								"header": [],
 								"body": {},
@@ -96,7 +85,7 @@
 						{
 							"name": "/experiment/expressions",
 							"request": {
-								"url": "http://{{ip}}:{{port}}/experiment/expressions",
+								"url": "http://{{ip}}:{{port}}/local/experiment/expressions",
 								"method": "POST",
 								"header": [
 									{
@@ -107,7 +96,7 @@
 								],
 								"body": {
 									"mode": "raw",
-									"raw": "{\n\t\"applicationSpecifics\": {\n\t\t\"target\" : {\n\t\t\t\"TARGET_EXPRESSION_RESULT\" : 235000\n\t\t},\n\t\t\"params\" : {\n\t\t\t\"MAX_OPERAND_VALUE\" : 1000\n\t\t}\n\t},\n\t\"algorithmParameters\": {\n\t\t\"recombinationPerc\": 0.8,\n\t\t\"mutationPerc\": 0.2,\n\t\t\"elitarism\": true,\n\t\t\"initialSelectionNumber\": 1000,\n\t\t\"initialSelectionRandom\": true,\n\t\t\"stopConditions\": {\n\t\t\t\"targetFitness\" : 1.0,\n\t\t\t\"maxIterations\": -1,\n\t\t\t\"maxLifetimeMs\": 3000,\n\t\t\t\"maxIdenticalFitnesses\": -1\n\t\t}\n\t},\n\t\"monitoringConfiguration\": {\n\t\t\"verbose\": false,\n\t\t\"showGraph\": true\n\t}\n}"
+									"raw": "{\n\t\"applicationSpecifics\": {\n\t\t\"target\" : {\n\t\t\t\"TARGET_EXPRESSION_RESULT\" : 235000\n\t\t},\n\t\t\"params\" : {\n\t\t\t\"MAX_OPERAND_VALUE\" : 1000\n\t\t}\n\t},\n\t\"algorithmParameters\": {\n\t\t\"recombinationPerc\": 0.8,\n\t\t\"mutationPerc\": 0.2,\n\t\t\"elitarism\": true,\n\t\t\"initialSelectionNumber\": 1000,\n\t\t\"initialSelectionRandom\": true,\n\t\t\"stopConditions\": {\n\t\t\t\"targetThreshold\" : 0.99999999,\n\t\t\t\"maxIterations\": -1,\n\t\t\t\"maxLifetimeMs\": 10000,\n\t\t\t\"maxIdenticalFitnesses\": -1\n\t\t}\n\t},\n\t\"monitoringConfiguration\": {\n\t\t\"verbose\": false,\n\t\t\"showGraph\": true\n\t}\n}"
 								},
 								"description": ""
 							},
@@ -116,7 +105,7 @@
 						{
 							"name": "/analysis/expressions",
 							"request": {
-								"url": "http://{{ip}}:{{port}}/analysis/expressions/3",
+								"url": "http://{{ip}}:{{port}}/local/analysis/expressions/3",
 								"method": "POST",
 								"header": [
 									{
@@ -136,7 +125,7 @@
 						{
 							"name": "/trial/expressions",
 							"request": {
-								"url": "http://{{ip}}:{{port}}/trial/expressions/3",
+								"url": "http://{{ip}}:{{port}}/local/trial/expressions/3",
 								"method": "POST",
 								"header": [
 									{
@@ -163,7 +152,7 @@
 						{
 							"name": "/test/garden",
 							"request": {
-								"url": "http://{{ip}}:{{port}}/test/garden",
+								"url": "http://{{ip}}:{{port}}/local/test/garden",
 								"method": "GET",
 								"header": [],
 								"body": {},
@@ -174,7 +163,7 @@
 						{
 							"name": "/experiment/garden",
 							"request": {
-								"url": "http://{{ip}}:{{port}}/experiment/garden",
+								"url": "http://{{ip}}:{{port}}/local/experiment/garden",
 								"method": "POST",
 								"header": [
 									{
@@ -194,7 +183,7 @@
 						{
 							"name": "/analysis/garden",
 							"request": {
-								"url": "http://{{ip}}:{{port}}/analysis/garden/3",
+								"url": "http://{{ip}}:{{port}}/local/analysis/garden/3",
 								"method": "POST",
 								"header": [
 									{
@@ -214,7 +203,7 @@
 						{
 							"name": "/trial/garden",
 							"request": {
-								"url": "http://{{ip}}:{{port}}/trial/garden/5",
+								"url": "http://{{ip}}:{{port}}/local/trial/garden/5",
 								"method": "POST",
 								"header": [
 									{
@@ -241,7 +230,7 @@
 						{
 							"name": "/test/sudoku",
 							"request": {
-								"url": "http://{{ip}}:{{port}}/test/sudoku",
+								"url": "http://{{ip}}:{{port}}/local/test/sudoku",
 								"method": "GET",
 								"header": [],
 								"body": {},
@@ -252,7 +241,7 @@
 						{
 							"name": "/experiment/sudoku",
 							"request": {
-								"url": "http://{{ip}}:{{port}}/experiment/sudoku",
+								"url": "http://{{ip}}:{{port}}/local/experiment/sudoku",
 								"method": "POST",
 								"header": [
 									{
@@ -272,7 +261,7 @@
 						{
 							"name": "/analysis/sudoku",
 							"request": {
-								"url": "http://{{ip}}:{{port}}/analysis/sudoku/5",
+								"url": "http://{{ip}}:{{port}}/local/analysis/sudoku/5",
 								"method": "POST",
 								"header": [
 									{
@@ -292,7 +281,7 @@
 						{
 							"name": "/trial/sudoku",
 							"request": {
-								"url": "http://{{ip}}:{{port}}/trial/sudoku/3",
+								"url": "http://{{ip}}:{{port}}/local/trial/sudoku/3",
 								"method": "POST",
 								"header": [
 									{
@@ -319,7 +308,7 @@
 						{
 							"name": "/test/algofrigerator",
 							"request": {
-								"url": "http://{{ip}}:{{port}}/test/algofrigerator",
+								"url": "http://{{ip}}:{{port}}/local/test/algofrigerator",
 								"method": "GET",
 								"header": [],
 								"body": {},
@@ -330,7 +319,7 @@
 						{
 							"name": "/experiment/algofrigerator IT",
 							"request": {
-								"url": "http://{{ip}}:{{port}}/experiment/algofrigerator",
+								"url": "http://{{ip}}:{{port}}/local/experiment/algofrigerator",
 								"method": "POST",
 								"header": [
 									{
@@ -347,7 +336,7 @@
 							},
 							"response": [
 								{
-									"id": "21c4febb-5e40-4297-80ff-b9cef4643580",
+									"id": "21c29e46-57c1-4383-a5b4-45c14ed48bcf",
 									"name": "Database EN",
 									"originalRequest": {
 										"url": "http://{{ip}}:{{port}}/experiment/algofrigerator",
@@ -374,7 +363,7 @@
 									"body": ""
 								},
 								{
-									"id": "dd7f97dc-9e7b-4c97-91cb-ff06c40d1856",
+									"id": "e2724796-a125-47f9-8cc4-58d264810913",
 									"name": "Database IT",
 									"originalRequest": {
 										"url": "http://{{ip}}:{{port}}/experiment/algofrigerator",
@@ -401,7 +390,7 @@
 									"body": ""
 								},
 								{
-									"id": "1b05eae0-991e-4997-b877-b522406c2873",
+									"id": "f3b5ffbf-c99e-4237-994f-13de39d4c8fa",
 									"name": "Dispensa Rossi",
 									"originalRequest": {
 										"url": "http://{{ip}}:{{port}}/experiment/algofrigerator",
@@ -457,7 +446,7 @@
 						{
 							"name": "/analysis/algofrigerator",
 							"request": {
-								"url": "http://{{ip}}:{{port}}/analysis/algofrigerator/3",
+								"url": "http://{{ip}}:{{port}}/local/analysis/algofrigerator/3",
 								"method": "POST",
 								"header": [
 									{
@@ -477,7 +466,7 @@
 						{
 							"name": "/trial/algofrigerator",
 							"request": {
-								"url": "http://{{ip}}:{{port}}/trial/algofrigerator/3",
+								"url": "http://{{ip}}:{{port}}/local/trial/algofrigerator/3",
 								"method": "POST",
 								"header": [
 									{
@@ -493,6 +482,133 @@
 								"description": ""
 							},
 							"response": []
+						},
+						{
+							"name": "Algofrigerator",
+							"request": {
+								"url": "http://{{ip}}:{{port}}/local/experiment/algofrigerator",
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"description": ""
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n\t\"applicationSpecifics\": {\n\t\t\"target\" : {\n\t\t\t\"TARGET_DESIRED_MEALS\" : 10,\n\t\t\t\"TARGET_SAVOURY_PROPORTION\" : 50,\n\t\t\t\"TARGET_SWEET_PROPORTION\" : 50,\n\t\t\t\"TARGET_FRIDGE_MANDATORY\" : true\n\t\t},\n\t\t\"params\" : {\n\t\t\t\"REFRIGERATOR_FOODS\" : [ \"albume\", \"albumi\" ],\n\t\t\t\"PANTRY_FOODS\" : [ \n ],\n\t\t\t\"DATABASE\" : \"IT\"\n\t\t}\n\t},\n\t\"algorithmParameters\": {\n\t\t\"recombinationPerc\": 0.8,\n\t\t\"mutationPerc\": 0.2,\n\t\t\"elitarism\": true,\n\t\t\"initialSelectionNumber\": 10,\n\t\t\"initialSelectionRandom\": true,\n\t\t\"stopConditions\": {\n\t\t\t\"maxIterations\": -1,\n\t\t\t\"maxLifetimeMs\": 30000,\n\t\t\t\"maxIdenticalFitnesses\": -1\n\t\t}\n\t},\n\t\"monitoringConfiguration\": {\n\t\t\"verbose\": false,\n\t\t\"showGraph\": true,\n\t\t\"traceHistory\": false\n\t}\n}"
+								},
+								"description": ""
+							},
+							"response": [
+								{
+									"id": "2763bc26-4939-4a8d-aadf-744d47312d28",
+									"name": "Database EN",
+									"originalRequest": {
+										"url": "http://{{ip}}:{{port}}/experiment/algofrigerator",
+										"method": "POST",
+										"header": [
+											{
+												"key": "Content-Type",
+												"value": "application/json",
+												"description": ""
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n\t\"applicationSpecifics\": {\n\t\t\"target\" : {\n\t\t\t\"TARGET_DESIRED_MEALS\" : 10,\n\t\t\t\"TARGET_SAVOURY_PROPORTION\" : 70,\n\t\t\t\"TARGET_SWEET_PROPORTION\" : 30\n\t\t},\n\t\t\"params\" : {\n\t\t\t\"REFRIGERATOR_FOODS\" : [ \"milk\",\"eggs\",\"parmesan\"],\n\t\t\t\"PANTRY_FOODS\" : [ \"salt\",\"sugar\",\"oil\",\"pepper\",\"flour\",\"bread\",\"pasta\",\"coffee\",\"jam\",\"peas\"]\n\t\t}\n\t},\n\t\"parameters\": {\n\t\t\"recombinationPerc\": 0.8,\n\t\t\"mutationPerc\": 0.2,\n\t\t\"elitarism\": true,\n\t\t\"initialSelectionNumber\": 5,\n\t\t\"initialSelectionRandom\": true\n\t},\n\t\"stopConditions\": {\n\t\t\"targetFitness\" : 1.0,\n\t\t\"maxIterations\": -1,\n\t\t\"maxLifetimeMs\": 3000,\n\t\t\"maxIdenticalFitnesses\": -1\n\t},\n\t\"monitoringConfiguration\": {\n\t\t\"verbose\": false,\n\t\t\"traceHistory\": false\n\t}\n}"
+										}
+									},
+									"status": "OK",
+									"code": 200,
+									"_postman_previewlanguage": "",
+									"_postman_previewtype": "parsed",
+									"header": [],
+									"cookie": [],
+									"responseTime": 0,
+									"body": ""
+								},
+								{
+									"id": "2a146cb8-2ad0-4c64-9f79-0f8e65524d95",
+									"name": "Database IT",
+									"originalRequest": {
+										"url": "http://{{ip}}:{{port}}/experiment/algofrigerator",
+										"method": "POST",
+										"header": [
+											{
+												"key": "Content-Type",
+												"value": "application/json",
+												"description": ""
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n\t\"applicationSpecifics\": {\n\t\t\"target\" : {\n\t\t\t\"TARGET_DESIRED_MEALS\" : 10,\n\t\t\t\"TARGET_SAVOURY_PROPORTION\" : 70,\n\t\t\t\"TARGET_SWEET_PROPORTION\" : 30\n\t\t},\n\t\t\"params\" : {\n\t\t\t\"REFRIGERATOR_FOODS\" : [ \"latte\",\"uova\",\"formaggio\"],\n\t\t\t\"PANTRY_FOODS\" : [ \"sale\",\"zucchero\",\"olio\",\"pepe\",\"farina\",\"pane\",\"pasta\",\"caffè\",\"piselli\"],\n\t\t\t\"DATABASE\" : \"IT\"\n\t\t}\n\t},\n\t\"parameters\": {\n\t\t\"recombinationPerc\": 0.8,\n\t\t\"mutationPerc\": 0.2,\n\t\t\"elitarism\": true,\n\t\t\"initialSelectionNumber\": 5,\n\t\t\"initialSelectionRandom\": true\n\t},\n\t\"stopConditions\": {\n\t\t\"targetFitness\" : 1.0,\n\t\t\"maxIterations\": -1,\n\t\t\"maxLifetimeMs\": 3000,\n\t\t\"maxIdenticalFitnesses\": -1\n\t},\n\t\"monitoringConfiguration\": {\n\t\t\"verbose\": false,\n\t\t\"traceHistory\": false\n\t}\n}"
+										}
+									},
+									"status": "OK",
+									"code": 200,
+									"_postman_previewlanguage": "",
+									"_postman_previewtype": "parsed",
+									"header": [],
+									"cookie": [],
+									"responseTime": 0,
+									"body": ""
+								},
+								{
+									"id": "75120a01-b82f-467f-aee5-7c97d79fd790",
+									"name": "Dispensa Rossi",
+									"originalRequest": {
+										"url": "http://{{ip}}:{{port}}/experiment/algofrigerator",
+										"method": "POST",
+										"header": [
+											{
+												"key": "Content-Type",
+												"value": "application/json",
+												"description": ""
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n\t\"applicationSpecifics\": {\n\t\t\"target\" : {\n\t\t\t\"TARGET_DESIRED_MEALS\" : 10,\n\t\t\t\"TARGET_SAVOURY_PROPORTION\" : 70,\n\t\t\t\"TARGET_SWEET_PROPORTION\" : 30\n\t\t},\n\t\t\"params\" : {\n\t\t\t\"REFRIGERATOR_FOODS\" : [ \"yogurt\",\"pesche\",\"pesca\",\"banane\",\"albicocca\",\"albicocche\",\"parmigiano\",\"uov\",\"mozzarell\",\"salmone\",\"pomodor\",\"crescenza\",\"robiola\",\"wurstel\",\"zenzero\",\"oliv\",\"caviale\",\"lompo\",\"maionese\",\"tahina\",\"limone\",\"pesto\",\"prosciutto\",\"chioggia\",\"insalat\",\"zucchin\",\"fagiolin\",\"cipolle rosse\",\"cipolla rossa\",\"wasabi\",\"prezzemolo\",\"cipollott\",\"tacchino\",\"pollo\",\"orata\",\"branzin\",\"merluzz\",\"ravioli\",\"sedan\" ],\n\t\t\t\"PANTRY_FOODS\" : [ \"noci\",\"arachidi\",\"mele\",\"mela\",\"banan\",\"sgombr\",\"nocciol\",\"nutella\",\"marmellata\",\"acciug\",\"zucchero di canna\",\"vaniglia\",\"pinoli\",\"farina integrale\",\"farina di castagne\",\"cacao\",\"cioccolato\",\"cioccolato bianco\",\"cioccolato fondente\",\"cioccolato al latte\",\"patatine\",\"birra\",\"mandorle\",\"sale\",\"zucchero\",\"olio\",\"olio d'oliva\",\"olio di semi\",\"pepe\",\"farina\",\"pane\",\"pasta\",\"caff\",\"piselli\",\"acqua\",\"latte\",\"tonno\",\"miele\",\"senape\",\"dado\",\"cipoll\",\"patat\",\"carot\",\"biscott\",\"caffè solubile\",\"vino\",\"vino rosso\",\"vino bianco\",\"aceto\",\"aceto balsamico\",\"salsa di soia\" ],\n\t\t\t\"DATABASE\" : \"IT\"\n\t\t}\n\t},\n\t\"parameters\": {\n\t\t\"recombinationPerc\": 0.8,\n\t\t\"mutationPerc\": 0.2,\n\t\t\"elitarism\": true,\n\t\t\"initialSelectionNumber\": 20,\n\t\t\"initialSelectionRandom\": true\n\t},\n\t\"stopConditions\": {\n\t\t\"targetFitness\" : 1.0,\n\t\t\"maxIterations\": -1,\n\t\t\"maxLifetimeMs\": 5000,\n\t\t\"maxIdenticalFitnesses\": -1\n\t},\n\t\"monitoringConfiguration\": {\n\t\t\"verbose\": false,\n\t\t\"traceHistory\": false\n\t}\n}"
+										}
+									},
+									"status": "OK",
+									"code": 200,
+									"_postman_previewlanguage": "json",
+									"_postman_previewtype": "text",
+									"header": [
+										{
+											"name": "content-type",
+											"key": "content-type",
+											"value": "application/json;charset=UTF-8",
+											"description": "The mime type of this content"
+										},
+										{
+											"name": "date",
+											"key": "date",
+											"value": "Sun, 10 Sep 2017 07:19:22 GMT",
+											"description": "The date and time that the message was sent"
+										},
+										{
+											"name": "transfer-encoding",
+											"key": "transfer-encoding",
+											"value": "chunked",
+											"description": "The form of encoding used to safely transfer the entity to the user. Currently defined methods are: chunked, compress, deflate, gzip, identity."
+										},
+										{
+											"name": "x-application-context",
+											"key": "x-application-context",
+											"value": "application",
+											"description": "Custom header"
+										}
+									],
+									"cookie": [],
+									"responseTime": 73452,
+									"body": "{\"target\":{\"goal\":{\"refrigeratorFoods\":[\"latte\",\"uova\",\"formaggio\",\"burro\",\"carote\",\"peperoni\",\"pomodor\",\"acciughe\",\"sale\",\"zucchero\",\"olio\",\"pepe\",\"farina\",\"pane\",\"pasta\",\"caffè\",\"piselli\"],\"pantry\":[\"sale\",\"zucchero\",\"olio\",\"pepe\",\"farina\",\"pane\",\"pasta\",\"caffè\",\"piselli\"],\"desiredMeals\":10,\"savouryMeals\":7,\"sweetMeals\":3},\"measure\":null,\"weights\":[0.7,0.3],\"level\":1.0,\"threshold\":null,\"targetThreshold\":null,\"referenceMeasure\":null,\"targetFitness\":1.0},\"lastGeneration\":{\"bestMatch\":{\"genotype\":{\"chromosomes\":[{\"genes\":[{\"pos\":\"0.0\",\"metadataCode\":\"SA\",\"locationProperties\":{},\"allele\":{\"value\":6474,\"dominant\":false}},{\"pos\":\"0.1\",\"metadataCode\":\"SA\",\"locationProperties\":{},\"allele\":{\"value\":14246,\"dominant\":false}},{\"pos\":\"0.2\",\"metadataCode\":\"SA\",\"locationProperties\":{},\"allele\":{\"value\":20061,\"dominant\":false}},{\"pos\":\"0.3\",\"metadataCode\":\"SA\",\"locationProperties\":{},\"allele\":{\"value\":15162,\"dominant\":false}},{\"pos\":\"0.4\",\"metadataCode\":\"SA\",\"locationProperties\":{},\"allele\":{\"value\":26810,\"dominant\":false}},{\"pos\":\"0.5\",\"metadataCode\":\"SA\",\"locationProperties\":{},\"allele\":{\"value\":19904,\"dominant\":false}},{\"pos\":\"0.6\",\"metadataCode\":\"SA\",\"locationProperties\":{},\"allele\":{\"value\":23724,\"dominant\":false}}]},{\"genes\":[{\"pos\":\"1.0\",\"metadataCode\":\"SW\",\"locationProperties\":{},\"allele\":{\"value\":22896,\"dominant\":false}},{\"pos\":\"1.1\",\"metadataCode\":\"SW\",\"locationProperties\":{},\"allele\":{\"value\":11504,\"dominant\":false}},{\"pos\":\"1.2\",\"metadataCode\":\"SW\",\"locationProperties\":{},\"allele\":{\"value\":3694,\"dominant\":false}}]},{\"genes\":[{\"pos\":\"2.0\",\"metadataCode\":\"NE\",\"locationProperties\":{},\"allele\":{\"value\":17459,\"dominant\":false}},{\"pos\":\"2.1\",\"metadataCode\":\"NE\",\"locationProperties\":{},\"allele\":{\"value\":16693,\"dominant\":false}},{\"pos\":\"2.2\",\"metadataCode\":\"NE\",\"locationProperties\":{},\"allele\":{\"value\":23733,\"dominant\":false}},{\"pos\":\"2.3\",\"metadataCode\":\"NE\",\"locationProperties\":{},\"allele\":{\"value\":3410,\"dominant\":false}},{\"pos\":\"2.4\",\"metadataCode\":\"NE\",\"locationProperties\":{},\"allele\":{\"value\":2874,\"dominant\":false}},{\"pos\":\"2.5\",\"metadataCode\":\"NE\",\"locationProperties\":{},\"allele\":{\"value\":15379,\"dominant\":false}},{\"pos\":\"2.6\",\"metadataCode\":\"NE\",\"locationProperties\":{},\"allele\":{\"value\":17843,\"dominant\":false}},{\"pos\":\"2.7\",\"metadataCode\":\"NE\",\"locationProperties\":{},\"allele\":{\"value\":15680,\"dominant\":false}},{\"pos\":\"2.8\",\"metadataCode\":\"NE\",\"locationProperties\":{},\"allele\":{\"value\":8505,\"dominant\":false}},{\"pos\":\"2.9\",\"metadataCode\":\"NE\",\"locationProperties\":{},\"allele\":{\"value\":8887,\"dominant\":false}}]}],\"positions\":[\"0.0\",\"0.1\",\"0.2\",\"0.3\",\"0.4\",\"0.5\",\"0.6\",\"1.0\",\"1.1\",\"1.2\",\"2.0\",\"2.1\",\"2.2\",\"2.3\",\"2.4\",\"2.5\",\"2.6\",\"2.7\",\"2.8\",\"2.9\"],\"numberOfChromosomes\":3},\"phenotype\":{\"value\":{\"PHENOTYPE_SWEET_RECIPES\":[{\"id\":15680,\"name\":\"Pasticcini Gallesi (3)\",\"recipeType\":\"NEUTRAL\",\"ingredients\":[\"500 G ==== Pasta Sfoglia\",\"150 G ==== Formaggio Cheddar Tagliato In Pezzetti\",\" ==== Farina\",\" ==== Burro\"],\"mainIngredient\":\"Formaggio Cheddar\",\"coverage\":\"FULL_MAIN_INGR\",\"notAvailable\":[],\"available\":[\"500 G ==== Pasta Sfoglia\",\"150 G ==== Formaggio Cheddar Tagliato In Pezzetti\",\" ==== Farina\",\" ==== Burro\"],\"acknowledgedIngredients\":[\"pasta\",\"formaggio\",\"farina\",\"burro\"],\"acknowledgedMainIngredient\":\"formaggio\"},{\"id\":16693,\"name\":\"Piselli Nei Baccelli\",\"recipeType\":\"NEUTRAL\",\"ingredients\":[\"250 G ==== Piselli Freschi Nei Loro Baccelli\"],\"mainIngredient\":\"Piselli\",\"coverage\":\"FULL_MAIN_INGR\",\"notAvailable\":[],\"available\":[\"250 G ==== Piselli Freschi Nei Loro Baccelli\"],\"acknowledgedIngredients\":[\"piselli\"],\"acknowledgedMainIngredient\":\"piselli\"},{\"id\":17843,\"name\":\"Ravioli Al Formaggio\",\"recipeType\":\"NEUTRAL\",\"ingredients\":[\"200 G ==== Pasta Sfoglia Surgelata\",\"150 G ==== Formaggio Stracchino\",\" ==== Formaggio Grana Grattugiato\",\" ==== Burro\",\" ==== Farina\"],\"mainIngredient\":\"Pasta Sfoglia\",\"coverage\":\"FULL_MAIN_INGR\",\"notAvailable\":[],\"available\":[\"200 G ==== Pasta Sfoglia Surgelata\",\"150 G ==== Formaggio Stracchino\",\" ==== Formaggio Grana Grattugiato\",\" ==== Burro\",\" ==== Farina\"],\"acknowledgedIngredients\":[\"pasta\",\"formaggio\",\"formaggio\",\"burro\",\"farina\"],\"acknowledgedMainIngredient\":\"pasta\"}],\"PHENOTYPE_COMPLETENESS_POINTS\":9.200000000000001,\"PHENOTYPE_SAVOURY_RECIPES\":[{\"id\":3410,\"name\":\"Burro Chiarificato (ghee)\",\"recipeType\":\"NEUTRAL\",\"ingredients\":[\"3000 G ==== Burro Di Panna Pastorizzata\"],\"mainIngredient\":\"Burro\",\"coverage\":\"FULL_MAIN_INGR\",\"notAvailable\":[],\"available\":[\"3000 G ==== Burro Di Panna Pastorizzata\"],\"acknowledgedIngredients\":[\"burro\"],\"acknowledgedMainIngredient\":\"burro\"},{\"id\":8887,\"name\":\"Frittata Di Maccheroni\",\"recipeType\":\"NEUTRAL\",\"ingredients\":[\"600 G ==== Pasta Tipo Vermicelli\",\"7 ==== Uova\",\"150 G ==== Burro\",\"100 G ==== Formaggio Parmigiano\"],\"mainIngredient\":\"Uova\",\"coverage\":\"FULL_MAIN_INGR\",\"notAvailable\":[],\"available\":[\"600 G ==== Pasta Tipo Vermicelli\",\"7 ==== Uova\",\"150 G ==== Burro\",\"100 G ==== Formaggio Parmigiano\"],\"acknowledgedIngredients\":[\"pasta\",\"uova\",\"burro\",\"formaggio\"],\"acknowledgedMainIngredient\":\"uova\"},{\"id\":15379,\"name\":\"Pasta Al Gorgonzola\",\"recipeType\":\"NEUTRAL\",\"ingredients\":[\"200 G ==== Formaggio Gorgonzola\",\"80 G ==== Burro\",\"3 Cucchiai ==== Latte Freddo\",\"400 G ==== Pasta Tipo Farfalle\"],\"mainIngredient\":\"Formaggio Gorgonzola\",\"coverage\":\"FULL_MAIN_INGR\",\"notAvailable\":[],\"available\":[\"200 G ==== Formaggio Gorgonzola\",\"80 G ==== Burro\",\"3 Cucchiai ==== Latte Freddo\",\"400 G ==== Pasta Tipo Farfalle\"],\"acknowledgedIngredients\":[\"formaggio\",\"burro\",\"latte\",\"pasta\"],\"acknowledgedMainIngredient\":\"formaggio\"},{\"id\":6474,\"name\":\"Crostata Piccante Al Formaggio\",\"recipeType\":\"SAVOURY\",\"ingredients\":[\"150 G ==== Farina\",\"150 G ==== Burro\",\"25 Cl ==== Latte\",\"200 G ==== Panna\",\"40 G ==== Maizena\",\"100 G ==== Formaggio Gorgonzola\",\"70 G ==== Formaggio Camembert\",\"50 G ==== Formaggio Parmigiano Grattugiato\",\"3 ==== Uova\",\" ==== Sale\",\" ==== Pepe\"],\"mainIngredient\":\"Formaggio Gorgonzola\",\"coverage\":\"PARTIAL_MAIN_INGR\",\"notAvailable\":[\"200 G ==== Panna\",\"40 G ==== Maizena\"],\"available\":[\"150 G ==== Farina\",\"150 G ==== Burro\",\"25 Cl ==== Latte\",\"100 G ==== Formaggio Gorgonzola\",\"70 G ==== Formaggio Camembert\",\"50 G ==== Formaggio Parmigiano Grattugiato\",\"3 ==== Uova\",\" ==== Sale\",\" ==== Pepe\"],\"acknowledgedIngredients\":[\"farina\",\"burro\",\"latte\",\"formaggio\",\"formaggio\",\"formaggio\",\"uova\",\"sale\",\"pepe\"],\"acknowledgedMainIngredient\":\"formaggio\"},{\"id\":14246,\"name\":\"Nastrini Con Pomodorini, Pancetta E Grana\",\"recipeType\":\"SAVOURY\",\"ingredients\":[\"250 G ==== Pasta Tipo Nastrini\",\"200 G ==== Pomodori Perini Maturi\",\"100 G ==== Pancetta\",\"1 ==== Scalogno\",\" ==== Basilico\",\" ==== Formaggio Grana Padano\",\" ==== Olio D'oliva Extra-vergine\",\" ==== Sale\",\" ==== Pepe\"],\"mainIngredient\":\"Pomodori Perini\",\"coverage\":\"PARTIAL_MAIN_INGR\",\"notAvailable\":[\"100 G ==== Pancetta\",\"1 ==== Scalogno\",\" ==== Basilico\"],\"available\":[\"250 G ==== Pasta Tipo Nastrini\",\"200 G ==== Pomodori Perini Maturi\",\" ==== Formaggio Grana Padano\",\" ==== Olio D'oliva Extra-vergine\",\" ==== Sale\",\" ==== Pepe\"],\"acknowledgedIngredients\":[\"pasta\",\"pomodor\",\"formaggio\",\"olio\",\"sale\",\"pepe\"],\"acknowledgedMainIngredient\":\"pomodor\"},{\"id\":15162,\"name\":\"Pappa Con Il Pomodoro\",\"recipeType\":\"SAVOURY\",\"ingredients\":[\"==== Pane Integrale Raffermo\",\" ==== Salsa Di Pomodoro\",\" ==== Aglio\",\" ==== Peperoncino\",\" ==== Olio D'oliva Extra-vergine\",\" ==== Sale\"],\"mainIngredient\":\"Pane Integrale Raffermo\",\"coverage\":\"PARTIAL_MAIN_INGR\",\"notAvailable\":[\" ==== Aglio\"],\"available\":[\"==== Pane Integrale Raffermo\",\" ==== Salsa Di Pomodoro\",\" ==== Peperoncino\",\" ==== Olio D'oliva Extra-vergine\",\" ==== Sale\"],\"acknowledgedIngredients\":[\"pane\",\"pomodor\",\"pepe\",\"olio\",\"sale\"],\"acknowledgedMainIngredient\":\"pane\"},{\"id\":20061,\"name\":\"Sformato Al Formaggio\",\"recipeType\":\"SAVOURY\",\"ingredients\":[\"600 G ==== Patate A Pasta Bianca\",\"2 Cucchiai ==== Formaggio Parmigiano Reggiano Grattugiato\",\"100 G ==== Prosciutto Cotto Tritato\",\"100 G ==== Formaggio Provolone Piccante\",\"1 ==== Uovo\",\"30 G ==== Burro\",\"25 Cl ==== Latte\",\" ==== Sale\"],\"mainIngredient\":\"Formaggio Provolone Piccante\",\"coverage\":\"PARTIAL_MAIN_INGR\",\"notAvailable\":[\"100 G ==== Prosciutto Cotto Tritato\",\"1 ==== Uovo\"],\"available\":[\"600 G ==== Patate A Pasta Bianca\",\"2 Cucchiai ==== Formaggio Parmigiano Reggiano Grattugiato\",\"100 G ==== Formaggio Provolone Piccante\",\"30 G ==== Burro\",\"25 Cl ==== Latte\",\" ==== Sale\"],\"acknowledgedIngredients\":[\"pasta\",\"formaggio\",\"formaggio\",\"burro\",\"latte\",\"sale\"],\"acknowledgedMainIngredient\":\"formaggio\"}]}},\"fitness\":{\"value\":0.92,\"legalCheck\":null,\"rawValue\":{\"value\":9.200000000000001}}}},\"generations\":48,\"time\":3016.0,\"totIdenticalFitnesses\":47,\"targetReached\":false}"
+								}
+							]
 						}
 					],
 					"_postman_isSubFolder": true
@@ -802,7 +918,7 @@
 								],
 								"body": {
 									"mode": "raw",
-									"raw": "{\r\n\t\"applicationSpecifics\": {\r\n\t\t\"target\" : {\r\n\t\t\t\"TARGET_DESIRED_MEALS\" : 10,\r\n\t\t\t\"TARGET_SAVOURY_PROPORTION\" : 70,\r\n\t\t\t\"TARGET_SWEET_PROPORTION\" : 30,\r\n\t\t\t\"TARGET_FRIDGE_MANDATORY\" : true\r\n\t\t},\r\n\t\t\"params\" : {\r\n\t\t\t\"REFRIGERATOR_FOODS\" : [ \"yogurth\", \"banana\", \"banane\"  ],\r\n\t\t\t\"PANTRY_FOODS\" : [ \r\n ],\r\n\t\t\t\"DATABASE\" : \"IT\"\r\n\t\t}\r\n\t},\r\n\t\"algorithmParameters\": {\r\n\t\t\"recombinationPerc\": 0.8,\r\n\t\t\"mutationPerc\": 0.2,\r\n\t\t\"elitarism\": true,\r\n\t\t\"initialSelectionNumber\": 10,\r\n\t\t\"initialSelectionRandom\": true,\r\n\t\t\"stopConditions\": {\r\n\t\t\t\"targetFitness\": 1.0,\r\n\t\t\t\"targetThreshold\": 0.9,\r\n\t\t\t\"maxIterations\": -1,\r\n\t\t\t\"maxLifetimeMs\": 3000,\r\n\t\t\t\"maxIdenticalFitnesses\": 300,\r\n\t\t\t\"maxEras\": 5\r\n\t\t},\r\n\t\t\"partitions\": 4,\r\n\t\t\"eraBestMatches\" : 10,\r\n\t\t\"reshuffleEveryEras\" : 2,\r\n\t\t\"multicolonyElitarism\" : true\r\n\t},\r\n\t\"monitoringConfiguration\": {\r\n\t\t\"verbose\": false,\r\n\t\t\"showGraph\": true,\r\n\t\t\"traceHistory\": false\r\n\t}\r\n}\r\n"
+									"raw": "{\r\n\t\"applicationSpecifics\": {\r\n\t\t\"target\" : {\r\n\t\t\t\"TARGET_DESIRED_MEALS\" : 10,\r\n\t\t\t\"TARGET_SAVOURY_PROPORTION\" : 70,\r\n\t\t\t\"TARGET_SWEET_PROPORTION\" : 30,\r\n\t\t\t\"TARGET_FRIDGE_MANDATORY\" : true\r\n\t\t},\r\n\t\t\"params\" : {\r\n\t\t\t\"REFRIGERATOR_FOODS\" : [ \"yogurth\", \"banana\", \"banane\"  ],\r\n\t\t\t\"PANTRY_FOODS\" : [ \r\n ],\r\n\t\t\t\"DATABASE\" : \"IT\"\r\n\t\t}\r\n\t},\r\n\t\"algorithmParameters\": {\r\n\t\t\"recombinationPerc\": 0.8,\r\n\t\t\"mutationPerc\": 0.2,\r\n\t\t\"elitarism\": true,\r\n\t\t\"initialSelectionNumber\": 10,\r\n\t\t\"initialSelectionRandom\": true,\r\n\t\t\"stopConditions\": {\r\n\t\t\t\"maxIterations\": -1,\r\n\t\t\t\"maxLifetimeMs\": 3000,\r\n\t\t\t\"maxIdenticalFitnesses\": -1,\r\n\t\t\t\"maxEras\": 5\r\n\t\t},\r\n\t\t\"partitions\": 4,\r\n\t\t\"eraBestMatches\" : 10,\r\n\t\t\"reshuffleEveryEras\" : 2,\r\n\t\t\"multicolonyElitarism\" : true\r\n\t},\r\n\t\"monitoringConfiguration\": {\r\n\t\t\"verbose\": false,\r\n\t\t\"showGraph\": true,\r\n\t\t\"traceHistory\": false\r\n\t}\r\n}\r\n"
 								},
 								"description": ""
 							},
@@ -822,7 +938,7 @@
 								],
 								"body": {
 									"mode": "raw",
-									"raw": "{\r\n\t\"applicationSpecifics\": {\r\n\t\t\"target\" : {\r\n\t\t\t\"TARGET_DESIRED_MEALS\" : 10,\r\n\t\t\t\"TARGET_SAVOURY_PROPORTION\" : 70,\r\n\t\t\t\"TARGET_SWEET_PROPORTION\" : 30,\r\n\t\t\t\"TARGET_FRIDGE_MANDATORY\" : true\r\n\t\t},\r\n\t\t\"params\" : {\r\n\t\t\t\"REFRIGERATOR_FOODS\" : [ \"yogurth\", \"banana\", \"banane\"  ],\r\n\t\t\t\"PANTRY_FOODS\" : [ \r\n ],\r\n\t\t\t\"DATABASE\" : \"IT\"\r\n\t\t}\r\n\t},\r\n\t\"algorithmParameters\": {\r\n\t\t\"recombinationPerc\": 0.8,\r\n\t\t\"mutationPerc\": 0.2,\r\n\t\t\"elitarism\": true,\r\n\t\t\"initialSelectionNumber\": 10,\r\n\t\t\"initialSelectionRandom\": true,\r\n\t\t\"stopConditions\": {\r\n\t\t\t\"targetFitness\": 1.0,\r\n\t\t\t\"targetThreshold\": 0.9,\r\n\t\t\t\"maxIterations\": -1,\r\n\t\t\t\"maxLifetimeMs\": 3000,\r\n\t\t\t\"maxIdenticalFitnesses\": 300,\r\n\t\t\t\"maxEras\": 5\r\n\t\t},\r\n\t\t\"partitions\": 4,\r\n\t\t\"eraBestMatches\" : 10,\r\n\t\t\"reshuffleEveryEras\" : 2,\r\n\t\t\"multicolonyElitarism\" : true\r\n\t},\r\n\t\"monitoringConfiguration\": {\r\n\t\t\"verbose\": false,\r\n\t\t\"showGraph\": true,\r\n\t\t\"traceHistory\": false\r\n\t}\r\n}\r\n"
+									"raw": "{\r\n\t\"applicationSpecifics\": {\r\n\t\t\"target\" : {\r\n\t\t\t\"TARGET_DESIRED_MEALS\" : 10,\r\n\t\t\t\"TARGET_SAVOURY_PROPORTION\" : 70,\r\n\t\t\t\"TARGET_SWEET_PROPORTION\" : 30,\r\n\t\t\t\"TARGET_FRIDGE_MANDATORY\" : true\r\n\t\t},\r\n\t\t\"params\" : {\r\n\t\t\t\"REFRIGERATOR_FOODS\" : [ \"yogurth\", \"banana\", \"banane\"  ],\r\n\t\t\t\"PANTRY_FOODS\" : [ \r\n ],\r\n\t\t\t\"DATABASE\" : \"IT\"\r\n\t\t}\r\n\t},\r\n\t\"algorithmParameters\": {\r\n\t\t\"recombinationPerc\": 0.8,\r\n\t\t\"mutationPerc\": 0.2,\r\n\t\t\"elitarism\": true,\r\n\t\t\"initialSelectionNumber\": 10,\r\n\t\t\"initialSelectionRandom\": true,\r\n\t\t\"stopConditions\": {\r\n\t\t\t\"maxIterations\": -1,\r\n\t\t\t\"maxLifetimeMs\": 3000,\r\n\t\t\t\"maxIdenticalFitnesses\": -1,\r\n\t\t\t\"maxEras\": 5\r\n\t\t},\r\n\t\t\"partitions\": 4,\r\n\t\t\"eraBestMatches\" : 10,\r\n\t\t\"reshuffleEveryEras\" : 2,\r\n\t\t\"multicolonyElitarism\" : true\r\n\t},\r\n\t\"monitoringConfiguration\": {\r\n\t\t\"verbose\": false,\r\n\t\t\"showGraph\": true,\r\n\t\t\"traceHistory\": false\r\n\t}\r\n}\r\n"
 								},
 								"description": ""
 							},

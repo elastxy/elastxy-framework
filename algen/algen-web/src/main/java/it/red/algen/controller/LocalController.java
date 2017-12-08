@@ -16,9 +16,6 @@
 
 package it.red.algen.controller;
 
-import java.util.Collections;
-import java.util.Map;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -34,42 +31,13 @@ import it.red.algen.context.AlgorithmContext;
 import it.red.algen.stats.ExperimentStats;
 
 @Controller
-public class AlgenController {
-	private static Logger logger = LoggerFactory.getLogger(AlgenController.class);
+@RequestMapping(path = "/local")
+public class LocalController {
+	private static Logger logger = LoggerFactory.getLogger(LocalController.class);
 
-
-	@Autowired private InfoService infoService;
-	
 	@Autowired private ApplicationService applicationService;
 
-
-	/**
-	 * ********************* MONITOR CONTROLLER *********************
-	 * TODOM: move elsewhere
-	 * @return
-	 */
-	@RequestMapping(path = "/access", method = RequestMethod.HEAD)
-	@ResponseBody
-	public String access() {
-		logger.info("REQUEST Service /access => (empty)");
-		logger.info("RESPONSE Service /access => OK");
-		return "OK";
-	}
 	
-	
-	@RequestMapping(path = "/hello", method = RequestMethod.GET)
-	@ResponseBody
-	public Map<String, String> hello() {
-		logger.info("REQUEST Service /hello => (empty)");
-		logger.info("RESPONSE Service /hello => Message");
-		return Collections.singletonMap("message", infoService.getInfoMessage());
-	}
-
-	
-	
-	/**
-	 * ********************* EXPERIMENT CONTROLLER *********************
-	 */
 	@RequestMapping(path = "/experiment/{application}", method = RequestMethod.POST)
 	@ResponseBody
 	public ExperimentStats experiment(

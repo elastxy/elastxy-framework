@@ -14,12 +14,10 @@
  * limitations under the License.
  */
 
-package it.red.algen.controller;
+package it.red.algen.application;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
-
-import it.red.algen.application.ServiceProperties;
 
 @Component
 public class InfoService {
