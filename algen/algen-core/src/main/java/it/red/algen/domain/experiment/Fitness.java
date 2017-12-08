@@ -59,6 +59,15 @@ public interface Fitness extends Serializable {
      * @return
      */
     public boolean fit();
+
+    /**
+     * Returns true if current fitness value is next to the given values,
+     * with a given approximation.
+     * 
+     * If parameters are not set, checks for maximum value.
+     * @return
+     */
+    public boolean fit(BigDecimal targetThreshold, BigDecimal targetFitness);
     
     
     /**
@@ -87,6 +96,13 @@ public interface Fitness extends Serializable {
      * @return
      */
     public boolean sameOf(Fitness other);
+
+    /**
+     * Returns true if this fitness value is equals to a given one
+     * @param other
+     * @return
+     */
+    public boolean sameOf(BigDecimal other);
     
     
     /**

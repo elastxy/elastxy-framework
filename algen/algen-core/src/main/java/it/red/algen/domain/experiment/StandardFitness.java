@@ -48,6 +48,27 @@ public class StandardFitness implements Fitness {
         return compareTo(MAX)==0;
      }
 
+	
+	@Override
+    public boolean fit(BigDecimal targetThreshold, BigDecimal targetFitness){
+		boolean result = false;
+		
+		// Check threshold (if set)
+		if(targetThreshold != null && overThreshold(targetThreshold)){
+			result = true;
+		}
+		// Check exact fitness (if set)
+		else if(targetFitness != null && sameOf(targetFitness)){
+			result = true;
+		}
+		// Check maximum fitness
+		else if(targetThreshold==null && targetFitness == null && fit()){
+			result = true;
+		}
+		return result;
+    }
+
+	
 	/**
 	 * TODOM: use only compareTo for both
 	 */
@@ -57,9 +78,12 @@ public class StandardFitness implements Fitness {
     }
 
 	/**
-	 * Evaluates the nearest to the target fitness
+	 * Evaluates the nearest to the target fitness.
 	 * 
-	 * Nearest = the nearer based on absolute value of the distance to fitness
+	 * Nearest = the nearer based on absolute value of the distance to fitness.
+	 * 
+	 * E.g. with target fitness = 0.9, 0.901 is nearest than 0.898, 
+	 * while 0.91 is NOT nearest than 0.89.
 	 * 
 	 */
 	@Override
@@ -71,7 +95,9 @@ public class StandardFitness implements Fitness {
 	
 
 	/**
-	 * Returns true if current fitness is (strictly) greater than the desider threshold
+	 * Returns true if current fitness is (strictly) greater than the desider threshold.
+	 * 
+	 * E.g. 0.997 is greater than 0.99, while 0.99 is NOT greater 0.99
 	 */
 	@Override
     public boolean overThreshold(BigDecimal targetThreshold) {
@@ -82,6 +108,11 @@ public class StandardFitness implements Fitness {
 	@Override
 	public boolean sameOf(Fitness other) {
         return compareTo(other.getValue())==0;
+	}
+	
+	@Override
+	public boolean sameOf(BigDecimal other) {
+        return compareTo(other)==0;
 	}
 	
 	

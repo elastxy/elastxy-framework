@@ -87,7 +87,7 @@ public class MetadataGenotypeFactory {
 	 */
 	public static Strand createStrand(MetadataGenoma genoma){
 		
-		// TODOA: copy GenotypeStructure instead
+		// TODOM-2: copy GenotypeStructure instead
 		Strand result = new Strand();
 //		if(genoma.getNumberOfStrands()!=1){
 //			String msg = "Cannot create strand. Genoma with number of strands different from one: "+genoma.getNumberOfStrands();

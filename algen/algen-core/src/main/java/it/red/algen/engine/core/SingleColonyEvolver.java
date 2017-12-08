@@ -149,12 +149,13 @@ public class SingleColonyEvolver implements Evolver {
 	private boolean checkEndCondition(Fitness lastGenFitness, Fitness currentGenFitness) {
 		boolean endConditionFound = false;
 		
-		// Check threshold
-		// TODOA: is near target fitness checked?
-		if(context.algorithmParameters.stopConditions.targetThreshold != null &&
-				env.currentGen.bestMatch.getFitness().overThreshold(context.algorithmParameters.stopConditions.targetThreshold)){
+		// Check fitness
+		if(!endConditionFound && env.currentGen.bestMatch.getFitness().fit(
+				context.algorithmParameters.stopConditions.targetThreshold, 
+				context.algorithmParameters.stopConditions.targetFitness)){
 			endConditionFound = goalReached();
 		}
+		
 		
 		// Check stability of the fitness value
 		if(!endConditionFound && context.algorithmParameters.elitarism){
@@ -168,15 +169,10 @@ public class SingleColonyEvolver implements Evolver {
 		        }
 		    }
 		    else {
-		    	env.totIdenticalFitnesses = 0; // reset if doesn't match
+		    	env.totIdenticalFitnesses = 0; // if doesn't match, reset and starts over
 		    }
 		}
-		
-		// Check goal reached
-		if(!endConditionFound && currentGenFitness.fit()){
-			endConditionFound = goalReached();
-		}
-		
+				
 		// Check time stop
 		if(!endConditionFound && !stopVerifier.onTime(env.currentGenNumber, EnvSupport.getLifeTimeInMillis(env))){
 			EnvSupport.stopTime(env);

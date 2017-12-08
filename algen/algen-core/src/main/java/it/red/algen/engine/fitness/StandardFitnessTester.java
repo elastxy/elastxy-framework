@@ -29,7 +29,7 @@ public class StandardFitnessTester implements FitnessTester {
     	population.bestMatch = null;
     	
         Iterator<Solution<?,?>> it = population.solutions.iterator();
-        while(it.hasNext()){ // TODOA: MapReduce!
+        while(it.hasNext()){
             Solution<?,?> solution = it.next();
             
             // Skip fitness test for solutions already tested
@@ -43,15 +43,15 @@ public class StandardFitnessTester implements FitnessTester {
             	}
             }
 
-    		// Target threshold set: Over the threshold => It does not calculate other solution (TODOM: configurable?)
-    		if(env.target.getTargetThreshold()!=null &&
-    				solution.getFitness().overThreshold(env.target.getTargetThreshold())) {
+            // Check if desidered fitness is matched => it's best match ABSOLUTE: stop here!
+    		if(solution.getFitness().fit(env.target.getTargetThreshold(), env.target.getTargetFitness())) {
+    			// TODOM: multiple best matches!
     			population.bestMatch = solution;
     			population.goalReached = true;
     			break;
     		}
             
-            // Check if it's best match
+            // Check if it's best match RELATIVE
     		else if(isBestMatch(env.target, population.bestMatch, solution)){
             	population.bestMatch = solution;
             }
@@ -78,7 +78,7 @@ public class StandardFitnessTester implements FitnessTester {
 	private boolean isBestMatch(Target<?, ?> target, Solution<?, ?> currentBestMatch, Solution<?, ?> currentSolution) {
 		boolean bestMatch = false;
 		
-		// First time: TRUE
+		// No current best match: first solution is set to TRUE
 		if(currentBestMatch==null){
 			bestMatch = true;
 		}

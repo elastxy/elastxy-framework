@@ -40,8 +40,9 @@ public class Population {
     
     /**
      * Goal is reached while processing these population solutions:
-     * - fitness is 1.0 (TODOA: is near target fitness checked?)
-     * - fitness is over threshold
+     * - fitness is 1.0
+     * - fitness is identical to desider fitness value (if set)
+     * - fitness is over threshold fitness value (if set)
      */
     public boolean goalReached = false;
 

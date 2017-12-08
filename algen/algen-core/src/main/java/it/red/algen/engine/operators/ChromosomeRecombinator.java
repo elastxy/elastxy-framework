@@ -28,8 +28,8 @@ public class ChromosomeRecombinator implements Recombinator<Solution> {
      * all genes will be swapped, leading to poor performance.
      * TODOM by now it's not implemented
      * 
-     * TODOM: more than 2 parents management 
-     * TODOA: cut point for operating on minimum set of genes
+     * TODOM: more than 2 parents management
+     * TODOA-2: cut point for operating on minimum set of genes
      * 
      * @param other
      * @return
