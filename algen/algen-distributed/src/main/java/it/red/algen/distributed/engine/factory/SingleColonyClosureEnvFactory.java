@@ -72,12 +72,12 @@ public class SingleColonyClosureEnvFactory implements EnvFactory {
 
     	// Updates Genoma with local Alleles from partition for population creation
         AlleleValuesProvider allelesProviderForPopulation = new InMemoryAlleleValuesProvider();
-        // TODOD: name of alleles provider from metadata?
+        // TODOA-8: multi alleles provider: get name of alleles provider from metadata?
         allelesProviderForPopulation.insertAlleles(DistributedAlleleValuesProvider.NAME, newPopulationAlleles);
         
         GenomaProvider genomaProvider = context.application.genomaProvider;
         genomaProvider.collect();
-        Genoma genoma = genomaProvider.shrink(target); // TODOA-2: target from context??
+        Genoma genoma = genomaProvider.shrink(target); // TODOA-2: target from context?? now either from context and passed serialized
         MetadataGenomaBuilder.setupAlleleValuesProvider(genoma, allelesProviderForPopulation);
 
     	// Create initial population
@@ -85,12 +85,12 @@ public class SingleColonyClosureEnvFactory implements EnvFactory {
 
     	// Updates Genoma with broadcasted mutation Alleles for mutation
         AlleleValuesProvider allelesProviderForMutation = new InMemoryAlleleValuesProvider();
-        // TODOA-4: how to manage multi alleles provider?
+        // TODOA-8: multi alleles provider: how to manage multi alleles provider?
         allelesProviderForMutation.insertAlleles(DistributedAlleleValuesProvider.NAME, mutationAlleles);
     	genoma.setAlleleValuesProvider(allelesProviderForMutation);
         
         // Create environment
-        Env env = new Env(target, startGen, genoma, null); // TODOD: reintroduce working set (e.g. MeF)
+        Env env = new Env(target, startGen, genoma, null); // TODOA-2: reintroduce working set? (e.g. MeF)
         
         return env;
     }

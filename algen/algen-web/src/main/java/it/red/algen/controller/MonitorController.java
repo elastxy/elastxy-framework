@@ -46,7 +46,8 @@ public class MonitorController {
 	
 	
 	/**
-	 * TODOM: show registered applications
+	 * TODOA-2: show registered applications
+	 * TODOM-8: let register/deregister an application
 	 * @return
 	 */
 	@RequestMapping(path = "/info", method = RequestMethod.GET)

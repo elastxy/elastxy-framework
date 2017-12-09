@@ -21,12 +21,10 @@ public class StrandRecombinator implements Recombinator<Solution> {
     
     /**
      *  Recombination of two Solution. Two are the expected parents.
-     *  
-     * In case of preserving alleles, with cutpoint fixed to half,
-     * all genes will be swapped, leading to poor performance.
-     * TODOM by now it's not implemented
      * 
-     * TODOM: more than 2 parents management 
+     * TODOA-2: cut point for operating on minimum set of genes (from beginning or end of sequence)
+     * TODOM-2: check performance of Recombination operator
+     * TODOM-4: more than 2 parents management
      * 
      * @param other
      * @return
@@ -37,7 +35,7 @@ public class StrandRecombinator implements Recombinator<Solution> {
 		}
 		
 		// Define cut point
-		// TODOM: define cut point from metadata!
+		// TODOM-1: define cut point from metadata!
 		Strand genotype0 = (Strand)parents.get(0).getGenotype();
 		
 		Solution[] offsprings = null;

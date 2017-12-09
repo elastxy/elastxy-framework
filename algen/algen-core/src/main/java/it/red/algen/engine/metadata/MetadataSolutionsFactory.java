@@ -10,7 +10,7 @@ import it.red.algen.engine.factory.SolutionsFactory;
 public class MetadataSolutionsFactory implements SolutionsFactory<StandardMetadataGenoma> {
 
 
-    // TODOM: genotype builders based directly inside in genoma
+    // TODOM-4: genotype builders based directly inside in genoma
     @Override
     public Solution createRandom(StandardMetadataGenoma genoma) {
     	return createSolution(genoma, genoma.getRandomAlleles());

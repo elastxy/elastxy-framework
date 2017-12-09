@@ -79,11 +79,11 @@ public class AppComponents implements Serializable {
 	public transient SolutionRenderer solutionRenderer;
 
 	// Distributed application
-	// TODOM: DistributedAppComponents extending this?
-	public transient EnvFactory multiColonyEnvFactory; // TODOD: type of MultiColonyEnvFactory
-	public transient DatasetProvider distributedDatasetProvider; // TODOD: type of DistributedDatasetProvider (another application json???)
-	public transient DatasetProvider singleColonyDatasetProvider; // TODOD: type of BroadcastedDatasetProvider (another application json???)
-	public transient GenomaProvider distributedGenomaProvider; // TODOD: type of DistributedGenomaProvider (another application json???)
+	// TODOM-2: DistributedAppComponents extending this, with specific MultiColony- types?? another application.json extending local?
+	public transient EnvFactory multiColonyEnvFactory;
+	public transient DatasetProvider distributedDatasetProvider;
+	public transient DatasetProvider singleColonyDatasetProvider;
+	public transient GenomaProvider distributedGenomaProvider;
 	
 	/**
 	 * Creates a copy for redefining at runtime some behaviour

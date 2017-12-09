@@ -27,7 +27,7 @@ import it.red.algen.engine.metadata.StandardMetadataGenoma;
  * RDD<Allele> cardinality should be enough to cover 
  * a single population: solutionsNumber + 50%
  * 
- * TODOD: bloccare le interfacce in ottica SDK!
+ * TODOA-4: bloccare le interfacce in ottica SDK!
  * @author red
  */
 public class MexdDistributedGenomaProvider implements DistributedGenomaProvider {
@@ -96,7 +96,6 @@ public class MexdDistributedGenomaProvider implements DistributedGenomaProvider 
 	 * - 2000000 alleles 	=> we need 2000000 / 8 * 0.3 * 1.3 = 97500 genes.
 	 * 
 	 * If total needed alleles is more than available, all are pushed.
-	 * TODOD: check size of memory / network compromise for allele to mutate!
 	 * 
 	 */
 	@Override
@@ -109,7 +108,7 @@ public class MexdDistributedGenomaProvider implements DistributedGenomaProvider 
 			neededAlleles = Math.round(solutionsToMutatePerGen * (double)context.algorithmParameters.stopConditions.maxIterations); // a little more choice
 		}
 		// If iterations count is not known, by now we take a mutationPerc % of all Alleles in the partitions
-		// TODOM-4: upgrade considering real elapsed generation time (by executing a benchmark, for example)
+		// TODOM-4: upgrade considering real elapsed generation time (by executing a benchmark, for example). Check size of memory / network compromise
 		else {
 			neededAlleles = Math.round(countAvailable / (double)context.algorithmParameters.partitions * context.algorithmParameters.mutationPerc);
 		}
@@ -118,26 +117,23 @@ public class MexdDistributedGenomaProvider implements DistributedGenomaProvider 
 	    JavaRDD<Allele> mutatedGenomaRDD = pickNumbers(workingDataset.rdd, totAlleles).map(DataToAllele::toAllele);
 
 	    List<Allele> mutatedGenomaList = mutatedGenomaRDD.collect();
-	 // TODOD: logging
-//	    if(logger.isDebugEnabled()){
-//	      val count = mutatedGenomaList.size
-//	      logger.debug(s"List of $count mutated genes")
-//	      if(logger.isTraceEnabled()) logger.trace(mutatedGenomaList)
-//	    }
+	    if(logger.isDebugEnabled()){
+	      logger.debug("Number of "+mutatedGenomaList.size()+" mutated genes.");
+	      if(logger.isTraceEnabled()) logger.trace(mutatedGenomaList);
+	    }
 	    return mutatedGenomaList;
 	}
 
 
 	private JavaRDD<Long> pickNumbers(JavaRDD<Long> numbers, Long tot) {
 	    final Long totNumbers = numbers.count();
-	    final double percExtract = 1.3 * tot.doubleValue() / totNumbers.doubleValue();// a little more TODOD: spark plus configurable
-	    // TODOD: logging
-//	    if(logger.isDebugEnabled()) {
-//	      logger.debug(f"Picking perc $percExtract of $totNumbers numbers (was needed $tot)")
-//	    }
+	    final double percExtract = 1.3 * tot.doubleValue() / totNumbers.doubleValue();// put a little more // TODOM-1: spark plus configurable
+	    if(logger.isDebugEnabled()) {
+	      logger.debug("Picking perc "+percExtract+" of "+totNumbers+" numbers (was needed "+tot+")");
+	    }
 	    JavaRDD<Long> result = numbers.sample(true, percExtract, Randomizer.seed());
-		// TODOD: check performance when caching after count()
-//	    result.cache();
+		// TODOA-2: check performance of caching
+	    result.cache();
 //	    if(logger.isDebugEnabled()) {
 //	      val totPicked = result.count()
 //	      logger.debug(f"Picked rdd of $totPicked numbers")

@@ -9,7 +9,7 @@ import it.red.algen.engine.metadata.StandardMetadataGenoma;
 public class MefSolutionsFactory implements SolutionsFactory<StandardMetadataGenoma> {
 
 
-    // TODOM: genotype builders based directly inside in genoma
+    // TODOM-4: genotype builders based directly inside in genoma
     public Solution createRandom(StandardMetadataGenoma genoma) {
     	GenericSolution solution = new GenericSolution();
     	solution.genotype = MetadataGenotypeFactory.createStrand(genoma);

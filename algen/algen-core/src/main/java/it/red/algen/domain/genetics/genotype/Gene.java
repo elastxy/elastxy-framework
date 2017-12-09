@@ -5,8 +5,7 @@ import java.io.Serializable;
 /**
  * Gene is a position within a Chromosome instance, bringing an Allele value.
  * 
- * TODOM: BuildingBlock concept to optionally group/cluster many genes, 
- * beyond chromosomes
+ * TODOM-8: BuildingBlock concept to optionally group/cluster many genes, beyond chromosomes
  *
  * @author grossi
  */

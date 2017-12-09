@@ -88,7 +88,7 @@ public interface Genoma {
 	 * are consumed until no Allele is present (which it's a client side 
 	 * responsibility to ensure).
 	 * 
-	 * TODOM: limit logics embedded in a Genoma implementation
+	 * TODOM-1: limit logics embedded in a Genoma implementation
 	 * 
 	 * @return
 	 */

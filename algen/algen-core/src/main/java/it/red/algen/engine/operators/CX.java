@@ -3,6 +3,9 @@ package it.red.algen.engine.operators;
 import it.red.algen.domain.genetics.genotype.Gene;
 
 /**
+ * 
+ * TODOM-8: add a good set of Recombination operators
+ * 
  * @author red
  *
  */

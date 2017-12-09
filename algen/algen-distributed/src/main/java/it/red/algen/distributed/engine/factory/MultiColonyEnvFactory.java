@@ -24,7 +24,7 @@ import it.red.algen.engine.factory.EnvFactory;
  * 
  * @author grossi
  */
-public interface MultiColonyEnvFactory extends EnvFactory { // TODOD: type of MultiColonyEnvFactory. decouple from this iterface
+public interface MultiColonyEnvFactory extends EnvFactory {
 	
 	public void setup(AlgorithmContext context);
     

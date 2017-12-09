@@ -29,7 +29,7 @@ import it.red.algen.engine.genetics.PredefinedGenomaBuilder;
  *  
  *  Set of alleles is F in number, and limited when creating a new solution
  *  
- * TODOM: cache!
+ * TODOM-2: cache!
  * @author red
  *
  */

@@ -36,6 +36,7 @@ import it.red.algen.distributed.SparkTaskConfig;
 import it.red.algen.distributed.SparkTaskExecutor;
 import it.red.algen.distributed.appsupport.AlgenSparkApplication;
 import it.red.algen.distributed.context.DistributedAlgorithmContext;
+import it.red.algen.stats.ExperimentStats;
 
 
 @Controller
@@ -48,14 +49,14 @@ public class DistributedController {
 	private ApplicationsSparkConfig applicationsSparkConfig;
 	
 	
-	// TODOD-2: check status & kill jobs
+	// TODOA-2: check status & kill jobs
 
 
-    @RequestMapping(path = "/experiment/local/{application}", method = RequestMethod.POST)
+    @RequestMapping(path = "/local/experiment/{application}", method = RequestMethod.POST)
     public ResponseEntity<String> executeExperimentLocal(
     		@PathVariable String application,  
 			@RequestBody DistributedAlgorithmContext context) throws Exception {
-    	logger.info("REQUEST Service /experiment/local/{application} => "+application+""+context);
+    	logger.info("REQUEST Service /local/experiment/{application} => "+application+""+context);
     	
 		context.application.appName = application;
 		
@@ -69,40 +70,48 @@ public class DistributedController {
     	logger.info("Submitting job locally with params: "+Arrays.asList(params));
 		AlgenSparkApplication.main(params);
 
-    	logger.info("RESPONSE Service /experiment/local/{application}"); // TODOD: get and return results
+    	logger.info("RESPONSE Service /local/experiment/{application}"); // TODOA-4: return distributed ExperimentStats
         String stats = "OK";
     	return new ResponseEntity<>(stats, HttpStatus.OK);
     }
 
     
-    @RequestMapping(path = "/experiment/cluster/{application}", method = RequestMethod.POST)
+    @RequestMapping(path = "/cluster/experiment/{application}", method = RequestMethod.POST)
     @ResponseBody
 	public ResponseEntity<String> executeExperimentCluster(
 			@PathVariable String application,  
 			@RequestBody DistributedAlgorithmContext context) throws Exception {
-		logger.info("REQUEST Service /experiment/cluster/{application} => "+application+""+context);
+		logger.info("REQUEST Service /cluster/experiment/{application} => "+application+""+context);
     	
 		context.application.appName = application;
     	
     	SparkTaskExecutor executor = new SparkTaskExecutor();
-    	String stats = executor.runDistributed(applicationsSparkConfig.getTaskConfig(application), context); // TODOD: ExperimentStats
+    	String stats = executor.runDistributed(applicationsSparkConfig.getTaskConfig(application), context); // TODOA-4: return distributed ExperimentStats
     	
-    	logger.info("RESPONSE Service /experiment/cluster/{application} => "+stats);
+    	logger.info("RESPONSE Service /cluster/experiment/{application} => "+stats);
         return new ResponseEntity<>(stats, HttpStatus.OK);
     }
     
     
-	
-//	@RequestMapping("/test/cluster/{application}")
+	// TODOM-1: benchmark, analysis, trial in distributed controller
+//	@RequestMapping("/local/test/{application}")
 //	@ResponseBody
-//	public ExperimentStats test(@PathVariable String application) {
-//		logger.info("REQUEST Service /test/cluster/{application} => "+application);
+//	public ResponseEntity<String> testLocal(@PathVariable String application) {
+//		logger.info("REQUEST Service /local/test/{application} => "+application);
+//		String stats = null;
+//		
+//		logger.info("RESPONSE Service /local/test/{application} => "+stats);
+//		return new ResponseEntity<>(stats, HttpStatus.OK);
+//	}
 //
-//		// TODOD /test/cluster
-//		if(true) throw new UnsupportedOperationException("NYI");
-//		String stats = "N/A";
-//		logger.info("RESPONSE Service /test/cluster/{application} => "+stats);
-//		return stats;
+//	@RequestMapping("/cluster/test/{application}")
+//	@ResponseBody
+//	public ResponseEntity<String> testCluster(@PathVariable String application) {
+//		logger.info("REQUEST Service /cluster/test/{application} => "+application);
+//		String stats = null;
+//		
+//		logger.info("RESPONSE Service /cluster/test/{application} => "+stats);
+//		return new ResponseEntity<>(stats, HttpStatus.OK);
 //	}
     
     

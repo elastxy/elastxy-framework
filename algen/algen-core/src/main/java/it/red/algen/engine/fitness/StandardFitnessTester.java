@@ -45,7 +45,7 @@ public class StandardFitnessTester implements FitnessTester {
 
             // Check if desidered fitness is matched => it's best match ABSOLUTE: stop here!
     		if(solution.getFitness().fit(env.target.getTargetThreshold(), env.target.getTargetFitness())) {
-    			// TODOM: multiple best matches!
+    			// TODOM-4: multiple best matches!
     			population.bestMatch = solution;
     			population.goalReached = true;
     			break;
@@ -57,7 +57,7 @@ public class StandardFitnessTester implements FitnessTester {
             }
             
 //            // Else remove phenotype to free memory: not useful anymore
-//            // TODOM: configurable
+//            // TODOM-2: configurable, in some cases doesn't work
 //            else {
 //            	solution.setPhenotype(null);
 //            }

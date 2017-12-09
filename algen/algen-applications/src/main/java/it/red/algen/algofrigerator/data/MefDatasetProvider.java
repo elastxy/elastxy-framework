@@ -117,7 +117,7 @@ public class MefDatasetProvider implements DatasetProvider {
 			RecipeType rType = it.next();
 			List<Recipe> recipesByType = recipes.get(rType);
 			for(int r = 0; r < recipesByType.size(); r++){
-				Recipe recipe = recipesByType.get(r); // TODOM: avoid cocktails
+				Recipe recipe = recipesByType.get(r); // TODOM-1: mef: avoid cocktails
 				Recipe copy = recipe.copy();
 				if(MefUtils.feasibleWith(copy, fridgeFoods, pantryFoods)){
 					feasibleByType.get(rType).add(copy);

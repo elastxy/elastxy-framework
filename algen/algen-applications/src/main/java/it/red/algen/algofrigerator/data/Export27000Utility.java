@@ -54,7 +54,7 @@ public class Export27000Utility {
 					RecipeType.SWEET.getCode() :
 					RecipeType.SAVOURY.getCode(); 
 			if(nextLine[6].toLowerCase().indexOf("sale")==-1
-					&& nextLine[6].toLowerCase().indexOf("zucchero")==-1){ // TODOM: segnare ricette neutre
+					&& nextLine[6].toLowerCase().indexOf("zucchero")==-1){ // TODOA-4: mef: segnare ricette neutre
 				type = RecipeType.NEUTRAL.getCode();
 			}
 			

@@ -22,7 +22,7 @@ import it.red.algen.tracking.SolutionRenderer;
  * Builds up all the ApplicationComponents, based on 
  * AlgenApplication metadata definition.
  * 
- * TODOM: evaluate Command for this duties
+ * TODOB-2: evaluate Command for this duties
  * 
  * @author red
  *
@@ -45,7 +45,7 @@ public class AppComponentsBuilder {
 		result.targetBuilder = 		(TargetBuilder)constructComponent(applicationMetadata.targetBuilder);
 		result.envFactory = 		(EnvFactory)constructComponent(applicationMetadata.envFactory);
 		
-		// TODOM: not by reference: indirection with name
+		// TODOB-2: not by reference: indirection with name?
 		result.datasetProvider = (DatasetProvider)constructComponent(applicationMetadata.datasetProvider);
 		result.genomaProvider = 	(GenomaProvider)constructComponent(applicationMetadata.genomaProvider);
 		result.alleleGenerator = 	(AlleleGenerator)constructComponent(applicationMetadata.alleleGenerator);
@@ -63,7 +63,7 @@ public class AppComponentsBuilder {
 		result.solutionRenderer = 	(SolutionRenderer)constructComponent(applicationMetadata.solutionRenderer);
 
 		// Distributed application
-		// TODOD: one only property (e.g. envFactory) but assigned based on context: LOCAL|DISTRIBUTED
+		// TODOM-4: one only property (e.g. envFactory) but assigned based on runtime context: LOCAL|DISTRIBUTED
 		result.multiColonyEnvFactory =(EnvFactory)constructComponent(applicationMetadata.multiColonyEnvFactory);
 		result.distributedDatasetProvider =(DatasetProvider)constructComponent(applicationMetadata.distributedDatasetProvider);
 		result.singleColonyDatasetProvider = (DatasetProvider)constructComponent(applicationMetadata.singleColonyDatasetProvider);
@@ -102,7 +102,6 @@ public class AppComponentsBuilder {
 	 */
 	public AppComponents wire(AppComponents appComponents){
 		appComponents.envFactory.setTargetBuilder(appComponents.targetBuilder);
-		// TODOM: check if it's really needed the target in multicolony... should not be enough in envFactory?
 		if(appComponents.multiColonyEnvFactory!=null) appComponents.multiColonyEnvFactory.setTargetBuilder(appComponents.targetBuilder);
 		appComponents.populationFactory.setSolutionsFactory(appComponents.solutionsFactory);
 		appComponents.fitnessCalculator.setup(appComponents.incubator);
@@ -111,8 +110,7 @@ public class AppComponentsBuilder {
 	
 	
 	/**
-	 * Initialize the ApplicationComponents for InitializationAware components
-	 * TODOM: to be used?
+	 * TODOM-2: Initialize the ApplicationComponents for InitializationAware components: to be used?
 	 */
 	public AppComponents init(AppComponents appComponents){
 		return appComponents;

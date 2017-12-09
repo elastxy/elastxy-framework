@@ -6,10 +6,10 @@ package it.red.algen.domain.genetics.genotype;
 //import java.util.stream.Collectors;
 //
 ///**
-// * Double strand fashion genotype, similar to a two-strand DNA
-// * For every gene, chose the dominant allele
+// * Multiple strand fashion genotype, similar to a two-strand DNA (helix).
+// * For every gene, chose the dominant allele.
 // * 
-// * TODOM: check if useful for improving performance
+// * TODOM-1: check if useful for improving performance
 // *  
 // * Position: "<strand>.<chromosome>.<gene>"
 // * E.g. "0.0.0", "0.0.1", .. , "0.1.0", "5.4", .. , "M.N" 

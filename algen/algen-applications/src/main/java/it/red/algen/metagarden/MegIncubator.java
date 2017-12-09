@@ -46,30 +46,36 @@ public class MegIncubator implements Incubator<Chromosome, UserPhenotype<GardenW
 	 */
 	public Double calculateUnhappiness(Gene gene, GeneMetadata metadata){
 		double unhappiness = 0;
+		boolean dead = false;
 		
-		// TODOM: remove redundancy
+		// TODOM-1: meg: remove redundancy
 		
 		// distanza della richiesta dalla pianta alla fornita dal posto
+		{
 		int sunExposure = (int)metadata.userProperties.get(PlaceProperty.SUN_EXPOSURE.name());
 		int sunRequest = ((Tree)gene.allele.value).getSunRequest();
 		int sunRequestDifference = Math.abs(sunExposure-sunRequest);
-		boolean dead = sunRequestDifference==2;
+		dead = sunRequestDifference==2;
 		unhappiness += sunRequestDifference * FITNESS_WEIGHT_SUN;
+		}
 		
-		
+		{
 		// umidita' in eccesso rispetto a quella accettata dalla pianta
 		int wetLevel = (int)metadata.userProperties.get(PlaceProperty.WET_LEVEL.name());
 		int wetAllowed = ((Tree)gene.allele.value).getWetAllowed();
 		int wetRequestDifference = Math.abs(wetLevel - wetAllowed);
 //		dead |= wetRequestDifference==2;
 		unhappiness += wetRequestDifference * FITNESS_WEIGHT_WET;
+		}
 		
+		{
 		// vento in eccesso rispetto a quello ammesso dalla pianta
 		int windLevel = (int)metadata.userProperties.get(PlaceProperty.WIND_LEVEL.name());
 		int windAllowed = ((Tree)gene.allele.value).getWindAllowed();
 		int windRequestDifference = Math.abs(windLevel - windAllowed);
 //		dead |= windRequestDifference==2;
 		unhappiness += windRequestDifference * FITNESS_WEIGHT_WIND;
+		}
 		
 		// weights unhappiness based on criteria weights
 		unhappiness = unhappiness / (FITNESS_WEIGHT_SUN+FITNESS_WEIGHT_WET+FITNESS_WEIGHT_WIND);

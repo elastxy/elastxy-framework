@@ -29,8 +29,9 @@ public class PredefinedGenoma extends AbstractGenoma implements Genoma {
 
 
 	/**For a PredefinedGenoma if a valuesProvider is set, 
-	 * then all alleles must be pulled from that
-	 * TODOM: check sharedAlleles linked to provider number
+	 * then all alleles must be pulled from that Provider.
+	 * 
+	 * TODOM-1: sharedAlleles linked to provider number is ok?
 	 */
 	@Override
 	public void setAlleleValuesProvider(AlleleValuesProvider provider){

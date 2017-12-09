@@ -39,7 +39,7 @@ public interface DistributedGenomaProvider extends GenomaProvider {
 	 * In distributed context it means a repartition/coalesce of
 	 * original data and subsequence genoma redefinition.
 	 * 
-	 * TODOD: maintain best matches
+	 * TODOA-8: maintain best matches over eras
 	 */
 	public void spread();
 

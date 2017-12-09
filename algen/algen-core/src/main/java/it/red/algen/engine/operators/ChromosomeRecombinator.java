@@ -24,12 +24,9 @@ public class ChromosomeRecombinator implements Recombinator<Solution> {
     /**
      * Recombination of two Solution. Two are the expected parents.
      * 
-     * In case of preserving alleles, with cutpoint fixed to half,
-     * all genes will be swapped, leading to poor performance.
-     * TODOM by now it's not implemented
-     * 
-     * TODOM: more than 2 parents management
-     * TODOA-2: cut point for operating on minimum set of genes
+     * TODOA-2: cut point for operating on minimum set of genes (from beginning or end of sequence)
+     * TODOM-2: check performance of Recombination operator
+     * TODOM-4: more than 2 parents management
      * 
      * @param other
      * @return
@@ -37,7 +34,7 @@ public class ChromosomeRecombinator implements Recombinator<Solution> {
 	public List<Solution> recombine(List<Solution> parents, boolean preserveAlleles){
 		
 		// Define cut point
-		// TODOM: define cut point from metadata!
+		// TODOM-1: define cut point from metadata!
 		Chromosome genotype0 = (Chromosome)parents.get(0).getGenotype();
 		
 		int genesSize = genotype0.genes.size();

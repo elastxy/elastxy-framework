@@ -19,7 +19,7 @@ public class MesSolutionRenderer implements SolutionRenderer<String> {
 			return "No phenotype to visualize.";
 		}
 		
-//		TODOB: show changed values in square brackets ((SequenceGenotype)solution.getGenotype()).genes.get(index);
+//		TODOB-2: mes: show changed values in square brackets ((SequenceGenotype)solution.getGenotype()).genes.get(index);
 		int[][] matrix = (int[][])phenotype.getValue().get(MesConstants.PHENOTYPE_MATRIX);
 		
 		int[] columnTotals = new int[9];

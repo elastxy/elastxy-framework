@@ -96,7 +96,7 @@ public class MultiColonyExperiment implements Experiment {
     public void run(){
     	
     	// Observer setup
-    	// TODOD: distributed Observer (Kafka?)
+    	// TODOM-8: distributed Observer (Kafka?)
         EnvObserver observer = new EnvObserver(context);
         
         // Creates initial environment

@@ -336,7 +336,7 @@
 							},
 							"response": [
 								{
-									"id": "5e80dede-9baa-44bd-921e-58cb1f7cc709",
+									"id": "c65a7c80-4091-4e58-9c5f-db9251a6dce3",
 									"name": "Database EN",
 									"originalRequest": {
 										"url": "http://{{ip}}:{{port}}/experiment/algofrigerator",
@@ -363,7 +363,7 @@
 									"body": ""
 								},
 								{
-									"id": "39bf7339-a19b-44f6-ba55-82a9fedba76b",
+									"id": "c9e30ba2-c666-4db8-b455-cf1ea383a0f9",
 									"name": "Database IT",
 									"originalRequest": {
 										"url": "http://{{ip}}:{{port}}/experiment/algofrigerator",
@@ -390,7 +390,7 @@
 									"body": ""
 								},
 								{
-									"id": "e0dd3540-3df5-4fe5-94d8-cff36dfb2b77",
+									"id": "acb40312-d1b4-4e49-aca6-1d82ca75fd73",
 									"name": "Dispensa Rossi",
 									"originalRequest": {
 										"url": "http://{{ip}}:{{port}}/experiment/algofrigerator",
@@ -503,7 +503,7 @@
 							},
 							"response": [
 								{
-									"id": "4118e7cd-a734-4f8c-aaf2-a71119d238dd",
+									"id": "61d9ba3a-7213-4480-82d2-0b7dce2f1b1b",
 									"name": "Database EN",
 									"originalRequest": {
 										"url": "http://{{ip}}:{{port}}/experiment/algofrigerator",
@@ -530,7 +530,7 @@
 									"body": ""
 								},
 								{
-									"id": "fdb4084b-3567-4b16-acbe-a36cbd030f12",
+									"id": "e0e61ecf-ca2d-4604-b7e7-742a548cb8e5",
 									"name": "Database IT",
 									"originalRequest": {
 										"url": "http://{{ip}}:{{port}}/experiment/algofrigerator",
@@ -557,7 +557,7 @@
 									"body": ""
 								},
 								{
-									"id": "a7feb658-7f40-44d1-babe-0cad47bfb6df",
+									"id": "ad08686f-b21f-4f3d-a514-58e9be0dad73",
 									"name": "Dispensa Rossi",
 									"originalRequest": {
 										"url": "http://{{ip}}:{{port}}/experiment/algofrigerator",
@@ -626,7 +626,7 @@
 						{
 							"name": "/distr/exp/local SMALL",
 							"request": {
-								"url": "http://{{ip}}:{{port}}/distributed/experiment/local/expressions_d",
+								"url": "http://{{ip}}:{{port}}/distributed/local/experiment/expressions_d",
 								"method": "POST",
 								"header": [
 									{
@@ -646,7 +646,7 @@
 						{
 							"name": "/distr/exp/local MEDIUM",
 							"request": {
-								"url": "http://{{ip}}:{{port}}/distributed/experiment/local/expressions_d",
+								"url": "http://{{ip}}:{{port}}/distributed/local/experiment/expressions_d",
 								"method": "POST",
 								"header": [
 									{
@@ -666,7 +666,7 @@
 						{
 							"name": "/distr/exp/cluster SMALL",
 							"request": {
-								"url": "http://{{ip}}:{{port}}/distributed/experiment/cluster/expressions_d",
+								"url": "http://{{ip}}:{{port}}/distributed/cluster/experiment/expressions_d",
 								"method": "POST",
 								"header": [
 									{
@@ -686,7 +686,7 @@
 						{
 							"name": "/distr/exp/cluster MEDIUM",
 							"request": {
-								"url": "http://{{ip}}:{{port}}/distributed/experiment/cluster/expressions_d",
+								"url": "http://{{ip}}:{{port}}/distributed/cluster/experiment/expressions_d",
 								"method": "POST",
 								"header": [
 									{
@@ -706,7 +706,7 @@
 						{
 							"name": "/distr/exp/cluster BIG",
 							"request": {
-								"url": "http://{{ip}}:{{port}}/distributed/experiment/cluster/expressions_d",
+								"url": "http://{{ip}}:{{port}}/distributed/cluster/experiment/expressions_d",
 								"method": "POST",
 								"header": [
 									{
@@ -733,7 +733,7 @@
 						{
 							"name": "/distr/sudoku/local SMALL",
 							"request": {
-								"url": "http://{{ip}}:{{port}}/distributed/experiment/local/sudoku_d",
+								"url": "http://{{ip}}:{{port}}/distributed/local/experiment/sudoku_d",
 								"method": "POST",
 								"header": [
 									{
@@ -753,7 +753,7 @@
 						{
 							"name": "/distr/sudoku/local MEDIUM",
 							"request": {
-								"url": "http://{{ip}}:{{port}}/distributed/experiment/local/sudoku_d",
+								"url": "http://{{ip}}:{{port}}/distributed/local/experiment/sudoku_d",
 								"method": "POST",
 								"header": [
 									{
@@ -773,7 +773,7 @@
 						{
 							"name": "/distr/sudoku/cluster SMALL",
 							"request": {
-								"url": "http://{{ip}}:{{port}}/distributed/experiment/cluster/sudoku_d",
+								"url": "http://{{ip}}:{{port}}/distributed/cluster/experiment/sudoku_d",
 								"method": "POST",
 								"header": [
 									{
@@ -793,7 +793,7 @@
 						{
 							"name": "/distr/sudoku/cluster MEDIUM",
 							"request": {
-								"url": "http://{{ip}}:{{port}}/distributed/experiment/cluster/sudoku_d",
+								"url": "http://{{ip}}:{{port}}/distributed/cluster/experiment/sudoku_d",
 								"method": "POST",
 								"header": [
 									{
@@ -813,7 +813,7 @@
 						{
 							"name": "/distr/sudoku/cluster BIG",
 							"request": {
-								"url": "http://{{ip}}:{{port}}/distributed/experiment/cluster/sudoku_d",
+								"url": "http://{{ip}}:{{port}}/distributed/cluster/experiment/sudoku_d",
 								"method": "POST",
 								"header": [
 									{
@@ -840,7 +840,7 @@
 						{
 							"name": "/distr/garden/local SMALL",
 							"request": {
-								"url": "http://{{ip}}:{{port}}/distributed/experiment/local/garden_d",
+								"url": "http://{{ip}}:{{port}}/distributed/local/experiment/garden_d",
 								"method": "POST",
 								"header": [
 									{
@@ -860,7 +860,7 @@
 						{
 							"name": "/distr/garden/cluster SMALL",
 							"request": {
-								"url": "http://{{ip}}:{{port}}/distributed/experiment/cluster/garden_d",
+								"url": "http://{{ip}}:{{port}}/distributed/cluster/experiment/garden_d",
 								"method": "POST",
 								"header": [
 									{
@@ -880,7 +880,7 @@
 						{
 							"name": "/distr/garden/cluster MEDIUM",
 							"request": {
-								"url": "http://{{ip}}:{{port}}/distributed/experiment/cluster/garden_d",
+								"url": "http://{{ip}}:{{port}}/distributed/cluster/experiment/garden_d",
 								"method": "POST",
 								"header": [
 									{
@@ -907,7 +907,7 @@
 						{
 							"name": "/distr/algofrigerator/local SMALL",
 							"request": {
-								"url": "http://{{ip}}:{{port}}/distributed/experiment/local/algofrigerator_d",
+								"url": "http://{{ip}}:{{port}}/distributed/local/experiment/algofrigerator_d",
 								"method": "POST",
 								"header": [
 									{
@@ -927,7 +927,7 @@
 						{
 							"name": "/distr/algofrigerator/cluster SMALL",
 							"request": {
-								"url": "http://{{ip}}:{{port}}/distributed/experiment/cluster/algofrigerator_d",
+								"url": "http://{{ip}}:{{port}}/distributed/cluster/experiment/algofrigerator_d",
 								"method": "POST",
 								"header": [
 									{

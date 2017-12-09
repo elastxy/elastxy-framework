@@ -14,7 +14,7 @@ import it.red.algen.conf.MonitoringConfiguration;
  * All parameters attributes must be serializable, because 
  * they can be distributed to other executors in a cluster.
  * 
- * TODOM: check if AppComponents either should be Serializable... tradeoffs
+ * TODOM-2: check if AppComponents either should be Serializable... tradeoffs
  * 
  * @author red
  */

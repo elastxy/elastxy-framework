@@ -66,7 +66,7 @@ public class StandardMultiColonyEnvFactory<T extends Object, R extends Object, G
 			localWorkingDataset = context.application.datasetProvider.getWorkingDataset();
 		}
 		
-		// TODOD: evaluate target builder in distributed environment?
+		// TODOM-2: evaluate a specific target builder in distributed environment to set overall goals?
 		target = createTarget(localWorkingDataset);
 			
 		if(context.application.datasetProvider!=null){
@@ -125,7 +125,7 @@ public class StandardMultiColonyEnvFactory<T extends Object, R extends Object, G
 	 * Logics should be removed, or if found useful maintained
 	 * declaring a distributedTargetBuilder component...
 	 * 
-	 * TODOD: evaluate target builder in distributed environment?
+	 * TODOM-2: evaluate a specific target builder in distributed environment to set overall goals?
 	 */
 	private Target<T,R> createTarget(WorkingDataset workingDataset){
 		Target<T,R> target = targetBuilder.define(workingDataset);

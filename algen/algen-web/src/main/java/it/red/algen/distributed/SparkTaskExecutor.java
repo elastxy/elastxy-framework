@@ -17,8 +17,7 @@ import it.red.algen.distributed.context.DistributedAlgorithmContext;
 public class SparkTaskExecutor {
 	private static Logger logger = Logger.getLogger(SparkTaskExecutor.class);
 
-	// TODOD: check status & kill services
-
+	
     public String runDistributed(SparkTaskConfig config, DistributedAlgorithmContext context) throws Exception {
 
     	// Setup configurations
@@ -30,7 +29,7 @@ public class SparkTaskExecutor {
     	
     	// Create client
     	logger.info("Creating client..");
-    	// TODOM: env configurations from properties
+    	// TODOA-2: inject task configurations, or get from local properties
 //    	final Map<String,String> environmentVariables = new HashMap<>();
 //    	environmentVariables.put("log4j.configuration",				config.log4jConfiguration);
 //    	environmentVariables.put("spark.eventLog.enabled",			config.historyEventsEnabled);

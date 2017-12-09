@@ -60,9 +60,9 @@ public class StrandGenotypeStructure extends GenotypeStructureImpl {
 				numberOfGenes.set(numberOfChromosomes-1, new Integer(splitted[1])+1);
 			}
 
-			// TODOM: Double strand
+			// TODOM-8: Double strand implementation
 			else if(splitted.length==3){
-				throw new UnsupportedOperationException("NYI");
+				throw new UnsupportedOperationException("NYI: MultiStrand genotype not yet supported!");
 			}
 		}
 	}

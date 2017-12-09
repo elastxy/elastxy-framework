@@ -26,7 +26,7 @@ public class Population {
 	/**
 	 * Compares two fitness values
 	 * 
-	 * TODOM: make it injectable
+	 * TODOB-2: make it injectable?
 	 */
     private static FitnessComparator FITNESS_COMPARATOR = new FitnessComparator();
     
@@ -48,7 +48,7 @@ public class Population {
 
     
     /**
-     * TODOM: List of best-performing solutions ordered by fitness DESC
+     * TODOM-4: maintain bestMatches, not only one, as a List of best-performing solutions ordered by fitness DESC
      */
 //    public List<Solution> bestMatches = new ArrayList<Solution>();
 //    public Solution getBestMatch(){
@@ -71,7 +71,7 @@ public class Population {
     }
     
     public void orderByFitnessProximityDesc(BigDecimal targetFitness){
-    	Collections.sort(solutions, new TargetFitnessComparator(targetFitness)); // TODOM: re-create too much expensive!
+    	Collections.sort(solutions, new TargetFitnessComparator(targetFitness)); // TODOM-2: TargetFitnessComparator in context: re-create is too much expensive!
     }
     
     public String toString(){

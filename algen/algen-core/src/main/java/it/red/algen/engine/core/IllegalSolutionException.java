@@ -14,14 +14,14 @@ package it.red.algen.engine.core;
  * Checked exception to be managed in case of
  * problems during solutions growth.
  * 
- * TODOB: define better structure for validation rule and breaks
+ * TODOB-2: define better structure for validation rule and breaks
  * 
  * @author grossi
  */
 public class IllegalSolutionException extends Exception {
 	private static final long serialVersionUID = 1L;
 	
-	private String legalCheck = "No legal check details."; // TODOM: i18n, i10n
+	private String legalCheck = "No legal check details."; // TODOM-8: i18n, i10n
 
 	public IllegalSolutionException(String msg) {
         super(msg);

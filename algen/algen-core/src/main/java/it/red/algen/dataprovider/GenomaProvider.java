@@ -19,7 +19,7 @@ public interface GenomaProvider {
 	
 	/**
 	 * Setup runtime context for this component
-	 * TODOM: ContextAware interface
+	 * TODOM-4: ContextAware interface
 	 * @return
 	 */
 	public void setup(AlgorithmContext context);

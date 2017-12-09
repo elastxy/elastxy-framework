@@ -32,7 +32,7 @@ public interface GenotypeStructure {
 	
 //	/**
 //	 * Returns the number of chromosomes by strand
-//	 * TODOM: number of strands
+//	 * TODOM-4: multistrands
 //	 * @return
 //	 */
 //	public int getNumberOfStrands();
@@ -45,7 +45,7 @@ public interface GenotypeStructure {
 
 	/**
 	 * Returns the number of genes for given chromosome
-	 * TODOM: number of strands
+	 * TODOM-4: multistrands
 	 * @return
 	 */
 	public int getNumberOfGenes(int chromosome);

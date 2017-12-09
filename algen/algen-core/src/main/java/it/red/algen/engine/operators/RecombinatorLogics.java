@@ -122,7 +122,7 @@ public class RecombinatorLogics {
 	 * (2/3*|3) (1*2/|1)
 	 * (2/3*|2) (1*2/|1)
 	 * 
-	 * TODOM: For efficiency, better swapping those in shorter part.
+	 * TODOM-2: For efficiency, better swapping those in shorter part.
 	 * 
 	 * @param off0genes
 	 * @param off1genes

@@ -26,13 +26,13 @@ public class MultiColonyEnvSupport {
         return now - env.startTime;
     }
     
-    // TODOD: Stats collection to be completed
+    // TODOM-2: Stats collection to be completed
     public static MultiColonyExperimentStats getStats(MultiColonyEnv env){
         MultiColonyExperimentStats stats = new MultiColonyExperimentStats();
         stats.target = env.target;
         stats.bestMatch = env.eraBestMatches.isEmpty() ? null : env.eraBestMatches.get(0);
         stats.goalAccumulator = env.goalAccumulator.isPresent() ? env.goalAccumulator.get().value() : 0;
-        stats.eras = (int)env.currentEraNumber; // TODOD: era number is +1??
+        stats.eras = (int)env.currentEraNumber; // TODOA-2: era number is +1??
         stats.time = env.endTime;
         stats.totErasIdenticalFitnesses= env.totIdenticalFitnesses;
         stats.targetReached = env.targetReached;

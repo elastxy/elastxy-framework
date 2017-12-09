@@ -15,7 +15,7 @@ import it.red.algen.metagarden.data.GardenDatabaseCSV;
 import it.red.algen.metagarden.data.Place;
 
 /**
- * TODOD: bloccare le interfacce in ottica SDK!
+ * TODOA-4: bloccare le interfacce in ottica SDK!
  * @author red
  *
  */
@@ -35,7 +35,7 @@ public class MefdDistributedDatasetProvider extends ProcessingOnlyDistributedDat
 	 * Broadcast feasible recipes file to all nodes.
 	 * 
 	 * Delegates Recipes list creation to old MefDatasetProvider.
-	 * TODOD: evaluate injection of localDatasetProvider component into distributed.
+	 * TODOA-2: evaluate injection of localDatasetProvider component into distributed.
 	 * 
 	 */
 	@Override

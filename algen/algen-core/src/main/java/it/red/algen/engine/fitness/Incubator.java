@@ -15,7 +15,7 @@ public interface Incubator<G extends Genotype, P extends Phenotype> {
 	 *  
 	 *  E.g. in Mef WorkingDataset is given to get meaningful data from original recipes.
 	 *  
-	 *  TODOM: create an interface EnvironmentAware for injecting Env runtime context without passing in signatures
+	 *  TODOM-4: EnvironmentAware interface for injecting Env runtime context without passing in signatures
 	 * @param genotype
 	 * @return
 	 */

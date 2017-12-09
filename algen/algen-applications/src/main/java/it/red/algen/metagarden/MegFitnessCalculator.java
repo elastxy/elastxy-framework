@@ -24,7 +24,7 @@ public class MegFitnessCalculator extends  AbstractFitnessCalculator<GenericSolu
 	 * Produces the performing data of the individual.
 	 * E.g. for the expression individual, is the computed value of its expression
 	 * 
-	 * TODOM: manage no-goal problems: concept of fitness boundaries
+	 * TODOM-4: manage no-goal problems: concept of fitness boundaries
 	 * @return
 	 */
 	@Override

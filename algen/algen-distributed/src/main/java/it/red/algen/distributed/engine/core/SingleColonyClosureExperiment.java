@@ -69,7 +69,7 @@ public class SingleColonyClosureExperiment implements Experiment {
     
     public void run(){
     	
-        EnvObserver observer = new EnvObserver(context); // TODOD: events like Kafka?
+        EnvObserver observer = new EnvObserver(context); // TODOM-8: events like Kafka?
         
         // Creates initial environment
         EnvFactory envFactory = new SingleColonyClosureEnvFactory(

@@ -3,6 +3,9 @@ package it.red.algen.applications.components;
 
 /**
  * Metadata for a Component
+ * 
+ * TODOM-8: components as scripting passed online: to be carefully evaluated
+ * 
  * @author red
  *
  */
@@ -13,12 +16,12 @@ public class ComponentMetadata {
 	public static final String TYPE_JAVA = 		"java";
 	
 //	/**
-//	 * A Scala script. TODOM: to be added
+//	 * A Scala script.
 //	 */
 //	public static final String TYPE_SCALA = 	"scala";
 //	
 //	/**
-//	 * A Groovy script. TODOM: to be evaluated
+//	 * A Groovy script.
 //	 */
 //	public static final String TYPE_SCRIPT =	"groovy";
 	

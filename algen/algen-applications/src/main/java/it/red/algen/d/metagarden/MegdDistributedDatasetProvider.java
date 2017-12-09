@@ -12,7 +12,7 @@ import it.red.algen.metagarden.data.Place;
 import it.red.algen.metagarden.data.Tree;
 
 /**
- * TODOD: bloccare le interfacce in ottica SDK!
+ * TODOA-4: bloccare le interfacce in ottica SDK!
  * @author red
  *
  */

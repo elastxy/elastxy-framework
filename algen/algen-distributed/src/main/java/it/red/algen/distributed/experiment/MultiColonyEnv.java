@@ -49,7 +49,7 @@ public class MultiColonyEnv {
     public JavaRDD<Solution> bestMatchesRDD = null;
 
     // HISTORY
-    // TODOD: eras history
+    // TODOM-2: eras history
 //    public List<Population> generationsHistory = new ArrayList<Population>();
     
     public MultiColonyEnv(Target<?,?> target, Genoma genoma, Map<String, BroadcastWorkingDataset> broadcastWorkingDatasets){
@@ -59,7 +59,7 @@ public class MultiColonyEnv {
     }
         
     public String toString(){
-    	// TODOD: evaluate target builder in distributed environment?
+    	// TODOM-2: evaluate a specific target builder in distributed environment to set overall goals?
 //    	return String.format("MultiColonyEnv [Target: %s, EraNumber: %d, Identical Fit: %d]", target, currentEraNumber, totIdenticalFitnesses);
     	return String.format("MultiColonyEnv [EraNumber: %d, Identical Fit: %d]", currentEraNumber, totIdenticalFitnesses);
     }

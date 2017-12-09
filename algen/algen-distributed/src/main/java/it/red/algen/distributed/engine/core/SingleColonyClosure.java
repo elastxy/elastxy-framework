@@ -58,7 +58,7 @@ public class SingleColonyClosure implements FlatMapFunction<Iterator<Allele>, So
     private Map<String, BroadcastWorkingDataset> broadcastDatasets;
     
     
-    // TODOM: ClosureContext instead of many params
+    // TODOM-1: ClosureContext instead of many params
 	public SingleColonyClosure(
 			long currentEraNumber,
 			AlgorithmContext context,
@@ -94,7 +94,7 @@ public class SingleColonyClosure implements FlatMapFunction<Iterator<Allele>, So
 			this.coloniesGoalAccumulator.add(1);
 		}
 		List<Solution> bestMatches = new ArrayList<Solution>();
-		bestMatches.add(stats.lastGeneration.bestMatch); // TODOD: a number of bestMatches
+		bestMatches.add(stats.lastGeneration.bestMatch); // TODOA-4: a number of bestMatches
 		return bestMatches.iterator();
 	}
 
@@ -137,7 +137,7 @@ public class SingleColonyClosure implements FlatMapFunction<Iterator<Allele>, So
 		List<Solution> previousBestMatches = previousBestMatchesBC==null ? null : previousBestMatchesBC.getValue();
 		if(logger.isTraceEnabled()) logger.trace(String.format("Solutions from prev best matches: %.2000s", previousBestMatches));
 
-	    // TODOD: Creates a local complete Genoma Provider
+	    // TODOM-4: Creates a local complete Genoma Provider
 	    
 	    // Executes local Experiment
 		if(logger.isTraceEnabled()) logger.trace(String.format(">>> Single Colony Experiment Context %n%s", context));
@@ -156,8 +156,8 @@ public class SingleColonyClosure implements FlatMapFunction<Iterator<Allele>, So
 	private void bootstrap() {
 		AppBootstrapRaw bootstrap = new AppBootstrapRaw();
 		AppComponentsLocator locator = bootstrap.boot(context.application.appName);
-		// TODOM: check if mandatory configurations are present!
-		logger.info("Initializing LOCAL context.");
+		// TODOM-1: check if mandatory configurations are present!
+		logger.info("Initializing Closure LOCAL context.");
 		setupContext(locator);
 	}
 

@@ -19,7 +19,7 @@ import it.red.algen.metagarden.data.PlaceProperty;
 
 
 /**
- * TODOM: cache!
+ * TODOM-2: cache!
  * @author red
  *
  */
@@ -42,7 +42,7 @@ public class MegGenomaProvider implements GenomaProvider {
 		this.workingDataset = (MegWorkingDataset)workingDataset;
 	}
 	
-//	@Cacheable(value = "genoma") TODOM: cache
+//	@Cacheable(value = "genoma")  // TODOM-2: cache!
 	@Override
 	public Genoma getGenoma(){
 		return cachedGenoma;
@@ -65,14 +65,15 @@ public class MegGenomaProvider implements GenomaProvider {
 			metadata.name = "Location "+metadata.code+" in "+place.zone;
 			
 			metadata.type = GeneMetadataType.USER;
-			// TODOM: generic properties in Place
+			// TODOM-4: generic properties in Place to allow different kind of analysis
 			metadata.userProperties.put(PlaceProperty.SUN_EXPOSURE.name(), 	place.getSunExposure());
 			metadata.userProperties.put(PlaceProperty.WET_LEVEL.name(), 	place.getWetLevel());
 			metadata.userProperties.put(PlaceProperty.WIND_LEVEL.name(), 	place.getWindLevel());
 			
 			metadata.values = Arrays.asList(workingDataset.trees);
 			
-			MetadataGenomaBuilder.addGene(genoma, String.valueOf(pos), metadata); // TODOM: rework to a GenePosition to represent position
+			// TODOB-4: rework to a GenePosition to represent position
+			MetadataGenomaBuilder.addGene(genoma, String.valueOf(pos), metadata);
 		}
 
 		MetadataGenomaBuilder.finalize(genoma);

@@ -108,7 +108,7 @@ public class SingleColonyEvolver implements Evolver {
 	private void applyGeneticOperators(int generationSize, Population nextGeneration) {
 		
 		// BEST MATCHES - extract
-		// TODOM: reuse some best matches for sharing their genetic material
+		// TODOA-2: reuse some best matches for sharing their genetic material
 		List<Solution> bestMatches = BestMatchesSupport.extractBestMatches(nextGeneration, context.algorithmParameters.elitarism);
 
 		// LOOP OVER NON-BEST SHUFFLED

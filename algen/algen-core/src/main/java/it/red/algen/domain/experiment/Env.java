@@ -44,7 +44,7 @@ public class Env {
     public int totIdenticalFitnesses = 0; // number of sequential best population fitness value
     
     // HISTORY
-    // TODOM: move to another entity EnvHistory, Tracking...
+    // TODOM-4: move to another entity/service, such as EnvHistory, Tracking...
     public List<Population> generationsHistory = new ArrayList<Population>();
     
     public Env(Target<?,?> target, Population currentGen, Genoma genoma, WorkingDataset workingDataset){

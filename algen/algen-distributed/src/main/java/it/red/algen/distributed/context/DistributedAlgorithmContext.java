@@ -7,5 +7,5 @@ import it.red.algen.context.AlgorithmContext;
 public class DistributedAlgorithmContext extends AlgorithmContext {
 	private static final long serialVersionUID = -3147739520028566916L;
 	
-	transient public JavaSparkContext distributedContext; // TODOM: decouple Context from Spark
+	transient public JavaSparkContext distributedContext; // TODOB-4: decouple Context from Spark
 }

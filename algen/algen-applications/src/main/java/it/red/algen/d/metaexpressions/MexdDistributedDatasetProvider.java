@@ -17,7 +17,7 @@ import it.red.algen.domain.experiment.Target;
 import it.red.algen.metaexpressions.MexConstants;
 
 /**
- * TODOD: bloccare le interfacce in ottica SDK!
+ * TODOA-4: bloccare le interfacce in ottica SDK!
  * @author red
  *
  */
@@ -52,7 +52,7 @@ public class MexdDistributedDatasetProvider implements DistributedDatasetProvide
 		List<Long> range = LongStream.rangeClosed(-maxValue, maxValue).boxed().collect(Collectors.toList());
 		
 		// Partitioned RDD
-		// TODOD: check performance when caching after count()
+		// TODOA-2: check performance of caching
 		workingDataset = new RDDDistributedWorkingDataset<Long>();
 		workingDataset.rdd = context.distributedContext.parallelize(range, partitions).cache();
 
@@ -82,7 +82,7 @@ public class MexdDistributedDatasetProvider implements DistributedDatasetProvide
 		// Repartitions genoma
 		int partitions = context.algorithmParameters.partitions;
 		if(logger.isDebugEnabled()) logger.debug(String.format("Reshuffling data and spreading genetic material across %d colonies (partitions).", partitions));
-		// TODOD: check performance when caching after count()
+		// TODOA-2: check performance of caching
 		workingDataset.rdd = workingDataset.rdd.coalesce(partitions, true).cache();
 //		workingDataset.rdd.count();
 		

@@ -42,7 +42,7 @@ import it.red.algen.engine.metadata.StandardMetadataGenoma;
  *  
  *  The length of each chromosome may vary depending user needs.
  *  
- * TODOM: cache!
+ * TODOM-2: cache!
  * @author red
  *
  */
@@ -102,7 +102,7 @@ public class MefGenomaProvider implements GenomaProvider {
 		logger.debug("Reducing the number of recipes and collecting info.");
 
 		// Add values to metadata based on target
-		// TODOM: refactory with AllelesValueProvider
+		// TODOM-2: refactory with AllelesValueProvider
 		Map<RecipeType, Integer> targetRecipesByType = calculateRecipesByType(target);
 		
 		// Populate metadata genoma
@@ -165,7 +165,7 @@ public class MefGenomaProvider implements GenomaProvider {
 		GenesMetadataConfiguration genes = ReadConfigSupport.retrieveGenesMetadata(context.application.appName);
 
 		// Create Genoma
-		// TODOM: repetitions of receipt could be available: make it configurable!
+		// TODOM-4: mef: repetitions of receipt could be available: make it configurable!
 		StandardMetadataGenoma genoma = MetadataGenomaBuilder.create(context, false);
 		
 		Iterator<Map.Entry<RecipeType, List<Recipe>>> it = workingDataset.feasibleByType.entrySet().iterator();

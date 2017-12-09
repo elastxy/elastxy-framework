@@ -18,7 +18,7 @@ import it.red.algen.engine.operators.MutatorLogics;
  * Position: "<chromosome>.<gene>"
  * E.g. "0.0", "0.1", .. , "5.4", .. , "M.N" 
  * 
- * TODOM: rework to a GenePosition to represent position
+ * TODOM-4: rework to a GenePosition to represent position
  *
  * @author red
  *
@@ -29,6 +29,7 @@ public class Strand implements Genotype {
 	/**
 	 * For every gene, encode the gene value
 	 * 
+	 * TODOM-4: find a usage of encoded Genotype :)
 	 */
 	@Override
 	public String encode() {

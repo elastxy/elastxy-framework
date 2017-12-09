@@ -10,7 +10,7 @@ import it.red.algen.dataprovider.WorkingDataset;
  * raw input data into an RDD and random repartitioning
  * (coalesce) data across nodes.
  * 
- * TODOD: input data in streaming
+ * TODOM-8: input data in streaming
  *  
  * After this operation, genetic material is shared
  * by spreading Genoma either (within same partition),

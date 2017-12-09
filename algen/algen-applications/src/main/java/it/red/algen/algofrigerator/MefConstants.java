@@ -21,10 +21,9 @@ package it.red.algen.algofrigerator;
  * Genoma: one type of gene assigned to all chromosomes, reflecting the recipe id.
  * 		Initial genoma for the single experiment is filtered to exclude 
  * 		recipes with no ingredients present in given goal foods.
- * 		TODOM: filter by forbidden ingredients (e.g. gluten, meat...), cuisine type (e.g. french), and so on...
+ * 		TODOM-4: mef: filter by forbidden ingredients (e.g. gluten, meat...), cuisine type (e.g. french), and so on...
  * 		A list of evergreen pantry default ingredients may be provided to complete recipes (salt, oil, 
  * 		winegar, sugar...)
- * 		TODOM: pantry given by user
  * 
  * Solution genotype: a number of three chromosomes, for sweet, savoury or neutral recipes.
  * 		Every gene hosts a recipe, the order is not important.
@@ -40,8 +39,8 @@ package it.red.algen.algofrigerator;
  * 		Every recipe is marked if it is completed or partially covered by ingredients (more than 
  * 		50% ingredients found).
  * 		Recipe has id, name, procedure, a list of ingredients, every one of them marked 
- * 		if available, not available or available from pantry (TODOM).
- * 		TODOM: take into account available measures
+ * 		if available, not available or available from pantry.
+ * 		TODOM-2: mef: take into account available measures on recipes
  * 
  * Fitness: maximize the number of filled and partial recipes, proportionally
  * 		distributed between savoury and sweet.
@@ -51,15 +50,17 @@ package it.red.algen.algofrigerator;
  * 			Pw: points from sweet recipes (max Nw)
  * 			Point is given this way:
  * 				1.0		savoury or sweet recipe completed, even if all ingredients are in the pantry
- * 				TODOM: 0.8	savoury or sweet recipe completed with no pantry ingredients
+ * 				TODOM-1: 0.8	savoury or sweet recipe completed with no pantry ingredients
  * 				0.6 	neutral replacement recipe completed
  * 				0.4		savoury or sweet recipe partially completed
  * 				0.2		neutral recipe partially completed
  * 				0.0		no points for recipes with less than 50% ingredients fulfilled
  * 
- * TODOM: semantic check or affinity between names given by user to foods, and names of recipe ingredients
- * 		(e.g. tomato =~ tomatoes)
- * TODOM: pepe don't find peperoni; plurals; more weight to fridge foods than to pantry
+ * TODOM-8: better search on ingredients:
+ * 	- semantic check or affinity between names given by user to foods, and names of recipe ingredients (e.g. tomato =~ tomatoes)
+ *  - pepe don't find peperoni
+ *  - plurals management
+ *  - more weight to fridge foods than to pantry
  * 
  * @author red
  *

@@ -18,12 +18,12 @@ import it.red.algen.stats.ExperimentStats;
 public class AlgenSparkApplication {
 	private static Logger logger = Logger.getLogger(AlgenSparkApplication.class);
 //	private static org.slf4j.Logger logger2 = org.slf4j.LoggerFactory.getLogger(MexdSparkApplication.class);
-
 	
 //	private static transient BufferedWriter stream = null;
 	
+	
 	/**
-	 * TODOD: check if parameters passed to Driver in clustered mode could be avoided (sprk home..)
+	 * TODOM-2: make params to Driver optional, use those in local conf if missing (if possible)
 	 * 
 	 * @param args
 	 */
@@ -90,7 +90,7 @@ public class AlgenSparkApplication {
 	            .setAppName(applicationName)
 	            .setSparkHome(sparkHome)
 	            .setMaster(master);
-//	            .set("spark.driver.allowMultipleContexts", "true"); // TODOD: check if ok
+//	            .set("spark.driver.allowMultipleContexts", "true"); // TODOB-1: make it configurable?
 		JavaSparkContext sparkContext = new JavaSparkContext(sparkConf);
 		return sparkContext;
 	}

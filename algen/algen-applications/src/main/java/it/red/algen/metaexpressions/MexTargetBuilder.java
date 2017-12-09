@@ -25,7 +25,7 @@ public class MexTargetBuilder implements TargetBuilder<PerformanceTarget, BigDec
         target.setGoal(targetValue);
 
         // Determines goal rough measure by deriving from extreme solutions
-        // TODOM concept of boundaries
+        // TODOA-8: introduce concepts of boundaries and distance, with specific calculation methods
         long maxOperandValue = context.applicationSpecifics.getParamLong(MexConstants.MAX_OPERAND_VALUE);
         NumberRawFitness raw = new NumberRawFitness(
         		new BigDecimal(Math.max((maxOperandValue*maxOperandValue)+targetValue, (maxOperandValue*maxOperandValue)-targetValue)));

@@ -67,7 +67,7 @@ public class LocalController {
 	
 	
 
-	// TODOM: structured results
+	// TODOM-2: analysis: structured results
 	@RequestMapping(path = "/analysis/{application}/{experiments}", method = RequestMethod.POST)
 	@ResponseBody
 	public String analysis(
@@ -84,6 +84,7 @@ public class LocalController {
 	}
 
 
+	// TODOM-2: trial: structured results
 	@RequestMapping(path = "/trial/{application}/{experiments}", method = RequestMethod.POST)
 	@ResponseBody
 	public String trialTest(

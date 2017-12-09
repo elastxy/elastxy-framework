@@ -21,7 +21,7 @@ public class Allele<T> implements Serializable {
 	}
 	
 	public String encode(){
-		return value.toString(); // TODOM: encoding based on type
+		return value.toString(); // TODOM-2: encoding based on type
 	}
 
 	public Allele<T> copy(){

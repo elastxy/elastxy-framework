@@ -15,9 +15,6 @@ import it.red.algen.dataprovider.WorkingDataset;
  * E.g. original Recipe is copied into an extended version RecipeDS,
  * hosting all data necessary to execution (coverage, available ingredients).
  * 
- * TODOD: check if in distributed context feasibleByType could not be transient 
- * (used only for GenomaProvider)
- * 
  * @author red
  *
  */

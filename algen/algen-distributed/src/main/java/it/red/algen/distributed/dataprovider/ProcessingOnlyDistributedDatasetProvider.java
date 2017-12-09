@@ -63,10 +63,8 @@ public class ProcessingOnlyDistributedDatasetProvider implements DistributedData
 	public void collect() {
 		int partitions = context.algorithmParameters.partitions;
 		if(logger.isInfoEnabled()) logger.info("No data to collect for "+context.application.appName+". Only processing on "+partitions+" partitions.");
-		
-//		int halfPartitions = Math.floorDiv(partitions, 2) + 1;
-//		List<Integer> range = IntStream.rangeClosed(-halfPartitions, partitions-halfPartitions).boxed().collect(Collectors.toList());
 
+		// TODOM-8: map partition over any genes, specified by metadata (e.g. map on operators on mexd)
 		List<Integer> range = IntStream.rangeClosed(0, partitions-1).boxed().collect(Collectors.toList());
 		
 		// Partitioned RDD
@@ -83,7 +81,7 @@ public class ProcessingOnlyDistributedDatasetProvider implements DistributedData
 	public final void redistribute() {
 		int partitions = context.algorithmParameters.partitions;
 		if(logger.isDebugEnabled()) logger.debug(String.format("Coalescing %d partitions.", partitions));
-		// TODOD: check performance when caching after count()
+		// TODOA-2: check performance of caching
 		workingDataset.rdd = workingDataset.rdd.coalesce(partitions, true).cache();
 //		workingDataset.numbersRDD.count();
 	}

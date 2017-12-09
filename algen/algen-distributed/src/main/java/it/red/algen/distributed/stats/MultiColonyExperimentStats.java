@@ -18,16 +18,17 @@ import it.red.algen.stats.ExperimentStats;
 /**
  * @author grossi
  */
-public class MultiColonyExperimentStats extends ExperimentStats { // TODOD: manage two different types
-	// TODOM: typed to Target
-	public Object target;
+public class MultiColonyExperimentStats extends ExperimentStats { // TODOB-2: manage two different types of ExperimentStats?
+	// Common to SingleColonyExperimentStats
+//	public Object target;
+//    public double time;
+//    public boolean targetReached;
     public int eras;
-    public double time;
     public int totErasIdenticalFitnesses;
-    public boolean targetReached;
     public Solution bestMatch;
     public Long goalAccumulator;
     public List<Solution> otherBestMatches;
+
     
     public String toString(){
     	StringBuffer buf = new StringBuffer();

@@ -23,7 +23,7 @@ import it.red.algen.stats.ExperimentStats;
 /** This class processes many events in the lifecycle of the execution,
  *  for the purpose of collecting stats and so on.
  *  
- *  TODOB: use generic mechanism, such as Spring:
+ *  TODOM-4: use generic observer mechanism, such as following Spring:
  *  	- ApplicationEventPublisherAware for publishing events
  *  	- @EventListener annotation for consuming events
  *
@@ -64,7 +64,7 @@ public class EnvObserver {
 
     
     /**
-     * TODOM: Incapsulate events under a simple generic interface, 
+     * TODOM-4: Incapsulate events under a simple generic interface, 
      * such as Spring "publishEvent" of ApplicationEventPublisher
      * @param s
      */
