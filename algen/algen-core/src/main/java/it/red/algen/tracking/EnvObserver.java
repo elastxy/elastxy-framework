@@ -15,7 +15,6 @@ import java.util.List;
 import it.red.algen.context.AlgorithmContext;
 import it.red.algen.domain.experiment.Population;
 import it.red.algen.domain.experiment.Solution;
-import it.red.algen.engine.core.Evolver;
 import it.red.algen.stats.ExperimentStats;
 
 
@@ -84,25 +83,24 @@ public class EnvObserver {
         if(context.monitoringConfiguration.verbose) context.monitoringConfiguration.logger.out("+++ MUTAZIONE: \n"+original+"\n\t-> \n"+mutated);
     }
     
-    public void goalReachedEvent(Evolver evolver){
+    public void goalReachedEvent(ExperimentStats stats){
     	context.monitoringConfiguration.logger.out("******* SUCCESS *******");
-        showResults(evolver);
+        showResults(stats);
     }
     
-    public void stableSolutionEvent(Evolver evolver){
+    public void stableSolutionEvent(ExperimentStats stats){
     	context.monitoringConfiguration.logger.out("******* STABLE SOLUTION *******");
-        showResults(evolver);
+        showResults(stats);
     }
     
-    public void historyEndedEvent(Evolver evolver){
+    public void historyEndedEvent(ExperimentStats stats){
     	context.monitoringConfiguration.logger.out("--- STORY HAS ENDED WITHOUT REACHING GOAL... ---");
-        showResults(evolver);
+        showResults(stats);
     }
     
-    private void showResults(Evolver evolver){
+    private void showResults(ExperimentStats stats){
     	Logger log = context.monitoringConfiguration.logger;
         log.out("\n##################### STATS #####################");
-        ExperimentStats stats = evolver.getStats();
         log.out("Best match:");
         log.out(renderer.render(stats.lastGeneration.bestMatch));
         log.out("Number of generations: "+stats.generations);

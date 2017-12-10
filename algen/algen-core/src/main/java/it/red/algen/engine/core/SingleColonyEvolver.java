@@ -268,15 +268,15 @@ public class SingleColonyEvolver implements Evolver {
     }
     
     private void fireGoalReachedEvent(){
-        observer.goalReachedEvent(this);
+        observer.goalReachedEvent(getStats());
     }
 
     private void fireStableSolutionEvent(){
-        observer.stableSolutionEvent(this);
+        observer.stableSolutionEvent(getStats());
     }
     
     private void fireHistoryEndedEvent(){
-        observer.historyEndedEvent(this);
+        observer.historyEndedEvent(getStats());
     }
     
     
