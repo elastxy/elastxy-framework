@@ -18,6 +18,6 @@ public class UserPhenotype<U> implements Phenotype<U> {
 
 	@Override
 	public String toString() {
-		return String.format("UserPhenotype [value=%s]", value==null?"N/A":value.toString());
+		return String.format("(UserPhenotype) %s", value==null?"N/A":value.toString());
 	}
 }

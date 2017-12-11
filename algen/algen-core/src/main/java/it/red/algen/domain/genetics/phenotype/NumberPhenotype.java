@@ -18,6 +18,6 @@ public class NumberPhenotype implements Phenotype<Number> {
 
 	@Override
 	public String toString() {
-		return String.format("NumberPhenotype [value=%s]", value==null?"N/A":value.toString());
+		return String.format("(NumberPhenotype) %s", value==null?"N/A":value.toString());
 	}
 }

@@ -14,6 +14,7 @@ import it.red.algen.distributed.dataprovider.DistributedDatasetProvider;
 import it.red.algen.distributed.dataprovider.DistributedGenomaProvider;
 import it.red.algen.distributed.engine.factory.StandardMultiColonyEnvFactory;
 import it.red.algen.distributed.experiment.MultiColonyEnv;
+import it.red.algen.distributed.tracking.MultiColonyEnvObserver;
 import it.red.algen.domain.experiment.Solution;
 import it.red.algen.domain.genetics.genotype.Allele;
 import it.red.algen.engine.core.Evolver;
@@ -45,8 +46,7 @@ public class MultiColonyEvolver implements Evolver {
     private MultiColonyEnv env;
 
     // LISTENER
-    // TODOA-2: Add observer of MultiColonyEvolver. Extend events for MultiColonyEvolver
-    private EnvObserver observer;
+    private MultiColonyEnvObserver observer;
     
     
     /**
@@ -60,14 +60,14 @@ public class MultiColonyEvolver implements Evolver {
     
     
     public void subscribe(EnvObserver l){
-        observer = l;
+        observer = (MultiColonyEnvObserver)l;
     }
 
     public ExperimentStats getStats(){
     	return MultiColonyEnvSupport.getStats(env);
     }
     
-
+    
 	/**
 	 * ============================================================
 	 * 		EVOLUTION
@@ -80,6 +80,7 @@ public class MultiColonyEvolver implements Evolver {
     	
     	// Start global timer
     	MultiColonyEnvSupport.startTime(env);
+    	fireEvolutionStarted();
     	
     	// Create accumulator
         env.goalAccumulator = Optional.of(context.distributedContext.sc().longAccumulator(MultiColonyEnv.ACCUMULATOR_NAME));
@@ -88,6 +89,7 @@ public class MultiColonyEvolver implements Evolver {
         boolean stop = false;
         while(!stop) {
             logger.info(String.format(">>> 1.1 Started loop for [era %d]", env.currentEraNumber));
+        	fireEraStarted(env.currentEraNumber);
         	
             logger.info(String.format(">>> 1.2 Genoma Extraction (Mutation) [era %d]",env.currentEraNumber));
             List<Allele> alleles = ((DistributedGenomaProvider)context.application.distributedGenomaProvider).collectForMutation();
@@ -116,6 +118,7 @@ public class MultiColonyEvolver implements Evolver {
           	env.eraBestMatches = env.bestMatchesRDD.collect();
             
             if(logger.isDebugEnabled()) logger.debug(String.format("     Era best matches %s", env.eraBestMatches));
+        	fireEraEnded(env.currentEraNumber);
             if(logger.isDebugEnabled()) logger.debug(">>>>>> Era ACTION END");
 //            if(logger.isTraceEnabled()) Monitoring.printPartitionsSolutions(bestRDD)
             Solution eraBestMatch = env.eraBestMatches==null || env.eraBestMatches.isEmpty() ? null : env.eraBestMatches.get(0);
@@ -137,12 +140,14 @@ public class MultiColonyEvolver implements Evolver {
             if(env.currentEraNumber >= context.algorithmParameters.stopConditions.maxEras || checkColoniesGoal()){
             	// TODOM-2: new stop condition: check max eras identical fitnesses
               logger.info("   >>> End condition found! Execution will be stopped.");
+              fireTargetReachedEvent(null); // TODOM-2: pass stats
               stop = true;
             }
             
             // 1.5 Reshuffle
             else {
               if(env.currentEraNumber % context.algorithmParameters.reshuffleEveryEras == 0){
+            	fireReshuffleEvent(env.currentEraNumber);
                 logger.info(String.format("   >>> 1.5 Repartition required [era %d]", env.currentEraNumber));
                 // TODOA-4: reinsert best matches between reshuffled eras
                 env = ((StandardMultiColonyEnvFactory)context.application.multiColonyEnvFactory).newEra(env);
@@ -152,10 +157,10 @@ public class MultiColonyEvolver implements Evolver {
           	
             env.currentEraNumber++;
         }
-            
+        
         // 4. View results
         viewResults(env.allBestMatches);
-        
+        fireEvolutionEndedEvent(env.targetReached, env.totIdenticalFitnesses);
     	logFinal("END!");
     	
         // END OF EXPERIMENT
@@ -198,39 +203,38 @@ public class MultiColonyEvolver implements Evolver {
 
 
     
-//	/**
-//	 * ============================================================
-//	 * 		EVENTS
-//	 * ============================================================
-//	 */
-//
-//    private void fireNewEraEvent(Population lastGen, Population newGen){
-//        observer.newGenerationEvent(env.currentGenNumber, EnvSupport.getLifeTimeInMillis(env), lastGen, newGen);
-//    }
-//
-//    private void fireCrossoverEvent(Solution father, Solution mother, List<Solution> sons){
-//    	observer.crossoverEvent(father, mother, sons);
-//    }
-//    
-//    private void fireMutationEvent(Solution orig, Solution mutated){
-//    	observer.mutationEvent(orig, mutated);
-//    }
-//    
-//    private void fireGoalReachedEvent(){
-//        observer.goalReachedEvent(this);
-//    }
-//
-//    private void fireStableSolutionEvent(){
-//        observer.stableSolutionEvent(this);
-//    }
-//    
-//    private void fireHistoryEndedEvent(){
-//        observer.historyEndedEvent(this);
-//    }
-    
+      /**
+       * ============================================================
+       * 		EVENTS
+       * ============================================================
+       */
+      private void fireEvolutionStarted(){
+          observer.evolutionStartedEvent();
+      }
+      
+      private void fireEraStarted(long eraNumber){
+    	  observer.eraStartedEvent(eraNumber);
+      }
+      
+      private void fireEraEnded(long eraNumber){
+    	  observer.eraEndedEvent(eraNumber);
+      }
+      
+      private void fireTargetReachedEvent(ExperimentStats stats){
+      	observer.targetReachedEvent(stats);
+      }
+      
+      private void fireReshuffleEvent(long eraNumber){
+      	observer.reshuffleEvent(eraNumber);
+      }
+      
+      private void fireEvolutionEndedEvent(boolean targetReached, int totIdenticalFitnesses){
+      	observer.evolutionEndedEvent(targetReached, totIdenticalFitnesses);
+      }
     
     public String toString(){
     	return String.format("Evolver: current Env %s", env);
     }
-    
+
+
 }

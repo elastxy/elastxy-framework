@@ -26,7 +26,7 @@ public class ComplexPhenotype implements Phenotype<Map<String,Object>> {
 
 	@Override
 	public String toString() {
-		return String.format("ComplexPhenotype [value=%s]", value==null?"N/A":value.toString());
+		return String.format("(ComplexPhenotype) %s", value==null?"N/A":value.toString());
 	}
 
 }

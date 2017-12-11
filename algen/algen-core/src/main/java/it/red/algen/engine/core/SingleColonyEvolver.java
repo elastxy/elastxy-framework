@@ -64,7 +64,7 @@ public class SingleColonyEvolver implements Evolver {
     public void evolve(){
     	
     	EnvSupport.startTime(env);
-    	if(context.monitoringConfiguration.verbose) env.generationsHistory.add(env.currentGen);
+    	if(context.monitoringConfiguration.traceHistory) env.generationsHistory.add(env.currentGen);
         
     	// TEST FITNESS - initial gen
     	// TODOA-4: selection-operators-fitness-check also for first generation, bypassing operators
@@ -80,7 +80,7 @@ public class SingleColonyEvolver implements Evolver {
         	
         	// SELECTION
         	Population currentGeneration = selection(generationSize);
-        	if(context.monitoringConfiguration.verbose) env.generationsHistory.add(currentGeneration);
+        	if(context.monitoringConfiguration.traceHistory) env.generationsHistory.add(currentGeneration);
         	
         	// For uniform distribution selector skip genetic operators
         	if(!context.algorithmParameters.randomEvolution) {
@@ -119,7 +119,7 @@ public class SingleColonyEvolver implements Evolver {
 			Solution[] parents = {nextGeneration.solutions.get(s), nextGeneration.solutions.get(s+1)};
 
 		    
-		    // RECOMBINATION
+		    // RECOMBINATION or PRESERVATION
 			List<Solution> sons = recombination(parents);
 		    
 		    
@@ -217,6 +217,7 @@ public class SingleColonyEvolver implements Evolver {
 		List<Solution> sons;
 		boolean crossover = Randomizer.nextDouble() < context.algorithmParameters.recombinationPerc;
 		if(crossover) {
+			// Phenotype and fitness are not propagated to offsprings because they will likely change after recombination
 		    sons = context.application.recombinator.recombine(Arrays.asList(parents), env.genoma.getLimitedAllelesStrategy());
 		    fireCrossoverEvent(parents[0], parents[1], sons);
 		}
@@ -232,14 +233,14 @@ public class SingleColonyEvolver implements Evolver {
 		boolean mute1 = Randomizer.nextDouble() < context.algorithmParameters.mutationPerc;
 		if(mute0) { 
 		    Solution old = sons.get(0);
-		    Solution niu = old.copy();
+		    Solution niu = old.copyGenotype();
 		    context.application.mutator.mutate(niu, env.genoma);
 		    sons.set(0, niu);
 		    fireMutationEvent(old, niu);
 		}
 		if(mute1) { 
 		    Solution old = sons.get(1);
-		    Solution niu = old.copy();
+		    Solution niu = old.copyGenotype();
 		    context.application.mutator.mutate(niu, env.genoma);
 		    sons.set(1, niu);
 		    fireMutationEvent(old, niu);

@@ -40,6 +40,7 @@ public class GenericSolution implements Solution, Serializable {
 		this.fitness = fitness;
 	}
 
+	
 	@Override
 	public Solution copy() {
 		GenericSolution result = new GenericSolution();
@@ -50,13 +51,20 @@ public class GenericSolution implements Solution, Serializable {
 	}
 
 	@Override
+	public Solution copyGenotype() {
+		GenericSolution result = new GenericSolution();
+		result.genotype = (Genotype)genotype!=null?genotype.copy():null;
+		return result;
+	}
+
+	@Override
 	public String toString() {
-		return String.format("Genotype %s => Phenotype %s => Fitness %s", genotype, phenotype, fitness);
+		return String.format("SOL:Ge[%s] > Ph[%s] > F[%s]", genotype, phenotype, fitness);
 	}
 	
-	@Override
-	public String toStringDetails() {
-		return String.format("[Solution: %s; Phenotype: %s; Fitness: %s", toString(), phenotype, fitness!=null?fitness.toString():null);
-	}
+//	@Override
+//	public String toStringDetails() {
+//		return String.format("[Sol: %s; Ph: %s; Fit: %s", toString(), phenotype, fitness!=null?fitness.toString():null);
+//	}
 	
 }

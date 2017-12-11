@@ -22,9 +22,9 @@ public class RecombinatorLogics {
 		int crossoverPointHalf = Math.floorDiv(genesSize, 2);
 		int crossoverPoint = crossoverPointRandom ? Randomizer.nextInt(genesSize) : crossoverPointHalf;
 		
-		// Define parents and children as initial clones of the parents
-		Solution offspring0 = parents.get(0).copy();
-		Solution offspring1 = parents.get(1).copy();
+		// Define parents and children as initial clones of the parents without fitness and phenotype info
+		Solution offspring0 = parents.get(0).copyGenotype();
+		Solution offspring1 = parents.get(1).copyGenotype();
 		List<Gene> offspring0Genes = RecombinatorLogics.getGenes(offspring0, c);
 		List<Gene> offspring1Genes = RecombinatorLogics.getGenes(offspring1, c);
 		

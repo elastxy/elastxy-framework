@@ -30,7 +30,7 @@ import it.red.algen.stats.ExperimentStats;
  */
 public class EnvObserver {
 	
-    private AlgorithmContext context;
+    protected AlgorithmContext context;
     private SolutionRenderer renderer = new DefaultSolutionRenderer();
     
     public EnvObserver(AlgorithmContext context){

@@ -56,8 +56,20 @@ public interface Solution<S extends Solution, F extends Fitness> {
     
     public void setFitness(F fitness);
     
-    
+
+	/**
+	 * Deep copy of all Solution attributes.
+	 */
     public S copy();
+    
+	/**
+	 * Deep copy of only the genetic material (fitness and phenotype must be recalculated).
+	 * 
+	 * Necessary when copying Solutions for recombination or mutation.
+	 * 
+	 * @return
+	 */
+    public S copyGenotype();
     
     
     /**
@@ -67,9 +79,9 @@ public interface Solution<S extends Solution, F extends Fitness> {
     public String toString();
         
     
-    /**
-     * Long description
-     * @return
-     */
-    public String toStringDetails();
+//    /**
+//     * Long description
+//     * @return
+//     */
+//    public String toStringDetails();
 }

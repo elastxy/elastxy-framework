@@ -14,9 +14,9 @@ import it.red.algen.distributed.context.DistributedAlgorithmContext;
 import it.red.algen.distributed.engine.factory.MultiColonyEnvFactory;
 import it.red.algen.distributed.experiment.MultiColonyEnv;
 import it.red.algen.distributed.stats.MultiColonyExperimentStats;
+import it.red.algen.distributed.tracking.MultiColonyEnvObserver;
 import it.red.algen.engine.core.Experiment;
 import it.red.algen.stats.ExperimentStats;
-import it.red.algen.tracking.EnvObserver;
 
 
 
@@ -97,7 +97,7 @@ public class MultiColonyExperiment implements Experiment {
     	
     	// Observer setup
     	// TODOM-8: distributed Observer (Kafka?)
-        EnvObserver observer = new EnvObserver(context);
+        MultiColonyEnvObserver observer = new MultiColonyEnvObserver(context);
         
         // Creates initial environment
         MultiColonyEnvFactory envFactory = (MultiColonyEnvFactory)context.application.multiColonyEnvFactory;
