@@ -105,7 +105,7 @@
 						{
 							"name": "/analysis/expressions",
 							"request": {
-								"url": "http://{{ip}}:{{port}}/local/analysis/expressions/3",
+								"url": "http://{{ip}}:{{port}}/local/analysis/expressions/5",
 								"method": "POST",
 								"header": [
 									{
@@ -125,7 +125,7 @@
 						{
 							"name": "/trial/expressions",
 							"request": {
-								"url": "http://{{ip}}:{{port}}/local/trial/expressions/3",
+								"url": "http://{{ip}}:{{port}}/local/trial/expressions/5",
 								"method": "POST",
 								"header": [
 									{
@@ -203,7 +203,7 @@
 						{
 							"name": "/analysis/garden",
 							"request": {
-								"url": "http://{{ip}}:{{port}}/local/analysis/garden/3",
+								"url": "http://{{ip}}:{{port}}/local/analysis/garden/5",
 								"method": "POST",
 								"header": [
 									{
@@ -235,6 +235,26 @@
 								"body": {
 									"mode": "raw",
 									"raw": "{\n\t\"applicationSpecifics\": {\n\t\t\"target\" : {\n\t\t\t\"TARGET_WELLNESS\" : \"happy\"\n\t\t},\n\t\t\"params\" : {\n\t\t\t\"LIMITED_TREES\" : false\n\t\t}\n\t},\n\t\"algorithmParameters\": {\n\t\t\"recombinationPerc\": 0.0,\n\t\t\"mutationPerc\": 0.2,\n\t\t\"elitarism\": false,\n\t\t\"initialSelectionNumber\": 100,\n\t\t\"initialSelectionRandom\": true,\n\t\t\"stopConditions\": {\n\t\t\t\"targetFitness\": 1.0,\n\t\t\t\"maxIterations\": -1,\n\t\t\t\"maxLifetimeMs\": 3000,\n\t\t\t\"maxIdenticalFitnesses\": -1\n\t\t}\n\t},\n\t\"monitoringConfiguration\": {\n\t\t\"verbose\": false\n\t}\n}"
+								},
+								"description": ""
+							},
+							"response": []
+						},
+						{
+							"name": "APP Garden",
+							"request": {
+								"url": "http://{{ip}}:{{port}}/local/experiment/garden",
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"description": ""
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n\t\"applicationSpecifics\": {\n\t\t\"target\" : {\n\t\t\t\"TARGET_WELLNESS\" : \"happy\"\n\t\t},\n\t\t\"params\" : {\n\t\t\t\"LIMITED_TREES\" : false\n\t\t}\n\t},\n\t\"algorithmParameters\": {\n\t\t\"recombinationPerc\": 0.5,\n\t\t\"mutationPerc\": 0.2,\n\t\t\"elitarism\": true,\n\t\t\"initialSelectionNumber\": 100,\n\t\t\"initialSelectionRandom\": false,\n\t\t\"stopConditions\": {\n\t\t\t\"maxIterations\": -1,\n\t\t\t\"maxLifetimeMs\": 3000,\n\t\t\t\"maxIdenticalFitnesses\": -1\n\t\t}\n\t},\n\t\"monitoringConfiguration\": {\n\t\t\"verbose\": false,\n\t\t\"showGraph\": true\n\t}\n}"
 								},
 								"description": ""
 							},
@@ -301,7 +321,7 @@
 						{
 							"name": "/trial/sudoku",
 							"request": {
-								"url": "http://{{ip}}:{{port}}/local/trial/sudoku/3",
+								"url": "http://{{ip}}:{{port}}/local/trial/sudoku/5",
 								"method": "POST",
 								"header": [
 									{
@@ -313,6 +333,26 @@
 								"body": {
 									"mode": "raw",
 									"raw": "{\n\t\"applicationSpecifics\": {\n\t},\n\t\"algorithmParameters\": {\n\t\t\"initialSelectionNumber\": 100,\n\t\t\"initialSelectionRandom\": true,\n\t\t\"stopConditions\": {\n\t\t\t\"maxIterations\": -1,\n\t\t\t\"maxLifetimeMs\": 3000,\n\t\t\t\"maxIdenticalFitnesses\": -1\n\t\t}\n\t},\n\t\"monitoringConfiguration\": {\n\t}\n}"
+								},
+								"description": ""
+							},
+							"response": []
+						},
+						{
+							"name": "APP Sudoku",
+							"request": {
+								"url": "http://{{ip}}:{{port}}/local/experiment/sudoku",
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"description": ""
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n\t\"applicationSpecifics\": {\n\t},\n\t\"algorithmParameters\": {\n\t\t\"recombinationPerc\": 0.8,\n\t\t\"mutationPerc\": 0.2,\n\t\t\"elitarism\": true,\n\t\t\"initialSelectionNumber\": 10,\n\t\t\"initialSelectionRandom\": true,\n\t\t\"stopConditions\": {\n\t\t\t\"maxIterations\": -1,\n\t\t\t\"maxLifetimeMs\": 3000,\n\t\t\t\"maxIdenticalFitnesses\": -1\n\t\t}\n\t},\n\t\"monitoringConfiguration\": {\n\t\t\"verbose\": false,\n\t\t\"showGraph\": true\n\t}\n}"
 								},
 								"description": ""
 							},
@@ -356,7 +396,7 @@
 							},
 							"response": [
 								{
-									"id": "1f5c4630-fc85-4f0a-bac0-f6f1996a456a",
+									"id": "7c8b963c-4e13-4565-975c-3edb846c4ae1",
 									"name": "Database EN",
 									"originalRequest": {
 										"url": "http://{{ip}}:{{port}}/experiment/algofrigerator",
@@ -383,7 +423,7 @@
 									"body": ""
 								},
 								{
-									"id": "c850946e-0c30-406c-ab33-525e21e76f85",
+									"id": "eaaa4df1-8f9e-4271-ac56-446aa3767cb9",
 									"name": "Database IT",
 									"originalRequest": {
 										"url": "http://{{ip}}:{{port}}/experiment/algofrigerator",
@@ -410,7 +450,7 @@
 									"body": ""
 								},
 								{
-									"id": "ae7d5095-80eb-4576-bf35-3595ce838b4f",
+									"id": "8ad49684-b867-480b-803b-5a0e8ec01db8",
 									"name": "Dispensa Rossi",
 									"originalRequest": {
 										"url": "http://{{ip}}:{{port}}/experiment/algofrigerator",
@@ -466,7 +506,7 @@
 						{
 							"name": "/analysis/algofrigerator",
 							"request": {
-								"url": "http://{{ip}}:{{port}}/local/analysis/algofrigerator/3",
+								"url": "http://{{ip}}:{{port}}/local/analysis/algofrigerator/5",
 								"method": "POST",
 								"header": [
 									{
@@ -486,7 +526,7 @@
 						{
 							"name": "/trial/algofrigerator",
 							"request": {
-								"url": "http://{{ip}}:{{port}}/local/trial/algofrigerator/3",
+								"url": "http://{{ip}}:{{port}}/local/trial/algofrigerator/5",
 								"method": "POST",
 								"header": [
 									{
@@ -504,7 +544,7 @@
 							"response": []
 						},
 						{
-							"name": "Algofrigerator",
+							"name": "APP Algofrigerator",
 							"request": {
 								"url": "http://{{ip}}:{{port}}/local/experiment/algofrigerator",
 								"method": "POST",
@@ -523,7 +563,7 @@
 							},
 							"response": [
 								{
-									"id": "45abb7fb-16dc-4737-91a4-9a298be2d267",
+									"id": "9a150bd9-8764-4c67-b7a3-4c5c6b1b3b9c",
 									"name": "Database EN",
 									"originalRequest": {
 										"url": "http://{{ip}}:{{port}}/experiment/algofrigerator",
@@ -550,7 +590,7 @@
 									"body": ""
 								},
 								{
-									"id": "3fb026c2-d00b-48e5-aa27-c222b4690c05",
+									"id": "832b1554-0abc-457d-9fa6-31814dae6083",
 									"name": "Database IT",
 									"originalRequest": {
 										"url": "http://{{ip}}:{{port}}/experiment/algofrigerator",
@@ -577,7 +617,7 @@
 									"body": ""
 								},
 								{
-									"id": "c8094f58-0710-44e8-9414-e2bd08310b22",
+									"id": "5f0412e4-8cc6-4004-8351-8cd3b7fcea24",
 									"name": "Dispensa Rossi",
 									"originalRequest": {
 										"url": "http://{{ip}}:{{port}}/experiment/algofrigerator",
