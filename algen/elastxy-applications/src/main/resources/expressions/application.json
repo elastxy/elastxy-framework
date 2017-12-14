@@ -3,61 +3,61 @@
 	
 	"targetBuilder": {
 		"type" : "java",
-		"content" : "it.red.algen.metaexpressions.MexTargetBuilder"
+		"content" : "org.elastxy.app.metaexpressions.MexTargetBuilder"
 	},
 	
 	"envFactory": {
 		"type" : "java",
-		"content" : "it.red.algen.engine.factory.StandardEnvFactory"
+		"content" : "org.elastxy.core.engine.factory.StandardEnvFactory"
 	},
 	
 	"genomaProvider": {
 		"type" : "java",
-		"content" : "it.red.algen.metaexpressions.MexGenomaProvider"
+		"content" : "org.elastxy.app.metaexpressions.MexGenomaProvider"
 	},
 	
 	"alleleGenerator": {
 		"type" : "java",
-		"content" : "it.red.algen.engine.metadata.MetadataAlleleGenerator"
+		"content" : "org.elastxy.core.engine.metadata.MetadataAlleleGenerator"
 	},
 	
 	"populationFactory": {
 		"type" : "java",
-		"content" : "it.red.algen.engine.factory.StandardPopulationFactory"
+		"content" : "org.elastxy.core.engine.factory.StandardPopulationFactory"
 	},
 	
 	"solutionsFactory": {
 		"type" : "java",
-		"content" : "it.red.algen.engine.metadata.MetadataSolutionsFactory"
+		"content" : "org.elastxy.core.engine.metadata.MetadataSolutionsFactory"
 	},
 	
 	"fitnessCalculator": {
 		"type" : "java",
-		"content" : "it.red.algen.metaexpressions.MexFitnessCalculator"
+		"content" : "org.elastxy.app.metaexpressions.MexFitnessCalculator"
 	},
 	
 	"incubator": {
 		"type" : "java",
-		"content" : "it.red.algen.metaexpressions.MexIncubator"
+		"content" : "org.elastxy.app.metaexpressions.MexIncubator"
 	},
 	
 	"selector": {
 		"type" : "java",
-		"content" : "it.red.algen.engine.operators.StandardSelector"
+		"content" : "org.elastxy.core.engine.operators.StandardSelector"
 	},
 	
 	"mutator": {
 		"type" : "java",
-		"content" : "it.red.algen.engine.operators.ChromosomeMutator"
+		"content" : "org.elastxy.core.engine.operators.ChromosomeMutator"
 	},
 	
 	"recombinator": {
 		"type" : "java",
-		"content" : "it.red.algen.engine.operators.ChromosomeRecombinator"
+		"content" : "org.elastxy.core.engine.operators.ChromosomeRecombinator"
 	},
 	
 	"solutionRenderer": {
 		"type" : "java",
-		"content" : "it.red.algen.tracking.DefaultSolutionRenderer"
+		"content" : "org.elastxy.core.tracking.DefaultSolutionRenderer"
 	}
 }

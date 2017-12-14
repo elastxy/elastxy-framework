@@ -4,74 +4,74 @@
 	
 	"targetBuilder": {
 		"type" : "java",
-		"content" : "it.red.algen.metasudoku.MesTargetBuilder"
+		"content" : "org.elastxy.app.metasudoku.MesTargetBuilder"
 	},
 	
 	"envFactory": {
 		"type" : "java",
-		"content" : "it.red.algen.engine.factory.StandardEnvFactory"
+		"content" : "org.elastxy.core.engine.factory.StandardEnvFactory"
 	},
 	
 	"genomaProvider": {
 		"type" : "java",
-		"content" : "it.red.algen.metasudoku.MesGenomaProvider"
+		"content" : "org.elastxy.app.metasudoku.MesGenomaProvider"
 	},
 	
 	"alleleGenerator": {
 		"type" : "java",
-		"content" : "it.red.algen.engine.metadata.MetadataAlleleGenerator"
+		"content" : "org.elastxy.core.engine.metadata.MetadataAlleleGenerator"
 	},
 	
 	"solutionsFactory": {
 		"type" : "java",
-		"content" : "it.red.algen.engine.factory.PredefinedGenomaSolutionsFactory"
+		"content" : "org.elastxy.core.engine.factory.PredefinedGenomaSolutionsFactory"
 	},
 	
 	"populationFactory": {
 		"type" : "java",
-		"content" : "it.red.algen.engine.factory.StandardPopulationFactory"
+		"content" : "org.elastxy.core.engine.factory.StandardPopulationFactory"
 	},
 	
 	"incubator": {
 		"type" : "java",
-		"content" : "it.red.algen.metasudoku.MesIncubator"
+		"content" : "org.elastxy.app.metasudoku.MesIncubator"
 	},
 	
 	"fitnessCalculator": {
 		"type" : "java",
-		"content" : "it.red.algen.metasudoku.MesFitnessCalculator"
+		"content" : "org.elastxy.app.metasudoku.MesFitnessCalculator"
 	},
 	
 	"selector": {
 		"type" : "java",
-		"content" : "it.red.algen.engine.operators.StandardSelector"
+		"content" : "org.elastxy.core.engine.operators.StandardSelector"
 	},
 	"mutator": {
 		"type" : "java",
-		"content" : "it.red.algen.engine.operators.ChromosomeMutator"
+		"content" : "org.elastxy.core.engine.operators.ChromosomeMutator"
 	},
 	"recombinator": {
 		"type" : "java",
-		"content" : "it.red.algen.engine.operators.ChromosomeRecombinator"
+		"content" : "org.elastxy.core.engine.operators.ChromosomeRecombinator"
 	},
 	"solutionRenderer": {
 		"type" : "java",
-		"content" : "it.red.algen.metasudoku.MesSolutionRenderer"
+		"content" : "org.elastxy.app.metasudoku.MesSolutionRenderer"
 	},
 	
 	
 	"multiColonyEnvFactory": {
 		"type" : "java",
-		"content" : "it.red.algen.distributed.engine.factory.StandardMultiColonyEnvFactory"
+		"content" : "org.elastxy.distributed.engine.factory.StandardMultiColonyEnvFactory"
 	},
 	
 	"distributedDatasetProvider": {
 		"type" : "java",
-		"content" : "it.red.algen.distributed.dataprovider.ProcessingOnlyDistributedDatasetProvider"
+		"content" : "org.elastxy.distributed.dataprovider.ProcessingOnlyDistributedDatasetProvider"
 	},
 	
 	"distributedGenomaProvider": {
 		"type" : "java",
-		"content" : "it.red.algen.distributed.dataprovider.ProcessingOnlyDistributedGenomaProvider"
+		"content" : "org.elastxy.distributed.dataprovider.ProcessingOnlyDistributedGenomaProvider"
 	}
 }

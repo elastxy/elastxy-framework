@@ -139,7 +139,7 @@
 						              <!-- 
 						              <filters>
 										  <filter>
-										    <artifact>org.elastxy:elastxy-applications</artifact>
+										    <artifact>org.elastxy.app:elastxy-applications</artifact>
 										    <excludes>
 										      <exclude>appdata/**</exclude>
 										    </excludes>
