@@ -1,0 +1,1 @@
+spark-submit --class org.elastxy.app.d.mex.MexApplication --master spark://192.168.1.101:7077 target/scala-2.11/Scaligen-assembly-1.0.jar spark://192.168.1.101:7077

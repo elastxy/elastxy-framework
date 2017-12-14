@@ -1,0 +1,133 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	
+	 <properties>
+        
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+        <java.version>1.8</java.version>
+        
+	    <base>frolvlad/alpine-oraclejdk8:slim</base>
+	    <tomcat.port>4003</tomcat.port>
+	    <tomcat.ip>192.168.99.100</tomcat.ip>
+	    <file>readme</file>
+    	<!-- <docker.maven.plugin.version>0.21-SNAPSHOT</docker.maven.plugin.version> -->
+    	
+	  </properties>
+
+    <parent>
+        <groupId>org.elastxy</groupId>
+        <artifactId>elastxy-parent</artifactId>
+        <version>1.0.0-SNAPSHOT</version>
+    </parent>
+    
+	<artifactId>elastxy-distributed</artifactId>
+	
+	<name>ElastXY Distributed Application</name>
+	<url>http://elastxy.org</url>
+
+
+	<dependencies>
+	
+    	<!-- RED Dependencies -->
+    	
+	  	<dependency>
+	  		<groupId>org.elastxy</groupId>
+	  		<artifactId>elastxy-core</artifactId>
+	  		<version>1.0.0-SNAPSHOT</version>
+	  	</dependency>
+	
+		<!-- Spring dependencies -->
+    	<dependency>
+        	<groupId>org.springframework.boot</groupId>
+        	<artifactId>spring-boot-starter-web</artifactId>
+            <exclusions>
+                <exclusion>
+                    <groupId>ch.qos.logback</groupId>
+                    <artifactId>logback-classic</artifactId>
+                </exclusion>
+            </exclusions>
+    	</dependency>
+<!--     	<dependency>
+        	<groupId>org.springframework.boot</groupId>
+        	<artifactId>spring-boot-starter-cache</artifactId>
+    	</dependency> -->
+    	<dependency>
+        	<groupId>org.springframework.boot</groupId>
+        	<artifactId>spring-boot-starter-actuator</artifactId>
+    	</dependency>
+    	<dependency>
+		    <groupId>com.google.code.gson</groupId>
+		    <artifactId>gson</artifactId>
+		</dependency>
+    	
+		
+		<!-- SPARK -->
+    	
+    	  <!-- Spark -->
+   		<dependency>
+            <groupId>org.apache.spark</groupId>
+            <artifactId>spark-core_2.11</artifactId>
+            <scope>provided</scope>
+            <exclusions>
+                <exclusion>
+                    <groupId>org.slf4j</groupId>
+                    <artifactId>slf4j-log4j12</artifactId>
+                </exclusion>
+                <exclusion>
+                    <groupId>log4j</groupId>
+                    <artifactId>log4j</artifactId>
+                </exclusion>
+            </exclusions>
+        </dependency>
+
+        <!-- fix java.lang.ClassNotFoundException: org.codehaus.commons.compiler.UncheckedCompileException -->
+        <dependency>
+            <groupId>org.codehaus.janino</groupId>
+            <artifactId>commons-compiler</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>org.slf4j</groupId>
+            <artifactId>log4j-over-slf4j</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.slf4j</groupId>
+            <artifactId>slf4j-api</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.slf4j</groupId>
+            <artifactId>slf4j-simple</artifactId>
+        </dependency>
+        
+	</dependencies>
+	    			
+	    			
+	    			
+	<profiles>
+		<profile>
+			<id>distributed</id>
+			<activation>
+				<activeByDefault>true</activeByDefault>
+			</activation>
+		    <build>
+		        <plugins>
+			        <plugin>
+					  <groupId>org.apache.maven.plugins</groupId>
+					  <artifactId>maven-compiler-plugin</artifactId>
+					  <configuration>
+					    <excludes>
+					      <exclude>**/example/*.java</exclude>
+					      <exclude>**/sandbox/*.java</exclude>
+					      <exclude>**/lab/*.*</exclude>
+					    </excludes>
+					  </configuration>
+					</plugin>
+		        </plugins>
+		    </build>
+		</profile>
+	</profiles>
+	
+	
+</project>
