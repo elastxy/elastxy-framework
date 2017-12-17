@@ -3,6 +3,7 @@ package org.elastxy.core.domain.experiment;
 import java.io.Serializable;
 import java.math.BigDecimal;
 
+import org.elastxy.core.engine.core.MathUtils;
 import org.elastxy.core.engine.fitness.FitnessUtils;
 
 /**
@@ -57,7 +58,7 @@ public class PerformanceTarget<G,M> implements Target<G,M>, Serializable {
 	 */
 	@Override
 	public void setTargetFitness(BigDecimal fitness) {
-		this.targetFitness = FitnessUtils.approximateFitness(fitness);
+		this.targetFitness = checkUndefined(fitness) ? null : FitnessUtils.approximateFitness(fitness);
 	}
 	
 	
@@ -65,9 +66,19 @@ public class PerformanceTarget<G,M> implements Target<G,M>, Serializable {
 	public BigDecimal getTargetThreshold() {
 		return targetThreshold;
 	}
+	
 	@Override
 	public void setTargetThreshold(BigDecimal threshold) {
-		this.targetThreshold = threshold;
+		this.targetThreshold = checkUndefined(threshold) ? null : FitnessUtils.approximateFitness(threshold);
+	}
+	
+	private boolean checkUndefined(BigDecimal parameter){
+		if(MathUtils.equals(parameter, BigDecimal.valueOf(-1.0))){
+			return true;
+		}
+		else {
+			return false;
+		}
 	}
 	
 	

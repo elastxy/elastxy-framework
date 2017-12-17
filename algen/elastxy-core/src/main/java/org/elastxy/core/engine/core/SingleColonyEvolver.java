@@ -151,8 +151,8 @@ public class SingleColonyEvolver implements Evolver {
 		
 		// Check fitness
 		if(!endConditionFound && env.currentGen.bestMatch.getFitness().fit(
-				context.algorithmParameters.stopConditions.targetThreshold, 
-				context.algorithmParameters.stopConditions.targetFitness)){
+				env.target.getTargetThreshold(), 
+				env.target.getTargetFitness())) {
 			endConditionFound = goalReached();
 		}
 		
