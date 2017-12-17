@@ -73,7 +73,7 @@ public class PerformanceTarget<G,M> implements Target<G,M>, Serializable {
 	}
 	
 	private boolean checkUndefined(BigDecimal parameter){
-		if(MathUtils.equals(parameter, BigDecimal.valueOf(-1.0))){
+		if(parameter==null || MathUtils.equals(parameter, BigDecimal.valueOf(-1.0))){
 			return true;
 		}
 		else {
