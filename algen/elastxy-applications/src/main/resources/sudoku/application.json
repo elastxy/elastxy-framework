@@ -62,6 +62,6 @@
 	
 	"resultsRenderer": {
 		"type" : "java",
-		"content" : "org.elastxy.core.tracking.DefaultResultsRenderer"
+		"content" : "org.elastxy.app.metasudoku.MesResultsRenderer"
 	}
 }
