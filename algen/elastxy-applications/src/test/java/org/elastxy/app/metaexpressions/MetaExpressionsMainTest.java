@@ -16,6 +16,8 @@ import java.io.File;
 
 import org.elastxy.app.TestConfig;
 import org.elastxy.core.applications.ApplicationService;
+import org.elastxy.core.context.AlgorithmContext;
+import org.elastxy.core.context.RequestContext;
 import org.elastxy.core.stats.ExperimentStats;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -37,7 +39,10 @@ public class MetaExpressionsMainTest {
     public void simpleRun() {
 		System.setProperty("datadir", new File("C:\\tmp\\elastxydata").getAbsolutePath());
 
-		ExperimentStats stats = service.executeBenchmark("expressions");
+		AlgorithmContext context = new AlgorithmContext();
+		context.application.appName = "expressions";
+		context.requestContext = new RequestContext(false);
+		ExperimentStats stats = service.executeBenchmark(context);
 		
         assertNotNull(stats);
         assertNotNull(stats.lastGeneration);

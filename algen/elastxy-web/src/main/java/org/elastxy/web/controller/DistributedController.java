@@ -18,9 +18,11 @@ package org.elastxy.web.controller;
 
 import java.util.Arrays;
 import java.util.Base64;
+import java.util.Locale;
 
 import org.apache.log4j.Logger;
 import org.elastxy.core.conf.ReadConfigSupport;
+import org.elastxy.core.context.RequestContext;
 import org.elastxy.distributed.appsupport.ElastXYApplication;
 import org.elastxy.distributed.context.DistributedAlgorithmContext;
 import org.elastxy.web.distributed.ApplicationsSparkConfig;
@@ -32,6 +34,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -53,10 +56,13 @@ public class DistributedController {
     @RequestMapping(path = "/local/experiment/{application}", method = RequestMethod.POST)
     public ResponseEntity<String> executeExperimentLocal(
     		@PathVariable String application,  
-			@RequestBody DistributedAlgorithmContext context) throws Exception {
+			@RequestBody DistributedAlgorithmContext context,
+			@RequestHeader(value="Web-Request", defaultValue="true") boolean webRequest,
+			Locale userLocale) throws Exception {
     	logger.info("REQUEST Service /local/experiment/{application} => "+application+""+context);
     	
 		context.application.appName = application;
+		context.requestContext = new RequestContext(webRequest, userLocale);
 		
 		SparkTaskConfig taskConfig = applicationsSparkConfig.getTaskConfig(application);
 		
@@ -78,10 +84,13 @@ public class DistributedController {
     @ResponseBody
 	public ResponseEntity<String> executeExperimentCluster(
 			@PathVariable String application,  
-			@RequestBody DistributedAlgorithmContext context) throws Exception {
+			@RequestBody DistributedAlgorithmContext context,
+			@RequestHeader(value="Web-Request", defaultValue="true") boolean webRequest,
+			Locale userLocale) throws Exception {
 		logger.info("REQUEST Service /cluster/experiment/{application} => "+application+""+context);
     	
 		context.application.appName = application;
+		context.requestContext = new RequestContext(webRequest, userLocale);
     	
     	SparkTaskExecutor executor = new SparkTaskExecutor();
     	String stats = executor.runDistributed(applicationsSparkConfig.getTaskConfig(application), context); // TODOA-4: return distributed ExperimentStats

@@ -3,6 +3,7 @@ package org.elastxy.core.applications;
 import org.elastxy.core.applications.components.AppComponentsLocator;
 import org.elastxy.core.context.AlgorithmContext;
 import org.elastxy.core.context.ContextBuilder;
+import org.elastxy.core.context.RequestContext;
 import org.elastxy.core.engine.core.Experiment;
 import org.elastxy.core.engine.core.SingleColonyExperiment;
 import org.elastxy.core.engine.operators.UniformlyDistributedSelector;
@@ -22,9 +23,11 @@ public class ApplicationService {
 	@Autowired private AppComponentsLocator appComponentsLocator;
 
 
-	public ExperimentStats executeBenchmark(String applicationName){
-		AlgorithmContext context = benchmarkContextBuilder.build(applicationName, true);
-		context.application.appName = applicationName;
+	public ExperimentStats executeBenchmark(AlgorithmContext context){
+		// Overwrite initial context with benchmark, plus parameters from request
+		RequestContext originContext = context.requestContext;
+		context = benchmarkContextBuilder.build(context.application.appName, true);
+		context.requestContext = originContext;
 		setupContext(context);
 		Experiment e = new SingleColonyExperiment(context);
 		e.run();

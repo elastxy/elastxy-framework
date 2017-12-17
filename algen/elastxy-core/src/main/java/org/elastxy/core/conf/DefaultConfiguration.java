@@ -11,6 +11,9 @@
 package org.elastxy.core.conf;
 
 import java.math.BigDecimal;
+import java.util.Arrays;
+import java.util.List;
+import java.util.Locale;
 
 /**
  *
@@ -44,6 +47,15 @@ public class DefaultConfiguration {
     public static final int 		DEFAULT_PARTITIONS = 4;
     public static final int 		DEFAULT_RESHUFFLE_EVERY_ERAS = 2;
     public static final boolean		DEFAULT_MULTICOLONY_ELITARISM = true;
-    
+
+    // REQUEST CONTEXT
+	public static final boolean WEB_REQUEST 	= true; // most restrictive
+	public static final Locale USER_LOCALE 	= Locale.forLanguageTag("en-GB");
+	// TODOM-1: properties file
+	public static final List<Locale> AVAILABLE_LOCALES = Arrays.asList(
+			Locale.forLanguageTag("en-GB"),
+			Locale.forLanguageTag("en-US"),
+			Locale.forLanguageTag("it-IT"),
+			Locale.forLanguageTag("fr-FR"));
 
 }

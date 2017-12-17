@@ -16,8 +16,11 @@
 
 package org.elastxy.web.controller;
 
+import java.util.Locale;
+
 import org.elastxy.core.applications.ApplicationService;
 import org.elastxy.core.context.AlgorithmContext;
+import org.elastxy.core.context.RequestContext;
 import org.elastxy.core.stats.ExperimentStats;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -25,10 +28,18 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+
+/**
+ * TODOA-2: Create a UserContext before, at the end of SecurityFilterChain, 
+ * to host locale and if request comes from Web.
+ * @author red
+ *
+ */
 @Controller
 @RequestMapping(path = "/local")
 public class LocalController {
@@ -36,15 +47,17 @@ public class LocalController {
 
 	@Autowired private ApplicationService applicationService;
 
-	
 	@RequestMapping(path = "/experiment/{application}", method = RequestMethod.POST)
 	@ResponseBody
 	public ExperimentStats experiment(
 			@PathVariable String application,  
-			@RequestBody AlgorithmContext context) {
+			@RequestBody AlgorithmContext context,
+			@RequestHeader(value="Web-Request", defaultValue="true") boolean webRequest,
+			Locale userLocale) {
 		logger.info("REQUEST Service /experiment/{application} => "+application+""+context);
-
+		
 		context.application.appName = application;
+		context.requestContext = new RequestContext(webRequest, userLocale);
 		ExperimentStats stats = applicationService.executeExperiment(context);
 		
 		logger.info("RESPONSE Service /experiment/{application} => "+stats);
@@ -55,10 +68,15 @@ public class LocalController {
 
 	@RequestMapping("/test/{application}")
 	@ResponseBody
-	public ExperimentStats test(@PathVariable String application) {
+	public ExperimentStats test(@PathVariable String application,
+			@RequestHeader(value="Web-Request", defaultValue="true") boolean webRequest,
+			Locale userLocale) {
 		logger.info("REQUEST Service /test/{application} => "+application);
 
-		ExperimentStats stats = applicationService.executeBenchmark(application);
+		AlgorithmContext context = new AlgorithmContext();
+		context.application.appName = application;
+		context.requestContext = new RequestContext(webRequest, userLocale);
+		ExperimentStats stats = applicationService.executeBenchmark(context);
 		
 		logger.info("RESPONSE Service /test/{application} => "+stats);
 		return stats;
@@ -72,10 +90,13 @@ public class LocalController {
 	public String analysis(
 			@PathVariable String application, 
 			@PathVariable Integer experiments,
-			@RequestBody AlgorithmContext context) {
+			@RequestBody AlgorithmContext context,
+			@RequestHeader(value="Web-Request", defaultValue="true") boolean webRequest,
+			Locale userLocale) {
 		logger.info("REQUEST Service /analysis/{application}/{experiments} => "+application+","+experiments);
 		
 		context.application.appName = application;
+		context.requestContext = new RequestContext(webRequest, userLocale);
 		String result = applicationService.executeAnalysis(context, experiments);
 		
 		logger.info("RESPONSE Service /analysis/{domain}/{experiments} => "+result);
@@ -89,10 +110,13 @@ public class LocalController {
 	public String trialTest(
 			@PathVariable String application, 
 			@PathVariable Integer experiments,
-			@RequestBody AlgorithmContext context) {
+			@RequestBody AlgorithmContext context,
+			@RequestHeader(value="Web-Request", defaultValue="true") boolean webRequest,
+			Locale userLocale) {
 		logger.info("REQUEST Service /trial/{application}/{experiments} => "+application+","+experiments);
 
 		context.application.appName = application;
+		context.requestContext = new RequestContext(webRequest, userLocale);
 		String result = applicationService.executeTrialTest(context, experiments);
 
 		logger.info("RESPONSE Service /trial/{application}/{experiments} => "+result);

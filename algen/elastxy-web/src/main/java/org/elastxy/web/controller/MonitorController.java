@@ -17,6 +17,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+/**
+ * TODOA-2: filter out request to monitoring services using a Filter
+ * TODOA-2: filter out request to Spring Boot monitoring with a Filter
+ * @author red
+ *
+ */
 @Controller
 @RequestMapping(path = "/monitor")
 public class MonitorController {
@@ -38,8 +44,8 @@ public class MonitorController {
 	@RequestMapping(path = "/access", method = RequestMethod.HEAD)
 	@ResponseBody
 	public String access() {
-		logger.info("REQUEST Service /access => (empty)");
-		logger.info("RESPONSE Service /access => OK");
+		logger.info("REQUEST Service HEAD /access => (empty)");
+		logger.info("RESPONSE Service HEAD /access => OK");
 		return "OK";
 	}
 	
@@ -52,17 +58,18 @@ public class MonitorController {
 	@RequestMapping(path = "/info", method = RequestMethod.GET)
 	@ResponseBody
 	public Map<String, String> hello() {
-		logger.info("REQUEST Service /hello => (empty)");
-		logger.info("RESPONSE Service /hello => Message");
+		logger.info("REQUEST Service GET /info => (empty)");
+		logger.info("RESPONSE Service GET /info => Message");
 		return Collections.singletonMap("message", infoService.getInfoMessage());
 	}
 	
-
 	
-    @RequestMapping("/healthcheck")
+    @RequestMapping(path = "/healthcheck", method = RequestMethod.GET)
     public ResponseEntity<String> healthCheck() {
+		logger.info("REQUEST Service GET /healthcheck => (empty)");
     	String localResult = runHealthCheck(sparkConfLocal);
     	String remoteResult = runHealthCheck(sparkConfRemote);
+    	logger.info("RESPONSE Service GET /healthcheck => Message");
         return new ResponseEntity<>("LOCAL: \n"+localResult+"\nREMOTE: \n"+remoteResult, HttpStatus.OK);
     }
     

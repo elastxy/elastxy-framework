@@ -36,6 +36,7 @@ public class JSONContextBuilder implements ContextBuilder {
 		AlgorithmContext result;
 		try {
 			result = (AlgorithmContext)ReadConfigSupport.readJSON(classpathResource, AlgorithmContext.class);
+			result.application.appName = applicationName;
 		} catch (IOException e) {
 			String msg = "Error while reading JSON from classpath resource "+classpathResource+". Ex: "+e;
 			logger.error(msg, e);

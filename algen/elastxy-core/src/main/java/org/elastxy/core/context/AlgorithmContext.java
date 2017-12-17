@@ -1,10 +1,13 @@
 package org.elastxy.core.context;
 
 import java.io.Serializable;
+import java.util.Locale;
 
 import org.elastxy.core.applications.components.AppComponents;
 import org.elastxy.core.conf.AlgorithmParameters;
 import org.elastxy.core.conf.ApplicationSpecifics;
+import org.elastxy.core.conf.DefaultConfiguration;
+import org.elastxy.core.conf.DefaultMonitoringConfiguration;
 import org.elastxy.core.conf.MonitoringConfiguration;
 
 /**
@@ -38,8 +41,15 @@ public class AlgorithmContext implements Serializable {
 	
 	
 	/**
-	 * Configurations related to log, monitoring, etc.
+	 * Configurations related to log, monitoring, locale, etc.
 	 */
 	public MonitoringConfiguration monitoringConfiguration = new MonitoringConfiguration();
 	
+	
+	/**
+	 * Context related parameters to request: originator user, agent, language...
+	 * 
+	 */
+	public RequestContext requestContext = new RequestContext();
+
 }

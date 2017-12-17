@@ -21,6 +21,7 @@ public class ExperimentStats  {
 	// TODOA-8: fix generics
 	// TODOM-2: typed to Target
 	public Object target;
+//    public String bestMatchRendering;
     public Population lastGeneration;
     public int generations;
     public double time;
