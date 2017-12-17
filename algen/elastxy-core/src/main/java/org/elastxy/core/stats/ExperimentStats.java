@@ -24,7 +24,7 @@ public class ExperimentStats  {
 //    public String bestMatchRendering;
     public Population lastGeneration;
     public int generations;
-    public double time;
+    public long executionTimeMs; // total execution executionTimeMs in millis
     public int totIdenticalFitnesses;
     public boolean targetReached;
     public transient List<Population> generationHistory;
@@ -34,7 +34,7 @@ public class ExperimentStats  {
         buf.append("##################### STATS #####################").append(Character.LINE_SEPARATOR);
         buf.append("Best match:" + lastGeneration.bestMatch).append(Character.LINE_SEPARATOR);
         buf.append("Number of generations: "+generations).append(Character.LINE_SEPARATOR);
-        buf.append("Total time (ms): "+time).append(Character.LINE_SEPARATOR);
+        buf.append("Total execution time (ms): "+executionTimeMs).append(Character.LINE_SEPARATOR);
         buf.append("Total generations with same fitness: "+totIdenticalFitnesses);
         return buf.toString();
     }

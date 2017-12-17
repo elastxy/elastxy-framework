@@ -46,6 +46,7 @@ public class ApplicationMetadata {
 	public ComponentMetadata recombinator;
 
 	public ComponentMetadata solutionRenderer;
+	public ComponentMetadata resultsRenderer;
 
 	// Distributed application
 	public ComponentMetadata multiColonyEnvFactory;

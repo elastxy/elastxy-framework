@@ -59,5 +59,10 @@
 	"solutionRenderer": {
 		"type" : "java",
 		"content" : "org.elastxy.core.tracking.DefaultSolutionRenderer"
+	},
+	
+	"resultsRenderer": {
+		"type" : "java",
+		"content" : "org.elastxy.app.metaexpressions.MexResultsRenderer"
 	}
 }

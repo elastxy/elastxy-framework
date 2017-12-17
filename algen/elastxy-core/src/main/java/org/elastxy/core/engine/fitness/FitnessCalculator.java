@@ -23,7 +23,7 @@ public interface FitnessCalculator<S extends Solution, F extends Fitness> {
 	 * 
 	 * @param incubator
 	 */
-	public void setup(Incubator<? extends Genotype, ? extends Phenotype> incubator);
+	public void setIncubator(Incubator<? extends Genotype, ? extends Phenotype> incubator);
 	
 
 	/**

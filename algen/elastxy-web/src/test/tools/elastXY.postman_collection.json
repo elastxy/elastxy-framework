@@ -16,7 +16,13 @@
 					"request": {
 						"url": "http://{{ip}}:{{port}}/monitor/access",
 						"method": "HEAD",
-						"header": [],
+						"header": [
+							{
+								"key": "Web-Request",
+								"value": "false",
+								"description": ""
+							}
+						],
 						"body": {},
 						"description": ""
 					},
@@ -27,7 +33,18 @@
 					"request": {
 						"url": "http://{{ip}}:{{port}}/monitor/info",
 						"method": "GET",
-						"header": [],
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							},
+							{
+								"key": "Web-Request",
+								"value": "false",
+								"description": ""
+							}
+						],
 						"body": {},
 						"description": ""
 					},
@@ -38,7 +55,18 @@
 					"request": {
 						"url": "http://{{ip}}:{{port}}/monitor/healthcheck",
 						"method": "GET",
-						"header": [],
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							},
+							{
+								"key": "Web-Request",
+								"value": "false",
+								"description": ""
+							}
+						],
 						"body": {},
 						"description": ""
 					},
@@ -76,7 +104,18 @@
 							"request": {
 								"url": "http://{{ip}}:{{port}}/local/test/expressions",
 								"method": "GET",
-								"header": [],
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"description": ""
+									},
+									{
+										"key": "Web-Request",
+										"value": "false",
+										"description": ""
+									}
+								],
 								"body": {},
 								"description": ""
 							},
@@ -92,11 +131,16 @@
 										"key": "Content-Type",
 										"value": "application/json",
 										"description": ""
+									},
+									{
+										"key": "Web-Request",
+										"value": "false",
+										"description": ""
 									}
 								],
 								"body": {
 									"mode": "raw",
-									"raw": "{\n\t\"applicationSpecifics\": {\n\t\t\"target\" : {\n\t\t\t\"TARGET_EXPRESSION_RESULT\" : 235000\n\t\t},\n\t\t\"params\" : {\n\t\t\t\"MAX_OPERAND_VALUE\" : 1000\n\t\t}\n\t},\n\t\"algorithmParameters\": {\n\t\t\"recombinationPerc\": 0.8,\n\t\t\"mutationPerc\": 0.2,\n\t\t\"elitarism\": true,\n\t\t\"initialSelectionNumber\": 1000,\n\t\t\"initialSelectionRandom\": true,\n\t\t\"stopConditions\": {\n\t\t\t\"targetThreshold\" : 0.99999999,\n\t\t\t\"maxIterations\": -1,\n\t\t\t\"maxLifetimeMs\": 10000,\n\t\t\t\"maxIdenticalFitnesses\": -1\n\t\t}\n\t},\n\t\"monitoringConfiguration\": {\n\t\t\"verbose\": false,\n\t\t\"showGraph\": true\n\t}\n}"
+									"raw": "{\n\t\"applicationSpecifics\": {\n\t\t\"target\" : {\n\t\t\t\"TARGET_EXPRESSION_RESULT\" : 235000\n\t\t},\n\t\t\"params\" : {\n\t\t\t\"MAX_OPERAND_VALUE\" : 1000\n\t\t}\n\t},\n\t\"algorithmParameters\": {\n\t\t\"recombinationPerc\": 0.8,\n\t\t\"mutationPerc\": 0.2,\n\t\t\"elitarism\": true,\n\t\t\"initialSelectionNumber\": 1000,\n\t\t\"initialSelectionRandom\": true,\n\t\t\"stopConditions\": {\n\t\t\t\"targetThreshold\" : 0.99999999,\n\t\t\t\"maxIterations\": -1,\n\t\t\t\"maxLifetimeMs\": 3000,\n\t\t\t\"maxIdenticalFitnesses\": -1\n\t\t}\n\t},\n\t\"monitoringConfiguration\": {\n\t\t\"verbose\": false,\n\t\t\"showGraph\": true\n\t}\n}"
 								},
 								"description": ""
 							},
@@ -105,12 +149,17 @@
 						{
 							"name": "/analysis/expressions",
 							"request": {
-								"url": "http://{{ip}}:{{port}}/local/analysis/expressions/5",
+								"url": "http://{{ip}}:{{port}}/local/analysis/expressions/3",
 								"method": "POST",
 								"header": [
 									{
 										"key": "Content-Type",
 										"value": "application/json",
+										"description": ""
+									},
+									{
+										"key": "Web-Request",
+										"value": "false",
 										"description": ""
 									}
 								],
@@ -132,6 +181,11 @@
 										"key": "Content-Type",
 										"value": "application/json",
 										"description": ""
+									},
+									{
+										"key": "Web-Request",
+										"value": "false",
+										"description": ""
 									}
 								],
 								"body": {
@@ -152,11 +206,16 @@
 										"key": "Content-Type",
 										"value": "application/json",
 										"description": ""
+									},
+									{
+										"key": "Web-Request",
+										"value": "false",
+										"description": ""
 									}
 								],
 								"body": {
 									"mode": "raw",
-									"raw": "{\n\t\"applicationSpecifics\": {\n\t\t\"target\" : {\n\t\t\t\"TARGET_EXPRESSION_RESULT\" : 23\n\t\t},\n\t\t\"params\" : {\n\t\t\t\"MAX_OPERAND_VALUE\" : 100\n\t\t}\n\t},\n\t\"algorithmParameters\": {\n\t\t\"recombinationPerc\": 0.8,\n\t\t\"mutationPerc\": 0.2,\n\t\t\"elitarism\": true,\n\t\t\"initialSelectionNumber\": 10,\n\t\t\"initialSelectionRandom\": true,\n\t\t\"stopConditions\": {\n\t\t\t\"targetThreshold\" : 0.99999999,\n\t\t\t\"maxIterations\": 10,\n\t\t\t\"maxLifetimeMs\": -1,\n\t\t\t\"maxIdenticalFitnesses\": -1\n\t\t}\n\t},\n\t\"monitoringConfiguration\": {\n\t\t\"verbose\": false,\n\t\t\"showGraph\": true\n\t}\n}"
+									"raw": "{\r\n\t\"applicationSpecifics\": {\r\n\t\t\"target\" : {\r\n\t\t\t\"TARGET_EXPRESSION_RESULT\" : 235000\r\n\t\t},\r\n\t\t\"params\" : {\r\n\t\t\t\"MAX_OPERAND_VALUE\" : 1000\r\n\t\t}\r\n\t},\r\n\t\"algorithmParameters\": {\r\n\t\t\"recombinationPerc\": 0.8,\r\n\t\t\"mutationPerc\": 0.2,\r\n\t\t\"elitarism\": true,\r\n\t\t\"initialSelectionNumber\": 10,\r\n\t\t\"initialSelectionRandom\": true,\r\n\t\t\"stopConditions\": {\r\n\t\t\t\"targetFitness\" : 0.5,\r\n\t\t\t\"targetThreshold\" : -1,\r\n\t\t\t\"maxIterations\": -1,\r\n\t\t\t\"maxLifetimeMs\": 3000,\r\n\t\t\t\"maxIdenticalFitnesses\": -1\r\n\t\t}\r\n\t},\r\n\t\"monitoringConfiguration\": {\r\n\t\t\"verbose\": false,\r\n\t\t\"showGraph\": true\r\n\t}\r\n}"
 								},
 								"description": ""
 							},
@@ -174,7 +233,18 @@
 							"request": {
 								"url": "http://{{ip}}:{{port}}/local/test/garden",
 								"method": "GET",
-								"header": [],
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"description": ""
+									},
+									{
+										"key": "Web-Request",
+										"value": "false",
+										"description": ""
+									}
+								],
 								"body": {},
 								"description": ""
 							},
@@ -189,6 +259,11 @@
 									{
 										"key": "Content-Type",
 										"value": "application/json",
+										"description": ""
+									},
+									{
+										"key": "Web-Request",
+										"value": "false",
 										"description": ""
 									}
 								],
@@ -210,6 +285,11 @@
 										"key": "Content-Type",
 										"value": "application/json",
 										"description": ""
+									},
+									{
+										"key": "Web-Request",
+										"value": "false",
+										"description": ""
 									}
 								],
 								"body": {
@@ -230,6 +310,11 @@
 										"key": "Content-Type",
 										"value": "application/json",
 										"description": ""
+									},
+									{
+										"key": "Web-Request",
+										"value": "false",
+										"description": ""
 									}
 								],
 								"body": {
@@ -249,6 +334,11 @@
 									{
 										"key": "Content-Type",
 										"value": "application/json",
+										"description": ""
+									},
+									{
+										"key": "Web-Request",
+										"value": "false",
 										"description": ""
 									}
 								],
@@ -272,7 +362,18 @@
 							"request": {
 								"url": "http://{{ip}}:{{port}}/local/test/sudoku",
 								"method": "GET",
-								"header": [],
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"description": ""
+									},
+									{
+										"key": "Web-Request",
+										"value": "false",
+										"description": ""
+									}
+								],
 								"body": {},
 								"description": ""
 							},
@@ -287,6 +388,11 @@
 									{
 										"key": "Content-Type",
 										"value": "application/json",
+										"description": ""
+									},
+									{
+										"key": "Web-Request",
+										"value": "false",
 										"description": ""
 									}
 								],
@@ -308,6 +414,11 @@
 										"key": "Content-Type",
 										"value": "application/json",
 										"description": ""
+									},
+									{
+										"key": "Web-Request",
+										"value": "false",
+										"description": ""
 									}
 								],
 								"body": {
@@ -328,6 +439,11 @@
 										"key": "Content-Type",
 										"value": "application/json",
 										"description": ""
+									},
+									{
+										"key": "Web-Request",
+										"value": "false",
+										"description": ""
 									}
 								],
 								"body": {
@@ -347,6 +463,11 @@
 									{
 										"key": "Content-Type",
 										"value": "application/json",
+										"description": ""
+									},
+									{
+										"key": "Web-Request",
+										"value": "false",
 										"description": ""
 									}
 								],
@@ -370,7 +491,18 @@
 							"request": {
 								"url": "http://{{ip}}:{{port}}/local/test/algofrigerator",
 								"method": "GET",
-								"header": [],
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"description": ""
+									},
+									{
+										"key": "Web-Request",
+										"value": "false",
+										"description": ""
+									}
+								],
 								"body": {},
 								"description": ""
 							},
@@ -386,6 +518,11 @@
 										"key": "Content-Type",
 										"value": "application/json",
 										"description": ""
+									},
+									{
+										"key": "Web-Request",
+										"value": "false",
+										"description": ""
 									}
 								],
 								"body": {
@@ -396,7 +533,7 @@
 							},
 							"response": [
 								{
-									"id": "7c8b963c-4e13-4565-975c-3edb846c4ae1",
+									"id": "11bbd4ee-5b88-4256-be76-aaa681b523b0",
 									"name": "Database EN",
 									"originalRequest": {
 										"url": "http://{{ip}}:{{port}}/experiment/algofrigerator",
@@ -423,7 +560,7 @@
 									"body": ""
 								},
 								{
-									"id": "eaaa4df1-8f9e-4271-ac56-446aa3767cb9",
+									"id": "cd19c02b-2143-4f10-a0f1-0002f44cb7b9",
 									"name": "Database IT",
 									"originalRequest": {
 										"url": "http://{{ip}}:{{port}}/experiment/algofrigerator",
@@ -450,7 +587,7 @@
 									"body": ""
 								},
 								{
-									"id": "8ad49684-b867-480b-803b-5a0e8ec01db8",
+									"id": "151fdd11-5720-4ce2-ae93-012595dd0553",
 									"name": "Dispensa Rossi",
 									"originalRequest": {
 										"url": "http://{{ip}}:{{port}}/experiment/algofrigerator",
@@ -513,6 +650,11 @@
 										"key": "Content-Type",
 										"value": "application/json",
 										"description": ""
+									},
+									{
+										"key": "Web-Request",
+										"value": "false",
+										"description": ""
 									}
 								],
 								"body": {
@@ -532,6 +674,11 @@
 									{
 										"key": "Content-Type",
 										"value": "application/json",
+										"description": ""
+									},
+									{
+										"key": "Web-Request",
+										"value": "false",
 										"description": ""
 									}
 								],
@@ -553,6 +700,11 @@
 										"key": "Content-Type",
 										"value": "application/json",
 										"description": ""
+									},
+									{
+										"key": "Web-Request",
+										"value": "false",
+										"description": ""
 									}
 								],
 								"body": {
@@ -563,7 +715,7 @@
 							},
 							"response": [
 								{
-									"id": "9a150bd9-8764-4c67-b7a3-4c5c6b1b3b9c",
+									"id": "a368cff6-09ee-4e3f-890c-597e14b43235",
 									"name": "Database EN",
 									"originalRequest": {
 										"url": "http://{{ip}}:{{port}}/experiment/algofrigerator",
@@ -590,7 +742,7 @@
 									"body": ""
 								},
 								{
-									"id": "832b1554-0abc-457d-9fa6-31814dae6083",
+									"id": "750bba65-3cb8-430d-8bc7-64ccf2e34893",
 									"name": "Database IT",
 									"originalRequest": {
 										"url": "http://{{ip}}:{{port}}/experiment/algofrigerator",
@@ -617,7 +769,7 @@
 									"body": ""
 								},
 								{
-									"id": "5f0412e4-8cc6-4004-8351-8cd3b7fcea24",
+									"id": "2a1c83ba-3d9f-41f1-8af2-a0ae1f0b456f",
 									"name": "Dispensa Rossi",
 									"originalRequest": {
 										"url": "http://{{ip}}:{{port}}/experiment/algofrigerator",
@@ -693,6 +845,11 @@
 										"key": "Content-Type",
 										"value": "application/json",
 										"description": ""
+									},
+									{
+										"key": "Web-Request",
+										"value": "false",
+										"description": ""
 									}
 								],
 								"body": {
@@ -712,6 +869,11 @@
 									{
 										"key": "Content-Type",
 										"value": "application/json",
+										"description": ""
+									},
+									{
+										"key": "Web-Request",
+										"value": "false",
 										"description": ""
 									}
 								],
@@ -733,6 +895,11 @@
 										"key": "Content-Type",
 										"value": "application/json",
 										"description": ""
+									},
+									{
+										"key": "Web-Request",
+										"value": "false",
+										"description": ""
 									}
 								],
 								"body": {
@@ -753,6 +920,11 @@
 										"key": "Content-Type",
 										"value": "application/json",
 										"description": ""
+									},
+									{
+										"key": "Web-Request",
+										"value": "false",
+										"description": ""
 									}
 								],
 								"body": {
@@ -772,6 +944,11 @@
 									{
 										"key": "Content-Type",
 										"value": "application/json",
+										"description": ""
+									},
+									{
+										"key": "Web-Request",
+										"value": "false",
 										"description": ""
 									}
 								],
@@ -800,6 +977,11 @@
 										"key": "Content-Type",
 										"value": "application/json",
 										"description": ""
+									},
+									{
+										"key": "Web-Request",
+										"value": "false",
+										"description": ""
 									}
 								],
 								"body": {
@@ -819,6 +1001,11 @@
 									{
 										"key": "Content-Type",
 										"value": "application/json",
+										"description": ""
+									},
+									{
+										"key": "Web-Request",
+										"value": "false",
 										"description": ""
 									}
 								],
@@ -840,6 +1027,11 @@
 										"key": "Content-Type",
 										"value": "application/json",
 										"description": ""
+									},
+									{
+										"key": "Web-Request",
+										"value": "false",
+										"description": ""
 									}
 								],
 								"body": {
@@ -860,6 +1052,11 @@
 										"key": "Content-Type",
 										"value": "application/json",
 										"description": ""
+									},
+									{
+										"key": "Web-Request",
+										"value": "false",
+										"description": ""
 									}
 								],
 								"body": {
@@ -879,6 +1076,11 @@
 									{
 										"key": "Content-Type",
 										"value": "application/json",
+										"description": ""
+									},
+									{
+										"key": "Web-Request",
+										"value": "false",
 										"description": ""
 									}
 								],
@@ -907,6 +1109,11 @@
 										"key": "Content-Type",
 										"value": "application/json",
 										"description": ""
+									},
+									{
+										"key": "Web-Request",
+										"value": "false",
+										"description": ""
 									}
 								],
 								"body": {
@@ -927,6 +1134,11 @@
 										"key": "Content-Type",
 										"value": "application/json",
 										"description": ""
+									},
+									{
+										"key": "Web-Request",
+										"value": "false",
+										"description": ""
 									}
 								],
 								"body": {
@@ -946,6 +1158,11 @@
 									{
 										"key": "Content-Type",
 										"value": "application/json",
+										"description": ""
+									},
+									{
+										"key": "Web-Request",
+										"value": "false",
 										"description": ""
 									}
 								],
@@ -974,6 +1191,11 @@
 										"key": "Content-Type",
 										"value": "application/json",
 										"description": ""
+									},
+									{
+										"key": "Web-Request",
+										"value": "false",
+										"description": ""
 									}
 								],
 								"body": {
@@ -993,6 +1215,11 @@
 									{
 										"key": "Content-Type",
 										"value": "application/json",
+										"description": ""
+									},
+									{
+										"key": "Web-Request",
+										"value": "false",
 										"description": ""
 									}
 								],

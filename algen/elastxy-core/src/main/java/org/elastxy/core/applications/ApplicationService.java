@@ -99,6 +99,7 @@ public class ApplicationService {
 		context.application.recombinator.setup(context.algorithmParameters);
 		context.application.targetBuilder.setup(context);
 		context.application.envFactory.setup(context);
+//		context.application.resultsRenderer.setup(context);
 		
 		// Distributed application
 		if(context.application.multiColonyEnvFactory!=null) context.application.multiColonyEnvFactory.setup(context);

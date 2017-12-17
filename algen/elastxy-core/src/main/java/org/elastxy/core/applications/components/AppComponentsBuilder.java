@@ -14,6 +14,7 @@ import org.elastxy.core.engine.metadata.AlleleGenerator;
 import org.elastxy.core.engine.operators.Mutator;
 import org.elastxy.core.engine.operators.Recombinator;
 import org.elastxy.core.engine.operators.Selector;
+import org.elastxy.core.tracking.ResultsRenderer;
 import org.elastxy.core.tracking.SolutionRenderer;
 import org.springframework.stereotype.Component;
 
@@ -41,6 +42,7 @@ public class AppComponentsBuilder {
 		result.appName = 				applicationMetadata.appName;
 		result.appFolder = 				applicationMetadata.appFolder!=null ? "appdata/"+applicationMetadata.appFolder : "appdata/"+applicationMetadata.appName;
 
+		// TODOM-2: provide default when applicable, to reduce verbosity of application.json config
 		result.targetBuilder = 		(TargetBuilder)constructComponent(applicationMetadata.targetBuilder);
 		result.envFactory = 		(EnvFactory)constructComponent(applicationMetadata.envFactory);
 		
@@ -60,6 +62,7 @@ public class AppComponentsBuilder {
 		result.recombinator = 		(Recombinator)constructComponent(applicationMetadata.recombinator);
 		
 		result.solutionRenderer = 	(SolutionRenderer)constructComponent(applicationMetadata.solutionRenderer);
+		result.resultsRenderer = 	(ResultsRenderer)constructComponent(applicationMetadata.resultsRenderer);
 
 		// Distributed application
 		// TODOM-4: one only property (e.g. envFactory) but assigned based on runtime context: LOCAL|DISTRIBUTED
@@ -103,7 +106,8 @@ public class AppComponentsBuilder {
 		appComponents.envFactory.setTargetBuilder(appComponents.targetBuilder);
 		if(appComponents.multiColonyEnvFactory!=null) appComponents.multiColonyEnvFactory.setTargetBuilder(appComponents.targetBuilder);
 		appComponents.populationFactory.setSolutionsFactory(appComponents.solutionsFactory);
-		appComponents.fitnessCalculator.setup(appComponents.incubator);
+		appComponents.fitnessCalculator.setIncubator(appComponents.incubator);
+		appComponents.resultsRenderer.setSolutionRenderer(appComponents.solutionRenderer);
 		return appComponents;
 	}
 	

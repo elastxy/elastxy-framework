@@ -66,6 +66,8 @@ public class ElastXYApplication {
 			// Execute experiment
 			info("Starting application experiment.");
 			ExperimentStats stats = executeExperiment(context);
+			
+			// TODOA-2: persist and make available results! Reuse ResultsRenderer 
 			info("Experiment ended: "+stats);
 			
 		} catch (Exception e) {
@@ -108,6 +110,8 @@ public class ElastXYApplication {
 		context.application.recombinator.setup(context.algorithmParameters);
 		context.application.targetBuilder.setup(context);
 		context.application.envFactory.setup(context);
+//		context.application.resultsRenderer.setup(context);
+		
 		context.application.multiColonyEnvFactory.setup(context);
 		if(context.application.singleColonyDatasetProvider!=null) context.application.singleColonyDatasetProvider.setup(context);
 		if(context.application.distributedDatasetProvider!=null) context.application.distributedDatasetProvider.setup(context);

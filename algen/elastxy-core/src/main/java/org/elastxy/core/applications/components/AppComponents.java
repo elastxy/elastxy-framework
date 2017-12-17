@@ -14,13 +14,14 @@ import org.elastxy.core.engine.metadata.AlleleGenerator;
 import org.elastxy.core.engine.operators.Mutator;
 import org.elastxy.core.engine.operators.Recombinator;
 import org.elastxy.core.engine.operators.Selector;
+import org.elastxy.core.tracking.ResultsRenderer;
 import org.elastxy.core.tracking.SolutionRenderer;
 
 /**
  * Contains all components needed for algorithm to work.
  * 
  * It'a simple container, not a ServiceLocator in that
- * it's created at boot time by a builder, than used to supply
+ * it's created at boot executionTimeMs by a builder, than used to supply
  * the finite set of component to the algorithm.
  * 
  * @author red
@@ -28,32 +29,33 @@ import org.elastxy.core.tracking.SolutionRenderer;
  */
 public class AppComponents implements Serializable {
 
-	public static final String ApplicationName = 	"appName";
-	public static final String ApplicationFolder = 	"appFolder";
-	
-	public static final String TargetBuilder = 		"targetBuilder"; // Context-dependent
-	public static final String EnvFactory = 		"envFactory"; // Context-dependent
-	
-	public static final String DatasetProvider = 	"datasetProvider"; // Context-dependent
-	public static final String GenomaProvider = 	"genomaProvider"; // Context-dependent
-	public static final String AlleleGenerator = 	"alleleGenerator";
-	
-	public static final String PopulationFactory = 	"populationFactory";
-	public static final String SolutionsFactory = 	"solutionsFactory";
-	
-	public static final String FitnessCalculator = 	"fitnessCalculator";
-	public static final String Incubator = 			"incubator";
-	
-	public static final String Selector = 			"selector"; // Context-dependent
-	public static final String Mutator = 			"mutator";
-	public static final String Recombinator = 		"recombinator";
-	
-	public static final String SolutionRenderer = 	"renderer";
-
-	public static final String MultiColonyEnvFactory ="multiColonyEnvFactory"; // Context-dependent
-	public static final String DistributedDatasetProvider = 	"distributedDatasetProvider"; // Context-dependent
-	public static final String SingleColonyDatasetProvider = 	"singleColonyDatasetProvider"; // Context-dependent
-	public static final String DistributedGenomaProvider = 	"distributedGenomaProvider"; // Context-dependent
+//	public static final String ApplicationName = 	"appName";
+//	public static final String ApplicationFolder = 	"appFolder";
+//	
+//	public static final String TargetBuilder = 		"targetBuilder"; // Context-dependent
+//	public static final String EnvFactory = 		"envFactory"; // Context-dependent
+//	
+//	public static final String DatasetProvider = 	"datasetProvider"; // Context-dependent
+//	public static final String GenomaProvider = 	"genomaProvider"; // Context-dependent
+//	public static final String AlleleGenerator = 	"alleleGenerator";
+//	
+//	public static final String PopulationFactory = 	"populationFactory";
+//	public static final String SolutionsFactory = 	"solutionsFactory";
+//	
+//	public static final String FitnessCalculator = 	"fitnessCalculator";
+//	public static final String Incubator = 			"incubator";
+//	
+//	public static final String Selector = 			"selector"; // Context-dependent
+//	public static final String Mutator = 			"mutator";
+//	public static final String Recombinator = 		"recombinator";
+//
+//	public static final String SolutionRenderer = 	"renderer";
+//	public static final String ResultsRenderer = 	"resultsRenderer";
+//
+//	public static final String MultiColonyEnvFactory =		"multiColonyEnvFactory"; // Context-dependent
+//	public static final String DistributedDatasetProvider = "distributedDatasetProvider"; // Context-dependent
+//	public static final String SingleColonyDatasetProvider ="singleColonyDatasetProvider"; // Context-dependent
+//	public static final String DistributedGenomaProvider = 	"distributedGenomaProvider"; // Context-dependent
 
 	
 	public String appName;
@@ -77,6 +79,7 @@ public class AppComponents implements Serializable {
 	public transient Recombinator recombinator;
 	
 	public transient SolutionRenderer solutionRenderer;
+	public transient ResultsRenderer resultsRenderer;
 
 	// Distributed application
 	// TODOM-2: DistributedAppComponents extending this, with specific MultiColony- types?? another application.json extending local?
@@ -113,6 +116,7 @@ public class AppComponents implements Serializable {
 		result.recombinator = recombinator;
 		
 		result.solutionRenderer = solutionRenderer;
+		result.resultsRenderer = resultsRenderer;
 
 		// Distributed application
 		result.multiColonyEnvFactory = multiColonyEnvFactory;

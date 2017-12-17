@@ -41,7 +41,7 @@ public class AggregatedStats {
 	public List<String> bestMatches = new ArrayList<String>();
 
 	
-    public transient List<Double> successExecutionTimes = new ArrayList<Double>();
+    public transient List<Long> successExecutionTimes = new ArrayList<Long>();
     
     public AggregatedStats() {
     }

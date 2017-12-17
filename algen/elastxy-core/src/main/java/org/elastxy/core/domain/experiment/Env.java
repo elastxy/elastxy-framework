@@ -40,6 +40,7 @@ public class Env {
     public int currentGenNumber = 0; // first generation starts from 0
     public long startTime;
     public long endTime;
+    public long totalLifeTime;
     public boolean targetReached;
     public int totIdenticalFitnesses = 0; // number of sequential best population fitness value
     

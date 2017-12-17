@@ -46,17 +46,25 @@
 		"type" : "java",
 		"content" : "org.elastxy.core.engine.operators.StandardSelector"
 	},
+	
 	"mutator": {
 		"type" : "java",
 		"content" : "org.elastxy.core.engine.operators.ChromosomeMutator"
 	},
+	
 	"recombinator": {
 		"type" : "java",
 		"content" : "org.elastxy.core.engine.operators.ChromosomeRecombinator"
 	},
+	
 	"solutionRenderer": {
 		"type" : "java",
 		"content" : "org.elastxy.app.metasudoku.MesSolutionRenderer"
+	},
+	
+	"resultsRenderer": {
+		"type" : "java",
+		"content" : "org.elastxy.core.tracking.DefaultResultsRenderer"
 	},
 	
 	

@@ -25,6 +25,7 @@ public class CSVReporter implements Reporter, Serializable {
 		outputDir = path;
 	}
 	
+	// TODOM-2: reuse ResultsRenderer?
 	public void createReports(ExperimentStats stats) {
 		try {
 			File outputDir = new File(this.outputDir);
@@ -34,7 +35,7 @@ public class CSVReporter implements Reporter, Serializable {
 			csv.add(new String[] {"FITNESS", String.format("%1.20f", stats.lastGeneration.bestMatch.getFitness().getValue())});
 			csv.add(new String[] {"Last population size", String.valueOf(stats.lastGeneration.size())});
 			csv.add(new String[] {"Number of generations", String.valueOf(stats.generations)});
-			csv.add(new String[] {"Total time (sec)", String.valueOf(stats.time) });
+			csv.add(new String[] {"Total execution time (ms)", String.valueOf(stats.executionTimeMs) });
 			
 			List<String[]> customPart = createCustomPart(stats);
 			csv.addAll(customPart);

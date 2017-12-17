@@ -22,6 +22,8 @@ import org.elastxy.core.applications.ApplicationService;
 import org.elastxy.core.context.AlgorithmContext;
 import org.elastxy.core.context.RequestContext;
 import org.elastxy.core.stats.ExperimentStats;
+import org.elastxy.web.renderer.InternalExperimentResponseRenderer;
+import org.elastxy.web.renderer.WebExperimentResponseRenderer;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -46,10 +48,14 @@ public class LocalController {
 	private static Logger logger = LoggerFactory.getLogger(LocalController.class);
 
 	@Autowired private ApplicationService applicationService;
+	
+	@Autowired private WebExperimentResponseRenderer webRenderer;
+	@Autowired private InternalExperimentResponseRenderer intRenderer;
 
+	
 	@RequestMapping(path = "/experiment/{application}", method = RequestMethod.POST)
 	@ResponseBody
-	public ExperimentStats experiment(
+	public ExperimentResponse experiment(
 			@PathVariable String application,  
 			@RequestBody AlgorithmContext context,
 			@RequestHeader(value="Web-Request", defaultValue="true") boolean webRequest,
@@ -59,16 +65,15 @@ public class LocalController {
 		context.application.appName = application;
 		context.requestContext = new RequestContext(webRequest, userLocale);
 		ExperimentStats stats = applicationService.executeExperiment(context);
-		
+		// TODOA-2: exceptions management
 		logger.info("RESPONSE Service /experiment/{application} => "+stats);
-		return stats;
+		return res(webRequest, context, stats);
 	}
-	
 
 
 	@RequestMapping("/test/{application}")
 	@ResponseBody
-	public ExperimentStats test(@PathVariable String application,
+	public ExperimentResponse test(@PathVariable String application,
 			@RequestHeader(value="Web-Request", defaultValue="true") boolean webRequest,
 			Locale userLocale) {
 		logger.info("REQUEST Service /test/{application} => "+application);
@@ -79,7 +84,7 @@ public class LocalController {
 		ExperimentStats stats = applicationService.executeBenchmark(context);
 		
 		logger.info("RESPONSE Service /test/{application} => "+stats);
-		return stats;
+		return res(webRequest, context, stats);
 	}
 	
 	
@@ -87,7 +92,7 @@ public class LocalController {
 	// TODOM-2: analysis: structured results
 	@RequestMapping(path = "/analysis/{application}/{experiments}", method = RequestMethod.POST)
 	@ResponseBody
-	public String analysis(
+	public ExperimentResponse analysis(
 			@PathVariable String application, 
 			@PathVariable Integer experiments,
 			@RequestBody AlgorithmContext context,
@@ -100,14 +105,14 @@ public class LocalController {
 		String result = applicationService.executeAnalysis(context, experiments);
 		
 		logger.info("RESPONSE Service /analysis/{domain}/{experiments} => "+result);
-        return result;
+		return res(webRequest, context, result);
 	}
 
 
 	// TODOM-2: trial: structured results
 	@RequestMapping(path = "/trial/{application}/{experiments}", method = RequestMethod.POST)
 	@ResponseBody
-	public String trialTest(
+	public ExperimentResponse trialTest(
 			@PathVariable String application, 
 			@PathVariable Integer experiments,
 			@RequestBody AlgorithmContext context,
@@ -120,7 +125,16 @@ public class LocalController {
 		String result = applicationService.executeTrialTest(context, experiments);
 
 		logger.info("RESPONSE Service /trial/{application}/{experiments} => "+result);
-        return result;
+		return res(webRequest, context, result);
+	}
+
+	
+	private ExperimentResponse res(boolean webRequest, AlgorithmContext context, ExperimentStats stats){
+		return webRequest ? webRenderer.render(context, stats) : intRenderer.render(context, stats);
+	}
+
+	private ExperimentResponse res(boolean webRequest, AlgorithmContext context, String content){
+		return webRequest ? webRenderer.render(context, content) : intRenderer.render(context, content);
 	}
 
 }

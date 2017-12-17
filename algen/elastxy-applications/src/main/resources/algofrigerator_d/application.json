@@ -67,6 +67,11 @@
 		"content" : "org.elastxy.app.algofrigerator.MefSolutionRenderer"
 	},
 	
+	"resultsRenderer": {
+		"type" : "java",
+		"content" : "org.elastxy.core.tracking.DefaultResultsRenderer"
+	},
+	
 	"multiColonyEnvFactory": {
 		"type" : "java",
 		"content" : "org.elastxy.distributed.engine.factory.StandardMultiColonyEnvFactory"

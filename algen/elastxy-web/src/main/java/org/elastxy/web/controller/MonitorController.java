@@ -45,8 +45,8 @@ public class MonitorController {
 	@ResponseBody
 	public String access() {
 		logger.info("REQUEST Service HEAD /access => (empty)");
-		logger.info("RESPONSE Service HEAD /access => OK");
-		return "OK";
+		logger.info("RESPONSE Service HEAD /access => NO_ERROR");
+		return "NO_ERROR";
 	}
 	
 	

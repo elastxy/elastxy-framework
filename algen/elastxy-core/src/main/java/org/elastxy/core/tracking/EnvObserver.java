@@ -98,13 +98,15 @@ public class EnvObserver {
         showResults(stats);
     }
     
+    
+    // TODOA-2: put into a ResultsRenderer
     private void showResults(ExperimentStats stats){
     	Logger log = context.monitoringConfiguration.logger;
         log.out("\n##################### STATS #####################");
         log.out("Best match:");
         log.out(renderer.render(stats.lastGeneration.bestMatch));
         log.out("Number of generations: "+stats.generations);
-        log.out("Total time (ms): "+stats.time);
+        log.out("Total execution time (ms): "+stats.executionTimeMs);
         if(context.algorithmParameters.elitarism) {
         	log.out("Total generations with same fitness: "+stats.totIdenticalFitnesses);
         }

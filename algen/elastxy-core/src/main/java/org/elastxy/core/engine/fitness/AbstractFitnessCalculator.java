@@ -19,7 +19,7 @@ public abstract class AbstractFitnessCalculator<S extends GenericSolution, F ext
 
 
 	@Override
-	public void setup(Incubator incubator) {
+	public void setIncubator(Incubator incubator) {
 		this.incubator = incubator;
 	}
 	

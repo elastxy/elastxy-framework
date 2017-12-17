@@ -75,7 +75,7 @@ public class DistributedController {
 		ElastXYApplication.main(params);
 
     	logger.info("RESPONSE Service /local/experiment/{application}"); // TODOA-4: return distributed ExperimentStats
-        String stats = "OK";
+        String stats = "NO_ERROR";
     	return new ResponseEntity<>(stats, HttpStatus.OK);
     }
 
