@@ -67,7 +67,7 @@ public class ElastXYApplication {
 			info("Starting application experiment.");
 			ExperimentStats stats = executeExperiment(context);
 			
-			// TODOA-2: persist and make available results! Reuse ResultsRenderer 
+			// TODOA-2: ResultsRenderer: persist and make available results! Reuse ResultsRenderer 
 			info("Experiment ended: "+stats);
 			
 		} catch (Exception e) {

@@ -135,7 +135,7 @@
 											<exclude>ch.qos.logback:*</exclude>
 						                </excludes>
 						              </artifactSet>
-						              <!-- TODOD: point to local db files, and exclude from classpath -->
+						              <!-- TODOA-2: point to local db files, and exclude from classpath -->
 						              <!-- 
 						              <filters>
 										  <filter>

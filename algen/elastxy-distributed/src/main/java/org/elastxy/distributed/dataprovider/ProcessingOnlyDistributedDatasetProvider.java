@@ -31,7 +31,7 @@ public class ProcessingOnlyDistributedDatasetProvider implements DistributedData
 
 	
 	/**
-	 * TODOA-4: put final on every blocked implementation
+	 * TODOM-4: put final on every blocked implementation
 	 */
 	public final void setup(AlgorithmContext context){
 		this.context = (DistributedAlgorithmContext)context;

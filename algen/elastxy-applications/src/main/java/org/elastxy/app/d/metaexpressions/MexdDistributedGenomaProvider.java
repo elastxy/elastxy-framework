@@ -26,7 +26,7 @@ import org.elastxy.distributed.dataprovider.RDDDistributedWorkingDataset;
  * RDD<Allele> cardinality should be enough to cover 
  * a single population: solutionsNumber + 50%
  * 
- * TODOA-4: bloccare le interfacce in ottica SDK!
+ * TODOM-4: bloccare le interfacce in ottica SDK!
  * @author red
  */
 public class MexdDistributedGenomaProvider implements DistributedGenomaProvider {

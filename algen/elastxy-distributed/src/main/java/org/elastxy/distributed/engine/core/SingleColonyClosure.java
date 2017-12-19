@@ -85,14 +85,14 @@ public class SingleColonyClosure implements FlatMapFunction<Iterator<Allele>, So
 		boolean processingOnly = (context.application.distributedGenomaProvider instanceof ProcessingOnlyDistributedGenomaProvider) ? true : false;
 		ExperimentStats stats = processingOnly ? runIsolatedColonyExperiment() : runLinkedColonyExperiment(initialGenomaIterator);
 		
-		// TODOA-2: persist stats, if useful with a ResultsRenderer
+		// TODOA-2: ResultsRenderer: persist stats, if useful with a ResultsRenderer
 		if(stats.targetReached){
 			logger.info(">>> TARGET GOAL REACHED!!! <<<");
 			logger.info(">>> BestMatch: "+stats.lastGeneration.bestMatch+" <<<");
 			this.coloniesGoalAccumulator.add(1);
 		}
 		List<Solution> bestMatches = new ArrayList<Solution>();
-		bestMatches.add(stats.lastGeneration.bestMatch); // TODOA-4: a number of bestMatches
+		bestMatches.add(stats.lastGeneration.bestMatch); // TODOA-4: Elitism: a number of bestMatches: ElitismOperator multicolony
 		return bestMatches.iterator();
 	}
 
@@ -101,7 +101,7 @@ public class SingleColonyClosure implements FlatMapFunction<Iterator<Allele>, So
 	 * Runs an experiment starting from scratch: no genoma is reintroduced
 	 * beyond best matches of previous generation.
 	 * 
-	 * TODOA-4: reintroduce previous best matches
+	 * TODOA-4: Elitism: maintain best matches over eras
 	 * 
 	 * @param initialGenomaIterator
 	 * @return

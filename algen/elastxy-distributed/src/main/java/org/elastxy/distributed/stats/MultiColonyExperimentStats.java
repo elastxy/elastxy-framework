@@ -30,7 +30,7 @@ public class MultiColonyExperimentStats extends ExperimentStats { // TODOB-2: ma
     public List<Solution> otherBestMatches;
 
    
-    // TODOA-2: create a specific ResultsRenderer
+    // TODOA-2: ResultsRenderer: create a specific multicolony ResultsRenderer
     public String toString(){
     	StringBuffer buf = new StringBuffer();
         buf.append("##################### STATS #####################").append(Character.LINE_SEPARATOR);

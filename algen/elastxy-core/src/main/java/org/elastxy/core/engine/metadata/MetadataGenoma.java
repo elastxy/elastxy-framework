@@ -66,7 +66,7 @@ public interface MetadataGenoma extends Genoma {
 	 * 
 	 * TODOM-2: only by metadatacode String?
 	 * TODOM-8: reorder and document these APIs
-	 * TODOA-4: create a JavaDoc on important APIs!
+	 * TODOM-4: create a JavaDoc on important APIs!
 	 * 
 	 * @param metadata
 	 * @return

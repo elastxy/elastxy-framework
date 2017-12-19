@@ -32,7 +32,7 @@ public class MultiColonyEnvObserver extends EnvObserver {
     	context.monitoringConfiguration.logger.out("Era "+eraNumber+" ended");
     }
     
-    // TODOA-2: reuse the ResultsRenderer
+    // TODOA-2: ResultsRenderer: reuse the ResultsRenderer
     public void targetReachedEvent(ExperimentStats stats){
     	context.monitoringConfiguration.logger.out("Goal reached! \nStats:"+stats);
     }

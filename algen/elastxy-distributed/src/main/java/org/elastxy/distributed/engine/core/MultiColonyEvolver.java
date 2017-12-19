@@ -102,7 +102,7 @@ public class MultiColonyEvolver implements Evolver {
           	
           	// NOTE: context passed must be serializable and will be copied to new Java Runtime!
           	Broadcast<List<Solution>> prevBest = env.previousBestMatchesBroadcast.isPresent() ? env.previousBestMatchesBroadcast.get() : null;
-			// TODOA-2: algorifero is broadcasting every executionTimeMs... how to persist/unpersist locally?
+			// TODOA-2: bug. algorifero is broadcasting every executionTimeMs... how to persist/unpersist locally?
           	env.bestMatchesRDD = alleleValuesProvider.rdd().mapPartitions(new SingleColonyClosure(
           	    env.currentEraNumber,
           	    context,
@@ -148,7 +148,7 @@ public class MultiColonyEvolver implements Evolver {
               if(env.currentEraNumber % context.algorithmParameters.reshuffleEveryEras == 0){
             	fireReshuffleEvent(env.currentEraNumber);
                 logger.info(String.format("   >>> 1.5 Repartition required [era %d]", env.currentEraNumber));
-                // TODOA-4: reinsert best matches between reshuffled eras
+                // TODOA-4: Elitism: maintain best matches over eras
                 env = ((StandardMultiColonyEnvFactory)context.application.multiColonyEnvFactory).newEra(env);
               }
             }
@@ -170,7 +170,7 @@ public class MultiColonyEvolver implements Evolver {
       }
 
     
-    // TODOA-2: add a multicolony ResultsRenderer
+    // TODOA-2: ResultsRenderer: create a specific multicolony ResultsRenderer
     private void viewResults(List<Solution> bestMatches){
         logFinal("-----------------------------------------------");
         final Long goalAccumulator = env.goalAccumulator.isPresent() ? env.goalAccumulator.get().value() : null;

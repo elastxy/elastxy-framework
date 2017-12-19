@@ -16,7 +16,7 @@ import org.elastxy.distributed.dataprovider.DistributedDatasetProvider;
 import org.elastxy.distributed.dataprovider.RDDDistributedWorkingDataset;
 
 /**
- * TODOA-4: bloccare le interfacce in ottica SDK!
+ * TODOM-4: bloccare le interfacce in ottica SDK!
  * @author red
  *
  */

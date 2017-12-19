@@ -50,7 +50,7 @@ public class DistributedController {
 	private ApplicationsSparkConfig applicationsSparkConfig;
 	
 	
-	// TODOA-2: check status & kill jobs
+	// TODOM-2: check status & kill jobs
 
 
     @RequestMapping(path = "/local/experiment/{application}", method = RequestMethod.POST)
@@ -74,7 +74,7 @@ public class DistributedController {
     	logger.info("Submitting job locally with params: "+Arrays.asList(params));
 		ElastXYApplication.main(params);
 
-    	logger.info("RESPONSE Service /local/experiment/{application}"); // TODOA-4: return distributed ExperimentStats
+    	logger.info("RESPONSE Service /local/experiment/{application}"); // TODOA-2: ResultsRenderer: collect distributed ExperimentStats
         String stats = "NO_ERROR";
     	return new ResponseEntity<>(stats, HttpStatus.OK);
     }
@@ -93,7 +93,7 @@ public class DistributedController {
 		context.requestContext = new RequestContext(webRequest, userLocale);
     	
     	SparkTaskExecutor executor = new SparkTaskExecutor();
-    	String stats = executor.runDistributed(applicationsSparkConfig.getTaskConfig(application), context); // TODOA-4: return distributed ExperimentStats
+    	String stats = executor.runDistributed(applicationsSparkConfig.getTaskConfig(application), context); // TODOA-2: ResultsRenderer: return distributed ExperimentStats
     	
     	logger.info("RESPONSE Service /cluster/experiment/{application} => "+stats);
         return new ResponseEntity<>(stats, HttpStatus.OK);

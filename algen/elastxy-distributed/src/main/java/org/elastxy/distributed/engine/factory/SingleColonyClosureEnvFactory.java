@@ -69,7 +69,7 @@ public class SingleColonyClosureEnvFactory implements EnvFactory {
 
     	// Updates Genoma with local Alleles from partition for population creation
         AlleleValuesProvider allelesProviderForPopulation = new InMemoryAlleleValuesProvider();
-        // TODOA-8: multi alleles provider: get name of alleles provider from metadata?
+        // TODOA-4: multi alleles provider: get name of alleles provider from metadata?
         allelesProviderForPopulation.insertAlleles(DistributedAlleleValuesProvider.NAME, newPopulationAlleles);
         
         GenomaProvider genomaProvider = context.application.genomaProvider;
@@ -82,7 +82,7 @@ public class SingleColonyClosureEnvFactory implements EnvFactory {
 
     	// Updates Genoma with broadcasted mutation Alleles for mutation
         AlleleValuesProvider allelesProviderForMutation = new InMemoryAlleleValuesProvider();
-        // TODOA-8: multi alleles provider: how to manage multi alleles provider?
+        // TODOA-4: multi alleles provider: get name of alleles provider from metadata?
         allelesProviderForMutation.insertAlleles(DistributedAlleleValuesProvider.NAME, mutationAlleles);
     	genoma.setAlleleValuesProvider(allelesProviderForMutation);
         

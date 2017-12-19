@@ -1,7 +1,7 @@
 package org.elastxy.core.tracking;
 
 /**
- * TODOA-4: proper error management, now it's generic
+ * // TODOA-2: exceptions management
  * @author red
  *
  */

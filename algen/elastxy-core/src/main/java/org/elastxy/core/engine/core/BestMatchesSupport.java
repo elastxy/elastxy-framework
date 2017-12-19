@@ -16,7 +16,7 @@ public class BestMatchesSupport {
      * The copy will also maintain the original phenotype, in case the solution
      * will be selected furthermore.
      * 
-     * // TODOA-4: best matches a certain percentage, not only one
+     * // TODOA-4: Elitism: best matches a certain percentage, not only one: create ElitismOperator
 	 * 
      * @param generationSize
      * @param nextGeneration

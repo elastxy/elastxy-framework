@@ -18,8 +18,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 /**
- * TODOA-2: filter out request to monitoring services using a Filter
- * TODOA-2: filter out request to Spring Boot monitoring with a Filter
+ * TODOA-2: blacklist request to monitoring/spring boot/spark/swagger services using a Filter
  * @author red
  *
  */
@@ -51,7 +50,7 @@ public class MonitorController {
 	
 	
 	/**
-	 * TODOA-2: show registered applications
+	 * TODOM-2: show registered applications
 	 * TODOM-8: let register/deregister an application
 	 * @return
 	 */

@@ -19,8 +19,8 @@ public class StandardSelector implements Selector<Genoma> {
      * - starts from the actual population, with fitness already calculated for every individual
      * - and ordered by fitness descending
      * - if elitism is enabled, selects the best match and puts it into the next population
-     * - TODOA-4: inserts a certain percentage of the best individuals, not only one
-	 * - TODOM-8: multiple chromosomes: maintain 100% fit chromosomes from current population to the next
+     * - TODOA-4: Elitism: inserts a certain percentage of the best individuals, not only one
+	 * - TODOM-8: Elitism: multiple chromosomes: maintain 100% fit chromosomes from current population to the next
      * 
      *  ..until list is empty
      */

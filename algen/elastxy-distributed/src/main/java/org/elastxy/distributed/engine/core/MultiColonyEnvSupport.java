@@ -32,7 +32,7 @@ public class MultiColonyEnvSupport {
         stats.target = env.target;
         stats.bestMatch = env.eraBestMatches.isEmpty() ? null : env.eraBestMatches.get(0);
         stats.goalAccumulator = env.goalAccumulator.isPresent() ? env.goalAccumulator.get().value() : 0;
-        stats.eras = (int)env.currentEraNumber; // TODOA-2: era number is +1??
+        stats.eras = (int)env.currentEraNumber; // TODOA-2: bug. era number is +1??
         stats.executionTimeMs = env.endTime;
         stats.totErasIdenticalFitnesses= env.totIdenticalFitnesses;
         stats.targetReached = env.targetReached;
