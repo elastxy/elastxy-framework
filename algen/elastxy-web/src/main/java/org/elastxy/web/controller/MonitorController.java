@@ -18,7 +18,6 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 /**
- * TODOA-2: blacklist request to monitoring/spring boot/spark/swagger services using a Filter
  * @author red
  *
  */
