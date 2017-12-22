@@ -30,11 +30,6 @@ public class Allele<T> implements Serializable {
 		result.dominant = dominant;
 		return result;
 	}
-	
-	@Override
-	public String toString() {
-		return value==null?"null":value.toString();
-	}
 
 	@Override
 	public int hashCode() {
@@ -59,6 +54,11 @@ public class Allele<T> implements Serializable {
 		} else if (!value.equals(other.value))
 			return false;
 		return true;
+	}
+	
+	@Override
+	public String toString() {
+		return value==null?"":value.toString();
 	}
 
 }

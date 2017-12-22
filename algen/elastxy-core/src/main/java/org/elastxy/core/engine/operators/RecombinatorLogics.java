@@ -4,6 +4,9 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 
+import org.apache.commons.math3.genetics.AbstractListChromosome;
+import org.apache.commons.math3.genetics.BinaryChromosome;
+import org.apache.commons.math3.genetics.CycleCrossover;
 import org.apache.log4j.Logger;
 import org.elastxy.core.domain.experiment.Solution;
 import org.elastxy.core.domain.genetics.Genotype;
@@ -37,11 +40,11 @@ public class RecombinatorLogics {
 
 		// Recombine redistributing genotype on two offsprings
 		if(!preserveAlleles){
-			RecombinatorLogics.cutAndSwapSequence(offspring0Genes, offspring1Genes, crossoverPoint);
+			RecombinatorLogics.onePointCrossover(offspring0Genes, offspring1Genes, crossoverPoint);
 		}
 		// Recombine swapping genes until cutting point
 		else {
-			RecombinatorLogics.cutAndRedistributeSequence(offspring0Genes, offspring1Genes, crossoverPoint);
+			RecombinatorLogics.cycleCrossover(offspring0Genes, offspring1Genes, crossoverPoint);
 		}
 		return offsprings;
 	}
@@ -57,6 +60,32 @@ public class RecombinatorLogics {
 		}
 		return result;
 	}
+
+	
+	public static List<Solution> recombineList(Recombinator recombinator, List<Solution> solutions, boolean preserveAlleles){
+		if(logger.isTraceEnabled()) logger.trace("*** INPUT"+solutions);
+		// LOOP OVER NON-BEST SHUFFLED
+        Collections.shuffle(solutions);
+        int solutionsSize = solutions.size();
+		for(int s=0; s < solutionsSize && s != solutionsSize-1; s=s+2){
+		    
+			// EXTRACT PARENTS
+			Solution[] parentsArray = {solutions.get(s), solutions.get(s+1)};
+
+		    // RECOMBINATION
+			List<Solution> parents = Arrays.asList(parentsArray);
+			if(logger.isTraceEnabled()) logger.trace("*** RECOMBINING PARENTS "+parents);
+			List<Solution> sons = recombinator.recombine(parents, preserveAlleles);
+			if(logger.isTraceEnabled()) logger.trace("*** RECOMBINED SONS "+sons);
+		    
+		    // REPLACE PARENTS WITH SONS
+		    solutions.set(s, sons.get(0));
+		    solutions.set(s+1, sons.get(1));
+		}
+		if(logger.isTraceEnabled()) logger.trace("*** OUTPUT"+solutions);
+		return solutions;
+	}
+
 
 	
 	
@@ -91,7 +120,7 @@ public class RecombinatorLogics {
 	 * @param off1genes
 	 * @param crossoverPoint
 	 */
-	public static void cutAndSwapSequence(List<Gene> off0genes, List<Gene> off1genes, int crossoverPoint){
+	public static void onePointCrossover(List<Gene> off0genes, List<Gene> off1genes, int crossoverPoint){
 		for(int pos=0; pos < crossoverPoint; pos++){
 			Gene tmp = off0genes.get(pos);
 			off0genes.set(pos, off1genes.get(pos));
@@ -127,92 +156,13 @@ public class RecombinatorLogics {
 	 * @param off1genes
 	 * @param crossoverPoint
 	 */
-	public static void cutAndRedistributeSequence(List<Gene> off0genes, List<Gene> off1genes, int crossoverPoint){
+	public static void cycleCrossover(List<Gene> off0genes, List<Gene> off1genes, Integer crossoverPoint){
 
-		Gene[] off0GenesArr = new Gene[off0genes.size()];
-		off0GenesArr = off0genes.toArray(off0GenesArr);
-		Gene[] off1GenesArr = new Gene[off1genes.size()];
-		off1GenesArr = off1genes.toArray(off1GenesArr);
-
-		CX alg = new CX(off0GenesArr, off1GenesArr);
-		for(int i=0; i<alg.offspring1.length; i++) off0genes.set(i, alg.offspring1[i]); 
-		for(int i=0; i<alg.offspring2.length; i++) off1genes.set(i, alg.offspring2[i]); 
+		List<Gene>[] offsprings = CXRecombinator.recombine(off0genes, off1genes, crossoverPoint);
+		for(int i=0; i<offsprings[0].size(); i++) off0genes.set(i, offsprings[0].get(i)); 
+		for(int i=0; i<offsprings[1].size(); i++) off1genes.set(i, offsprings[1].get(i)); 
 		
-		
-//		// Normal recombination
-//		int sequenceEnd = off0genes.size();
-//		Map<Gene, Gene> newOldRedistribute = new HashMap<Gene, Gene>();
-//		for(int pos=0; pos < sequenceEnd; pos++){
-//			if(pos < crossoverPoint){
-//				Gene tmp0 = off0genes.get(pos);
-//				Gene tmp1 = off1genes.get(pos);
-//				off0genes.set(pos, tmp1);
-//				off1genes.set(pos, tmp0);
-//				newOldRedistribute.put(tmp1, tmp0);
-//			}
-//			else if(pos >= crossoverPoint){
-//				if(newOldRedistribute.isEmpty()){
-//					break; // nothing to swap
-//				}
-//				Gene tmp0 = off0genes.get(pos);
-//				if(newOldRedistribute.containsKey(tmp0)){
-//					Gene tmp1 = newOldRedistribute.get(tmp0);
-//					off0genes.set(pos, tmp1); // replace with old value missing
-//					replaceFirst(off1genes, pos, tmp1, tmp0);
-//					newOldRedistribute.remove(tmp0);
-//				}
-//			}
-//		}
-//		
 	}
-//	
-//	/**
-//	 * Replace a Gene starting from beginPos, restarting
-//	 * from 0 if nothing found.
-//	 * 
-//	 * @param sequence
-//	 * @param beginPos
-//	 * @param old
-//	 * @param newG
-//	 */
-//	private static void replaceFirst(List<Gene> sequence, int beginPos, Gene old, Gene newG) {
-//		int endPos = sequence.size();
-//		for(int pos=beginPos; pos < endPos; pos++){
-//			if(sequence.get(pos).equals(old)){
-//				sequence.set(pos, newG);
-//				break;
-//			}
-//			// nothing found: restart
-//			if(pos==endPos){
-//				pos=0;
-//				endPos=beginPos-1;
-//			}
-//		}
-//	}
 	
 	
-	public static List<Solution> recombineList(Recombinator recombinator, List<Solution> solutions, boolean preserveAlleles){
-		if(logger.isTraceEnabled()) logger.trace("*** INPUT"+solutions);
-		// LOOP OVER NON-BEST SHUFFLED
-        Collections.shuffle(solutions);
-        int solutionsSize = solutions.size();
-		for(int s=0; s < solutionsSize && s != solutionsSize-1; s=s+2){
-		    
-			// EXTRACT PARENTS
-			Solution[] parentsArray = {solutions.get(s), solutions.get(s+1)};
-
-		    // RECOMBINATION
-			List<Solution> parents = Arrays.asList(parentsArray);
-			if(logger.isTraceEnabled()) logger.trace("*** RECOMBINING PARENTS "+parents);
-			List<Solution> sons = recombinator.recombine(parents, preserveAlleles);
-			if(logger.isTraceEnabled()) logger.trace("*** RECOMBINED SONS "+sons);
-		    
-		    // REPLACE PARENTS WITH SONS
-		    solutions.set(s, sons.get(0));
-		    solutions.set(s+1, sons.get(1));
-		}
-		if(logger.isTraceEnabled()) logger.trace("*** OUTPUT"+solutions);
-		return solutions;
-	}
-
 }

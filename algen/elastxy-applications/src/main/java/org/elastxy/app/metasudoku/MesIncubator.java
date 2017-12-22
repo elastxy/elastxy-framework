@@ -1,17 +1,23 @@
 package org.elastxy.app.metasudoku;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
 
+import org.apache.log4j.Logger;
 import org.elastxy.core.domain.experiment.Env;
 import org.elastxy.core.domain.genetics.genotype.Chromosome;
 import org.elastxy.core.domain.genetics.genotype.Gene;
 import org.elastxy.core.domain.genetics.phenotype.ComplexPhenotype;
+import org.elastxy.core.engine.core.IllegalSolutionException;
 import org.elastxy.core.engine.fitness.Incubator;
+import org.elastxy.core.engine.operators.MutatorLogics;
 
 public class MesIncubator implements Incubator<Chromosome, ComplexPhenotype>{
+	private static Logger logger = Logger.getLogger(MesIncubator.class);
+	
 	private static final int[] COMPLETED_VALUES = new int[]{1,2,3,4,5,6,7,8,9};
 	
 	/**
@@ -25,15 +31,27 @@ public class MesIncubator implements Incubator<Chromosome, ComplexPhenotype>{
 	 */	
 	@Override
 	public ComplexPhenotype grow(Chromosome genotype, Env env) {
+		int[][] goal = (int[][])env.target.getGoal();
+
+		// TODOM-2: create a ConsistencyChecker for Incubator and other components
+//		if(logger.isDebugEnabled()){
+//		checkGoal(goal, genotype.genes);
+//		}
+		
 		ComplexPhenotype result = new ComplexPhenotype();
-		int[][] matrix = fillMatrix((int[][])env.target.getGoal(), genotype.genes);
+		int[][] matrix = fillMatrix(goal, genotype.genes);
+	
 		double completeness = countCompleteRowsSquares(matrix);
 		result.value.put(MesConstants.PHENOTYPE_MATRIX, matrix);
 		result.value.put(MesConstants.PHENOTYPE_COMPLETENESS, completeness);
 		return result;
 	}
 	
-	public static int[][] fillMatrix(int[][] targetMatrix, List<Gene> genes){
+	public static int[][] fillMatrix(int[][] targetMatrix, List<Gene> genesInput){
+		
+		List<Gene> genes = new ArrayList<Gene>();
+		for(Gene g : genesInput){ genes.add(g.copy()); }
+		
 		int size = targetMatrix.length;
 		int[][] matrix = new int[size][size];
 		int i=0;
@@ -43,6 +61,9 @@ public class MesIncubator implements Incubator<Chromosome, ComplexPhenotype>{
 				matrix[r][c] = targetValue==0 ? (int)genes.get(i++).allele.value : targetValue;
 			}
 		}
+
+//		checkConsistency(matrix);
+		
 //		for (int i = 0; i < genes.size(); i++) {
 //			matrix[i / size][i % size] = (int)genes.get(i).allele.value;
 //		}
@@ -103,7 +124,8 @@ public class MesIncubator implements Incubator<Chromosome, ComplexPhenotype>{
 		
 		return totalPoints;
 	}
-
+	
+	
 	private double calculateElementPoints(double totalPoints, int[] values) {
 		if(Arrays.equals(values, COMPLETED_VALUES)) totalPoints++;
 		else {
@@ -113,5 +135,49 @@ public class MesIncubator implements Incubator<Chromosome, ComplexPhenotype>{
 		}
 		return totalPoints;
 	}
+	
+	
+//	private static void checkConsistency(int[][] matrix){
+//		List<Integer> actual = new ArrayList<Integer>();
+//		for(int i=0; i < matrix.length; i++) {
+//			for(int j=0; j < matrix.length; j++){
+//				actual.add(matrix[i][j]);
+//			}
+//		}
+//		
+//		// Removes all first occurrences of legal numbers, and leaves duplicates, if any
+//		for(int i=0; i < COMPLETED_VALUES.length; i++) {
+//			for(int j=0; j < COMPLETED_VALUES.length; j++){
+//				actual.remove(new Integer(COMPLETED_VALUES[j]));
+//			}
+//		}
+//		
+//		if(!actual.isEmpty()){
+//			throw new IllegalSolutionException("Error while growing solution.", "A number of duplicates was found in the resulting phenotype:"+actual);
+//		}
+//	}
+//	
+//	private static void checkGoal(int[][] goal, List<Gene> genes){
+//		int[][] matrix = new int[9][9];
+//		List<Integer> actual = new ArrayList<Integer>();
+//		int count = 0;
+//		for(int i=0; i < matrix.length; i++) {
+//			for(int j=0; j < matrix.length; j++){
+//				if(goal[i][j]==0) matrix[i][j] = ((Integer)genes.get(count++).allele.value);
+//				else matrix[i][j] = goal[i][j];
+//			}
+//		}
+//		
+//		// Removes all first occurrences of legal numbers, and leaves duplicates, if any
+//		for(int i=0; i < COMPLETED_VALUES.length; i++) {
+//			for(int j=0; j < COMPLETED_VALUES.length; j++){
+//				if(j==8) actual.remove(new Integer(0));
+//			}
+//		}
+//		
+//		if(!actual.isEmpty()){
+//			throw new IllegalSolutionException("Error while growing solution.", "Wrong goal matrix:"+actual);
+//		}
+//	}
 
 }

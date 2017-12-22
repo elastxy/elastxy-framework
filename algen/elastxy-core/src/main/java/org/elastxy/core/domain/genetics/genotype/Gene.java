@@ -97,7 +97,10 @@ public class Gene implements Serializable {
 
 	
 	public String toString(){
-		return String.format("(P:%s M:%s) %s", pos, metadataCode, allele!=null?allele.value:null);
+		return String.format("(%s%s)%s", 
+				pos==null?"":"P:"+pos, 
+				metadataCode==null?"":",M:"+metadataCode, 
+				allele==null?"":allele.value);
 	}
 
 }
