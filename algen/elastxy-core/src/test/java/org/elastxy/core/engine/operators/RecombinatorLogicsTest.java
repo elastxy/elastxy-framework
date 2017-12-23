@@ -11,6 +11,9 @@ import org.elastxy.core.domain.genetics.genotype.Allele;
 import org.elastxy.core.domain.genetics.genotype.Chromosome;
 import org.elastxy.core.domain.genetics.genotype.Gene;
 import org.elastxy.core.engine.core.IllegalSolutionException;
+import org.elastxy.core.engine.operators.crossover.BinaryCrossover;
+import org.elastxy.core.engine.operators.crossover.CXCrossover;
+import org.elastxy.core.engine.operators.crossover.CXDCrossover;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -18,11 +21,11 @@ import org.junit.Test;
  * Unit test for simple App.
  */
 public class RecombinatorLogicsTest {
-	private final Integer[] OFF1_SIMPLE = new Integer[]{1, 2, 1, 3, 4};
-	private final Integer[] OFF2_SIMPLE = new Integer[]{3, 1, 2, 4, 1};
+	private final Integer[] SIMPLE1 = new Integer[]{1, 2, 1, 3, 4};
+	private final Integer[] SIMPLE2 = new Integer[]{3, 1, 2, 4, 1};
 
-	private final Integer[] OFF1_COMPLEX = new Integer[]{2, 1, 8, 7, 4, 1, 5, 2, 2, 6, 7, 9, 3, 3, 4, 4, 5, 1};
-	private final Integer[] OFF2_COMPLEX = new Integer[]{5, 7, 6, 4, 4, 4, 1, 7, 2, 3, 1, 1, 2, 5, 3, 2, 8, 9};
+	private final Integer[] COMPLEX1 = new Integer[]{2, 1, 8, 7, 4, 1, 5, 2, 2, 6, 7, 9, 3, 3, 4, 4, 5, 1};
+	private final Integer[] COMPLEX2 = new Integer[]{5, 7, 6, 4, 4, 4, 1, 7, 2, 3, 1, 1, 2, 5, 3, 2, 8, 9};
 	
 	private Chromosome c1;
 	private Chromosome c2;
@@ -39,12 +42,19 @@ public class RecombinatorLogicsTest {
     	c1 = c1();
     	c2 = c2();
     	c3 = c3();
-    	cas = c(OFF1_SIMPLE);
-    	cbs = c(OFF2_SIMPLE);
-    	cac = c(OFF1_COMPLEX);
-    	cbc = c(OFF2_COMPLEX);
+    	cas = c(SIMPLE1);
+    	cbs = c(SIMPLE2);
+    	cac = c(COMPLEX1);
+    	cbc = c(COMPLEX2);
     }
 
+    
+    
+    /**
+     * --------------------------------------------------
+     * BINARY CROSSOVER
+     * --------------------------------------------------
+     */
     
     /**
      * Swaps in the middle.
@@ -52,10 +62,33 @@ public class RecombinatorLogicsTest {
      */
     @Test
     public void testTwoChromosomes(){
-    	RecombinatorLogics.onePointCrossover(c1.genes, c2.genes, 2);
-    	assertEquals("[4, -, 2, /, 3]", c1.toAlleleList().toString());    	
-    	assertEquals("[1, *, 5, +, 6]", c2.toAlleleList().toString());
+    	List<Gene>[] actual = BinaryCrossover.recombine(c1.genes, c2.genes, 2);
+    	assertEquals("[4, -, 2, /, 3]", toAllelesString(actual[0]));    	
+    	assertEquals("[1, *, 5, +, 6]", toAllelesString(actual[1]));
     }
+    
+
+    @Test
+    public void testTwoChromosomesBeginningPointcut(){
+    	List<Gene>[] actual = BinaryCrossover.recombine(c1.genes, c2.genes, 0);
+    	assertEquals("[1, *, 2, /, 3]", toAllelesString(actual[0]));
+    	assertEquals("[4, -, 5, +, 6]", toAllelesString(actual[1]));    	
+    }
+
+    @Test
+    public void testTwoChromosomesEndingPointcut(){
+    	List<Gene>[] actual = BinaryCrossover.recombine(c1.genes, c2.genes, c1.genes.size()-1);
+    	assertEquals("[4, -, 5, +, 3]", toAllelesString(actual[0]));    	
+    	assertEquals("[1, *, 2, /, 6]", toAllelesString(actual[1]));
+    }
+    
+    
+
+    /**
+     * --------------------------------------------------
+     * CX CROSSOVER
+     * --------------------------------------------------
+     */
 
     /**
      * Swaps in the middle.
@@ -63,110 +96,99 @@ public class RecombinatorLogicsTest {
      */
     @Test
     public void testTwoChromosomesPreserveGenes(){
-    	RecombinatorLogics.cycleCrossover(c1.genes, c3.genes, 2);
-    	assertEquals("[2, *, 3, /, 1]", c1.toAlleleList().toString());
-    	assertEquals("[1, /, 2, *, 3]", c3.toAlleleList().toString());    	
+    	List<Gene>[] actual = CXCrossover.recombine(c1.genes, c3.genes, 2);
+    	assertEquals("[1, /, 2, *, 3]", toAllelesString(actual[0]));    	
+    	assertEquals("[2, *, 3, /, 1]", toAllelesString(actual[1]));
     }
+
     
     @Test
-    public void testTwoChromosomesBeginningPointcut(){
-    	RecombinatorLogics.onePointCrossover(c1.genes, c2.genes, 0);
-    	assertEquals("[1, *, 2, /, 3]", c1.toAlleleList().toString());
-    	assertEquals("[4, -, 5, +, 6]", c2.toAlleleList().toString());    	
-    }
-
-
-    @Test
     public void testTwoChromosomesBeginningPointcutPreserveGenes(){
-    	RecombinatorLogics.cycleCrossover(c1.genes, c3.genes, 0);
-    	assertEquals("[2, *, 3, /, 1]", c1.toAlleleList().toString());
-    	assertEquals("[1, /, 2, *, 3]", c3.toAlleleList().toString());    	
+    	List<Gene>[] actual = CXCrossover.recombine(c1.genes, c3.genes, 0);
+    	assertEquals("[1, /, 2, *, 3]", toAllelesString(actual[0]));
+    	assertEquals("[2, *, 3, /, 1]", toAllelesString(actual[1]));
     }
-
-
-    @Test
-    public void testTwoChromosomesEndingPointcut(){
-    	RecombinatorLogics.onePointCrossover(c1.genes, c2.genes, c1.genes.size()-1);
-    	assertEquals("[4, -, 5, +, 3]", c1.toAlleleList().toString());    	
-    	assertEquals("[1, *, 2, /, 6]", c2.toAlleleList().toString());
-    }
-
+    
+    
     // (3*2/|1) (2/1*|3)
     @Test
     public void testTwoChromosomesEndingPointcutPreserveGenes(){
-    	RecombinatorLogics.cycleCrossover(c1.genes, c3.genes, c1.genes.size()-1);
-    	assertEquals("[2, *, 3, /, 1]", c1.toAlleleList().toString());    	
-    	assertEquals("[1, /, 2, *, 3]", c3.toAlleleList().toString());
-    }
+    	List<Gene>[] actual = CXCrossover.recombine(c1.genes, c3.genes, c1.genes.size()-1);
+    	assertEquals("[1, /, 2, *, 3]", toAllelesString(actual[0]));
+    	assertEquals("[2, *, 3, /, 1]", toAllelesString(actual[1]));    	
+    }    
+
+    
+    
+    /**
+     * --------------------------------------------------
+     * CXD CROSSOVER
+     * --------------------------------------------------
+     */
 
     @Test
     public void testDuplicatesSimpleStart() throws IllegalSolutionException {
-    	RecombinatorLogics.cycleCrossover(cas.genes, cbs.genes, 0);
-    	checkGenes(cas.genes, OFF1_SIMPLE);
-    	checkGenes(cbs.genes, OFF1_SIMPLE);
-    	assertEquals("[3, 2, 1, 4, 1]", cas.toAlleleList().toString());  
-    	assertEquals("[1, 1, 2, 3, 4]", cbs.toAlleleList().toString());
+    	List<Gene>[] actual = CXDCrossover.recombine(cas.genes, cbs.genes, 0);
+    	checkGenes(actual[0], SIMPLE1);
+    	checkGenes(actual[1], SIMPLE1);
+    	assertEquals("[3, 2, 1, 4, 1]", toAllelesString(actual[0]));  
+    	assertEquals("[1, 1, 2, 3, 4]", toAllelesString(actual[1]));
     }
 
     @Test
     public void testDuplicatesSimpleEnd() throws IllegalSolutionException {
-    	RecombinatorLogics.cycleCrossover(cas.genes, cbs.genes, cbs.genes.size()-1);
-    	checkGenes(cas.genes, OFF1_SIMPLE);
-    	checkGenes(cbs.genes, OFF1_SIMPLE);
-    	assertEquals("[3, 2, 1, 4, 1]", cas.toAlleleList().toString());  
-    	assertEquals("[1, 1, 2, 3, 4]", cbs.toAlleleList().toString());
+    	List<Gene>[] actual = CXDCrossover.recombine(cas.genes, cbs.genes, cbs.genes.size()-1);
+    	checkGenes(actual[0], SIMPLE1);
+    	checkGenes(actual[1], SIMPLE1);
+    	assertEquals("[3, 2, 1, 4, 1]", toAllelesString(actual[0]));  
+    	assertEquals("[1, 1, 2, 3, 4]", toAllelesString(actual[1]));
     }
 
     @Test
     public void testDuplicatesSimpleMiddle() throws IllegalSolutionException {
-    	RecombinatorLogics.cycleCrossover(cas.genes, cbs.genes, 2);
-    	checkGenes(cas.genes, OFF1_SIMPLE);
-    	checkGenes(cbs.genes, OFF1_SIMPLE);
-    	assertEquals("[1, 1, 2, 3, 4]", cas.toAlleleList().toString());  
-    	assertEquals("[3, 2, 1, 4, 1]", cbs.toAlleleList().toString());
+    	List<Gene>[] actual = CXDCrossover.recombine(cas.genes, cbs.genes, 2);
+    	checkGenes(actual[0], SIMPLE1);
+    	checkGenes(actual[1], SIMPLE1);
+    	assertEquals("[1, 1, 2, 3, 4]", toAllelesString(actual[0]));  
+    	assertEquals("[3, 2, 1, 4, 1]", toAllelesString(actual[1]));
     }
-
-//    4,5,7,3,7,2,1,3,5,2,8,4,4,1,2,1,6,9
-//    4,1,6,3,2,1,7,8,9,4,1,2,7,4,5,3,5,2
 
     // Swap from first pos
     @Test
     public void testDuplicatesComplexStart() throws IllegalSolutionException {
-    	RecombinatorLogics.cycleCrossover(cac.genes, cbc.genes, 0);
-    	checkGenes(cac.genes, OFF1_COMPLEX);
-    	checkGenes(cbc.genes, OFF1_COMPLEX);
+    	List<Gene>[] actual = CXDCrossover.recombine(cac.genes, cbc.genes, 0);
+    	checkGenes(actual[0], COMPLEX1);
+    	checkGenes(actual[1], COMPLEX1);
     	String off1 = "[5, 7, 8, 4, 4, 4, 1, 7, 2, 6, 1, 1, 2, 3, 3, 2, 5, 9]";
     	String off2 = "[2, 1, 6, 7, 4, 1, 5, 2, 2, 3, 7, 9, 3, 5, 4, 4, 8, 1]";
-    	assertEquals(off1, cac.toAlleleList().toString());
-    	assertEquals(off2, cbc.toAlleleList().toString());  
+    	assertEquals(off1, toAllelesString(actual[0]));
+    	assertEquals(off2, toAllelesString(actual[1]));  
     }
 
     
-  // Swap from end pos
-  @Test
-  public void testDuplicatesComplexEnd() throws IllegalSolutionException {
-  	RecombinatorLogics.cycleCrossover(cac.genes, cbc.genes, cbc.genes.size()-1);
-  	checkGenes(cac.genes, OFF1_COMPLEX);
-  	checkGenes(cbc.genes, OFF1_COMPLEX);
-  	String off1 = "[2, 1, 6, 7, 4, 1, 5, 2, 2, 3, 7, 1, 3, 5, 4, 4, 8, 9]";
-  	String off2 = "[5, 7, 8, 4, 4, 4, 1, 7, 2, 6, 1, 9, 2, 3, 3, 2, 5, 1]";
-  	assertEquals(off1, cac.toAlleleList().toString());  
-  	assertEquals(off2, cbc.toAlleleList().toString());
-  }
+	// Swap from end pos
+	@Test
+	public void testDuplicatesComplexEnd() throws IllegalSolutionException {
+		List<Gene>[] actual = CXDCrossover.recombine(cac.genes, cbc.genes, cbc.genes.size()-1);
+    	checkGenes(actual[0], COMPLEX1);
+    	checkGenes(actual[1], COMPLEX1);
+	  	String off1 = "[2, 1, 6, 7, 4, 1, 5, 2, 2, 3, 7, 1, 3, 5, 4, 4, 8, 9]";
+	  	String off2 = "[5, 7, 8, 4, 4, 4, 1, 7, 2, 6, 1, 9, 2, 3, 3, 2, 5, 1]";
+	  	assertEquals(off1, toAllelesString(actual[0]));  
+	  	assertEquals(off2, toAllelesString(actual[1]));
+	}
 
   
 	// Swap from middle pos
     @Test
     public void testDuplicatesComplexMiddle() throws IllegalSolutionException {
-    	cac = c(OFF1_COMPLEX);
-    	cbc = c(OFF2_COMPLEX);
-    	RecombinatorLogics.cycleCrossover(cac.genes, cbc.genes, 8);
-    	checkGenes(cac.genes, OFF1_COMPLEX);
-    	checkGenes(cbc.genes, OFF1_COMPLEX);
+    	List<Gene>[] actual = CXDCrossover.recombine(cac.genes, cbc.genes, 8);
+    	checkGenes(actual[0], COMPLEX1);
+    	checkGenes(actual[1], COMPLEX1);
     	String off1 = "[5, 7, 8, 4, 4, 4, 1, 7, 2, 6, 1, 1, 2, 3, 3, 2, 5, 9]";
     	String off2 = "[2, 1, 6, 7, 4, 1, 5, 2, 2, 3, 7, 9, 3, 5, 4, 4, 8, 1]";
-    	assertEquals(off1, cac.toAlleleList().toString());
-    	assertEquals(off2, cbc.toAlleleList().toString());  
+    	assertEquals(off1, toAllelesString(actual[0]));
+    	assertEquals(off2, toAllelesString(actual[1]));  
     }
 
     
@@ -222,7 +244,12 @@ public class RecombinatorLogicsTest {
     	result.allele = allele;
     	return result;
     }
-    
+
+    private String toAllelesString(List<Gene> genes){
+    	Chromosome c = new Chromosome();
+    	c.genes = genes;
+    	return c.toAlleleList().toString();
+    }
 
 	public static void checkGenes(List<Gene> genes, Integer[] SAMPLE) throws IllegalSolutionException {
 		List<Integer> check = genes.stream().map(g -> (Integer)g.allele.value).collect(Collectors.toList());
@@ -248,4 +275,6 @@ public class RecombinatorLogicsTest {
 			throw new IllegalSolutionException("Bad solution after swap.");
 		}
 	}
+	
+
 }

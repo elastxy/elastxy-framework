@@ -5,6 +5,11 @@ import java.util.stream.IntStream;
 
 import org.elastxy.core.engine.core.AlgorithmException;
 
+/**
+ * A single chromosomes genotype structure.
+ * @author red
+ *
+ */
 public class ChromosomeGenotypeStructure extends GenotypeStructureImpl {
 
 	/**

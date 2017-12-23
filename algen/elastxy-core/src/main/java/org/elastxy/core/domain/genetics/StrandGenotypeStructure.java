@@ -7,6 +7,12 @@ import java.util.SortedMap;
 
 import org.elastxy.core.engine.metadata.GeneMetadata;
 
+
+/**
+ * A multiple chromosomes genotype structure.
+ * @author red
+ *
+ */
 public class StrandGenotypeStructure extends GenotypeStructureImpl {
 	
 	
