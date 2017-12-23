@@ -8,7 +8,7 @@
 		"initialSelectionRandom": true,
 		"stopConditions": {
 			"targetFitness" : 1.0,
-			"maxIterations": -1,
+			"maxGenerations": -1,
 			"maxLifetimeMs": 3000,
 			"maxIdenticalFitnesses": -1
 		}

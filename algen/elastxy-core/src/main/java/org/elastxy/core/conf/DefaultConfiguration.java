@@ -36,7 +36,7 @@ public class DefaultConfiguration {
     // STOP CONDITIONS
     public static final BigDecimal	TARGET_LEVEL = null; // Default: maximize
     public static final BigDecimal	TARGET_THRESHOLD = null;//BigDecimal.ONE; // Default: not active
-    public static final int 		MAX_ITERATIONS = -1;
+    public static final int 		MAX_GENERATIONS = -1;
     public static final int 		MAX_LIFETIME_MS = 60000;
     public static final int 		MAX_IDENTICAL_FITNESSES = -1;
     

@@ -25,7 +25,7 @@ public class StopConditionVerifier {
 		boolean result = stopConditions.maxLifetimeMs==-1 || currentLifeTime <= stopConditions.maxLifetimeMs;
 		
 		// Iterations
-		result &= (stopConditions.maxIterations==-1 || currentGenNumber < stopConditions.maxIterations-1);
+		result &= (stopConditions.maxGenerations==-1 || currentGenNumber < stopConditions.maxGenerations-1);
 		
 		return result;
 	}

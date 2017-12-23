@@ -15,7 +15,7 @@
 		"initialSelectionNumber": 100,
 		"initialSelectionRandom": true,
 		"stopConditions": {
-			"maxIterations": -1,
+			"maxGenerations": -1,
 			"maxLifetimeMs": 3000,
 			"maxIdenticalFitnesses": -1
 		}

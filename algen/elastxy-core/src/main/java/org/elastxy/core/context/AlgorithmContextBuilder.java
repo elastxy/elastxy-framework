@@ -16,7 +16,7 @@ public class AlgorithmContextBuilder {
 			double recombinationPerc,
 			double mutationPerc,
 			boolean elitarism,
-			int maxIterations,
+			int maxGenerations,
 			int maxLifetimeMs,
 			int maxIdenticalFitnesses,
 			boolean verbose,
@@ -34,7 +34,7 @@ public class AlgorithmContextBuilder {
         algParameters.initialSelectionRandom = initialSelectionRandom;
         
         StopConditions stopConditions = new StopConditions();
-        stopConditions.maxIterations = maxIterations;
+        stopConditions.maxGenerations = maxGenerations;
         stopConditions.maxLifetimeMs = maxLifetimeMs;
         stopConditions.maxIdenticalFitnesses = maxIdenticalFitnesses;
         
