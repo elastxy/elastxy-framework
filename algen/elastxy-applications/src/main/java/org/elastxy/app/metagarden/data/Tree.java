@@ -20,6 +20,10 @@ public class Tree implements Serializable {
 	private int wetAllowed; // 0,1,2
 	private int windAllowed;// 0,1,2
 
+	public Tree(){
+		
+	}
+	
 	public Tree(String code, int sunRequest, int wetRequest, int windAllowed) {
 		super();
 		this.code = code;

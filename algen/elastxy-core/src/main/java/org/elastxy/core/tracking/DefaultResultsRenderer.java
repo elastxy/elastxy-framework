@@ -1,6 +1,5 @@
 package org.elastxy.core.tracking;
 
-import org.elastxy.core.context.AlgorithmContext;
 import org.elastxy.core.domain.experiment.Solution;
 import org.elastxy.core.stats.ClientFriendlyResults;
 import org.elastxy.core.stats.ExperimentStats;

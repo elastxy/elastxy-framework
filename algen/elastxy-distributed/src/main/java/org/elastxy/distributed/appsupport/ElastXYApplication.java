@@ -1,5 +1,6 @@
 package org.elastxy.distributed.appsupport;
 
+import java.io.File;
 import java.util.Arrays;
 import java.util.Base64;
 
@@ -11,6 +12,7 @@ import org.elastxy.core.applications.components.factory.AppBootstrapRaw;
 import org.elastxy.core.conf.ReadConfigSupport;
 import org.elastxy.core.engine.core.Experiment;
 import org.elastxy.core.stats.ExperimentStats;
+import org.elastxy.core.support.JSONSupport;
 import org.elastxy.distributed.context.DistributedAlgorithmContext;
 import org.elastxy.distributed.engine.core.MultiColonyExperiment;
 
@@ -41,11 +43,13 @@ public class ElastXYApplication {
 			}
 			info("Arguments found: "+Arrays.asList(args));
 			String applicationName = args[0]; // expressions_d
+			String taskIdentifier = args[1];
 			
 			info("Initializing application "+applicationName);
-			String sparkHome = args[1]; // "C:/dev/spark-2.2.0-bin-hadoop2.7"
-			String master = args[2]; // "spark://192.168.1.101:7077"
-			String configBase64 = args[3]; // configuration json input from ws
+			String sparkHome = args[2]; // "C:/dev/spark-2.2.0-bin-hadoop2.7"
+			String outputPath = args[3];// "C:/tmp/results
+			String master = args[4]; // "spark://192.168.1.101:7077"
+			String configBase64 = args[5]; // configuration json input from ws
 			String config = new String(Base64.getDecoder().decode(configBase64));
 			info("Application config: "+config);
 			
@@ -56,7 +60,7 @@ public class ElastXYApplication {
 	
 			// Create application context
 			info("Initializing context.");
-			context = (DistributedAlgorithmContext) ReadConfigSupport.readJSONString(config, DistributedAlgorithmContext.class);
+			context = (DistributedAlgorithmContext) JSONSupport.readJSONString(config, DistributedAlgorithmContext.class);
 			context.application.appName = applicationName;
 			setupContext(context, locator);
 	
@@ -66,6 +70,9 @@ public class ElastXYApplication {
 			// Execute experiment
 			info("Starting application experiment.");
 			ExperimentStats stats = executeExperiment(context);
+			
+			// Store results
+			JSONSupport.writeJSONObject(new File(outputPath, taskIdentifier+".json"), stats);
 			
 			// TODOA-2: ResultsRenderer: persist and make available results! Reuse ResultsRenderer 
 			info("Experiment ended: "+stats);

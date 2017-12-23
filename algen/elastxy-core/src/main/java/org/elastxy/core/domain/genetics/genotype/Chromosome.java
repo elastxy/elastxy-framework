@@ -8,6 +8,8 @@ import java.util.stream.IntStream;
 import org.elastxy.core.domain.genetics.Genotype;
 import org.elastxy.core.engine.operators.MutatorLogics;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 /**
  * A sequence of Genes
  * 
@@ -25,6 +27,7 @@ public class Chromosome implements Genotype {
 	 * Returns the list of available positions: [0..N]
 	 */
 //	@Cacheable(value = "genotype_positions") // TODOM-2: cache!
+	@JsonIgnore
 	@Override
 	public List<String> getPositions() {
 		List<String> result = IntStream.

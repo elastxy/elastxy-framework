@@ -16,6 +16,24 @@ public class SparkTaskConfig {
 //	public String historyEventsEnabled = null; 	//e.g. "false";
 //	public String historyEventsDir = null; 		//e.g. "c:/tmp/sparktemp/eventLog";
 
+	public String outputPath; 					//e.g. "C:/tmp/results"
+	
+	// TODOB-2: generate a more safe taskIdentifier
+    // Examples: 
+    // 1514025726113_523_banana
+	// 1514025743598_784_banana
+
+	/**
+	 * Uniquely identifies task name before it's executed.
+	 * Used to grab back results, for example.
+	 * 
+	 * E.g: 
+	 * 1514025726113_523_sudoku
+	 * 1514025743598_784_sudoku
+	 */
+	public String taskIdentifier = null;
+	
+	
 	public String toString(){
 		StringBuffer sb = new StringBuffer();
 		sb.append("masterURI = "+masterURI);
@@ -28,6 +46,8 @@ public class SparkTaskConfig {
 //		sb.append("log4jConfiguration = "+log4jConfiguration);
 //		sb.append("historyEventsEnabled = "+historyEventsEnabled);
 //		sb.append("historyEventsDir = "+historyEventsDir);
+		sb.append("outputPath = "+outputPath);
+		sb.append("taskIdentifier = "+taskIdentifier);
 		return sb.toString();
 	}
 }

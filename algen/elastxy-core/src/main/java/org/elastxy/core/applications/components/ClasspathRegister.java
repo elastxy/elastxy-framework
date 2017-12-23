@@ -7,6 +7,7 @@ import java.util.Map;
 import org.apache.log4j.Logger;
 import org.elastxy.core.conf.ConfigurationException;
 import org.elastxy.core.conf.ReadConfigSupport;
+import org.elastxy.core.support.JSONSupport;
 import org.springframework.core.io.Resource;
 import org.springframework.core.io.support.PathMatchingResourcePatternResolver;
 import org.springframework.core.io.support.ResourcePatternResolver;
@@ -31,7 +32,7 @@ public class ClasspathRegister implements AppRegister {
 		String classpathResource = "/"+applicationName+"/application.json";
 		ApplicationMetadata result;
 		try {
-			result = (ApplicationMetadata)ReadConfigSupport.readJSON(classpathResource, ApplicationMetadata.class);
+			result = (ApplicationMetadata)JSONSupport.readJSON(classpathResource, ApplicationMetadata.class);
 		} catch (IOException e) {
 			String msg = "Error while getting classpath resource "+classpathResource+". Ex: "+e;
 			logger.error(msg, e);
@@ -55,7 +56,7 @@ public class ClasspathRegister implements AppRegister {
 		for (Resource classpathResource : resources){
 			ApplicationMetadata applicationMetadata;
 			try {
-				applicationMetadata = (ApplicationMetadata)ReadConfigSupport.readJSON(classpathResource.getInputStream(), ApplicationMetadata.class);
+				applicationMetadata = (ApplicationMetadata)JSONSupport.readJSON(classpathResource.getInputStream(), ApplicationMetadata.class);
 				result.put(applicationMetadata.appName, applicationMetadata);
 			} catch (Throwable e) {
 				String msg = "Error while getting classpath resource "+classpathResource.getFilename()+". Ex: "+e;

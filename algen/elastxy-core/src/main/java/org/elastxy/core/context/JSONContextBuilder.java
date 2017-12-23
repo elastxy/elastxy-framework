@@ -3,7 +3,7 @@ package org.elastxy.core.context;
 import java.io.IOException;
 
 import org.elastxy.core.conf.ConfigurationException;
-import org.elastxy.core.conf.ReadConfigSupport;
+import org.elastxy.core.support.JSONSupport;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
@@ -35,7 +35,7 @@ public class JSONContextBuilder implements ContextBuilder {
 		
 		AlgorithmContext result;
 		try {
-			result = (AlgorithmContext)ReadConfigSupport.readJSON(classpathResource, AlgorithmContext.class);
+			result = (AlgorithmContext)JSONSupport.readJSON(classpathResource, AlgorithmContext.class);
 			result.application.appName = applicationName;
 		} catch (IOException e) {
 			String msg = "Error while reading JSON from classpath resource "+classpathResource+". Ex: "+e;

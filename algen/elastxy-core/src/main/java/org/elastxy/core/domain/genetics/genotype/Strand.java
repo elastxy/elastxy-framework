@@ -12,6 +12,8 @@ import java.util.stream.IntStream;
 import org.elastxy.core.domain.genetics.Genotype;
 import org.elastxy.core.engine.operators.MutatorLogics;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 /**
  * Chromosome grouped lists of genes
  * 
@@ -46,6 +48,7 @@ public class Strand implements Genotype {
 	}
 
 
+	@JsonIgnore
 	@Override
 	public List<String> getPositions() {
 		List<String> result = new ArrayList<String>();

@@ -1,7 +1,6 @@
 package org.elastxy.core.conf;
 
 import java.io.IOException;
-import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -9,8 +8,7 @@ import org.apache.log4j.Logger;
 import org.elastxy.core.engine.metadata.GeneMetadata;
 import org.elastxy.core.engine.metadata.GeneMetadataType;
 import org.elastxy.core.engine.metadata.GenesMetadataConfiguration;
-
-import com.fasterxml.jackson.databind.ObjectMapper;
+import org.elastxy.core.support.JSONSupport;
 
 /**
  * Support class for reading configuration or local JSON files
@@ -24,7 +22,7 @@ public class ReadConfigSupport {
 		GenesMetadataConfiguration genes;
 		String classpathResource = "/"+applicationName+"/genes.json";
 		try {
-			genes = (GenesMetadataConfiguration)ReadConfigSupport.readJSON(classpathResource, GenesMetadataConfiguration.class);
+			genes = (GenesMetadataConfiguration)JSONSupport.readJSON(classpathResource, GenesMetadataConfiguration.class);
 		} catch (IOException e) {
 			String msg = "Error while getting classpath resource "+classpathResource+". Ex: "+e;
 			logger.error(msg, e);
@@ -48,26 +46,4 @@ public class ReadConfigSupport {
 //		metadata.values.stream().forEach(v -> ((String)v).charAt(0));
 	}
 	
-	public static Object readJSON(String classpathResource, Class type) throws IOException {
-		return readJSON(ReadConfigSupport.class.getResourceAsStream(classpathResource), type);
-	}
-	
-	public static Object readJSON(InputStream inputStream, Class type) throws IOException {
-    	ObjectMapper om = new ObjectMapper();
-		Object result = om.readValue(inputStream, type);
-		return result;
-	}
-
-	public static Object readJSONString(String inputString, Class type) throws IOException {
-    	ObjectMapper om = new ObjectMapper();
-		Object result = om.readValue(inputString, type);
-		return result;
-	}
-
-
-	public static String writeJSONString(Object inputObject) throws IOException {
-    	ObjectMapper om = new ObjectMapper();
-		String result = om.writeValueAsString(inputObject);
-		return result;
-	}
 }

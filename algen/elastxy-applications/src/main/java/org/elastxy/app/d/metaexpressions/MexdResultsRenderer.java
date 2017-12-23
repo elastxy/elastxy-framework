@@ -1,7 +1,8 @@
-package org.elastxy.app.metaexpressions;
+package org.elastxy.app.d.metaexpressions;
 
-import org.elastxy.core.tracking.DefaultResultsRenderer;
+import org.elastxy.app.metaexpressions.HTMLExpressionsSolutionRenderer;
 import org.elastxy.core.tracking.SolutionRenderer;
+import org.elastxy.distributed.tracking.DistributedResultsRenderer;
 
 /**
  * Simple: X OP Y = RES
@@ -9,7 +10,7 @@ import org.elastxy.core.tracking.SolutionRenderer;
  * @author red
  *
  */
-public class MexResultsRenderer extends DefaultResultsRenderer {
+public class MexdResultsRenderer extends DistributedResultsRenderer {
 
 	@Override
 	public void setSolutionRenderer(SolutionRenderer solutionRenderer) {

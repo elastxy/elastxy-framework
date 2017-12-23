@@ -1,17 +1,16 @@
 package org.elastxy.app.metasudoku;
 
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.List;
 
 import org.apache.log4j.Logger;
 import org.elastxy.core.conf.ConfigurationException;
-import org.elastxy.core.conf.ReadConfigSupport;
 import org.elastxy.core.context.AlgorithmContext;
 import org.elastxy.core.dataprovider.WorkingDataset;
 import org.elastxy.core.domain.experiment.PerformanceTarget;
 import org.elastxy.core.domain.experiment.Target;
 import org.elastxy.core.engine.factory.TargetBuilder;
+import org.elastxy.core.support.JSONSupport;
 
 /**
  * 		
@@ -59,7 +58,7 @@ public class MesTargetBuilder implements TargetBuilder<int[][], Integer> {
     private int[][] readGoal(){
 		String classpathResource = "/"+context.application.appName+"/target.json";
 		try {
-			return (int[][])ReadConfigSupport.readJSON(classpathResource, int[][].class);
+			return (int[][])JSONSupport.readJSON(classpathResource, int[][].class);
 		} catch (IOException e) {
 			String msg = "Error while reading JSON from classpath resource "+classpathResource+". Ex: "+e;
 			logger.error(msg, e);

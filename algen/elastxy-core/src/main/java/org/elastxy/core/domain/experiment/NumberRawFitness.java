@@ -9,6 +9,9 @@ package org.elastxy.core.domain.experiment;
 public class NumberRawFitness implements RawFitness {
 	public Number value;
 	
+	public NumberRawFitness(){
+	}
+	
 	public NumberRawFitness(Number value){
 		this.value = value;
 	}

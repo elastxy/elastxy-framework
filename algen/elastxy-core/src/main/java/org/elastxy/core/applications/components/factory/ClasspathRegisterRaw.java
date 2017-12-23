@@ -4,10 +4,10 @@ import java.io.IOException;
 import java.util.Map;
 
 import org.apache.log4j.Logger;
-import org.elastxy.core.applications.components.ApplicationMetadata;
 import org.elastxy.core.applications.components.AppRegister;
+import org.elastxy.core.applications.components.ApplicationMetadata;
 import org.elastxy.core.conf.ConfigurationException;
-import org.elastxy.core.conf.ReadConfigSupport;
+import org.elastxy.core.support.JSONSupport;
 
 /**
  * Retrieves Application metadata from classpath.
@@ -27,7 +27,7 @@ public class ClasspathRegisterRaw implements AppRegister {
 		String classpathResource = "/"+applicationName+"/application.json";
 		ApplicationMetadata result;
 		try {
-			result = (ApplicationMetadata)ReadConfigSupport.readJSON(classpathResource, ApplicationMetadata.class);
+			result = (ApplicationMetadata)JSONSupport.readJSON(classpathResource, ApplicationMetadata.class);
 		} catch (IOException e) {
 			String msg = "Error while getting classpath resource "+classpathResource+". Ex: "+e;
 			logger.error(msg, e);

@@ -20,6 +20,9 @@ public class Place implements Serializable {
 	private int windLevel;		// 0,1,2
 	public String zone;
 
+	public Place(){
+	}
+	
 	public Place(int sunExposure, int wetLevel, int windLevel, String zone) {
 		super();
 		this.sunExposure = sunExposure;

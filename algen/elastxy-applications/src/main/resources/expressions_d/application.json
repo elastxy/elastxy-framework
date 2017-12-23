@@ -63,7 +63,7 @@
 	
 	"resultsRenderer": {
 		"type" : "java",
-		"content" : "org.elastxy.app.metaexpressions.MexResultsRenderer"
+		"content" : "org.elastxy.app.d.metaexpressions.MexdResultsRenderer"
 	},
 	
 	"multiColonyEnvFactory": {

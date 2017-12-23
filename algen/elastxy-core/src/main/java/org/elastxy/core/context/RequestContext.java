@@ -1,10 +1,21 @@
 package org.elastxy.core.context;
 
+import java.io.Serializable;
 import java.util.Locale;
 
 import org.elastxy.core.conf.DefaultConfiguration;
 
-public class RequestContext {
+
+/**
+ * Context parameters for Algorithm execution.
+ * 
+ * All parameters and configurations related to execution environment
+ * and client information.
+ * 
+ * @author red
+ *
+ */
+public class RequestContext implements Serializable {
 
 	/**
 	 * Used to restrict permissions to request coming from Internet,
@@ -15,13 +26,14 @@ public class RequestContext {
 	 * 
 	 * Default: true
 	 */
-	public transient boolean webRequest = DefaultConfiguration.WEB_REQUEST; 
+	public boolean webRequest = DefaultConfiguration.WEB_REQUEST; 
 	
 	
 	/**
 	 * User locale defined from request headers, or default to "en-GB".
 	 */
-	public transient Locale clientLocale = DefaultConfiguration.USER_LOCALE;
+	public Locale clientLocale = DefaultConfiguration.USER_LOCALE;
+
 
 	public RequestContext(){
 	}

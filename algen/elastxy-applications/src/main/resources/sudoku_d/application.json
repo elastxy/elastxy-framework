@@ -64,7 +64,7 @@
 	
 	"resultsRenderer": {
 		"type" : "java",
-		"content" : "org.elastxy.app.metasudoku.MesResultsRenderer"
+		"content" : "org.elastxy.app.d.metasudoku.MesdResultsRenderer"
 	},
 	
 	

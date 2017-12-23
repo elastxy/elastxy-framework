@@ -8,13 +8,13 @@ import java.util.List;
 
 import org.apache.log4j.Logger;
 import org.elastxy.core.conf.ConfigurationException;
-import org.elastxy.core.conf.ReadConfigSupport;
 import org.elastxy.core.context.AlgorithmContext;
 import org.elastxy.core.dataprovider.WorkingDataset;
 import org.elastxy.core.domain.experiment.MultiplePerformanceTarget;
 import org.elastxy.core.domain.experiment.Target;
 import org.elastxy.core.domain.experiment.TargetType;
 import org.elastxy.core.engine.factory.TargetBuilder;
+import org.elastxy.core.support.JSONSupport;
 
 public class MefTargetBuilder implements TargetBuilder<MultiplePerformanceTarget, BigDecimal>{
 	private static Logger logger = Logger.getLogger(MefTargetBuilder.class);
@@ -86,7 +86,7 @@ public class MefTargetBuilder implements TargetBuilder<MultiplePerformanceTarget
 		String classpathResource = "/"+this.context.application.appFolder+"/"+db+"/target.json";
 		try {
 			result.refrigeratorFoods = new ArrayList<String>();
-			String[] foods = (String[])ReadConfigSupport.readJSON(classpathResource, String[].class);
+			String[] foods = (String[])JSONSupport.readJSON(classpathResource, String[].class);
 			result.refrigeratorFoods.addAll(Arrays.asList(foods));
 		} catch (IOException e) {
 			String msg = "Error while reading JSON from classpath resource "+classpathResource+". Ex: "+e;
@@ -100,7 +100,7 @@ public class MefTargetBuilder implements TargetBuilder<MultiplePerformanceTarget
 		String db = context.applicationSpecifics.getParamString(MefConstants.PARAM_DATABASE, MefConstants.DEFAULT_DATABASE);
 		String classpathResource = "/"+this.context.application.appFolder+"/"+db+"/pantry.json";
 		try {
-			result.pantry = Arrays.asList((String[])ReadConfigSupport.readJSON(classpathResource, String[].class));
+			result.pantry = Arrays.asList((String[])JSONSupport.readJSON(classpathResource, String[].class));
 		} catch (IOException e) {
 			String msg = "Error while reading JSON from classpath resource "+classpathResource+". Ex: "+e;
 			logger.error(msg, e);

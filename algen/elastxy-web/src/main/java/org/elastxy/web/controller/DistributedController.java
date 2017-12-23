@@ -16,21 +16,13 @@
 
 package org.elastxy.web.controller;
 
-import java.util.Arrays;
-import java.util.Base64;
 import java.util.Locale;
 
 import org.apache.log4j.Logger;
-import org.elastxy.core.conf.ReadConfigSupport;
 import org.elastxy.core.context.RequestContext;
-import org.elastxy.distributed.appsupport.ElastXYApplication;
 import org.elastxy.distributed.context.DistributedAlgorithmContext;
-import org.elastxy.web.distributed.ApplicationsSparkConfig;
-import org.elastxy.web.distributed.SparkTaskConfig;
-import org.elastxy.web.distributed.SparkTaskExecutor;
+import org.elastxy.web.distributed.DistributedApplicationService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -45,44 +37,33 @@ import org.springframework.web.bind.annotation.ResponseBody;
 public class DistributedController {
 	private static transient Logger logger = Logger.getLogger(DistributedController.class);
 
-	
-	@Autowired
-	private ApplicationsSparkConfig applicationsSparkConfig;
-	
-	
 	// TODOM-2: check status & kill jobs
+	
+	@Autowired private DistributedApplicationService applicationService;
 
 
     @RequestMapping(path = "/local/experiment/{application}", method = RequestMethod.POST)
-    public ResponseEntity<String> executeExperimentLocal(
+	@ResponseBody
+    public ExperimentResponse executeExperimentLocal(
     		@PathVariable String application,  
 			@RequestBody DistributedAlgorithmContext context,
 			@RequestHeader(value="Web-Request", defaultValue="true") boolean webRequest,
 			Locale userLocale) throws Exception {
     	logger.info("REQUEST Service /local/experiment/{application} => "+application+""+context);
-    	
+
 		context.application.appName = application;
 		context.requestContext = new RequestContext(webRequest, userLocale);
 		
-		SparkTaskConfig taskConfig = applicationsSparkConfig.getTaskConfig(application);
+		ExperimentResponse response = applicationService.executeDistributedLocal(context);
 		
-		String master = "local[*]";
-		byte[] contextBytes = ReadConfigSupport.writeJSONString(context).getBytes(); 
-		String contextAsString = Base64.getEncoder().encodeToString(contextBytes);
-		
-		String[] params = new String[]{application, taskConfig.sparkHome, master, contextAsString};
-    	logger.info("Submitting job locally with params: "+Arrays.asList(params));
-		ElastXYApplication.main(params);
-
-    	logger.info("RESPONSE Service /local/experiment/{application}"); // TODOA-2: ResultsRenderer: collect distributed ExperimentStats
-        String stats = "NO_ERROR";
-    	return new ResponseEntity<>(stats, HttpStatus.OK);
+    	logger.info("RESPONSE Service /local/experiment/{application} => "+response.status);
+    	return response;
     }
 
     
     @RequestMapping(path = "/cluster/experiment/{application}", method = RequestMethod.POST)
     @ResponseBody
-	public ResponseEntity<String> executeExperimentCluster(
+	public ExperimentResponse executeExperimentCluster(
 			@PathVariable String application,  
 			@RequestBody DistributedAlgorithmContext context,
 			@RequestHeader(value="Web-Request", defaultValue="true") boolean webRequest,
@@ -91,12 +72,11 @@ public class DistributedController {
     	
 		context.application.appName = application;
 		context.requestContext = new RequestContext(webRequest, userLocale);
-    	
-    	SparkTaskExecutor executor = new SparkTaskExecutor();
-    	String stats = executor.runDistributed(applicationsSparkConfig.getTaskConfig(application), context); // TODOA-2: ResultsRenderer: return distributed ExperimentStats
-    	
-    	logger.info("RESPONSE Service /cluster/experiment/{application} => "+stats);
-        return new ResponseEntity<>(stats, HttpStatus.OK);
+
+		ExperimentResponse response = applicationService.executeDistributedCluster(context);
+
+    	logger.info("RESPONSE Service /cluster/experiment/{application} => "+response.status);
+    	return response;
     }
     
     
@@ -120,7 +100,6 @@ public class DistributedController {
 //		logger.info("RESPONSE Service /cluster/test/{application} => "+stats);
 //		return new ResponseEntity<>(stats, HttpStatus.OK);
 //	}
-    
-    
+
 
 }
