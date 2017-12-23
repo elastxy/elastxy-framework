@@ -136,7 +136,7 @@ public class MultiColonyEvolver implements Evolver {
             if(logger.isDebugEnabled()) logger.debug(String.format("     New all best matches %s", env.allBestMatches));
             
             // TODOM-2: max number of eras with same best match
-            if(env.currentEraNumber >= context.algorithmParameters.stopConditions.maxEras || checkColoniesGoal()){
+            if(env.currentEraNumber >= context.algorithmParameters.stopConditions.maxEras-1 || checkColoniesGoal()){
             	// TODOM-2: new stop condition: check max eras identical fitnesses
               logger.info("   >>> End condition found! Execution will be stopped.");
               fireTargetReachedEvent(null); // TODOM-2: pass stats
@@ -145,16 +145,18 @@ public class MultiColonyEvolver implements Evolver {
             
             // 1.5 Reshuffle
             else {
-              if(env.currentEraNumber % context.algorithmParameters.reshuffleEveryEras == 0){
+              if((env.currentEraNumber+1) % context.algorithmParameters.reshuffleEveryEras == 0){
             	fireReshuffleEvent(env.currentEraNumber);
                 logger.info(String.format("   >>> 1.5 Repartition required [era %d]", env.currentEraNumber));
                 // TODOA-4: Elitism: maintain best matches over eras
                 env = ((StandardMultiColonyEnvFactory)context.application.multiColonyEnvFactory).newEra(env);
               }
+              
+              // 1.5 Increment current Era value
+              env.currentEraNumber++;
             }
             
           	
-            env.currentEraNumber++;
         }
         
         // 4. View results

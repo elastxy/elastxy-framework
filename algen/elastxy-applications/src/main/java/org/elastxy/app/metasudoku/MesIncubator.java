@@ -27,7 +27,6 @@ public class MesIncubator implements Incubator<Chromosome, ComplexPhenotype>{
 	 * Incubator starts from the genotype representing missing values,
 	 * and fills the original matrix.
 	 * 
-	 * TODOA-2: bug. Check consistecy of genotype: sometimes duplicate values! 
 	 */	
 	@Override
 	public ComplexPhenotype grow(Chromosome genotype, Env env) {
