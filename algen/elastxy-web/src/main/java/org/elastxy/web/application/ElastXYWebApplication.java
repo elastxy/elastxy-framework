@@ -25,11 +25,13 @@ import org.springframework.cache.concurrent.ConcurrentMapCacheManager;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 
 @EnableCaching
 @Configuration
 @EnableAutoConfiguration
 @EnableConfigurationProperties
+@EnableWebMvc
 @ComponentScan(basePackages = "org.elastxy")
 public class ElastXYWebApplication {
 

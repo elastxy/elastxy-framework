@@ -40,7 +40,7 @@ public class SparkTaskExecutor {
     	
     	// Create client
     	logger.info("Creating client..");
-    	// TODOA-2: inject task configurations, or get from local properties
+    	// TODOM-2: inject task configurations, or get from external properties
 //    	final Map<String,String> environmentVariables = new HashMap<>();
 //    	environmentVariables.put("log4j.configuration",				config.log4jConfiguration);
 //    	environmentVariables.put("spark.eventLog.enabled",			config.historyEventsEnabled);

@@ -65,7 +65,6 @@ public class LocalController {
 		context.application.appName = application;
 		context.requestContext = new RequestContext(webRequest, userLocale);
 		ExperimentStats stats = applicationService.executeExperiment(context);
-		// TODOA-2: exceptions management
 		logger.info("RESPONSE Service /experiment/{application} => "+stats);
 		return res(webRequest, context, stats);
 	}
