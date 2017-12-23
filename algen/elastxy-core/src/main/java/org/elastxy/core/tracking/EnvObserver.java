@@ -99,7 +99,7 @@ public class EnvObserver {
     }
     
     
-    // TODOA-2: ResultsRenderer: put into a ResultsRenderer
+    // TODOM-2: ResultsRenderer: put into a ResultsRenderer
     private void showResults(ExperimentStats stats){
     	Logger log = context.monitoringConfiguration.logger;
         log.out("\n##################### STATS #####################");

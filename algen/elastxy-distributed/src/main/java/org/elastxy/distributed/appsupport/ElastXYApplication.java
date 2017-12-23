@@ -74,7 +74,6 @@ public class ElastXYApplication {
 			// Store results
 			JSONSupport.writeJSONObject(new File(outputPath, taskIdentifier+".json"), stats);
 			
-			// TODOA-2: ResultsRenderer: persist and make available results! Reuse ResultsRenderer 
 			info("Experiment ended: "+stats);
 			
 		} catch (Exception e) {

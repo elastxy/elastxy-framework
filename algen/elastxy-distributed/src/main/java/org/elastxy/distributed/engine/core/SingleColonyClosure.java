@@ -85,7 +85,6 @@ public class SingleColonyClosure implements FlatMapFunction<Iterator<Allele>, So
 		boolean processingOnly = (context.application.distributedGenomaProvider instanceof ProcessingOnlyDistributedGenomaProvider) ? true : false;
 		ExperimentStats stats = processingOnly ? runIsolatedColonyExperiment() : runLinkedColonyExperiment(initialGenomaIterator);
 		
-		// TODOA-2: ResultsRenderer: persist stats, if useful with a ResultsRenderer
 		if(stats.targetReached){
 			logger.info(">>> TARGET GOAL REACHED!!! <<<");
 			logger.info(">>> BestMatch: "+stats.lastGeneration.bestMatch+" <<<");

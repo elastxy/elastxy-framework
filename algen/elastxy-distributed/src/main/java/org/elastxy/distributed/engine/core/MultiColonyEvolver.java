@@ -170,7 +170,7 @@ public class MultiColonyEvolver implements Evolver {
       }
 
     
-    // TODOA-2: ResultsRenderer: create a specific multicolony ResultsRenderer
+    // TODOM-2: ResultsRenderer: create a specific multicolony ResultsRenderer
     private void viewResults(List<Solution> bestMatches){
         logFinal("-----------------------------------------------");
         final Long goalAccumulator = env.goalAccumulator.isPresent() ? env.goalAccumulator.get().value() : null;
