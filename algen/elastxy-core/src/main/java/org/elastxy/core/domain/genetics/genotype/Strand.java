@@ -62,10 +62,12 @@ public class Strand implements Genotype {
 		return result;
 	}
 
+	@JsonIgnore
 	public int getNumberOfChromosomes() {
 		return chromosomes.size();
 	}
-	
+
+	@JsonIgnore
 	public List<String> getPositions(int chromosome) {
 		List<String> result = new ArrayList<String>();
 		result.addAll(IntStream.
