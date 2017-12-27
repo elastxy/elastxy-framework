@@ -18,15 +18,25 @@ import org.springframework.stereotype.Component;
 public class ApplicationService {
 	private static Logger logger = LoggerFactory.getLogger(ApplicationService.class);
 
-	@Autowired private ContextBuilder benchmarkContextBuilder;
+	@Autowired private ContextBuilder contextBuilder;
 	
 	@Autowired private AppComponentsLocator appComponentsLocator;
 
 
-	public ExperimentStats executeBenchmark(AlgorithmContext context){
-		// Overwrite initial context with benchmark, plus parameters from request
+	
+	
+	public ExperimentStats executeExperiment(AlgorithmContext context){
+	 	setupContext(context);
+	 	Experiment e = new SingleColonyExperiment(context);
+        e.run();
+        ExperimentStats stats = e.getStats();
+        return stats;
+	}
+	
+	
+	public ExperimentStats executeCheck(AlgorithmContext context){
 		RequestContext originContext = context.requestContext;
-		context = benchmarkContextBuilder.build(context.application.appName, true);
+		context = contextBuilder.build(context.application.appName, AppStage.APPCHECK);
 		context.requestContext = originContext;
 		setupContext(context);
 		Experiment e = new SingleColonyExperiment(context);
@@ -36,11 +46,15 @@ public class ApplicationService {
 	}
 	
 	
-	public ExperimentStats executeExperiment(AlgorithmContext context){
-	 	setupContext(context);
-	 	Experiment e = new SingleColonyExperiment(context);
-        e.run();
-        ExperimentStats stats = e.getStats();
+	public ExperimentStats executeBenchmark(AlgorithmContext context){
+		// Overwrite initial context with benchmark, plus parameters from request
+		RequestContext originContext = context.requestContext;
+		context = contextBuilder.build(context.application.appName, AppStage.BENCHMARK);
+		context.requestContext = originContext;
+		setupContext(context);
+		Experiment e = new SingleColonyExperiment(context);
+		e.run();
+		ExperimentStats stats = e.getStats();
         return stats;
 	}
 	
@@ -59,11 +73,12 @@ public class ApplicationService {
 		
 		// Trial parameters
 		context.algorithmParameters.randomEvolution = true;
- 		context.algorithmParameters.elitarism = false;
  		context.algorithmParameters.mutationPerc = 0.0;
  		context.algorithmParameters.recombinationPerc = 0.0;
  		context.algorithmParameters.crossoverPointRandom = false;
  		context.algorithmParameters.initialSelectionRandom = true;
+ 		
+ 		context.algorithmParameters.elitism.singleColonyElitism = false;
  		
  		// Substitute Selector bean with uniform random pick
  		context.application.selector = new UniformlyDistributedSelector();

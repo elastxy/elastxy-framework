@@ -107,7 +107,7 @@ public class EnvObserver {
         log.out(renderer.render(stats.lastGeneration.bestMatch));
         log.out("Number of generations: "+stats.generations);
         log.out("Total execution time (ms): "+stats.executionTimeMs);
-        if(context.algorithmParameters.elitarism) {
+        if(context.algorithmParameters.elitism.singleColonyElitism) {
         	log.out("Total generations with same fitness: "+stats.totIdenticalFitnesses);
         }
         

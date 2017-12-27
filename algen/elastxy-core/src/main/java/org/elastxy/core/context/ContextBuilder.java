@@ -1,5 +1,7 @@
 package org.elastxy.core.context;
 
+import org.elastxy.core.applications.AppStage;
+
 /**
  * Convenient interface for building up an AlgorithmContext,
  * given its simplest coordinates
@@ -8,11 +10,11 @@ package org.elastxy.core.context;
 public interface ContextBuilder {
 	
 	/**
-	 * Build an AlgorithmContext given application name and if it is a benchmark or not
+	 * Build an AlgorithmContext given application name and stage.
 	 * @param application
 	 * @param benchmark
 	 * @return
 	 */
-	public AlgorithmContext build(String applicationName, boolean benchmark);
+	public AlgorithmContext build(String applicationName, AppStage appStage);
 
 }

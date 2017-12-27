@@ -24,8 +24,7 @@ public class DefaultConfiguration {
 	// SELECTION
     public static final long 	DEFAULT_INITIAL_SELECTION_NUMBER = 100L;
 	public static final boolean DEFAULT_INITIAL_SELECTION_RANDOM = true;
-    public static final boolean DEFAULT_ELITARISM = true;
-	
+
     // RECOMBINATION
     public static final double 	DEFAULT_RECOMBINANTION_PERC = 0.8;
     public static final boolean DEFAULT_CROSSOVER_POINT_RANDOM = false; // false: 1/2 of the sequence
@@ -37,16 +36,23 @@ public class DefaultConfiguration {
     public static final BigDecimal	TARGET_LEVEL = null; // Default: maximize
     public static final BigDecimal	TARGET_THRESHOLD = null;//BigDecimal.ONE; // Default: not active
     public static final int 		MAX_GENERATIONS = -1;
-    public static final int 		MAX_LIFETIME_MS = 60000;
+    public static final int 		MAX_LIFETIME_MS = 1000;
     public static final int 		MAX_IDENTICAL_FITNESSES = -1;
+
+	// ELITISM
+    public static final boolean 	DEFAULT_SINGLECOLONY_ELITISM_ENABLED = true; // elitism enable
+    public static final Double 		DEFAULT_SINGLECOLONY_ELITISM_PERC = null; // 0.0-1.0 perc of individuals maintained between generations
+    public static final Long 		DEFAULT_SINGLECOLONY_ELITISM_NUMBER = 1L; // 1 elite solution maintained by default
     
+    public static final boolean		DEFAULT_MULTICOLONY_ELITISM_ENABLED = true;
+    public static final Long 		DEFAULT_MULTICOLONY_ELITISM_NUMBER = 10L;
+    public static final Double 		DEFAULT_MULTICOLONY_ELITISM_PERC = null; // TODOA-1: Elitism multicolony perc enable!
+
     // DISTRIBUTED
     public static final int 		DEFAULT_MAX_ERAS = 3;
     public static final int 		DEFAULT_MAX_ERAS_IDENTICAL_FITNESSES = -1;
-    public static final int 		DEFAULT_ERA_BEST_MATCHES = 1;
     public static final int 		DEFAULT_PARTITIONS = 4;
     public static final int 		DEFAULT_RESHUFFLE_EVERY_ERAS = 2;
-    public static final boolean		DEFAULT_MULTICOLONY_ELITARISM = true;
 
     // REQUEST CONTEXT
 	public static final boolean WEB_REQUEST 	= true; // most restrictive

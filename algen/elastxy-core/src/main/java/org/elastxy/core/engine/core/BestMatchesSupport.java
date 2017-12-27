@@ -36,7 +36,7 @@ public class BestMatchesSupport {
 		bestBrother.setPhenotype(bestMatch.getPhenotype());
 		nextGeneration.solutions.add(bestBrother);
 		
-	    // Caso di elitarismo e popolazione pari: anche il successivo deve essere inserito
+	    // Caso di elitism e popolazione pari: anche il successivo deve essere inserito
 	    // per mantenere il numero delle coppie
 	    if(generationSize > 1 && generationSize % 2 == 0){
 	    	bestMatches.add(nextGeneration.solutions.remove(0));

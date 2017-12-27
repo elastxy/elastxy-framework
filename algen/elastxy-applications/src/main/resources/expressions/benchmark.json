@@ -11,13 +11,16 @@
 		"recombinationPerc": 0.8,
 		"crossoverPointRandom": false,
 		"mutationPerc": 0.2,
-		"elitarism": true,
 		"initialSelectionNumber": 100,
 		"initialSelectionRandom": true,
 		"stopConditions": {
 			"maxGenerations": -1,
 			"maxLifetimeMs": 3000,
 			"maxIdenticalFitnesses": -1
+		},
+		"elitism": {
+			"singleColonyElitism": true,
+			"singleColonyElitismNumber": 1
 		}
 	},
 	"monitoringConfiguration": {

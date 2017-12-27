@@ -42,7 +42,6 @@ public class AlgorithmParameters implements Serializable {
 	 */
 	public long initialSelectionNumber = DefaultConfiguration.DEFAULT_INITIAL_SELECTION_NUMBER;    
 	public boolean initialSelectionRandom = DefaultConfiguration.DEFAULT_INITIAL_SELECTION_RANDOM;
-    public boolean elitarism = DefaultConfiguration.DEFAULT_ELITARISM;
 
 	// TODOM-8: Selection types: stochastic sampling, roulette-wheel, tournament (con % gruppi), truncation (con %) + elitism, reward based
     // At the end they are 4: Proportional selection (in combination with a scaling method), linear ranking, tournament selection, and
@@ -98,15 +97,21 @@ public class AlgorithmParameters implements Serializable {
 	//	public MutationDecreaseType mutationDecreaseType =  = DefaultConfiguration.DEFAULT_MUTATION_DECREASE_TYPE; 
 	//	public double mutationDecreaseRatio =  = DefaultConfiguration.DEFAULT_MUTATION_DECREASE_RATIO; 
 
+
 	/*
 	 * ======================================
 	 * DISTRIBUTED
 	 * ======================================
 	 */
 	public int partitions = 		DefaultConfiguration.DEFAULT_PARTITIONS;
-    public int eraBestMatches = 	DefaultConfiguration.DEFAULT_ERA_BEST_MATCHES;
     public int reshuffleEveryEras = DefaultConfiguration.DEFAULT_RESHUFFLE_EVERY_ERAS;
-    // All eraBestMatches are reinserted into ALL colonies to spread their (good) genes around
-    public boolean multicolonyElitarism = DefaultConfiguration.DEFAULT_MULTICOLONY_ELITARISM;
+
+
+    /*
+	 * ======================================
+	 * ELITISM
+	 * ======================================
+	 */
+    public ElitismParameters elitism = new ElitismParameters();
 
 }

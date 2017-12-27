@@ -130,9 +130,9 @@ public class MultiColonyEvolver implements Evolver {
             				return (int)Math.signum(b.getFitness().getValue().subtract(a.getFitness().getValue()).doubleValue());
             			}
             		}).
-            		limit(context.algorithmParameters.eraBestMatches).
+            		limit(context.algorithmParameters.elitism.multiColonyElitismNumber).
             		collect(Collectors.toList());
-            if(context.algorithmParameters.multicolonyElitarism) env.previousBestMatchesBroadcast = Optional.of(context.distributedContext.broadcast(env.allBestMatches));
+            if(context.algorithmParameters.elitism.multiColonyElitism) env.previousBestMatchesBroadcast = Optional.of(context.distributedContext.broadcast(env.allBestMatches));
             if(logger.isDebugEnabled()) logger.debug(String.format("     New all best matches %s", env.allBestMatches));
             
             // TODOM-2: max number of eras with same best match

@@ -97,7 +97,7 @@ public class SingleColonyEvolver implements Evolver {
             env.currentGen = currentGeneration;
             env.currentGenNumber++;
             
-            // CHECK END CONDITION
+            // APPCHECK END CONDITION
             endConditionFound = checkEndCondition(lastFitness, bestFitness);
         }
         
@@ -109,7 +109,7 @@ public class SingleColonyEvolver implements Evolver {
 		
 		// BEST MATCHES - extract
 		// TODOA-4: Elitism: reuse some best matches for sharing their genetic material
-		List<Solution> bestMatches = BestMatchesSupport.extractBestMatches(nextGeneration, context.algorithmParameters.elitarism);
+		List<Solution> bestMatches = BestMatchesSupport.extractBestMatches(nextGeneration, context.algorithmParameters.elitism.singleColonyElitism);
 
 		// LOOP OVER NON-BEST SHUFFLED
         Collections.shuffle(nextGeneration.solutions);
@@ -142,7 +142,7 @@ public class SingleColonyEvolver implements Evolver {
 
 	/**
 	 * ============================================================
-	 * 		CHECK END CONDITION
+	 * 		APPCHECK END CONDITION
 	 * ============================================================
 	 */
 
@@ -158,7 +158,7 @@ public class SingleColonyEvolver implements Evolver {
 		
 		
 		// Check stability of the fitness value
-		if(!endConditionFound && context.algorithmParameters.elitarism){
+		if(!endConditionFound && context.algorithmParameters.elitism.singleColonyElitism){
 		    if(lastGenFitness!=null && currentGenFitness.sameOf(lastGenFitness)){
 		    	env.totIdenticalFitnesses++;
 		        if(stopVerifier.isStable(env.totIdenticalFitnesses)){

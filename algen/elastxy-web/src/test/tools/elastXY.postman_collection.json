@@ -1,113 +1,165 @@
 {
-	"variables": [],
 	"info": {
 		"name": "ElastXY",
-		"_postman_id": "0dd1b6f6-f005-0c98-407e-bcad843a40ab",
+		"_postman_id": "f5422769-caee-15d5-ce83-9aa54da7d361",
 		"description": "",
-		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json"
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
 	},
 	"item": [
 		{
 			"name": "monitor",
-			"description": "",
 			"item": [
 				{
 					"name": "/monitor/access",
 					"request": {
-						"url": "http://{{ip}}:{{port}}/monitor/access",
 						"method": "HEAD",
 						"header": [
 							{
 								"key": "Web-Request",
-								"value": "false",
-								"description": ""
+								"value": "false"
 							}
 						],
-						"body": {},
-						"description": ""
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "http://{{ip}}:{{port}}/monitor/access",
+							"protocol": "http",
+							"host": [
+								"{{ip}}"
+							],
+							"port": "{{port}}",
+							"path": [
+								"monitor",
+								"access"
+							]
+						}
 					},
 					"response": []
 				},
 				{
 					"name": "/monitor/info",
 					"request": {
-						"url": "http://{{ip}}:{{port}}/monitor/info",
 						"method": "GET",
 						"header": [
 							{
 								"key": "Content-Type",
-								"value": "application/json",
-								"description": ""
+								"value": "application/json"
 							},
 							{
 								"key": "Web-Request",
-								"value": "false",
-								"description": ""
+								"value": "false"
 							}
 						],
-						"body": {},
-						"description": ""
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "http://{{ip}}:{{port}}/monitor/info",
+							"protocol": "http",
+							"host": [
+								"{{ip}}"
+							],
+							"port": "{{port}}",
+							"path": [
+								"monitor",
+								"info"
+							]
+						}
 					},
 					"response": []
 				},
 				{
 					"name": "/monitor/healthcheck",
 					"request": {
-						"url": "http://{{ip}}:{{port}}/monitor/healthcheck",
 						"method": "GET",
 						"header": [
 							{
 								"key": "Content-Type",
-								"value": "application/json",
-								"description": ""
+								"value": "application/json"
 							},
 							{
 								"key": "Web-Request",
-								"value": "false",
-								"description": ""
+								"value": "false"
 							}
 						],
-						"body": {},
-						"description": ""
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "http://{{ip}}:{{port}}/monitor/healthcheck",
+							"protocol": "http",
+							"host": [
+								"{{ip}}"
+							],
+							"port": "{{port}}",
+							"path": [
+								"monitor",
+								"healthcheck"
+							]
+						}
 					},
 					"response": []
 				},
 				{
 					"name": "/monitor/error",
 					"request": {
-						"url": "http://{{ip}}:{{port}}/monitor/error/10",
 						"method": "GET",
 						"header": [
 							{
 								"key": "Content-Type",
-								"value": "application/json",
-								"description": ""
+								"value": "application/json"
 							},
 							{
 								"key": "Web-Request",
-								"value": "false",
-								"description": ""
+								"value": "false"
 							}
 						],
 						"body": {},
-						"description": ""
+						"url": {
+							"raw": "http://{{ip}}:{{port}}/monitor/error/5",
+							"protocol": "http",
+							"host": [
+								"{{ip}}"
+							],
+							"port": "{{port}}",
+							"path": [
+								"monitor",
+								"error",
+								"5"
+							]
+						}
 					},
 					"response": []
 				},
 				{
 					"name": "/beans",
 					"request": {
-						"url": "http://{{ip}}:{{port}}/beans",
 						"method": "GET",
 						"header": [
 							{
 								"key": "Authorization",
-								"value": "Basic Og==",
-								"description": ""
+								"value": "Basic Og=="
 							}
 						],
-						"body": {},
-						"description": ""
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "http://{{ip}}:{{port}}/beans",
+							"protocol": "http",
+							"host": [
+								"{{ip}}"
+							],
+							"port": "{{port}}",
+							"path": [
+								"beans"
+							]
+						}
 					},
 					"response": []
 				}
@@ -115,131 +167,313 @@
 		},
 		{
 			"name": "applications",
-			"description": "",
 			"item": [
 				{
-					"name": "expressions",
+					"name": "appcheck",
 					"description": "",
 					"item": [
 						{
-							"name": "/test/expressions",
+							"name": "/appcheck/expressions",
 							"request": {
-								"url": "http://{{ip}}:{{port}}/local/test/expressions",
 								"method": "GET",
 								"header": [
 									{
 										"key": "Content-Type",
-										"value": "application/json",
-										"description": ""
+										"value": "application/json"
 									},
 									{
 										"key": "Web-Request",
-										"value": "false",
-										"description": ""
+										"value": "false"
 									}
 								],
 								"body": {},
-								"description": ""
+								"url": {
+									"raw": "http://{{ip}}:{{port}}/local/appcheck/expressions",
+									"protocol": "http",
+									"host": [
+										"{{ip}}"
+									],
+									"port": "{{port}}",
+									"path": [
+										"local",
+										"appcheck",
+										"expressions"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "/appcheck/sudoku",
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									},
+									{
+										"key": "Web-Request",
+										"value": "false"
+									}
+								],
+								"body": {},
+								"url": {
+									"raw": "http://{{ip}}:{{port}}/local/appcheck/sudoku",
+									"protocol": "http",
+									"host": [
+										"{{ip}}"
+									],
+									"port": "{{port}}",
+									"path": [
+										"local",
+										"appcheck",
+										"sudoku"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "/appcheck/garden",
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									},
+									{
+										"key": "Web-Request",
+										"value": "false"
+									}
+								],
+								"body": {},
+								"url": {
+									"raw": "http://{{ip}}:{{port}}/local/appcheck/garden",
+									"protocol": "http",
+									"host": [
+										"{{ip}}"
+									],
+									"port": "{{port}}",
+									"path": [
+										"local",
+										"appcheck",
+										"garden"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "/appcheck/algofrigerator",
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									},
+									{
+										"key": "Web-Request",
+										"value": "false"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": ""
+								},
+								"url": {
+									"raw": "http://{{ip}}:{{port}}/local/test/algofrigerator",
+									"protocol": "http",
+									"host": [
+										"{{ip}}"
+									],
+									"port": "{{port}}",
+									"path": [
+										"local",
+										"test",
+										"algofrigerator"
+									]
+								}
+							},
+							"response": []
+						}
+					],
+					"_postman_isSubFolder": true
+				},
+				{
+					"name": "expressions",
+					"item": [
+						{
+							"name": "/test/expressions",
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									},
+									{
+										"key": "Web-Request",
+										"value": "false"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": ""
+								},
+								"url": {
+									"raw": "http://{{ip}}:{{port}}/local/test/expressions",
+									"protocol": "http",
+									"host": [
+										"{{ip}}"
+									],
+									"port": "{{port}}",
+									"path": [
+										"local",
+										"test",
+										"expressions"
+									]
+								}
 							},
 							"response": []
 						},
 						{
 							"name": "/experiment/expressions",
 							"request": {
-								"url": "http://{{ip}}:{{port}}/local/experiment/expressions",
 								"method": "POST",
 								"header": [
 									{
 										"key": "Content-Type",
-										"value": "application/json",
-										"description": ""
+										"value": "application/json"
 									},
 									{
 										"key": "Web-Request",
-										"value": "false",
-										"description": ""
+										"value": "false"
 									}
 								],
 								"body": {
 									"mode": "raw",
-									"raw": "{\n\t\"applicationSpecifics\": {\n\t\t\"target\" : {\n\t\t\t\"TARGET_EXPRESSION_RESULT\" : 235000\n\t\t},\n\t\t\"params\" : {\n\t\t\t\"MAX_OPERAND_VALUE\" : 1000\n\t\t}\n\t},\n\t\"algorithmParameters\": {\n\t\t\"recombinationPerc\": 0.8,\n\t\t\"mutationPerc\": 0.2,\n\t\t\"elitism\": true,\n\t\t\"initialSelectionNumber\": 1000,\n\t\t\"initialSelectionRandom\": true,\n\t\t\"stopConditions\": {\n\t\t\t\"targetThreshold\" : 0.99999999,\n\t\t\t\"maxIterations\": -1,\n\t\t\t\"maxLifetimeMs\": 3000,\n\t\t\t\"maxIdenticalFitnesses\": -1\n\t\t}\n\t},\n\t\"monitoringConfiguration\": {\n\t\t\"verbose\": false,\n\t\t\"showGraph\": true\n\t}\n}"
+									"raw": "{\n\t\"applicationSpecifics\": {\n\t\t\"target\" : {\n\t\t\t\"TARGET_EXPRESSION_RESULT\" : 235000\n\t\t},\n\t\t\"params\" : {\n\t\t\t\"MAX_OPERAND_VALUE\" : 1000\n\t\t}\n\t},\n\t\"algorithmParameters\": {\n\t\t\"recombinationPerc\": 0.8,\n\t\t\"mutationPerc\": 0.2,\n\t\t\"initialSelectionNumber\": 1000,\n\t\t\"initialSelectionRandom\": true,\n\t\t\"stopConditions\": {\n\t\t\t\"targetThreshold\" : 0.99999999,\n\t\t\t\"maxIterations\": -1,\n\t\t\t\"maxLifetimeMs\": 3000,\n\t\t\t\"maxIdenticalFitnesses\": -1\n\t\t},\n\t\t\"elitism\": {\n\t\t\t\"singleColonyElitism\": true,\n\t\t\t\"singleColonyElitismNumber\": 1\n\t\t}\n\t},\n\t\"monitoringConfiguration\": {\n\t\t\"verbose\": false,\n\t\t\"showGraph\": true\n\t}\n}"
 								},
-								"description": ""
+								"url": {
+									"raw": "http://{{ip}}:{{port}}/local/experiment/expressions",
+									"protocol": "http",
+									"host": [
+										"{{ip}}"
+									],
+									"port": "{{port}}",
+									"path": [
+										"local",
+										"experiment",
+										"expressions"
+									]
+								}
 							},
 							"response": []
 						},
 						{
 							"name": "/analysis/expressions",
 							"request": {
-								"url": "http://{{ip}}:{{port}}/local/analysis/expressions/3",
 								"method": "POST",
 								"header": [
 									{
 										"key": "Content-Type",
-										"value": "application/json",
-										"description": ""
+										"value": "application/json"
 									},
 									{
 										"key": "Web-Request",
-										"value": "false",
-										"description": ""
+										"value": "false"
 									}
 								],
 								"body": {
 									"mode": "raw",
-									"raw": "{\n\t\"applicationSpecifics\": {\n\t\t\"target\" : {\n\t\t\t\"TARGET_EXPRESSION_RESULT\" : 235000\n\t\t},\n\t\t\"params\" : {\n\t\t\t\"MAX_OPERAND_VALUE\" : \"1000\"\n\t\t}\n\t},\n\t\"algorithmParameters\": {\n\t\t\"recombinationPerc\": 0.8,\n\t\t\"mutationPerc\": 0.2,\n\t\t\"elitism\": true,\n\t\t\"initialSelectionNumber\": 100,\n\t\t\"initialSelectionRandom\": false,\n\t\t\"stopConditions\": {\n\t\t\t\"maxIterations\": -1,\n\t\t\t\"maxLifetimeMs\": 3000,\n\t\t\t\"maxIdenticalFitnesses\": -1\n\t\t}\n\t},\n\t\"monitoringConfiguration\": {\n\t\t\"verbose\": false\n\t}\n}"
+									"raw": "{\n\t\"applicationSpecifics\": {\n\t\t\"target\" : {\n\t\t\t\"TARGET_EXPRESSION_RESULT\" : 235000\n\t\t},\n\t\t\"params\" : {\n\t\t\t\"MAX_OPERAND_VALUE\" : \"1000\"\n\t\t}\n\t},\n\t\"algorithmParameters\": {\n\t\t\"recombinationPerc\": 0.8,\n\t\t\"mutationPerc\": 0.2,\n\t\t\"initialSelectionNumber\": 100,\n\t\t\"initialSelectionRandom\": false,\n\t\t\"stopConditions\": {\n\t\t\t\"maxIterations\": -1,\n\t\t\t\"maxLifetimeMs\": 3000,\n\t\t\t\"maxIdenticalFitnesses\": -1\n\t\t}\n\t},\n\t\"monitoringConfiguration\": {\n\t\t\"verbose\": false\n\t}\n}"
 								},
-								"description": ""
+								"url": {
+									"raw": "http://{{ip}}:{{port}}/local/analysis/expressions/3",
+									"protocol": "http",
+									"host": [
+										"{{ip}}"
+									],
+									"port": "{{port}}",
+									"path": [
+										"local",
+										"analysis",
+										"expressions",
+										"3"
+									]
+								}
 							},
 							"response": []
 						},
 						{
 							"name": "/trial/expressions",
 							"request": {
-								"url": "http://{{ip}}:{{port}}/local/trial/expressions/5",
 								"method": "POST",
 								"header": [
 									{
 										"key": "Content-Type",
-										"value": "application/json",
-										"description": ""
+										"value": "application/json"
 									},
 									{
 										"key": "Web-Request",
-										"value": "false",
-										"description": ""
+										"value": "false"
 									}
 								],
 								"body": {
 									"mode": "raw",
-									"raw": "{\n\t\"applicationSpecifics\": {\n\t\t\"target\" : {\n\t\t\t\"TARGET_EXPRESSION_RESULT\" : 235000\n\t\t},\n\t\t\"params\" : {\n\t\t\t\"MAX_OPERAND_VALUE\" : \"1000\"\n\t\t}\n\t},\n\t\"algorithmParameters\": {\n\t\t\"initialSelectionNumber\": 10,\n\t\t\"initialSelectionRandom\": true,\n\t\t\"stopConditions\": {\n\t\t\t\"maxIterations\": -1,\n\t\t\t\"maxLifetimeMs\": 3000,\n\t\t\t\"maxIdenticalFitnesses\": -1\n\t\t}\n\t},\n\t\"monitoringConfiguration\": {\n\t\t\"showGraph\" : true\n\t}\n}"
+									"raw": "{\n\t\"applicationSpecifics\": {\n\t\t\"target\" : {\n\t\t\t\"TARGET_EXPRESSION_RESULT\" : 235000\n\t\t},\n\t\t\"params\" : {\n\t\t\t\"MAX_OPERAND_VALUE\" : \"1000\"\n\t\t}\n\t},\n\t\"algorithmParameters\": {\n\t\t\"initialSelectionNumber\": 10,\n\t\t\"initialSelectionRandom\": true,\n\t\t\"stopConditions\": {\n\t\t\t\"maxIterations\": -1,\n\t\t\t\"maxLifetimeMs\": 3000,\n\t\t\t\"maxIdenticalFitnesses\": -1\n\t\t},\n\t\t\"elitism\": {\n\t\t\t\"singleColonyElitism\": true,\n\t\t\t\"singleColonyElitismNumber\": 1\n\t\t}\n\t},\n\t\"monitoringConfiguration\": {\n\t\t\"showGraph\" : true\n\t}\n}"
 								},
-								"description": ""
+								"url": {
+									"raw": "http://{{ip}}:{{port}}/local/trial/expressions/5",
+									"protocol": "http",
+									"host": [
+										"{{ip}}"
+									],
+									"port": "{{port}}",
+									"path": [
+										"local",
+										"trial",
+										"expressions",
+										"5"
+									]
+								}
 							},
 							"response": []
 						},
 						{
 							"name": "APP Expressions",
 							"request": {
-								"url": "http://{{ip}}:{{port}}/local/experiment/expressions",
 								"method": "POST",
 								"header": [
 									{
 										"key": "Content-Type",
-										"value": "application/json",
-										"description": ""
+										"value": "application/json"
 									},
 									{
 										"key": "Web-Request",
-										"value": "false",
-										"description": ""
+										"value": "false"
 									}
 								],
 								"body": {
 									"mode": "raw",
-									"raw": "{\r\n\t\"applicationSpecifics\": {\r\n\t\t\"target\" : {\r\n\t\t\t\"TARGET_EXPRESSION_RESULT\" : 235000\r\n\t\t},\r\n\t\t\"params\" : {\r\n\t\t\t\"MAX_OPERAND_VALUE\" : 1000\r\n\t\t}\r\n\t},\r\n\t\"algorithmParameters\": {\r\n\t\t\"recombinationPerc\": 0.8,\r\n\t\t\"mutationPerc\": 0.2,\r\n\t\t\"elitism\": true,\r\n\t\t\"initialSelectionNumber\": 10,\r\n\t\t\"initialSelectionRandom\": true,\r\n\t\t\"stopConditions\": {\r\n\t\t\t\"targetFitness\" : 0.5,\r\n\t\t\t\"targetThreshold\" : -1,\r\n\t\t\t\"maxIterations\": -1,\r\n\t\t\t\"maxLifetimeMs\": 3000,\r\n\t\t\t\"maxIdenticalFitnesses\": -1\r\n\t\t}\r\n\t},\r\n\t\"monitoringConfiguration\": {\r\n\t\t\"verbose\": false,\r\n\t\t\"showGraph\": true\r\n\t}\r\n}"
+									"raw": "{\r\n\t\"applicationSpecifics\": {\r\n\t\t\"target\" : {\r\n\t\t\t\"TARGET_EXPRESSION_RESULT\" : 235000\r\n\t\t},\r\n\t\t\"params\" : {\r\n\t\t\t\"MAX_OPERAND_VALUE\" : 1000\r\n\t\t}\r\n\t},\r\n\t\"algorithmParameters\": {\r\n\t\t\"recombinationPerc\": 0.8,\r\n\t\t\"mutationPerc\": 0.2,\r\n\t\t\"initialSelectionNumber\": 10,\r\n\t\t\"initialSelectionRandom\": true,\r\n\t\t\"stopConditions\": {\r\n\t\t\t\"targetFitness\" : 0.5,\r\n\t\t\t\"targetThreshold\" : -1,\r\n\t\t\t\"maxIterations\": -1,\r\n\t\t\t\"maxLifetimeMs\": 3000,\r\n\t\t\t\"maxIdenticalFitnesses\": -1\r\n\t\t},\r\n\t\t\"elitism\": {\r\n\t\t\t\"singleColonyElitism\": true,\r\n\t\t\t\"singleColonyElitismNumber\": 1\r\n\t\t}\r\n\t},\r\n\t\"monitoringConfiguration\": {\r\n\t\t\"verbose\": false,\r\n\t\t\"showGraph\": true\r\n\t}\r\n}"
 								},
-								"description": ""
+								"url": {
+									"raw": "http://{{ip}}:{{port}}/local/experiment/expressions",
+									"protocol": "http",
+									"host": [
+										"{{ip}}"
+									],
+									"port": "{{port}}",
+									"path": [
+										"local",
+										"experiment",
+										"expressions"
+									]
+								}
 							},
 							"response": []
 						}
@@ -248,127 +482,176 @@
 				},
 				{
 					"name": "garden",
-					"description": "",
 					"item": [
 						{
 							"name": "/test/garden",
 							"request": {
-								"url": "http://{{ip}}:{{port}}/local/test/garden",
 								"method": "GET",
 								"header": [
 									{
 										"key": "Content-Type",
-										"value": "application/json",
-										"description": ""
+										"value": "application/json"
 									},
 									{
 										"key": "Web-Request",
-										"value": "false",
-										"description": ""
+										"value": "false"
 									}
 								],
-								"body": {},
-								"description": ""
+								"body": {
+									"mode": "raw",
+									"raw": ""
+								},
+								"url": {
+									"raw": "http://{{ip}}:{{port}}/local/test/garden",
+									"protocol": "http",
+									"host": [
+										"{{ip}}"
+									],
+									"port": "{{port}}",
+									"path": [
+										"local",
+										"test",
+										"garden"
+									]
+								}
 							},
 							"response": []
 						},
 						{
 							"name": "/experiment/garden",
 							"request": {
-								"url": "http://{{ip}}:{{port}}/local/experiment/garden",
 								"method": "POST",
 								"header": [
 									{
 										"key": "Content-Type",
-										"value": "application/json",
-										"description": ""
+										"value": "application/json"
 									},
 									{
 										"key": "Web-Request",
-										"value": "false",
-										"description": ""
+										"value": "false"
 									}
 								],
 								"body": {
 									"mode": "raw",
-									"raw": "{\n\t\"applicationSpecifics\": {\n\t\t\"target\" : {\n\t\t\t\"TARGET_WELLNESS\" : \"happy\"\n\t\t},\n\t\t\"params\" : {\n\t\t\t\"LIMITED_TREES\" : false\n\t\t}\n\t},\n\t\"algorithmParameters\": {\n\t\t\"recombinationPerc\": 0.5,\n\t\t\"mutationPerc\": 0.2,\n\t\t\"elitism\": true,\n\t\t\"initialSelectionNumber\": 100,\n\t\t\"initialSelectionRandom\": false,\n\t\t\"stopConditions\": {\n\t\t\t\"maxIterations\": -1,\n\t\t\t\"maxLifetimeMs\": 3000,\n\t\t\t\"maxIdenticalFitnesses\": -1\n\t\t}\n\t},\n\t\"monitoringConfiguration\": {\n\t\t\"verbose\": false,\n\t\t\"showGraph\": true\n\t}\n}"
+									"raw": "{\n\t\"applicationSpecifics\": {\n\t\t\"target\" : {\n\t\t\t\"TARGET_WELLNESS\" : \"happy\"\n\t\t},\n\t\t\"params\" : {\n\t\t\t\"LIMITED_TREES\" : false\n\t\t}\n\t},\n\t\"algorithmParameters\": {\n\t\t\"recombinationPerc\": 0.5,\n\t\t\"mutationPerc\": 0.2,\n\t\t\"initialSelectionNumber\": 100,\n\t\t\"initialSelectionRandom\": false,\n\t\t\"stopConditions\": {\n\t\t\t\"maxIterations\": -1,\n\t\t\t\"maxLifetimeMs\": 3000,\n\t\t\t\"maxIdenticalFitnesses\": -1\n\t\t},\n\t\t\"elitism\": {\n\t\t\t\"singleColonyElitism\": true,\n\t\t\t\"singleColonyElitismNumber\": 1\n\t\t}\n\t},\n\t\"monitoringConfiguration\": {\n\t\t\"verbose\": false,\n\t\t\"showGraph\": true\n\t}\n}"
 								},
-								"description": ""
+								"url": {
+									"raw": "http://{{ip}}:{{port}}/local/experiment/garden",
+									"protocol": "http",
+									"host": [
+										"{{ip}}"
+									],
+									"port": "{{port}}",
+									"path": [
+										"local",
+										"experiment",
+										"garden"
+									]
+								}
 							},
 							"response": []
 						},
 						{
 							"name": "/analysis/garden",
 							"request": {
-								"url": "http://{{ip}}:{{port}}/local/analysis/garden/5",
 								"method": "POST",
 								"header": [
 									{
 										"key": "Content-Type",
-										"value": "application/json",
-										"description": ""
+										"value": "application/json"
 									},
 									{
 										"key": "Web-Request",
-										"value": "false",
-										"description": ""
+										"value": "false"
 									}
 								],
 								"body": {
 									"mode": "raw",
-									"raw": "{\n\t\"applicationSpecifics\": {\n\t\t\"target\" : {\n\t\t\t\"TARGET_WELLNESS\" : \"happy\"\n\t\t},\n\t\t\"params\" : {\n\t\t\t\"LIMITED_TREES\" : false\n\t\t}\n\t},\n\t\"algorithmParameters\": {\n\t\t\"recombinationPerc\": 0.0,\n\t\t\"mutationPerc\": 0.2,\n\t\t\"elitism\": true,\n\t\t\"initialSelectionNumber\": 100,\n\t\t\"initialSelectionRandom\": false,\n\t\t\"stopConditions\": {\n\t\t\t\"maxIterations\": -1,\n\t\t\t\"maxLifetimeMs\": 3000,\n\t\t\t\"maxIdenticalFitnesses\": -1\n\t\t}\n\t},\n\t\"monitoringConfiguration\": {\n\t\t\"verbose\": false\n\t}\n}"
+									"raw": "{\n\t\"applicationSpecifics\": {\n\t\t\"target\" : {\n\t\t\t\"TARGET_WELLNESS\" : \"happy\"\n\t\t},\n\t\t\"params\" : {\n\t\t\t\"LIMITED_TREES\" : false\n\t\t}\n\t},\n\t\"algorithmParameters\": {\n\t\t\"recombinationPerc\": 0.0,\n\t\t\"mutationPerc\": 0.2,\n\t\t\"initialSelectionNumber\": 100,\n\t\t\"initialSelectionRandom\": false,\n\t\t\"stopConditions\": {\n\t\t\t\"maxIterations\": -1,\n\t\t\t\"maxLifetimeMs\": 3000,\n\t\t\t\"maxIdenticalFitnesses\": -1\n\t\t},\n\t\t\"elitism\": {\n\t\t\t\"singleColonyElitism\": true,\n\t\t\t\"singleColonyElitismNumber\": 1\n\t\t}\n\t},\n\t\"monitoringConfiguration\": {\n\t\t\"verbose\": false\n\t}\n}"
 								},
-								"description": ""
+								"url": {
+									"raw": "http://{{ip}}:{{port}}/local/analysis/garden/5",
+									"protocol": "http",
+									"host": [
+										"{{ip}}"
+									],
+									"port": "{{port}}",
+									"path": [
+										"local",
+										"analysis",
+										"garden",
+										"5"
+									]
+								}
 							},
 							"response": []
 						},
 						{
 							"name": "/trial/garden",
 							"request": {
-								"url": "http://{{ip}}:{{port}}/local/trial/garden/5",
 								"method": "POST",
 								"header": [
 									{
 										"key": "Content-Type",
-										"value": "application/json",
-										"description": ""
+										"value": "application/json"
 									},
 									{
 										"key": "Web-Request",
-										"value": "false",
-										"description": ""
+										"value": "false"
 									}
 								],
 								"body": {
 									"mode": "raw",
-									"raw": "{\n\t\"applicationSpecifics\": {\n\t\t\"target\" : {\n\t\t\t\"TARGET_WELLNESS\" : \"happy\"\n\t\t},\n\t\t\"params\" : {\n\t\t\t\"LIMITED_TREES\" : false\n\t\t}\n\t},\n\t\"algorithmParameters\": {\n\t\t\"recombinationPerc\": 0.0,\n\t\t\"mutationPerc\": 0.2,\n\t\t\"elitism\": false,\n\t\t\"initialSelectionNumber\": 100,\n\t\t\"initialSelectionRandom\": true,\n\t\t\"stopConditions\": {\n\t\t\t\"targetFitness\": 1.0,\n\t\t\t\"maxIterations\": -1,\n\t\t\t\"maxLifetimeMs\": 3000,\n\t\t\t\"maxIdenticalFitnesses\": -1\n\t\t}\n\t},\n\t\"monitoringConfiguration\": {\n\t\t\"verbose\": false\n\t}\n}"
+									"raw": "{\n\t\"applicationSpecifics\": {\n\t\t\"target\" : {\n\t\t\t\"TARGET_WELLNESS\" : \"happy\"\n\t\t},\n\t\t\"params\" : {\n\t\t\t\"LIMITED_TREES\" : false\n\t\t}\n\t},\n\t\"algorithmParameters\": {\n\t\t\"recombinationPerc\": 0.0,\n\t\t\"mutationPerc\": 0.2,\n\t\t\"initialSelectionNumber\": 100,\n\t\t\"initialSelectionRandom\": true,\n\t\t\"stopConditions\": {\n\t\t\t\"targetFitness\": 1.0,\n\t\t\t\"maxIterations\": -1,\n\t\t\t\"maxLifetimeMs\": 3000,\n\t\t\t\"maxIdenticalFitnesses\": -1\n\t\t},\n\t\t\"elitism\": {\n\t\t\t\"singleColonyElitism\": true,\n\t\t\t\"singleColonyElitismNumber\": 1\n\t\t}\n\t},\n\t\"monitoringConfiguration\": {\n\t\t\"verbose\": false\n\t}\n}"
 								},
-								"description": ""
+								"url": {
+									"raw": "http://{{ip}}:{{port}}/local/trial/garden/5",
+									"protocol": "http",
+									"host": [
+										"{{ip}}"
+									],
+									"port": "{{port}}",
+									"path": [
+										"local",
+										"trial",
+										"garden",
+										"5"
+									]
+								}
 							},
 							"response": []
 						},
 						{
 							"name": "APP Garden",
 							"request": {
-								"url": "http://{{ip}}:{{port}}/local/experiment/garden",
 								"method": "POST",
 								"header": [
 									{
 										"key": "Content-Type",
-										"value": "application/json",
-										"description": ""
+										"value": "application/json"
 									},
 									{
 										"key": "Web-Request",
-										"value": "false",
-										"description": ""
+										"value": "false"
 									}
 								],
 								"body": {
 									"mode": "raw",
-									"raw": "{\n\t\"applicationSpecifics\": {\n\t\t\"target\" : {\n\t\t\t\"TARGET_WELLNESS\" : \"happy\"\n\t\t},\n\t\t\"params\" : {\n\t\t\t\"LIMITED_TREES\" : false\n\t\t}\n\t},\n\t\"algorithmParameters\": {\n\t\t\"recombinationPerc\": 0.5,\n\t\t\"mutationPerc\": 0.2,\n\t\t\"elitism\": true,\n\t\t\"initialSelectionNumber\": 100,\n\t\t\"initialSelectionRandom\": false,\n\t\t\"stopConditions\": {\n\t\t\t\"maxIterations\": -1,\n\t\t\t\"maxLifetimeMs\": 3000,\n\t\t\t\"maxIdenticalFitnesses\": -1\n\t\t}\n\t},\n\t\"monitoringConfiguration\": {\n\t\t\"verbose\": false,\n\t\t\"showGraph\": true\n\t}\n}"
+									"raw": "{\n\t\"applicationSpecifics\": {\n\t\t\"target\" : {\n\t\t\t\"TARGET_WELLNESS\" : \"happy\"\n\t\t},\n\t\t\"params\" : {\n\t\t\t\"LIMITED_TREES\" : false\n\t\t}\n\t},\n\t\"algorithmParameters\": {\n\t\t\"recombinationPerc\": 0.5,\n\t\t\"mutationPerc\": 0.2,\n\t\t\"initialSelectionNumber\": 100,\n\t\t\"initialSelectionRandom\": false,\n\t\t\"stopConditions\": {\n\t\t\t\"maxIterations\": -1,\n\t\t\t\"maxLifetimeMs\": 3000,\n\t\t\t\"maxIdenticalFitnesses\": -1\n\t\t},\n\t\t\"elitism\": {\n\t\t\t\"singleColonyElitism\": true,\n\t\t\t\"singleColonyElitismNumber\": 1\n\t\t}\n\t},\n\t\"monitoringConfiguration\": {\n\t\t\"verbose\": false,\n\t\t\"showGraph\": true\n\t}\n}"
 								},
-								"description": ""
+								"url": {
+									"raw": "http://{{ip}}:{{port}}/local/experiment/garden",
+									"protocol": "http",
+									"host": [
+										"{{ip}}"
+									],
+									"port": "{{port}}",
+									"path": [
+										"local",
+										"experiment",
+										"garden"
+									]
+								}
 							},
 							"response": []
 						}
@@ -377,152 +660,210 @@
 				},
 				{
 					"name": "sudoku",
-					"description": "",
 					"item": [
 						{
 							"name": "/test/sudoku",
 							"request": {
-								"url": "http://{{ip}}:{{port}}/local/test/sudoku",
 								"method": "GET",
 								"header": [
 									{
 										"key": "Content-Type",
-										"value": "application/json",
-										"description": ""
+										"value": "application/json"
 									},
 									{
 										"key": "Web-Request",
-										"value": "false",
-										"description": ""
+										"value": "false"
 									}
 								],
-								"body": {},
-								"description": ""
+								"body": {
+									"mode": "raw",
+									"raw": ""
+								},
+								"url": {
+									"raw": "http://{{ip}}:{{port}}/local/test/sudoku",
+									"protocol": "http",
+									"host": [
+										"{{ip}}"
+									],
+									"port": "{{port}}",
+									"path": [
+										"local",
+										"test",
+										"sudoku"
+									]
+								}
 							},
 							"response": []
 						},
 						{
 							"name": "/experiment/sudoku",
 							"request": {
-								"url": "http://{{ip}}:{{port}}/local/experiment/sudoku",
 								"method": "POST",
 								"header": [
 									{
 										"key": "Content-Type",
-										"value": "application/json",
-										"description": ""
+										"value": "application/json"
 									},
 									{
 										"key": "Web-Request",
-										"value": "false",
-										"description": ""
+										"value": "false"
 									}
 								],
 								"body": {
 									"mode": "raw",
-									"raw": "{\n\t\"applicationSpecifics\": {\n\t},\n\t\"algorithmParameters\": {\n\t\t\"recombinationPerc\": 0.8,\n\t\t\"mutationPerc\": 0.2,\n\t\t\"elitism\": true,\n\t\t\"initialSelectionNumber\": 10,\n\t\t\"initialSelectionRandom\": true,\n\t\t\"stopConditions\": {\n\t\t\t\"maxIterations\": -1,\n\t\t\t\"maxLifetimeMs\": 3000,\n\t\t\t\"maxIdenticalFitnesses\": -1\n\t\t}\n\t},\n\t\"monitoringConfiguration\": {\n\t\t\"verbose\": false,\n\t\t\"showGraph\": true\n\t}\n}"
+									"raw": "{\n\t\"applicationSpecifics\": {\n\t},\n\t\"algorithmParameters\": {\n\t\t\"recombinationPerc\": 0.8,\n\t\t\"mutationPerc\": 0.2,\n\t\t\"initialSelectionNumber\": 10,\n\t\t\"initialSelectionRandom\": true,\n\t\t\"stopConditions\": {\n\t\t\t\"maxIterations\": -1,\n\t\t\t\"maxLifetimeMs\": 3000,\n\t\t\t\"maxIdenticalFitnesses\": -1\n\t\t},\n\t\t\"elitism\": {\n\t\t\t\"singleColonyElitism\": true,\n\t\t\t\"singleColonyElitismNumber\": 1\n\t\t}\n\t},\n\t\"monitoringConfiguration\": {\n\t\t\"verbose\": false,\n\t\t\"showGraph\": true\n\t}\n}"
 								},
-								"description": ""
+								"url": {
+									"raw": "http://{{ip}}:{{port}}/local/experiment/sudoku",
+									"protocol": "http",
+									"host": [
+										"{{ip}}"
+									],
+									"port": "{{port}}",
+									"path": [
+										"local",
+										"experiment",
+										"sudoku"
+									]
+								}
 							},
 							"response": []
 						},
 						{
 							"name": "/analysis/sudoku",
 							"request": {
-								"url": "http://{{ip}}:{{port}}/local/analysis/sudoku/5",
 								"method": "POST",
 								"header": [
 									{
 										"key": "Content-Type",
-										"value": "application/json",
-										"description": ""
+										"value": "application/json"
 									},
 									{
 										"key": "Web-Request",
-										"value": "false",
-										"description": ""
+										"value": "false"
 									}
 								],
 								"body": {
 									"mode": "raw",
-									"raw": "{\n\t\"algorithmParameters\": {\n\t\t\"recombinationPerc\": 0.0,\n\t\t\"mutationPerc\": 0.3,\n\t\t\"elitism\": true,\n\t\t\"initialSelectionNumber\": 100,\n\t\t\"initialSelectionRandom\": true,\n\t\t\"stopConditions\": {\n\t\t\t\"maxIterations\": -1,\n\t\t\t\"maxLifetimeMs\": 3000,\n\t\t\t\"maxIdenticalFitnesses\": -1\n\t\t}\n\t},\n\t\"monitoringConfiguration\": {\n\t\t\"verbose\": false\n\t}\n}"
+									"raw": "{\n\t\"algorithmParameters\": {\n\t\t\"recombinationPerc\": 0.0,\n\t\t\"mutationPerc\": 0.3,\n\t\t\"initialSelectionNumber\": 100,\n\t\t\"initialSelectionRandom\": true,\n\t\t\"stopConditions\": {\n\t\t\t\"maxIterations\": -1,\n\t\t\t\"maxLifetimeMs\": 3000,\n\t\t\t\"maxIdenticalFitnesses\": -1\n\t\t},\n\t\t\"elitism\": {\n\t\t\t\"singleColonyElitism\": true,\n\t\t\t\"singleColonyElitismNumber\": 1\n\t\t}\n\t},\n\t\"monitoringConfiguration\": {\n\t\t\"verbose\": false\n\t}\n}"
 								},
-								"description": ""
+								"url": {
+									"raw": "http://{{ip}}:{{port}}/local/analysis/sudoku/5",
+									"protocol": "http",
+									"host": [
+										"{{ip}}"
+									],
+									"port": "{{port}}",
+									"path": [
+										"local",
+										"analysis",
+										"sudoku",
+										"5"
+									]
+								}
 							},
 							"response": []
 						},
 						{
 							"name": "/trial/sudoku",
 							"request": {
-								"url": "http://{{ip}}:{{port}}/local/trial/sudoku/5",
 								"method": "POST",
 								"header": [
 									{
 										"key": "Content-Type",
-										"value": "application/json",
-										"description": ""
+										"value": "application/json"
 									},
 									{
 										"key": "Web-Request",
-										"value": "false",
-										"description": ""
+										"value": "false"
 									}
 								],
 								"body": {
 									"mode": "raw",
 									"raw": "{\n\t\"applicationSpecifics\": {\n\t},\n\t\"algorithmParameters\": {\n\t\t\"initialSelectionNumber\": 100,\n\t\t\"initialSelectionRandom\": true,\n\t\t\"stopConditions\": {\n\t\t\t\"maxIterations\": -1,\n\t\t\t\"maxLifetimeMs\": 3000,\n\t\t\t\"maxIdenticalFitnesses\": -1\n\t\t}\n\t},\n\t\"monitoringConfiguration\": {\n\t}\n}"
 								},
-								"description": ""
+								"url": {
+									"raw": "http://{{ip}}:{{port}}/local/trial/sudoku/5",
+									"protocol": "http",
+									"host": [
+										"{{ip}}"
+									],
+									"port": "{{port}}",
+									"path": [
+										"local",
+										"trial",
+										"sudoku",
+										"5"
+									]
+								}
 							},
 							"response": []
 						},
 						{
 							"name": "APP Sudoku GET",
 							"request": {
-								"url": "http://{{ip}}:{{port}}/local/experiment/sudoku",
 								"method": "POST",
 								"header": [
 									{
 										"key": "Content-Type",
-										"value": "application/json",
-										"description": ""
+										"value": "application/json"
 									},
 									{
 										"key": "Web-Request",
-										"value": "false",
-										"description": ""
+										"value": "false"
 									}
 								],
 								"body": {
 									"mode": "raw",
-									"raw": "{\n\t\"applicationSpecifics\": {\n\t},\n\t\"algorithmParameters\": {\n\t\t\"recombinationPerc\": 0.8,\n\t\t\"mutationPerc\": 0.2,\n\t\t\"elitism\": true,\n\t\t\"initialSelectionNumber\": 10,\n\t\t\"initialSelectionRandom\": true,\n\t\t\"stopConditions\": {\n\t\t\t\"maxIterations\": -1,\n\t\t\t\"maxLifetimeMs\": 3000,\n\t\t\t\"maxIdenticalFitnesses\": -1\n\t\t}\n\t},\n\t\"monitoringConfiguration\": {\n\t\t\"verbose\": false,\n\t\t\"showGraph\": true\n\t}\n}"
+									"raw": "{\n\t\"applicationSpecifics\": {\n\t},\n\t\"algorithmParameters\": {\n\t\t\"recombinationPerc\": 0.8,\n\t\t\"mutationPerc\": 0.2,\n\t\t\"initialSelectionNumber\": 10,\n\t\t\"initialSelectionRandom\": true,\n\t\t\"stopConditions\": {\n\t\t\t\"maxIterations\": -1,\n\t\t\t\"maxLifetimeMs\": 3000,\n\t\t\t\"maxIdenticalFitnesses\": -1\n\t\t},\n\t\t\"elitism\": {\n\t\t\t\"singleColonyElitism\": true,\n\t\t\t\"singleColonyElitismNumber\": 1\n\t\t}\n\t},\n\t\"monitoringConfiguration\": {\n\t\t\"verbose\": false,\n\t\t\"showGraph\": true\n\t}\n}"
 								},
-								"description": ""
+								"url": {
+									"raw": "http://{{ip}}:{{port}}/local/experiment/sudoku",
+									"protocol": "http",
+									"host": [
+										"{{ip}}"
+									],
+									"port": "{{port}}",
+									"path": [
+										"local",
+										"experiment",
+										"sudoku"
+									]
+								}
 							},
 							"response": []
 						},
 						{
 							"name": "APP Sudoku POST",
 							"request": {
-								"url": "http://{{ip}}:{{port}}/local/experiment/sudoku",
 								"method": "POST",
 								"header": [
 									{
 										"key": "Content-Type",
-										"value": "application/json",
-										"description": ""
+										"value": "application/json"
 									},
 									{
 										"key": "Web-Request",
-										"value": "false",
-										"description": ""
+										"value": "false"
 									}
 								],
 								"body": {
 									"mode": "raw",
-									"raw": "{\n\t\"applicationSpecifics\": {\n\t\t\"target\" : { \n\t\t\t\"matrix\" : \"[[1,0,3,0,8,5,6,2,0],[0,5,2,1,6,7,8,3,9],[9,8,6,0,3,4,7,0,1],[7,2,0,8,4,3,9,6,5],[3,9,5,6,7,0,0,4,8],[8,6,0,5,9,0,2,0,3],[6,4,0,0,2,9,0,1,7],[2,1,7,4,5,8,3,9,6],[5,0,9,7,1,0,4,8,0]]\"\n\t\t}\n\t},\n\t\"algorithmParameters\": {\n\t\t\"recombinationPerc\": 0.8,\n\t\t\"mutationPerc\": 0.2,\n\t\t\"elitism\": true,\n\t\t\"initialSelectionNumber\": 10,\n\t\t\"initialSelectionRandom\": true,\n\t\t\"stopConditions\": {\n\t\t\t\"maxIterations\": -1,\n\t\t\t\"maxLifetimeMs\": 3000,\n\t\t\t\"maxIdenticalFitnesses\": -1\n\t\t}\n\t},\n\t\"monitoringConfiguration\": {\n\t\t\"verbose\": false,\n\t\t\"showGraph\": true\n\t}\n}"
+									"raw": "{\n\t\"applicationSpecifics\": {\n\t\t\"target\" : { \n\t\t\t\"matrix\" : \"[[1,0,3,0,8,5,6,2,0],[0,5,2,1,6,7,8,3,9],[9,8,6,0,3,4,7,0,1],[7,2,0,8,4,3,9,6,5],[3,9,5,6,7,0,0,4,8],[8,6,0,5,9,0,2,0,3],[6,4,0,0,2,9,0,1,7],[2,1,7,4,5,8,3,9,6],[5,0,9,7,1,0,4,8,0]]\"\n\t\t}\n\t},\n\t\"algorithmParameters\": {\n\t\t\"recombinationPerc\": 0.8,\n\t\t\"mutationPerc\": 0.2,\n\t\t\"initialSelectionNumber\": 10,\n\t\t\"initialSelectionRandom\": true,\n\t\t\"stopConditions\": {\n\t\t\t\"maxIterations\": -1,\n\t\t\t\"maxLifetimeMs\": 3000,\n\t\t\t\"maxIdenticalFitnesses\": -1\n\t\t},\n\t\t\"elitism\": {\n\t\t\t\"singleColonyElitism\": true,\n\t\t\t\"singleColonyElitismNumber\": 1\n\t\t}\n\t},\n\t\"monitoringConfiguration\": {\n\t\t\"verbose\": false,\n\t\t\"showGraph\": true\n\t}\n}"
 								},
-								"description": ""
+								"url": {
+									"raw": "http://{{ip}}:{{port}}/local/experiment/sudoku",
+									"protocol": "http",
+									"host": [
+										"{{ip}}"
+									],
+									"port": "{{port}}",
+									"path": [
+										"local",
+										"experiment",
+										"sudoku"
+									]
+								}
 							},
 							"response": []
 						}
@@ -531,75 +872,105 @@
 				},
 				{
 					"name": "algorifero",
-					"description": "",
 					"item": [
 						{
 							"name": "/test/algofrigerator",
 							"request": {
-								"url": "http://{{ip}}:{{port}}/local/test/algofrigerator",
 								"method": "GET",
 								"header": [
 									{
 										"key": "Content-Type",
-										"value": "application/json",
-										"description": ""
+										"value": "application/json"
 									},
 									{
 										"key": "Web-Request",
-										"value": "false",
-										"description": ""
+										"value": "false"
 									}
 								],
-								"body": {},
-								"description": ""
+								"body": {
+									"mode": "raw",
+									"raw": ""
+								},
+								"url": {
+									"raw": "http://{{ip}}:{{port}}/local/test/algofrigerator",
+									"protocol": "http",
+									"host": [
+										"{{ip}}"
+									],
+									"port": "{{port}}",
+									"path": [
+										"local",
+										"test",
+										"algofrigerator"
+									]
+								}
 							},
 							"response": []
 						},
 						{
 							"name": "/experiment/algofrigerator IT",
 							"request": {
-								"url": "http://{{ip}}:{{port}}/local/experiment/algofrigerator",
 								"method": "POST",
 								"header": [
 									{
 										"key": "Content-Type",
-										"value": "application/json",
-										"description": ""
+										"value": "application/json"
 									},
 									{
 										"key": "Web-Request",
-										"value": "false",
-										"description": ""
+										"value": "false"
 									}
 								],
 								"body": {
 									"mode": "raw",
-									"raw": "{\n\t\"applicationSpecifics\": {\n\t\t\"target\" : {\n\t\t\t\"TARGET_DESIRED_MEALS\" : 10,\n\t\t\t\"TARGET_SAVOURY_PROPORTION\" : 70,\n\t\t\t\"TARGET_SWEET_PROPORTION\" : 30,\n\t\t\t\"TARGET_FRIDGE_MANDATORY\" : true\n\t\t},\n\t\t\"params\" : {\n\t\t\t\"REFRIGERATOR_FOODS\" : [ \"yogurth\", \"banana\", \"banane\"  ],\n\t\t\t\"PANTRY_FOODS\" : [ \n ],\n\t\t\t\"DATABASE\" : \"IT\"\n\t\t}\n\t},\n\t\"algorithmParameters\": {\n\t\t\"recombinationPerc\": 0.8,\n\t\t\"mutationPerc\": 0.2,\n\t\t\"elitism\": true,\n\t\t\"initialSelectionNumber\": 10,\n\t\t\"initialSelectionRandom\": true,\n\t\t\"stopConditions\": {\n\t\t\t\"targetFitness\": 1.0,\n\t\t\t\"targetThreshold\": 0.9,\n\t\t\t\"maxIterations\": -1,\n\t\t\t\"maxLifetimeMs\": 3000,\n\t\t\t\"maxIdenticalFitnesses\": 300\n\t\t}\n\t},\n\t\"monitoringConfiguration\": {\n\t\t\"verbose\": false,\n\t\t\"showGraph\": true,\n\t\t\"traceHistory\": false\n\t}\n}"
+									"raw": "{\n\t\"applicationSpecifics\": {\n\t\t\"target\" : {\n\t\t\t\"TARGET_DESIRED_MEALS\" : 10,\n\t\t\t\"TARGET_SAVOURY_PROPORTION\" : 70,\n\t\t\t\"TARGET_SWEET_PROPORTION\" : 30,\n\t\t\t\"TARGET_FRIDGE_MANDATORY\" : true\n\t\t},\n\t\t\"params\" : {\n\t\t\t\"REFRIGERATOR_FOODS\" : [ \"yogurth\", \"banana\", \"banane\"  ],\n\t\t\t\"PANTRY_FOODS\" : [ \n ],\n\t\t\t\"DATABASE\" : \"IT\"\n\t\t}\n\t},\n\t\"algorithmParameters\": {\n\t\t\"recombinationPerc\": 0.8,\n\t\t\"mutationPerc\": 0.2,\n\t\t\"initialSelectionNumber\": 10,\n\t\t\"initialSelectionRandom\": true,\n\t\t\"stopConditions\": {\n\t\t\t\"targetFitness\": 1.0,\n\t\t\t\"targetThreshold\": 0.9,\n\t\t\t\"maxIterations\": -1,\n\t\t\t\"maxLifetimeMs\": 3000,\n\t\t\t\"maxIdenticalFitnesses\": 300\n\t\t},\n\t\t\"elitism\": {\n\t\t\t\"singleColonyElitism\": true,\n\t\t\t\"singleColonyElitismNumber\": 1\n\t\t}\n\t},\n\t\"monitoringConfiguration\": {\n\t\t\"verbose\": false,\n\t\t\"showGraph\": true,\n\t\t\"traceHistory\": false\n\t}\n}"
 								},
-								"description": ""
+								"url": {
+									"raw": "http://{{ip}}:{{port}}/local/experiment/algofrigerator",
+									"protocol": "http",
+									"host": [
+										"{{ip}}"
+									],
+									"port": "{{port}}",
+									"path": [
+										"local",
+										"experiment",
+										"algofrigerator"
+									]
+								}
 							},
 							"response": [
 								{
-									"id": "bf6c3185-2c66-4cb4-b9b9-9b8f59ce5c48",
+									"id": "676e1f87-6b94-4e98-9a16-3b39310c6f3d",
 									"name": "Database EN",
 									"originalRequest": {
-										"url": "http://{{ip}}:{{port}}/experiment/algofrigerator",
 										"method": "POST",
 										"header": [
 											{
 												"key": "Content-Type",
-												"value": "application/json",
-												"description": ""
+												"value": "application/json"
 											}
 										],
 										"body": {
 											"mode": "raw",
 											"raw": "{\n\t\"applicationSpecifics\": {\n\t\t\"target\" : {\n\t\t\t\"TARGET_DESIRED_MEALS\" : 10,\n\t\t\t\"TARGET_SAVOURY_PROPORTION\" : 70,\n\t\t\t\"TARGET_SWEET_PROPORTION\" : 30\n\t\t},\n\t\t\"params\" : {\n\t\t\t\"REFRIGERATOR_FOODS\" : [ \"milk\",\"eggs\",\"parmesan\"],\n\t\t\t\"PANTRY_FOODS\" : [ \"salt\",\"sugar\",\"oil\",\"pepper\",\"flour\",\"bread\",\"pasta\",\"coffee\",\"jam\",\"peas\"]\n\t\t}\n\t},\n\t\"parameters\": {\n\t\t\"recombinationPerc\": 0.8,\n\t\t\"mutationPerc\": 0.2,\n\t\t\"elitism\": true,\n\t\t\"initialSelectionNumber\": 5,\n\t\t\"initialSelectionRandom\": true\n\t},\n\t\"stopConditions\": {\n\t\t\"targetFitness\" : 1.0,\n\t\t\"maxIterations\": -1,\n\t\t\"maxLifetimeMs\": 3000,\n\t\t\"maxIdenticalFitnesses\": -1\n\t},\n\t\"monitoringConfiguration\": {\n\t\t\"verbose\": false,\n\t\t\"traceHistory\": false\n\t}\n}"
+										},
+										"url": {
+											"raw": "http://{{ip}}:{{port}}/experiment/algofrigerator",
+											"protocol": "http",
+											"host": [
+												"{{ip}}"
+											],
+											"port": "{{port}}",
+											"path": [
+												"experiment",
+												"algofrigerator"
+											]
 										}
 									},
 									"status": "OK",
 									"code": 200,
-									"_postman_previewlanguage": "",
+									"_postman_previewlanguage": "Text",
 									"_postman_previewtype": "parsed",
 									"header": [],
 									"cookie": [],
@@ -607,26 +978,36 @@
 									"body": ""
 								},
 								{
-									"id": "550d2dda-fa44-4be8-9519-1e40adc5d248",
+									"id": "6e58f530-3605-4265-8314-3b495a5ec973",
 									"name": "Database IT",
 									"originalRequest": {
-										"url": "http://{{ip}}:{{port}}/experiment/algofrigerator",
 										"method": "POST",
 										"header": [
 											{
 												"key": "Content-Type",
-												"value": "application/json",
-												"description": ""
+												"value": "application/json"
 											}
 										],
 										"body": {
 											"mode": "raw",
 											"raw": "{\n\t\"applicationSpecifics\": {\n\t\t\"target\" : {\n\t\t\t\"TARGET_DESIRED_MEALS\" : 10,\n\t\t\t\"TARGET_SAVOURY_PROPORTION\" : 70,\n\t\t\t\"TARGET_SWEET_PROPORTION\" : 30\n\t\t},\n\t\t\"params\" : {\n\t\t\t\"REFRIGERATOR_FOODS\" : [ \"latte\",\"uova\",\"formaggio\"],\n\t\t\t\"PANTRY_FOODS\" : [ \"sale\",\"zucchero\",\"olio\",\"pepe\",\"farina\",\"pane\",\"pasta\",\"caffè\",\"piselli\"],\n\t\t\t\"DATABASE\" : \"IT\"\n\t\t}\n\t},\n\t\"parameters\": {\n\t\t\"recombinationPerc\": 0.8,\n\t\t\"mutationPerc\": 0.2,\n\t\t\"elitism\": true,\n\t\t\"initialSelectionNumber\": 5,\n\t\t\"initialSelectionRandom\": true\n\t},\n\t\"stopConditions\": {\n\t\t\"targetFitness\" : 1.0,\n\t\t\"maxIterations\": -1,\n\t\t\"maxLifetimeMs\": 3000,\n\t\t\"maxIdenticalFitnesses\": -1\n\t},\n\t\"monitoringConfiguration\": {\n\t\t\"verbose\": false,\n\t\t\"traceHistory\": false\n\t}\n}"
+										},
+										"url": {
+											"raw": "http://{{ip}}:{{port}}/experiment/algofrigerator",
+											"protocol": "http",
+											"host": [
+												"{{ip}}"
+											],
+											"port": "{{port}}",
+											"path": [
+												"experiment",
+												"algofrigerator"
+											]
 										}
 									},
 									"status": "OK",
 									"code": 200,
-									"_postman_previewlanguage": "",
+									"_postman_previewlanguage": "Text",
 									"_postman_previewtype": "parsed",
 									"header": [],
 									"cookie": [],
@@ -634,21 +1015,31 @@
 									"body": ""
 								},
 								{
-									"id": "d53f385c-ac73-4701-ba57-ed8c3dbc87f3",
+									"id": "e2efeb2d-a376-461f-8dc0-48d23cc49823",
 									"name": "Dispensa Rossi",
 									"originalRequest": {
-										"url": "http://{{ip}}:{{port}}/experiment/algofrigerator",
 										"method": "POST",
 										"header": [
 											{
 												"key": "Content-Type",
-												"value": "application/json",
-												"description": ""
+												"value": "application/json"
 											}
 										],
 										"body": {
 											"mode": "raw",
 											"raw": "{\n\t\"applicationSpecifics\": {\n\t\t\"target\" : {\n\t\t\t\"TARGET_DESIRED_MEALS\" : 10,\n\t\t\t\"TARGET_SAVOURY_PROPORTION\" : 70,\n\t\t\t\"TARGET_SWEET_PROPORTION\" : 30\n\t\t},\n\t\t\"params\" : {\n\t\t\t\"REFRIGERATOR_FOODS\" : [ \"yogurt\",\"pesche\",\"pesca\",\"banane\",\"albicocca\",\"albicocche\",\"parmigiano\",\"uov\",\"mozzarell\",\"salmone\",\"pomodor\",\"crescenza\",\"robiola\",\"wurstel\",\"zenzero\",\"oliv\",\"caviale\",\"lompo\",\"maionese\",\"tahina\",\"limone\",\"pesto\",\"prosciutto\",\"chioggia\",\"insalat\",\"zucchin\",\"fagiolin\",\"cipolle rosse\",\"cipolla rossa\",\"wasabi\",\"prezzemolo\",\"cipollott\",\"tacchino\",\"pollo\",\"orata\",\"branzin\",\"merluzz\",\"ravioli\",\"sedan\" ],\n\t\t\t\"PANTRY_FOODS\" : [ \"noci\",\"arachidi\",\"mele\",\"mela\",\"banan\",\"sgombr\",\"nocciol\",\"nutella\",\"marmellata\",\"acciug\",\"zucchero di canna\",\"vaniglia\",\"pinoli\",\"farina integrale\",\"farina di castagne\",\"cacao\",\"cioccolato\",\"cioccolato bianco\",\"cioccolato fondente\",\"cioccolato al latte\",\"patatine\",\"birra\",\"mandorle\",\"sale\",\"zucchero\",\"olio\",\"olio d'oliva\",\"olio di semi\",\"pepe\",\"farina\",\"pane\",\"pasta\",\"caff\",\"piselli\",\"acqua\",\"latte\",\"tonno\",\"miele\",\"senape\",\"dado\",\"cipoll\",\"patat\",\"carot\",\"biscott\",\"caffè solubile\",\"vino\",\"vino rosso\",\"vino bianco\",\"aceto\",\"aceto balsamico\",\"salsa di soia\" ],\n\t\t\t\"DATABASE\" : \"IT\"\n\t\t}\n\t},\n\t\"parameters\": {\n\t\t\"recombinationPerc\": 0.8,\n\t\t\"mutationPerc\": 0.2,\n\t\t\"elitism\": true,\n\t\t\"initialSelectionNumber\": 20,\n\t\t\"initialSelectionRandom\": true\n\t},\n\t\"stopConditions\": {\n\t\t\"targetFitness\" : 1.0,\n\t\t\"maxIterations\": -1,\n\t\t\"maxLifetimeMs\": 5000,\n\t\t\"maxIdenticalFitnesses\": -1\n\t},\n\t\"monitoringConfiguration\": {\n\t\t\"verbose\": false,\n\t\t\"traceHistory\": false\n\t}\n}"
+										},
+										"url": {
+											"raw": "http://{{ip}}:{{port}}/experiment/algofrigerator",
+											"protocol": "http",
+											"host": [
+												"{{ip}}"
+											],
+											"port": "{{port}}",
+											"path": [
+												"experiment",
+												"algofrigerator"
+											]
 										}
 									},
 									"status": "OK",
@@ -690,98 +1081,137 @@
 						{
 							"name": "/analysis/algofrigerator",
 							"request": {
-								"url": "http://{{ip}}:{{port}}/local/analysis/algofrigerator/5",
 								"method": "POST",
 								"header": [
 									{
 										"key": "Content-Type",
-										"value": "application/json",
-										"description": ""
+										"value": "application/json"
 									},
 									{
 										"key": "Web-Request",
-										"value": "false",
-										"description": ""
+										"value": "false"
 									}
 								],
 								"body": {
 									"mode": "raw",
-									"raw": "{\n\t\"applicationSpecifics\": {\n\t\t\"target\" : {\n\t\t\t\"TARGET_DESIRED_MEALS\" : 10,\n\t\t\t\"TARGET_SAVOURY_PROPORTION\" : 70,\n\t\t\t\"TARGET_SWEET_PROPORTION\" : 30\n\t\t},\n\t\t\"params\" : {\n\t\t\t\"REFRIGERATOR_FOODS\" : [ \"latte\",\"uova\",\"formaggio\",\"burro\",\"carote\",\"peperoni\",\"pomodor\",\"acciughe\"],\n\t\t\t\"PANTRY_FOODS\" : [ \"sale\",\"zucchero\",\"olio\",\"pepe\",\"farina\",\"pane\",\"pasta\",\"caffè\",\"piselli\"],\n\t\t\t\"DATABASE\" : \"IT\"\n\t\t}\n\t},\n\t\"algorithmParameters\": {\n\t\t\"recombinationPerc\": 0.8,\n\t\t\"mutationPerc\": 0.2,\n\t\t\"elitism\": true,\n\t\t\"initialSelectionNumber\": 100,\n\t\t\"initialSelectionRandom\": true,\n\t\t\"stopConditions\": {\n\t\t\t\"maxIterations\": -1,\n\t\t\t\"maxLifetimeMs\": 3000,\n\t\t\t\"maxIdenticalFitnesses\": -1\n\t\t}\n\t},\n\t\"monitoringConfiguration\": {\n\t\t\"verbose\": false,\n\t\t\"traceHistory\": false\n\t}\n}"
+									"raw": "{\n\t\"applicationSpecifics\": {\n\t\t\"target\" : {\n\t\t\t\"TARGET_DESIRED_MEALS\" : 10,\n\t\t\t\"TARGET_SAVOURY_PROPORTION\" : 70,\n\t\t\t\"TARGET_SWEET_PROPORTION\" : 30\n\t\t},\n\t\t\"params\" : {\n\t\t\t\"REFRIGERATOR_FOODS\" : [ \"latte\",\"uova\",\"formaggio\",\"burro\",\"carote\",\"peperoni\",\"pomodor\",\"acciughe\"],\n\t\t\t\"PANTRY_FOODS\" : [ \"sale\",\"zucchero\",\"olio\",\"pepe\",\"farina\",\"pane\",\"pasta\",\"caffè\",\"piselli\"],\n\t\t\t\"DATABASE\" : \"IT\"\n\t\t}\n\t},\n\t\"algorithmParameters\": {\n\t\t\"recombinationPerc\": 0.8,\n\t\t\"mutationPerc\": 0.2,\n\t\t\"initialSelectionNumber\": 100,\n\t\t\"initialSelectionRandom\": true,\n\t\t\"stopConditions\": {\n\t\t\t\"maxIterations\": -1,\n\t\t\t\"maxLifetimeMs\": 3000,\n\t\t\t\"maxIdenticalFitnesses\": -1\n\t\t},\n\t\t\"elitism\": {\n\t\t\t\"singleColonyElitism\": true,\n\t\t\t\"singleColonyElitismNumber\": 1\n\t\t}\n\t},\n\t\"monitoringConfiguration\": {\n\t\t\"verbose\": false,\n\t\t\"traceHistory\": false\n\t}\n}"
 								},
-								"description": ""
+								"url": {
+									"raw": "http://{{ip}}:{{port}}/local/analysis/algofrigerator/5",
+									"protocol": "http",
+									"host": [
+										"{{ip}}"
+									],
+									"port": "{{port}}",
+									"path": [
+										"local",
+										"analysis",
+										"algofrigerator",
+										"5"
+									]
+								}
 							},
 							"response": []
 						},
 						{
 							"name": "/trial/algofrigerator",
 							"request": {
-								"url": "http://{{ip}}:{{port}}/local/trial/algofrigerator/5",
 								"method": "POST",
 								"header": [
 									{
 										"key": "Content-Type",
-										"value": "application/json",
-										"description": ""
+										"value": "application/json"
 									},
 									{
 										"key": "Web-Request",
-										"value": "false",
-										"description": ""
+										"value": "false"
 									}
 								],
 								"body": {
 									"mode": "raw",
 									"raw": "{\n\t\"applicationSpecifics\": {\n\t\t\"target\" : {\n\t\t\t\"TARGET_DESIRED_MEALS\" : 10,\n\t\t\t\"TARGET_SAVOURY_PROPORTION\" : 70,\n\t\t\t\"TARGET_SWEET_PROPORTION\" : 30,\n\t\t\t\"TARGET_FRIDGE_MANDATORY\" : true\n\t\t},\n\t\t\"params\" : {\n\t\t\t\"REFRIGERATOR_FOODS\" : [ \"yogurth\", \"banana\",  \"banane\"  ],\n\t\t\t\"PANTRY_FOODS\" : [ ],\n\t\t\t\"DATABASE\" : \"IT\"\n\t\t}\n\t},\n\t\"algorithmParameters\": {\n\t\t\"initialSelectionNumber\": 5,\n\t\t\"initialSelectionRandom\": true,\n\t\t\"stopConditions\": {\n\t\t\t\"maxIterations\": -1,\n\t\t\t\"maxLifetimeMs\": 3000,\n\t\t\t\"maxIdenticalFitnesses\": -1\n\t\t}\n\t},\n\t\"monitoringConfiguration\": {\n\t}\n}"
 								},
-								"description": ""
+								"url": {
+									"raw": "http://{{ip}}:{{port}}/local/trial/algofrigerator/5",
+									"protocol": "http",
+									"host": [
+										"{{ip}}"
+									],
+									"port": "{{port}}",
+									"path": [
+										"local",
+										"trial",
+										"algofrigerator",
+										"5"
+									]
+								}
 							},
 							"response": []
 						},
 						{
 							"name": "APP Algofrigerator",
 							"request": {
-								"url": "http://{{ip}}:{{port}}/local/experiment/algofrigerator",
 								"method": "POST",
 								"header": [
 									{
 										"key": "Content-Type",
-										"value": "application/json",
-										"description": ""
+										"value": "application/json"
 									},
 									{
 										"key": "Web-Request",
-										"value": "false",
-										"description": ""
+										"value": "false"
 									}
 								],
 								"body": {
 									"mode": "raw",
-									"raw": "{\n\t\"applicationSpecifics\": {\n\t\t\"target\" : {\n\t\t\t\"TARGET_DESIRED_MEALS\" : 10,\n\t\t\t\"TARGET_SAVOURY_PROPORTION\" : 50,\n\t\t\t\"TARGET_SWEET_PROPORTION\" : 50,\n\t\t\t\"TARGET_FRIDGE_MANDATORY\" : true\n\t\t},\n\t\t\"params\" : {\n\t\t\t\"REFRIGERATOR_FOODS\" : [ \"albume\", \"albumi\" ],\n\t\t\t\"PANTRY_FOODS\" : [ \n ],\n\t\t\t\"DATABASE\" : \"IT\"\n\t\t}\n\t},\n\t\"algorithmParameters\": {\n\t\t\"recombinationPerc\": 0.8,\n\t\t\"mutationPerc\": 0.2,\n\t\t\"elitism\": true,\n\t\t\"initialSelectionNumber\": 10,\n\t\t\"initialSelectionRandom\": true,\n\t\t\"stopConditions\": {\n\t\t\t\"maxIterations\": -1,\n\t\t\t\"maxLifetimeMs\": 30000,\n\t\t\t\"maxIdenticalFitnesses\": -1\n\t\t}\n\t},\n\t\"monitoringConfiguration\": {\n\t\t\"verbose\": false,\n\t\t\"showGraph\": true,\n\t\t\"traceHistory\": false\n\t}\n}"
+									"raw": "{\n\t\"applicationSpecifics\": {\n\t\t\"target\" : {\n\t\t\t\"TARGET_DESIRED_MEALS\" : 10,\n\t\t\t\"TARGET_SAVOURY_PROPORTION\" : 50,\n\t\t\t\"TARGET_SWEET_PROPORTION\" : 50,\n\t\t\t\"TARGET_FRIDGE_MANDATORY\" : true\n\t\t},\n\t\t\"params\" : {\n\t\t\t\"REFRIGERATOR_FOODS\" : [ \"albume\", \"albumi\" ],\n\t\t\t\"PANTRY_FOODS\" : [ \n ],\n\t\t\t\"DATABASE\" : \"IT\"\n\t\t}\n\t},\n\t\"algorithmParameters\": {\n\t\t\"recombinationPerc\": 0.8,\n\t\t\"mutationPerc\": 0.2,\n\t\t\"initialSelectionNumber\": 10,\n\t\t\"initialSelectionRandom\": true,\n\t\t\"stopConditions\": {\n\t\t\t\"maxIterations\": -1,\n\t\t\t\"maxLifetimeMs\": 30000,\n\t\t\t\"maxIdenticalFitnesses\": -1\n\t\t},\n\t\t\"elitism\": {\n\t\t\t\"singleColonyElitism\": true,\n\t\t\t\"singleColonyElitismNumber\": 1\n\t\t}\n\t},\n\t\"monitoringConfiguration\": {\n\t\t\"verbose\": false,\n\t\t\"showGraph\": true,\n\t\t\"traceHistory\": false\n\t}\n}"
 								},
-								"description": ""
+								"url": {
+									"raw": "http://{{ip}}:{{port}}/local/experiment/algofrigerator",
+									"protocol": "http",
+									"host": [
+										"{{ip}}"
+									],
+									"port": "{{port}}",
+									"path": [
+										"local",
+										"experiment",
+										"algofrigerator"
+									]
+								}
 							},
 							"response": [
 								{
-									"id": "bd40bba8-a102-469f-8338-06f7a3dd0638",
+									"id": "cb99c7b5-cf15-4ffe-a824-660f3d06ee3f",
 									"name": "Database EN",
 									"originalRequest": {
-										"url": "http://{{ip}}:{{port}}/experiment/algofrigerator",
 										"method": "POST",
 										"header": [
 											{
 												"key": "Content-Type",
-												"value": "application/json",
-												"description": ""
+												"value": "application/json"
 											}
 										],
 										"body": {
 											"mode": "raw",
 											"raw": "{\n\t\"applicationSpecifics\": {\n\t\t\"target\" : {\n\t\t\t\"TARGET_DESIRED_MEALS\" : 10,\n\t\t\t\"TARGET_SAVOURY_PROPORTION\" : 70,\n\t\t\t\"TARGET_SWEET_PROPORTION\" : 30\n\t\t},\n\t\t\"params\" : {\n\t\t\t\"REFRIGERATOR_FOODS\" : [ \"milk\",\"eggs\",\"parmesan\"],\n\t\t\t\"PANTRY_FOODS\" : [ \"salt\",\"sugar\",\"oil\",\"pepper\",\"flour\",\"bread\",\"pasta\",\"coffee\",\"jam\",\"peas\"]\n\t\t}\n\t},\n\t\"parameters\": {\n\t\t\"recombinationPerc\": 0.8,\n\t\t\"mutationPerc\": 0.2,\n\t\t\"elitism\": true,\n\t\t\"initialSelectionNumber\": 5,\n\t\t\"initialSelectionRandom\": true\n\t},\n\t\"stopConditions\": {\n\t\t\"targetFitness\" : 1.0,\n\t\t\"maxIterations\": -1,\n\t\t\"maxLifetimeMs\": 3000,\n\t\t\"maxIdenticalFitnesses\": -1\n\t},\n\t\"monitoringConfiguration\": {\n\t\t\"verbose\": false,\n\t\t\"traceHistory\": false\n\t}\n}"
+										},
+										"url": {
+											"raw": "http://{{ip}}:{{port}}/experiment/algofrigerator",
+											"protocol": "http",
+											"host": [
+												"{{ip}}"
+											],
+											"port": "{{port}}",
+											"path": [
+												"experiment",
+												"algofrigerator"
+											]
 										}
 									},
 									"status": "OK",
 									"code": 200,
-									"_postman_previewlanguage": "",
+									"_postman_previewlanguage": "Text",
 									"_postman_previewtype": "parsed",
 									"header": [],
 									"cookie": [],
@@ -789,26 +1219,36 @@
 									"body": ""
 								},
 								{
-									"id": "eb324373-5a21-4de1-8035-2738edfbd403",
+									"id": "24813e05-9559-4a4c-8ded-9fd48f19f03d",
 									"name": "Database IT",
 									"originalRequest": {
-										"url": "http://{{ip}}:{{port}}/experiment/algofrigerator",
 										"method": "POST",
 										"header": [
 											{
 												"key": "Content-Type",
-												"value": "application/json",
-												"description": ""
+												"value": "application/json"
 											}
 										],
 										"body": {
 											"mode": "raw",
 											"raw": "{\n\t\"applicationSpecifics\": {\n\t\t\"target\" : {\n\t\t\t\"TARGET_DESIRED_MEALS\" : 10,\n\t\t\t\"TARGET_SAVOURY_PROPORTION\" : 70,\n\t\t\t\"TARGET_SWEET_PROPORTION\" : 30\n\t\t},\n\t\t\"params\" : {\n\t\t\t\"REFRIGERATOR_FOODS\" : [ \"latte\",\"uova\",\"formaggio\"],\n\t\t\t\"PANTRY_FOODS\" : [ \"sale\",\"zucchero\",\"olio\",\"pepe\",\"farina\",\"pane\",\"pasta\",\"caffè\",\"piselli\"],\n\t\t\t\"DATABASE\" : \"IT\"\n\t\t}\n\t},\n\t\"parameters\": {\n\t\t\"recombinationPerc\": 0.8,\n\t\t\"mutationPerc\": 0.2,\n\t\t\"elitism\": true,\n\t\t\"initialSelectionNumber\": 5,\n\t\t\"initialSelectionRandom\": true\n\t},\n\t\"stopConditions\": {\n\t\t\"targetFitness\" : 1.0,\n\t\t\"maxIterations\": -1,\n\t\t\"maxLifetimeMs\": 3000,\n\t\t\"maxIdenticalFitnesses\": -1\n\t},\n\t\"monitoringConfiguration\": {\n\t\t\"verbose\": false,\n\t\t\"traceHistory\": false\n\t}\n}"
+										},
+										"url": {
+											"raw": "http://{{ip}}:{{port}}/experiment/algofrigerator",
+											"protocol": "http",
+											"host": [
+												"{{ip}}"
+											],
+											"port": "{{port}}",
+											"path": [
+												"experiment",
+												"algofrigerator"
+											]
 										}
 									},
 									"status": "OK",
 									"code": 200,
-									"_postman_previewlanguage": "",
+									"_postman_previewlanguage": "Text",
 									"_postman_previewtype": "parsed",
 									"header": [],
 									"cookie": [],
@@ -816,21 +1256,31 @@
 									"body": ""
 								},
 								{
-									"id": "da6302d6-9a1c-4dab-8d81-79466b4d6cbf",
+									"id": "2c692414-0778-4f42-ae4f-e4ac08529b28",
 									"name": "Dispensa Rossi",
 									"originalRequest": {
-										"url": "http://{{ip}}:{{port}}/experiment/algofrigerator",
 										"method": "POST",
 										"header": [
 											{
 												"key": "Content-Type",
-												"value": "application/json",
-												"description": ""
+												"value": "application/json"
 											}
 										],
 										"body": {
 											"mode": "raw",
 											"raw": "{\n\t\"applicationSpecifics\": {\n\t\t\"target\" : {\n\t\t\t\"TARGET_DESIRED_MEALS\" : 10,\n\t\t\t\"TARGET_SAVOURY_PROPORTION\" : 70,\n\t\t\t\"TARGET_SWEET_PROPORTION\" : 30\n\t\t},\n\t\t\"params\" : {\n\t\t\t\"REFRIGERATOR_FOODS\" : [ \"yogurt\",\"pesche\",\"pesca\",\"banane\",\"albicocca\",\"albicocche\",\"parmigiano\",\"uov\",\"mozzarell\",\"salmone\",\"pomodor\",\"crescenza\",\"robiola\",\"wurstel\",\"zenzero\",\"oliv\",\"caviale\",\"lompo\",\"maionese\",\"tahina\",\"limone\",\"pesto\",\"prosciutto\",\"chioggia\",\"insalat\",\"zucchin\",\"fagiolin\",\"cipolle rosse\",\"cipolla rossa\",\"wasabi\",\"prezzemolo\",\"cipollott\",\"tacchino\",\"pollo\",\"orata\",\"branzin\",\"merluzz\",\"ravioli\",\"sedan\" ],\n\t\t\t\"PANTRY_FOODS\" : [ \"noci\",\"arachidi\",\"mele\",\"mela\",\"banan\",\"sgombr\",\"nocciol\",\"nutella\",\"marmellata\",\"acciug\",\"zucchero di canna\",\"vaniglia\",\"pinoli\",\"farina integrale\",\"farina di castagne\",\"cacao\",\"cioccolato\",\"cioccolato bianco\",\"cioccolato fondente\",\"cioccolato al latte\",\"patatine\",\"birra\",\"mandorle\",\"sale\",\"zucchero\",\"olio\",\"olio d'oliva\",\"olio di semi\",\"pepe\",\"farina\",\"pane\",\"pasta\",\"caff\",\"piselli\",\"acqua\",\"latte\",\"tonno\",\"miele\",\"senape\",\"dado\",\"cipoll\",\"patat\",\"carot\",\"biscott\",\"caffè solubile\",\"vino\",\"vino rosso\",\"vino bianco\",\"aceto\",\"aceto balsamico\",\"salsa di soia\" ],\n\t\t\t\"DATABASE\" : \"IT\"\n\t\t}\n\t},\n\t\"parameters\": {\n\t\t\"recombinationPerc\": 0.8,\n\t\t\"mutationPerc\": 0.2,\n\t\t\"elitism\": true,\n\t\t\"initialSelectionNumber\": 20,\n\t\t\"initialSelectionRandom\": true\n\t},\n\t\"stopConditions\": {\n\t\t\"targetFitness\" : 1.0,\n\t\t\"maxIterations\": -1,\n\t\t\"maxLifetimeMs\": 5000,\n\t\t\"maxIdenticalFitnesses\": -1\n\t},\n\t\"monitoringConfiguration\": {\n\t\t\"verbose\": false,\n\t\t\"traceHistory\": false\n\t}\n}"
+										},
+										"url": {
+											"raw": "http://{{ip}}:{{port}}/experiment/algofrigerator",
+											"protocol": "http",
+											"host": [
+												"{{ip}}"
+											],
+											"port": "{{port}}",
+											"path": [
+												"experiment",
+												"algofrigerator"
+											]
 										}
 									},
 									"status": "OK",
@@ -876,134 +1326,182 @@
 		},
 		{
 			"name": "distributed",
-			"description": "",
 			"item": [
 				{
 					"name": "expressions_d",
-					"description": "",
 					"item": [
 						{
 							"name": "/distr/exp/local SMALL",
 							"request": {
-								"url": "http://{{ip}}:{{port}}/distributed/local/experiment/expressions_d",
 								"method": "POST",
 								"header": [
 									{
 										"key": "Content-Type",
-										"value": "application/json",
-										"description": ""
+										"value": "application/json"
 									},
 									{
 										"key": "Web-Request",
-										"value": "false",
-										"description": ""
+										"value": "false"
 									}
 								],
 								"body": {
 									"mode": "raw",
-									"raw": "{\r\n\t\"applicationSpecifics\": {\r\n\t\t\"target\" : {\r\n\t\t\t\"TARGET_EXPRESSION_RESULT\" : 235000\r\n\t\t},\r\n\t\t\"params\" : {\r\n\t\t\t\"MAX_OPERAND_VALUE\" : 1000\r\n\t\t}\r\n\t},\r\n\t\"algorithmParameters\": {\r\n\t\t\"recombinationPerc\": 0.8,\r\n\t\t\"mutationPerc\": 0.2,\r\n\t\t\"elitism\": true,\r\n\t\t\"initialSelectionNumber\": 1000,\r\n\t\t\"initialSelectionRandom\": true,\r\n\t\t\"stopConditions\": {\r\n\t\t\t\"targetThreshold\" : 0.99999999,\r\n\t\t\t\"maxIterations\": -1,\r\n\t\t\t\"maxLifetimeMs\": 2000,\r\n\t\t\t\"maxIdenticalFitnesses\": -1,\r\n\t\t\t\"maxEras\": 3\r\n\t\t},\r\n\t\t\"partitions\": 4,\r\n\t\t\"eraBestMatches\" : 10,\r\n\t\t\"reshuffleEveryEras\" : 2,\r\n\t\t\"multiColonyElitism\" : true\r\n\t},\r\n\t\"monitoringConfiguration\": {\r\n\t\t\"verbose\": false,\r\n\t\t\"showGraph\": true\r\n\t}\r\n}"
+									"raw": "{\r\n\t\"applicationSpecifics\": {\r\n\t\t\"target\" : {\r\n\t\t\t\"TARGET_EXPRESSION_RESULT\" : 235000\r\n\t\t},\r\n\t\t\"params\" : {\r\n\t\t\t\"MAX_OPERAND_VALUE\" : 1000\r\n\t\t}\r\n\t},\r\n\t\"algorithmParameters\": {\r\n\t\t\"recombinationPerc\": 0.8,\r\n\t\t\"mutationPerc\": 0.2,\r\n\t\t\"initialSelectionNumber\": 1000,\r\n\t\t\"initialSelectionRandom\": true,\r\n\t\t\"stopConditions\": {\r\n\t\t\t\"targetThreshold\" : 0.99999999,\r\n\t\t\t\"maxIterations\": -1,\r\n\t\t\t\"maxLifetimeMs\": 2000,\r\n\t\t\t\"maxIdenticalFitnesses\": -1,\r\n\t\t\t\"maxEras\": 3\r\n\t\t},\r\n\t\t\"partitions\": 4,\r\n\t\t\"reshuffleEveryEras\" : 2,\r\n\t\t\"elitism\": {\r\n\t\t\t\"singleColonyElitism\": true,\r\n\t\t\t\"singleColonyElitismNumber\": 1,\r\n\t\t\t\"multiColonyElitism\" : true,\r\n\t\t\t\"multiColonyElitismNumber\" : 10\r\n\t\t}\r\n\t},\r\n\t\"monitoringConfiguration\": {\r\n\t\t\"verbose\": false,\r\n\t\t\"showGraph\": true\r\n\t}\r\n}"
 								},
-								"description": ""
+								"url": {
+									"raw": "http://{{ip}}:{{port}}/distributed/local/experiment/expressions_d",
+									"protocol": "http",
+									"host": [
+										"{{ip}}"
+									],
+									"port": "{{port}}",
+									"path": [
+										"distributed",
+										"local",
+										"experiment",
+										"expressions_d"
+									]
+								}
 							},
 							"response": []
 						},
 						{
 							"name": "/distr/exp/local MEDIUM",
 							"request": {
-								"url": "http://{{ip}}:{{port}}/distributed/local/experiment/expressions_d",
 								"method": "POST",
 								"header": [
 									{
 										"key": "Content-Type",
-										"value": "application/json",
-										"description": ""
+										"value": "application/json"
 									},
 									{
 										"key": "Web-Request",
-										"value": "false",
-										"description": ""
+										"value": "false"
 									}
 								],
 								"body": {
 									"mode": "raw",
-									"raw": "{\r\n\t\"applicationSpecifics\": {\r\n\t\t\"target\" : {\r\n\t\t\t\"TARGET_EXPRESSION_RESULT\" : 235000\r\n\t\t},\r\n\t\t\"params\" : {\r\n\t\t\t\"MAX_OPERAND_VALUE\" : 10000\r\n\t\t}\r\n\t},\r\n\t\"algorithmParameters\": {\r\n\t\t\"recombinationPerc\": 0.5,\r\n\t\t\"mutationPerc\": 0.2,\r\n\t\t\"elitism\": true,\r\n\t\t\"initialSelectionNumber\": 100,\r\n\t\t\"initialSelectionRandom\": true,\r\n\t\t\"stopConditions\": {\r\n\t\t\t\"targetFitness\" : 1.0,\r\n\t\t\t\"maxIterations\": -1,\r\n\t\t\t\"maxLifetimeMs\": 3000,\r\n\t\t\t\"maxIdenticalFitnesses\": -1,\r\n\t\t\t\"maxEras\": 5\r\n\t\t},\r\n\t\t\"partitions\": 4,\r\n\t\t\"eraBestMatches\" : 10,\r\n\t\t\"reshuffleEveryEras\" : 2,\r\n\t\t\"multiColonyElitism\" : true\r\n\t},\r\n\t\"monitoringConfiguration\": {\r\n\t\t\"verbose\": false,\r\n\t\t\"traceHistory\": false\r\n\t}\r\n}\r\n"
+									"raw": "{\r\n\t\"applicationSpecifics\": {\r\n\t\t\"target\" : {\r\n\t\t\t\"TARGET_EXPRESSION_RESULT\" : 235000\r\n\t\t},\r\n\t\t\"params\" : {\r\n\t\t\t\"MAX_OPERAND_VALUE\" : 10000\r\n\t\t}\r\n\t},\r\n\t\"algorithmParameters\": {\r\n\t\t\"recombinationPerc\": 0.5,\r\n\t\t\"mutationPerc\": 0.2,\r\n\t\t\"initialSelectionNumber\": 100,\r\n\t\t\"initialSelectionRandom\": true,\r\n\t\t\"stopConditions\": {\r\n\t\t\t\"targetFitness\" : 1.0,\r\n\t\t\t\"maxIterations\": -1,\r\n\t\t\t\"maxLifetimeMs\": 3000,\r\n\t\t\t\"maxIdenticalFitnesses\": -1,\r\n\t\t\t\"maxEras\": 5\r\n\t\t},\r\n\t\t\"partitions\": 4,\r\n\t\t\"reshuffleEveryEras\" : 2,\r\n\t\t\"elitism\": {\r\n\t\t\t\"singleColonyElitism\": true,\r\n\t\t\t\"singleColonyElitismNumber\": 1,\r\n\t\t\t\"multiColonyElitism\" : true,\r\n\t\t\t\"multiColonyElitismNumber\" : 10\r\n\t\t}\r\n\t},\r\n\t\"monitoringConfiguration\": {\r\n\t\t\"verbose\": false,\r\n\t\t\"traceHistory\": false\r\n\t}\r\n}\r\n"
 								},
-								"description": ""
+								"url": {
+									"raw": "http://{{ip}}:{{port}}/distributed/local/experiment/expressions_d",
+									"protocol": "http",
+									"host": [
+										"{{ip}}"
+									],
+									"port": "{{port}}",
+									"path": [
+										"distributed",
+										"local",
+										"experiment",
+										"expressions_d"
+									]
+								}
 							},
 							"response": []
 						},
 						{
 							"name": "/distr/exp/cluster SMALL",
 							"request": {
-								"url": "http://{{ip}}:{{port}}/distributed/cluster/experiment/expressions_d",
 								"method": "POST",
 								"header": [
 									{
 										"key": "Content-Type",
-										"value": "application/json",
-										"description": ""
+										"value": "application/json"
 									},
 									{
 										"key": "Web-Request",
-										"value": "false",
-										"description": ""
+										"value": "false"
 									}
 								],
 								"body": {
 									"mode": "raw",
-									"raw": "{\r\n\t\"applicationSpecifics\": {\r\n\t\t\"target\" : {\r\n\t\t\t\"TARGET_EXPRESSION_RESULT\" : 23\r\n\t\t},\r\n\t\t\"params\" : {\r\n\t\t\t\"MAX_OPERAND_VALUE\" : 100\r\n\t\t}\r\n\t},\r\n\t\"algorithmParameters\": {\r\n\t\t\"recombinationPerc\": 0.8,\r\n\t\t\"mutationPerc\": 0.2,\r\n\t\t\"elitism\": true,\r\n\t\t\"initialSelectionNumber\": 10,\r\n\t\t\"initialSelectionRandom\": true,\r\n\t\t\"stopConditions\": {\r\n\t\t\t\"targetFitness\" : 1.0,\r\n\t\t\t\"maxIterations\": -1,\r\n\t\t\t\"maxLifetimeMs\": 3000,\r\n\t\t\t\"maxIdenticalFitnesses\": -1,\r\n\t\t\t\"maxEras\": 3\r\n\t\t},\r\n\t\t\"partitions\": 4,\r\n\t\t\"eraBestMatches\" : 1,\r\n\t\t\"reshuffleEveryEras\" : 2,\r\n\t\t\"multiColonyElitism\" : true\r\n\t},\r\n\t\"monitoringConfiguration\": {\r\n\t\t\"verbose\": false,\r\n\t\t\"traceHistory\": false\r\n\t}\r\n}\r\n"
+									"raw": "{\r\n\t\"applicationSpecifics\": {\r\n\t\t\"target\" : {\r\n\t\t\t\"TARGET_EXPRESSION_RESULT\" : 23\r\n\t\t},\r\n\t\t\"params\" : {\r\n\t\t\t\"MAX_OPERAND_VALUE\" : 100\r\n\t\t}\r\n\t},\r\n\t\"algorithmParameters\": {\r\n\t\t\"recombinationPerc\": 0.8,\r\n\t\t\"mutationPerc\": 0.2,\r\n\t\t\"initialSelectionNumber\": 10,\r\n\t\t\"initialSelectionRandom\": true,\r\n\t\t\"stopConditions\": {\r\n\t\t\t\"targetFitness\" : 1.0,\r\n\t\t\t\"maxIterations\": -1,\r\n\t\t\t\"maxLifetimeMs\": 3000,\r\n\t\t\t\"maxIdenticalFitnesses\": -1,\r\n\t\t\t\"maxEras\": 3\r\n\t\t},\r\n\t\t\"partitions\": 4,\r\n\t\t\"reshuffleEveryEras\" : 2,\r\n\t\t\"elitism\": {\r\n\t\t\t\"singleColonyElitism\": true,\r\n\t\t\t\"singleColonyElitismNumber\": 1,\r\n\t\t\t\"multiColonyElitism\" : true,\r\n\t\t\t\"multiColonyElitismNumber\" : 10\r\n\t\t}\r\n\t},\r\n\t\"monitoringConfiguration\": {\r\n\t\t\"verbose\": false,\r\n\t\t\"traceHistory\": false\r\n\t}\r\n}\r\n"
 								},
-								"description": ""
+								"url": {
+									"raw": "http://{{ip}}:{{port}}/distributed/cluster/experiment/expressions_d",
+									"protocol": "http",
+									"host": [
+										"{{ip}}"
+									],
+									"port": "{{port}}",
+									"path": [
+										"distributed",
+										"cluster",
+										"experiment",
+										"expressions_d"
+									]
+								}
 							},
 							"response": []
 						},
 						{
 							"name": "/distr/exp/cluster MEDIUM",
 							"request": {
-								"url": "http://{{ip}}:{{port}}/distributed/cluster/experiment/expressions_d",
 								"method": "POST",
 								"header": [
 									{
 										"key": "Content-Type",
-										"value": "application/json",
-										"description": ""
+										"value": "application/json"
 									},
 									{
 										"key": "Web-Request",
-										"value": "false",
-										"description": ""
+										"value": "false"
 									}
 								],
 								"body": {
 									"mode": "raw",
-									"raw": "{\r\n\t\"applicationSpecifics\": {\r\n\t\t\"target\" : {\r\n\t\t\t\"TARGET_EXPRESSION_RESULT\" : 235000\r\n\t\t},\r\n\t\t\"params\" : {\r\n\t\t\t\"MAX_OPERAND_VALUE\" : 10000\r\n\t\t}\r\n\t},\r\n\t\"algorithmParameters\": {\r\n\t\t\"recombinationPerc\": 0.8,\r\n\t\t\"mutationPerc\": 0.2,\r\n\t\t\"elitism\": true,\r\n\t\t\"initialSelectionNumber\": 100,\r\n\t\t\"initialSelectionRandom\": true,\r\n\t\t\"stopConditions\": {\r\n\t\t\t\"targetFitness\" : 1.0,\r\n\t\t\t\"maxIterations\": -1,\r\n\t\t\t\"maxLifetimeMs\": 3000,\r\n\t\t\t\"maxIdenticalFitnesses\": -1,\r\n\t\t\t\"maxEras\": 5\r\n\t\t},\r\n\t\t\"partitions\": 4,\r\n\t\t\"eraBestMatches\" : 10,\r\n\t\t\"reshuffleEveryEras\" : 2,\r\n\t\t\"multiColonyElitism\" : true\r\n\t},\r\n\t\"monitoringConfiguration\": {\r\n\t\t\"verbose\": false,\r\n\t\t\"traceHistory\": false\r\n\t}\r\n}\r\n"
+									"raw": "{\r\n\t\"applicationSpecifics\": {\r\n\t\t\"target\" : {\r\n\t\t\t\"TARGET_EXPRESSION_RESULT\" : 235000\r\n\t\t},\r\n\t\t\"params\" : {\r\n\t\t\t\"MAX_OPERAND_VALUE\" : 10000\r\n\t\t}\r\n\t},\r\n\t\"algorithmParameters\": {\r\n\t\t\"recombinationPerc\": 0.8,\r\n\t\t\"mutationPerc\": 0.2,\r\n\t\t\"initialSelectionNumber\": 100,\r\n\t\t\"initialSelectionRandom\": true,\r\n\t\t\"stopConditions\": {\r\n\t\t\t\"targetFitness\" : 1.0,\r\n\t\t\t\"maxIterations\": -1,\r\n\t\t\t\"maxLifetimeMs\": 3000,\r\n\t\t\t\"maxIdenticalFitnesses\": -1,\r\n\t\t\t\"maxEras\": 5\r\n\t\t},\r\n\t\t\"partitions\": 4,\r\n\t\t\"reshuffleEveryEras\" : 2,\r\n\t\t\"elitism\": {\r\n\t\t\t\"singleColonyElitism\": true,\r\n\t\t\t\"singleColonyElitismNumber\": 1,\r\n\t\t\t\"multiColonyElitism\" : true,\r\n\t\t\t\"multiColonyElitismNumber\" : 10\r\n\t\t}\r\n\t},\r\n\t\"monitoringConfiguration\": {\r\n\t\t\"verbose\": false,\r\n\t\t\"traceHistory\": false\r\n\t}\r\n}\r\n"
 								},
-								"description": ""
+								"url": {
+									"raw": "http://{{ip}}:{{port}}/distributed/cluster/experiment/expressions_d",
+									"protocol": "http",
+									"host": [
+										"{{ip}}"
+									],
+									"port": "{{port}}",
+									"path": [
+										"distributed",
+										"cluster",
+										"experiment",
+										"expressions_d"
+									]
+								}
 							},
 							"response": []
 						},
 						{
 							"name": "/distr/exp/cluster BIG",
 							"request": {
-								"url": "http://{{ip}}:{{port}}/distributed/cluster/experiment/expressions_d",
 								"method": "POST",
 								"header": [
 									{
 										"key": "Content-Type",
-										"value": "application/json",
-										"description": ""
+										"value": "application/json"
 									},
 									{
 										"key": "Web-Request",
-										"value": "false",
-										"description": ""
+										"value": "false"
 									}
 								],
 								"body": {
 									"mode": "raw",
-									"raw": "{\r\n\t\"applicationSpecifics\": {\r\n\t\t\"target\" : {\r\n\t\t\t\"TARGET_EXPRESSION_RESULT\" : 235000\r\n\t\t},\r\n\t\t\"params\" : {\r\n\t\t\t\"MAX_OPERAND_VALUE\" : 1000000\r\n\t\t}\r\n\t},\r\n\t\"algorithmParameters\": {\r\n\t\t\"recombinationPerc\": 0.5,\r\n\t\t\"mutationPerc\": 0.2,\r\n\t\t\"elitism\": true,\r\n\t\t\"initialSelectionNumber\": 1000,\r\n\t\t\"initialSelectionRandom\": true,\r\n\t\t\"stopConditions\": {\r\n\t\t\t\"targetFitness\" : 1.0,\r\n\t\t\t\"maxIterations\": -1,\r\n\t\t\t\"maxLifetimeMs\": 3000,\r\n\t\t\t\"maxIdenticalFitnesses\": -1,\r\n\t\t\t\"maxEras\": 5\r\n\t\t},\r\n\t\t\"partitions\": 4,\r\n\t\t\"eraBestMatches\" : 100,\r\n\t\t\"reshuffleEveryEras\" : 3,\r\n\t\t\"multiColonyElitism\" : true\r\n\t},\r\n\t\"monitoringConfiguration\": {\r\n\t\t\"verbose\": false,\r\n\t\t\"traceHistory\": false\r\n\t}\r\n}\r\n"
+									"raw": "{\r\n\t\"applicationSpecifics\": {\r\n\t\t\"target\" : {\r\n\t\t\t\"TARGET_EXPRESSION_RESULT\" : 235000\r\n\t\t},\r\n\t\t\"params\" : {\r\n\t\t\t\"MAX_OPERAND_VALUE\" : 1000000\r\n\t\t}\r\n\t},\r\n\t\"algorithmParameters\": {\r\n\t\t\"recombinationPerc\": 0.5,\r\n\t\t\"mutationPerc\": 0.2,\r\n\t\t\"initialSelectionNumber\": 1000,\r\n\t\t\"initialSelectionRandom\": true,\r\n\t\t\"stopConditions\": {\r\n\t\t\t\"targetFitness\" : 1.0,\r\n\t\t\t\"maxIterations\": -1,\r\n\t\t\t\"maxLifetimeMs\": 3000,\r\n\t\t\t\"maxIdenticalFitnesses\": -1,\r\n\t\t\t\"maxEras\": 5\r\n\t\t},\r\n\t\t\"partitions\": 4,\r\n\t\t\"reshuffleEveryEras\" : 3,\r\n\t\t\"elitism\": {\r\n\t\t\t\"singleColonyElitism\": true,\r\n\t\t\t\"singleColonyElitismNumber\": 1,\r\n\t\t\t\"multiColonyElitism\" : true,\r\n\t\t\t\"multiColonyElitismNumber\" : 100\r\n\t\t}\r\n\t},\r\n\t\"monitoringConfiguration\": {\r\n\t\t\"verbose\": false,\r\n\t\t\"traceHistory\": false\r\n\t}\r\n}\r\n"
 								},
-								"description": ""
+								"url": {
+									"raw": "http://{{ip}}:{{port}}/distributed/cluster/experiment/expressions_d",
+									"protocol": "http",
+									"host": [
+										"{{ip}}"
+									],
+									"port": "{{port}}",
+									"path": [
+										"distributed",
+										"cluster",
+										"experiment",
+										"expressions_d"
+									]
+								}
 							},
 							"response": []
 						}
@@ -1012,155 +1510,214 @@
 				},
 				{
 					"name": "sudoku_d",
-					"description": "",
 					"item": [
 						{
 							"name": "/distr/sudoku/local SMALL",
 							"request": {
-								"url": "http://{{ip}}:{{port}}/distributed/local/experiment/sudoku_d",
 								"method": "POST",
 								"header": [
 									{
 										"key": "Content-Type",
-										"value": "application/json",
-										"description": ""
+										"value": "application/json"
 									},
 									{
 										"key": "Web-Request",
-										"value": "false",
-										"description": ""
+										"value": "false"
 									}
 								],
 								"body": {
 									"mode": "raw",
-									"raw": "{\r\n\t\"algorithmParameters\": {\r\n\t\t\"recombinationPerc\": 0.8,\r\n\t\t\"mutationPerc\": 0.2,\r\n\t\t\"elitism\": true,\r\n\t\t\"initialSelectionNumber\": 10,\r\n\t\t\"initialSelectionRandom\": true,\r\n\t\t\"stopConditions\": {\r\n\t\t\t\"maxIterations\": -1,\r\n\t\t\t\"maxLifetimeMs\": 3000,\r\n\t\t\t\"maxIdenticalFitnesses\": -1,\r\n\t\t\t\"maxEras\": 5\r\n\t\t},\r\n\t\t\"partitions\": 4,\r\n\t\t\"eraBestMatches\" : 10,\r\n\t\t\"reshuffleEveryEras\" : 2,\r\n\t\t\"multiColonyElitism\" : false\r\n\t},\r\n\t\"monitoringConfiguration\": {\r\n\t\t\"verbose\": false,\r\n\t\t\"traceHistory\": false\r\n\t}\r\n}\r\n"
+									"raw": "{\r\n\t\"algorithmParameters\": {\r\n\t\t\"recombinationPerc\": 0.8,\r\n\t\t\"mutationPerc\": 0.2,\r\n\t\t\"initialSelectionNumber\": 10,\r\n\t\t\"initialSelectionRandom\": true,\r\n\t\t\"stopConditions\": {\r\n\t\t\t\"maxIterations\": -1,\r\n\t\t\t\"maxLifetimeMs\": 3000,\r\n\t\t\t\"maxIdenticalFitnesses\": -1,\r\n\t\t\t\"maxEras\": 5\r\n\t\t},\r\n\t\t\"partitions\": 4,\r\n\t\t\"reshuffleEveryEras\" : 2,\r\n\t\t\"elitism\": {\r\n\t\t\t\"singleColonyElitism\": true,\r\n\t\t\t\"singleColonyElitismNumber\": 1,\r\n\t\t\t\"multiColonyElitism\" : true,\r\n\t\t\t\"multiColonyElitismNumber\" : 10\r\n\t\t}\r\n\t},\r\n\t\"monitoringConfiguration\": {\r\n\t\t\"verbose\": false,\r\n\t\t\"traceHistory\": false\r\n\t}\r\n}\r\n"
 								},
-								"description": ""
+								"url": {
+									"raw": "http://{{ip}}:{{port}}/distributed/local/experiment/sudoku_d",
+									"protocol": "http",
+									"host": [
+										"{{ip}}"
+									],
+									"port": "{{port}}",
+									"path": [
+										"distributed",
+										"local",
+										"experiment",
+										"sudoku_d"
+									]
+								}
 							},
 							"response": []
 						},
 						{
 							"name": "/distr/sudoku/local MEDIUM",
 							"request": {
-								"url": "http://{{ip}}:{{port}}/distributed/local/experiment/sudoku_d",
 								"method": "POST",
 								"header": [
 									{
 										"key": "Content-Type",
-										"value": "application/json",
-										"description": ""
+										"value": "application/json"
 									},
 									{
 										"key": "Web-Request",
-										"value": "false",
-										"description": ""
+										"value": "false"
 									}
 								],
 								"body": {
 									"mode": "raw",
-									"raw": "{\r\n\t\"algorithmParameters\": {\r\n\t\t\"recombinationPerc\": 0.8,\r\n\t\t\"mutationPerc\": 0.2,\r\n\t\t\"elitism\": true,\r\n\t\t\"initialSelectionNumber\": 100,\r\n\t\t\"initialSelectionRandom\": true,\r\n\t\t\"stopConditions\": {\r\n\t\t\t\"maxIterations\": -1,\r\n\t\t\t\"maxLifetimeMs\": 3000,\r\n\t\t\t\"maxIdenticalFitnesses\": -1,\r\n\t\t\t\"maxEras\": 5\r\n\t\t},\r\n\t\t\"partitions\": 4,\r\n\t\t\"eraBestMatches\" : 100,\r\n\t\t\"reshuffleEveryEras\" : 2,\r\n\t\t\"multiColonyElitism\" : true\r\n\t},\r\n\t\"monitoringConfiguration\": {\r\n\t\t\"verbose\": false,\r\n\t\t\"traceHistory\": false\r\n\t}\r\n}\r\n"
+									"raw": "{\r\n\t\"algorithmParameters\": {\r\n\t\t\"recombinationPerc\": 0.8,\r\n\t\t\"mutationPerc\": 0.2,\r\n\t\t\"initialSelectionNumber\": 100,\r\n\t\t\"initialSelectionRandom\": true,\r\n\t\t\"stopConditions\": {\r\n\t\t\t\"maxIterations\": -1,\r\n\t\t\t\"maxLifetimeMs\": 3000,\r\n\t\t\t\"maxIdenticalFitnesses\": -1,\r\n\t\t\t\"maxEras\": 5\r\n\t\t},\r\n\t\t\"partitions\": 4,\r\n\t\t\"reshuffleEveryEras\" : 2,\r\n\t\t\"elitism\": {\r\n\t\t\t\"singleColonyElitism\": true,\r\n\t\t\t\"singleColonyElitismNumber\": 1,\r\n\t\t\t\"multiColonyElitism\" : true,\r\n\t\t\t\"multiColonyElitismNumber\" : 100\r\n\t\t}\r\n\t},\r\n\t\"monitoringConfiguration\": {\r\n\t\t\"verbose\": false,\r\n\t\t\"traceHistory\": false\r\n\t}\r\n}\r\n"
 								},
-								"description": ""
+								"url": {
+									"raw": "http://{{ip}}:{{port}}/distributed/local/experiment/sudoku_d",
+									"protocol": "http",
+									"host": [
+										"{{ip}}"
+									],
+									"port": "{{port}}",
+									"path": [
+										"distributed",
+										"local",
+										"experiment",
+										"sudoku_d"
+									]
+								}
 							},
 							"response": []
 						},
 						{
 							"name": "/distr/sudoku/cluster SMALL",
 							"request": {
-								"url": "http://{{ip}}:{{port}}/distributed/cluster/experiment/sudoku_d",
 								"method": "POST",
 								"header": [
 									{
 										"key": "Content-Type",
-										"value": "application/json",
-										"description": ""
+										"value": "application/json"
 									},
 									{
 										"key": "Web-Request",
-										"value": "false",
-										"description": ""
+										"value": "false"
 									}
 								],
 								"body": {
 									"mode": "raw",
-									"raw": "{\r\n\t\"algorithmParameters\": {\r\n\t\t\"recombinationPerc\": 0.8,\r\n\t\t\"mutationPerc\": 0.2,\r\n\t\t\"elitism\": true,\r\n\t\t\"initialSelectionNumber\": 10,\r\n\t\t\"initialSelectionRandom\": true,\r\n\t\t\"stopConditions\": {\r\n\t\t\t\"maxIterations\": -1,\r\n\t\t\t\"maxLifetimeMs\": 3000,\r\n\t\t\t\"maxIdenticalFitnesses\": -1,\r\n\t\t\t\"maxEras\": 5\r\n\t\t},\r\n\t\t\"partitions\": 4,\r\n\t\t\"eraBestMatches\" : 10,\r\n\t\t\"reshuffleEveryEras\" : 2,\r\n\t\t\"multiColonyElitism\" : true\r\n\t},\r\n\t\"monitoringConfiguration\": {\r\n\t\t\"verbose\": false,\r\n\t\t\"traceHistory\": false\r\n\t}\r\n}\r\n"
+									"raw": "{\r\n\t\"algorithmParameters\": {\r\n\t\t\"recombinationPerc\": 0.8,\r\n\t\t\"mutationPerc\": 0.2,\r\n\t\t\"initialSelectionNumber\": 10,\r\n\t\t\"initialSelectionRandom\": true,\r\n\t\t\"stopConditions\": {\r\n\t\t\t\"maxIterations\": -1,\r\n\t\t\t\"maxLifetimeMs\": 3000,\r\n\t\t\t\"maxIdenticalFitnesses\": -1,\r\n\t\t\t\"maxEras\": 5\r\n\t\t},\r\n\t\t\"partitions\": 4,\r\n\t\t\"reshuffleEveryEras\" : 2,\r\n\t\t\"elitism\": {\r\n\t\t\t\"singleColonyElitism\": true,\r\n\t\t\t\"singleColonyElitismNumber\": 1,\r\n\t\t\t\"multiColonyElitism\" : true,\r\n\t\t\t\"multiColonyElitismNumber\" : 10\r\n\t\t}\r\n\t},\r\n\t\"monitoringConfiguration\": {\r\n\t\t\"verbose\": false,\r\n\t\t\"traceHistory\": false\r\n\t}\r\n}\r\n"
 								},
-								"description": ""
+								"url": {
+									"raw": "http://{{ip}}:{{port}}/distributed/cluster/experiment/sudoku_d",
+									"protocol": "http",
+									"host": [
+										"{{ip}}"
+									],
+									"port": "{{port}}",
+									"path": [
+										"distributed",
+										"cluster",
+										"experiment",
+										"sudoku_d"
+									]
+								}
 							},
 							"response": []
 						},
 						{
 							"name": "/distr/sudoku/cluster MEDIUM",
 							"request": {
-								"url": "http://{{ip}}:{{port}}/distributed/cluster/experiment/sudoku_d",
 								"method": "POST",
 								"header": [
 									{
 										"key": "Content-Type",
-										"value": "application/json",
-										"description": ""
+										"value": "application/json"
 									},
 									{
 										"key": "Web-Request",
-										"value": "false",
-										"description": ""
+										"value": "false"
 									}
 								],
 								"body": {
 									"mode": "raw",
-									"raw": "{\r\n\t\"algorithmParameters\": {\r\n\t\t\"recombinationPerc\": 0.8,\r\n\t\t\"mutationPerc\": 0.2,\r\n\t\t\"elitism\": true,\r\n\t\t\"initialSelectionNumber\": 1000,\r\n\t\t\"initialSelectionRandom\": true,\r\n\t\t\"stopConditions\": {\r\n\t\t\t\"maxIterations\": -1,\r\n\t\t\t\"maxLifetimeMs\": 3000,\r\n\t\t\t\"maxIdenticalFitnesses\": -1,\r\n\t\t\t\"maxEras\": 5\r\n\t\t},\r\n\t\t\"partitions\": 8,\r\n\t\t\"eraBestMatches\" : 100,\r\n\t\t\"reshuffleEveryEras\" : 2,\r\n\t\t\"multiColonyElitism\" : true\r\n\t},\r\n\t\"monitoringConfiguration\": {\r\n\t\t\"verbose\": false,\r\n\t\t\"traceHistory\": false\r\n\t}\r\n}\r\n"
+									"raw": "{\r\n\t\"algorithmParameters\": {\r\n\t\t\"recombinationPerc\": 0.8,\r\n\t\t\"mutationPerc\": 0.2,\r\n\t\t\"initialSelectionNumber\": 1000,\r\n\t\t\"initialSelectionRandom\": true,\r\n\t\t\"stopConditions\": {\r\n\t\t\t\"maxIterations\": -1,\r\n\t\t\t\"maxLifetimeMs\": 3000,\r\n\t\t\t\"maxIdenticalFitnesses\": -1,\r\n\t\t\t\"maxEras\": 5\r\n\t\t},\r\n\t\t\"partitions\": 8,\r\n\t\t\"reshuffleEveryEras\" : 2,\r\n\t\t\"elitism\": {\r\n\t\t\t\"singleColonyElitism\": true,\r\n\t\t\t\"singleColonyElitismNumber\": 1,\r\n\t\t\t\"multiColonyElitism\" : true,\r\n\t\t\t\"multiColonyElitismNumber\" : 100\r\n\t\t}\r\n\t},\r\n\t\"monitoringConfiguration\": {\r\n\t\t\"verbose\": false,\r\n\t\t\"traceHistory\": false\r\n\t}\r\n}\r\n"
 								},
-								"description": ""
+								"url": {
+									"raw": "http://{{ip}}:{{port}}/distributed/cluster/experiment/sudoku_d",
+									"protocol": "http",
+									"host": [
+										"{{ip}}"
+									],
+									"port": "{{port}}",
+									"path": [
+										"distributed",
+										"cluster",
+										"experiment",
+										"sudoku_d"
+									]
+								}
 							},
 							"response": []
 						},
 						{
 							"name": "/distr/sudoku/cluster BIG",
 							"request": {
-								"url": "http://{{ip}}:{{port}}/distributed/cluster/experiment/sudoku_d",
 								"method": "POST",
 								"header": [
 									{
 										"key": "Content-Type",
-										"value": "application/json",
-										"description": ""
+										"value": "application/json"
 									},
 									{
 										"key": "Web-Request",
-										"value": "false",
-										"description": ""
+										"value": "false"
 									}
 								],
 								"body": {
 									"mode": "raw",
-									"raw": "{\r\n\t\"algorithmParameters\": {\r\n\t\t\"recombinationPerc\": 0.8,\r\n\t\t\"mutationPerc\": 0.2,\r\n\t\t\"elitism\": true,\r\n\t\t\"initialSelectionNumber\": 100000,\r\n\t\t\"initialSelectionRandom\": true,\r\n\t\t\"stopConditions\": {\r\n\t\t\t\"maxIterations\": -1,\r\n\t\t\t\"maxLifetimeMs\": 3000,\r\n\t\t\t\"maxIdenticalFitnesses\": -1,\r\n\t\t\t\"maxEras\": 5\r\n\t\t},\r\n\t\t\"partitions\": 8,\r\n\t\t\"eraBestMatches\" : 100,\r\n\t\t\"reshuffleEveryEras\" : 2,\r\n\t\t\"multiColonyElitism\" : true\r\n\t},\r\n\t\"monitoringConfiguration\": {\r\n\t\t\"verbose\": false,\r\n\t\t\"traceHistory\": false\r\n\t}\r\n}\r\n"
+									"raw": "{\r\n\t\"algorithmParameters\": {\r\n\t\t\"recombinationPerc\": 0.8,\r\n\t\t\"mutationPerc\": 0.2,\r\n\t\t\"initialSelectionNumber\": 100000,\r\n\t\t\"initialSelectionRandom\": true,\r\n\t\t\"stopConditions\": {\r\n\t\t\t\"maxIterations\": -1,\r\n\t\t\t\"maxLifetimeMs\": 3000,\r\n\t\t\t\"maxIdenticalFitnesses\": -1,\r\n\t\t\t\"maxEras\": 5\r\n\t\t},\r\n\t\t\"partitions\": 8,\r\n\t\t\"reshuffleEveryEras\" : 2,\r\n\t\t\"elitism\": {\r\n\t\t\t\"singleColonyElitism\": true,\r\n\t\t\t\"singleColonyElitismNumber\": 1,\r\n\t\t\t\"multiColonyElitism\" : true,\r\n\t\t\t\"multiColonyElitismNumber\" : 100\r\n\t\t}\r\n\t},\r\n\t\"monitoringConfiguration\": {\r\n\t\t\"verbose\": false,\r\n\t\t\"traceHistory\": false\r\n\t}\r\n}\r\n"
 								},
-								"description": ""
+								"url": {
+									"raw": "http://{{ip}}:{{port}}/distributed/cluster/experiment/sudoku_d",
+									"protocol": "http",
+									"host": [
+										"{{ip}}"
+									],
+									"port": "{{port}}",
+									"path": [
+										"distributed",
+										"cluster",
+										"experiment",
+										"sudoku_d"
+									]
+								}
 							},
 							"response": []
 						},
 						{
 							"name": "APP /distr/sudoku/local",
 							"request": {
-								"url": "http://{{ip}}:{{port}}/distributed/local/experiment/sudoku_d",
 								"method": "POST",
 								"header": [
 									{
 										"key": "Content-Type",
-										"value": "application/json",
-										"description": ""
+										"value": "application/json"
 									},
 									{
 										"key": "Web-Request",
-										"value": "false",
-										"description": ""
+										"value": "false"
 									}
 								],
 								"body": {
 									"mode": "raw",
-									"raw": "{\r\n\t\"algorithmParameters\": {\r\n\t\t\"recombinationPerc\": 0.8,\r\n\t\t\"mutationPerc\": 0.2,\r\n\t\t\"elitism\": true,\r\n\t\t\"initialSelectionNumber\": 10,\r\n\t\t\"initialSelectionRandom\": true,\r\n\t\t\"stopConditions\": {\r\n\t\t\t\"maxIterations\": -1,\r\n\t\t\t\"maxLifetimeMs\": 3000,\r\n\t\t\t\"maxIdenticalFitnesses\": -1,\r\n\t\t\t\"maxEras\": 1\r\n\t\t},\r\n\t\t\"partitions\": 4,\r\n\t\t\"eraBestMatches\" : 10,\r\n\t\t\"reshuffleEveryEras\" : 2,\r\n\t\t\"multiColonyElitism\" : false\r\n\t},\r\n\t\"monitoringConfiguration\": {\r\n\t\t\"verbose\": false,\r\n\t\t\"traceHistory\": false\r\n\t}\r\n}\r\n"
+									"raw": "{\r\n\t\"algorithmParameters\": {\r\n\t\t\"recombinationPerc\": 0.8,\r\n\t\t\"mutationPerc\": 0.2,\r\n\t\t\"initialSelectionNumber\": 10,\r\n\t\t\"initialSelectionRandom\": true,\r\n\t\t\"stopConditions\": {\r\n\t\t\t\"maxIterations\": -1,\r\n\t\t\t\"maxLifetimeMs\": 3000,\r\n\t\t\t\"maxIdenticalFitnesses\": -1,\r\n\t\t\t\"maxEras\": 1\r\n\t\t},\r\n\t\t\"partitions\": 4,\r\n\t\t\"reshuffleEveryEras\" : 2,\r\n\t\t\"elitism\": {\r\n\t\t\t\"singleColonyElitism\": true,\r\n\t\t\t\"singleColonyElitismNumber\": 1,\r\n\t\t\t\"multiColonyElitism\" : true,\r\n\t\t\t\"multiColonyElitismNumber\" : 10\r\n\t\t}\r\n\t},\r\n\t\"monitoringConfiguration\": {\r\n\t\t\"verbose\": false,\r\n\t\t\"traceHistory\": false\r\n\t}\r\n}\r\n"
 								},
-								"description": ""
+								"url": {
+									"raw": "http://{{ip}}:{{port}}/distributed/local/experiment/sudoku_d",
+									"protocol": "http",
+									"host": [
+										"{{ip}}"
+									],
+									"port": "{{port}}",
+									"path": [
+										"distributed",
+										"local",
+										"experiment",
+										"sudoku_d"
+									]
+								}
 							},
 							"response": []
 						}
@@ -1169,80 +1726,109 @@
 				},
 				{
 					"name": "garden_d",
-					"description": "",
 					"item": [
 						{
 							"name": "/distr/garden/local SMALL",
 							"request": {
-								"url": "http://{{ip}}:{{port}}/distributed/local/experiment/garden_d",
 								"method": "POST",
 								"header": [
 									{
 										"key": "Content-Type",
-										"value": "application/json",
-										"description": ""
+										"value": "application/json"
 									},
 									{
 										"key": "Web-Request",
-										"value": "false",
-										"description": ""
+										"value": "false"
 									}
 								],
 								"body": {
 									"mode": "raw",
-									"raw": "{\r\n\t\"applicationSpecifics\": {\r\n\t\t\"target\" : {\r\n\t\t\t\"TARGET_WELLNESS\" : \"happy\"\r\n\t\t},\r\n\t\t\"params\" : {\r\n\t\t\t\"LIMITED_TREES\" : false\r\n\t\t}\r\n\t},\r\n\t\"algorithmParameters\": {\r\n\t\t\"recombinationPerc\": 0.5,\r\n\t\t\"mutationPerc\": 0.2,\r\n\t\t\"elitism\": true,\r\n\t\t\"initialSelectionNumber\": 100,\r\n\t\t\"initialSelectionRandom\": false,\r\n\t\t\"stopConditions\": {\r\n\t\t\t\"maxIterations\": -1,\r\n\t\t\t\"maxLifetimeMs\": 3000,\r\n\t\t\t\"maxIdenticalFitnesses\": -1,\r\n\t\t\t\"maxEras\": 5\r\n\t\t},\r\n\t\t\"partitions\": 4,\r\n\t\t\"eraBestMatches\" : 10,\r\n\t\t\"reshuffleEveryEras\" : 2,\r\n\t\t\"multiColonyElitism\" : true\r\n\t},\r\n\t\"monitoringConfiguration\": {\r\n\t\t\"verbose\": false,\r\n\t\t\"showGraph\": true\r\n\t}\r\n}"
+									"raw": "{\r\n\t\"applicationSpecifics\": {\r\n\t\t\"target\" : {\r\n\t\t\t\"TARGET_WELLNESS\" : \"happy\"\r\n\t\t},\r\n\t\t\"params\" : {\r\n\t\t\t\"LIMITED_TREES\" : false\r\n\t\t}\r\n\t},\r\n\t\"algorithmParameters\": {\r\n\t\t\"recombinationPerc\": 0.5,\r\n\t\t\"mutationPerc\": 0.2,\r\n\t\t\"initialSelectionNumber\": 100,\r\n\t\t\"initialSelectionRandom\": false,\r\n\t\t\"stopConditions\": {\r\n\t\t\t\"maxIterations\": -1,\r\n\t\t\t\"maxLifetimeMs\": 3000,\r\n\t\t\t\"maxIdenticalFitnesses\": -1,\r\n\t\t\t\"maxEras\": 5\r\n\t\t},\r\n\t\t\"partitions\": 4,\r\n\t\t\"reshuffleEveryEras\" : 2,\r\n\t\t\"elitism\": {\r\n\t\t\t\"singleColonyElitism\": true,\r\n\t\t\t\"singleColonyElitismNumber\": 1,\r\n\t\t\t\"multiColonyElitism\" : true,\r\n\t\t\t\"multiColonyElitismNumber\" : 10\r\n\t\t}\r\n\t},\r\n\t\"monitoringConfiguration\": {\r\n\t\t\"verbose\": false,\r\n\t\t\"showGraph\": true\r\n\t}\r\n}"
 								},
-								"description": ""
+								"url": {
+									"raw": "http://{{ip}}:{{port}}/distributed/local/experiment/garden_d",
+									"protocol": "http",
+									"host": [
+										"{{ip}}"
+									],
+									"port": "{{port}}",
+									"path": [
+										"distributed",
+										"local",
+										"experiment",
+										"garden_d"
+									]
+								}
 							},
 							"response": []
 						},
 						{
 							"name": "/distr/garden/cluster SMALL",
 							"request": {
-								"url": "http://{{ip}}:{{port}}/distributed/cluster/experiment/garden_d",
 								"method": "POST",
 								"header": [
 									{
 										"key": "Content-Type",
-										"value": "application/json",
-										"description": ""
+										"value": "application/json"
 									},
 									{
 										"key": "Web-Request",
-										"value": "false",
-										"description": ""
+										"value": "false"
 									}
 								],
 								"body": {
 									"mode": "raw",
-									"raw": "{\r\n\t\"applicationSpecifics\": {\r\n\t\t\"target\" : {\r\n\t\t\t\"TARGET_WELLNESS\" : \"happy\"\r\n\t\t},\r\n\t\t\"params\" : {\r\n\t\t\t\"LIMITED_TREES\" : false\r\n\t\t}\r\n\t},\r\n\t\"algorithmParameters\": {\r\n\t\t\"recombinationPerc\": 0.5,\r\n\t\t\"mutationPerc\": 0.2,\r\n\t\t\"elitism\": true,\r\n\t\t\"initialSelectionNumber\": 100,\r\n\t\t\"initialSelectionRandom\": false,\r\n\t\t\"stopConditions\": {\r\n\t\t\t\"maxIterations\": -1,\r\n\t\t\t\"maxLifetimeMs\": 3000,\r\n\t\t\t\"maxIdenticalFitnesses\": -1,\r\n\t\t\t\"maxEras\": 5\r\n\t\t},\r\n\t\t\"partitions\": 4,\r\n\t\t\"eraBestMatches\" : 10,\r\n\t\t\"reshuffleEveryEras\" : 2,\r\n\t\t\"multiColonyElitism\" : true\r\n\t},\r\n\t\"monitoringConfiguration\": {\r\n\t\t\"verbose\": false,\r\n\t\t\"showGraph\": true\r\n\t}\r\n}"
+									"raw": "{\r\n\t\"applicationSpecifics\": {\r\n\t\t\"target\" : {\r\n\t\t\t\"TARGET_WELLNESS\" : \"happy\"\r\n\t\t},\r\n\t\t\"params\" : {\r\n\t\t\t\"LIMITED_TREES\" : false\r\n\t\t}\r\n\t},\r\n\t\"algorithmParameters\": {\r\n\t\t\"recombinationPerc\": 0.5,\r\n\t\t\"mutationPerc\": 0.2,\r\n\t\t\"initialSelectionNumber\": 100,\r\n\t\t\"initialSelectionRandom\": false,\r\n\t\t\"stopConditions\": {\r\n\t\t\t\"maxIterations\": -1,\r\n\t\t\t\"maxLifetimeMs\": 3000,\r\n\t\t\t\"maxIdenticalFitnesses\": -1,\r\n\t\t\t\"maxEras\": 5\r\n\t\t},\r\n\t\t\"partitions\": 4,\r\n\t\t\"reshuffleEveryEras\" : 2,\r\n\t\t\"elitism\": {\r\n\t\t\t\"singleColonyElitism\": true,\r\n\t\t\t\"singleColonyElitismNumber\": 1,\r\n\t\t\t\"multiColonyElitism\" : true,\r\n\t\t\t\"multiColonyElitismNumber\" : 10\r\n\t\t}\r\n\t},\r\n\t\"monitoringConfiguration\": {\r\n\t\t\"verbose\": false,\r\n\t\t\"showGraph\": true\r\n\t}\r\n}"
 								},
-								"description": ""
+								"url": {
+									"raw": "http://{{ip}}:{{port}}/distributed/cluster/experiment/garden_d",
+									"protocol": "http",
+									"host": [
+										"{{ip}}"
+									],
+									"port": "{{port}}",
+									"path": [
+										"distributed",
+										"cluster",
+										"experiment",
+										"garden_d"
+									]
+								}
 							},
 							"response": []
 						},
 						{
 							"name": "/distr/garden/cluster MEDIUM",
 							"request": {
-								"url": "http://{{ip}}:{{port}}/distributed/cluster/experiment/garden_d",
 								"method": "POST",
 								"header": [
 									{
 										"key": "Content-Type",
-										"value": "application/json",
-										"description": ""
+										"value": "application/json"
 									},
 									{
 										"key": "Web-Request",
-										"value": "false",
-										"description": ""
+										"value": "false"
 									}
 								],
 								"body": {
 									"mode": "raw",
-									"raw": "{\r\n\t\"applicationSpecifics\": {\r\n\t\t\"target\" : {\r\n\t\t\t\"TARGET_WELLNESS\" : \"happy\"\r\n\t\t},\r\n\t\t\"params\" : {\r\n\t\t\t\"LIMITED_TREES\" : false\r\n\t\t}\r\n\t},\r\n\t\"algorithmParameters\": {\r\n\t\t\"recombinationPerc\": 0.5,\r\n\t\t\"mutationPerc\": 0.2,\r\n\t\t\"elitism\": true,\r\n\t\t\"initialSelectionNumber\": 1000,\r\n\t\t\"initialSelectionRandom\": false,\r\n\t\t\"stopConditions\": {\r\n\t\t\t\"maxIterations\": -1,\r\n\t\t\t\"maxLifetimeMs\": 10000,\r\n\t\t\t\"maxIdenticalFitnesses\": -1,\r\n\t\t\t\"maxEras\": 5\r\n\t\t},\r\n\t\t\"partitions\": 8,\r\n\t\t\"eraBestMatches\" : 100,\r\n\t\t\"reshuffleEveryEras\" : 2,\r\n\t\t\"multiColonyElitism\" : true\r\n\t},\r\n\t\"monitoringConfiguration\": {\r\n\t\t\"verbose\": false,\r\n\t\t\"showGraph\": true\r\n\t}\r\n}"
+									"raw": "{\r\n\t\"applicationSpecifics\": {\r\n\t\t\"target\" : {\r\n\t\t\t\"TARGET_WELLNESS\" : \"happy\"\r\n\t\t},\r\n\t\t\"params\" : {\r\n\t\t\t\"LIMITED_TREES\" : false\r\n\t\t}\r\n\t},\r\n\t\"algorithmParameters\": {\r\n\t\t\"recombinationPerc\": 0.5,\r\n\t\t\"mutationPerc\": 0.2,\r\n\t\t\"initialSelectionNumber\": 1000,\r\n\t\t\"initialSelectionRandom\": false,\r\n\t\t\"stopConditions\": {\r\n\t\t\t\"maxIterations\": -1,\r\n\t\t\t\"maxLifetimeMs\": 10000,\r\n\t\t\t\"maxIdenticalFitnesses\": -1,\r\n\t\t\t\"maxEras\": 5\r\n\t\t},\r\n\t\t\"partitions\": 8,\r\n\t\t\"reshuffleEveryEras\" : 2,\r\n\t\t\"elitism\": {\r\n\t\t\t\"singleColonyElitism\": true,\r\n\t\t\t\"singleColonyElitismNumber\": 1,\r\n\t\t\t\"multiColonyElitism\" : true,\r\n\t\t\t\"multiColonyElitismNumber\" : 100\r\n\t\t}\r\n\t},\r\n\t\"monitoringConfiguration\": {\r\n\t\t\"verbose\": false,\r\n\t\t\"showGraph\": true\r\n\t}\r\n}"
 								},
-								"description": ""
+								"url": {
+									"raw": "http://{{ip}}:{{port}}/distributed/cluster/experiment/garden_d",
+									"protocol": "http",
+									"host": [
+										"{{ip}}"
+									],
+									"port": "{{port}}",
+									"path": [
+										"distributed",
+										"cluster",
+										"experiment",
+										"garden_d"
+									]
+								}
 							},
 							"response": []
 						}
@@ -1251,55 +1837,74 @@
 				},
 				{
 					"name": "algorifero_d",
-					"description": "",
 					"item": [
 						{
 							"name": "/distr/algofrigerator/local SMALL",
 							"request": {
-								"url": "http://{{ip}}:{{port}}/distributed/local/experiment/algofrigerator_d",
 								"method": "POST",
 								"header": [
 									{
 										"key": "Content-Type",
-										"value": "application/json",
-										"description": ""
+										"value": "application/json"
 									},
 									{
 										"key": "Web-Request",
-										"value": "false",
-										"description": ""
+										"value": "false"
 									}
 								],
 								"body": {
 									"mode": "raw",
-									"raw": "{\r\n\t\"applicationSpecifics\": {\r\n\t\t\"target\" : {\r\n\t\t\t\"TARGET_DESIRED_MEALS\" : 10,\r\n\t\t\t\"TARGET_SAVOURY_PROPORTION\" : 70,\r\n\t\t\t\"TARGET_SWEET_PROPORTION\" : 30,\r\n\t\t\t\"TARGET_FRIDGE_MANDATORY\" : true\r\n\t\t},\r\n\t\t\"params\" : {\r\n\t\t\t\"REFRIGERATOR_FOODS\" : [ \"yogurth\", \"banana\", \"banane\"  ],\r\n\t\t\t\"PANTRY_FOODS\" : [ \r\n ],\r\n\t\t\t\"DATABASE\" : \"IT\"\r\n\t\t}\r\n\t},\r\n\t\"algorithmParameters\": {\r\n\t\t\"recombinationPerc\": 0.8,\r\n\t\t\"mutationPerc\": 0.2,\r\n\t\t\"elitism\": true,\r\n\t\t\"initialSelectionNumber\": 10,\r\n\t\t\"initialSelectionRandom\": true,\r\n\t\t\"stopConditions\": {\r\n\t\t\t\"maxIterations\": -1,\r\n\t\t\t\"maxLifetimeMs\": 3000,\r\n\t\t\t\"maxIdenticalFitnesses\": -1,\r\n\t\t\t\"maxEras\": 3\r\n\t\t},\r\n\t\t\"partitions\": 4,\r\n\t\t\"eraBestMatches\" : 10,\r\n\t\t\"reshuffleEveryEras\" : 10,\r\n\t\t\"multiColonyElitism\" : true\r\n\t},\r\n\t\"monitoringConfiguration\": {\r\n\t\t\"verbose\": false,\r\n\t\t\"showGraph\": true,\r\n\t\t\"traceHistory\": false\r\n\t}\r\n}\r\n"
+									"raw": "{\r\n\t\"applicationSpecifics\": {\r\n\t\t\"target\" : {\r\n\t\t\t\"TARGET_DESIRED_MEALS\" : 10,\r\n\t\t\t\"TARGET_SAVOURY_PROPORTION\" : 70,\r\n\t\t\t\"TARGET_SWEET_PROPORTION\" : 30,\r\n\t\t\t\"TARGET_FRIDGE_MANDATORY\" : true\r\n\t\t},\r\n\t\t\"params\" : {\r\n\t\t\t\"REFRIGERATOR_FOODS\" : [ \"yogurth\", \"banana\", \"banane\"  ],\r\n\t\t\t\"PANTRY_FOODS\" : [ \r\n ],\r\n\t\t\t\"DATABASE\" : \"IT\"\r\n\t\t}\r\n\t},\r\n\t\"algorithmParameters\": {\r\n\t\t\"recombinationPerc\": 0.8,\r\n\t\t\"mutationPerc\": 0.2,\r\n\t\t\"initialSelectionNumber\": 10,\r\n\t\t\"initialSelectionRandom\": true,\r\n\t\t\"stopConditions\": {\r\n\t\t\t\"maxIterations\": -1,\r\n\t\t\t\"maxLifetimeMs\": 3000,\r\n\t\t\t\"maxIdenticalFitnesses\": -1,\r\n\t\t\t\"maxEras\": 3\r\n\t\t},\r\n\t\t\"partitions\": 4,\r\n\t\t\"reshuffleEveryEras\" : 10,\r\n\t\t\"elitism\": {\r\n\t\t\t\"singleColonyElitism\": true,\r\n\t\t\t\"singleColonyElitismNumber\": 1,\r\n\t\t\t\"multiColonyElitism\" : true,\r\n\t\t\t\"multiColonyElitismNumber\" : 10\r\n\t\t}\r\n\t},\r\n\t\"monitoringConfiguration\": {\r\n\t\t\"verbose\": false,\r\n\t\t\"showGraph\": true,\r\n\t\t\"traceHistory\": false\r\n\t}\r\n}\r\n"
 								},
-								"description": ""
+								"url": {
+									"raw": "http://{{ip}}:{{port}}/distributed/local/experiment/algofrigerator_d",
+									"protocol": "http",
+									"host": [
+										"{{ip}}"
+									],
+									"port": "{{port}}",
+									"path": [
+										"distributed",
+										"local",
+										"experiment",
+										"algofrigerator_d"
+									]
+								}
 							},
 							"response": []
 						},
 						{
 							"name": "/distr/algofrigerator/cluster SMALL",
 							"request": {
-								"url": "http://{{ip}}:{{port}}/distributed/cluster/experiment/algofrigerator_d",
 								"method": "POST",
 								"header": [
 									{
 										"key": "Content-Type",
-										"value": "application/json",
-										"description": ""
+										"value": "application/json"
 									},
 									{
 										"key": "Web-Request",
-										"value": "false",
-										"description": ""
+										"value": "false"
 									}
 								],
 								"body": {
 									"mode": "raw",
-									"raw": "{\r\n\t\"applicationSpecifics\": {\r\n\t\t\"target\" : {\r\n\t\t\t\"TARGET_DESIRED_MEALS\" : 10,\r\n\t\t\t\"TARGET_SAVOURY_PROPORTION\" : 70,\r\n\t\t\t\"TARGET_SWEET_PROPORTION\" : 30,\r\n\t\t\t\"TARGET_FRIDGE_MANDATORY\" : true\r\n\t\t},\r\n\t\t\"params\" : {\r\n\t\t\t\"REFRIGERATOR_FOODS\" : [ \"yogurth\", \"banana\", \"banane\"  ],\r\n\t\t\t\"PANTRY_FOODS\" : [ \r\n ],\r\n\t\t\t\"DATABASE\" : \"IT\"\r\n\t\t}\r\n\t},\r\n\t\"algorithmParameters\": {\r\n\t\t\"recombinationPerc\": 0.8,\r\n\t\t\"mutationPerc\": 0.2,\r\n\t\t\"elitism\": true,\r\n\t\t\"initialSelectionNumber\": 10,\r\n\t\t\"initialSelectionRandom\": true,\r\n\t\t\"stopConditions\": {\r\n\t\t\t\"maxIterations\": -1,\r\n\t\t\t\"maxLifetimeMs\": 2000,\r\n\t\t\t\"maxIdenticalFitnesses\": -1,\r\n\t\t\t\"maxEras\": 1\r\n\t\t},\r\n\t\t\"partitions\": 4,\r\n\t\t\"eraBestMatches\" : 10,\r\n\t\t\"reshuffleEveryEras\" : 2,\r\n\t\t\"multiColonyElitism\" : true\r\n\t},\r\n\t\"monitoringConfiguration\": {\r\n\t\t\"verbose\": false,\r\n\t\t\"showGraph\": true,\r\n\t\t\"traceHistory\": false\r\n\t}\r\n}\r\n"
+									"raw": "{\r\n\t\"applicationSpecifics\": {\r\n\t\t\"target\" : {\r\n\t\t\t\"TARGET_DESIRED_MEALS\" : 10,\r\n\t\t\t\"TARGET_SAVOURY_PROPORTION\" : 70,\r\n\t\t\t\"TARGET_SWEET_PROPORTION\" : 30,\r\n\t\t\t\"TARGET_FRIDGE_MANDATORY\" : true\r\n\t\t},\r\n\t\t\"params\" : {\r\n\t\t\t\"REFRIGERATOR_FOODS\" : [ \"yogurth\", \"banana\", \"banane\"  ],\r\n\t\t\t\"PANTRY_FOODS\" : [ \r\n ],\r\n\t\t\t\"DATABASE\" : \"IT\"\r\n\t\t}\r\n\t},\r\n\t\"algorithmParameters\": {\r\n\t\t\"recombinationPerc\": 0.8,\r\n\t\t\"mutationPerc\": 0.2,\r\n\t\t\"initialSelectionNumber\": 10,\r\n\t\t\"initialSelectionRandom\": true,\r\n\t\t\"stopConditions\": {\r\n\t\t\t\"maxIterations\": -1,\r\n\t\t\t\"maxLifetimeMs\": 2000,\r\n\t\t\t\"maxIdenticalFitnesses\": -1,\r\n\t\t\t\"maxEras\": 1\r\n\t\t},\r\n\t\t\"partitions\": 4,\r\n\t\t\"reshuffleEveryEras\" : 2,\r\n\t\t\"elitism\": {\r\n\t\t\t\"singleColonyElitism\": true,\r\n\t\t\t\"singleColonyElitismNumber\": 1,\r\n\t\t\t\"multiColonyElitism\" : true,\r\n\t\t\t\"multiColonyElitismNumber\" : 10\r\n\t\t}\r\n\t},\r\n\t\"monitoringConfiguration\": {\r\n\t\t\"verbose\": false,\r\n\t\t\"showGraph\": true,\r\n\t\t\"traceHistory\": false\r\n\t}\r\n}\r\n"
 								},
-								"description": ""
+								"url": {
+									"raw": "http://{{ip}}:{{port}}/distributed/cluster/experiment/algofrigerator_d",
+									"protocol": "http",
+									"host": [
+										"{{ip}}"
+									],
+									"port": "{{port}}",
+									"path": [
+										"distributed",
+										"cluster",
+										"experiment",
+										"algofrigerator_d"
+									]
+								}
 							},
 							"response": []
 						}
@@ -1310,69 +1915,108 @@
 		},
 		{
 			"name": "sandbox",
-			"description": "",
 			"item": [
 				{
 					"name": "spark-control",
-					"description": "",
 					"item": [
 						{
 							"name": "/v1/submissions/create",
 							"request": {
-								"url": "http://192.168.1.101:6066/v1/submissions/create",
 								"method": "POST",
 								"header": [
 									{
 										"key": "Content-Type",
-										"value": "application/json;charset=UTF-8",
-										"description": ""
+										"value": "application/json;charset=UTF-8"
 									}
 								],
 								"body": {
 									"mode": "raw",
 									"raw": "{\r\n  \"action\" : \"CreateSubmissionRequest\",\r\n  \"appArgs\" : [ \"spark://192.168.1.101:7077\" ],\r\n  \"appResource\" : \"file:///c:/dev/workspaces/ws_scala/Scaligen/target/scala-2.11/Scaligen-assembly-1.0.jar\",\r\n  \"clientSparkVersion\" : \"1.5.0\",\r\n  \"environmentVariables\" : {\r\n    \"log4j.configuration\" : \"C:/dev/spark-2.2.0-bin-hadoop2.7/conf/log4j.properties\",\r\n    \"spark.eventLog.enabled\" : \"false\",\r\n    \"spark.eventLog.dir\" : \"file:///c:/tmp/sparktemp/eventLog\",\r\n    \"spark.history.fs.logDirectory\" : \"file:///c:/tmp/sparktemp/eventLog\"\r\n  },\r\n  \"mainClass\" : \"org.elastxy.app.d.mex.MexApplication\",\r\n  \"sparkProperties\" : {\r\n    \"spark.driver.supervise\" : \"false\",\r\n    \"spark.app.name\" : \"MexApplication\",\r\n    \"spark.eventLog.enabled\": \"true\",\r\n    \"spark.submit.deployMode\" : \"cluster\",\r\n    \"spark.master\" : \"spark://192.168.1.101:7077\"\r\n  }\r\n}"
 								},
-								"description": ""
+								"url": {
+									"raw": "http://192.168.1.101:6066/v1/submissions/create",
+									"protocol": "http",
+									"host": [
+										"192",
+										"168",
+										"1",
+										"101"
+									],
+									"port": "6066",
+									"path": [
+										"v1",
+										"submissions",
+										"create"
+									]
+								}
 							},
 							"response": []
 						},
 						{
 							"name": "/v1/submissions/status",
 							"request": {
-								"url": "http://192.168.1.101:6066/v1/submissions/status/driver-20171125234642-0000",
 								"method": "GET",
 								"header": [
 									{
 										"key": "Content-Type",
-										"value": "application/json;charset=UTF-8",
-										"description": ""
+										"value": "application/json;charset=UTF-8"
 									}
 								],
 								"body": {
 									"mode": "raw",
 									"raw": ""
 								},
-								"description": ""
+								"url": {
+									"raw": "http://192.168.1.101:6066/v1/submissions/status/driver-20171125234642-0000",
+									"protocol": "http",
+									"host": [
+										"192",
+										"168",
+										"1",
+										"101"
+									],
+									"port": "6066",
+									"path": [
+										"v1",
+										"submissions",
+										"status",
+										"driver-20171125234642-0000"
+									]
+								}
 							},
 							"response": []
 						},
 						{
 							"name": "/v1/submissions/kill",
 							"request": {
-								"url": "http://192.168.1.101:6066/v1/submissions/kill/driver-20171125234642-0000",
 								"method": "GET",
 								"header": [
 									{
 										"key": "Content-Type",
-										"value": "application/json;charset=UTF-8",
-										"description": ""
+										"value": "application/json;charset=UTF-8"
 									}
 								],
 								"body": {
 									"mode": "raw",
 									"raw": ""
 								},
-								"description": ""
+								"url": {
+									"raw": "http://192.168.1.101:6066/v1/submissions/kill/driver-20171125234642-0000",
+									"protocol": "http",
+									"host": [
+										"192",
+										"168",
+										"1",
+										"101"
+									],
+									"port": "6066",
+									"path": [
+										"v1",
+										"submissions",
+										"kill",
+										"driver-20171125234642-0000"
+									]
+								}
 							},
 							"response": []
 						}
@@ -1382,33 +2026,78 @@
 				{
 					"name": "/distributed/test/spark/concurrent",
 					"request": {
-						"url": "http://{{ip}}:{{port}}/distributed/test/spark/concurrent",
 						"method": "GET",
 						"header": [],
-						"body": {},
-						"description": ""
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "http://{{ip}}:{{port}}/distributed/test/spark/concurrent",
+							"protocol": "http",
+							"host": [
+								"{{ip}}"
+							],
+							"port": "{{port}}",
+							"path": [
+								"distributed",
+								"test",
+								"spark",
+								"concurrent"
+							]
+						}
 					},
 					"response": []
 				},
 				{
 					"name": "/distributed/test/spark/single",
 					"request": {
-						"url": "http://{{ip}}:{{port}}/distributed/test/spark/single",
 						"method": "GET",
 						"header": [],
-						"body": {},
-						"description": ""
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "http://{{ip}}:{{port}}/distributed/test/spark/single",
+							"protocol": "http",
+							"host": [
+								"{{ip}}"
+							],
+							"port": "{{port}}",
+							"path": [
+								"distributed",
+								"test",
+								"spark",
+								"single"
+							]
+						}
 					},
 					"response": []
 				},
 				{
 					"name": "/distributed/test/spark/distributed",
 					"request": {
-						"url": "http://{{ip}}:{{port}}/distributed/test/spark/distributed",
 						"method": "GET",
 						"header": [],
-						"body": {},
-						"description": ""
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "http://{{ip}}:{{port}}/distributed/test/spark/distributed",
+							"protocol": "http",
+							"host": [
+								"{{ip}}"
+							],
+							"port": "{{port}}",
+							"path": [
+								"distributed",
+								"test",
+								"spark",
+								"distributed"
+							]
+						}
 					},
 					"response": []
 				}

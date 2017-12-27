@@ -1,6 +1,7 @@
 package org.elastxy.core.context;
 
 import org.elastxy.core.conf.AlgorithmParameters;
+import org.elastxy.core.conf.ElitismParameters;
 import org.elastxy.core.conf.MonitoringConfiguration;
 import org.elastxy.core.conf.StopConditions;
 import org.elastxy.core.tracking.Reporter;
@@ -15,7 +16,7 @@ public class AlgorithmContextBuilder {
 			boolean crossoverPointRandom,
 			double recombinationPerc,
 			double mutationPerc,
-			boolean elitarism,
+			boolean singleColonyElitism,
 			int maxGenerations,
 			int maxLifetimeMs,
 			int maxIdenticalFitnesses,
@@ -29,9 +30,11 @@ public class AlgorithmContextBuilder {
         algParameters.recombinationPerc = recombinationPerc;
         algParameters.crossoverPointRandom = crossoverPointRandom;
         algParameters.mutationPerc = mutationPerc;
-        algParameters.elitarism = elitarism;
         algParameters.initialSelectionNumber = initialSelectionNumber;
         algParameters.initialSelectionRandom = initialSelectionRandom;
+        
+        algParameters.elitism = new ElitismParameters();
+        algParameters.elitism.singleColonyElitism = singleColonyElitism;
         
         StopConditions stopConditions = new StopConditions();
         stopConditions.maxGenerations = maxGenerations;

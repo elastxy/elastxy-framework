@@ -38,7 +38,7 @@ object ClosuresE {
       logger.info(s"----------->>> Generation $generations [era $era][Last best $best] <<<-----------")
       
       logger.info(">>> 2.2 Population Selection					WORKER => List[Solution]")
-      // Elitarism: exclude last best match
+      // Elitism: exclude last best match
     	var newPopulation:MexPopulationE = GeneticFunctionsE.selection(lastPopulation)
     	
       logger.info(">>> 2.3 Genetic Operators							WORKER => List[Solution]")
@@ -49,7 +49,7 @@ object ClosuresE {
       }
     
       logger.info(">>> 2.4 Fitness Calculation						WORKER => List[Solution] WORKER => List[Best]")
-      // Elitarism: re-include last best match
+      // Elitism: re-include last best match
       // TODOA: reinclude also in Era
       // TODOA: reinclude a percentage
       if(generations > 1) newPopulation = FunctionsE.reinsertBestMatch(lastPopulation, newPopulation)

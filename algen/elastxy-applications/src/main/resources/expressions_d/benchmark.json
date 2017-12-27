@@ -11,7 +11,6 @@
 		"recombinationPerc": 0.8,
 		"crossoverPointRandom": false,
 		"mutationPerc": 0.2,
-		"elitarism": true,
 		"initialSelectionNumber": 1000,
 		"initialSelectionRandom": true,
 		"stopConditions": {
@@ -22,9 +21,13 @@
 			"maxEras": 5
 		},
 		"partitions": 8,
-		"eraBestMatches" : 10,
 		"reshuffleEveryEras" : 3,
-		"multicolonyElitarism" : true
+		"elitism": {
+			"singleColonyElitism": true,
+			"singleColonyElitismNumber": 1,
+			"multiColonyElitism" : true,
+			"multiColonyElitismNumber" : 10
+		}
 	},
 	"monitoringConfiguration": {
 		"verbose": false,
