@@ -80,7 +80,7 @@ public class DistributedController {
     }
     
     
-	// TODOM-1: benchmark, analysis, trial in distributed controller
+	// TODOM-1: check, benchmark, analysis, trial in distributed controller
 //	@RequestMapping("/local/test/{application}")
 //	@ResponseBody
 //	public ResponseEntity<String> testLocal(@PathVariable String application) {

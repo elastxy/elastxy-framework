@@ -70,6 +70,30 @@ public class LocalController {
 	}
 
 
+	/**
+	 * TODOM-2: a service for app-checking all registered applications
+	 * @param application
+	 * @param webRequest
+	 * @param userLocale
+	 * @return
+	 */
+	@RequestMapping("/appcheck/{application}")
+	@ResponseBody
+	public ExperimentResponse appCheck(@PathVariable String application,
+			@RequestHeader(value="Web-Request", defaultValue="true") boolean webRequest,
+			Locale userLocale) {
+		logger.info("REQUEST Service /appcheck/{application} => "+application);
+
+		AlgorithmContext context = new AlgorithmContext();
+		context.application.appName = application;
+		context.requestContext = new RequestContext(webRequest, userLocale);
+		ExperimentStats stats = applicationService.executeCheck(context);
+		
+		logger.info("RESPONSE Service /appcheck/{application} => "+stats);
+		return res(webRequest, context, stats);
+	}
+
+
 	@RequestMapping("/test/{application}")
 	@ResponseBody
 	public ExperimentResponse test(@PathVariable String application,

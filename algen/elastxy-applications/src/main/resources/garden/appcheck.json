@@ -1,0 +1,10 @@
+{
+	"applicationSpecifics": {
+		"target" : {
+			"TARGET_WELLNESS" : "happy"
+		},
+		"params" : {
+			"LIMITED_TREES" : true
+		}
+	}
+}

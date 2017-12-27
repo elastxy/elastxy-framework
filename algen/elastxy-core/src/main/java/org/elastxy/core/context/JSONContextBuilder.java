@@ -2,6 +2,7 @@ package org.elastxy.core.context;
 
 import java.io.IOException;
 
+import org.elastxy.core.applications.AppStage;
 import org.elastxy.core.conf.ConfigurationException;
 import org.elastxy.core.support.JSONSupport;
 import org.slf4j.Logger;
@@ -24,13 +25,14 @@ public class JSONContextBuilder implements ContextBuilder {
 	 * classpath:/{applicationName}/{fileName}.json
 	 * 
 	 * Where file names must be:
+	 * - "appcheck" for simple check
 	 * - "benchmark" for benchmark
 	 * - "experiment" for experiment
 	 * 
 	 */
 	@Override
-	public AlgorithmContext build(String applicationName, boolean benchmark) {
-		String fileName = benchmark ? "benchmark" : "experiment";
+	public AlgorithmContext build(String applicationName, AppStage appStage) {
+		String fileName = appStage.getName();
 		String classpathResource = "/"+applicationName+"/"+fileName+".json";
 		
 		AlgorithmContext result;
