@@ -60,6 +60,7 @@ public class RecombinatorLogics {
 		
 		// Recombine, redistributing genotype on two offsprings
 		// TODOM-2: configurable injectable crossover implementation
+		// TODOA-2: cut point for operating on minimum set of genes (from beginning or end of sequence)
 		Integer crossoverPoint = crossoverPointRandom ? Randomizer.nextInt(genesSize) : Math.floorDiv(genesSize, 2);
 		if(!preserveAlleles){
 			offspringGenes = BinaryCrossover.recombine(parentGenesCopy[0], parentGenesCopy[1], crossoverPoint);

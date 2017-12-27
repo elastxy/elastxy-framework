@@ -22,7 +22,6 @@ public class StrandRecombinator implements Recombinator<Solution> {
     /**
      *  Recombination of two Solution. Two are the expected parents.
      * 
-     * TODOA-2: cut point for operating on minimum set of genes (from beginning or end of sequence)
      * TODOM-2: check performance of Recombination operator
      * TODOM-4: more than 2 parents management
      * 
