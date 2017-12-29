@@ -15,6 +15,13 @@ import org.elastxy.core.engine.fitness.StandardFitnessTester;
 import org.elastxy.core.stats.ExperimentStats;
 import org.elastxy.core.tracking.EnvObserver;
 
+
+/**
+ * Evolve system life over generations in a single colony context.
+ * 
+ * @author red
+ *
+ */
 public class SingleColonyEvolver implements Evolver {
 	private static Logger logger = Logger.getLogger(SingleColonyEvolver.class.getName());
 
@@ -38,7 +45,7 @@ public class SingleColonyEvolver implements Evolver {
     public SingleColonyEvolver(AlgorithmContext context, Env env){
     	this.context = context;
     	this.env = env;
-    	this.fitnessTester = new StandardFitnessTester(context.application.fitnessCalculator);
+    	this.fitnessTester = new StandardFitnessTester(context.application.fitnessCalculator, context.algorithmParameters.elitism);
     	this.stopVerifier = new StopConditionVerifier(context.algorithmParameters.stopConditions);
     }
     
@@ -63,76 +70,76 @@ public class SingleColonyEvolver implements Evolver {
      */
     public void evolve(){
     	
+    	// START
     	EnvSupport.startTime(env);
-    	if(context.monitoringConfiguration.traceHistory) env.generationsHistory.add(env.currentGen);
-        
-    	// TEST FITNESS - initial gen
-    	// TODOA-4: selection-operators-fitness-check also for first generation, bypassing operators
-        fitnessTester.test(env.currentGen, env);
-        int generationSize = env.currentGen.solutions.size();
-        Fitness bestFitness = env.currentGen.bestMatch.getFitness();
+    	
+        // TEST FITNESS - initial gen
+        fitnessTester.test(env.lastGen, env);
+        long populationSize = env.lastGen.solutions.size();
+        Fitness bestFitness = env.lastGen.bestMatch.getFitness();
         boolean endConditionFound = checkEndCondition(null, bestFitness);
-//        fireNewGenerationEvent(null, env.currentGen);
+        
+        // TODOA-4: selection-operators-fitness-check also for first generation, bypassing operators
+//    	boolean endConditionFound = false;
+//    	long populationSize = context.algorithmParameters.initialSelectionNumber;
+//    	if(context.monitoringConfiguration.traceHistory) env.generationsHistory.add(env.lastGen);
         
         
     	// Loops until end condition rises
         while(!endConditionFound) {
         	
         	// SELECTION
-        	Population currentGeneration = selection(generationSize);
-        	if(context.monitoringConfiguration.traceHistory) env.generationsHistory.add(currentGeneration);
+        	// Worst matches are excluded and a clone of best maintained
+        	Population newGeneration = selection(env.lastGen, populationSize);
         	
-        	// For uniform distribution selector skip genetic operators
+        	// GENETIC OPERATORS
+        	// Skip genetic operators in case of uniform distribution selector
         	if(!context.algorithmParameters.randomEvolution) {
-        		applyGeneticOperators(generationSize, currentGeneration);
+        		applyGeneticOperators(newGeneration);
         	}
         	
-            // TEST FITNESS - next gen
-            fitnessTester.test(currentGeneration, env);
+            // TEST FITNESS
+        	BestMatchesSupport.reinsertBestMatches(env.lastGen.bestMatches, newGeneration);
+            fitnessTester.test(newGeneration, env);
 
-            // Assign new generation
-            bestFitness = currentGeneration.bestMatch.getFitness();
-            Fitness lastFitness = env.currentGen.bestMatch.getFitness();
+            // Pass to new generation
+            Fitness newBestFitness = newGeneration.bestMatch.getFitness();
+            Fitness lastBestFitness = env.lastGenNumber > 0 ? env.lastGen.bestMatch.getFitness() : null;
 
-            env.currentGen = currentGeneration;
-            env.currentGenNumber++;
+            env.lastGen = newGeneration;
+            env.lastGenNumber++;
+            if(context.monitoringConfiguration.traceHistory) env.generationsHistory.add(newGeneration);
             
-            // APPCHECK END CONDITION
-            endConditionFound = checkEndCondition(lastFitness, bestFitness);
+            // CHECK END CONDITION
+            endConditionFound = checkEndCondition(lastBestFitness, newBestFitness);
         }
         
         // END OF EXPERIMENT
     }
 
 
-	private void applyGeneticOperators(int generationSize, Population nextGeneration) {
+	private void applyGeneticOperators(Population newGeneration) {
 		
-		// BEST MATCHES - extract
-		// TODOA-4: Elitism: reuse some best matches for sharing their genetic material
-		List<Solution> bestMatches = BestMatchesSupport.extractBestMatches(nextGeneration, context.algorithmParameters.elitism.singleColonyElitism);
-
 		// LOOP OVER NON-BEST SHUFFLED
-        Collections.shuffle(nextGeneration.solutions);
-		for(int s=0; s < generationSize-bestMatches.size(); s=s+2){
+        Collections.shuffle(newGeneration.solutions);
+        int solutionsToOperate = newGeneration.solutions.size();
+        if(solutionsToOperate % 2 != 0) solutionsToOperate--; // odd case: skip the last solution
+		for(int s=0; s < solutionsToOperate; s=s+2){
 		    
 			// EXTRACT PARENTS
-			Solution[] parents = {nextGeneration.solutions.get(s), nextGeneration.solutions.get(s+1)};
+			Solution[] parents = {newGeneration.solutions.get(s), newGeneration.solutions.get(s+1)};
 
-		    
-		    // RECOMBINATION or PRESERVATION
+		    // RECOMBINATION
 			List<Solution> sons = recombination(parents);
-		    
 		    
 		    // MUTATION
 		    mutation(sons);
 		
 		    // REPLACE PARENTS WITH SONS
-		    nextGeneration.solutions.set(s, sons.get(0));
-		    nextGeneration.solutions.set(s+1, sons.get(1));
+		    newGeneration.solutions.set(s, sons.get(0));
+		    newGeneration.solutions.set(s+1, sons.get(1));
 		}
 
-		// BEST MATCHES - reinsert
-		for(Solution s : bestMatches){ nextGeneration.add(s); }
 	}
 
 
@@ -142,7 +149,7 @@ public class SingleColonyEvolver implements Evolver {
 
 	/**
 	 * ============================================================
-	 * 		APPCHECK END CONDITION
+	 * 		CHECK END CONDITION
 	 * ============================================================
 	 */
 
@@ -150,7 +157,7 @@ public class SingleColonyEvolver implements Evolver {
 		boolean endConditionFound = false;
 		
 		// Check fitness
-		if(!endConditionFound && env.currentGen.bestMatch.getFitness().fit(
+		if(!endConditionFound && currentGenFitness.fit(
 				env.target.getTargetThreshold(), 
 				env.target.getTargetFitness())) {
 			endConditionFound = goalReached();
@@ -174,7 +181,7 @@ public class SingleColonyEvolver implements Evolver {
 		}
 				
 		// Check time stop
-		if(!endConditionFound && !stopVerifier.onTime(env.currentGenNumber, EnvSupport.getLifeTimeInMillis(env))){
+		if(!endConditionFound && !stopVerifier.onTime(env.lastGenNumber, EnvSupport.getLifeTimeInMillis(env))){
 			EnvSupport.stopTime(env);
 			endConditionFound = true;
 		    fireHistoryEndedEvent();
@@ -201,15 +208,19 @@ public class SingleColonyEvolver implements Evolver {
 	 * ============================================================
 	 */
 
-	private Population selection(int generationSize) {
-		Population currentGeneration = context.application.selector.select(env.currentGen, env.genoma);
-		fireNewGenerationEvent(env.currentGen, currentGeneration);
-		if(generationSize!=currentGeneration.solutions.size()){
-			String msg = String.format("Selected generation size (%d) differs from last (%d)", currentGeneration.solutions.size(), generationSize);
+	private Population selection(Population lastGeneration, long generationSize) {
+		Population newGeneration = context.application.selector.select(lastGeneration, env.genoma);
+		fireNewGenerationEvent(env.lastGen, newGeneration);
+		int bm = lastGeneration.bestMatches==null ? 0 : lastGeneration.bestMatches.size();
+		if(generationSize!=newGeneration.solutions.size()+bm){
+			String msg = String.format("Selected generation size (%d+%d) differs from last (%d)", 
+					newGeneration.solutions.size(), 
+					newGeneration.bestMatches.size(), 
+					generationSize);
 			logger.severe(msg);
-			throw new IllegalStateException(msg);
+			throw new AlgorithmException(msg);
 		}
-		return currentGeneration;
+		return newGeneration;
 	}
 
 	
@@ -257,7 +268,7 @@ public class SingleColonyEvolver implements Evolver {
 	 */
 
     private void fireNewGenerationEvent(Population lastGen, Population newGen){
-        observer.newGenerationEvent(env.currentGenNumber, EnvSupport.getLifeTimeInMillis(env), lastGen, newGen);
+        observer.newGenerationEvent(env.lastGenNumber, EnvSupport.getLifeTimeInMillis(env), lastGen, newGen);
     }
 
     private void fireCrossoverEvent(Solution father, Solution mother, List<Solution> sons){

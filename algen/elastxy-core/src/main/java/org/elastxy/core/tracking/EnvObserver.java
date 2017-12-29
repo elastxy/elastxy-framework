@@ -105,6 +105,8 @@ public class EnvObserver {
         log.out("\n##################### STATS #####################");
         log.out("Best match:");
         log.out(renderer.render(stats.lastGeneration.bestMatch));
+        log.out("Other best matches number:");
+        log.out(stats.lastGeneration.bestMatches==null?0:stats.lastGeneration.bestMatches.size());
         log.out("Number of generations: "+stats.generations);
         log.out("Total execution time (ms): "+stats.executionTimeMs);
         if(context.algorithmParameters.elitism.singleColonyElitism) {

@@ -1,21 +1,37 @@
 package org.elastxy.core.engine.fitness;
 
+import java.util.ArrayList;
 import java.util.Iterator;
 
+import org.elastxy.core.conf.ElitismParameters;
 import org.elastxy.core.domain.experiment.Env;
 import org.elastxy.core.domain.experiment.Fitness;
 import org.elastxy.core.domain.experiment.Population;
 import org.elastxy.core.domain.experiment.Solution;
 import org.elastxy.core.domain.experiment.Target;
+import org.elastxy.core.engine.core.BestMatchesSupport;
 import org.elastxy.core.tracking.EnvObserver;
 
+/**
+ * Tests population fitness of every individual solutions in a population.
+ * 
+ * Assign the population with the single best match reference found 
+ * for following checks, order solutions and calculate best matches.
+ * 
+ * @author red
+ *
+ */
 public class StandardFitnessTester implements FitnessTester {
 	private FitnessCalculator calculator;
+	private ElitismParameters elitismParameters;
+	
 	private EnvObserver observer;
 
-	public StandardFitnessTester(FitnessCalculator calculator){
+	public StandardFitnessTester(FitnessCalculator calculator, ElitismParameters elitismParameters){
 		this.calculator = calculator;
+		this.elitismParameters = elitismParameters;
 	}
+	
 	
 	@Override
 	public void subscribe(EnvObserver observer) {
@@ -25,8 +41,9 @@ public class StandardFitnessTester implements FitnessTester {
 	@Override
     public Fitness test(Population population, Env env){
 
-		// Reset current bestMatch
-    	population.bestMatch = null;
+		// Reset current bestMatch and best matches
+		population.bestMatch = null;
+		population.bestMatches = new ArrayList<Solution<?,?>>();
     	
         Iterator<Solution<?,?>> it = population.solutions.iterator();
         while(it.hasNext()){
@@ -43,12 +60,13 @@ public class StandardFitnessTester implements FitnessTester {
             	}
             }
 
-            // Check if desidered fitness is matched => it's best match ABSOLUTE: stop here!
+            // Check if desired fitness is reached => it's best match ABSOLUTE
     		if(solution.getFitness().fit(env.target.getTargetThreshold(), env.target.getTargetFitness())) {
-    			// TODOM-4: multiple best matches!
     			population.bestMatch = solution;
     			population.goalReached = true;
-    			break;
+    			// TODOM: stop configurable: this is more efficient, but other perfectly fitting solutions 
+    			// and their fitness and phenotype calcs are left out with fitness null
+//    			break;
     		}
             
             // Check if it's best match RELATIVE
@@ -63,6 +81,7 @@ public class StandardFitnessTester implements FitnessTester {
 //            }
         }
         
+		// Order solutions
         // No target fitness: Order by fitness desc
         if(env.target.getTargetFitness()==null){     
         	population.orderByFitnessDesc();
@@ -71,6 +90,9 @@ public class StandardFitnessTester implements FitnessTester {
         else {
         	population.orderByFitnessProximityDesc(env.target.getTargetFitness());
         }
+
+        // Creates best matches list for future use
+        BestMatchesSupport.calculateBestMatches(population, elitismParameters);
         
         return population.bestMatch.getFitness();
     }
@@ -87,6 +109,7 @@ public class StandardFitnessTester implements FitnessTester {
 		else if(target.getTargetFitness()!=null) {
 			bestMatch = currentSolution.getFitness().nearestThan(currentBestMatch.getFitness(), target.getTargetFitness());
 		}
+		
 		// No target fitness: More than current best => TRUE
 		else {
 			bestMatch = currentSolution.getFitness().greaterThan(currentBestMatch.getFitness());

@@ -39,6 +39,7 @@ public class AggregatedStats {
     
 	public Optional<String> bestMatch = Optional.empty();
 	public List<String> bestMatches = new ArrayList<String>();
+	public long totBestMatches;
 
 	
     public transient List<Long> successExecutionTimes = new ArrayList<Long>();
@@ -60,6 +61,9 @@ public class AggregatedStats {
     }
     public double getAvgFitness(){
         return totFitness / (double)totExperiments;
+    }
+    public double getAvgBestMatchesNumber(){
+        return totBestMatches / (double)totGenerations;
     }
     
     

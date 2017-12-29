@@ -30,13 +30,29 @@ public class Population {
 	 */
     private static FitnessComparator FITNESS_COMPARATOR = new FitnessComparator();
     
+    
     /**
      * List of all solutions
      */
     public transient List<Solution<?,?>> solutions = new ArrayList<Solution<?,?>>();
-
     
+
+    /**
+     * The better solution of this generation.
+     */
     public Solution<?,?> bestMatch;
+    
+
+    /**
+     * The best solutions of this generation, ordered by fitness desc.
+     * 
+     * The set includes the overall best match, referenced by bestMatch
+     * attribute.
+     * 
+     * The number of solutions is driven by ElitismParameters configuration.
+     */
+    public List<Solution<?,?>> bestMatches;
+
     
     /**
      * Goal is reached while processing these population solutions:
@@ -46,17 +62,6 @@ public class Population {
      */
     public boolean goalReached = false;
 
-    
-    /**
-     * TODOM-4: maintain bestMatches, not only one, as a List of best-performing solutions ordered by fitness DESC
-     */
-//    public List<Solution> bestMatches = new ArrayList<Solution>();
-//    public Solution getBestMatch(){
-//    	return bestMatches.isEmpty() ? null : bestMatches.get(0);
-//    }
-//    public List<Solution> getBestMatches(){
-//    	return bestMatches;
-//    }
     
     public int size(){
     	return solutions.size();

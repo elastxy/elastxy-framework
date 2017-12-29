@@ -91,7 +91,7 @@ public class SingleColonyClosure implements FlatMapFunction<Iterator<Allele>, So
 			this.coloniesGoalAccumulator.add(1);
 		}
 		List<Solution> bestMatches = new ArrayList<Solution>();
-		bestMatches.add(stats.lastGeneration.bestMatch); // TODOA-4: Elitism: a number of bestMatches: ElitismOperator multicolony
+		bestMatches.addAll(stats.lastGeneration.bestMatches);
 		return bestMatches.iterator();
 	}
 

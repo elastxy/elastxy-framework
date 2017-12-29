@@ -98,7 +98,7 @@ public class SingleColonyClosureEnvFactory implements EnvFactory {
 		boolean random = 		context.algorithmParameters.initialSelectionRandom;
 		
 		// Recombines previous best to preserve their genetic material,
-		// while avoiding that every population will reproduce undefinitely the same bests!
+		// while avoiding that every population will reproduce indefinitely the same best ones!
 		if(logger.isTraceEnabled()) logger.trace("Best matches before recombination: "+previousBestMatches);
 		if(previousBestMatches!=null && previousBestMatches.size()>1){
 			previousBestMatches = RecombinatorLogics.recombineList(context.application.recombinator, previousBestMatches, genoma.getLimitedAllelesStrategy());

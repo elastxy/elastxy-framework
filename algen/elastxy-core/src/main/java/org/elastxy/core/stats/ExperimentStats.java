@@ -33,6 +33,7 @@ public class ExperimentStats  {
     	StringBuffer buf = new StringBuffer();
         buf.append("##################### STATS #####################").append(Character.LINE_SEPARATOR);
         buf.append("Best match:" + lastGeneration.bestMatch).append(Character.LINE_SEPARATOR);
+        buf.append("Other best matches:" + lastGeneration.bestMatches==null?0:lastGeneration.bestMatches.size()).append(Character.LINE_SEPARATOR);
         buf.append("Number of generations: "+generations).append(Character.LINE_SEPARATOR);
         buf.append("Total execution time (ms): "+executionTimeMs).append(Character.LINE_SEPARATOR);
         buf.append("Total generations with same fitness: "+totIdenticalFitnesses);

@@ -20,6 +20,8 @@ import org.elastxy.core.engine.core.SingleColonyExperiment;
 
 
 /**
+ * 
+ * Collects a number of stats executing a number of experiments.
  *
  * @author grossi
  */
@@ -55,6 +57,7 @@ public class StatsExperimentExecutor {
         globalStats.totFitness += bestMatchFitness;
         globalStats.maxFitness = Optional.of(globalStats.maxFitness.isPresent() ? Math.max(globalStats.minFitness.get(), bestMatchFitness) : bestMatchFitness);
         globalStats.minFitness = Optional.of(globalStats.minFitness.isPresent() ? Math.min(globalStats.minFitness.get(), bestMatchFitness) : bestMatchFitness);
+        globalStats.totBestMatches += stats.lastGeneration.bestMatches==null?0:stats.lastGeneration.bestMatches.size();
     }
     
     public void run(){
@@ -102,6 +105,7 @@ public class StatsExperimentExecutor {
         outln(buffer, "AVG FITNESS: "+String.format("%.10f", globalStats.getAvgFitness()));
         outln(buffer, "MAX FITNESS: "+String.format("%.10f", globalStats.maxFitness.orElse(null)));
         outln(buffer, "MIN FITNESS: "+String.format("%.10f", globalStats.minFitness.orElse(null)));
+        outln(buffer, "AVG BEST MATCHES: "+globalStats.getAvgBestMatchesNumber());
         outln(buffer, "BEST MATCHES: "+globalStats.bestMatches);
         
         return buffer.toString();

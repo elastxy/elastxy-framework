@@ -28,7 +28,10 @@ public class Env {
 
     // LIVE DATA
 	public Target<?,?> target;
-    public Population currentGen;
+	
+	public int lastGenNumber = 0; // first generation starts from 0
+    public Population lastGen;
+    
     public Genoma genoma;
 
 	/**
@@ -37,7 +40,6 @@ public class Env {
 	 */
     public WorkingDataset workingDataset;
 
-    public int currentGenNumber = 0; // first generation starts from 0
     public long startTime;
     public long endTime;
     public long totalLifeTime;
@@ -50,14 +52,14 @@ public class Env {
     
     public Env(Target<?,?> target, Population currentGen, Genoma genoma, WorkingDataset workingDataset){
     	this.target = target;
-    	this.currentGen = currentGen;
+    	this.lastGen = currentGen;
     	this.genoma = genoma;
     	this.workingDataset = workingDataset;
     }
         
     
     public String toString(){
-    	return String.format("Env [Target: %s, GenNumber: %d, Identical Fit: %d]", target, currentGenNumber, totIdenticalFitnesses);
+    	return String.format("Env [Target: %s, GenNumber: %d, Identical Fit: %d]", target, lastGenNumber, totIdenticalFitnesses);
     }
     
 }
