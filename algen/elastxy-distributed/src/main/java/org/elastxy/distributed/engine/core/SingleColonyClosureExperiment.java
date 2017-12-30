@@ -109,18 +109,24 @@ public class SingleColonyClosureExperiment implements Experiment {
 
 
     /**
-     * Replaces first N solutions with previous bms.
+     * Replaces first N solutions with a copy of every previous best matches.
      * 
      * @param environment
      */
 	private void insertPreviousBestMatches(Env environment) {
 		if(previousBestMatches!=null && previousBestMatches.size() > 1){
-			List<Solution> reinsertedBestMatches = RecombinatorLogics.recombineList(
+			if(context.algorithmParameters.elitism.recombineElite){
+				List<Solution> reinsertedBestMatches = RecombinatorLogics.recombineList(
 					context.application.recombinator, 
 					previousBestMatches, 
 					environment.genoma.getLimitedAllelesStrategy());
-			for(int s=0; s < reinsertedBestMatches.size(); s++) 
-				environment.lastGen.solutions.set(s, reinsertedBestMatches.get(s).copy());
+				for(int s=0; s < reinsertedBestMatches.size(); s++) 
+					environment.lastGen.solutions.set(s, reinsertedBestMatches.get(s).copy());
+			}
+			else {
+				for(int s=0; s < previousBestMatches.size(); s++) 
+					environment.lastGen.solutions.set(s, previousBestMatches.get(s).copy());
+			}
 		}
 	}
 	

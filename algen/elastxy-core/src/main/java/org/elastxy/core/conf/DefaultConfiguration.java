@@ -48,6 +48,8 @@ public class DefaultConfiguration {
     public static final Long 		DEFAULT_MULTICOLONY_ELITISM_NUMBER = 1L;
     public static final Double 		DEFAULT_MULTICOLONY_ELITISM_PERC = null;
 
+    public static final boolean 	DEFAULT_RECOMBINE_ELITE = true;
+
     // DISTRIBUTED
     public static final int 		DEFAULT_MAX_ERAS = 3;
     public static final int 		DEFAULT_MAX_ERAS_IDENTICAL_FITNESSES = -1;

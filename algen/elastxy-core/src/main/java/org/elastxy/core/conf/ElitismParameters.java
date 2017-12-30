@@ -47,10 +47,10 @@ public class ElitismParameters implements Serializable {
 	 * Number of elite solutions to take from all best matches and broadcast again around.
 	 */
 	public Long multiColonyElitismNumber = 	DefaultConfiguration.DEFAULT_MULTICOLONY_ELITISM_NUMBER;
-	
 
 	/**
-	 * TODOA-4: Elitism: parameter for recombining or copy exact solutions over generations/eras
+	 * If true, recombines or copies solutions as-is over generations/eras.
 	 */
-//	public Boolean recombineElite = ;
+	public Boolean recombineElite = DefaultConfiguration.DEFAULT_RECOMBINE_ELITE;
+	
 }

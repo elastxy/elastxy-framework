@@ -1,5 +1,6 @@
 package org.elastxy.distributed.engine.factory;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.apache.log4j.Logger;
@@ -104,11 +105,19 @@ public class SingleColonyClosureEnvFactory implements EnvFactory {
 		// while avoiding that every population will reproduce indefinitely the same best ones!
 		if(logger.isTraceEnabled()) logger.trace("Best matches before recombination: "+previousBestMatches);
 		if(previousBestMatches!=null && previousBestMatches.size()>1){
-			previousBestMatches = RecombinatorLogics.recombineList(
+			if(context.algorithmParameters.elitism.recombineElite){
+				previousBestMatches = RecombinatorLogics.recombineList(
 					context.application.recombinator, 
 					previousBestMatches, 
 					genoma.getLimitedAllelesStrategy());
+			}
+			else {
+				previousBestMatches = new ArrayList<Solution>(previousBestMatches.size());
+				for(int s=0; s < previousBestMatches.size(); s++) 
+					previousBestMatches.add(previousBestMatches.get(s).copy());
+			}
 		}
+		
 		if(logger.isTraceEnabled()) logger.trace("Best matches after recombination: "+previousBestMatches);
 		
         Population startGen = 	context.application.populationFactory.createNew(genoma, solutions, random, previousBestMatches);
