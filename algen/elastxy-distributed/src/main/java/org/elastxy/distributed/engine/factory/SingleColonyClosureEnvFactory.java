@@ -22,11 +22,14 @@ import org.elastxy.distributed.dataprovider.DistributedAlleleValuesProvider;
 
 /**
  * Starts from data from Driver coordinator, and creates an ad-hoc
- * local context with:
+ * local context.
+ * 
+ * Context is provided of, if any:
  * - references to broadcast working sets, if needed
  * - GenomaProvider not distributed, but AllelesValuesProvider loaded
  *   with broadcast variable from Driver
  * - initial Population created from Alleles List from Driver
+ * - initial best matches from previous eras
  * 
  * @author red
  *
@@ -101,7 +104,10 @@ public class SingleColonyClosureEnvFactory implements EnvFactory {
 		// while avoiding that every population will reproduce indefinitely the same best ones!
 		if(logger.isTraceEnabled()) logger.trace("Best matches before recombination: "+previousBestMatches);
 		if(previousBestMatches!=null && previousBestMatches.size()>1){
-			previousBestMatches = RecombinatorLogics.recombineList(context.application.recombinator, previousBestMatches, genoma.getLimitedAllelesStrategy());
+			previousBestMatches = RecombinatorLogics.recombineList(
+					context.application.recombinator, 
+					previousBestMatches, 
+					genoma.getLimitedAllelesStrategy());
 		}
 		if(logger.isTraceEnabled()) logger.trace("Best matches after recombination: "+previousBestMatches);
 		

@@ -41,12 +41,12 @@ public class DefaultConfiguration {
 
 	// ELITISM
     public static final boolean 	DEFAULT_SINGLECOLONY_ELITISM_ENABLED = true; // elitism enable
-    public static final Double 		DEFAULT_SINGLECOLONY_ELITISM_PERC = null; // 0.0-1.0 perc of individuals maintained between generations
     public static final Long 		DEFAULT_SINGLECOLONY_ELITISM_NUMBER = 1L; // 1 elite solution maintained by default
+    public static final Double 		DEFAULT_SINGLECOLONY_ELITISM_PERC = null; // 0.0-1.0 perc of individuals maintained between generations
     
     public static final boolean		DEFAULT_MULTICOLONY_ELITISM_ENABLED = true;
-    public static final Long 		DEFAULT_MULTICOLONY_ELITISM_NUMBER = 10L;
-    public static final Double 		DEFAULT_MULTICOLONY_ELITISM_PERC = null; // TODOA-1: Elitism multicolony perc enable!
+    public static final Long 		DEFAULT_MULTICOLONY_ELITISM_NUMBER = 1L;
+    public static final Double 		DEFAULT_MULTICOLONY_ELITISM_PERC = null;
 
     // DISTRIBUTED
     public static final int 		DEFAULT_MAX_ERAS = 3;

@@ -20,6 +20,7 @@ import org.elastxy.core.domain.genetics.genotype.Allele;
 import org.elastxy.core.engine.core.Experiment;
 import org.elastxy.core.engine.core.SingleColonyEvolver;
 import org.elastxy.core.engine.factory.EnvFactory;
+import org.elastxy.core.engine.operators.RecombinatorLogics;
 import org.elastxy.core.stats.ExperimentStats;
 import org.elastxy.core.tracking.EnvObserver;
 import org.elastxy.distributed.engine.factory.SingleColonyClosureEnvFactory;
@@ -32,8 +33,16 @@ import org.elastxy.distributed.engine.factory.SingleColonyClosureEnvFactory;
  *
  *  In distributed MultiColony context, the SingleColonyExperiment
  *  runs a big number of generations from an initial population, into an Era 
- *  within a closure and based on Genoma provided by a distributed broadcast 
- *  set for mutation and a rdd iterator for initial population.
+ *  within a closure.
+ *  
+ *  Such an Experiment can be optionally based on Genoma provided 
+ *  by a distributed broadcast set for mutation and a rdd iterator 
+ *  containing alleles of initial population, beyond best matches
+ *  of current era.
+ *
+ *	If new population or mutation alleles are not provided,
+ *  the Experiment is a normal local one, except for best matches
+ *  which are reintroduced from a previous era into actual population.
  *
  * @author grossi
  */
@@ -69,15 +78,22 @@ public class SingleColonyClosureExperiment implements Experiment {
     	
         EnvObserver observer = new EnvObserver(context); // TODOM-8: events like Kafka?
         
+        boolean processingOnlyExperiment = newPopulationAlleles==null||newPopulationAlleles.isEmpty();
+        
         // Creates initial environment
-        EnvFactory envFactory = new SingleColonyClosureEnvFactory(
+        EnvFactory envFactory = processingOnlyExperiment ?
+        		context.application.envFactory :
+        		new SingleColonyClosureEnvFactory(
         		target, 
         		newPopulationAlleles, 
         		mutationAlleles, 
         		previousBestMatches);
         envFactory.setup(context);
         Env environment = envFactory.create();
-    	
+        
+        // Randomly add previous best matches to initial population
+        if(processingOnlyExperiment) insertPreviousBestMatches(environment);
+
         // Setups engine
         SingleColonyEvolver evolver = new SingleColonyEvolver(
         		context, 
@@ -90,6 +106,24 @@ public class SingleColonyClosureExperiment implements Experiment {
         // Retrieves stats
         stats = evolver.getStats();
     }
+
+
+    /**
+     * Replaces first N solutions with previous bms.
+     * 
+     * @param environment
+     */
+	private void insertPreviousBestMatches(Env environment) {
+		if(previousBestMatches!=null && previousBestMatches.size() > 1){
+			List<Solution> reinsertedBestMatches = RecombinatorLogics.recombineList(
+					context.application.recombinator, 
+					previousBestMatches, 
+					environment.genoma.getLimitedAllelesStrategy());
+			for(int s=0; s < reinsertedBestMatches.size(); s++) 
+				environment.lastGen.solutions.set(s, reinsertedBestMatches.get(s).copy());
+		}
+	}
+	
     
     public String toString(){
     	return String.format("Experiment stats: %s", stats);

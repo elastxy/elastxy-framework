@@ -41,7 +41,10 @@ public class BestMatchesSupport {
 		
 		// elitism => check the number of best matches to retain
 		int generationSize = population.size();
-		Long bestMatchesNumber = calculateBestMatchesNumber(elitism, generationSize);
+		Long bestMatchesNumber = calculateBestMatchesNumber(
+				elitism.singleColonyElitismNumber, 
+				elitism.singleColonyElitismPerc,
+				generationSize);
 		
 		// limit best matches to given number
 		population.bestMatches = population.solutions.stream().
@@ -50,10 +53,10 @@ public class BestMatchesSupport {
 	}
 
 
-	private static Long calculateBestMatchesNumber(ElitismParameters elitism, int generationSize) {
-		Long bestMatchesNumber = elitism.singleColonyElitismNumber;
-		if(bestMatchesNumber==null || elitism.singleColonyElitismNumber < 0){
-			bestMatchesNumber = (long)Math.floor(generationSize * elitism.singleColonyElitismPerc);
+	public static Long calculateBestMatchesNumber(Long eliteNumber, Double elitePerc, long generationSize) {
+		Long bestMatchesNumber = eliteNumber;
+		if(bestMatchesNumber==null || eliteNumber < 0){
+			bestMatchesNumber = (long)Math.floor(generationSize * elitePerc);
 		}
 
 		// if the number of best is greater than half, internal error: 

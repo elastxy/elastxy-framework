@@ -10,6 +10,7 @@ import org.apache.log4j.Logger;
 import org.apache.spark.broadcast.Broadcast;
 import org.elastxy.core.domain.experiment.Solution;
 import org.elastxy.core.domain.genetics.genotype.Allele;
+import org.elastxy.core.engine.core.BestMatchesSupport;
 import org.elastxy.core.engine.core.Evolver;
 import org.elastxy.core.stats.ExperimentStats;
 import org.elastxy.core.tracking.EnvObserver;
@@ -164,6 +165,10 @@ public class MultiColonyEvolver implements Evolver {
 
 
 	private void manageBestMatches() {
+		long eliteNumber = BestMatchesSupport.calculateBestMatchesNumber(
+				context.algorithmParameters.elitism.multiColonyElitismNumber, 
+				context.algorithmParameters.elitism.multiColonyElitismPerc, 
+				context.algorithmParameters.initialSelectionNumber);
 		env.allBestMatches.addAll(env.eraBestMatches);
 		env.allBestMatches = env.allBestMatches.stream().sorted(
 				new Comparator<Solution>() {
@@ -174,7 +179,7 @@ public class MultiColonyEvolver implements Evolver {
 						return bFitness.compareTo(aFitness);
 					}
 				}).
-				limit(context.algorithmParameters.elitism.multiColonyElitismNumber).
+				limit(eliteNumber).
 				collect(Collectors.toList());
 		
 		if(logger.isInfoEnabled()){

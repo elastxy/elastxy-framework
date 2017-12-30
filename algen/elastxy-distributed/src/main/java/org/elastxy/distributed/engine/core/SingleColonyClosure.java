@@ -97,16 +97,28 @@ public class SingleColonyClosure implements FlatMapFunction<Iterator<Allele>, So
 
 	
 	/**
-	 * Runs an experiment starting from scratch: no genoma is reintroduced
-	 * beyond best matches of previous generation.
-	 * 
-	 * TODOA-4: Elitism: maintain best matches over eras
+	 * Runs an experiment starting from scratch every time: no genoma is reintroduced
+	 * (included best matches of previous eras).
 	 * 
 	 * @param initialGenomaIterator
 	 * @return
 	 */
 	private ExperimentStats runIsolatedColonyExperiment() {
-		SingleColonyExperiment experiment = new SingleColonyExperiment(context);
+		
+		// Import Solution from Broadcast variable => new best solutions
+		List<Solution> previousBestMatches = previousBestMatchesBC==null ? null : previousBestMatchesBC.getValue();
+		if(logger.isTraceEnabled()) logger.trace(String.format("Solutions from prev best matches: %.2000s", previousBestMatches));
+
+	    // TODOM-4: Creates a local complete Genoma Provider
+	    
+	    // Executes local Experiment
+		if(logger.isTraceEnabled()) logger.trace(String.format(">>> Single Colony Experiment Context %n%s", context));
+		SingleColonyClosureExperiment experiment = new SingleColonyClosureExperiment(
+				context, 
+				target, 
+				null,
+				null,
+				previousBestMatches);
 		experiment.run();
 		ExperimentStats stats = experiment.getStats();
 		return stats;
