@@ -32,7 +32,7 @@ public class CSVReporter implements Reporter, Serializable {
 			outputDir.mkdirs();
 			CSVWriter writer = new CSVWriter(new FileWriter(new File(outputDir, "results_gen"+stats.generations+"_pop"+stats.lastGeneration.size()+"_"+Calendar.getInstance().getTimeInMillis()+".csv")), ';');
 			List<String[]> csv = new ArrayList<String[]>();
-			csv.add(new String[] {"FITNESS", String.format("%1.20f", stats.lastGeneration.bestMatch.getFitness().getValue())});
+			csv.add(new String[] {"FITNESS", String.format("%1.20f", stats.bestMatch.getFitness().getValue())});
 			csv.add(new String[] {"Last population size", String.valueOf(stats.lastGeneration.size())});
 			csv.add(new String[] {"Number of generations", String.valueOf(stats.generations)});
 			csv.add(new String[] {"Total execution time (ms)", String.valueOf(stats.executionTimeMs) });

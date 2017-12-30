@@ -13,6 +13,7 @@ package org.elastxy.core.stats;
 import java.util.List;
 
 import org.elastxy.core.domain.experiment.Population;
+import org.elastxy.core.domain.experiment.Solution;
 
 /**
  * @author grossi
@@ -22,17 +23,18 @@ public class ExperimentStats  {
 	// TODOM-2: typed to Target
 	public Object target;
 //    public String bestMatchRendering;
-    public Population lastGeneration;
+    public Solution bestMatch;
     public int generations;
     public long executionTimeMs; // total execution executionTimeMs in millis
     public int totIdenticalFitnesses;
     public boolean targetReached;
+    public transient Population lastGeneration;
     public transient List<Population> generationHistory;
     
     public String toString(){
     	StringBuffer buf = new StringBuffer();
         buf.append("##################### STATS #####################").append(Character.LINE_SEPARATOR);
-        buf.append("Best match:" + lastGeneration.bestMatch).append(Character.LINE_SEPARATOR);
+        buf.append("Best match:" + bestMatch).append(Character.LINE_SEPARATOR);
         buf.append("Other best matches:" + lastGeneration.bestMatches==null?0:lastGeneration.bestMatches.size()).append(Character.LINE_SEPARATOR);
         buf.append("Number of generations: "+generations).append(Character.LINE_SEPARATOR);
         buf.append("Total execution time (ms): "+executionTimeMs).append(Character.LINE_SEPARATOR);

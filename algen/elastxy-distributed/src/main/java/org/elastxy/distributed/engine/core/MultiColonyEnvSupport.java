@@ -33,6 +33,7 @@ public class MultiColonyEnvSupport {
         stats.bestMatch = env.allBestMatches.isEmpty() ? null : env.allBestMatches.get(0);
         stats.goalAccumulator = env.goalAccumulator.isPresent() ? env.goalAccumulator.get().value() : 0;
         stats.eras = (int)env.currentEraNumber;
+        stats.eons = (int)env.currentEonNumber;
         stats.executionTimeMs = env.endTime;
         stats.totErasIdenticalFitnesses= env.totIdenticalFitnesses;
         stats.targetReached = env.targetReached;

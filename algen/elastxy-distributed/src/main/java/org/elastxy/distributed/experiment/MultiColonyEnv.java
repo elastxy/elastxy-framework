@@ -31,6 +31,7 @@ public class MultiColonyEnv {
 
     // LIVE DATA
     public long currentEraNumber = 0L; // first Era starts from 0
+    public long currentEonNumber = 0L; // first Eon starts from 0
     public List<Solution> eraBestMatches = new ArrayList<Solution>();
     public List<Solution> allBestMatches = new ArrayList<Solution>();
 

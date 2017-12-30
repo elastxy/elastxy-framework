@@ -43,8 +43,9 @@ public class MetaSudokuMainTest {
 		context.application.appName = "sudoku";
 		context.requestContext = new RequestContext(false);
 		ExperimentStats stats = service.executeBenchmark(context);
-		
+
         assertNotNull(stats);
+        assertNotNull(stats.bestMatch);
         assertNotNull(stats.lastGeneration);
     }
     

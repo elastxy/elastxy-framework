@@ -24,8 +24,8 @@ public class MultiColonyExperimentStats extends ExperimentStats { // TODOB-2: ma
 //    public double executionTimeMs;
 //    public boolean targetReached;
     public int eras;
+    public int eons;
     public int totErasIdenticalFitnesses;
-    public Solution bestMatch;
     public Long goalAccumulator;
     public List<Solution> otherBestMatches;
 
@@ -37,6 +37,7 @@ public class MultiColonyExperimentStats extends ExperimentStats { // TODOB-2: ma
         buf.append("Best match:" + bestMatch).append(Character.LINE_SEPARATOR);
         buf.append("Goal accumulator: "+goalAccumulator).append(Character.LINE_SEPARATOR);
         buf.append("Number of eras: "+eras).append(Character.LINE_SEPARATOR);
+        buf.append("Number of eons: "+eons).append(Character.LINE_SEPARATOR);
         buf.append("Total execution time (ms): "+executionTimeMs).append(Character.LINE_SEPARATOR);
         buf.append("Total generations with same fitness: "+totErasIdenticalFitnesses);
         buf.append("Other best matches:" + otherBestMatches).append(Character.LINE_SEPARATOR);

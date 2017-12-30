@@ -145,7 +145,7 @@ public class StandardMultiColonyEnvFactory<T extends Object, R extends Object, G
      * @return
      */
 	@Override
-    public MultiColonyEnv newEra(MultiColonyEnv env){
+    public void newEon(MultiColonyEnv env){
     	
     	// With new data identical fitness check can be misleading
     	env.totIdenticalFitnesses=0; 
@@ -172,8 +172,9 @@ public class StandardMultiColonyEnvFactory<T extends Object, R extends Object, G
 
     	// Reduce Genoma based on target
     	env.genoma = genomaProvider.shrink(env.target);
-
-        return env;
+    	
+    	// Increment Eon number
+    	env.currentEonNumber++;
     }
 
 

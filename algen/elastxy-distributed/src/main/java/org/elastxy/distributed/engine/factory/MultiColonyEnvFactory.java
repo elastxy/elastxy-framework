@@ -30,5 +30,5 @@ public interface MultiColonyEnvFactory extends EnvFactory {
     
 	public MultiColonyEnv createEnv();
 
-    public MultiColonyEnv newEra(MultiColonyEnv env);
+    public void newEon(MultiColonyEnv env);
 }

@@ -45,6 +45,7 @@ public class MetaExpressionsMainTest {
 		ExperimentStats stats = service.executeBenchmark(context);
 		
         assertNotNull(stats);
+        assertNotNull(stats.bestMatch);
         assertNotNull(stats.lastGeneration);
     }
     

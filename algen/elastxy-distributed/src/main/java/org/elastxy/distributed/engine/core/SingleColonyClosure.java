@@ -87,7 +87,7 @@ public class SingleColonyClosure implements FlatMapFunction<Iterator<Allele>, So
 		
 		if(stats.targetReached){
 			logger.info(">>> TARGET GOAL REACHED!!! <<<");
-			logger.info(">>> BestMatch: "+stats.lastGeneration.bestMatch+" <<<");
+			logger.info(">>> BestMatch: "+stats.bestMatch+" <<<");
 			this.coloniesGoalAccumulator.add(1);
 		}
 		List<Solution> bestMatches = new ArrayList<Solution>();

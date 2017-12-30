@@ -46,14 +46,14 @@ public class StatsExperimentExecutor {
         if(stats.targetReached){
         	globalStats.successExecutionTimes.add(stats.executionTimeMs);
         	globalStats.totSuccesses++;
-        	globalStats.bestMatch = Optional.of(stats.lastGeneration.bestMatch.toString());
+        	globalStats.bestMatch = Optional.of(stats.bestMatch.toString());
         }
-        globalStats.bestMatches.add(stats.lastGeneration.bestMatch.toString());
+        globalStats.bestMatches.add(stats.bestMatch.toString());
         
         // Execution stats
         globalStats.totTime += stats.executionTimeMs;
         globalStats.totGenerations += stats.generations;
-        double bestMatchFitness = stats.lastGeneration.bestMatch.getFitness().getValue().doubleValue();
+        double bestMatchFitness = stats.bestMatch.getFitness().getValue().doubleValue();
         globalStats.totFitness += bestMatchFitness;
         globalStats.maxFitness = Optional.of(globalStats.maxFitness.isPresent() ? Math.max(globalStats.minFitness.get(), bestMatchFitness) : bestMatchFitness);
         globalStats.minFitness = Optional.of(globalStats.minFitness.isPresent() ? Math.min(globalStats.minFitness.get(), bestMatchFitness) : bestMatchFitness);

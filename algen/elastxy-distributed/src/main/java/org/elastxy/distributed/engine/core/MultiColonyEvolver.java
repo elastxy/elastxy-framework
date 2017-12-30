@@ -80,13 +80,14 @@ public class MultiColonyEvolver implements Evolver {
     public void evolve(){
     	
     	// Start global timer
+        logger.info(">>> 0. START EXPERIMENT");
     	MultiColonyEnvSupport.startTime(env);
     	fireEvolutionStarted();
     	
     	// Create accumulator
         env.goalAccumulator = Optional.of(context.distributedContext.sc().longAccumulator(MultiColonyEnv.ACCUMULATOR_NAME));
 
-        logger.info(">>> 1.1 Eras Loop");
+        logger.info(">>> 1.0 Eras Loop");
         boolean stop = false;
         while(!stop) {
         	
@@ -101,14 +102,12 @@ public class MultiColonyEvolver implements Evolver {
             
             logger.info(String.format(">>> 1.4 Era Check End Condition [era %d]				DRIVER <= Accumulator", env.currentEraNumber));
             manageBestMatches();
-            
-            // TODOM-2: max number of eras with same best match
             stop = checkEndCondition();
             
             if(!stop){
             	
-            	// CHECK RESHUFFLE
-            	checkReshuffle();
+            	// CHECK EON PROGRESS
+            	checkEonProgress();
             	
             	// INCREMENT ERA
             	env.currentEraNumber++;
@@ -116,14 +115,12 @@ public class MultiColonyEvolver implements Evolver {
           	
         }
         
-        // 4. View results
 		logger.info(String.format(">>> 2. View results"));
         viewResults(env.allBestMatches);
         fireEvolutionEndedEvent(env.targetReached, env.totIdenticalFitnesses);
 
-        
         // END OF EXPERIMENT
-        logFinal("END!");
+        logFinal(">>> 3. END OF EXPERIMENT!");
     }
     
     
@@ -193,20 +190,10 @@ public class MultiColonyEvolver implements Evolver {
 		if(context.algorithmParameters.elitism.multiColonyElitism) env.previousBestMatchesBroadcast = Optional.of(context.distributedContext.broadcast(env.allBestMatches));
 		if(logger.isDebugEnabled()) logger.debug(String.format("     New all best matches %s", env.allBestMatches));
 	}
-	
-
-	private void checkReshuffle() {
-		if((env.currentEraNumber+1) % context.algorithmParameters.reshuffleEveryEras == 0){
-			logger.info(String.format("   >>> 1.5 Repartition required [era %d]", env.currentEraNumber));
-			fireReshuffleEvent(env.currentEraNumber);
-		    // TODOA-4: Elitism: maintain best matches over reshuffle
-		    env = ((StandardMultiColonyEnvFactory)context.application.multiColonyEnvFactory).newEra(env);
-		}
-	}
 
     private boolean checkEndCondition(){
         boolean result = false;
-    	if(env.currentEraNumber >= context.algorithmParameters.stopConditions.maxEras-1 || checkColoniesGoal()){
+    	if(checkColoniesGoal() || env.currentEraNumber >= context.algorithmParameters.stopConditions.maxEras-1){
         	// TODOM-2: new stop condition: check max eras identical fitnesses
           logger.info("   >>> End condition found! Execution will be stopped.");
           fireTargetReachedEvent(null); // TODOM-2: pass stats
@@ -218,7 +205,18 @@ public class MultiColonyEvolver implements Evolver {
 
     private boolean checkColoniesGoal() {
         return env.goalAccumulator.isPresent() && env.goalAccumulator.get().value() > 0;
-      }
+    }
+	
+
+    // TODOM-1: evaluate a maxEons concept and replace maxEras with erasPerEon
+	private void checkEonProgress() {
+		if((env.currentEraNumber+1) % context.algorithmParameters.reshuffleEveryEras == 0){
+			logger.info(String.format("   >>> 1.5 New Eon repartition required [era %d]", env.currentEraNumber));
+			fireReshuffleEvent(env.currentEraNumber);
+		    // TODOM-4: Elitism: maintain best matches over reshuffle?
+		    ((StandardMultiColonyEnvFactory)context.application.multiColonyEnvFactory).newEon(env);
+		}
+	}
 
     
     

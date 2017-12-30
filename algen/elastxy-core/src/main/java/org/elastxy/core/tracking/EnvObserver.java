@@ -104,7 +104,7 @@ public class EnvObserver {
     	Logger log = context.monitoringConfiguration.logger;
         log.out("\n##################### STATS #####################");
         log.out("Best match:");
-        log.out(renderer.render(stats.lastGeneration.bestMatch));
+        log.out(renderer.render(stats.bestMatch));
         log.out("Other best matches number:");
         log.out(stats.lastGeneration.bestMatches==null?0:stats.lastGeneration.bestMatches.size());
         log.out("Number of generations: "+stats.generations);

@@ -30,7 +30,7 @@ public class DefaultResultsRenderer implements ResultsRenderer {
 		ClientFriendlyResults result = new ClientFriendlyResults();
 		result.goalReached = stats.targetReached;
 		
-		Solution bestMatch = stats.lastGeneration.bestMatch;
+		Solution bestMatch = stats.bestMatch;
 		result.accuracy = bestMatch.getFitness().getValue().doubleValue();
 
 		result.iterationsNumber = stats.generations;

@@ -33,6 +33,7 @@ public class EnvSupport {
     public static ExperimentStats getStats(Env env){
         ExperimentStats stats = new ExperimentStats();
         stats.target = env.target;
+        stats.bestMatch = env.lastGen.bestMatch;
         stats.lastGeneration = env.lastGen;
         stats.generations = env.lastGenNumber+1;
         stats.executionTimeMs = env.totalLifeTime;
