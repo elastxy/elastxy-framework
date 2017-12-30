@@ -15,7 +15,7 @@ import java.util.Map;
  */
 public class ApplicationSpecifics implements Serializable {
 	
-	// TODOM-4: Jackson inheritance
+	// TODO3-4: Jackson inheritance
 	// http://www.baeldung.com/jackson-inheritance
 	public Map<String, Object> target = new HashMap<String, Object>();
 	public Map<String, Object> params = new HashMap<String, Object>();

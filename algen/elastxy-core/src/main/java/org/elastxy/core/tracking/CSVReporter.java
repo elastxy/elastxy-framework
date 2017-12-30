@@ -25,7 +25,7 @@ public class CSVReporter implements Reporter, Serializable {
 		outputDir = path;
 	}
 	
-	// TODOM-2: reuse ResultsRenderer?
+	// TODO2-2: ResultsRenderer: reuse?
 	public void createReports(ExperimentStats stats) {
 		try {
 			File outputDir = new File(this.outputDir);

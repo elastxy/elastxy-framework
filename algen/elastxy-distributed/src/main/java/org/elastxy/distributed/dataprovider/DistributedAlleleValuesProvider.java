@@ -36,7 +36,7 @@ public class DistributedAlleleValuesProvider implements AlleleValuesProvider {
 
 	/**
 	 * Collects alleles, executing a Spark action on RDD.
-	 * TODOA-2: method getAlleles(number)? document and contextualize all these getAllele methods!
+	 * TODO2-2: method getAlleles(number)? document and contextualize all these getAllele methods!
 	 */
 	@Override
 	public List<Allele> getAlleles() {
@@ -49,7 +49,7 @@ public class DistributedAlleleValuesProvider implements AlleleValuesProvider {
 	}
 	
 	
-	// TODOM-1: move to a "writable" alleleValuesProvider or implements a "read only" alleleVP
+	// TODO2-1: alleleValuesProvider: move to a "writable" alleleValuesProvider or implements a "read only" alleleVP
 	@Override
 	public void insertAlleles(List<Allele> alleles) {
 		if(true) throw new UnsupportedOperationException("Not supported: alleles are retrieved by read-only RDD");

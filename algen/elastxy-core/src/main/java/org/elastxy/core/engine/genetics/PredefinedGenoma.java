@@ -31,7 +31,7 @@ public class PredefinedGenoma extends AbstractGenoma implements Genoma {
 	/**For a PredefinedGenoma if a valuesProvider is set, 
 	 * then all alleles must be pulled from that Provider.
 	 * 
-	 * TODOM-1: sharedAlleles linked to provider number is ok?
+	 * TODO2-1: alleleValuesProvider: sharedAlleles linked to provider number is ok?
 	 */
 	@Override
 	public void setAlleleValuesProvider(AlleleValuesProvider provider){
@@ -73,7 +73,7 @@ public class PredefinedGenoma extends AbstractGenoma implements Genoma {
 	 * 
 	 * Implemented only for shared values.
 	 * 
-	 * TODOM-4: strategy for admitting duplicates or not?
+	 * TODO2-4: alleleValuesProvider: strategy for admitting duplicates or not?
 	 * @return
 	 */
 	@Override
@@ -106,7 +106,7 @@ public class PredefinedGenoma extends AbstractGenoma implements Genoma {
 	 * Returns a random allele for every position.
 	 * Implemented only for shared values.
 	 * 
-	 * TODOM-4: strategy for admitting duplicates or not?
+	 * TODO2-4: alleleValuesProvider: strategy for admitting duplicates or not?
 	 * 
 	 * @return
 	 */

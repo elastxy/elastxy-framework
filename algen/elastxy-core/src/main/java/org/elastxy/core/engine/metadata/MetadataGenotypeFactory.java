@@ -86,7 +86,7 @@ public class MetadataGenotypeFactory {
 	 */
 	public static Strand createStrand(MetadataGenoma genoma){
 		
-		// TODOM-2: copy GenotypeStructure instead
+		// TODO2-2: copy GenotypeStructure instead
 		Strand result = new Strand();
 //		if(genoma.getNumberOfStrands()!=1){
 //			String msg = "Cannot create strand. Genoma with number of strands different from one: "+genoma.getNumberOfStrands();
@@ -94,7 +94,7 @@ public class MetadataGenotypeFactory {
 //			throw new AlgorithmException(msg);
 //		}
 		
-		// TODOM-8: all for cycles must not have logics repeated
+		// TODO0-8: all for cycles must not have logics repeated in condition
 		for(int c=0; c < genoma.getGenotypeStructure().getNumberOfChromosomes(); c++){
 			Chromosome chromosome = new Chromosome();
 			for(int g=0; g < genoma.getGenotypeStructure().getNumberOfGenes(c); g++){

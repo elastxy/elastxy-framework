@@ -49,7 +49,7 @@ public abstract class GenotypeStructureImpl implements GenotypeStructure {
 	public abstract int getNumberOfGenes(int chromosome);
 
 	
-// TODOM-4: multistrands
+// TODO3-4: multistrands
 //	@Override
 //	public int getNumberOfStrands() {
 //		return 0;

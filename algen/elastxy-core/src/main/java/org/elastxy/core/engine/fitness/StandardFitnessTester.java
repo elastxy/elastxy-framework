@@ -64,7 +64,7 @@ public class StandardFitnessTester implements FitnessTester {
     		if(solution.getFitness().fit(env.target.getTargetThreshold(), env.target.getTargetFitness())) {
     			population.bestMatch = solution;
     			population.goalReached = true;
-    			// TODOM: stop configurable: this is more efficient, but other perfectly fitting solutions 
+    			// TODO2-2: stop configurable: this is more efficient, but other perfectly fitting solutions 
     			// and their fitness and phenotype calcs are left out with fitness null
 //    			break;
     		}
@@ -75,7 +75,7 @@ public class StandardFitnessTester implements FitnessTester {
             }
             
 //            // Else remove phenotype to free memory: not useful anymore
-//            // TODOM-2: configurable, in some cases doesn't work
+//            // TODO3-2: configurable, in some cases doesn't work
 //            else {
 //            	solution.setPhenotype(null);
 //            }

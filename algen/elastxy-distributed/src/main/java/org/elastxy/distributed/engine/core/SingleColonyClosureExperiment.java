@@ -76,7 +76,7 @@ public class SingleColonyClosureExperiment implements Experiment {
     
     public void run(){
     	
-        EnvObserver observer = new EnvObserver(context); // TODOM-8: events like Kafka?
+        EnvObserver observer = new EnvObserver(context); // TODO3-8: events like Kafka?
         
         boolean processingOnlyExperiment = newPopulationAlleles==null||newPopulationAlleles.isEmpty();
         

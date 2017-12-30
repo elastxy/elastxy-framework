@@ -31,7 +31,7 @@ public class MexIncubator implements Incubator<Chromosome, NumberPhenotype>{
 	}
 	
 	
-	// TODOM-4: math expression evaluator (ex. exp4j)
+	// TODO3-4: math expression evaluator (ex. exp4j)
     public long calculate(long val1, char op, long val2) throws IllegalSolutionException {
         long result = 0;
         switch(op){

@@ -41,7 +41,7 @@ import org.elastxy.core.engine.metadata.StandardMetadataGenoma;
  *  
  *  The length of each chromosome may vary depending user needs.
  *  
- * TODOM-2: cache!
+ * TODO2-2: cache!
  * @author red
  *
  */
@@ -101,7 +101,7 @@ public class MefGenomaProvider implements GenomaProvider {
 		logger.debug("Reducing the number of recipes and collecting info.");
 
 		// Add values to metadata based on target
-		// TODOM-2: refactory with AllelesValueProvider
+		// TODO3-2: refactor with AllelesValueProvider
 		Map<RecipeType, Integer> targetRecipesByType = calculateRecipesByType(target);
 		
 		// Populate metadata genoma
@@ -164,7 +164,7 @@ public class MefGenomaProvider implements GenomaProvider {
 		GenesMetadataConfiguration genes = ReadConfigSupport.retrieveGenesMetadata(context.application.appName);
 
 		// Create Genoma
-		// TODOM-4: mef: repetitions of receipt could be available: make it configurable!
+		// TODO3-4: mef: repetitions of receipt could be available: make it configurable!
 		StandardMetadataGenoma genoma = MetadataGenomaBuilder.create(context, false);
 		
 		Iterator<Map.Entry<RecipeType, List<Recipe>>> it = workingDataset.feasibleByType.entrySet().iterator();

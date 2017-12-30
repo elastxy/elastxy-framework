@@ -59,7 +59,7 @@ public class DefaultConfiguration {
     // REQUEST CONTEXT
 	public static final boolean WEB_REQUEST 	= true; // most restrictive
 	public static final Locale USER_LOCALE 	= Locale.forLanguageTag("en-GB");
-	// TODOM-1: properties file
+	// TODO2-1: properties file
 	public static final List<Locale> AVAILABLE_LOCALES = Arrays.asList(
 			Locale.forLanguageTag("en-GB"),
 			Locale.forLanguageTag("en-US"),

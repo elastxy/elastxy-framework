@@ -91,7 +91,7 @@ public class ApplicationService {
         String result = collector.print();
         
 		
-		// TODOB-2: execute test trial beside normal analysis and compare results
+		// TODO2-2: execute test trial beside normal analysis and compare results
 //		StringBuffer result = new StringBuffer();
 //		result
 //		.append("\n\n*********** NORMAL TEST ***********")

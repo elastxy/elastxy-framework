@@ -27,7 +27,6 @@ public class MefUtils {
 		
 		// For each ingredient in recipe, check whether is amongst the available
 		// based on similarity: if YES, add the food string value to the raw values
-		// TODOB-2: mef: use streams
 		for(int i=0; i < recipe.ingredients.size(); i++){
 			String recipeIngredient = recipe.ingredients.get(i);
 			
@@ -113,8 +112,8 @@ public class MefUtils {
 //	}
 	
 	
-	// TODOM-4: mef: affinity (Levenshtein distance) or semantic affinity, configurable (disabled for performance)
-	// TODOM-4: mef: configurable regex for similar ingredients
+	// TODO3-4: mef: affinity (Levenshtein distance) or semantic affinity, configurable (disabled for performance)
+	// TODO3-4: mef: configurable regex for similar ingredients
 	public static boolean similar(String singleWord, String phrase){
 		return phrase.toLowerCase().matches(".*\\b"+singleWord.toLowerCase()+"\\b.*");
 	}
@@ -128,7 +127,7 @@ public class MefUtils {
 	 * but equality only to the list of acknowledge ingredients during
 	 * genoma pre-process phase.
 	 * 
-	 * TODOM-2: mef: check separate pantry available + refrigerator available foods
+	 * TODO3-2: mef: check separate pantry available + refrigerator available foods
 	 */
 	public static IngredientsCoverage checkCoverage(Recipe recipe){
 		if(recipe.notAvailable.isEmpty()){

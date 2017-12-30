@@ -48,7 +48,7 @@ public class MegIncubator implements Incubator<Chromosome, UserPhenotype<GardenW
 		double unhappiness = 0;
 		boolean dead = false;
 		
-		// TODOM-1: meg: remove redundancy
+		// TODO3-1: meg: remove redundancy
 		
 		// distanza della richiesta dalla pianta alla fornita dal posto
 		{

@@ -24,7 +24,7 @@ public class ElastXYApplication {
 	
 	
 	/**
-	 * TODOM-2: make params to Driver optional, use those in local conf if missing (if possible)
+	 * TODO1-2: make params to Driver optional, use those in local conf if missing (if possible)
 	 * 
 	 * @param args
 	 */
@@ -97,7 +97,7 @@ public class ElastXYApplication {
 	            .setAppName(applicationName)
 	            .setSparkHome(sparkHome)
 	            .setMaster(master);
-//	            .set("spark.driver.allowMultipleContexts", "true"); // TODOB-1: make it configurable?
+//	            .set("spark.driver.allowMultipleContexts", "true"); // TODO3-1: make it configurable?
 		JavaSparkContext sparkContext = new JavaSparkContext(sparkConf);
 		return sparkContext;
 	}

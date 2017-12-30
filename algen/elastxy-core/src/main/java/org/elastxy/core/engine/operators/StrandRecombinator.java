@@ -22,8 +22,8 @@ public class StrandRecombinator implements Recombinator<Solution> {
     /**
      *  Recombination of two Solution. Two are the expected parents.
      * 
-     * TODOM-2: check performance of Recombination operator
-     * TODOM-4: more than 2 parents management
+     * TODO1-2: check performance of Recombination operator
+     * TODO3-4: more than 2 parents management
      * 
      * @param other
      * @return
@@ -34,7 +34,7 @@ public class StrandRecombinator implements Recombinator<Solution> {
 		}
 		
 		// Define cut point
-		// TODOM-1: define cut point from metadata!
+		// TODO2-1: define cut point from metadata!
 		Strand genotype0 = (Strand)parents.get(0).getGenotype();
 		
 		Solution[] offsprings = null;

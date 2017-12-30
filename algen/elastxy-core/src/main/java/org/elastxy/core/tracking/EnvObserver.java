@@ -22,7 +22,7 @@ import org.elastxy.core.stats.ExperimentStats;
 /** This class processes many events in the lifecycle of the execution,
  *  for the purpose of collecting stats and so on.
  *  
- *  TODOM-4: use generic observer mechanism, such as following Spring:
+ *  TODO3-4: use generic observer mechanism, such as following Spring:
  *  	- ApplicationEventPublisherAware for publishing events
  *  	- @EventListener annotation for consuming events
  *
@@ -63,7 +63,7 @@ public class EnvObserver {
 
     
     /**
-     * TODOM-4: Incapsulate events under a simple generic interface, 
+     * TODO3-4: Incapsulate events under a simple generic interface, 
      * such as Spring "publishEvent" of ApplicationEventPublisher
      * @param s
      */
@@ -99,7 +99,7 @@ public class EnvObserver {
     }
     
     
-    // TODOM-2: ResultsRenderer: put into a ResultsRenderer
+    // TODO2-2: ResultsRenderer: put into a ResultsRenderer
     private void showResults(ExperimentStats stats){
     	Logger log = context.monitoringConfiguration.logger;
         log.out("\n##################### STATS #####################");

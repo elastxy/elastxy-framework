@@ -80,7 +80,7 @@ public class DistributedApplicationService {
 	}
 
 
-    // TODOB-1: remove duplication
+    // TODO3-1: remove duplication on ExperimentResponse builder
 	private ExperimentResponse res(boolean webRequest, AlgorithmContext context, ExperimentStats stats){
 		return webRequest ? webRenderer.render(context, stats) : intRenderer.render(context, stats);
 	}

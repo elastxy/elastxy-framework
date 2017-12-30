@@ -15,7 +15,7 @@ import org.elastxy.distributed.stats.MultiColonyExperimentStats;
  * By now, a Stats object is serialized as a JSON on local Driver
  * file system.
  * 
- * TODOM-2: generic interface for collecting/writing results.
+ * TODO2-2: generic interface for collecting/writing results.
  * 
  * @author red
  *

@@ -39,7 +39,7 @@ public interface DistributedGenomaProvider extends GenomaProvider {
 	 * In distributed context it means a repartition/coalesce of
 	 * original data and subsequence genoma redefinition.
 	 * 
-	 * TODOM-4: Elitism: maintain best matches over reshuffle?
+	 * TODO3-4: Elitism: maintain best matches over reshuffle?
 	 */
 	public void spread();
 

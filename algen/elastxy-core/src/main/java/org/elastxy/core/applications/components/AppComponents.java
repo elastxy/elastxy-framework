@@ -82,7 +82,7 @@ public class AppComponents implements Serializable {
 	public transient ResultsRenderer resultsRenderer;
 
 	// Distributed application
-	// TODOM-2: DistributedAppComponents extending this, with specific MultiColony- types?? another application.json extending local?
+	// TODO2-2: DistributedAppComponents extending this, with specific MultiColony- types?? another application.json extending local one?
 	public transient EnvFactory multiColonyEnvFactory;
 	public transient DatasetProvider distributedDatasetProvider;
 	public transient DatasetProvider singleColonyDatasetProvider;

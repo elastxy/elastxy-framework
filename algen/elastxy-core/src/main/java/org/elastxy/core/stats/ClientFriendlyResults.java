@@ -28,7 +28,7 @@ public class ClientFriendlyResults implements Serializable {
 	
 	public String target;
 	
-    public boolean goalReached; // TODOM-2: more details of how has finished
+    public boolean goalReached; // TODO2-2: more details of how has finished
     public double accuracy; // fitness
     public String bestMatch; // client specific rendering (html, jpeg, ...)
 	

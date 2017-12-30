@@ -26,7 +26,7 @@ import org.elastxy.distributed.dataprovider.RDDDistributedWorkingDataset;
  * RDD<Allele> cardinality should be enough to cover 
  * a single population: solutionsNumber + 50%
  * 
- * TODOM-4: bloccare le interfacce in ottica SDK!
+ * TODO2-4: bloccare le interfacce in ottica SDK!
  * @author red
  */
 public class MexdDistributedGenomaProvider implements DistributedGenomaProvider {
@@ -107,7 +107,7 @@ public class MexdDistributedGenomaProvider implements DistributedGenomaProvider 
 			neededAlleles = Math.round(solutionsToMutatePerGen * (double)context.algorithmParameters.stopConditions.maxGenerations); // a little more choice
 		}
 		// If iterations count is not known, by now we take a mutationPerc % of all Alleles in the partitions
-		// TODOM-4: upgrade considering real elapsed generation time (by executing a benchmark, for example). Check size of memory / network compromise
+		// TODO2-4: upgrade considering real elapsed generation time (by executing a benchmark, for example). Check size of memory / network compromise
 		else {
 			neededAlleles = Math.round(countAvailable / (double)context.algorithmParameters.partitions * context.algorithmParameters.mutationPerc);
 		}
@@ -126,12 +126,13 @@ public class MexdDistributedGenomaProvider implements DistributedGenomaProvider 
 
 	private JavaRDD<Long> pickNumbers(JavaRDD<Long> numbers, Long tot) {
 	    final Long totNumbers = numbers.count();
-	    final double percExtract = 1.3 * tot.doubleValue() / totNumbers.doubleValue();// put a little more // TODOM-1: spark plus configurable
+	    // TODO2-1: spark execution parameters more configurable..
+	    final double percExtract = 1.3 * tot.doubleValue() / totNumbers.doubleValue(); // put a little more
 	    if(logger.isDebugEnabled()) {
 	      logger.debug("Picking perc "+percExtract+" of "+totNumbers+" numbers (was needed "+tot+")");
 	    }
 	    JavaRDD<Long> result = numbers.sample(true, percExtract, Randomizer.seed());
-		// TODOA-2: check performance of caching
+		// TODO2-2: check performance of caching
 	    result.cache();
 //	    if(logger.isDebugEnabled()) {
 //	      val totPicked = result.count()

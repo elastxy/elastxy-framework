@@ -33,7 +33,6 @@ public interface ExperimentResponseRenderer {
 	
 	/**
 	 * Render error experiment stats.
-	 * TODOM-2: proper exception management.
 	 * @param stats
 	 * @return
 	 */

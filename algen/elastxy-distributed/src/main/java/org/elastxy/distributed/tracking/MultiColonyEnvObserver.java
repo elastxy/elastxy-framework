@@ -7,9 +7,9 @@ import org.elastxy.core.tracking.EnvObserver;
 /**
  * Observer of Multicolony related events.
  * 
- * TODOM-1: add meaningful events..
- * TODOA-2: hierarchy not good: detach MultiColony EnvObserver/Observable/Evolver from Single Colony ones.
- * TODOA-4: add comments with disclaimer and author on every source.
+ * TODO3-1: add meaningful events..
+ * TODO2-2: hierarchy not good: detach MultiColony EnvObserver/Observable/Evolver from Single Colony ones.
+ * TODO0-4: add comments with disclaimer and author on every source.
  * @author red
  *
  */
@@ -32,7 +32,7 @@ public class MultiColonyEnvObserver extends EnvObserver {
     	context.monitoringConfiguration.logger.out("Era "+eraNumber+" ended");
     }
     
-    // TODOM-2: ResultsRenderer: reuse the ResultsRenderer
+    // TODO2-2: ResultsRenderer: reuse the ResultsRenderer
     public void targetReachedEvent(ExperimentStats stats){
     	context.monitoringConfiguration.logger.out("Goal reached! \nStats:"+stats);
     }

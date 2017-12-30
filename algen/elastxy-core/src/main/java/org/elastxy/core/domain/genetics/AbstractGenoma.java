@@ -27,12 +27,12 @@ public abstract class AbstractGenoma implements Genoma {
 	 * When generating a set of Alleles for a number of genes, takes care of excluding 
 	 * those already selected
 	 */
-	// TODOM-4: manage by strategy
+	// TODO2-4: use a Strategy for limited alleles
 	protected boolean limitedAllelesStrategy = false;
 
 	/**
 	 * True if a single shared list of alleles should be used.
-	 * TODOM-4: use a Strategy for sharedAlleles.
+	 * TODO2-4: use a Strategy for sharedAlleles.
 	 */
 	protected boolean sharedAlleles = false;
 	

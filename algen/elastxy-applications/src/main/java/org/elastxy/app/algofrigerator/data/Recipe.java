@@ -40,7 +40,7 @@ public class Recipe implements Serializable{
 		copy.recipeType = recipeType;
 		copy.ingredients = ingredients;
 		copy.mainIngredient = mainIngredient;
-		copy.preparation = preparation; // TODOA-4: mef: persisted only for renderer: separate with rendered domain!
+		copy.preparation = preparation; // TODO1-4: mef: persisted only for renderer purposes: separate with rendered domain!
 		copy.persons = persons;
 		copy.note = note;
 		return copy;

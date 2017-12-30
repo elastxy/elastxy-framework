@@ -13,7 +13,7 @@ import org.elastxy.core.engine.metadata.StandardMetadataGenoma;
 
 
 /**
- * TODOM-2: cache!
+ * TODO2-2: cache!
  * @author red
  *
  */

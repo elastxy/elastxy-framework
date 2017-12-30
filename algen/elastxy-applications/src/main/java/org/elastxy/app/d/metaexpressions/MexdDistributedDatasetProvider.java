@@ -16,7 +16,7 @@ import org.elastxy.distributed.dataprovider.DistributedDatasetProvider;
 import org.elastxy.distributed.dataprovider.RDDDistributedWorkingDataset;
 
 /**
- * TODOM-4: bloccare le interfacce in ottica SDK!
+ * TODO2-4: bloccare le interfacce in ottica SDK!
  * @author red
  *
  */
@@ -51,7 +51,7 @@ public class MexdDistributedDatasetProvider implements DistributedDatasetProvide
 		List<Long> range = LongStream.rangeClosed(-maxValue, maxValue).boxed().collect(Collectors.toList());
 		
 		// Partitioned RDD
-		// TODOA-2: check performance of caching
+		// TODO2-2: check performance of caching
 		workingDataset = new RDDDistributedWorkingDataset<Long>();
 		workingDataset.rdd = context.distributedContext.parallelize(range, partitions).cache();
 
@@ -81,7 +81,7 @@ public class MexdDistributedDatasetProvider implements DistributedDatasetProvide
 		// Repartitions genoma
 		int partitions = context.algorithmParameters.partitions;
 		if(logger.isDebugEnabled()) logger.debug(String.format("Reshuffling data and spreading genetic material across %d colonies (partitions).", partitions));
-		// TODOA-2: check performance of caching
+		// TODO2-2: check performance of caching
 		workingDataset.rdd = workingDataset.rdd.coalesce(partitions, true).cache();
 //		workingDataset.rdd.count();
 		

@@ -37,7 +37,8 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 
 /**
- * TODOM-2: Create a UserContext before, at the end of SecurityFilterChain, 
+ * TODO0-4: configure a SecurityChain
+ * TODO1-2: Create a UserContext before, at the end of SecurityFilterChain, 
  * to host locale and if request comes from Web.
  * @author red
  *
@@ -71,7 +72,7 @@ public class LocalController {
 
 
 	/**
-	 * TODOM-2: a service for app-checking all registered applications
+	 * TODO2-2: a service for app-checking all registered applications
 	 * @param application
 	 * @param webRequest
 	 * @param userLocale
@@ -112,7 +113,7 @@ public class LocalController {
 	
 	
 
-	// TODOM-2: analysis: structured results
+	// TODO2-2: analysis: structured results
 	@RequestMapping(path = "/analysis/{application}/{experiments}", method = RequestMethod.POST)
 	@ResponseBody
 	public ExperimentResponse analysis(
@@ -132,7 +133,7 @@ public class LocalController {
 	}
 
 
-	// TODOM-2: trial: structured results
+	// TODO2-2: trial: structured results
 	@RequestMapping(path = "/trial/{application}/{experiments}", method = RequestMethod.POST)
 	@ResponseBody
 	public ExperimentResponse trialTest(

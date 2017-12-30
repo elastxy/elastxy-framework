@@ -27,7 +27,7 @@ public class StandardSelector implements Selector<Genoma> {
      * - if elitism is enabled:
      * 		. selects the best matches and puts a clone of them into the next population into bestMatches list
      * 		. discards worst matches
-	 * - TODOM-8: Elitism: multiple chromosomes: maintain 100% fit chromosomes from current population to the next
+	 * - TODO1-8: Elitism: multiple chromosomes: maintain 100% fit chromosomes from current population to the next
      * 
      *  ..until list is empty
      */
@@ -53,7 +53,7 @@ public class StandardSelector implements Selector<Genoma> {
     		// Best fitness solutions are maintained
     		for(int s=0; s < bestMatchesNumber; s++){
     			Solution best = actualGeneration.bestMatches.get(s);
-    			// TODOM-4: optimization: don't copy genotype for solutions to be recombined/mutated
+    			// TODO2-4: optimization: don't copy phenotype for solutions to be recombined/mutated
     			newGeneration.add(best.copy()); 
     		}
     		

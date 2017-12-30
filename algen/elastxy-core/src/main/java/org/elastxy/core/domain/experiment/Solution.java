@@ -48,7 +48,7 @@ public interface Solution<S extends Solution, F extends Fitness> {
 	 * Performance indicator about how the individual performs in the environment,
 	 * normalized to 1.
 	 * 
-	 * TODOM-8: study and apply normalization techniques
+	 * TODO3-8: study and apply normalization techniques
 	 * 
 	 * @return
 	 */

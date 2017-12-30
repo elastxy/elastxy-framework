@@ -10,7 +10,7 @@ import org.elastxy.core.engine.factory.SolutionsFactory;
 public class MetadataSolutionsFactory implements SolutionsFactory<StandardMetadataGenoma> {
 
 
-    // TODOM-4: genotype builders based directly inside in genoma
+	// TODO2-4: decouple from genotype builders: used them directly inside in genoma
     @Override
     public Solution createRandom(StandardMetadataGenoma genoma) {
     	return createSolution(genoma, genoma.getRandomAlleles());

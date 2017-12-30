@@ -27,7 +27,7 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 
 /**
- * TODOM-8: complete test coverage
+ * TODO2-8: complete test coverage
  * @author grossi
  */
 @RunWith(SpringJUnit4ClassRunner.class)

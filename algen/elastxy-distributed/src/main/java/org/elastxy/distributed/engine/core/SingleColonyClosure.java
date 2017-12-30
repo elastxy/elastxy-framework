@@ -56,7 +56,7 @@ public class SingleColonyClosure implements FlatMapFunction<Iterator<Allele>, So
     private Map<String, BroadcastWorkingDataset> broadcastDatasets;
     
     
-    // TODOM-1: ClosureContext instead of many params
+    // TODO0-1: ClosureContext instead of many params
 	public SingleColonyClosure(
 			long currentEraNumber,
 			AlgorithmContext context,
@@ -109,7 +109,7 @@ public class SingleColonyClosure implements FlatMapFunction<Iterator<Allele>, So
 		List<Solution> previousBestMatches = previousBestMatchesBC==null ? null : previousBestMatchesBC.getValue();
 		if(logger.isTraceEnabled()) logger.trace(String.format("Solutions from prev best matches: %.2000s", previousBestMatches));
 
-	    // TODOM-4: Creates a local complete Genoma Provider
+	    // TODO3-4: Creates a local complete Genoma Provider (???)
 	    
 	    // Executes local Experiment
 		if(logger.isTraceEnabled()) logger.trace(String.format(">>> Single Colony Experiment Context %n%s", context));
@@ -146,7 +146,7 @@ public class SingleColonyClosure implements FlatMapFunction<Iterator<Allele>, So
 		List<Solution> previousBestMatches = previousBestMatchesBC==null ? null : previousBestMatchesBC.getValue();
 		if(logger.isTraceEnabled()) logger.trace(String.format("Solutions from prev best matches: %.2000s", previousBestMatches));
 
-	    // TODOM-4: Creates a local complete Genoma Provider
+	    // TODO3-4: Creates a local complete Genoma Provider (???)
 	    
 	    // Executes local Experiment
 		if(logger.isTraceEnabled()) logger.trace(String.format(">>> Single Colony Experiment Context %n%s", context));
@@ -165,7 +165,7 @@ public class SingleColonyClosure implements FlatMapFunction<Iterator<Allele>, So
 	private void bootstrap() {
 		AppBootstrapRaw bootstrap = new AppBootstrapRaw();
 		AppComponentsLocator locator = bootstrap.boot(context.application.appName);
-		// TODOM-1: check if mandatory configurations are present!
+		// TODO0-1: check if mandatory configurations are present!
 		logger.info("Initializing Closure LOCAL context.");
 		setupContext(locator);
 	}

@@ -9,7 +9,7 @@ import org.elastxy.core.engine.metadata.StandardMetadataGenoma;
 public class MefSolutionsFactory implements SolutionsFactory<StandardMetadataGenoma> {
 
 
-    // TODOM-4: genotype builders based directly inside in genoma
+    // TODO2-4: decouple from genotype builders: used them directly inside in genoma
     public Solution createRandom(StandardMetadataGenoma genoma) {
     	GenericSolution solution = new GenericSolution();
     	solution.genotype = MetadataGenotypeFactory.createStrand(genoma);

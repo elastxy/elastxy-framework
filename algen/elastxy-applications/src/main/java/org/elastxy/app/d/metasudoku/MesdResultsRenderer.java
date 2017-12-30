@@ -13,9 +13,9 @@ import org.elastxy.distributed.tracking.DistributedResultsRenderer;
 public class MesdResultsRenderer extends DistributedResultsRenderer {
 
 	
-	// TODOM-2: separate local from distributed solution renderer
 	@Override
 	public void setSolutionRenderer(SolutionRenderer solutionRenderer) {
+		// TODO0-2: no good: separate local from distributed solution renderer and inject
 		super.setSolutionRenderer(new HTMLMatrixSolutionRenderer());
 	}
 	

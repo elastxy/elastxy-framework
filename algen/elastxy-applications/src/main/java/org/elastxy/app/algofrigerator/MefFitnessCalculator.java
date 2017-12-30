@@ -59,7 +59,7 @@ public class MefFitnessCalculator extends  AbstractFitnessCalculator<GenericSolu
     		BigDecimal completeMealsBD = new BigDecimal(((NumberRawFitness)rawFitness).value.doubleValue()).setScale(2, BigDecimal.ROUND_HALF_UP);
     		BigDecimal desiredMealsBD = new BigDecimal(goal.desiredMeals).setScale(2, BigDecimal.ROUND_HALF_UP);
     	
-    		// TODOA-2: bug. completeness over 0!!!! check Accumulator and neutral recipes usage...
+    		// FIXME: bug. completeness over 0!!!! check Accumulator and neutral recipes usage...
     		BigDecimal completeness = completeMealsBD.compareTo(desiredMealsBD)==0 ? 
     			BigDecimal.ONE : 
     			completeMealsBD.divide(desiredMealsBD, BigDecimal.ROUND_HALF_UP);

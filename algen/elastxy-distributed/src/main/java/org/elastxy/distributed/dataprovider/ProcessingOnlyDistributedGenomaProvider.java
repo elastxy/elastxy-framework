@@ -65,7 +65,7 @@ public class ProcessingOnlyDistributedGenomaProvider implements DistributedGenom
 	}
 
 	
-	// TODOM-2: evaluate a specific target builder in distributed environment to set overall goals?
+	// TODO3-2: evaluate a specific target builder in distributed environment to set overall goals?
 	@Override
 	public Genoma shrink(Target<?, ?> target) {
 		return genoma;

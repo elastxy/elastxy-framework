@@ -21,7 +21,7 @@ package org.elastxy.app.algofrigerator;
  * Genoma: one type of gene assigned to all chromosomes, reflecting the recipe id.
  * 		Initial genoma for the single experiment is filtered to exclude 
  * 		recipes with no ingredients present in given goal foods.
- * 		TODOM-4: mef: filter by forbidden ingredients (e.g. gluten, meat...), cuisine type (e.g. french), and so on...
+ * 		TODO3-4: mef: filter by forbidden ingredients (e.g. gluten, meat...), cuisine type (e.g. french), and so on...
  * 		A list of evergreen pantry default ingredients may be provided to complete recipes (salt, oil, 
  * 		winegar, sugar...)
  * 
@@ -40,7 +40,7 @@ package org.elastxy.app.algofrigerator;
  * 		50% ingredients found).
  * 		Recipe has id, name, procedure, a list of ingredients, every one of them marked 
  * 		if available, not available or available from pantry.
- * 		TODOM-2: mef: take into account available measures on recipes
+ * 		TODO3-2: mef: take into account available measures on recipes
  * 
  * Fitness: maximize the number of filled and partial recipes, proportionally
  * 		distributed between savoury and sweet.
@@ -50,13 +50,13 @@ package org.elastxy.app.algofrigerator;
  * 			Pw: points from sweet recipes (max Nw)
  * 			Point is given this way:
  * 				1.0		savoury or sweet recipe completed, even if all ingredients are in the pantry
- * 				TODOM-1: 0.8	savoury or sweet recipe completed with no pantry ingredients
+ * 				TODO3-1: 0.8	savoury or sweet recipe completed with no pantry ingredients
  * 				0.6 	neutral replacement recipe completed
  * 				0.4		savoury or sweet recipe partially completed
  * 				0.2		neutral recipe partially completed
  * 				0.0		no points for recipes with less than 50% ingredients fulfilled
  * 
- * TODOM-8: better search on ingredients:
+ * TODO3-8: better search on ingredients:
  * 	- semantic check or affinity between names given by user to foods, and names of recipe ingredients (e.g. tomato =~ tomatoes)
  *  - pepe don't find peperoni
  *  - plurals management

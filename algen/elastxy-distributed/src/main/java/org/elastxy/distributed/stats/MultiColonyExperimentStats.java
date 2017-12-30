@@ -16,9 +16,12 @@ import org.elastxy.core.domain.experiment.Solution;
 import org.elastxy.core.stats.ExperimentStats;
 
 /**
+ * 
+ * TODO3-2: manage two different types of ExperimentStats?
+ * 
  * @author grossi
  */
-public class MultiColonyExperimentStats extends ExperimentStats { // TODOB-2: manage two different types of ExperimentStats?
+public class MultiColonyExperimentStats extends ExperimentStats {
 	// Common to SingleColonyExperimentStats
 //	public Object target;
 //    public double executionTimeMs;
@@ -30,7 +33,7 @@ public class MultiColonyExperimentStats extends ExperimentStats { // TODOB-2: ma
     public List<Solution> otherBestMatches;
 
    
-    // TODOM-2: ResultsRenderer: create a specific multicolony ResultsRenderer
+    // TODO1-2: ResultsRenderer: create a specific multicolony ResultsRenderer
     public String toString(){
     	StringBuffer buf = new StringBuffer();
         buf.append("##################### STATS #####################").append(Character.LINE_SEPARATOR);

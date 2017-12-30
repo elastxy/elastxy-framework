@@ -40,7 +40,7 @@ public class SparkTaskExecutor {
     	
     	// Create client
     	logger.info("Creating client..");
-    	// TODOM-2: inject task configurations, or get from external properties
+    	// TODO1-2: inject task configurations, or get from external properties
 //    	final Map<String,String> environmentVariables = new HashMap<>();
 //    	environmentVariables.put("log4j.configuration",				config.log4jConfiguration);
 //    	environmentVariables.put("spark.eventLog.enabled",			config.historyEventsEnabled);
@@ -114,7 +114,7 @@ public class SparkTaskExecutor {
     
 
     
-    // TODOB-1: remove duplication
+    // TODO3-1: remove duplication on ExperimentResponse builder
 	private ExperimentResponse res(boolean webRequest, AlgorithmContext context, ExperimentStats stats){
 		return webRequest ? webRenderer.render(context, stats) : intRenderer.render(context, stats);
 	}

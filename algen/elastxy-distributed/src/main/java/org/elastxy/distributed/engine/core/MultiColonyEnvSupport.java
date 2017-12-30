@@ -26,7 +26,7 @@ public class MultiColonyEnvSupport {
         return now - env.startTime;
     }
     
-    // TODOM-2: Stats collection to be completed
+    // FIXME: Stats collection to be completed
     public static MultiColonyExperimentStats getStats(MultiColonyEnv env){
         MultiColonyExperimentStats stats = new MultiColonyExperimentStats();
         stats.target = env.target;

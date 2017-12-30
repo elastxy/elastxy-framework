@@ -11,7 +11,7 @@ import org.elastxy.distributed.dataprovider.BroadcastWorkingDataset;
 import org.elastxy.distributed.dataprovider.ProcessingOnlyDistributedDatasetProvider;
 
 /**
- * TODOM-4: bloccare le interfacce in ottica SDK!
+ * TODO2-4: bloccare le interfacce in ottica SDK!
  * @author red
  *
  */

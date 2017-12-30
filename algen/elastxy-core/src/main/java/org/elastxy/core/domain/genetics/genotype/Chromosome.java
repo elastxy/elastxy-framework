@@ -26,7 +26,7 @@ public class Chromosome implements Genotype {
 	/**
 	 * Returns the list of available positions: [0..N]
 	 */
-//	@Cacheable(value = "genotype_positions") // TODOM-2: cache!
+//	@Cacheable(value = "genotype_positions") // TODO2-2: cache!
 	@JsonIgnore
 	@Override
 	public List<String> getPositions() {

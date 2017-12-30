@@ -32,7 +32,7 @@ public abstract class AbstractFitnessCalculator<S extends GenericSolution, F ext
 	 */
 	@Override
     public Fitness calculate(Solution sol, Env env) {
-        GenericSolution solution = (GenericSolution)sol; // TODOM-2: manage Solution generic type...
+        GenericSolution solution = (GenericSolution)sol; // TODO1-2: generics: manage Solution generic type...
         
 		// Setup fitness
 		StandardFitness result = new StandardFitness();

@@ -4,7 +4,7 @@ package org.elastxy.core.applications.components;
 /**
  * Metadata for a Component
  * 
- * TODOM-8: components as scripting passed online: to be carefully evaluated
+ * TODO3-8: components as scripting passed online: to be carefully evaluated
  * 
  * @author red
  *

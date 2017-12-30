@@ -18,11 +18,6 @@ public class SparkTaskConfig {
 
 	public String outputPath; 					//e.g. "C:/tmp/results"
 	
-	// TODOB-2: generate a more safe taskIdentifier
-    // Examples: 
-    // 1514025726113_523_banana
-	// 1514025743598_784_banana
-
 	/**
 	 * Uniquely identifies task name before it's executed.
 	 * Used to grab back results, for example.

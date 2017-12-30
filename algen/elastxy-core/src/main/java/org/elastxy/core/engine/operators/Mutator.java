@@ -7,7 +7,7 @@ import org.elastxy.core.domain.genetics.Genoma;
 /**
  * Mutator operator.
  *
- * TODOM-2: check performance of Mutator operator implementations.
+ * TODO1-2: check performance of Mutator operator implementations.
  * 
  * @author red
  */

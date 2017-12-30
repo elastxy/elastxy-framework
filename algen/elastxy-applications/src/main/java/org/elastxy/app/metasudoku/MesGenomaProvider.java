@@ -23,7 +23,7 @@ import org.elastxy.core.engine.genetics.PredefinedGenomaBuilder;
  *  
  *  Set of alleles is F in number, and limited when creating a new solution
  *  
- * TODOM-2: cache!
+ * TODO2-2: cache!
  * @author red
  *
  */

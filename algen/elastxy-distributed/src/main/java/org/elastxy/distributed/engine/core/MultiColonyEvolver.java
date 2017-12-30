@@ -132,8 +132,8 @@ public class MultiColonyEvolver implements Evolver {
     
 
 	private void executeMultiColonyEra() {
-		// TODOM-1: logging
-//          	if(logger.isTraceEnabled()) Monitoring.printPartitionsGenoma(initialGenomaRDD)
+		// TODO2-1: log partitions as in Scala sandbox
+		// if(logger.isTraceEnabled()) Monitoring.printPartitionsGenoma(initialGenomaRDD)
 		DistributedAlleleValuesProvider alleleValuesProvider = (DistributedAlleleValuesProvider)env.genoma.getAlleleValuesProvider();
 		
 		// NOTE: context passed must be serializable and will be copied to new Java Runtime!
@@ -189,9 +189,9 @@ public class MultiColonyEvolver implements Evolver {
     private boolean checkEndCondition(){
         boolean result = false;
     	if(checkColoniesGoal() || env.currentEraNumber >= context.algorithmParameters.stopConditions.maxEras-1){
-        	// TODOM-2: new stop condition: check max eras identical fitnesses
+        	// TODO2-2: new stop condition: check max eras identical fitnesses
           logger.info("   >>> End condition found! Execution will be stopped.");
-          fireTargetReachedEvent(null); // TODOM-2: pass stats
+          fireTargetReachedEvent(null); // TODO2-2: pass stats
           result = true;
         }
     	return result;
@@ -203,19 +203,19 @@ public class MultiColonyEvolver implements Evolver {
     }
 	
 
-    // TODOM-1: evaluate a maxEons concept and replace maxEras with erasPerEon
+    // TODO3-1: evaluate a maxEons concept and replace maxEras with erasPerEon
 	private void checkEonProgress() {
 		if((env.currentEraNumber+1) % context.algorithmParameters.reshuffleEveryEras == 0){
 			logger.info(String.format("   >>> 1.5 New Eon repartition required [era %d]", env.currentEraNumber));
 			fireReshuffleEvent(env.currentEraNumber);
-		    // TODOM-4: Elitism: maintain best matches over reshuffle?
+		    // TODO3-4: Elitism: maintain best matches over reshuffle?
 		    ((StandardMultiColonyEnvFactory)context.application.multiColonyEnvFactory).newEon(env);
 		}
 	}
 
     
     
-    // TODOM-2: ResultsRenderer: create a specific multicolony ResultsRenderer
+    // TODO1-2: ResultsRenderer: create a specific multicolony ResultsRenderer
     private void viewResults(List<Solution> bestMatches){
         logFinal("-----------------------------------------------");
         final Long goalAccumulator = env.goalAccumulator.isPresent() ? env.goalAccumulator.get().value() : null;

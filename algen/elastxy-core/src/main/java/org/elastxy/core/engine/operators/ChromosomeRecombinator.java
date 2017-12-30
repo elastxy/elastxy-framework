@@ -24,8 +24,8 @@ public class ChromosomeRecombinator implements Recombinator<Solution> {
     /**
      * Recombination of two Solution. Two are the expected parents.
      * 
-     * TODOM-2: check performance of Recombination operator
-     * TODOM-4: more than 2 parents management
+     * TODO1-2: check performance of Recombination operator
+     * TODO3-4: more than 2 parents management
      * 
      * @param other
      * @return
@@ -33,7 +33,7 @@ public class ChromosomeRecombinator implements Recombinator<Solution> {
 	public List<Solution> recombine(List<Solution> parents, boolean preserveAlleles){
 		
 		// Define cut point
-		// TODOM-1: define cut point from metadata!
+		// TODO2-1: define cut point from metadata!
 		Chromosome genotype0 = (Chromosome)parents.get(0).getGenotype();
 		
 		int genesSize = genotype0.genes.size();

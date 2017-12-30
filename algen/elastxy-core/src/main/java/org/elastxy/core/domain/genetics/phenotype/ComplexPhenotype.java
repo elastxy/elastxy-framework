@@ -19,7 +19,7 @@ public class ComplexPhenotype implements Phenotype<Map<String,Object>> {
 	
 	public Phenotype<Map<String,Object>> copy(){
 		ComplexPhenotype result = new ComplexPhenotype();
-		result.value = value; // TODOA-4: shallow or deep copy? this is ok only if read only
+		result.value = value; // TODO1-4: shallow or deep copy? this is ok only if read only
 		return result;
 	}
 

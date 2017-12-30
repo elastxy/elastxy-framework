@@ -37,7 +37,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 public class DistributedController {
 	private static transient Logger logger = Logger.getLogger(DistributedController.class);
 
-	// TODOM-2: check status & kill jobs
+	// TODO0-2: check status & kill jobs
 	
 	@Autowired private DistributedApplicationService applicationService;
 
@@ -80,7 +80,7 @@ public class DistributedController {
     }
     
     
-	// TODOM-1: check, benchmark, analysis, trial in distributed controller
+	// TODO1-1: check, benchmark, analysis, trial in distributed controller
 //	@RequestMapping("/local/test/{application}")
 //	@ResponseBody
 //	public ResponseEntity<String> testLocal(@PathVariable String application) {

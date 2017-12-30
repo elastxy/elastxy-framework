@@ -43,7 +43,7 @@ public class AlgorithmParameters implements Serializable {
 	public long initialSelectionNumber = DefaultConfiguration.DEFAULT_INITIAL_SELECTION_NUMBER;    
 	public boolean initialSelectionRandom = DefaultConfiguration.DEFAULT_INITIAL_SELECTION_RANDOM;
 
-	// TODOM-8: Selection types: stochastic sampling, roulette-wheel, tournament (con % gruppi), truncation (con %) + elitism, reward based
+	// TODO2-8: Selection types: stochastic sampling, roulette-wheel, tournament (con % gruppi), truncation (con %) + elitism, reward based
     // At the end they are 4: Proportional selection (in combination with a scaling method), linear ranking, tournament selection, and
     // (,)-selection (respectively (+)-selection).
     //	public SelectionType selectionType = DefaultConfiguration.DEFAULT_SELECTION_TYPE;
@@ -58,10 +58,10 @@ public class AlgorithmParameters implements Serializable {
 	 * See:
 	 * https://pdfs.semanticscholar.org/ea3c/6ef1b13eb007a5a633a71c011fb0f9843218.pdf
 	 */
-	// TODOM-4: pressure increase
+	// TODO2-4: selection pressure increase
     //	public double pressureIncrease = DefaultConfiguration.DEFAULT_SELECTION_PRESSURE_INCREASE;
 
-    // TODOM-8: base selection on individuals analysing promising groups of genes instead at looking only at fitness
+    // TODO3-8: base selection on individuals analysing promising groups of genes instead at looking only at fitness
 	// public BlockSearchType blockSearchType = DefaultConfiguration.DEFAULT_BUILDING_BLOCK_SEARCH_TYPE
 	
     
@@ -74,10 +74,10 @@ public class AlgorithmParameters implements Serializable {
 	
 	public boolean crossoverPointRandom = DefaultConfiguration.DEFAULT_CROSSOVER_POINT_RANDOM;
 	
-	// TODOM-4: Ordering: not ordered, ordered (based on natural genes ordering given by application)
+	// TODO3-4: Ordering: not ordered, ordered (based on natural genes ordering given by application)
 	//	public RecombinationOrderType recombinationOrder = DefaultConfiguration.DEFAULT_RECOMBINANTION_ORDER;
 	
-	// TODOM-8: Recombination Types: single point, multipoint, uniform, half uniform, three parents, CX
+	// TODO2-8: Recombination Types: single point, multipoint, uniform, half uniform, three parents, CX
 	// https://www.tutorialspoint.com/genetic_algorithms/genetic_algorithms_crossover.htm
 	// http://ictactjournals.in/paper/IJSC_V6_I1_paper_4_pp_1083_1092.pdf
 	
@@ -92,8 +92,8 @@ public class AlgorithmParameters implements Serializable {
 	 */
 	public double mutationPerc = DefaultConfiguration.DEFAULT_MUTATION_PERC;
 
-	// TODOM-8: Mutation types: https://www.tutorialspoint.com/genetic_algorithms/genetic_algorithms_mutation.htm
-	// TODOM-4: Auto (decrease based on current results and genes alphabet length if available), Fixed ratio, Increase pressure
+	// TODO3-8: Mutation types: https://www.tutorialspoint.com/genetic_algorithms/genetic_algorithms_mutation.htm
+	// TODO3-4: Auto (decrease based on current results and genes alphabet length if available), Fixed ratio, Increase pressure
 	//	public MutationDecreaseType mutationDecreaseType =  = DefaultConfiguration.DEFAULT_MUTATION_DECREASE_TYPE; 
 	//	public double mutationDecreaseRatio =  = DefaultConfiguration.DEFAULT_MUTATION_DECREASE_RATIO; 
 

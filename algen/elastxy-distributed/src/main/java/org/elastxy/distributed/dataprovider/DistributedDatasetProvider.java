@@ -9,7 +9,7 @@ import org.elastxy.core.dataprovider.DatasetProvider;
  * raw input data into an RDD and random repartitioning
  * (coalesce) data across nodes.
  * 
- * TODOM-8: input data in streaming
+ * TODO3-8: input data in streaming
  *  
  * After this operation, genetic material is shared
  * by spreading Genoma either (within same partition),

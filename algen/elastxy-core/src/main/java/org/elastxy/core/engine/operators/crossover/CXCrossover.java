@@ -14,7 +14,7 @@ import org.elastxy.core.engine.operators.Crossover;
 /**
  * See CXDCrossover explanations, but without admitting duplicates.
  * 
- * TODOM: link with Apache math3 library. Check no duplicates in input.
+ * TODO3-1: link Apache math3 library. Check no duplicates in input.
  * 
  * @author red
  *

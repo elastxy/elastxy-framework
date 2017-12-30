@@ -19,8 +19,8 @@ import org.elastxy.core.domain.experiment.Solution;
  * @author grossi
  */
 public class ExperimentStats  {
-	// TODOA-8: fix generics
-	// TODOM-2: typed to Target
+	// TODO1-8: fix generics
+	// TODO3-2: typed to Target
 	public Object target;
 //    public String bestMatchRendering;
     public Solution bestMatch;

@@ -43,7 +43,7 @@ public class CXDCrossover implements Crossover {
 	 * (2/3*|3) (1*2/|1)
 	 * (2/3*|2) (1*2/|1)
 	 * 
-	 * TODOM-2: For efficiency, better swapping those in shorter part.
+	 * TODO1-2: For efficiency, better swapping those in shorter part.
 	 * 
 	 * @param off0genes
 	 * @param off1genes
@@ -65,7 +65,7 @@ public class CXDCrossover implements Crossover {
         // and of the children: do a crossover copy to simplify the later processing
 		
 		final int length = parent1Copy.size();
-        parent1Copy = new ArrayList<Gene>(parent1Copy); // TODOM: optimization: no copy of genes
+        parent1Copy = new ArrayList<Gene>(parent1Copy); // TODO2-1: optimization: no copy of genes
         final List<Gene> child1Rep = new ArrayList<Gene>(parent1Copy);
         final List<Gene> child2Rep = new ArrayList<Gene>(parent2Copy);
 

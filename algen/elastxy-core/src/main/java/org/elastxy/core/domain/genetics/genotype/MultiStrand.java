@@ -9,7 +9,7 @@ package org.elastxy.core.domain.genetics.genotype;
 // * Multiple strand fashion genotype, similar to a two-strand DNA (helix).
 // * For every gene, chose the dominant allele.
 // * 
-// * TODOM-1: check if useful for improving performance
+// * TODO3-1: check if useful for improving performance
 // *  
 // * Position: "<strand>.<chromosome>.<gene>"
 // * E.g. "0.0.0", "0.0.1", .. , "0.1.0", "5.4", .. , "M.N" 

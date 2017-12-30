@@ -79,7 +79,7 @@ public class SingleColonyEvolver implements Evolver {
         Fitness bestFitness = env.lastGen.bestMatch.getFitness();
         boolean endConditionFound = checkEndCondition(null, bestFitness);
         
-        // TODOA-4: selection-operators-fitness-check also for first generation, bypassing operators
+        // FIXME: selection-operators-fitness-check also for first generation, bypassing operators
 //    	boolean endConditionFound = false;
 //    	long populationSize = context.algorithmParameters.initialSelectionNumber;
 //    	if(context.monitoringConfiguration.traceHistory) env.generationsHistory.add(env.lastGen);

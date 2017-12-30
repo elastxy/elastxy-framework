@@ -50,7 +50,8 @@ public class MefTargetBuilder implements TargetBuilder<MultiplePerformanceTarget
 
 
     /**
-     * A list of foods from refrigerator (TODOM-4: mef: by code, not by name)
+     * A list of foods from refrigerator.
+     * TODO2-4: mef: by code, not by name
      * 
      * @return
      */

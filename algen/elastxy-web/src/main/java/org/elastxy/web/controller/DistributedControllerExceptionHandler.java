@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.context.request.WebRequest;
 import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExceptionHandler;
 
-// TODOM-4: to be completed for every meaningful use case
+// TODO3-4: to be completed for every meaningful use case
 @ControllerAdvice
 public class DistributedControllerExceptionHandler extends ResponseEntityExceptionHandler {
 	private static Logger logger = Logger.getLogger(DistributedControllerExceptionHandler.class);

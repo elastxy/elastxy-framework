@@ -12,7 +12,7 @@ import org.elastxy.distributed.dataprovider.BroadcastWorkingDataset;
 import org.elastxy.distributed.dataprovider.ProcessingOnlyDistributedDatasetProvider;
 
 /**
- * TODOM-4: bloccare le interfacce in ottica SDK!
+ * TODO2-4: bloccare le interfacce in ottica SDK!
  * @author red
  *
  */
@@ -32,7 +32,7 @@ public class MefdDistributedDatasetProvider extends ProcessingOnlyDistributedDat
 	 * Broadcast feasible recipes file to all nodes.
 	 * 
 	 * Delegates Recipes list creation to old MefDatasetProvider.
-	 * TODOM-2: evaluate injection of localDatasetProvider component into distributed.
+	 * TODO3-2: evaluate injection of localDatasetProvider component into distributed.
 	 * 
 	 */
 	@Override

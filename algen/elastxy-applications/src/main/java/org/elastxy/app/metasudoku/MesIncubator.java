@@ -32,7 +32,7 @@ public class MesIncubator implements Incubator<Chromosome, ComplexPhenotype>{
 	public ComplexPhenotype grow(Chromosome genotype, Env env) {
 		int[][] goal = (int[][])env.target.getGoal();
 
-		// TODOM-2: create a ConsistencyChecker for Incubator and other components
+		// TODO3-2: create a ConsistencyChecker for Incubator and other components
 //		if(logger.isDebugEnabled()){
 //		checkGoal(goal, genotype.genes);
 //		}

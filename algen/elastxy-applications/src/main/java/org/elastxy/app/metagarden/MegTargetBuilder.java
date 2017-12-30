@@ -21,7 +21,7 @@ public class MegTargetBuilder implements TargetBuilder<String, Double> {
 	
 	@Override
 	public PerformanceTarget<String, Double> define(WorkingDataset dataset) {
-		// TODOM-2: evaluate a specific target builder in distributed environment to set overall goals?
+		// TODO3-2: evaluate a specific target builder in distributed environment to set overall goals?
 		if(!(dataset instanceof MegWorkingDataset)){
 			return null;
 		}

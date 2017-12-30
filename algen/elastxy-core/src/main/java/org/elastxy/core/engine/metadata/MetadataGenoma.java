@@ -15,7 +15,7 @@ import org.elastxy.core.domain.genetics.genotype.Allele;
  * E.g. when multiple chromosomes are involved, positions are in the form of "x.y" instead of "x".
  * See also: {@link SequenceGenotype}, {@link ChromosomeGenotype}, {@link DoubleStrandGenotype}
  * 
- * TODOB-2: evaluate if it's useful to create a specific MetadataGenoma type "ChromosomeMetadataGenoma"
+ * TODO3-2: evaluate if it's useful to create a specific MetadataGenoma type "ChromosomeMetadataGenoma"
  * composing multiple "StandardMetadataGenoma", one for each chromosome...
  * 
  * @author red
@@ -33,7 +33,7 @@ public interface MetadataGenoma extends Genoma {
 
 	/**
 	 * Get the metadata by code
-	 * TODOM-2: move to Structure?
+	 * TODO2-2: move getMetadataByCode to Structure?
 	 * @param metadataCode
 	 * @return
 	 */
@@ -42,7 +42,7 @@ public interface MetadataGenoma extends Genoma {
 
 	/**
 	 * Get the metadata by a given position
-	 * TODOM-2: move to Structure?
+	 * TODO2-2: move getMetadataByPosition to Structure?
 	 * @param metadataCode
 	 * @return
 	 */
@@ -64,9 +64,9 @@ public interface MetadataGenoma extends Genoma {
 	/**
 	 * Retrieves a random Allele suitable for the given metadata.
 	 * 
-	 * TODOM-2: only by metadatacode String?
-	 * TODOM-8: reorder and document these APIs
-	 * TODOM-4: create a JavaDoc on important APIs!
+	 * TODO3-2: only by metadatacode String?
+	 * TODO1-8: reorder and document these APIs
+	 * TODO2-4: create a JavaDoc on important APIs!
 	 * 
 	 * @param metadata
 	 * @return
@@ -77,7 +77,7 @@ public interface MetadataGenoma extends Genoma {
 	/**
 	 * Retrieves the list of Alleles suitable for the given metadata.
 	 * 
-	 * TODOM-2: only by metadatacode String?
+	 * TODO2-2: only by metadatacode String?
 	 * 
 	 * @param metadata
 	 * @return

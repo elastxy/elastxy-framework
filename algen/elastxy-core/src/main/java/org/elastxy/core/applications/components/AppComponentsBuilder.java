@@ -22,7 +22,7 @@ import org.springframework.stereotype.Component;
  * Builds up all the ApplicationComponents, based on 
  * ApplicationMetadata metadata definition.
  * 
- * TODOB-2: evaluate Command for this duties
+ * TODO3-2: evaluate Command for duties like builders
  * 
  * @author red
  *
@@ -42,11 +42,11 @@ public class AppComponentsBuilder {
 		result.appName = 				applicationMetadata.appName;
 		result.appFolder = 				applicationMetadata.appFolder!=null ? "appdata/"+applicationMetadata.appFolder : "appdata/"+applicationMetadata.appName;
 
-		// TODOM-2: provide default when applicable, to reduce verbosity of application.json config
+		// TODO2-2: provide default when applicable, to reduce verbosity of application.json config
 		result.targetBuilder = 		(TargetBuilder)constructComponent(applicationMetadata.targetBuilder);
 		result.envFactory = 		(EnvFactory)constructComponent(applicationMetadata.envFactory);
 		
-		// TODOB-2: not by reference: indirection with name?
+		// TODO3-2: link not by reference: indirection with name?
 		result.datasetProvider = (DatasetProvider)constructComponent(applicationMetadata.datasetProvider);
 		result.genomaProvider = 	(GenomaProvider)constructComponent(applicationMetadata.genomaProvider);
 		result.alleleGenerator = 	(AlleleGenerator)constructComponent(applicationMetadata.alleleGenerator);
@@ -65,7 +65,7 @@ public class AppComponentsBuilder {
 		result.resultsRenderer = 	(ResultsRenderer)constructComponent(applicationMetadata.resultsRenderer);
 
 		// Distributed application
-		// TODOM-4: one only property (e.g. envFactory) but assigned based on runtime context: LOCAL|DISTRIBUTED
+		// TODO2-4: evaluate one only property (e.g. envFactory) but assigned based on runtime context: LOCAL|DISTRIBUTED
 		result.multiColonyEnvFactory =(EnvFactory)constructComponent(applicationMetadata.multiColonyEnvFactory);
 		result.distributedDatasetProvider =(DatasetProvider)constructComponent(applicationMetadata.distributedDatasetProvider);
 		result.singleColonyDatasetProvider = (DatasetProvider)constructComponent(applicationMetadata.singleColonyDatasetProvider);
@@ -113,7 +113,7 @@ public class AppComponentsBuilder {
 	
 	
 	/**
-	 * TODOM-2: Initialize the ApplicationComponents for InitializationAware components: to be used?
+	 * TODO3-2: Initialize the ApplicationComponents for InitializationAware components: to be used?
 	 */
 	public AppComponents init(AppComponents appComponents){
 		return appComponents;

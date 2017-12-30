@@ -70,7 +70,7 @@ public class StandardFitness implements Fitness {
 
 	
 	/**
-	 * TODOM-2: use only compareTo for all??
+	 * TODO3-2: use only compareTo for all??
 	 */
 	@Override
     public boolean greaterThan(Fitness other){

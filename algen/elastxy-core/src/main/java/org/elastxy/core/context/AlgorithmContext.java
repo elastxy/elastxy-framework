@@ -14,10 +14,10 @@ import org.elastxy.core.conf.MonitoringConfiguration;
  * Context of a single execution: application functions, parameters, 
  * custom input, monitoring conf.
  * 
- * All parameters attributes must be serializable, because 
+ * More or less all parameters attributes should be serializable, because 
  * they can be distributed to other executors in a cluster.
  * 
- * TODOM-2: check if AppComponents either should be Serializable... tradeoffs
+ * TODO3-2: check if AppComponents either should be Serializable... tradeoffs
  * 
  * @author red
  */
