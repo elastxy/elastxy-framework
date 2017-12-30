@@ -18,25 +18,11 @@ import org.elastxy.core.domain.experiment.Solution;
 public class FitnessComparator implements Comparator<Solution> {
 
 	@Override
-	public int compare(Solution arg1, Solution arg2) {
-		BigDecimal fitness1 = arg1.getFitness()==null ? null : arg1.getFitness().getValue();
-		BigDecimal fitness2 = arg2.getFitness()==null ? null : arg2.getFitness().getValue();
-		int result = 0;
-		if(fitness1==null && fitness2!=null){
-			result = 1;
-		}
-		else if(fitness1!=null && fitness2==null){
-			result = -1;
-		}
-		else if(fitness1==null && fitness2==null){
-			result = 0;
-		}
-		else {
-			result = fitness1.compareTo(fitness2); // TODOM-1: check scale
-		}
-		
-		// MINUS SIGN => reverse order, from higher to lower
-		return -result;
+	public int compare(Solution a, Solution b) {
+		// null are worst cases
+		BigDecimal aFitness = a.getFitness()==null || a.getFitness().getValue()==null ? BigDecimal.ZERO : a.getFitness().getValue();
+		BigDecimal bFitness = b.getFitness()==null || b.getFitness().getValue()==null ? BigDecimal.ZERO : b.getFitness().getValue();
+		return bFitness.compareTo(aFitness);
 	}
 
 }

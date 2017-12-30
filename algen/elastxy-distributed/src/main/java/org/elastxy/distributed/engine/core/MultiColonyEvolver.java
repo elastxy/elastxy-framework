@@ -1,7 +1,5 @@
 package org.elastxy.distributed.engine.core;
 
-import java.math.BigDecimal;
-import java.util.Comparator;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -12,6 +10,7 @@ import org.elastxy.core.domain.experiment.Solution;
 import org.elastxy.core.domain.genetics.genotype.Allele;
 import org.elastxy.core.engine.core.BestMatchesSupport;
 import org.elastxy.core.engine.core.Evolver;
+import org.elastxy.core.engine.fitness.FitnessComparator;
 import org.elastxy.core.stats.ExperimentStats;
 import org.elastxy.core.tracking.EnvObserver;
 import org.elastxy.distributed.context.DistributedAlgorithmContext;
@@ -167,21 +166,17 @@ public class MultiColonyEvolver implements Evolver {
 				context.algorithmParameters.elitism.multiColonyElitismPerc, 
 				context.algorithmParameters.initialSelectionNumber);
 		env.allBestMatches.addAll(env.eraBestMatches);
-		env.allBestMatches = env.allBestMatches.stream().sorted(
-				new Comparator<Solution>() {
-					public int compare(Solution a, Solution b) {
-						// null are worst cases
-						BigDecimal aFitness = a.getFitness()==null || a.getFitness().getValue()==null ? BigDecimal.ZERO : a.getFitness().getValue();
-						BigDecimal bFitness = b.getFitness()==null || b.getFitness().getValue()==null ? BigDecimal.ZERO : b.getFitness().getValue();
-						return bFitness.compareTo(aFitness);
-					}
-				}).
+		env.allBestMatches = env.allBestMatches.stream().
+				sorted(new FitnessComparator()).
 				limit(eliteNumber).
 				collect(Collectors.toList());
 		
 		if(logger.isInfoEnabled()){
-			// TODOA-1: order before print!
-			Solution eraBestMatch = env.eraBestMatches==null || env.eraBestMatches.isEmpty() ? null : env.eraBestMatches.get(0);
+			Solution eraBestMatch = env.eraBestMatches==null || env.eraBestMatches.isEmpty() ? 
+					null : 
+					env.eraBestMatches.stream().
+						sorted(new FitnessComparator()).
+						collect(Collectors.toList()).get(0);
 			logger.info(String.format(">>> 		Era %d best match: %30.200s", env.currentEraNumber, eraBestMatch)); 
 			Solution allBestMatch = env.allBestMatches==null || env.allBestMatches.isEmpty() ? null : env.allBestMatches.get(0);
 			logger.info(String.format(">>> 		All eras best match: %30.200s", allBestMatch)); 

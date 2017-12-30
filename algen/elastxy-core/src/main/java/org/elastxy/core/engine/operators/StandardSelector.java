@@ -34,12 +34,8 @@ public class StandardSelector implements Selector<Genoma> {
     public Population select(Population actualGeneration, Genoma genoma){
     	Population newGeneration = new Population();
     	
-//		actualGeneration.solutions = actualGeneration.solutions.stream().sorted(
-//         		new Comparator<Solution>() {
-//         			public int compare(Solution a, Solution b) {
-//         				return b.getFitness().getValue().compareTo(a.getFitness().getValue());
-//         			}
-//         		}).
+//		actualGeneration.solutions = actualGeneration.solutions.stream().
+//    			sorted(new FitnessComparator<Solution>()).
 //         		collect(Collectors.toList());
 
     	// No elitism: creation of new population initially identical to previous
