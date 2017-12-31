@@ -1,5 +1,7 @@
 package org.elastxy.web.controller;
 
+import java.security.AccessControlException;
+
 import org.apache.log4j.Logger;
 import org.elastxy.core.applications.ApplicationException;
 import org.elastxy.core.conf.ConfigurationException;
@@ -18,7 +20,34 @@ import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExcep
 @ControllerAdvice
 public class DistributedControllerExceptionHandler extends ResponseEntityExceptionHandler {
 	private static Logger logger = Logger.getLogger(DistributedControllerExceptionHandler.class);
- 
+
+	/**
+	 * ----------------------------------
+	 * SECURITY
+	 * ----------------------------------
+	 * Authentication/authorization problems.
+	 * 
+	 * @param ex
+	 * @param request
+	 * @return
+	 */
+
+	// WRONG AUTHENTICATION
+	@ExceptionHandler(value = { SecurityException.class })
+    protected ResponseEntity<Object> handleAuthentication(RuntimeException ex, WebRequest request) {
+    	String bodyOfResponse = "Security issue detected (authentication or generic).";
+    	log(bodyOfResponse, ex);
+        return handleExceptionInternal(ex, bodyOfResponse, new HttpHeaders(), HttpStatus.UNAUTHORIZED, request);
+    }
+	
+	// ACCESS TO RESOURCES NOT ALLOWED
+    @ExceptionHandler(value = { AccessControlException.class })
+    protected ResponseEntity<Object> handleAuthorization(RuntimeException ex, WebRequest request) {
+    	String bodyOfResponse = "Security issue detected (authorization on resources denied).";
+    	log(bodyOfResponse, ex);
+        return handleExceptionInternal(ex, bodyOfResponse, new HttpHeaders(), HttpStatus.FORBIDDEN, request);
+    }
+	
 	/**
 	 * ----------------------------------
 	 * PRECONDIZIONI

@@ -19,6 +19,7 @@ import org.springframework.stereotype.Component;
 
 import com.github.ywilkof.sparkrestclient.DriverState;
 import com.github.ywilkof.sparkrestclient.SparkRestClient;
+import com.github.ywilkof.sparkrestclient.interfaces.JobStatusRequestSpecification;
 
 @Component
 public class SparkTaskExecutor {
@@ -28,6 +29,40 @@ public class SparkTaskExecutor {
 	@Autowired private WebExperimentResponseRenderer webRenderer;
 	@Autowired private InternalExperimentResponseRenderer intRenderer;
 
+	
+
+    public String checkJobStatus(SparkTaskConfig config, String jobId) throws Exception {
+    	logger.info("Checking job status. JobId: "+jobId);
+    	
+    	logger.info("Task Configuration");
+    	logger.info(config.toString());
+
+    	// Create client
+    	final SparkRestClient sparkClient = createClient(config);
+
+    	// Check job
+    	DriverState driverState = sparkClient.checkJobStatus().withSubmissionId(jobId);
+    	logger.info("Driver state: "+driverState);
+    	return driverState.toString();
+    }
+
+    
+    public boolean killJob(SparkTaskConfig config, String jobId) throws Exception {
+    	logger.info("Killing job. JobId: "+jobId);
+    	
+    	logger.info("Task Configuration");
+    	logger.info(config.toString());
+
+    	// Create client
+    	final SparkRestClient sparkClient = createClient(config);
+
+    	// Check job
+    	boolean killed = sparkClient.killJob().withSubmissionId(jobId);
+    	logger.info("Job killed: "+killed);
+    	return killed;
+    }
+	
+	
 	
     public String runDistributed(SparkTaskConfig config, DistributedAlgorithmContext context) throws Exception {
 
@@ -39,21 +74,7 @@ public class SparkTaskExecutor {
 		String contextAsString = Base64.getEncoder().encodeToString(contextBytes);
     	
     	// Create client
-    	logger.info("Creating client..");
-    	// TODO1-2: inject task configurations, or get from external properties
-//    	final Map<String,String> environmentVariables = new HashMap<>();
-//    	environmentVariables.put("log4j.configuration",				config.log4jConfiguration);
-//    	environmentVariables.put("spark.eventLog.enabled",			config.historyEventsEnabled);
-//    	environmentVariables.put("spark.eventLog.dir",				config.historyEventsDir);
-//    	environmentVariables.put("spark.history.fs.logDirectory",	config.historyEventsDir);
-//    	logger.info("Client config: "+Arrays.asList(config.masterHost, config.sparkVersion, environmentVariables));
-    	logger.info("Client config: "+Arrays.asList(config.masterHost, config.sparkVersion));
-    	final SparkRestClient sparkClient = SparkRestClient.builder()
-        	.masterHost(config.masterHost)
-        	.sparkVersion(config.sparkVersion)
-//        	.environmentVariables(environmentVariables)
-        	.build();
-    	logger.info("Client created on API root: "+sparkClient.getMasterApiRoot());
+    	final SparkRestClient sparkClient = createClient(config);
     	
     	// Submit job
     	logger.info("Submitting remote job with taskIdentifier ["+config.taskIdentifier+"]");
@@ -111,6 +132,27 @@ public class SparkTaskExecutor {
          }
     	return driverState.toString();
     }
+
+
+
+	private SparkRestClient createClient(SparkTaskConfig config) {
+		logger.info("Creating client..");
+    	// TODO1-2: inject task configurations, or get from external properties
+//    	final Map<String,String> environmentVariables = new HashMap<>();
+//    	environmentVariables.put("log4j.configuration",				config.log4jConfiguration);
+//    	environmentVariables.put("spark.eventLog.enabled",			config.historyEventsEnabled);
+//    	environmentVariables.put("spark.eventLog.dir",				config.historyEventsDir);
+//    	environmentVariables.put("spark.history.fs.logDirectory",	config.historyEventsDir);
+//    	logger.info("Client config: "+Arrays.asList(config.masterHost, config.sparkVersion, environmentVariables));
+    	logger.info("Client config: "+Arrays.asList(config.masterHost, config.sparkVersion));
+    	final SparkRestClient sparkClient = SparkRestClient.builder()
+        	.masterHost(config.masterHost)
+        	.sparkVersion(config.sparkVersion)
+//        	.environmentVariables(environmentVariables)
+        	.build();
+    	logger.info("Client created on API root: "+sparkClient.getMasterApiRoot());
+		return sparkClient;
+	}
     
 
     

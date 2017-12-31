@@ -1,6 +1,8 @@
 package org.elastxy.web.controller;
 
+import java.security.AccessControlException;
 import java.util.Collections;
+import java.util.Locale;
 import java.util.Map;
 
 import org.apache.log4j.Logger;
@@ -13,12 +15,14 @@ import org.elastxy.core.engine.core.AlgorithmException;
 import org.elastxy.core.engine.core.IllegalSolutionException;
 import org.elastxy.web.application.InfoService;
 import org.elastxy.web.distributed.SparkHealthCheckTask;
+import org.elastxy.web.distributed.SparkJobService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -34,11 +38,11 @@ public class MonitorController {
 
 	@Autowired private InfoService infoService;
 
-	@Autowired
-	private SparkConf sparkConfLocal;
+	@Autowired private SparkJobService sparkJobService;
 	
-	@Autowired
-	private SparkConf sparkConfRemote;
+	@Autowired private SparkConf sparkConfLocal;
+	
+	@Autowired private SparkConf sparkConfRemote;
 
 	@Value("${test.file.path}")
 	private String testFilePath;
@@ -77,6 +81,46 @@ public class MonitorController {
         return new ResponseEntity<>("LOCAL: \n"+localResult+"\nREMOTE: \n"+remoteResult, HttpStatus.OK);
     }
     
+    
+
+    @RequestMapping(path = "/jobs/{jobId}/status", method = RequestMethod.GET)
+	@ResponseBody
+    public ExperimentResponse checkJobStatus(
+    		@PathVariable String jobId,  
+			@RequestHeader(value="Web-Request", defaultValue="true") boolean webRequest,
+			Locale userLocale) throws Exception {
+    	logger.info("REQUEST Service /jobs/{jobId}/status => "+jobId);
+    	if(webRequest) throw new IllegalAccessError("API not allowed.");
+    	
+    	String status = sparkJobService.checkJobStatus(jobId);
+		ExperimentResponse response = new ExperimentResponse();
+		response.status = ResponseStatus.OK;
+		response.content = "Job "+jobId+" status:" + status;
+		
+    	logger.info("RESPONSE Service /jobs/{jobId}/status => "+response.status);
+    	return response;
+    }
+    
+
+    @RequestMapping(path = "/jobs/{jobId}/kill", method = RequestMethod.PUT)
+	@ResponseBody
+    public ExperimentResponse killJob(
+    		@PathVariable String jobId,  
+			@RequestHeader(value="Web-Request", defaultValue="true") boolean webRequest,
+			Locale userLocale) throws Exception {
+    	logger.info("REQUEST Service /jobs/{jobId}/kill => "+jobId);
+    	if(webRequest) throw new IllegalAccessError("API not allowed.");
+    	
+    	boolean status = sparkJobService.killJob(jobId);
+		ExperimentResponse response = new ExperimentResponse();
+		response.status = ResponseStatus.OK;
+		response.content = "Job "+jobId+" killed: "+status;
+		
+    	logger.info("RESPONSE Service /jobs/{jobId}/kill => "+response.status);
+    	return response;
+    }
+    
+    
 
 	/**
 	 * Loopback error test controller.
@@ -103,9 +147,12 @@ public class MonitorController {
 		
 		else if("9".equals(code)) throw new RuntimeException("handleGeneric");
 		
+		else if("10".equals(code)) throw new AccessControlException("handleAuthorization");
+		else if("11".equals(code)) throw new SecurityException("handleAuthentication");
+		
 		if(true) throw new Error("Wrong parameter code: "+code);
 		
-    	logger.info("RESPONSE Service GET /error/{code} => Error?");
+    	logger.info("RESPONSE Service GET /error/{code} => Error?"); // code not reachable, it's ok ;)
         return new ResponseEntity<>("ERROR "+code+" NOT THROWN!", HttpStatus.OK);
     }
     

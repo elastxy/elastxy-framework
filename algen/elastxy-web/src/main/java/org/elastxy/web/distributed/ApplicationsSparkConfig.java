@@ -49,12 +49,28 @@ public class ApplicationsSparkConfig {
 	private String outputPath;
 
 	
-	public SparkTaskConfig getTaskConfig(String application) {
+	/**
+	 * For monitoring usage.
+	 * @param application
+	 * @return
+	 */
+	public SparkTaskConfig getTaskConfig() {
 		SparkTaskConfig config = new SparkTaskConfig();
 		config.masterURI = masterUri;
 		config.masterHost = masterHost;
 		config.sparkVersion = sparkVersion;    	
 		config.sparkHome = sparkHome;
+		return config;
+	}
+	
+	
+	/**
+	 * For application usage.
+	 * @param application
+	 * @return
+	 */
+	public SparkTaskConfig getTaskConfig(String application) {
+		SparkTaskConfig config = getTaskConfig();
 		config.appName = application;
 		config.appJarPath = appJarPath;
 		config.mainClass = mainClass;
@@ -64,10 +80,6 @@ public class ApplicationsSparkConfig {
 		return config;
 	}
 	
-	public static void main(String[] args){
-		String s = String.format("%d_%d_%s", System.currentTimeMillis(), Randomizer.nextInt(1000), "banana");
-		System.out.println(s);
-	}
 	
 	@Bean
 	public static PropertySourcesPlaceholderConfigurer propertySourcesPlaceholderConfigurer() {

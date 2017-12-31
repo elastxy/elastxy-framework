@@ -118,12 +118,9 @@
 								"value": "false"
 							}
 						],
-						"body": {
-							"mode": "raw",
-							"raw": ""
-						},
+						"body": {},
 						"url": {
-							"raw": "http://{{ip}}:{{port}}/monitor/error/5",
+							"raw": "http://{{ip}}:{{port}}/monitor/error/10",
 							"protocol": "http",
 							"host": [
 								"{{ip}}"
@@ -132,7 +129,71 @@
 							"path": [
 								"monitor",
 								"error",
-								"5"
+								"10"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "/monitor/jobs/{jobId}/status",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "Web-Request",
+								"value": "false"
+							}
+						],
+						"body": {},
+						"url": {
+							"raw": "http://{{ip}}:{{port}}/monitor/jobs/driver-20171231143940-0002/status",
+							"protocol": "http",
+							"host": [
+								"{{ip}}"
+							],
+							"port": "{{port}}",
+							"path": [
+								"monitor",
+								"jobs",
+								"driver-20171231143940-0002",
+								"status"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "/monitor/jobs/{jobId}/kill",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "Web-Request",
+								"value": "false"
+							}
+						],
+						"body": {},
+						"url": {
+							"raw": "http://{{ip}}:{{port}}/monitor/jobs/driver-20171231143940-0002/kill",
+							"protocol": "http",
+							"host": [
+								"{{ip}}"
+							],
+							"port": "{{port}}",
+							"path": [
+								"monitor",
+								"jobs",
+								"driver-20171231143940-0002",
+								"kill"
 							]
 						}
 					},
@@ -810,7 +871,7 @@
 							},
 							"response": [
 								{
-									"id": "5013b9a9-d865-4f92-bc16-608fa172275f",
+									"id": "09bb2494-3c8a-410e-b530-40bd44d47f36",
 									"name": "Database EN",
 									"originalRequest": {
 										"method": "POST",
@@ -847,7 +908,7 @@
 									"body": ""
 								},
 								{
-									"id": "490bac57-4152-4395-85f8-a5a00c1d6ffd",
+									"id": "80bc9fad-7b2f-40cc-b8e0-dcf944242f10",
 									"name": "Database IT",
 									"originalRequest": {
 										"method": "POST",
@@ -884,7 +945,7 @@
 									"body": ""
 								},
 								{
-									"id": "5ef7e32b-fb55-4cff-8d7c-49defd4f30e8",
+									"id": "b6b373e1-3860-4c5a-a66c-17233960f216",
 									"name": "Dispensa Rossi",
 									"originalRequest": {
 										"method": "POST",
@@ -1051,7 +1112,7 @@
 							},
 							"response": [
 								{
-									"id": "0d55b4f3-e274-41f1-be12-a9877b605142",
+									"id": "f5ab6c6b-d6d7-4da2-9433-e5e8e548f219",
 									"name": "Database EN",
 									"originalRequest": {
 										"method": "POST",
@@ -1088,7 +1149,7 @@
 									"body": ""
 								},
 								{
-									"id": "973a6029-3143-4ae4-9d98-1b69a9703b03",
+									"id": "d1bf679f-4326-41fd-ad5f-96cb45a47fff",
 									"name": "Database IT",
 									"originalRequest": {
 										"method": "POST",
@@ -1125,7 +1186,7 @@
 									"body": ""
 								},
 								{
-									"id": "da4f174d-ff53-4450-9a4d-3892eb764beb",
+									"id": "711ecdec-3eeb-4f5e-a5e0-18b10019468d",
 									"name": "Dispensa Rossi",
 									"originalRequest": {
 										"method": "POST",
@@ -1285,7 +1346,7 @@
 								],
 								"body": {
 									"mode": "raw",
-									"raw": "{\r\n\t\"applicationSpecifics\": {\r\n\t\t\"target\" : {\r\n\t\t\t\"TARGET_EXPRESSION_RESULT\" : 23\r\n\t\t},\r\n\t\t\"params\" : {\r\n\t\t\t\"MAX_OPERAND_VALUE\" : 100\r\n\t\t}\r\n\t},\r\n\t\"algorithmParameters\": {\r\n\t\t\"recombinationPerc\": 0.8,\r\n\t\t\"mutationPerc\": 0.2,\r\n\t\t\"initialSelectionNumber\": 10,\r\n\t\t\"initialSelectionRandom\": true,\r\n\t\t\"stopConditions\": {\r\n\t\t\t\"targetFitness\" : 1.0,\r\n\t\t\t\"maxGenerations\": -1,\r\n\t\t\t\"maxLifetimeMs\": 3000,\r\n\t\t\t\"maxIdenticalFitnesses\": -1,\r\n\t\t\t\"maxEras\": 3\r\n\t\t},\r\n\t\t\"partitions\": 4,\r\n\t\t\"reshuffleEveryEras\" : 2,\r\n\t\t\"elitism\": {\r\n\t\t\t\"singleColonyElitism\": true,\r\n\t\t\t\"singleColonyElitismNumber\": 1,\r\n\t\t\t\"multiColonyElitism\" : true,\r\n\t\t\t\"multiColonyElitismNumber\" : 10\r\n\t\t}\r\n\t},\r\n\t\"monitoringConfiguration\": {\r\n\t\t\"verbose\": false,\r\n\t\t\"traceHistory\": false\r\n\t}\r\n}\r\n"
+									"raw": "{\r\n\t\"applicationSpecifics\": {\r\n\t\t\"target\" : {\r\n\t\t\t\"TARGET_EXPRESSION_RESULT\" : 235000\r\n\t\t},\r\n\t\t\"params\" : {\r\n\t\t\t\"MAX_OPERAND_VALUE\" : 1000\r\n\t\t}\r\n\t},\r\n\t\"algorithmParameters\": {\r\n\t\t\"recombinationPerc\": 0.8,\r\n\t\t\"mutationPerc\": 0.2,\r\n\t\t\"initialSelectionNumber\": 1000,\r\n\t\t\"initialSelectionRandom\": true,\r\n\t\t\"stopConditions\": {\r\n\t\t\t\"targetThreshold\" : 0.99999999,\r\n\t\t\t\"maxGenerations\": 1000,\r\n\t\t\t\"maxLifetimeMs\": -1,\r\n\t\t\t\"maxIdenticalFitnesses\": -1,\r\n\t\t\t\"maxEras\": 3\r\n\t\t},\r\n\t\t\"partitions\": 4,\r\n\t\t\"reshuffleEveryEras\" : 2,\r\n\t\t\"elitism\": {\r\n\t\t\t\"singleColonyElitism\": true,\r\n\t\t\t\"singleColonyElitismNumber\": 10,\r\n\t\t\t\"multiColonyElitism\" : true,\r\n\t\t\t\"multiColonyElitismNumber\" : 10,\r\n\t\t\t\"recombineElite\": true\r\n\t\t}\r\n\t},\r\n\t\"monitoringConfiguration\": {\r\n\t\t\"verbose\": false,\r\n\t\t\"showGraph\": true\r\n\t}\r\n}"
 								},
 								"url": {
 									"raw": "http://{{ip}}:{{port}}/distributed/cluster/experiment/expressions_d",
@@ -1356,6 +1417,41 @@
 								"body": {
 									"mode": "raw",
 									"raw": "{\r\n\t\"applicationSpecifics\": {\r\n\t\t\"target\" : {\r\n\t\t\t\"TARGET_EXPRESSION_RESULT\" : 235000\r\n\t\t},\r\n\t\t\"params\" : {\r\n\t\t\t\"MAX_OPERAND_VALUE\" : 1000000\r\n\t\t}\r\n\t},\r\n\t\"algorithmParameters\": {\r\n\t\t\"recombinationPerc\": 0.5,\r\n\t\t\"mutationPerc\": 0.2,\r\n\t\t\"initialSelectionNumber\": 1000,\r\n\t\t\"initialSelectionRandom\": true,\r\n\t\t\"stopConditions\": {\r\n\t\t\t\"targetFitness\" : 1.0,\r\n\t\t\t\"maxGenerations\": -1,\r\n\t\t\t\"maxLifetimeMs\": 3000,\r\n\t\t\t\"maxIdenticalFitnesses\": -1,\r\n\t\t\t\"maxEras\": 5\r\n\t\t},\r\n\t\t\"partitions\": 4,\r\n\t\t\"reshuffleEveryEras\" : 3,\r\n\t\t\"elitism\": {\r\n\t\t\t\"singleColonyElitism\": true,\r\n\t\t\t\"singleColonyElitismNumber\": 1,\r\n\t\t\t\"multiColonyElitism\" : true,\r\n\t\t\t\"multiColonyElitismNumber\" : 100\r\n\t\t}\r\n\t},\r\n\t\"monitoringConfiguration\": {\r\n\t\t\"verbose\": false,\r\n\t\t\"traceHistory\": false\r\n\t}\r\n}\r\n"
+								},
+								"url": {
+									"raw": "http://{{ip}}:{{port}}/distributed/cluster/experiment/expressions_d",
+									"protocol": "http",
+									"host": [
+										"{{ip}}"
+									],
+									"port": "{{port}}",
+									"path": [
+										"distributed",
+										"cluster",
+										"experiment",
+										"expressions_d"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "APP /distr/exp/local",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									},
+									{
+										"key": "Web-Request",
+										"value": "false"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n\t\"applicationSpecifics\": {\r\n\t\t\"target\" : {\r\n\t\t\t\"TARGET_EXPRESSION_RESULT\" : 23\r\n\t\t},\r\n\t\t\"params\" : {\r\n\t\t\t\"MAX_OPERAND_VALUE\" : 11\r\n\t\t}\r\n\t},\r\n\t\"algorithmParameters\": {\r\n\t\t\"recombinationPerc\": 0.8,\r\n\t\t\"mutationPerc\": 0.2,\r\n\t\t\"initialSelectionNumber\": 1000,\r\n\t\t\"initialSelectionRandom\": true,\r\n\t\t\"stopConditions\": {\r\n\t\t\t\"targetThreshold\" : 1.0,\r\n\t\t\t\"maxGenerations\": -1,\r\n\t\t\t\"maxLifetimeMs\": 60000,\r\n\t\t\t\"maxIdenticalFitnesses\": -1,\r\n\t\t\t\"maxEras\": 3\r\n\t\t},\r\n\t\t\"partitions\": 4,\r\n\t\t\"reshuffleEveryEras\" : 2,\r\n\t\t\"elitism\": {\r\n\t\t\t\"singleColonyElitism\": true,\r\n\t\t\t\"singleColonyElitismNumber\": 10,\r\n\t\t\t\"multiColonyElitism\" : true,\r\n\t\t\t\"multiColonyElitismNumber\" : 10,\r\n\t\t\t\"recombineElite\": true\r\n\t\t}\r\n\t},\r\n\t\"monitoringConfiguration\": {\r\n\t\t\"verbose\": false,\r\n\t\t\"showGraph\": true\r\n\t}\r\n}"
 								},
 								"url": {
 									"raw": "http://{{ip}}:{{port}}/distributed/cluster/experiment/expressions_d",
@@ -2317,7 +2413,7 @@
 					},
 					"response": [
 						{
-							"id": "493a4070-6c72-42c7-9284-8a8a7fc953eb",
+							"id": "649ac60a-1788-43d5-9a57-85324c6ec570",
 							"name": "Database EN",
 							"originalRequest": {
 								"method": "POST",
@@ -2354,7 +2450,7 @@
 							"body": ""
 						},
 						{
-							"id": "8210c5eb-2ae7-482f-b9ad-6560a480a52a",
+							"id": "abde9a11-85f8-4fbf-9942-9913d4163a48",
 							"name": "Database IT",
 							"originalRequest": {
 								"method": "POST",
@@ -2391,7 +2487,7 @@
 							"body": ""
 						},
 						{
-							"id": "206697d7-885c-4622-8a20-d8d29462ef77",
+							"id": "4783529c-9965-4e1e-8a55-87849efbd520",
 							"name": "Dispensa Rossi",
 							"originalRequest": {
 								"method": "POST",
@@ -2739,18 +2835,16 @@
 				{
 					"listen": "prerequest",
 					"script": {
-						"id": "ab148a61-1fba-4d44-82f1-3d8a4c3c4279",
-						"type": "text/javascript",
 						"exec": [
 							""
-						]
+						],
+						"id": "ab148a61-1fba-4d44-82f1-3d8a4c3c4279",
+						"type": "text/javascript"
 					}
 				},
 				{
 					"listen": "test",
 					"script": {
-						"id": "076450b3-b3d5-4e6b-803a-518df0e9944c",
-						"type": "text/javascript",
 						"exec": [
 							"        pm.test(\"HTTP Status 200\", function () {",
 							"            pm.response.to.have.status(200);",
@@ -2768,7 +2862,9 @@
 							"            var jsonData = pm.response.json();",
 							"            pm.expect(jsonData.experimentStats.bestMatch.fitness.value).to.be.within(minFitness,1.0);",
 							"        });"
-						]
+						],
+						"id": "076450b3-b3d5-4e6b-803a-518df0e9944c",
+						"type": "text/javascript"
 					}
 				}
 			]

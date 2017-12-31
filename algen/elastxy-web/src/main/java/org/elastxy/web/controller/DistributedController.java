@@ -22,6 +22,7 @@ import org.apache.log4j.Logger;
 import org.elastxy.core.context.RequestContext;
 import org.elastxy.distributed.context.DistributedAlgorithmContext;
 import org.elastxy.web.distributed.DistributedApplicationService;
+import org.elastxy.web.distributed.SparkJobService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -37,11 +38,9 @@ import org.springframework.web.bind.annotation.ResponseBody;
 public class DistributedController {
 	private static transient Logger logger = Logger.getLogger(DistributedController.class);
 
-	// TODO0-2: check status & kill jobs
-	
 	@Autowired private DistributedApplicationService applicationService;
 
-
+    
     @RequestMapping(path = "/local/experiment/{application}", method = RequestMethod.POST)
 	@ResponseBody
     public ExperimentResponse executeExperimentLocal(
