@@ -88,6 +88,7 @@ public class StandardFitness implements Fitness {
 	 */
 	@Override
     public boolean nearestThan(Fitness other, BigDecimal targetFitness) {
+		// TODO1-1: investigate null pointer in local cluster test
 		BigDecimal otherDistance = other.getValue().subtract(targetFitness).abs();
 		BigDecimal thisDistance = value.subtract(targetFitness).abs();
         return otherDistance.compareTo(thisDistance) >  0;
@@ -117,8 +118,13 @@ public class StandardFitness implements Fitness {
 	
 	
 	private int compareTo(BigDecimal other){
-        return value.setScale(SCALE, BigDecimal.ROUND_HALF_UP).
-        		compareTo(other.setScale(SCALE, BigDecimal.ROUND_HALF_UP));
+//        return value.setScale(SCALE, BigDecimal.ROUND_HALF_UP).
+//                compareTo(other.setScale(SCALE, BigDecimal.ROUND_HALF_UP));
+
+		// null are worst cases
+		BigDecimal thisFitness = value==null ? BigDecimal.ZERO : value.setScale(SCALE, BigDecimal.ROUND_HALF_UP);
+		BigDecimal otherFitness = other==null ? BigDecimal.ZERO : other.setScale(SCALE, BigDecimal.ROUND_HALF_UP);
+		return thisFitness.compareTo(otherFitness);
 	}
 	
 
