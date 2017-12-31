@@ -15,8 +15,8 @@ import org.elastxy.core.context.AlgorithmContext;
 import org.elastxy.core.domain.experiment.Solution;
 import org.elastxy.core.domain.experiment.Target;
 import org.elastxy.core.domain.genetics.genotype.Allele;
-import org.elastxy.core.engine.core.SingleColonyExperiment;
 import org.elastxy.core.stats.ExperimentStats;
+import org.elastxy.distributed.context.SingleColonyClosureContext;
 import org.elastxy.distributed.dataprovider.BroadcastWorkingDataset;
 import org.elastxy.distributed.dataprovider.BroadcastedDatasetProvider;
 import org.elastxy.distributed.dataprovider.ProcessingOnlyDistributedGenomaProvider;
@@ -46,54 +46,38 @@ import org.elastxy.distributed.dataprovider.ProcessingOnlyDistributedGenomaProvi
  */
 public class SingleColonyClosure implements FlatMapFunction<Iterator<Allele>, Solution> {
 	private static Logger logger = Logger.getLogger(SingleColonyClosure.class);
+
 	
-	private long currentEraNumber = 0L;
-	private AlgorithmContext context;
-	private Target target;
-    private LongAccumulator coloniesGoalAccumulator;
-    private Broadcast<List<Allele>> mutatedGenesBC;
-    private Broadcast<List<Solution>> previousBestMatchesBC;
-    private Map<String, BroadcastWorkingDataset> broadcastDatasets;
+	private SingleColonyClosureContext closureContext;
     
-    
-    // TODO0-1: ClosureContext instead of many params
-	public SingleColonyClosure(
-			long currentEraNumber,
-			AlgorithmContext context,
-			Target target,
-  			LongAccumulator coloniesGoalAccumulator,
-  			Broadcast<List<Allele>> mutatedGenesBC,
-  			Broadcast<List<Solution>> previousBestMatchesBC,
-  			Map<String, BroadcastWorkingDataset> broadcastDatasets){
-		this.currentEraNumber = currentEraNumber;
-		this.context = context;
-		this.target = target;
-		this.coloniesGoalAccumulator = coloniesGoalAccumulator;
-		this.mutatedGenesBC = mutatedGenesBC;
-		this.previousBestMatchesBC = previousBestMatchesBC;
-		this.broadcastDatasets = broadcastDatasets;
+	public SingleColonyClosure(SingleColonyClosureContext closureContext){
+		this.closureContext = closureContext;
 	}
 	
 	
 	public Iterator<Solution> call(Iterator<Allele> initialGenomaIterator) throws Exception {
 
-		logger.info(">>> 2.0 Bootstrapping LOCAL application context");
+		logger.info(">>> 2.0 Bootstrapping LOCAL application context & check parameters");
+		closureContext.check();
 		bootstrap();
 		
-		logger.info(String.format(">>> 2.1 Population Creation [era %d] 					WORKER => List[Solution]", currentEraNumber));
+		logger.info(String.format(">>> 2.1 Population Creation [era %d] 					WORKER => List[Solution]", closureContext.currentEraNumber));
 	    
-		boolean processingOnly = (context.application.distributedGenomaProvider instanceof ProcessingOnlyDistributedGenomaProvider) ? true : false;
+		boolean processingOnly = (closureContext.algorithmContext.application.distributedGenomaProvider instanceof ProcessingOnlyDistributedGenomaProvider) ? true : false;
+		logger.info(String.format(">>> 2.2 Executing local experiment [era %d, processing only: %b] 		WORKER => List[Solution] WORKER => List[Best]", closureContext.currentEraNumber, processingOnly));
 		ExperimentStats stats = processingOnly ? runIsolatedColonyExperiment() : runLinkedColonyExperiment(initialGenomaIterator);
 		
+		logger.info(String.format(">>> 2.3 Check end condition [era %d] 					WORKER => Accumulator", closureContext.currentEraNumber));
 		if(stats.targetReached){
 			logger.info(">>> TARGET GOAL REACHED!!! <<<");
 			logger.info(">>> BestMatch: "+stats.bestMatch+" <<<");
-			this.coloniesGoalAccumulator.add(1);
+			closureContext.coloniesGoalAccumulator.add(1);
 		}
 		List<Solution> bestMatches = new ArrayList<Solution>();
 		bestMatches.addAll(stats.lastGeneration.bestMatches);
 		return bestMatches.iterator();
 	}
+	
 
 	
 	/**
@@ -106,16 +90,16 @@ public class SingleColonyClosure implements FlatMapFunction<Iterator<Allele>, So
 	private ExperimentStats runIsolatedColonyExperiment() {
 		
 		// Import Solution from Broadcast variable => new best solutions
-		List<Solution> previousBestMatches = previousBestMatchesBC==null ? null : previousBestMatchesBC.getValue();
+		List<Solution> previousBestMatches = closureContext.previousBestMatchesBC==null ? null : closureContext.previousBestMatchesBC.getValue();
 		if(logger.isTraceEnabled()) logger.trace(String.format("Solutions from prev best matches: %.2000s", previousBestMatches));
 
 	    // TODO3-4: Creates a local complete Genoma Provider (???)
 	    
 	    // Executes local Experiment
-		if(logger.isTraceEnabled()) logger.trace(String.format(">>> Single Colony Experiment Context %n%s", context));
+		if(logger.isTraceEnabled()) logger.trace(String.format(">>> Single Colony Experiment Context %n%s", closureContext.algorithmContext));
 		SingleColonyClosureExperiment experiment = new SingleColonyClosureExperiment(
-				context, 
-				target, 
+				closureContext.algorithmContext, 
+				closureContext.target, 
 				null,
 				null,
 				previousBestMatches);
@@ -139,20 +123,20 @@ public class SingleColonyClosure implements FlatMapFunction<Iterator<Allele>, So
 		if(logger.isTraceEnabled()) logger.trace(String.format("New population alleles: %.2000s ", newPopulationAlleles));
 	    
 		// Import Alleles from Broadcast variable => new mutations
-		List<Allele> mutationAlleles = mutatedGenesBC.getValue();
+		List<Allele> mutationAlleles = closureContext.mutatedGenesBC.getValue();
 		if(logger.isTraceEnabled()) logger.trace(String.format("Alleles for mutation: %.2000s", mutationAlleles));
 
 		// Import Solution from Broadcast variable => new best solutions
-		List<Solution> previousBestMatches = previousBestMatchesBC==null ? null : previousBestMatchesBC.getValue();
+		List<Solution> previousBestMatches = closureContext.previousBestMatchesBC==null ? null : closureContext.previousBestMatchesBC.getValue();
 		if(logger.isTraceEnabled()) logger.trace(String.format("Solutions from prev best matches: %.2000s", previousBestMatches));
 
 	    // TODO3-4: Creates a local complete Genoma Provider (???)
 	    
 	    // Executes local Experiment
-		if(logger.isTraceEnabled()) logger.trace(String.format(">>> Single Colony Experiment Context %n%s", context));
+		if(logger.isTraceEnabled()) logger.trace(String.format(">>> Single Colony Experiment Context %n%s", closureContext.algorithmContext));
 		SingleColonyClosureExperiment experiment = new SingleColonyClosureExperiment(
-				context, 
-				target, 
+				closureContext.algorithmContext, 
+				closureContext.target, 
 				newPopulationAlleles,
 				mutationAlleles,
 				previousBestMatches);
@@ -164,27 +148,27 @@ public class SingleColonyClosure implements FlatMapFunction<Iterator<Allele>, So
 
 	private void bootstrap() {
 		AppBootstrapRaw bootstrap = new AppBootstrapRaw();
-		AppComponentsLocator locator = bootstrap.boot(context.application.appName);
-		// TODO0-1: check if mandatory configurations are present!
+		AppComponentsLocator locator = bootstrap.boot(closureContext.algorithmContext.application.appName);
 		logger.info("Initializing Closure LOCAL context.");
 		setupContext(locator);
 	}
 
 	
 	private void setupContext(AppComponentsLocator locator) {
-		context.application = locator.get(context.application.appName);
-		if(context.application.datasetProvider!=null) {
-			context.application.datasetProvider.setup(context);
+		AlgorithmContext ctx = closureContext.algorithmContext;
+		ctx.application = locator.get(ctx.application.appName);
+		if(ctx.application.datasetProvider!=null) {
+			ctx.application.datasetProvider.setup(ctx);
 		}
-		if(context.application.singleColonyDatasetProvider!=null && context.application.singleColonyDatasetProvider instanceof BroadcastedDatasetProvider) {
-			((BroadcastedDatasetProvider)context.application.singleColonyDatasetProvider).setBroadcastDatasets(broadcastDatasets);
-			context.application.singleColonyDatasetProvider.setup(context);
+		if(ctx.application.singleColonyDatasetProvider!=null && ctx.application.singleColonyDatasetProvider instanceof BroadcastedDatasetProvider) {
+			((BroadcastedDatasetProvider)ctx.application.singleColonyDatasetProvider).setBroadcastDatasets(closureContext.broadcastDatasets);
+			ctx.application.singleColonyDatasetProvider.setup(ctx);
 		}
-		context.application.genomaProvider.setup(context);
-		context.application.selector.setup(context);
-		context.application.recombinator.setup(context.algorithmParameters);
-		context.application.targetBuilder.setup(context);
-		context.application.envFactory.setup(context);
+		ctx.application.genomaProvider.setup(ctx);
+		ctx.application.selector.setup(ctx);
+		ctx.application.recombinator.setup(ctx.algorithmParameters);
+		ctx.application.targetBuilder.setup(ctx);
+		ctx.application.envFactory.setup(ctx);
 //		context.application.resultsRenderer.setup(context);
 	}
 	

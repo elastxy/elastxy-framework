@@ -14,6 +14,7 @@ import org.elastxy.core.engine.fitness.FitnessComparator;
 import org.elastxy.core.stats.ExperimentStats;
 import org.elastxy.core.tracking.EnvObserver;
 import org.elastxy.distributed.context.DistributedAlgorithmContext;
+import org.elastxy.distributed.context.SingleColonyClosureContext;
 import org.elastxy.distributed.dataprovider.DistributedAlleleValuesProvider;
 import org.elastxy.distributed.dataprovider.DistributedDatasetProvider;
 import org.elastxy.distributed.dataprovider.DistributedGenomaProvider;
@@ -79,7 +80,7 @@ public class MultiColonyEvolver implements Evolver {
     public void evolve(){
     	
     	// Start global timer
-        logger.info(">>> 0. START EXPERIMENT");
+        logger.info(">>> 0.0 START EXPERIMENT");
     	MultiColonyEnvSupport.startTime(env);
     	fireEvolutionStarted();
     	
@@ -114,12 +115,12 @@ public class MultiColonyEvolver implements Evolver {
           	
         }
         
-		logger.info(String.format(">>> 2. View results"));
+		logger.info(String.format(">>> 1.6 View results"));
         viewResults(env.allBestMatches);
         fireEvolutionEndedEvent(env.targetReached, env.totIdenticalFitnesses);
 
         // END OF EXPERIMENT
-        logFinal(">>> 3. END OF EXPERIMENT!");
+        logFinal(">>> 1.7 END OF EXPERIMENT!");
     }
     
     
@@ -139,15 +140,16 @@ public class MultiColonyEvolver implements Evolver {
 		// NOTE: context passed must be serializable and will be copied to new Java Runtime!
 		Broadcast<List<Solution>> prevBest = env.previousBestMatchesBroadcast.isPresent() ? env.previousBestMatchesBroadcast.get() : null;
 		
-		env.bestMatchesRDD = alleleValuesProvider.rdd().mapPartitions(new SingleColonyClosure(
-		    env.currentEraNumber,
-		    context,
-		    env.target,
-		    env.goalAccumulator.get(),
-		    env.mutationGenesBroadcast.get(),
-		    prevBest,
-		    env.broadcastWorkingDatasets
-		    ), true);
+		SingleColonyClosureContext closureContext = new SingleColonyClosureContext();
+		closureContext.currentEraNumber = env.currentEraNumber;
+		closureContext.algorithmContext = context;
+		closureContext.target = env.target;
+		closureContext.coloniesGoalAccumulator = env.goalAccumulator.get();
+		closureContext.mutatedGenesBC = env.mutationGenesBroadcast.get();
+		closureContext.previousBestMatchesBC = prevBest;
+		closureContext.broadcastDatasets = env.broadcastWorkingDatasets;
+	    
+		env.bestMatchesRDD = alleleValuesProvider.rdd().mapPartitions(new SingleColonyClosure(closureContext), true);
 		
 		if(logger.isDebugEnabled()) logger.debug(">>>>>> Era ACTION START");
 		env.eraBestMatches = env.bestMatchesRDD.collect();
