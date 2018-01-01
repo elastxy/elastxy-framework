@@ -135,7 +135,8 @@ public class MefIncubator implements Incubator<Strand, ComplexPhenotype>{
 				recipesIds.add((Long)gene.allele.value);
 			}
 			List<Recipe> recipes = workingDataset.getRecipes(recipesIds);
-			for(int r=0; r < recipes.size(); r++){
+			int tot = recipes.size();
+			for(int r=0; r < tot; r++){
 				Recipe recipe = recipes.get(r);
 				if(recipe.coverage == null || recipe.coverage == IngredientsCoverage.UNDEFINED){
 					String legalCheck = "Cannot convert Gene to Recipe. No coverage found ("+recipe.coverage+") for recipe id: "+recipe.id;

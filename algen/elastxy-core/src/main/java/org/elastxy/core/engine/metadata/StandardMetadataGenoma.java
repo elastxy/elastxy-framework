@@ -145,7 +145,8 @@ public class StandardMetadataGenoma extends AbstractGenoma implements MetadataGe
 		List<String> positions = new ArrayList<String>(genesMetadataByPos.keySet());
 		List<Allele> allelesList = getRandomAlleles(positions);
 		SortedMap<String, Allele> result = new TreeMap<String, Allele>(POSITIONS_COMPARATOR);
-		for(int a=0; a < allelesList.size(); a++){
+		int tot = allelesList.size();
+		for(int a=0; a < tot; a++){
 			result.put(positions.get(a), allelesList.get(a));
 		}
 		return result;

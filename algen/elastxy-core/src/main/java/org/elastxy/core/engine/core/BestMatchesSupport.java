@@ -71,7 +71,8 @@ public class BestMatchesSupport {
 			return; // no best matches to reintroduce
 		}
 		
-		for(int s=lastBestMatches.size()-1; s >= 0; s--){
+		int tot = lastBestMatches.size();
+		for(int s=tot-1; s >= 0; s--){
 			newGeneration.solutions.add(0, lastBestMatches.get(s));
 		}
 	}

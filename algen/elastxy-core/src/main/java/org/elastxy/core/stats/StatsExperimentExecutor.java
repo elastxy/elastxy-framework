@@ -76,7 +76,8 @@ public class StatsExperimentExecutor {
     	DescriptiveStatistics stats = new DescriptiveStatistics();
 
     	// Add the data from the array
-    	for( int i = 0; i < globalStats.successExecutionTimes.size(); i++) {
+    	int tot = globalStats.successExecutionTimes.size();
+    	for( int i = 0; i < tot; i++) {
     	        stats.addValue(globalStats.successExecutionTimes.get(i));
     	}
 

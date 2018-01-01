@@ -45,8 +45,8 @@ public class StrandGenotypeStructure extends GenotypeStructureImpl {
 	 */
 	private void countElements(){
 		List<String> positions = getPositions();
-		for(int p=0; p < positions.size(); p++){
-			String[] splitted = positions.get(p).split("\\.");
+		for(String pos : positions){
+			String[] splitted = pos.split("\\.");
 			
 			// Sequence
 			if(splitted.length==1){

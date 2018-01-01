@@ -82,12 +82,13 @@ public class PredefinedGenoma extends AbstractGenoma implements Genoma {
 		int positions = ((ChromosomeGenotypeStructure)genotypeStructure).getNumberOfGenes(0);
 		
 		List<Allele> result = new ArrayList<Allele>(alleleValuesProvider.getAlleles());
-		if(positions > result.size()){
-			for(int pos=result.size(); pos < positions; pos++){
+		int tot = result.size();
+		if(positions > tot){
+			for(int pos=tot; pos < positions; pos++){
 				result.add(getRandomAllele(String.valueOf(pos)));
 			}
 		}
-		else if(positions < result.size()){
+		else if(positions < tot){
 			throw new AlgorithmException("Shared possible Alleles number more than from genotype positions. Fix TODOM.");
 		}
 		Collections.shuffle(result);
@@ -116,7 +117,9 @@ public class PredefinedGenoma extends AbstractGenoma implements Genoma {
 		
 		SortedMap<String, Allele> result = new TreeMap<String, Allele>();
 		List<Allele> geneAlleles = new ArrayList<Allele>(alleleValuesProvider.getAlleles());
-		for(int pos=0; pos < genotypeStructure.getPositionsSize(); pos++){
+		// TODO0: all local variables final
+		int tot = genotypeStructure.getPositionsSize();
+		for(int pos=0; pos < tot; pos++){
 			String posString = String.valueOf(pos);
 			result.put(posString, getRandomAllele(posString));
 		}

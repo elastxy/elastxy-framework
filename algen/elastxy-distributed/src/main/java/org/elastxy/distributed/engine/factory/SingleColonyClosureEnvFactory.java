@@ -113,7 +113,8 @@ public class SingleColonyClosureEnvFactory implements EnvFactory {
 			}
 			else {
 				previousBestMatches = new ArrayList<Solution>(previousBestMatches.size());
-				for(int s=0; s < previousBestMatches.size(); s++) 
+				int tot = previousBestMatches.size();
+				for(int s=0; s < tot; s++) 
 					previousBestMatches.add(previousBestMatches.get(s).copy());
 			}
 		}

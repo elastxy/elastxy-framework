@@ -46,16 +46,17 @@ public class MefSolutionRenderer implements SolutionRenderer<String> {
 	private void printRecipes(StringBuffer sb, ComplexPhenotype phenotype, String type, String typeDescr) {
 		List<Recipe> recipes = (List<Recipe>)phenotype.getValue().get(type);
 		sb.append(String.format("%n%s RECIPES [%d]%n", typeDescr, recipes.size()));
-		for(int r=0; r < recipes.size(); r++){
+		int tot = recipes.size();
+		for(int r=0; r < tot; r++){
 			Recipe recipe = recipes.get(r);
 			sb.append(String.format("%d> %s (Coverage:%s)%n", (r+1), recipe.name, recipe.coverage));
 			sb.append("    Ingredients:\n");
-			for(int i=0; i < recipe.ingredients.size();i++){
-				sb.append(String.format("    . %s%n", recipe.ingredients.get(i)));
+			for(String i : recipe.ingredients){
+				sb.append(String.format("    . %s%n", i));
 			}
 			sb.append("    Available:\n");
-			for(int i=0; i < recipe.available.size();i++){
-				sb.append(String.format("    . %s%n", recipe.available.get(i)));
+			for(String a : recipe.available){
+				sb.append(String.format("    . %s%n", a));
 			}
 			sb.append("    Persons: "+recipe.persons+"\n");
 			sb.append("    Note: "+recipe.note+"\n");

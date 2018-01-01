@@ -69,11 +69,9 @@ public class MefDatasetProvider implements DatasetProvider {
 		recipes.put(RecipeType.SAVOURY, new ArrayList<Recipe>());
 		recipes.put(RecipeType.SWEET, 	new ArrayList<Recipe>());
 		recipes.put(RecipeType.NEUTRAL, new ArrayList<Recipe>());
-		for(int r = 0; r < recipesFromFile.size(); r++){
-			Recipe recipe = recipesFromFile.get(r);
-			recipes.get(recipe.recipeType).add(recipe);
+		for(Recipe r : recipesFromFile){
+			recipes.get(r.recipeType).add(r);
 		}
-
 		for(RecipeType type : RecipeType.values()){
 			logger.debug("Classified "+recipes.get(type).size()+" "+type+" recipes.");
 		}
@@ -114,9 +112,9 @@ public class MefDatasetProvider implements DatasetProvider {
 		Iterator<RecipeType> it = this.recipes.keySet().iterator();
 		while(it.hasNext()){
 			RecipeType rType = it.next();
+			// TODO1-1: mef: avoid drinks
 			List<Recipe> recipesByType = recipes.get(rType);
-			for(int r = 0; r < recipesByType.size(); r++){
-				Recipe recipe = recipesByType.get(r); // TODO1-1: mef: avoid drinks
+			for(Recipe recipe : recipesByType){
 				Recipe copy = recipe.copy();
 				if(MefUtils.feasibleWith(copy, fridgeFoods, pantryFoods)){
 					feasibleByType.get(rType).add(copy);

@@ -52,7 +52,8 @@ public class Strand implements Genotype {
 	@Override
 	public List<String> getPositions() {
 		List<String> result = new ArrayList<String>();
-		for(int c=0; c < chromosomes.size(); c++){
+		int tot = chromosomes.size();
+		for(int c=0; c < tot; c++){
 			final int ch = c;
 			result.addAll(IntStream.
 				range(0, chromosomes.get(c).genes.size()).
@@ -105,8 +106,8 @@ public class Strand implements Genotype {
 	public String toString(){
 		StringBuffer result = new StringBuffer();
 		result.append("Chromosomes: ");
-		for(int c=0; c < this.chromosomes.size(); c++){
-			result.append(chromosomes.get(c));
+		for(Chromosome c : chromosomes){
+			result.append(c);
 		}
 		return result.toString();
 	}

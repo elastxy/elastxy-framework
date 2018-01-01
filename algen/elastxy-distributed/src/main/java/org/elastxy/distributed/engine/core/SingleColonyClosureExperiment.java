@@ -120,11 +120,13 @@ public class SingleColonyClosureExperiment implements Experiment {
 					context.application.recombinator, 
 					previousBestMatches, 
 					environment.genoma.getLimitedAllelesStrategy());
-				for(int s=0; s < reinsertedBestMatches.size(); s++) 
+				int tot = reinsertedBestMatches.size();
+				for(int s=0; s < tot; s++) 
 					environment.lastGen.solutions.set(s, reinsertedBestMatches.get(s).copy());
 			}
 			else {
-				for(int s=0; s < previousBestMatches.size(); s++) 
+				int tot = previousBestMatches.size();
+				for(int s=0; s < tot; s++) 
 					environment.lastGen.solutions.set(s, previousBestMatches.get(s).copy());
 			}
 		}

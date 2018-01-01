@@ -182,7 +182,8 @@ public class MefGenomaProvider implements GenomaProvider {
 			}
 			
 			// Genes by positions
-			for(int meal=0; meal < mealsByType.get(entryType.getKey()); meal++){
+			int tot = mealsByType.get(entryType.getKey());
+			for(int meal=0; meal < tot; meal++){
 				String pos = genes.positions.get(geneCode).get(0)+meal; // positions = "x."+"y"
 				MetadataGenomaBuilder.addGene(genoma, pos, metadata); 
 			}

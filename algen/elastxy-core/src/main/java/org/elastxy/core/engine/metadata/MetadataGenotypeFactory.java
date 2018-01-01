@@ -44,7 +44,8 @@ public class MetadataGenotypeFactory {
 	 */
 	public static Chromosome createChromosome(MetadataGenoma genoma, List<Allele> alleles){
 		Chromosome result = new Chromosome();
-		for(int pos=0; pos < genoma.getGenotypeStructure().getPositionsSize(); pos++){
+		int tot = genoma.getGenotypeStructure().getPositionsSize();
+		for(int pos=0; pos < tot; pos++){
 			result.genes.add(createGeneByPosition(genoma, String.valueOf(pos)));
 		}
 
@@ -61,7 +62,8 @@ public class MetadataGenotypeFactory {
 	 */
 	public static Chromosome createChromosome(MetadataGenoma genoma){
 		Chromosome result = new Chromosome();
-		for(int pos=0; pos < genoma.getGenotypeStructure().getPositionsSize(); pos++){
+		int tot = genoma.getGenotypeStructure().getPositionsSize();
+		for(int pos=0; pos < tot; pos++){
 			result.genes.add(createGeneByPosition(genoma, String.valueOf(pos)));
 		}
 
@@ -70,7 +72,8 @@ public class MetadataGenotypeFactory {
     		throw new AlgorithmException("Number of possible different alleles less than number of genes creating a base predefined Solution. Check if you need the createRandom instead or try adding alleles");
     	} 
     	
-    	for(int i=0; i < alleles.size(); i++){
+    	tot = alleles.size();
+    	for(int i=0; i < tot; i++){
     		result.genes.get(i).allele = alleles.get(i);
     	}
 
@@ -95,9 +98,11 @@ public class MetadataGenotypeFactory {
 //		}
 		
 		// TODO0-8: all for cycles must not have logics repeated in condition
-		for(int c=0; c < genoma.getGenotypeStructure().getNumberOfChromosomes(); c++){
+		int totC = genoma.getGenotypeStructure().getNumberOfChromosomes();
+		for(int c=0; c < totC; c++){
 			Chromosome chromosome = new Chromosome();
-			for(int g=0; g < genoma.getGenotypeStructure().getNumberOfGenes(c); g++){
+			int totG = genoma.getGenotypeStructure().getNumberOfGenes(c);
+			for(int g=0; g < totG; g++){
 				Gene gene = createGeneByPosition(genoma, c+"."+g);
 				chromosome.genes.add(gene);
 			}

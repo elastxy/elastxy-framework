@@ -27,8 +27,7 @@ public class MefUtils {
 		
 		// For each ingredient in recipe, check whether is amongst the available
 		// based on similarity: if YES, add the food string value to the raw values
-		for(int i=0; i < recipe.ingredients.size(); i++){
-			String recipeIngredient = recipe.ingredients.get(i);
+		for(String recipeIngredient : recipe.ingredients){
 			
 			// Check if ingredient is acknowledge amongst available
 			// from fridge...
@@ -70,9 +69,8 @@ public class MefUtils {
 	 */
 	public static String containsSimilar(List<String> strings, String s){
 		String result = null;
-		for(int i=0; i < strings.size(); i++){
-			String string = strings.get(i);
-			if(similar(string,s)){
+		for(String string : strings){
+			if(similar(string, s)){
 				result = string;
 				break;
 			}

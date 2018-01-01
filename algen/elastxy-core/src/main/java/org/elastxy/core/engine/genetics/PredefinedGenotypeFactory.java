@@ -13,7 +13,8 @@ public class PredefinedGenotypeFactory {
 	 */
 	public static Chromosome createGenotype(PredefinedGenoma genoma){
 		Chromosome genotype = new Chromosome();
-		for(int pos=0; pos < genoma.getGenotypeStructure().getPositionsSize(); pos++){
+		int tot = genoma.getGenotypeStructure().getPositionsSize();
+		for(int pos=0; pos < tot; pos++){
 			Gene gene = new Gene();
 			gene.pos = String.valueOf(pos);
 			genotype.genes.add(gene);

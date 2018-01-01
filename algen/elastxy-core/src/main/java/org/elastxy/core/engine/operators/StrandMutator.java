@@ -22,7 +22,8 @@ public class StrandMutator implements Mutator<Solution, Genoma> {
 		
 		// Replace an allele to another for the same position for each chromosome
 		Strand genotype = (Strand)solution.getGenotype();
-		for(int c=0; c < genoma.getGenotypeStructure().getNumberOfChromosomes(); c++){
+		int tot = genoma.getGenotypeStructure().getNumberOfChromosomes();
+		for(int c=0; c < tot; c++){
 			List<String> positions = genotype.getPositions(c);
 			genoma.mutate(solution, positions);
 		}

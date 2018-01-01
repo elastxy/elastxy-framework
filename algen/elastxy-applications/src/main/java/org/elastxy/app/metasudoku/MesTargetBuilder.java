@@ -68,11 +68,13 @@ public class MesTargetBuilder implements TargetBuilder<int[][], Integer> {
     
     
     private int[][] toIntArray(List matrix){
-    	int[][] array = new int[matrix.size()][];
-    	for (int i = 0; i < matrix.size(); i++) {
+    	int totMatrix = matrix.size();
+    	int[][] array = new int[totMatrix][];
+    	for (int i = 0; i < totMatrix; i++) {
     	    List<Integer> row = (List<Integer>)matrix.get(i);
-    	    array[i] = new int[row.size()];
-    	    for(int j = 0; j < row.size(); j++){
+    	    int totRows = row.size();
+    	    array[i] = new int[totRows];
+    	    for(int j = 0; j < totRows; j++){
     	    	array[i][j] = row.get(j);
     	    }
     	}

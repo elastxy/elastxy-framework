@@ -119,8 +119,10 @@ public class CXDCrossover implements Crossover {
             indices.clear();
         }
 
-		for(int i=0; i < child1Rep.size(); i++) parent1Copy.set(i, child1Rep.get(i)); 
-		for(int i=0; i < child2Rep.size(); i++) parent2Copy.set(i, child2Rep.get(i)); 
+        int tot = child1Rep.size();
+		for(int i=0; i < tot; i++) parent1Copy.set(i, child1Rep.get(i)); 
+        tot = child2Rep.size();
+		for(int i=0; i < tot; i++) parent2Copy.set(i, child2Rep.get(i)); 
         return new List[]{parent1Copy, parent2Copy};
 	}
 	

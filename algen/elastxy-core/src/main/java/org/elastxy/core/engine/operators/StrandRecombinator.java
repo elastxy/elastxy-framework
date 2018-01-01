@@ -40,7 +40,8 @@ public class StrandRecombinator implements Recombinator<Solution> {
 		Solution[] offsprings = null;
 		
 		// for each chromosome
-		for(int c=0; c < genotype0.getNumberOfChromosomes(); c++){
+		int tot = genotype0.getNumberOfChromosomes();
+		for(int c=0; c < tot; c++){
 			int genesSize = genotype0.chromosomes.get(c).genes.size();
 			offsprings = RecombinatorLogics.generateOffsprings(parents, genesSize, c, preserveAlleles, algorithmParameters.crossoverPointRandom);
 		}

@@ -48,7 +48,8 @@ public class SudokuShrinkCommand {
     	}
 		
 		// Create restricted genoma
-		for(int i=0; i < missingNumbers.size(); i++){
+		int tot = missingNumbers.size();
+		for(int i=0; i < tot; i++){
 			Allele<Integer> allele = new Allele<Integer>();
 			allele.value = missingNumbers.get(i);
 			predefinedAlleles.add(allele);

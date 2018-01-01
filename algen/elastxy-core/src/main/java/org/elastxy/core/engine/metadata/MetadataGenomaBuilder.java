@@ -76,7 +76,8 @@ public class MetadataGenomaBuilder {
 			Entry<String, GeneMetadata> entry = it.next();
 			genoma.genesMetadataByCode.put(entry.getKey(), entry.getValue()); // yes, may be overwritten
 			List<String> positions = genes.positions.get(entry.getKey());
-			for(int p=0; p < positions.size(); p++){
+			int tot = positions.size();
+			for(int p=0; p < tot; p++){
 				genoma.genesMetadataByPos.put(String.valueOf(positions.get(p)), entry.getValue());
 			}
 		}
