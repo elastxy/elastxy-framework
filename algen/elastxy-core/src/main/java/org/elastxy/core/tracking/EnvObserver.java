@@ -117,6 +117,7 @@ public class EnvObserver {
             log.out("\n===================== HISTORY =====================");
             log.out("History of generations");
             List<Population> generations = stats.generationHistory;
+            // TODOM-2: increase for loops performance
             int tot = generations.size();
             for(int i=0; i < tot; i++){
             	log.out(String.format("Generation [%d] => Best match %s", i+1, generations.get(i).bestMatch));

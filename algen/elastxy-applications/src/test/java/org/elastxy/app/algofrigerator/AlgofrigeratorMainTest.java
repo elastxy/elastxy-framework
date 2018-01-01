@@ -10,7 +10,7 @@
 
 package org.elastxy.app.algofrigerator;
 
-import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.*;
 
 import java.io.File;
 
@@ -47,6 +47,7 @@ public class AlgofrigeratorMainTest {
         assertNotNull(stats);
         assertNotNull(stats.bestMatch);
         assertNotNull(stats.lastGeneration);
+        assertTrue(stats.bestMatch.getFitness().getValue().doubleValue() > 0.7);
     }
     
 }

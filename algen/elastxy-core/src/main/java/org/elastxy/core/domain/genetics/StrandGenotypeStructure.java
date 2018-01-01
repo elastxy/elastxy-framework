@@ -34,6 +34,7 @@ public class StrandGenotypeStructure extends GenotypeStructureImpl {
 	 */
 	public void build(SortedMap<String,GeneMetadata> genesMetadataByPos){
 		positionsSize = genesMetadataByPos.size();
+		// TODO1-2: optimization: set initial capacity on all collections instance
 		positions = new ArrayList<String>(genesMetadataByPos.keySet());
 		countElements();
 	}
