@@ -21,9 +21,8 @@ public class DistributedResultsRenderer extends DefaultResultsRenderer{
 		result.totalExecutionTimeMs = mstats.executionTimeMs;
 		
 		// default representation is toString()
-		result.bestMatch = solutionRenderer.render(mstats.bestMatch).toString();
+		result.stringResult = friendlySolutionRenderer.render(mstats.bestMatch).toString();
 		result.binaryResult = null;
-		result.stringResult = null;
 		result.notes = null;
 		return result;
 	}

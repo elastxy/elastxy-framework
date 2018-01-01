@@ -79,6 +79,8 @@ public class AppComponents implements Serializable {
 	public transient Recombinator recombinator;
 	
 	public transient SolutionRenderer solutionRenderer;
+	public transient SolutionRenderer friendlySolutionRenderer;
+	
 	public transient ResultsRenderer resultsRenderer;
 
 	// Distributed application

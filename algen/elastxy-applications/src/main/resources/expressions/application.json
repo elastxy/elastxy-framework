@@ -61,8 +61,13 @@
 		"content" : "org.elastxy.core.tracking.DefaultSolutionRenderer"
 	},
 	
+	"friendlySolutionRenderer": {
+		"type" : "java",
+		"content" : "org.elastxy.app.metaexpressions.HTMLExpressionsSolutionRenderer"
+	},
+	
 	"resultsRenderer": {
 		"type" : "java",
-		"content" : "org.elastxy.app.metaexpressions.MexResultsRenderer"
+		"content" : "org.elastxy.core.tracking.DefaultResultsRenderer"
 	}
 }

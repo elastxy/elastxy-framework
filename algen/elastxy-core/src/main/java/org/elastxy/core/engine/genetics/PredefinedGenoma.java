@@ -117,7 +117,7 @@ public class PredefinedGenoma extends AbstractGenoma implements Genoma {
 		
 		SortedMap<String, Allele> result = new TreeMap<String, Allele>();
 		List<Allele> geneAlleles = new ArrayList<Allele>(alleleValuesProvider.getAlleles());
-		// TODO0: all local variables final
+		// TODO1-2: all local variables final?
 		int tot = genotypeStructure.getPositionsSize();
 		for(int pos=0; pos < tot; pos++){
 			String posString = String.valueOf(pos);

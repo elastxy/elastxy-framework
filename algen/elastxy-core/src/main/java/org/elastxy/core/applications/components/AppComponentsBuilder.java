@@ -62,6 +62,7 @@ public class AppComponentsBuilder {
 		result.recombinator = 		(Recombinator)constructComponent(applicationMetadata.recombinator);
 		
 		result.solutionRenderer = 	(SolutionRenderer)constructComponent(applicationMetadata.solutionRenderer);
+		result.friendlySolutionRenderer = (SolutionRenderer)constructComponent(applicationMetadata.solutionRenderer);
 		result.resultsRenderer = 	(ResultsRenderer)constructComponent(applicationMetadata.resultsRenderer);
 
 		// Distributed application
@@ -107,7 +108,8 @@ public class AppComponentsBuilder {
 		if(appComponents.multiColonyEnvFactory!=null) appComponents.multiColonyEnvFactory.setTargetBuilder(appComponents.targetBuilder);
 		appComponents.populationFactory.setSolutionsFactory(appComponents.solutionsFactory);
 		appComponents.fitnessCalculator.setIncubator(appComponents.incubator);
-		appComponents.resultsRenderer.setSolutionRenderer(appComponents.solutionRenderer);
+		appComponents.resultsRenderer.setTechieSolutionRenderer(appComponents.solutionRenderer);
+		appComponents.resultsRenderer.setFriendlySolutionRenderer(appComponents.friendlySolutionRenderer);
 		return appComponents;
 	}
 	

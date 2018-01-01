@@ -62,9 +62,14 @@
 		"content" : "org.elastxy.app.metasudoku.MesSolutionRenderer"
 	},
 	
+	"friendlySolutionRenderer": {
+		"type" : "java",
+		"content" : "org.elastxy.app.metasudoku.HTMLMatrixSolutionRenderer"
+	},
+	
 	"resultsRenderer": {
 		"type" : "java",
-		"content" : "org.elastxy.app.d.metasudoku.MesdResultsRenderer"
+		"content" : "org.elastxy.core.tracking.DefaultResultsRenderer"
 	},
 	
 	

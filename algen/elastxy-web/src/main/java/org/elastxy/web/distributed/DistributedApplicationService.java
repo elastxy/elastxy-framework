@@ -91,7 +91,8 @@ public class DistributedApplicationService {
 	
 	private void setupContext(AlgorithmContext context) {
 		context.application = appComponentsLocator.get(context.application.appName);
-		context.application.resultsRenderer.setSolutionRenderer(context.application.solutionRenderer);
+		context.application.resultsRenderer.setTechieSolutionRenderer(context.application.solutionRenderer);
+		context.application.resultsRenderer.setFriendlySolutionRenderer(context.application.friendlySolutionRenderer);
 	}
 
 }

@@ -10,8 +10,6 @@
 
 package org.elastxy.core.stats;
 
-import java.io.Serializable;
-
 /**
  * Only main friendly properties are shown (e.g. for a web target audience).
  * 
@@ -22,30 +20,24 @@ import java.io.Serializable;
  * 
  * @author grossi
  */
-public class ClientFriendlyResults implements Serializable {
-	private static final long serialVersionUID = -3136599307752592810L;
+public class ClientFriendlyResults extends StandardExperimentResults {
+	private static final long serialVersionUID = -9086588149674651491L;
 	
 	
-	public String target;
-	
-    public boolean goalReached; // TODO2-2: more details of how has finished
-    public double accuracy; // fitness
-    public String bestMatch; // client specific rendering (html, jpeg, ...)
-	
-    public long iterationsNumber;
-    public long totalExecutionTimeMs;
-
-    public String notes; // additional info to be reported
-    
-
 	/**
-	 * Binary result
+	 * Fitness of found solution, in percentage (0-100).
+	 */
+	public double accuracy;
+	
+	
+	/**
+	 * General purpose result in binary format.
 	 */
 	public byte[] binaryResult;
 
 	
 	/**
-	 * Generic String result (e.g. an HTML/JSON response content)
+	 * Generic purpose result as astring (e.g. an HTML/JSON response content).
 	 */
 	public String stringResult;
 }
