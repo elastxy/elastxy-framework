@@ -11,16 +11,37 @@
 	</parent>
 	
 	<properties>
+	
+		<!-- APPLICATION -->
 	 	<spring.version>4.3.9.RELEASE</spring.version>
 	 	<spring.boot.version>1.5.4.RELEASE</spring.boot.version>
+
 	 	<opencsv.version>2.4</opencsv.version>
 	 	<!-- <gson.version>2.8.0</gson.version> -->
-	 	<jackson.version>2.8.8</jackson.version>
-	 	
 	 	<commons.math.version>3.2</commons.math.version>
+
+		<!-- LOGGING -->
+		<!-- TODO2-2: check logging dependencies -->	 	
+	 	<commons.logging.version>1.1.1</commons.logging.version>
+	 	<jcl.over.slf4j.version>1.8.0-alpha2</jcl.over.slf4j.version>
+	 	<log4j.over.slf4j.version>1.7.25</log4j.over.slf4j.version>
+	 	<slf4j.api.version>1.7.5</slf4j.api.version>
+	 	<slf4j.simple.version>1.6.4</slf4j.simple.version>
+
+		<!-- WEB -->
+	 	<servlet.version>3.0.1</servlet.version>
+	 	<jackson.version>2.8.8</jackson.version>
+	 	<springfox.swagger2.version>2.7.0</springfox.swagger2.version>
+	 	<springfox.swagger.ui.version>2.7.0</springfox.swagger.ui.version>
+	 	
+		<!-- SPARK -->
+	 	<spark.version>2.2.0</spark.version>
+	 	<janino.version>2.7.8</janino.version>
+	 	
+		<!-- TEST -->
 	 	<junit.version>4.12</junit.version>
 	 	<easymock.version>3.4</easymock.version>
-	 	<servlet.version>3.0.1</servlet.version>
+	 	
 	</properties>
 	
     <groupId>org.elastxy</groupId>
@@ -95,14 +116,14 @@
 			<dependency>
 			  <groupId>commons-logging</groupId>
 			  <artifactId>commons-logging</artifactId>
-			  <version>1.1.1</version>
+			  <version>${commons.logging.version}</version>
 			  <scope>provided</scope>
 			</dependency>
 			
 			<dependency>
 			  <groupId>org.slf4j</groupId>
 			  <artifactId>jcl-over-slf4j</artifactId>
-			  <version>1.8.0-alpha2</version>
+			  <version>${jcl.over.slf4j.version}</version>
 			</dependency>
 			
 			<dependency>
@@ -132,9 +153,23 @@
 			<dependency>
 			    <groupId>au.com.bytecode</groupId>
 			    <artifactId>opencsv</artifactId>
-					<version>${opencsv.version}</version>
+				<version>${opencsv.version}</version>
 			</dependency>
-    			
+    		
+    				
+			<dependency>
+	    		<groupId>io.springfox</groupId>
+	    		<artifactId>springfox-swagger2</artifactId>
+	    		<version>${springfox.swagger2.version}</version>
+			</dependency>
+			
+			<dependency>
+    			<groupId>io.springfox</groupId>
+    			<artifactId>springfox-swagger-ui</artifactId>
+    			<version>${springfox.swagger.ui.version}</version>
+			</dependency>
+			
+    		
 		
 		
 			<!-- SPARK INTEGRATION -->
@@ -145,7 +180,7 @@
         <dependency>
             <groupId>org.apache.spark</groupId>
             <artifactId>spark-core_2.11</artifactId>
-            <version>2.2.0</version>
+            <version>${spark.version}</version>
             <scope>provided</scope>
             <exclusions>
                 <exclusion>
@@ -163,7 +198,7 @@
         <dependency>
             <groupId>org.apache.spark</groupId>
             <artifactId>spark-sql_2.11</artifactId>
-            <version>2.2.0</version>
+            <version>${spark.version}</version>
             <scope>provided</scope>
         </dependency>
 
@@ -171,24 +206,24 @@
         <dependency>
             <groupId>org.codehaus.janino</groupId>
             <artifactId>commons-compiler</artifactId>
-            <version>2.7.8</version>
+            <version>${janino.version}</version>
         </dependency>
 
         <!-- https://mvnrepository.com/artifact/org.slf4j/log4j-over-slf4j -->
         <dependency>
             <groupId>org.slf4j</groupId>
             <artifactId>log4j-over-slf4j</artifactId>
-            <version>1.7.25</version>
+            <version>${log4j.over.slf4j.version}</version>
         </dependency>
         <dependency>
             <groupId>org.slf4j</groupId>
             <artifactId>slf4j-api</artifactId>
-            <version>1.7.5</version>
+            <version>${slf4j.api.version}</version>
         </dependency>
         <dependency>
             <groupId>org.slf4j</groupId>
             <artifactId>slf4j-simple</artifactId>
-            <version>1.6.4</version>
+            <version>${slf4j.simple.version}</version>
         </dependency>
         
 		

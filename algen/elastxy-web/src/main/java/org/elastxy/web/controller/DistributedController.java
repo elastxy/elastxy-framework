@@ -33,6 +33,17 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 
+/**
+ * Services for executing experiments in a distributed fashion.
+ * 
+ * Path cluster or local is related to Spark execution: local is on the cores of same JVM.
+ * 
+ * TODO2-2: asynchronous fashion services: experiment id returned and results collected after
+ * TODO2-2: enable swagger
+ * 
+ * @author red
+ *
+ */
 @Controller
 @RequestMapping(path = "/distributed")
 public class DistributedController {

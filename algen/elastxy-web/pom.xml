@@ -114,6 +114,16 @@
 		    <artifactId>spark-jobs-rest-client</artifactId>
 		    <version>1.3.6</version><!-- TODOA: move version to parent BOM -->
 		</dependency>
+		
+		<dependency>
+    		<groupId>io.springfox</groupId>
+    		<artifactId>springfox-swagger2</artifactId>
+		</dependency>
+		
+		<dependency>
+    		<groupId>io.springfox</groupId>
+    		<artifactId>springfox-swagger-ui</artifactId>
+		</dependency>
     	
 	</dependencies>
 	
