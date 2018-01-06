@@ -80,7 +80,7 @@ public class DistributedController {
 
     	config.appName = "MexApplication";
     	config.appJar = "file:///"+jarsPath+"Scaligen-assembly-1.0.jar";
-    	config.mainClass = "it.red.algen.d.mex.MexApplication";
+    	config.mainClass = "org.elastxy.d.mex.MexApplication";
 
     	String result = sparkHeartbeatTask.runDistributed(config);
     	
@@ -91,14 +91,14 @@ public class DistributedController {
 	
     @RequestMapping("/test/spark/single")
     public ResponseEntity<String> testSparkSingle() {
-    	String result = sparkHeartbeatTask.runSingle("C://tmp//algendata//words.txt");
+    	String result = sparkHeartbeatTask.runSingle("C://tmp//elastxydata//words.txt");
         return new ResponseEntity<>(result, HttpStatus.OK);
     }
     
 
     @RequestMapping("/test/spark/concurrent")
     public ResponseEntity<String> testSparkConcurrent() throws ExecutionException, InterruptedException {
-    	String result = sparkHeartbeatTask.runConcurrent("C://tmp//algendata//words1.txt", "C://tmp//algendata//words2.txt");
+    	String result = sparkHeartbeatTask.runConcurrent("C://tmp//elastxydata//words1.txt", "C://tmp//elastxydata//words2.txt");
         return new ResponseEntity<>(result, HttpStatus.OK);
     }
 
@@ -124,8 +124,8 @@ public class DistributedController {
     	config.historyEventsDir = "file:///"+sparkHistoryEventsPath;
 
     	config.appName = "expressions_d";
-    	config.appJar = "file:///"+jarsPath+"algen-applications-1.0.0-SNAPSHOT.jar";
-    	config.mainClass = "it.red.algen.d.metaexpressions.SparkApplication";
+    	config.appJar = "file:///"+jarsPath+"elastxy-applications-1.0.0-SNAPSHOT.jar";
+    	config.mainClass = "org.elastxy.d.metaexpressions.SparkApplication";
 
     	String result = sparkHeartbeatTask.runDistributed(config);
     	

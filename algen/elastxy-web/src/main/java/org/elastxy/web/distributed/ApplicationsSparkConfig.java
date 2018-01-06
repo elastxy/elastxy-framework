@@ -45,8 +45,18 @@ public class ApplicationsSparkConfig {
 	 * <timestamp>_stats.json, for example.
 	 * 
 	 */
-	@Value("${output.path}")
-	private String outputPath;
+	@Value("${cluster.output.path}")
+	private String clusterOutputPath;
+	
+	/**
+	 * Directory path local to web application where to retrieve results.
+	 * 
+	 * Can differ from remoteOutputPath for example when running
+	 * in a container, where local path is usually mounted to external.
+	 * 
+	 */
+	@Value("${webapp.output.path}")
+	private String webappOutputPath;
 
 	
 	/**
@@ -75,7 +85,8 @@ public class ApplicationsSparkConfig {
 		config.appJarPath = appJarPath;
 		config.mainClass = mainClass;
 		config.otherJarsPath = otherJarsPath;
-	    config.outputPath = outputPath;
+	    config.clusterOutputPath = clusterOutputPath;
+	    config.webappOutputPath = webappOutputPath;
 	    config.taskIdentifier = String.format("%d_%d_%s", System.currentTimeMillis(), Randomizer.nextInt(1000), application);
 		return config;
 	}

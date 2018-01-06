@@ -67,7 +67,7 @@ public class SparkTaskExecutor {
     public String runDistributed(SparkTaskConfig config, DistributedAlgorithmContext context) throws Exception {
 
     	// Setup configurations
-    	logger.info("Task Configuration");
+    	logger.info("Spark Executor Task Configuration");
     	logger.info(config.toString());
     	
 		byte[] contextBytes = JSONSupport.writeJSONString(context).getBytes(); 
@@ -83,7 +83,7 @@ public class SparkTaskExecutor {
     			config.appName, 
     			config.taskIdentifier,
     			config.sparkHome, 
-    			config.outputPath,
+    			config.clusterOutputPath,
     			config.masterURI, 
     			contextAsString);
     	logger.info("Job params: "+params);

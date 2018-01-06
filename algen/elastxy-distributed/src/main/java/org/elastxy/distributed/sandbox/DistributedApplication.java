@@ -9,7 +9,7 @@ import org.springframework.context.annotation.PropertySource;
 @SpringBootApplication
 @EnableConfigurationProperties
 @PropertySource(value={"classpath:distributed.properties"}, ignoreResourceNotFound = true)
-@ComponentScan(basePackages = "it.red.algen")
+@ComponentScan(basePackages = "org.elastxy")
 public class DistributedApplication {
 
 	public static void main(String[] args) {

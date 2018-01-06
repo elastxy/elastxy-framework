@@ -38,6 +38,11 @@ public class DistributedApplicationService {
 		// Configure
 		setupContext(context);
 		SparkTaskConfig taskConfig = applicationsSparkConfig.getTaskConfig(context.application.appName);
+
+		// Setup configurations
+    	logger.info("Local Service Task Configuration");
+    	logger.info(taskConfig.toString());
+
 		String master = "local[*]";
 		byte[] contextBytes = JSONSupport.writeJSONString(context).getBytes(); 
 		String contextAsString = Base64.getEncoder().encodeToString(contextBytes);
@@ -47,14 +52,14 @@ public class DistributedApplicationService {
 				context.application.appName, 
 				taskConfig.taskIdentifier, 
 				taskConfig.sparkHome, 
-				taskConfig.outputPath, 
+				taskConfig.clusterOutputPath, 
 				master, 
 				contextAsString};
     	logger.info("Submitting job locally with params: "+Arrays.asList(params));
 		ElastXYApplication.main(params);
 
 		// Export results
-		MultiColonyExperimentStats stats = DistributedResultsCollector.retrieveResults(taskConfig.outputPath, taskConfig.taskIdentifier);
+		MultiColonyExperimentStats stats = DistributedResultsCollector.retrieveResults(taskConfig.webappOutputPath, taskConfig.taskIdentifier);
     	ExperimentResponse response = res(context.requestContext.webRequest, context, stats);
     	
     	return response;
@@ -69,11 +74,15 @@ public class DistributedApplicationService {
     	SparkTaskExecutor executor = new SparkTaskExecutor();
     	SparkTaskConfig taskConfig = applicationsSparkConfig.getTaskConfig(context.application.appName);
     	
+    	// Setup configurations
+    	logger.info("Cluster Service Task Configuration");
+    	logger.info(taskConfig.toString());
+    	
     	// Execute job
     	String driverStatus = executor.runDistributed(taskConfig, context);
 
     	// Export results
-		MultiColonyExperimentStats stats = DistributedResultsCollector.retrieveResults(taskConfig.outputPath, taskConfig.taskIdentifier);
+		MultiColonyExperimentStats stats = DistributedResultsCollector.retrieveResults(taskConfig.webappOutputPath, taskConfig.taskIdentifier);
     	ExperimentResponse response = res(context.requestContext.webRequest, context, stats);
     	
     	return response;

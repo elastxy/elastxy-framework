@@ -16,7 +16,8 @@ public class SparkTaskConfig {
 //	public String historyEventsEnabled = null; 	//e.g. "false";
 //	public String historyEventsDir = null; 		//e.g. "c:/tmp/sparktemp/eventLog";
 
-	public String outputPath; 					//e.g. "C:/tmp/results"
+	public String clusterOutputPath; 					//e.g. "C:/tmp/results"
+	public String webappOutputPath; 					//e.g. "/results"
 	
 	/**
 	 * Uniquely identifies task name before it's executed.
@@ -31,17 +32,18 @@ public class SparkTaskConfig {
 	
 	public String toString(){
 		StringBuffer sb = new StringBuffer();
-		sb.append("masterURI = "+masterURI);
-		sb.append("masterHost = "+masterHost);
-		sb.append("sparkVersion = "+sparkVersion);
-		sb.append("appName = "+appName);
-		sb.append("appJarPath = "+appJarPath);
-		sb.append("mainClass = "+mainClass);
-		sb.append("otherJarsPath = "+otherJarsPath);
-//		sb.append("log4jConfiguration = "+log4jConfiguration);
-//		sb.append("historyEventsEnabled = "+historyEventsEnabled);
-//		sb.append("historyEventsDir = "+historyEventsDir);
-		sb.append("outputPath = "+outputPath);
+		sb.append("masterURI = "+masterURI+";");
+		sb.append("masterHost = "+masterHost+";");
+		sb.append("sparkVersion = "+sparkVersion+";");
+		sb.append("appName = "+appName+";");
+		sb.append("appJarPath = "+appJarPath+";");
+		sb.append("mainClass = "+mainClass+";");
+		sb.append("otherJarsPath = "+otherJarsPath+";");
+//		sb.append("log4jConfiguration = "+log4jConfiguration+";");
+//		sb.append("historyEventsEnabled = "+historyEventsEnabled+";");
+//		sb.append("historyEventsDir = "+historyEventsDir+";");
+		sb.append("clusterOutputPath = "+clusterOutputPath+";");
+		sb.append("webappOutputPath = "+webappOutputPath+";");
 		sb.append("taskIdentifier = "+taskIdentifier);
 		return sb.toString();
 	}

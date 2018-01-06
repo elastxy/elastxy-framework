@@ -1,9 +1,9 @@
-package it.red.algen.mex.encapsulated
+package org.elastxy.mex.encapsulated
 
 import org.apache.log4j._
-import it.red.algen.mex.partitioned.Monitoring
-import it.red.algen.mex.partitioned.Closures
-import it.red.algen.mex.partitioned.Functions
+import org.elastxy.mex.partitioned.Monitoring
+import org.elastxy.mex.partitioned.Closures
+import org.elastxy.mex.partitioned.Functions
 
 
 object GeneticFunctionsE {

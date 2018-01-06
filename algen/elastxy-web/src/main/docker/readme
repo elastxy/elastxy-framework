@@ -1,25 +1,39 @@
-# Maven build
+# -----------------
+# By Maven
+# ---------------
+
+# Build image
 mvn clean package docker:build
 
-# Build
+# Start container
+mvn docker:start
+
+
+# -----------------
+# By command-line
+# -----------------
+
+# Build by command-line
 cd target/docker
-docker build -t algen .
+docker build -t elastxy .
 
 # Run/Stop [-d for detached]
-docker run --name algenc -p 4000:8080 -v /c/Users/red/Docker/algenc:/tmp -e "DATADIR=/tmp" algen
-docker stop algenc
-
-# Shell
-docker exec -it algenc sh
+docker run --name elastxyc -p 4000:8080 -v /c/Users/red/Docker/elastxyc:/tmp -v /c/Users/red/ElastXY/results:/results -e "DATADIR=/tmp" -e "WEBAPP_OUTPUT_PATH=/results"  -e "webapp.output.path=/results" elastxy
+docker stop elastxyc
 
 # Info
-docker images
-docker inspect algenc
-
-# Remove image
-docker -rmi algen
+docker exec -ti elastxyc /bin/sh
+docker inspect elastxyc
+docker logs -f elastxyc
 
 # Manage containers
 docker ps
-docker stop CID
-docker logs -f algenc
+docker stop elastxyc
+docker rm elastxyc
+
+# Manage images
+docker images
+docker -rmi elastxy
+
+# System ops
+docker system prune

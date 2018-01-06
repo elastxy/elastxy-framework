@@ -1,7 +1,7 @@
-package it.red.algen.mex.encapsulated
+package org.elastxy.mex.encapsulated
 
 import org.apache.log4j._
-import it.red.algen.mex.partitioned.MexSolution
+import org.elastxy.mex.partitioned.MexSolution
 import org.apache.spark.util.LongAccumulator
 import org.apache.spark.broadcast.Broadcast
 

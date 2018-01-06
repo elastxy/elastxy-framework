@@ -11,8 +11,8 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import it.red.algen.applications.ApplicationService;
-import it.red.algen.stats.ExperimentStats;
+import org.elastxy.applications.ApplicationService;
+import org.elastxy.stats.ExperimentStats;
 
 @Component
 public class ConcurrentTask {
@@ -28,8 +28,8 @@ public class ConcurrentTask {
 	
     public String run(String application) throws ExecutionException, InterruptedException {
 
-    	// Algen global setup
-//		System.setProperty("datadir", new File("C:\\tmp\\algendata").getAbsolutePath());
+    	// ElastXY global setup
+//		System.setProperty("datadir", new File("C:\\tmp\\elastxydata").getAbsolutePath());
 
         ExecutorService executorService = Executors.newFixedThreadPool(2);
         

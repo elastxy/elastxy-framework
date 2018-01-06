@@ -1,12 +1,12 @@
-package it.red.algen.mex.encapsulated
+package org.elastxy.mex.encapsulated
 
 import org.apache.log4j._
-import it.red.algen.mex.partitioned.GenomaFunctions
+import org.elastxy.mex.partitioned.GenomaFunctions
 import org.apache.spark.rdd.RDD
 import scala.collection.mutable.ListBuffer
-import it.red.algen.mex.partitioned.MexSolution
-import it.red.algen.mex.partitioned.Functions
-import it.red.algen.mex.partitioned.Closures
+import org.elastxy.mex.partitioned.MexSolution
+import org.elastxy.mex.partitioned.Functions
+import org.elastxy.mex.partitioned.Closures
 
 
 object FunctionsE {
