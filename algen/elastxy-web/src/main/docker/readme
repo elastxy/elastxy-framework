@@ -19,7 +19,8 @@ docker build -t elastxy-web .
 
 # Run/Stop [-d for detached]
 docker-compose up -d
-docker run --name elastxyw -p 4000:8080 -v /c/Users/red/Docker/elastxyw:/tmp -v /c/Users/red/ElastXY/results:/results -e "DATADIR=/tmp" -e "WEBAPP_OUTPUT_PATH=/results" elastxy-web
+docker run --name elastxyw -p 4000:8080 -v /c/Users/red/Docker/elastxyw:/results -v /c/Users/red/ElastXY/results:/results -e "DATADIR=/data" -e "WEBAPP_OUTPUT_PATH=/results" elastxy-web
+docker run --name elastxyw -p 4000:8080 -v /usr/local/elastxy/data:/data -v /media/sf_elastxy-results:/results -e "DATADIR=/data" -e "WEBAPP_OUTPUT_PATH=/results" elastxy-web
 docker stop elastxyw
 
 # Info

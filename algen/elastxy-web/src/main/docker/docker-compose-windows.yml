@@ -6,8 +6,8 @@ services:
     ports:
       - 4000:8080
     volumes:
-      - /c/Users/red/Docker/elastxyw:/tmp
+      - /c/Users/red/Docker/elastxyw:/data
       - /c/Users/red/ElastXY/results:/results
     environment:
-     DATADIR: /tmp
+     DATADIR: /data
      WEBAPP_OUTPUT_PATH: /results

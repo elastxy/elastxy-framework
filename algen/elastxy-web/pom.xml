@@ -210,7 +210,7 @@
                                 <exec>
                                     <arg>java</arg>
                                     <arg>-Djava.security.egd=file:/dev/./urandom</arg>
-                                    <arg>-Ddatadir=/tmp</arg>
+                                    <arg>-Ddatadir=/data</arg>
                                     <arg>-jar</arg>
                                     <arg>/maven/${project.artifactId}-${project.version}.${project.packaging}</arg>
                                 </exec>
