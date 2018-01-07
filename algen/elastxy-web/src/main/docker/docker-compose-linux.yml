@@ -1,0 +1,14 @@
+version: "3"
+services:
+
+  web:
+    image: 192.168.1.12:5000/elastxy-web:0.0.1
+    container_name: elastxyw
+    ports:
+      - 4000:8080
+    volumes:
+      - /usr/local/bin/elastxy/data:/data
+      - /usr/local/bin/elastxy/results:/results
+    environment:
+     DATADIR: /data
+     WEBAPP_OUTPUT_PATH: /results

@@ -1,0 +1,13 @@
+version: "3"
+services:
+  web:
+    image: 192.168.1.12:5000/elastxy-web:0.0.1
+    container_name: elastxyw
+    ports:
+      - 4000:8080
+    volumes:
+      - /c/Users/red/Docker/elastxyw:/tmp
+      - /c/Users/red/ElastXY/results:/results
+    environment:
+     DATADIR: /tmp
+     WEBAPP_OUTPUT_PATH: /results

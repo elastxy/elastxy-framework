@@ -150,8 +150,8 @@
  		        <configuration>
 		          <images>
 			            <image>
-			              <name>elastxy</name>
-			              <alias>elastxyc</alias>
+			              <name>elastxy-web</name>
+			              <alias>elastxy-web</alias>
 			              <build>
 			                <filter>@</filter>
 			                <dockerFileDir>${project.basedir}/src/main/docker</dockerFileDir>

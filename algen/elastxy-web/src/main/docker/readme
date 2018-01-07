@@ -15,25 +15,26 @@ mvn docker:start
 
 # Build by command-line
 cd target/docker
-docker build -t elastxy .
+docker build -t elastxy-web .
 
 # Run/Stop [-d for detached]
-docker run --name elastxyc -p 4000:8080 -v /c/Users/red/Docker/elastxyc:/tmp -v /c/Users/red/ElastXY/results:/results -e "DATADIR=/tmp" -e "WEBAPP_OUTPUT_PATH=/results"  -e "webapp.output.path=/results" elastxy
-docker stop elastxyc
+docker-compose up -d
+docker run --name elastxyw -p 4000:8080 -v /c/Users/red/Docker/elastxyw:/tmp -v /c/Users/red/ElastXY/results:/results -e "DATADIR=/tmp" -e "WEBAPP_OUTPUT_PATH=/results" elastxy-web
+docker stop elastxyw
 
 # Info
-docker exec -ti elastxyc /bin/sh
-docker inspect elastxyc
-docker logs -f elastxyc
+docker exec -ti elastxyw /bin/sh
+docker inspect elastxyw
+docker logs -f elastxyw
 
 # Manage containers
 docker ps
-docker stop elastxyc
-docker rm elastxyc
+docker stop elastxyw
+docker rm elastxyw
 
 # Manage images
 docker images
-docker -rmi elastxy
+docker -rmi elastxy-web
 
 # System ops
-docker system prune
+docker system prune -f
