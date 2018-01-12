@@ -37,8 +37,6 @@ public class AlgofrigeratorMainTest {
 	
 	@Test
     public void simpleRun() {
-		System.setProperty("datadir", new File("C:\\tmp\\elastxydata").getAbsolutePath());
-
 		AlgorithmContext context = new AlgorithmContext();
 		context.application.appName = "algofrigerator";
 		context.requestContext = new RequestContext(false);

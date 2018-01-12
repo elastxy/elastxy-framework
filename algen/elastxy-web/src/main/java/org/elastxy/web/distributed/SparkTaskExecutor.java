@@ -83,7 +83,8 @@ public class SparkTaskExecutor {
     			config.appName, 
     			config.taskIdentifier,
     			config.sparkHome, 
-    			config.clusterOutputPath,
+    			config.driverInboundPath, 
+    			config.driverOutboundPath,
     			config.masterURI, 
     			contextAsString);
     	logger.info("Job params: "+params);

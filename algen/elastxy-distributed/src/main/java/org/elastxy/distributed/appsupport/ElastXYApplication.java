@@ -47,9 +47,10 @@ public class ElastXYApplication {
 			
 			info("Initializing application "+applicationName);
 			String sparkHome = args[2]; // "C:/dev/spark-2.2.0-bin-hadoop2.7"
-			String outputPath = args[3];// "C:/tmp/results
-			String master = args[4]; // "spark://192.168.1.101:7077"
-			String configBase64 = args[5]; // configuration json input from ws
+			String inboundPath = args[3];// "C:/tmp/inbound
+			String outboundPath = args[4];// "C:/tmp/results
+			String master = args[5]; // "spark://192.168.1.101:7077"
+			String configBase64 = args[6]; // configuration json input from ws
 			String config = new String(Base64.getDecoder().decode(configBase64));
 			info("Application config: "+config);
 			
@@ -72,7 +73,7 @@ public class ElastXYApplication {
 			ExperimentStats stats = executeExperiment(context);
 			
 			// Store results
-			JSONSupport.writeJSONObject(new File(outputPath, taskIdentifier+".json"), stats);
+			JSONSupport.writeJSONObject(new File(outboundPath, taskIdentifier+".json"), stats);
 			
 			info("Experiment ended: "+stats);
 			

@@ -16,8 +16,9 @@ public class SparkTaskConfig {
 //	public String historyEventsEnabled = null; 	//e.g. "false";
 //	public String historyEventsDir = null; 		//e.g. "c:/tmp/sparktemp/eventLog";
 
-	public String clusterOutputPath; 					//e.g. "C:/tmp/results"
-	public String webappOutputPath; 					//e.g. "/results"
+	public String driverOutboundPath; 					//e.g. "C:/tmp/input"
+	public String driverInboundPath; 					//e.g. "C:/tmp/input"
+	public String webappInboundPath; 					//e.g. "/results"
 	
 	/**
 	 * Uniquely identifies task name before it's executed.
@@ -42,8 +43,9 @@ public class SparkTaskConfig {
 //		sb.append("log4jConfiguration = "+log4jConfiguration+";");
 //		sb.append("historyEventsEnabled = "+historyEventsEnabled+";");
 //		sb.append("historyEventsDir = "+historyEventsDir+";");
-		sb.append("clusterOutputPath = "+clusterOutputPath+";");
-		sb.append("webappOutputPath = "+webappOutputPath+";");
+		sb.append("driverInboundPath = "+driverInboundPath+";");
+		sb.append("driverOutboundPath = "+driverOutboundPath+";");
+		sb.append("webappInboundPath = "+webappInboundPath+";");
 		sb.append("taskIdentifier = "+taskIdentifier);
 		return sb.toString();
 	}

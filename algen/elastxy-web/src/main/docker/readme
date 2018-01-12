@@ -36,6 +36,8 @@ docker rm elastxyw
 # Manage images
 docker images
 docker -rmi elastxy-web
+docker tag elastxy/web 192.168.1.211:5000/elastxy/web:0.0.1
+docker push 192.168.1.211:5000/elastxy/web:0.0.1
 
 # System ops
 docker system prune -f

@@ -1,13 +1,13 @@
 version: "3"
 services:
   web:
-    image: 192.168.1.211:5000/elastxy-web:0.0.1
+    image: 192.168.1.211:5000/elastxy/web:0.0.1
     container_name: elastxyw
     ports:
       - 4000:8080
     volumes:
-      - /c/Users/red/Docker/elastxyw:/data
-      - /c/Users/red/ElastXY/results:/results
+      - /c/Users/red/ElastXY/exchange:/exchange
     environment:
-     DATADIR: /data
-     WEBAPP_OUTPUT_PATH: /results
+     WEBAPP_INBOUND_PATH: /exchange/results
+     DRIVER_OUTBOUND_PATH: /exchange/results
+     DRIVER_INBOUND_PATH: /exchange/inbound

@@ -68,7 +68,7 @@ public class ElastXYWebApplication {
 		return new ApiInfoBuilder()
 				.title("ElastXY REST API documentation")
 				.description("see http://elastxy.io")
-				.version("1.0-ALPHA")
+				.version("0.0.1_ALPHA")
 //				.license("Apache 2.0 License")
 //				.licenseUrl("https://github.com/ElastXY/master/LICENSE")
 				.build();

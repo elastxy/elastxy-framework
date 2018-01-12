@@ -37,8 +37,6 @@ public class MetaGardenMainTest {
 	
 	@Test
     public void simpleRun() {
-		System.setProperty("datadir", new File("C:\\tmp\\elastxydata").getAbsolutePath());
-
 		AlgorithmContext context = new AlgorithmContext();
 		context.application.appName = "garden";
 		context.requestContext = new RequestContext(false);

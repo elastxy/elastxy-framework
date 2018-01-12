@@ -52,14 +52,15 @@ public class DistributedApplicationService {
 				context.application.appName, 
 				taskConfig.taskIdentifier, 
 				taskConfig.sparkHome, 
-				taskConfig.clusterOutputPath, 
+				taskConfig.driverInboundPath, 
+				taskConfig.driverOutboundPath, 
 				master, 
 				contextAsString};
     	logger.info("Submitting job locally with params: "+Arrays.asList(params));
 		ElastXYApplication.main(params);
 
 		// Export results
-		MultiColonyExperimentStats stats = DistributedResultsCollector.retrieveResults(taskConfig.webappOutputPath, taskConfig.taskIdentifier);
+		MultiColonyExperimentStats stats = DistributedResultsCollector.retrieveResults(taskConfig.webappInboundPath, taskConfig.taskIdentifier);
     	ExperimentResponse response = res(context.requestContext.webRequest, context, stats);
     	
     	return response;
@@ -82,7 +83,7 @@ public class DistributedApplicationService {
     	String driverStatus = executor.runDistributed(taskConfig, context);
 
     	// Export results
-		MultiColonyExperimentStats stats = DistributedResultsCollector.retrieveResults(taskConfig.webappOutputPath, taskConfig.taskIdentifier);
+		MultiColonyExperimentStats stats = DistributedResultsCollector.retrieveResults(taskConfig.webappInboundPath, taskConfig.taskIdentifier);
     	ExperimentResponse response = res(context.requestContext.webRequest, context, stats);
     	
     	return response;

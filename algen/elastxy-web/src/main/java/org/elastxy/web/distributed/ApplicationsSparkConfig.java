@@ -39,14 +39,20 @@ public class ApplicationsSparkConfig {
 	private String otherJarsPath;
 
 	/**
-	 * Directory path local to driver where to store results.
+	 * Directory path local to driver where to store results and output.
 	 * 
 	 * Results are stored in specific files related to executions:
 	 * <timestamp>_stats.json, for example.
 	 * 
 	 */
-	@Value("${cluster.output.path}")
-	private String clusterOutputPath;
+	@Value("${driver.outbound.path}")
+	private String driverOutboundPath;
+	
+	/**
+	 * Directory local to driver where to retrieve input data.
+	 */
+	@Value("${driver.inbound.path}")
+	private String driverInboundPath;
 	
 	/**
 	 * Directory path local to web application where to retrieve results.
@@ -55,8 +61,8 @@ public class ApplicationsSparkConfig {
 	 * in a container, where local path is usually mounted to external.
 	 * 
 	 */
-	@Value("${webapp.output.path}")
-	private String webappOutputPath;
+	@Value("${webapp.inbound.path}")
+	private String webappInboundPath;
 
 	
 	/**
@@ -85,8 +91,9 @@ public class ApplicationsSparkConfig {
 		config.appJarPath = appJarPath;
 		config.mainClass = mainClass;
 		config.otherJarsPath = otherJarsPath;
-	    config.clusterOutputPath = clusterOutputPath;
-	    config.webappOutputPath = webappOutputPath;
+	    config.driverOutboundPath = driverOutboundPath;
+	    config.driverInboundPath = driverInboundPath;
+	    config.webappInboundPath = webappInboundPath;
 	    config.taskIdentifier = String.format("%d_%d_%s", System.currentTimeMillis(), Randomizer.nextInt(1000), application);
 		return config;
 	}
