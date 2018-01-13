@@ -9,6 +9,7 @@ import org.apache.spark.SparkConf;
 import org.apache.spark.api.java.JavaSparkContext;
 import org.elastxy.core.applications.components.AppComponentsLocator;
 import org.elastxy.core.applications.components.factory.AppBootstrapRaw;
+import org.elastxy.core.conf.ConfigurationException;
 import org.elastxy.core.conf.ReadConfigSupport;
 import org.elastxy.core.engine.core.Experiment;
 import org.elastxy.core.stats.ExperimentStats;
@@ -46,9 +47,14 @@ public class ElastXYApplication {
 			String taskIdentifier = args[1];
 			
 			info("Initializing application "+applicationName);
-			String sparkHome = args[2]; // "C:/dev/spark-2.2.0-bin-hadoop2.7"
-			String inboundPath = args[3];// "C:/tmp/inbound
-			String outboundPath = args[4];// "C:/tmp/results
+			
+			String sparkHome = args[2]; // e.g. "C:/dev/spark-2.2.0-bin-hadoop2.7"
+			checkPath(sparkHome);
+			String inboundPath = args[3];// e.g. "C:/tmp/inbound
+			checkPath(inboundPath);
+			String outboundPath = args[4];// e.g. "C:/tmp/results
+			checkPath(outboundPath);
+			
 			String master = args[5]; // "spark://192.168.1.101:7077"
 			String configBase64 = args[6]; // configuration json input from ws
 			String config = new String(Base64.getDecoder().decode(configBase64));
@@ -87,6 +93,12 @@ public class ElastXYApplication {
 		} finally {
 			if(context!=null && context.distributedContext!=null) context.distributedContext.stop();
 //			try { if(stream!=null) stream.flush(); } catch(Throwable t){t.printStackTrace();}
+		}
+	}
+	
+	private static void checkPath(String path){
+		if(!new File(path).exists()){
+			throw new ConfigurationException("Distributed execution error: following path not found: "+path);
 		}
 	}
 	
