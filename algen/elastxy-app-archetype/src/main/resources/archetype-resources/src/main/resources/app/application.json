@@ -1,0 +1,73 @@
+{
+	"appName" : "${artifactId}",
+	
+	"targetBuilder": {
+		"type" : "java",
+		"content" : "${groupId}.appArchetype.AppTargetBuilder"
+	},
+	
+	"envFactory": {
+		"type" : "java",
+		"content" : "org.elastxy.core.engine.factory.StandardEnvFactory"
+	},
+	
+	"genomaProvider": {
+		"type" : "java",
+		"content" : "${groupId}.appArchetype.AppGenomaProvider"
+	},
+	
+	"alleleGenerator": {
+		"type" : "java",
+		"content" : "org.elastxy.core.engine.metadata.MetadataAlleleGenerator"
+	},
+	
+	"populationFactory": {
+		"type" : "java",
+		"content" : "org.elastxy.core.engine.factory.StandardPopulationFactory"
+	},
+	
+	"solutionsFactory": {
+		"type" : "java",
+		"content" : "org.elastxy.core.engine.metadata.MetadataSolutionsFactory"
+	},
+	
+	"fitnessCalculator": {
+		"type" : "java",
+		"content" : "${groupId}.appArchetype.AppFitnessCalculator"
+	},
+	
+	"incubator": {
+		"type" : "java",
+		"content" : "${groupId}.appArchetype.AppIncubator"
+	},
+	
+	"selector": {
+		"type" : "java",
+		"content" : "org.elastxy.core.engine.operators.StandardSelector"
+	},
+	
+	"mutator": {
+		"type" : "java",
+		"content" : "org.elastxy.core.engine.operators.ChromosomeMutator"
+	},
+	
+	"recombinator": {
+		"type" : "java",
+		"content" : "org.elastxy.core.engine.operators.ChromosomeRecombinator"
+	},
+	
+	"solutionRenderer": {
+		"type" : "java",
+		"content" : "org.elastxy.core.tracking.DefaultSolutionRenderer"
+	},
+	
+	"friendlySolutionRenderer": {
+		"type" : "java",
+		"content" : "${groupId}.appArchetype.AppSolutionRenderer"
+	},
+	
+	"resultsRenderer": {
+		"type" : "java",
+		"content" : "org.elastxy.core.tracking.DefaultResultsRenderer"
+	}
+}

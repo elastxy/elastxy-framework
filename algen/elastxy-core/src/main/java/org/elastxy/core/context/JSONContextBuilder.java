@@ -1,6 +1,7 @@
 package org.elastxy.core.context;
 
 import java.io.IOException;
+import java.net.URL;
 
 import org.elastxy.core.applications.AppStage;
 import org.elastxy.core.conf.ConfigurationException;
@@ -29,12 +30,13 @@ public class JSONContextBuilder implements ContextBuilder {
 	 * - "benchmark" for benchmark
 	 * - "experiment" for experiment
 	 * 
+	 * If nothing's found, searches in:
+	 * classpath:/app/{fileName}.json
+	 * 
 	 */
 	@Override
 	public AlgorithmContext build(String applicationName, AppStage appStage) {
-		String fileName = appStage.getName();
-		String classpathResource = "/"+applicationName+"/"+fileName+".json";
-		
+		String classpathResource = JSONSupport.checkClasspathResource(applicationName, appStage.getName()+".json");
 		AlgorithmContext result;
 		try {
 			result = (AlgorithmContext)JSONSupport.readJSON(classpathResource, AlgorithmContext.class);

@@ -56,7 +56,7 @@ public class MesTargetBuilder implements TargetBuilder<int[][], Integer> {
      * @return
      */
     private int[][] readGoal(){
-		String classpathResource = "/"+context.application.appName+"/target.json";
+		String classpathResource = JSONSupport.checkClasspathResource(context.application.appName, "target.json");
 		try {
 			return (int[][])JSONSupport.readJSON(classpathResource, int[][].class);
 		} catch (IOException e) {

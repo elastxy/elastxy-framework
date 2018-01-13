@@ -20,7 +20,7 @@ public class ReadConfigSupport {
 
 	public static GenesMetadataConfiguration retrieveGenesMetadata(String applicationName) {
 		GenesMetadataConfiguration genes;
-		String classpathResource = "/"+applicationName+"/genes.json";
+		String classpathResource = JSONSupport.checkClasspathResource(applicationName, "genes.json");
 		try {
 			genes = (GenesMetadataConfiguration)JSONSupport.readJSON(classpathResource, GenesMetadataConfiguration.class);
 		} catch (IOException e) {

@@ -24,7 +24,7 @@ public class ClasspathRegisterRaw implements AppRegister {
 
 	@Override
 	public ApplicationMetadata find(String applicationName){
-		String classpathResource = "/"+applicationName+"/application.json";
+		String classpathResource = JSONSupport.checkClasspathResource(applicationName, "application.json");
 		ApplicationMetadata result;
 		try {
 			result = (ApplicationMetadata)JSONSupport.readJSON(classpathResource, ApplicationMetadata.class);

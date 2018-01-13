@@ -3,12 +3,30 @@ package org.elastxy.core.support;
 import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
+import java.net.URL;
 
+import org.elastxy.core.conf.ConfigurationException;
 import org.elastxy.core.conf.ReadConfigSupport;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 public class JSONSupport {
+	private static final String DEFAULT_PATH = "app";
+	
+	public static String checkClasspathResource(String applicationName, String fileName){
+		String classpathResource = "/"+applicationName+"/"+fileName;
+		
+		// Check resource presence
+		URL u = JSONSupport.class.getResource(classpathResource);
+		if (u == null) {
+			classpathResource = "/"+DEFAULT_PATH+"/"+fileName;
+		}
+		u = JSONSupport.class.getResource(classpathResource);
+		if (u == null) {
+			throw new ConfigurationException("Resource not found in classpath: "+classpathResource);
+		}
+		return classpathResource;
+	}
 
 	public static Object readJSON(String classpathResource, Class type) throws IOException {
 		return readJSON(ReadConfigSupport.class.getResourceAsStream(classpathResource), type);
