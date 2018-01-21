@@ -11,3 +11,4 @@ algen/elastxy-app-archetype/.settings/*
 algen/elastxy-app-archetype/.project
 algen/elastxy-app-archetype/.classpath
 algen/elastxy-core/.settings/*
+algen/target/

@@ -76,6 +76,20 @@
 	  -->
 	
     <build>
+        
+    	<plugins>
+	      <plugin>
+	        <groupId>org.apache.maven.plugins</groupId>
+	        <artifactId>maven-javadoc-plugin</artifactId>
+	        <version>3.0.0</version>
+	        <configuration>
+	          <show>private</show>
+	          <nohelp>true</nohelp>
+	          <excludePackageNames>org.elastxy.app.*</excludePackageNames>
+	        </configuration>
+	      </plugin>
+	    </plugins>
+    
         <pluginManagement>
             <plugins>
                 <plugin>
@@ -89,6 +103,21 @@
             </plugins>
         </pluginManagement>
     </build>
+	     
+	  <reporting>
+	    <plugins>
+	      <plugin>
+	        <groupId>org.apache.maven.plugins</groupId>
+	        <artifactId>maven-javadoc-plugin</artifactId>
+	        <version>3.0.0</version>
+	        <configuration>
+	          <stylesheetfile>${basedir}/src/main/javadoc/stylesheet.css</stylesheetfile>
+	          <show>public</show>
+	          <excludePackageNames>org.elastxy.app.*</excludePackageNames>
+	        </configuration>
+	      </plugin>
+	    </plugins>
+	  </reporting>
 
 	<dependencyManagement>
 		<dependencies>
@@ -256,5 +285,6 @@
 			</dependency>
 		</dependencies>
 	</dependencyManagement>
+
 
 </project>

@@ -1,0 +1,1 @@
+spark-class org.apache.spark.deploy.worker.Worker spark://192.168.1.101:7077 -h 192.168.1.101 -c 1 -m 1G
