@@ -44,14 +44,23 @@ public class JSONSupport {
 	}
 
 	public static Object readJSONString(String inputString, Class type) throws IOException {
+		return readJSONString(inputString, type, false);
+	}
+
+	public static Object readJSONString(String inputString, Class type, boolean enableDefaultTyping) throws IOException {
     	ObjectMapper om = new ObjectMapper();
+    	if(enableDefaultTyping) om.enableDefaultTyping();
 		Object result = om.readValue(inputString, type);
 		return result;
 	}
 
-
 	public static String writeJSONString(Object inputObject) throws IOException {
+		return writeJSONString(inputObject, false);
+	}
+
+	public static String writeJSONString(Object inputObject, boolean enableDefaultTyping) throws IOException {
     	ObjectMapper om = new ObjectMapper();
+    	if(enableDefaultTyping) om.enableDefaultTyping();
 		String result = om.writeValueAsString(inputObject);
 		return result;
 	}

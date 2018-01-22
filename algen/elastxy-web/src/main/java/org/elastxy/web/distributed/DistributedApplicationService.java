@@ -10,7 +10,9 @@ import org.elastxy.core.support.JSONSupport;
 import org.elastxy.distributed.appsupport.ElastXYDriverApplication;
 import org.elastxy.distributed.context.DistributedAlgorithmContext;
 import org.elastxy.distributed.stats.MultiColonyExperimentStats;
+import org.elastxy.distributed.tracking.DistributedResultsCollector;
 import org.elastxy.distributed.tracking.StandardDistributedResultsCollector;
+import org.elastxy.distributed.tracking.kafka.KafkaDistributedResultsCollector;
 import org.elastxy.web.controller.ExperimentResponse;
 import org.elastxy.web.renderer.InternalExperimentResponseRenderer;
 import org.elastxy.web.renderer.WebExperimentResponseRenderer;
@@ -60,7 +62,7 @@ public class DistributedApplicationService {
 		ElastXYDriverApplication.main(params);
 
 		// Export results
-		StandardDistributedResultsCollector collector = new StandardDistributedResultsCollector();
+		DistributedResultsCollector collector = new KafkaDistributedResultsCollector(); //new StandardDistributedResultsCollector();
 		collector.init(context);
 		MultiColonyExperimentStats stats = collector.consumeResults(taskConfig.taskIdentifier);
     	ExperimentResponse response = res(context.requestContext.webRequest, context, stats);

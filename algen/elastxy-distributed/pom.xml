@@ -65,7 +65,6 @@
 		
 		<!-- SPARK -->
     	
-    	  <!-- Spark -->
    		<dependency>
             <groupId>org.apache.spark</groupId>
             <artifactId>spark-core_2.11</artifactId>
@@ -101,16 +100,28 @@
             <artifactId>slf4j-simple</artifactId>
         </dependency>
         
+		<dependency>
+		    <groupId>org.apache.kafka</groupId>
+		    <artifactId>kafka-clients</artifactId>
+		</dependency>
+        
 	</dependencies>
 	    			
 	    			
 	    			
 	<profiles>
 		<profile>
-			<id>distributed</id>
+			<id>messaging</id>
 			<activation>
 				<activeByDefault>true</activeByDefault>
 			</activation>
+	        <dependencies>
+	            <dependency>
+				    <groupId>org.apache.kafka</groupId>
+				    <artifactId>kafka-clients</artifactId>
+				</dependency>
+	        </dependencies>
+	        <!--
 		    <build>
 		        <plugins>
 			        <plugin>
@@ -126,6 +137,7 @@
 					</plugin>
 		        </plugins>
 		    </build>
+	         -->
 		</profile>
 	</profiles>
 	

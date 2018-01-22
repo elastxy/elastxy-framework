@@ -16,7 +16,8 @@ import org.elastxy.core.support.JSONSupport;
 import org.elastxy.distributed.context.DistributedAlgorithmContext;
 import org.elastxy.distributed.engine.core.MultiColonyExperiment;
 import org.elastxy.distributed.stats.MultiColonyExperimentStats;
-import org.elastxy.distributed.tracking.StandardDistributedResultsCollector;
+import org.elastxy.distributed.tracking.DistributedResultsCollector;
+import org.elastxy.distributed.tracking.kafka.KafkaDistributedResultsCollector;
 
 public class ElastXYDriverApplication {
 	private static Logger logger = Logger.getLogger(ElastXYDriverApplication.class);
@@ -81,7 +82,7 @@ public class ElastXYDriverApplication {
 			MultiColonyExperimentStats stats = executeExperiment(context);
 			
 			// Store results
-			StandardDistributedResultsCollector collector = new StandardDistributedResultsCollector();
+			DistributedResultsCollector collector = new KafkaDistributedResultsCollector();
 			collector.init(context);
 			collector.produceResults(taskIdentifier, stats);
 			
