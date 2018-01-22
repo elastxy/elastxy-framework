@@ -87,7 +87,7 @@ public class DistributedApplicationService {
     	String driverStatus = executor.runDistributed(taskConfig, context);
 
     	// Export results
-		StandardDistributedResultsCollector collector = new StandardDistributedResultsCollector();
+		DistributedResultsCollector collector = new KafkaDistributedResultsCollector();
 		collector.init(context);
 		MultiColonyExperimentStats stats = collector.consumeResults(taskConfig.taskIdentifier);
     	ExperimentResponse response = res(context.requestContext.webRequest, context, stats);
