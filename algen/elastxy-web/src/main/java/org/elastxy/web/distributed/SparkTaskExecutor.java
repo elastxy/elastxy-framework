@@ -19,7 +19,6 @@ import org.springframework.stereotype.Component;
 
 import com.github.ywilkof.sparkrestclient.DriverState;
 import com.github.ywilkof.sparkrestclient.SparkRestClient;
-import com.github.ywilkof.sparkrestclient.interfaces.JobStatusRequestSpecification;
 
 @Component
 public class SparkTaskExecutor {

@@ -10,15 +10,16 @@ import org.apache.spark.api.java.JavaSparkContext;
 import org.elastxy.core.applications.components.AppComponentsLocator;
 import org.elastxy.core.applications.components.factory.AppBootstrapRaw;
 import org.elastxy.core.conf.ConfigurationException;
-import org.elastxy.core.conf.ReadConfigSupport;
 import org.elastxy.core.engine.core.Experiment;
 import org.elastxy.core.stats.ExperimentStats;
 import org.elastxy.core.support.JSONSupport;
 import org.elastxy.distributed.context.DistributedAlgorithmContext;
 import org.elastxy.distributed.engine.core.MultiColonyExperiment;
+import org.elastxy.distributed.stats.MultiColonyExperimentStats;
+import org.elastxy.distributed.tracking.StandardDistributedResultsCollector;
 
-public class ElastXYApplication {
-	private static Logger logger = Logger.getLogger(ElastXYApplication.class);
+public class ElastXYDriverApplication {
+	private static Logger logger = Logger.getLogger(ElastXYDriverApplication.class);
 //	private static org.slf4j.Logger logger2 = org.slf4j.LoggerFactory.getLogger(MexdSparkApplication.class);
 	
 //	private static transient BufferedWriter stream = null;
@@ -70,16 +71,19 @@ public class ElastXYApplication {
 			context = (DistributedAlgorithmContext) JSONSupport.readJSONString(config, DistributedAlgorithmContext.class);
 			context.application.appName = applicationName;
 			setupContext(context, locator);
+			context.exchangePath = outboundPath;
 	
 			// Create distributed context
 			context.distributedContext = createSparkContext(applicationName, sparkHome, master);
 			
 			// Execute experiment
 			info("Starting application experiment.");
-			ExperimentStats stats = executeExperiment(context);
+			MultiColonyExperimentStats stats = executeExperiment(context);
 			
 			// Store results
-			JSONSupport.writeJSONObject(new File(outboundPath, taskIdentifier+".json"), stats);
+			StandardDistributedResultsCollector collector = new StandardDistributedResultsCollector();
+			collector.init(context);
+			collector.produceResults(taskIdentifier, stats);
 			
 			info("Experiment ended: "+stats);
 			
@@ -115,11 +119,11 @@ public class ElastXYApplication {
 		return sparkContext;
 	}
 
-	private static ExperimentStats executeExperiment(DistributedAlgorithmContext context){
+	private static MultiColonyExperimentStats executeExperiment(DistributedAlgorithmContext context){
 	 	Experiment e = new MultiColonyExperiment(context);
         e.run();
         ExperimentStats stats = e.getStats();
-        return stats;
+        return (MultiColonyExperimentStats)stats;
 	}
 	
 	private static void setupContext(DistributedAlgorithmContext context, AppComponentsLocator locator) {

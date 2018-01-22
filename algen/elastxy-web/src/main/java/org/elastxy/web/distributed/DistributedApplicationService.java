@@ -7,10 +7,10 @@ import org.elastxy.core.applications.components.AppComponentsLocator;
 import org.elastxy.core.context.AlgorithmContext;
 import org.elastxy.core.stats.ExperimentStats;
 import org.elastxy.core.support.JSONSupport;
-import org.elastxy.distributed.appsupport.ElastXYApplication;
+import org.elastxy.distributed.appsupport.ElastXYDriverApplication;
 import org.elastxy.distributed.context.DistributedAlgorithmContext;
 import org.elastxy.distributed.stats.MultiColonyExperimentStats;
-import org.elastxy.distributed.tracking.DistributedResultsCollector;
+import org.elastxy.distributed.tracking.StandardDistributedResultsCollector;
 import org.elastxy.web.controller.ExperimentResponse;
 import org.elastxy.web.renderer.InternalExperimentResponseRenderer;
 import org.elastxy.web.renderer.WebExperimentResponseRenderer;
@@ -36,8 +36,8 @@ public class DistributedApplicationService {
 	public ExperimentResponse executeDistributedLocal(DistributedAlgorithmContext context) throws Exception {
 		
 		// Configure
-		setupContext(context);
 		SparkTaskConfig taskConfig = applicationsSparkConfig.getTaskConfig(context.application.appName);
+		setupContext(context, taskConfig.webappInboundPath);
 
 		// Setup configurations
     	logger.info("Local Service Task Configuration");
@@ -57,10 +57,12 @@ public class DistributedApplicationService {
 				master, 
 				contextAsString};
     	logger.info("Submitting job locally with params: "+Arrays.asList(params));
-		ElastXYApplication.main(params);
+		ElastXYDriverApplication.main(params);
 
 		// Export results
-		MultiColonyExperimentStats stats = DistributedResultsCollector.retrieveResults(taskConfig.webappInboundPath, taskConfig.taskIdentifier);
+		StandardDistributedResultsCollector collector = new StandardDistributedResultsCollector();
+		collector.init(context);
+		MultiColonyExperimentStats stats = collector.consumeResults(taskConfig.taskIdentifier);
     	ExperimentResponse response = res(context.requestContext.webRequest, context, stats);
     	
     	return response;
@@ -71,9 +73,9 @@ public class DistributedApplicationService {
 	public ExperimentResponse executeDistributedCluster(DistributedAlgorithmContext context) throws Exception {
 
 		// Configure
-		setupContext(context);
+		SparkTaskConfig taskConfig = applicationsSparkConfig.getTaskConfig(context.application.appName);
+		setupContext(context, taskConfig.webappInboundPath);
     	SparkTaskExecutor executor = new SparkTaskExecutor();
-    	SparkTaskConfig taskConfig = applicationsSparkConfig.getTaskConfig(context.application.appName);
     	
     	// Setup configurations
     	logger.info("Cluster Service Task Configuration");
@@ -83,7 +85,9 @@ public class DistributedApplicationService {
     	String driverStatus = executor.runDistributed(taskConfig, context);
 
     	// Export results
-		MultiColonyExperimentStats stats = DistributedResultsCollector.retrieveResults(taskConfig.webappInboundPath, taskConfig.taskIdentifier);
+		StandardDistributedResultsCollector collector = new StandardDistributedResultsCollector();
+		collector.init(context);
+		MultiColonyExperimentStats stats = collector.consumeResults(taskConfig.taskIdentifier);
     	ExperimentResponse response = res(context.requestContext.webRequest, context, stats);
     	
     	return response;
@@ -99,10 +103,12 @@ public class DistributedApplicationService {
 		return webRequest ? webRenderer.render(context, content) : intRenderer.render(context, content);
 	}
 	
-	private void setupContext(AlgorithmContext context) {
+	
+	private void setupContext(DistributedAlgorithmContext context, String exchangePath) {
 		context.application = appComponentsLocator.get(context.application.appName);
 		context.application.resultsRenderer.setTechieSolutionRenderer(context.application.solutionRenderer);
 		context.application.resultsRenderer.setFriendlySolutionRenderer(context.application.friendlySolutionRenderer);
+		context.exchangePath = exchangePath;
 	}
 
 }
