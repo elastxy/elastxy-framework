@@ -20,22 +20,22 @@ public class ApplicationsSparkConfig {
 	@Value("${spark.home}")
 	private String sparkHome;
 	
-	@Value("${master.uri}")
+	@Value("${spark.master.uri}")
 	private String masterUri;
 
-	@Value("${master.host}")
+	@Value("${spark.master.host}")
 	private String masterHost;
 
 	@Value("${spark.version}")
 	private String sparkVersion;
 
-	@Value("${app.jar.path}")
+	@Value("${spark.app.jar.path}")
 	private String appJarPath;
 
-	@Value("${main.class}")
+	@Value("${spark.driver.main.class}")
 	private String mainClass;
 	
-	@Value("${other.jars.path}")
+	@Value("${spark.other.jars.path}")
 	private String otherJarsPath;
 
 	/**

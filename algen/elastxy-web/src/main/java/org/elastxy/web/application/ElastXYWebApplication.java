@@ -16,6 +16,11 @@
 
 package org.elastxy.web.application;
 
+import java.util.Arrays;
+
+import org.elastxy.web.distributed.DistributedApplicationService;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
@@ -24,6 +29,7 @@ import org.springframework.cache.annotation.EnableCaching;
 import org.springframework.cache.concurrent.ConcurrentMapCacheManager;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
+import org.springframework.core.env.Environment;
 
 import springfox.documentation.builders.ApiInfoBuilder;
 import springfox.documentation.builders.PathSelectors;
@@ -41,6 +47,7 @@ import springfox.documentation.swagger2.annotations.EnableSwagger2;
 @EnableSwagger2
 @ComponentScan(basePackages = "org.elastxy")
 public class ElastXYWebApplication {
+	private static Logger logger = LoggerFactory.getLogger(ElastXYWebApplication.class);
 
 	@Bean(name = "springCM")
 	public CacheManager cacheManager() {
@@ -48,6 +55,8 @@ public class ElastXYWebApplication {
 	}
 
 	public static void main(String[] args) throws Exception {
+		logger.info("ELASTXY ARGUMENTS DUMP: "+(args==null?"No arguments.":Arrays.asList(args)));
+		logger.info("ELASTXY SYSTEM PROPERTIES DUMP: "+System.getenv());
 		SpringApplication.run(ElastXYWebApplication.class, args);
 	}
 
