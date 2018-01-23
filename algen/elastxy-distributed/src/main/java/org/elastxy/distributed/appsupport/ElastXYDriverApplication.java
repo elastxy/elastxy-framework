@@ -1,15 +1,10 @@
 package org.elastxy.distributed.appsupport;
 
-import java.io.File;
-import java.util.Arrays;
-import java.util.Base64;
-
 import org.apache.log4j.Logger;
 import org.apache.spark.SparkConf;
 import org.apache.spark.api.java.JavaSparkContext;
 import org.elastxy.core.applications.components.AppComponentsLocator;
 import org.elastxy.core.applications.components.factory.AppBootstrapRaw;
-import org.elastxy.core.conf.ConfigurationException;
 import org.elastxy.core.engine.core.Experiment;
 import org.elastxy.core.stats.ExperimentStats;
 import org.elastxy.core.support.JSONSupport;
@@ -17,13 +12,11 @@ import org.elastxy.distributed.context.DistributedAlgorithmContext;
 import org.elastxy.distributed.engine.core.MultiColonyExperiment;
 import org.elastxy.distributed.stats.MultiColonyExperimentStats;
 import org.elastxy.distributed.tracking.DistributedResultsCollector;
+import org.elastxy.distributed.tracking.StandardDistributedResultsCollector;
 import org.elastxy.distributed.tracking.kafka.KafkaDistributedResultsCollector;
 
 public class ElastXYDriverApplication {
 	private static Logger logger = Logger.getLogger(ElastXYDriverApplication.class);
-//	private static org.slf4j.Logger logger2 = org.slf4j.LoggerFactory.getLogger(MexdSparkApplication.class);
-	
-//	private static transient BufferedWriter stream = null;
 	
 	
 	/**
@@ -33,64 +26,40 @@ public class ElastXYDriverApplication {
 	 */
 	public static void main(String[] args){
 		DistributedAlgorithmContext context = null;
+		DriverApplicationLogging logging = null;
 		try {
+			logging = new DriverApplicationLogging(logger);
+			DriverApplicationParameters parameters = new DriverApplicationParameters(logging);
 			
-//			stream = new BufferedWriter(new FileWriter("C:\\tmp\\mylog.log"));
+			logger.info("Parsing parameters.");
+			if(!parameters.check(args)) return;
+			parameters.parse(args);
 			
-			// Get application to run
-			if(args==null){
-				error("No arguments found. Please provide following arguments: "
-						+ "applicationName, spark home, master, configuration json.");
-				error("Current parameters: "+(args==null?null:Arrays.asList(args)));
-				return;
-			}
-			info("Arguments found: "+Arrays.asList(args));
-			String applicationName = args[0]; // expressions_d
-			String taskIdentifier = args[1];
-			
-			info("Initializing application "+applicationName);
-			
-			String sparkHome = args[2]; // e.g. "C:/dev/spark-2.2.0-bin-hadoop2.7"
-			checkPath(sparkHome);
-			String inboundPath = args[3];// e.g. "C:/tmp/inbound
-			checkPath(inboundPath);
-			String outboundPath = args[4];// e.g. "C:/tmp/results
-			checkPath(outboundPath);
-			
-			String master = args[5]; // "spark://192.168.1.101:7077"
-			String configBase64 = args[6]; // configuration json input from ws
-			String config = new String(Base64.getDecoder().decode(configBase64));
-			info("Application config: "+config);
-			
-			// Register Application
-			info("Bootstrapping application.");
+			logger.info("Bootstrapping application.");
 			AppBootstrapRaw bootstrap = new AppBootstrapRaw();
-			AppComponentsLocator locator = bootstrap.boot(applicationName);
+			AppComponentsLocator locator = bootstrap.boot(parameters.applicationName);
 	
-			// Create application context
-			info("Initializing context.");
-			context = (DistributedAlgorithmContext) JSONSupport.readJSONString(config, DistributedAlgorithmContext.class);
-			context.application.appName = applicationName;
+			logging.info("Initializing application context.");
+			context = (DistributedAlgorithmContext) JSONSupport.readJSONString(parameters.context, DistributedAlgorithmContext.class);
+			context.application.appName = parameters.applicationName;
 			setupContext(context, locator);
-			context.exchangePath = outboundPath;
-	
-			// Create distributed context
-			context.distributedContext = createSparkContext(applicationName, sparkHome, master);
 			
-			// Execute experiment
-			info("Starting application experiment.");
+			logging.info("Initializing distributed context.");
+			context.exchangePath = parameters.outboundPath;
+			context.distributedContext = createSparkContext(parameters.applicationName, parameters.sparkHome, parameters.master);
+			context.distributedResultsCollector = createResultsCollector(context);
+			
+			logging.info("Starting application experiment.");
 			MultiColonyExperimentStats stats = executeExperiment(context);
+
+			logging.info("Exporting experiment results.");
+			context.distributedResultsCollector.produceResults(parameters.taskIdentifier, stats);
 			
-			// Store results
-			DistributedResultsCollector collector = new KafkaDistributedResultsCollector();
-			collector.init(context);
-			collector.produceResults(taskIdentifier, stats);
-			
-			info("Experiment ended: "+stats);
+			logging.info("Experiment ended: "+stats);
 			
 		} catch (Exception e) {
 			try {
-				error("Error while executing SparkApplication. Ex: "+e, e);
+				logging.error("Error while executing SparkApplication. Ex: "+e, e);
 			}
 			catch(Exception ex2){
 				ex2.printStackTrace();
@@ -101,31 +70,7 @@ public class ElastXYDriverApplication {
 		}
 	}
 	
-	private static void checkPath(String path){
-		if(!new File(path).exists()){
-			throw new ConfigurationException("Distributed execution error: following path not found: "+path);
-		}
-	}
-	
-	private static JavaSparkContext createSparkContext(
-			String applicationName,
-			String sparkHome,
-			String master){
-		SparkConf sparkConf = new SparkConf()
-	            .setAppName(applicationName)
-	            .setSparkHome(sparkHome)
-	            .setMaster(master);
-//	            .set("spark.driver.allowMultipleContexts", "true"); // TODO3-1: make it configurable?
-		JavaSparkContext sparkContext = new JavaSparkContext(sparkConf);
-		return sparkContext;
-	}
 
-	private static MultiColonyExperimentStats executeExperiment(DistributedAlgorithmContext context){
-	 	Experiment e = new MultiColonyExperiment(context);
-        e.run();
-        ExperimentStats stats = e.getStats();
-        return (MultiColonyExperimentStats)stats;
-	}
 	
 	private static void setupContext(DistributedAlgorithmContext context, AppComponentsLocator locator) {
 		context.application = locator.get(context.application.appName);
@@ -142,29 +87,35 @@ public class ElastXYDriverApplication {
 		context.application.distributedGenomaProvider.setup(context);
 	}
 	
+	
+	private static JavaSparkContext createSparkContext(
+			String applicationName,
+			String sparkHome,
+			String master){
+		SparkConf sparkConf = new SparkConf()
+	            .setAppName(applicationName)
+	            .setSparkHome(sparkHome)
+	            .setMaster(master);
+//	            .set("spark.driver.allowMultipleContexts", "true"); // TODO3-1: make it configurable?
+		JavaSparkContext sparkContext = new JavaSparkContext(sparkConf);
+		return sparkContext;
+	}
 
-    private static void info(String message) throws Exception{
-    	System.out.println(message);
-    	if(logger!=null) logger.info(message);
-//    	if(logger2!=null) logger2.info(message);
-//    	stream.write(message);
-//    	stream.newLine();
-    }
-
-    private static void error(String message) throws Exception{
-    	System.out.println(message);
-    	if(logger!=null) logger.error(message);
-//    	if(logger2!=null) logger2.error(message);
-//    	stream.write(message);
-//    	stream.newLine();
-    }
-
-    private static void error(String message, Throwable exception) throws Exception{
-    	System.out.println(message);
-    	exception.printStackTrace();
-    	if(logger!=null) logger.error(message, exception);
-//    	if(logger2!=null) logger2.error(message, exception);
-//    	stream.write(message+" "+exception.toString());
-//    	stream.newLine();
-    }
+	
+	private static DistributedResultsCollector createResultsCollector(DistributedAlgorithmContext context){
+		DistributedResultsCollector collector = context.messagingEnabled ? 
+				new KafkaDistributedResultsCollector()
+				: new StandardDistributedResultsCollector();
+		collector.setup(context);
+		return collector;
+	}
+	
+	private static MultiColonyExperimentStats executeExperiment(DistributedAlgorithmContext context){
+	 	Experiment e = new MultiColonyExperiment(context);
+        e.run();
+        ExperimentStats stats = e.getStats();
+        return (MultiColonyExperimentStats)stats;
+	}
+	
+	
 }

@@ -33,7 +33,7 @@ public class StandardDistributedResultsCollector implements DistributedResultsCo
 	private String exchangePath;
 	
 	
-	public void init(DistributedAlgorithmContext context){
+	public void setup(DistributedAlgorithmContext context){
 		this.exchangePath = context.exchangePath;
 	}
 	
@@ -59,7 +59,7 @@ public class StandardDistributedResultsCollector implements DistributedResultsCo
     	MultiColonyExperimentStats stats = null;
     	try {
     		InputStream inputStream = new FileInputStream(inputFile);
-    		stats = (MultiColonyExperimentStats)JSONSupport.readJSON(inputStream, MultiColonyExperimentStats.class);
+    		stats = (MultiColonyExperimentStats)JSONSupport.readJSON(inputStream, MultiColonyExperimentStats.class, true);
     	}
     	catch(IOException ex){
     		String msg = "Error while reading results from File: "+inputFile+" Ex: "+ex;

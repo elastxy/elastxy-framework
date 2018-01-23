@@ -101,19 +101,34 @@
         </dependency>
         
 		<dependency>
-		    <groupId>org.apache.kafka</groupId>
-		    <artifactId>kafka-clients</artifactId>
+	    	<groupId>org.apache.kafka</groupId>
+	    	<artifactId>kafka-clients</artifactId>
 		</dependency>
-        
+		
 	</dependencies>
-	    			
-	    			
-	    			
+	
+    <!--     			
+    <build>
+        <plugins>
+	        <plugin>
+			  <groupId>org.apache.maven.plugins</groupId>
+			  <artifactId>maven-compiler-plugin</artifactId>
+			  <configuration>
+			    <excludes>
+			      <exclude>**/kafka/*.java</exclude>
+			      <exclude>**/kafka/**/*.java</exclude>
+			    </excludes>
+			  </configuration>
+			</plugin>
+        </plugins>
+    </build>
+    
 	<profiles>
+	
 		<profile>
-			<id>messaging</id>
+			<id>messaging-enabled</id>
 			<activation>
-				<activeByDefault>true</activeByDefault>
+				<activeByDefault>false</activeByDefault>
 			</activation>
 	        <dependencies>
 	            <dependency>
@@ -121,25 +136,22 @@
 				    <artifactId>kafka-clients</artifactId>
 				</dependency>
 	        </dependencies>
-	        <!--
 		    <build>
 		        <plugins>
 			        <plugin>
 					  <groupId>org.apache.maven.plugins</groupId>
 					  <artifactId>maven-compiler-plugin</artifactId>
 					  <configuration>
-					    <excludes>
-					      <exclude>**/example/*.java</exclude>
-					      <exclude>**/sandbox/*.java</exclude>
-					      <exclude>**/lab/*.*</exclude>
-					    </excludes>
+					    <includes>
+					      <include>**/kafka/*.java</include>
+					    </includes>
 					  </configuration>
 					</plugin>
 		        </plugins>
 		    </build>
-	         -->
 		</profile>
+		
 	</profiles>
-	
-	
+	 -->
+	 
 </project>

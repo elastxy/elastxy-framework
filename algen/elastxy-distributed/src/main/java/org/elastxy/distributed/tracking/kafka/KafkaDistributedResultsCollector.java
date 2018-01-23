@@ -1,13 +1,15 @@
 package org.elastxy.distributed.tracking.kafka;
 
-import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.List;
 import java.util.Properties;
+import java.util.concurrent.CompletableFuture;
+import java.util.concurrent.ExecutionException;
+import java.util.concurrent.Executors;
+import java.util.concurrent.ScheduledExecutorService;
+import java.util.concurrent.ScheduledFuture;
+import java.util.concurrent.TimeUnit;
 
 import org.apache.kafka.clients.consumer.Consumer;
-import org.apache.kafka.clients.consumer.ConsumerRecord;
-import org.apache.kafka.clients.consumer.ConsumerRecords;
 import org.apache.kafka.clients.consumer.KafkaConsumer;
 import org.apache.kafka.clients.producer.KafkaProducer;
 import org.apache.kafka.clients.producer.Producer;
@@ -31,34 +33,21 @@ public class KafkaDistributedResultsCollector implements DistributedResultsColle
 	private static Logger logger = Logger.getLogger(KafkaDistributedResultsCollector.class);
 
 
-	private Producer<String, String> producer;
-
-	private Consumer<String, String> consumer;
-
-
+	private Properties producerProps = new Properties();
+	private Properties consumerProps = new Properties();
+	
+	
 	@Override
-	public void init(DistributedAlgorithmContext context) {
-
-		Properties props = new Properties();
-		props.put("bootstrap.servers", "192.168.1.101:9092,192.168.1.101:9093,192.168.1.101:9094");
-		props.put("acks", "all");
-		props.put("batch.size", 16384);
-		props.put("linger.ms", 1);
-		props.put("buffer.memory", 33554432);
-		props.put("key.serializer", "org.apache.kafka.common.serialization.StringSerializer");
-		props.put("value.serializer", "org.apache.kafka.common.serialization.StringSerializer");
-		// props.put("retries", 0); // exactly-once delivery
-		props.put("enable.idempotence", "true"); // exactly-once delivery
-		producer = new KafkaProducer<>(props);
-
-
-		props = new Properties();
-		props.put("bootstrap.servers", "192.168.1.101:9092,192.168.1.101:9093,192.168.1.101:9094");
-		props.put("group.id", "test");
-		props.put("enable.auto.commit", "true");
-		props.put("key.deserializer", "org.apache.kafka.common.serialization.StringDeserializer");
-		props.put("value.deserializer", "org.apache.kafka.common.serialization.StringDeserializer");
-		consumer = new KafkaConsumer<>(props);
+	public void setup(DistributedAlgorithmContext context) {
+		context.messagingProperties.forEach((k,v)->{
+			String key = (String)k;
+			if(key.startsWith("messaging.producer.")){
+				producerProps.put(key.substring("messaging.producer.".length(), key.length()), v);
+			}
+			else if(key.startsWith("messaging.consumer.")){
+				consumerProps.put(key.substring("messaging.consumer.".length(), key.length()), v);
+			}
+		});
 	}
 
 
@@ -67,10 +56,10 @@ public class KafkaDistributedResultsCollector implements DistributedResultsColle
 	@Override
 	public void produceResults(String taskIdentifier, MultiColonyExperimentStats stats) {
 
-		try {
+		try (Producer<String, String> producer = new KafkaProducer<>(producerProps);) {
 			String msg = JSONSupport.writeJSONString(stats, true);
 			producer.send(new ProducerRecord<String, String>("elastxy-results", taskIdentifier, msg)); // TODO0-2: kafka topic per app
-			//			 producer.close(); // TODO1-2: close the kafka producer
+			producer.close(); // TODO1-2: close the kafka producer
 		}
 		catch(Exception ex){
 			String msg = "Error while producing results to Kafka. TaskId: "+taskIdentifier+"Ex: "+ex;
@@ -82,30 +71,64 @@ public class KafkaDistributedResultsCollector implements DistributedResultsColle
 
 	@Override
 	public MultiColonyExperimentStats consumeResults(String taskIdentifier) {
-		MultiColonyExperimentStats result = null;
 
+		// Create Consumer
+		Consumer<String, String> consumer = new KafkaConsumer<>(consumerProps);
 		consumer.subscribe(Arrays.asList("elastxy-results")); // TODO0-2: kafka topic per app
 
-		extloop:
-			while (true) {
-				ConsumerRecords<String, String> records = consumer.poll(100);
-				for (ConsumerRecord<String, String> record : records) {
-					if(record.key().equals(taskIdentifier)){
-						try {
-							result = (MultiColonyExperimentStats)JSONSupport.readJSONString(record.value(), MultiColonyExperimentStats.class, true);
-						}
-						catch(Exception ex){
-							String msg = "Error while consuming results from Kafka. TaskId: "+taskIdentifier+"Ex: "+ex;
-							logger.error(msg, ex);
-							throw new DataAccessException(msg, ex);
-						}
-						break extloop;
-					}
-				}
-			}
-		consumer.close();// TODO0-2: Producer should be singleton (is thread-safe)
-		producer.close();// TODO0-2: Producer should be singleton (is thread-safe)
+		// Execute async
+		ScheduledExecutorService executor = Executors.newSingleThreadScheduledExecutor();
+		
+		long timeout = 30; // polling overall timeout in seconds
+		PollResultsCommand cmd = new PollResultsCommand(consumer, taskIdentifier, timeout * 1000);
+		
+		CompletableFuture<MultiColonyExperimentStats> future = pollForCompletion(executor, cmd, 500L);
+		MultiColonyExperimentStats result = null;
+		try {
+			result = future.get();
+		}
+		catch(DataAccessException ex){
+			throw ex;
+		}
+		catch(ExecutionException | InterruptedException ex){
+			logger.warn("Generic ExecutionException from Future while polling Kafka topic. Ex: "+ex);
+		}
+		finally{
+			consumer.close();// TODO0-2: Producer should be singleton (is thread-safe)
+		}
+		if(result==null){
+			throw new DataAccessException("Cannot retrieve message from Kafka topic after "+timeout+" s.");
+		}
 		return result;
 	}
+	
 
+	private static CompletableFuture<MultiColonyExperimentStats> pollForCompletion(
+			ScheduledExecutorService executor, 
+			PollResultsCommand cmd, 
+			long frequency) {
+		
+	    CompletableFuture<MultiColonyExperimentStats> completionFuture = new CompletableFuture<>();
+	    
+	    final ScheduledFuture<?> checkFuture = executor.scheduleAtFixedRate(() -> {
+    		cmd.poll();
+    		if(cmd.getResults()!=null){
+    			completionFuture.complete(cmd.getResults());
+    		}
+    		else if(cmd.getException()!=null){
+    			completionFuture.completeExceptionally(cmd.getException());
+    		}
+    		else if(cmd.isTimedOut()){
+    			completionFuture.complete(null);
+    		}
+	    }, 0, frequency, TimeUnit.MILLISECONDS);
+	    
+	    completionFuture.whenComplete((result, thrown) -> {
+	        checkFuture.cancel(true);
+	        executor.shutdown();
+	    });
+	    
+	    return completionFuture;
+	}
+	
 }

@@ -15,7 +15,7 @@ import org.elastxy.distributed.stats.MultiColonyExperimentStats;
  */
 public interface DistributedResultsCollector {
 
-	public void init(DistributedAlgorithmContext context);
+	public void setup(DistributedAlgorithmContext context);
 
 	/**
 	 * Produce execution results and puts them 

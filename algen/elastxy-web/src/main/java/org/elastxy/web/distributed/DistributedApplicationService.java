@@ -1,7 +1,9 @@
 package org.elastxy.web.distributed;
 
+import java.io.InputStream;
 import java.util.Arrays;
 import java.util.Base64;
+import java.util.Properties;
 
 import org.elastxy.core.applications.components.AppComponentsLocator;
 import org.elastxy.core.context.AlgorithmContext;
@@ -19,12 +21,18 @@ import org.elastxy.web.renderer.WebExperimentResponseRenderer;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.context.annotation.PropertySource;
 import org.springframework.stereotype.Component;
 
 @Component
+@PropertySource("classpath:distributed.properties")
 public class DistributedApplicationService {
 	private static Logger logger = LoggerFactory.getLogger(DistributedApplicationService.class);
 
+	
+	@Value("${messaging.enabled}")
+	private Boolean messagingEnabled;
 	
 	@Autowired private AppComponentsLocator appComponentsLocator;
 	
@@ -62,8 +70,7 @@ public class DistributedApplicationService {
 		ElastXYDriverApplication.main(params);
 
 		// Export results
-		DistributedResultsCollector collector = new KafkaDistributedResultsCollector(); //new StandardDistributedResultsCollector();
-		collector.init(context);
+		DistributedResultsCollector collector = createResultsCollector(context);
 		MultiColonyExperimentStats stats = collector.consumeResults(taskConfig.taskIdentifier);
     	ExperimentResponse response = res(context.requestContext.webRequest, context, stats);
     	
@@ -87,9 +94,8 @@ public class DistributedApplicationService {
     	String driverStatus = executor.runDistributed(taskConfig, context);
 
     	// Export results
-		DistributedResultsCollector collector = new KafkaDistributedResultsCollector();
-		collector.init(context);
-		MultiColonyExperimentStats stats = collector.consumeResults(taskConfig.taskIdentifier);
+    	context.distributedResultsCollector = createResultsCollector(context);
+		MultiColonyExperimentStats stats = context.distributedResultsCollector.consumeResults(taskConfig.taskIdentifier);
     	ExperimentResponse response = res(context.requestContext.webRequest, context, stats);
     	
     	return response;
@@ -106,11 +112,28 @@ public class DistributedApplicationService {
 	}
 	
 	
-	private void setupContext(DistributedAlgorithmContext context, String exchangePath) {
+	private void setupContext(DistributedAlgorithmContext context, String exchangePath) throws Exception {
 		context.application = appComponentsLocator.get(context.application.appName);
 		context.application.resultsRenderer.setTechieSolutionRenderer(context.application.solutionRenderer);
 		context.application.resultsRenderer.setFriendlySolutionRenderer(context.application.friendlySolutionRenderer);
 		context.exchangePath = exchangePath;
+		context.messagingEnabled = messagingEnabled;
+		if(messagingEnabled){
+			final Properties properties = new Properties();
+			try (final InputStream stream = getClass().getResourceAsStream("/messaging.properties")) {
+				properties.load(stream);
+			}
+			context.messagingProperties = properties;
+		}
+	}
+	
+
+	private static DistributedResultsCollector createResultsCollector(DistributedAlgorithmContext context){
+		DistributedResultsCollector collector = context.messagingEnabled ? 
+				new KafkaDistributedResultsCollector()
+				: new StandardDistributedResultsCollector();
+		collector.setup(context);
+		return collector;
 	}
 
 }
