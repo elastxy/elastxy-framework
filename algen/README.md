@@ -9,7 +9,7 @@ ElastXY can be natively:
 - distributed on multi-server environments via **Docker containers** managed by **Rancher Console**
 - or even executed in serverless cloud computing services supporting Apache Spark, like **Google Dataproc** or **Amazon EMR**.
 
-ElastXY is entirely written in Java 8 language.
+ElastXY is entirely written in **Java 8 language** and adopts **OAuth 2.0 security** standard flow.
 
 *DISCLAIMER*: the project is at an early stage but growing and consolidating fast, so contributions and ideas are very welcome here! :)
 
@@ -29,6 +29,7 @@ Roadmap is huge:
 - PaaS for offering ElastXY services and registering own apps easily, without configuring a bit of infrastructure
 - developer portal for easily integrate with ElastXY
 - partial/complete porting to Scala language for simplifying and ease coding
+- cover other OAuth 2.0 / OpenID Connect security flows and security concerns, like token signature and verification
 
 and many other points.
 

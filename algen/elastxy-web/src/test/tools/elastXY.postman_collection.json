@@ -12,11 +12,18 @@
 				{
 					"name": "/monitor/access",
 					"request": {
+						"auth": {
+							"type": "noauth"
+						},
 						"method": "HEAD",
 						"header": [
 							{
 								"key": "Web-Request",
 								"value": "false"
+							},
+							{
+								"key": "Authorization",
+								"value": "Basic eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX25hbWUiOiJhZG1pblVzZXIiLCJzY29wZSI6WyJtYW5hZ2UiLCJleGVjdXRlIl0sIm9yZ2FuaXphdGlvbiI6ImFkbWluVXNlcnphRGoiLCJleHAiOjE1MTY3NTA5NjgsImF1dGhvcml0aWVzIjpbIlJPTEVfQURNSU4iXSwianRpIjoiZjM2Yjk3MWQtN2ZiMS00MzE0LWEyY2EtODhjYWFjMTNmNjZhIiwiY2xpZW50X2lkIjoiY2xpZW50QWRtaW4ifQ.HRCKnl0NlIpcyUOmo0zvJNgkVA35OYegv85arHM0nFZZH0cr_97L0Zs-fGV7QmaBqwGpBLLG3ygLZrLc4nlXk_4-Toy2v0YcR4QEPt0Tt7dAPozgohRCpQUYXbjcEakhcoNTwAw-gMA86VpnN3CwYXWDQfcgC0LehEdDP0GXFlyfVVEXt6Tf1d-L0Mr0AOBsA2AT9rQLGyj2X9GKFOJ3JKnNMG58KsaV22f2BpYR6KnomoMZvH21Px7_hU9Y9aS9Q0fZ5FbDgFpHrI1LVzW_XJGMVSr1PnOb2GW8F5mWViWfpOIreUNWdzhSgYxZxc5uJfKhTK4meNkU4m0p_Tg9Iw"
 							}
 						],
 						"body": {
@@ -871,7 +878,7 @@
 							},
 							"response": [
 								{
-									"id": "f8ff018e-1d9e-4c33-8d1f-a9cf7de4407a",
+									"id": "83f56be4-2b4d-41f9-9a70-c1bd6030b372",
 									"name": "Database EN",
 									"originalRequest": {
 										"method": "POST",
@@ -908,7 +915,7 @@
 									"body": ""
 								},
 								{
-									"id": "41cf3550-2a4a-4427-8929-61dfc956465d",
+									"id": "3e7ade03-691c-467f-869a-ef5eb935c88c",
 									"name": "Database IT",
 									"originalRequest": {
 										"method": "POST",
@@ -945,7 +952,7 @@
 									"body": ""
 								},
 								{
-									"id": "b87417ee-f52f-4bf4-a5de-f49f54ac0cdb",
+									"id": "f8639530-42bb-44aa-8fcb-b0e28fabb1ee",
 									"name": "Dispensa Rossi",
 									"originalRequest": {
 										"method": "POST",
@@ -1112,7 +1119,7 @@
 							},
 							"response": [
 								{
-									"id": "d7d68e3c-eb87-42bd-ba4c-3e20e1ef22f8",
+									"id": "3dfdcd64-e1f6-4caa-a5a4-2daf24d3c305",
 									"name": "Database EN",
 									"originalRequest": {
 										"method": "POST",
@@ -1149,7 +1156,7 @@
 									"body": ""
 								},
 								{
-									"id": "bb6ccc55-196a-48e5-b30a-5ec9bf7764ea",
+									"id": "4c7bb33b-9569-4051-b554-d6fca4d7bc7e",
 									"name": "Database IT",
 									"originalRequest": {
 										"method": "POST",
@@ -1186,7 +1193,7 @@
 									"body": ""
 								},
 								{
-									"id": "d69c146b-639e-4741-a20d-ae21046d82e4",
+									"id": "2262698e-62ab-41c9-9014-bd098bf08cf6",
 									"name": "Dispensa Rossi",
 									"originalRequest": {
 										"method": "POST",
@@ -1346,7 +1353,7 @@
 								],
 								"body": {
 									"mode": "raw",
-									"raw": "{\r\n\t\"applicationSpecifics\": {\r\n\t\t\"target\" : {\r\n\t\t\t\"TARGET_EXPRESSION_RESULT\" : 235000\r\n\t\t},\r\n\t\t\"params\" : {\r\n\t\t\t\"MAX_OPERAND_VALUE\" : 1000\r\n\t\t}\r\n\t},\r\n\t\"algorithmParameters\": {\r\n\t\t\"recombinationPerc\": 0.8,\r\n\t\t\"mutationPerc\": 0.2,\r\n\t\t\"initialSelectionNumber\": 1000,\r\n\t\t\"initialSelectionRandom\": true,\r\n\t\t\"stopConditions\": {\r\n\t\t\t\"targetThreshold\" : 0.99999999,\r\n\t\t\t\"maxGenerations\": -1,\r\n\t\t\t\"maxLifetimeMs\": 1000,\r\n\t\t\t\"maxIdenticalFitnesses\": -1,\r\n\t\t\t\"maxEras\": 1\r\n\t\t},\r\n\t\t\"partitions\": 4,\r\n\t\t\"reshuffleEveryEras\" : 2,\r\n\t\t\"elitism\": {\r\n\t\t\t\"singleColonyElitism\": true,\r\n\t\t\t\"singleColonyElitismNumber\": 10,\r\n\t\t\t\"multiColonyElitism\" : true,\r\n\t\t\t\"multiColonyElitismNumber\" : 10,\r\n\t\t\t\"recombineElite\": true\r\n\t\t}\r\n\t},\r\n\t\"monitoringConfiguration\": {\r\n\t\t\"verbose\": false,\r\n\t\t\"showGraph\": true\r\n\t}\r\n}"
+									"raw": "{\r\n\t\"applicationSpecifics\": {\r\n\t\t\"target\" : {\r\n\t\t\t\"TARGET_EXPRESSION_RESULT\" : 235000\r\n\t\t},\r\n\t\t\"params\" : {\r\n\t\t\t\"MAX_OPERAND_VALUE\" : 1000\r\n\t\t}\r\n\t},\r\n\t\"algorithmParameters\": {\r\n\t\t\"recombinationPerc\": 0.8,\r\n\t\t\"mutationPerc\": 0.2,\r\n\t\t\"initialSelectionNumber\": 1000,\r\n\t\t\"initialSelectionRandom\": true,\r\n\t\t\"stopConditions\": {\r\n\t\t\t\"targetThreshold\" : 0.99999999,\r\n\t\t\t\"maxGenerations\": -1,\r\n\t\t\t\"maxLifetimeMs\": 3000,\r\n\t\t\t\"maxIdenticalFitnesses\": -1,\r\n\t\t\t\"maxEras\": 3\r\n\t\t},\r\n\t\t\"partitions\": 4,\r\n\t\t\"reshuffleEveryEras\" : 2,\r\n\t\t\"elitism\": {\r\n\t\t\t\"singleColonyElitism\": true,\r\n\t\t\t\"singleColonyElitismNumber\": 10,\r\n\t\t\t\"multiColonyElitism\" : true,\r\n\t\t\t\"multiColonyElitismNumber\" : 10,\r\n\t\t\t\"recombineElite\": true\r\n\t\t}\r\n\t},\r\n\t\"monitoringConfiguration\": {\r\n\t\t\"verbose\": false,\r\n\t\t\"showGraph\": true\r\n\t}\r\n}"
 								},
 								"url": {
 									"raw": "http://{{ip}}:{{port}}/distributed/cluster/experiment/expressions_d",
@@ -1474,6 +1481,48 @@
 					"_postman_isSubFolder": true
 				},
 				{
+					"name": "expressions_c",
+					"description": "",
+					"item": [
+						{
+							"name": "/distr/exp/local SMALL",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									},
+									{
+										"key": "Web-Request",
+										"value": "false"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n\t\"applicationSpecifics\": {\r\n\t\t\"target\" : {\r\n\t\t\t\"TARGET_EXPRESSION_RESULT\" : 23\r\n\t\t},\r\n\t\t\"params\" : {\r\n\t\t\t\"MAX_OPERAND_VALUE\" : 100\r\n\t\t}\r\n\t},\r\n\t\"algorithmParameters\": {\r\n\t\t\"recombinationPerc\": 0.8,\r\n\t\t\"mutationPerc\": 0.2,\r\n\t\t\"initialSelectionNumber\": 10,\r\n\t\t\"initialSelectionRandom\": true,\r\n\t\t\"stopConditions\": {\r\n\t\t\t\"maxGenerations\": 10,\r\n\t\t\t\"maxLifetimeMs\": -1,\r\n\t\t\t\"maxIdenticalFitnesses\": -1,\r\n\t\t\t\"maxEras\": 3\r\n\t\t},\r\n\t\t\"partitions\": 4,\r\n\t\t\"reshuffleEveryEras\" : 2,\r\n\t\t\"elitism\": {\r\n\t\t\t\"singleColonyElitism\": true,\r\n\t\t\t\"singleColonyElitismNumber\": 1,\r\n\t\t\t\"multiColonyElitism\" : true,\r\n\t\t\t\"multiColonyElitismNumber\" : 1,\r\n\t\t\t\"recombineElite\": true\r\n\t\t}\r\n\t},\r\n\t\"monitoringConfiguration\": {\r\n\t\t\"verbose\": false,\r\n\t\t\"showGraph\": true\r\n\t}\r\n}"
+								},
+								"url": {
+									"raw": "http://{{ip}}:{{port}}/distributed/local/experiment/expressions_c",
+									"protocol": "http",
+									"host": [
+										"{{ip}}"
+									],
+									"port": "{{port}}",
+									"path": [
+										"distributed",
+										"local",
+										"experiment",
+										"expressions_c"
+									]
+								}
+							},
+							"response": []
+						}
+					],
+					"_postman_isSubFolder": true
+				},
+				{
 					"name": "sudoku_d",
 					"item": [
 						{
@@ -1562,7 +1611,7 @@
 								],
 								"body": {
 									"mode": "raw",
-									"raw": "{\r\n\t\"algorithmParameters\": {\r\n\t\t\"recombinationPerc\": 0.8,\r\n\t\t\"mutationPerc\": 0.2,\r\n\t\t\"initialSelectionNumber\": 10,\r\n\t\t\"initialSelectionRandom\": true,\r\n\t\t\"stopConditions\": {\r\n\t\t\t\"maxGenerations\": -1,\r\n\t\t\t\"maxLifetimeMs\": 3000,\r\n\t\t\t\"maxIdenticalFitnesses\": -1,\r\n\t\t\t\"maxEras\": 5\r\n\t\t},\r\n\t\t\"partitions\": 4,\r\n\t\t\"reshuffleEveryEras\" : 2,\r\n\t\t\"elitism\": {\r\n\t\t\t\"singleColonyElitism\": true,\r\n\t\t\t\"singleColonyElitismNumber\": 1,\r\n\t\t\t\"multiColonyElitism\" : true,\r\n\t\t\t\"multiColonyElitismNumber\" : 10\r\n\t\t}\r\n\t},\r\n\t\"monitoringConfiguration\": {\r\n\t\t\"verbose\": false,\r\n\t\t\"traceHistory\": false\r\n\t}\r\n}\r\n"
+									"raw": "{\r\n\t\"algorithmParameters\": {\r\n\t\t\"recombinationPerc\": 0.8,\r\n\t\t\"mutationPerc\": 0.2,\r\n\t\t\"initialSelectionNumber\": 100,\r\n\t\t\"initialSelectionRandom\": true,\r\n\t\t\"stopConditions\": {\r\n\t\t\t\"maxGenerations\": -1,\r\n\t\t\t\"maxLifetimeMs\": 1000,\r\n\t\t\t\"maxIdenticalFitnesses\": -1,\r\n\t\t\t\"maxEras\": 5\r\n\t\t},\r\n\t\t\"partitions\": 4,\r\n\t\t\"reshuffleEveryEras\" : 2,\r\n\t\t\"elitism\": {\r\n\t\t\t\"singleColonyElitism\": true,\r\n\t\t\t\"singleColonyElitismNumber\": 1,\r\n\t\t\t\"multiColonyElitism\" : true,\r\n\t\t\t\"multiColonyElitismNumber\" : 10\r\n\t\t}\r\n\t},\r\n\t\"monitoringConfiguration\": {\r\n\t\t\"verbose\": false,\r\n\t\t\"traceHistory\": false\r\n\t}\r\n}\r\n"
 								},
 								"url": {
 									"raw": "http://{{ip}}:{{port}}/distributed/cluster/experiment/sudoku_d",
@@ -1854,7 +1903,7 @@
 								],
 								"body": {
 									"mode": "raw",
-									"raw": "{\r\n\t\"applicationSpecifics\": {\r\n\t\t\"target\" : {\r\n\t\t\t\"TARGET_DESIRED_MEALS\" : 10,\r\n\t\t\t\"TARGET_SAVOURY_PROPORTION\" : 70,\r\n\t\t\t\"TARGET_SWEET_PROPORTION\" : 30,\r\n\t\t\t\"TARGET_FRIDGE_MANDATORY\" : true\r\n\t\t},\r\n\t\t\"params\" : {\r\n\t\t\t\"REFRIGERATOR_FOODS\" : [ \"yogurth\", \"banana\", \"banane\"  ],\r\n\t\t\t\"PANTRY_FOODS\" : [ \r\n ],\r\n\t\t\t\"DATABASE\" : \"IT\"\r\n\t\t}\r\n\t},\r\n\t\"algorithmParameters\": {\r\n\t\t\"recombinationPerc\": 0.8,\r\n\t\t\"mutationPerc\": 0.2,\r\n\t\t\"initialSelectionNumber\": 10,\r\n\t\t\"initialSelectionRandom\": true,\r\n\t\t\"stopConditions\": {\r\n\t\t\t\"maxGenerations\": -1,\r\n\t\t\t\"maxLifetimeMs\": 2000,\r\n\t\t\t\"maxIdenticalFitnesses\": -1,\r\n\t\t\t\"maxEras\": 1\r\n\t\t},\r\n\t\t\"partitions\": 4,\r\n\t\t\"reshuffleEveryEras\" : 2,\r\n\t\t\"elitism\": {\r\n\t\t\t\"singleColonyElitism\": true,\r\n\t\t\t\"singleColonyElitismNumber\": 1,\r\n\t\t\t\"multiColonyElitism\" : true,\r\n\t\t\t\"multiColonyElitismNumber\" : 10\r\n\t\t}\r\n\t},\r\n\t\"monitoringConfiguration\": {\r\n\t\t\"verbose\": false,\r\n\t\t\"showGraph\": true,\r\n\t\t\"traceHistory\": false\r\n\t}\r\n}\r\n"
+									"raw": "{\r\n\t\"applicationSpecifics\": {\r\n\t\t\"target\" : {\r\n\t\t\t\"TARGET_DESIRED_MEALS\" : 10,\r\n\t\t\t\"TARGET_SAVOURY_PROPORTION\" : 70,\r\n\t\t\t\"TARGET_SWEET_PROPORTION\" : 30,\r\n\t\t\t\"TARGET_FRIDGE_MANDATORY\" : true\r\n\t\t},\r\n\t\t\"params\" : {\r\n\t\t\t\"REFRIGERATOR_FOODS\" : [ \"yogurth\", \"banana\", \"banane\"  ],\r\n\t\t\t\"PANTRY_FOODS\" : [ \r\n ],\r\n\t\t\t\"DATABASE\" : \"IT\"\r\n\t\t}\r\n\t},\r\n\t\"algorithmParameters\": {\r\n\t\t\"recombinationPerc\": 0.8,\r\n\t\t\"mutationPerc\": 0.2,\r\n\t\t\"initialSelectionNumber\": 10,\r\n\t\t\"initialSelectionRandom\": true,\r\n\t\t\"stopConditions\": {\r\n\t\t\t\"maxGenerations\": -1,\r\n\t\t\t\"maxLifetimeMs\": 1000,\r\n\t\t\t\"maxIdenticalFitnesses\": -1,\r\n\t\t\t\"maxEras\": 1\r\n\t\t},\r\n\t\t\"partitions\": 4,\r\n\t\t\"reshuffleEveryEras\" : 2,\r\n\t\t\"elitism\": {\r\n\t\t\t\"singleColonyElitism\": true,\r\n\t\t\t\"singleColonyElitismNumber\": 1,\r\n\t\t\t\"multiColonyElitism\" : true,\r\n\t\t\t\"multiColonyElitismNumber\" : 10\r\n\t\t}\r\n\t},\r\n\t\"monitoringConfiguration\": {\r\n\t\t\"verbose\": false,\r\n\t\t\"showGraph\": true,\r\n\t\t\"traceHistory\": false\r\n\t}\r\n}\r\n"
 								},
 								"url": {
 									"raw": "http://{{ip}}:{{port}}/distributed/cluster/experiment/algofrigerator_d",
@@ -1875,196 +1924,6 @@
 						}
 					],
 					"_postman_isSubFolder": true
-				}
-			]
-		},
-		{
-			"name": "sandbox",
-			"item": [
-				{
-					"name": "spark-control",
-					"item": [
-						{
-							"name": "/v1/submissions/create",
-							"request": {
-								"method": "POST",
-								"header": [
-									{
-										"key": "Content-Type",
-										"value": "application/json;charset=UTF-8"
-									}
-								],
-								"body": {
-									"mode": "raw",
-									"raw": "{\r\n  \"action\" : \"CreateSubmissionRequest\",\r\n  \"appArgs\" : [ \"spark://192.168.1.101:7077\" ],\r\n  \"appResource\" : \"file:///c:/dev/workspaces/ws_scala/Scaligen/target/scala-2.11/Scaligen-assembly-1.0.jar\",\r\n  \"clientSparkVersion\" : \"1.5.0\",\r\n  \"environmentVariables\" : {\r\n    \"log4j.configuration\" : \"C:/dev/spark-2.2.0-bin-hadoop2.7/conf/log4j.properties\",\r\n    \"spark.eventLog.enabled\" : \"false\",\r\n    \"spark.eventLog.dir\" : \"file:///c:/tmp/sparktemp/eventLog\",\r\n    \"spark.history.fs.logDirectory\" : \"file:///c:/tmp/sparktemp/eventLog\"\r\n  },\r\n  \"mainClass\" : \"org.elastxy.app.d.mex.MexApplication\",\r\n  \"sparkProperties\" : {\r\n    \"spark.driver.supervise\" : \"false\",\r\n    \"spark.app.name\" : \"MexApplication\",\r\n    \"spark.eventLog.enabled\": \"true\",\r\n    \"spark.submit.deployMode\" : \"cluster\",\r\n    \"spark.master\" : \"spark://192.168.1.101:7077\"\r\n  }\r\n}"
-								},
-								"url": {
-									"raw": "http://192.168.1.101:6066/v1/submissions/create",
-									"protocol": "http",
-									"host": [
-										"192",
-										"168",
-										"1",
-										"101"
-									],
-									"port": "6066",
-									"path": [
-										"v1",
-										"submissions",
-										"create"
-									]
-								}
-							},
-							"response": []
-						},
-						{
-							"name": "/v1/submissions/status",
-							"request": {
-								"method": "GET",
-								"header": [
-									{
-										"key": "Content-Type",
-										"value": "application/json;charset=UTF-8"
-									}
-								],
-								"body": {
-									"mode": "raw",
-									"raw": ""
-								},
-								"url": {
-									"raw": "http://192.168.1.101:6066/v1/submissions/status/driver-20171125234642-0000",
-									"protocol": "http",
-									"host": [
-										"192",
-										"168",
-										"1",
-										"101"
-									],
-									"port": "6066",
-									"path": [
-										"v1",
-										"submissions",
-										"status",
-										"driver-20171125234642-0000"
-									]
-								}
-							},
-							"response": []
-						},
-						{
-							"name": "/v1/submissions/kill",
-							"request": {
-								"method": "GET",
-								"header": [
-									{
-										"key": "Content-Type",
-										"value": "application/json;charset=UTF-8"
-									}
-								],
-								"body": {
-									"mode": "raw",
-									"raw": ""
-								},
-								"url": {
-									"raw": "http://192.168.1.101:6066/v1/submissions/kill/driver-20171125234642-0000",
-									"protocol": "http",
-									"host": [
-										"192",
-										"168",
-										"1",
-										"101"
-									],
-									"port": "6066",
-									"path": [
-										"v1",
-										"submissions",
-										"kill",
-										"driver-20171125234642-0000"
-									]
-								}
-							},
-							"response": []
-						}
-					],
-					"_postman_isSubFolder": true
-				},
-				{
-					"name": "/distributed/test/spark/concurrent",
-					"request": {
-						"method": "GET",
-						"header": [],
-						"body": {
-							"mode": "raw",
-							"raw": ""
-						},
-						"url": {
-							"raw": "http://{{ip}}:{{port}}/distributed/test/spark/concurrent",
-							"protocol": "http",
-							"host": [
-								"{{ip}}"
-							],
-							"port": "{{port}}",
-							"path": [
-								"distributed",
-								"test",
-								"spark",
-								"concurrent"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "/distributed/test/spark/single",
-					"request": {
-						"method": "GET",
-						"header": [],
-						"body": {
-							"mode": "raw",
-							"raw": ""
-						},
-						"url": {
-							"raw": "http://{{ip}}:{{port}}/distributed/test/spark/single",
-							"protocol": "http",
-							"host": [
-								"{{ip}}"
-							],
-							"port": "{{port}}",
-							"path": [
-								"distributed",
-								"test",
-								"spark",
-								"single"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "/distributed/test/spark/distributed",
-					"request": {
-						"method": "GET",
-						"header": [],
-						"body": {
-							"mode": "raw",
-							"raw": ""
-						},
-						"url": {
-							"raw": "http://{{ip}}:{{port}}/distributed/test/spark/distributed",
-							"protocol": "http",
-							"host": [
-								"{{ip}}"
-							],
-							"port": "{{port}}",
-							"path": [
-								"distributed",
-								"test",
-								"spark",
-								"distributed"
-							]
-						}
-					},
-					"response": []
 				}
 			]
 		},
@@ -2413,7 +2272,7 @@
 					},
 					"response": [
 						{
-							"id": "a80f16f8-5f80-4107-b69a-aee49a87b3d4",
+							"id": "936fa7ea-5f58-494d-9713-c8f5d986b012",
 							"name": "Database EN",
 							"originalRequest": {
 								"method": "POST",
@@ -2450,7 +2309,7 @@
 							"body": ""
 						},
 						{
-							"id": "b0e2627d-5725-44cb-9853-9596b0710ecd",
+							"id": "20abb45c-3684-42bf-bdb7-a8a527f972f9",
 							"name": "Database IT",
 							"originalRequest": {
 								"method": "POST",
@@ -2487,7 +2346,7 @@
 							"body": ""
 						},
 						{
-							"id": "340a5fa0-4efd-49a7-9403-12ba085e48f2",
+							"id": "be1c68bc-ac7a-490e-aa74-563aafb7f8b0",
 							"name": "Dispensa Rossi",
 							"originalRequest": {
 								"method": "POST",
@@ -2868,6 +2727,477 @@
 					}
 				}
 			]
+		},
+		{
+			"name": "security",
+			"description": "",
+			"item": [
+				{
+					"name": "OAuth2 Password Flow APPUSER",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Basic ZWxhc3R4eTpzZWNyZXR4eQ=="
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/x-www-form-urlencoded"
+							}
+						],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "grant_type",
+									"value": "password",
+									"description": "",
+									"type": "text"
+								},
+								{
+									"key": "username",
+									"value": "appuser",
+									"description": "",
+									"type": "text"
+								},
+								{
+									"key": "password",
+									"value": "secretxy",
+									"description": "",
+									"type": "text"
+								},
+								{
+									"key": "scope",
+									"value": "execute",
+									"description": "",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "http://{{ids_ip}}:{{ids_port}}/oauth/token",
+							"protocol": "http",
+							"host": [
+								"{{ids_ip}}"
+							],
+							"port": "{{ids_port}}",
+							"path": [
+								"oauth",
+								"token"
+							]
+						},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "OAuth2 Password Flow ADMINUSER",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Basic ZWxhc3R4eTpzZWNyZXR4eQ=="
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/x-www-form-urlencoded"
+							}
+						],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "grant_type",
+									"value": "password",
+									"description": "",
+									"type": "text"
+								},
+								{
+									"key": "username",
+									"value": "adminuser",
+									"description": "",
+									"type": "text"
+								},
+								{
+									"key": "password",
+									"value": "secretxy",
+									"description": "",
+									"type": "text"
+								},
+								{
+									"key": "scope",
+									"value": "execute manage",
+									"description": "",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "http://{{ids_ip}}:{{ids_port}}/oauth/token",
+							"protocol": "http",
+							"host": [
+								"{{ids_ip}}"
+							],
+							"port": "{{ids_port}}",
+							"path": [
+								"oauth",
+								"token"
+							]
+						},
+						"description": ""
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "sandbox",
+			"item": [
+				{
+					"name": "spark-control",
+					"item": [
+						{
+							"name": "/v1/submissions/create",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json;charset=UTF-8"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"action\" : \"CreateSubmissionRequest\",\r\n  \"appArgs\" : [ \"spark://192.168.1.101:7077\" ],\r\n  \"appResource\" : \"file:///c:/dev/workspaces/ws_scala/Scaligen/target/scala-2.11/Scaligen-assembly-1.0.jar\",\r\n  \"clientSparkVersion\" : \"1.5.0\",\r\n  \"environmentVariables\" : {\r\n    \"log4j.configuration\" : \"C:/dev/spark-2.2.0-bin-hadoop2.7/conf/log4j.properties\",\r\n    \"spark.eventLog.enabled\" : \"false\",\r\n    \"spark.eventLog.dir\" : \"file:///c:/tmp/sparktemp/eventLog\",\r\n    \"spark.history.fs.logDirectory\" : \"file:///c:/tmp/sparktemp/eventLog\"\r\n  },\r\n  \"mainClass\" : \"org.elastxy.app.d.mex.MexApplication\",\r\n  \"sparkProperties\" : {\r\n    \"spark.driver.supervise\" : \"false\",\r\n    \"spark.app.name\" : \"MexApplication\",\r\n    \"spark.eventLog.enabled\": \"true\",\r\n    \"spark.submit.deployMode\" : \"cluster\",\r\n    \"spark.master\" : \"spark://192.168.1.101:7077\"\r\n  }\r\n}"
+								},
+								"url": {
+									"raw": "http://192.168.1.101:6066/v1/submissions/create",
+									"protocol": "http",
+									"host": [
+										"192",
+										"168",
+										"1",
+										"101"
+									],
+									"port": "6066",
+									"path": [
+										"v1",
+										"submissions",
+										"create"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "/v1/submissions/status",
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json;charset=UTF-8"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": ""
+								},
+								"url": {
+									"raw": "http://192.168.1.101:6066/v1/submissions/status/driver-20171125234642-0000",
+									"protocol": "http",
+									"host": [
+										"192",
+										"168",
+										"1",
+										"101"
+									],
+									"port": "6066",
+									"path": [
+										"v1",
+										"submissions",
+										"status",
+										"driver-20171125234642-0000"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "/v1/submissions/kill",
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json;charset=UTF-8"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": ""
+								},
+								"url": {
+									"raw": "http://192.168.1.101:6066/v1/submissions/kill/driver-20171125234642-0000",
+									"protocol": "http",
+									"host": [
+										"192",
+										"168",
+										"1",
+										"101"
+									],
+									"port": "6066",
+									"path": [
+										"v1",
+										"submissions",
+										"kill",
+										"driver-20171125234642-0000"
+									]
+								}
+							},
+							"response": []
+						}
+					],
+					"_postman_isSubFolder": true
+				},
+				{
+					"name": "security test token",
+					"description": "",
+					"item": [
+						{
+							"name": "OAuth2 Password Flow",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "Basic dGVzdGp3dGNsaWVudGlkOlhZN2ttem9OemwxMDA="
+									},
+									{
+										"key": "Content-Type",
+										"value": "application/x-www-form-urlencoded"
+									}
+								],
+								"body": {
+									"mode": "urlencoded",
+									"urlencoded": [
+										{
+											"key": "grant_type",
+											"value": "password",
+											"description": "",
+											"type": "text"
+										},
+										{
+											"key": "username",
+											"value": "john.doe",
+											"description": "",
+											"type": "text"
+										},
+										{
+											"key": "password",
+											"value": "jwtpass",
+											"description": "",
+											"type": "text"
+										}
+									]
+								},
+								"url": {
+									"raw": "http://{{ids_ip}}:{{ids_port}}/oauth/token",
+									"protocol": "http",
+									"host": [
+										"{{ids_ip}}"
+									],
+									"port": "{{ids_port}}",
+									"path": [
+										"oauth",
+										"token"
+									]
+								},
+								"description": ""
+							},
+							"response": []
+						},
+						{
+							"name": "OAuth2 Resource Access Example",
+							"request": {
+								"auth": {
+									"type": "oauth2",
+									"oauth2": [
+										{
+											"key": "accessToken",
+											"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhdWQiOlsidGVzdGp3dHJlc291cmNlaWQiXSwidXNlcl9uYW1lIjoiam9obi5kb2UiLCJzY29wZSI6WyJyZWFkIiwid3JpdGUiXSwiZXhwIjoxNTE2ODMxMTQ4LCJhdXRob3JpdGllcyI6WyJTVEFOREFSRF9VU0VSIl0sImp0aSI6IjQ2ODFjMmM5LWIwZGEtNDZjOS1hNDY5LWViYjcxZmIwYjZhYiIsImNsaWVudF9pZCI6InRlc3Rqd3RjbGllbnRpZCJ9.38F3tlfrW-t8ygrNnnMRkvy3Ln1M3Wiv-Tc5IAwbzF4",
+											"type": "string"
+										},
+										{
+											"key": "addTokenTo",
+											"value": "header",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [],
+								"body": {},
+								"url": {
+									"raw": "http://{{ids_ip}}:{{ids_port}}/springjwt/cities",
+									"protocol": "http",
+									"host": [
+										"{{ids_ip}}"
+									],
+									"port": "{{ids_port}}",
+									"path": [
+										"springjwt",
+										"cities"
+									]
+								},
+								"description": ""
+							},
+							"response": []
+						}
+					],
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"id": "5fe9114e-d9f5-4973-90de-52dd18915ffb",
+								"type": "text/javascript",
+								"exec": [
+									""
+								]
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"id": "be793f9a-1506-4bb6-a074-15e5c752167f",
+								"type": "text/javascript",
+								"exec": [
+									""
+								]
+							}
+						}
+					],
+					"_postman_isSubFolder": true
+				},
+				{
+					"name": "/distributed/test/spark/concurrent",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "http://{{ip}}:{{port}}/distributed/test/spark/concurrent",
+							"protocol": "http",
+							"host": [
+								"{{ip}}"
+							],
+							"port": "{{port}}",
+							"path": [
+								"distributed",
+								"test",
+								"spark",
+								"concurrent"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "/distributed/test/spark/single",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "http://{{ip}}:{{port}}/distributed/test/spark/single",
+							"protocol": "http",
+							"host": [
+								"{{ip}}"
+							],
+							"port": "{{port}}",
+							"path": [
+								"distributed",
+								"test",
+								"spark",
+								"single"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "/distributed/test/spark/distributed",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "http://{{ip}}:{{port}}/distributed/test/spark/distributed",
+							"protocol": "http",
+							"host": [
+								"{{ip}}"
+							],
+							"port": "{{port}}",
+							"path": [
+								"distributed",
+								"test",
+								"spark",
+								"distributed"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	],
+	"auth": {
+		"type": "bearer",
+		"bearer": [
+			{
+				"key": "token",
+				"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhdWQiOlsiZWxhc3R4eXJlc291cmNlaWQiXSwidXNlcl9uYW1lIjoiYXBwdXNlciIsInNjb3BlIjpbImV4ZWN1dGUiXSwiZXhwIjoxNTE2ODQ3NDMzLCJhdXRob3JpdGllcyI6WyJTVEFOREFSRF9VU0VSIl0sImp0aSI6ImQ3NTE1ZmRlLTFkMDItNDE0ZC05OTI0LTZjNjE4ZmNhMDU5ZCIsImNsaWVudF9pZCI6ImVsYXN0eHkifQ.lXjJOAeIiFNME1kuvqRiQDZC1ariSForN-2zYqpsPtk",
+				"type": "string"
+			}
+		]
+	},
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"id": "755b6cbe-2c6b-4d2e-8c09-df8ec4d3464a",
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"id": "5b2b3e28-558f-41f6-9d85-247214b3a1ad",
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
 		}
 	]
 }

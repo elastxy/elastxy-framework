@@ -20,6 +20,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestHeader;
@@ -48,7 +49,7 @@ public class MonitorController {
 	private String testFilePath;
 	
 	
-	
+	// Public, no authorization (will be hidden behind a proxy)
 	@RequestMapping(path = "/access", method = RequestMethod.HEAD)
 	@ResponseBody
 	public String access() {
@@ -63,6 +64,7 @@ public class MonitorController {
 	 * TODO2-8: let register/deregister an application
 	 * @return
 	 */
+	@PreAuthorize("(hasAuthority('ADMIN_USER') or hasAuthority('STANDARD_USER')) and #oauth2.hasScope('manage')")
 	@RequestMapping(path = "/info", method = RequestMethod.GET)
 	@ResponseBody
 	public Map<String, String> hello() {
@@ -71,7 +73,8 @@ public class MonitorController {
 		return Collections.singletonMap("message", infoService.getInfoMessage());
 	}
 	
-	
+
+	@PreAuthorize("(hasAuthority('ADMIN_USER')) and #oauth2.hasScope('manage')")
     @RequestMapping(path = "/healthcheck", method = RequestMethod.GET)
     public ResponseEntity<String> healthCheck() {
 		logger.info("REQUEST Service GET /healthcheck => (empty)");
@@ -83,6 +86,7 @@ public class MonitorController {
     
     
 
+	@PreAuthorize("(hasAuthority('ADMIN_USER')) and #oauth2.hasScope('manage')")
     @RequestMapping(path = "/jobs/{jobId}/status", method = RequestMethod.GET)
 	@ResponseBody
     public ExperimentResponse checkJobStatus(
@@ -102,6 +106,7 @@ public class MonitorController {
     }
     
 
+	@PreAuthorize("(hasAuthority('ADMIN_USER')) and #oauth2.hasScope('manage')")
     @RequestMapping(path = "/jobs/{jobId}/kill", method = RequestMethod.PUT)
 	@ResponseBody
     public ExperimentResponse killJob(
@@ -127,6 +132,7 @@ public class MonitorController {
 	 * @param code
 	 * @return
 	 */
+	@PreAuthorize("(hasAuthority('ADMIN_USER')) and #oauth2.hasScope('manage')")
     @RequestMapping(path = "/error/{code}", method = RequestMethod.GET)
     @ResponseBody
     public ResponseEntity<String> healthCheck(

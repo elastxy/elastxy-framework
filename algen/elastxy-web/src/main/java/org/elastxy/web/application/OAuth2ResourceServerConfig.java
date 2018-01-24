@@ -1,0 +1,41 @@
+package org.elastxy.web.application;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnExpression;
+import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.Profile;
+import org.springframework.security.config.annotation.web.builders.HttpSecurity;
+import org.springframework.security.oauth2.config.annotation.web.configuration.EnableResourceServer;
+import org.springframework.security.oauth2.config.annotation.web.configuration.ResourceServerConfigurerAdapter;
+import org.springframework.security.oauth2.config.annotation.web.configurers.ResourceServerSecurityConfigurer;
+import org.springframework.security.oauth2.provider.token.ResourceServerTokenServices;
+
+ 
+@Configuration
+@EnableResourceServer
+//@EnableGlobalMethodSecurity(prePostEnabled = true)
+@Profile("!local")
+@ConditionalOnExpression("${web.security.enabled}")
+public class OAuth2ResourceServerConfig extends ResourceServerConfigurerAdapter {
+    @Autowired
+    private ResourceServerTokenServices tokenServices;
+
+    @Value("${security.jwt.resource-ids}")
+    private String resourceIds;
+
+    @Override
+    public void configure(ResourceServerSecurityConfigurer resources) throws Exception {
+        resources.resourceId(resourceIds).tokenServices(tokenServices);
+    }
+
+	@Override
+    public void configure(HttpSecurity http) throws Exception {
+                http
+                .requestMatchers()
+                .and()
+                .authorizeRequests()
+                .antMatchers("/monitor/access").permitAll()
+                .antMatchers("/local/**", "/distributed/**", "/monitor/**" ).authenticated();
+    }
+}

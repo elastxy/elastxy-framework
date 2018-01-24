@@ -23,6 +23,7 @@ import org.elastxy.core.context.RequestContext;
 import org.elastxy.distributed.context.DistributedAlgorithmContext;
 import org.elastxy.web.distributed.DistributedApplicationService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -50,7 +51,8 @@ public class DistributedController {
 
 	@Autowired private DistributedApplicationService applicationService;
 
-    
+
+	@PreAuthorize("(hasAuthority('ADMIN_USER') or hasAuthority('STANDARD_USER')) and #oauth2.hasScope('execute')")
     @RequestMapping(path = "/local/experiment/{application}", method = RequestMethod.POST)
 	@ResponseBody
     public ExperimentResponse executeExperimentLocal(
@@ -69,7 +71,8 @@ public class DistributedController {
     	return response;
     }
 
-    
+
+	@PreAuthorize("(hasAuthority('ADMIN_USER') or hasAuthority('STANDARD_USER')) and #oauth2.hasScope('execute')")
     @RequestMapping(path = "/cluster/experiment/{application}", method = RequestMethod.POST)
     @ResponseBody
 	public ExperimentResponse executeExperimentCluster(
@@ -90,6 +93,7 @@ public class DistributedController {
     
     
 	// TODO1-1: check, benchmark, analysis, trial in distributed controller
+//	@PreAuthorize("(hasAuthority('ADMIN_USER') or hasAuthority('STANDARD_USER')) and #oauth2.hasScope('manage')")
 //	@RequestMapping("/local/test/{application}")
 //	@ResponseBody
 //	public ResponseEntity<String> testLocal(@PathVariable String application) {
@@ -100,6 +104,7 @@ public class DistributedController {
 //		return new ResponseEntity<>(stats, HttpStatus.OK);
 //	}
 //
+//	@PreAuthorize("(hasAuthority('ADMIN_USER') or hasAuthority('STANDARD_USER')) and #oauth2.hasScope('manage')")
 //	@RequestMapping("/cluster/test/{application}")
 //	@ResponseBody
 //	public ResponseEntity<String> testCluster(@PathVariable String application) {

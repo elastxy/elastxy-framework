@@ -27,6 +27,7 @@ import org.elastxy.web.renderer.WebExperimentResponseRenderer;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -53,7 +54,7 @@ public class LocalController {
 	@Autowired private WebExperimentResponseRenderer webRenderer;
 	@Autowired private InternalExperimentResponseRenderer intRenderer;
 
-	
+	@PreAuthorize("(hasAuthority('ADMIN_USER') or hasAuthority('STANDARD_USER')) and #oauth2.hasScope('execute')")
 	@RequestMapping(path = "/experiment/{application}", method = RequestMethod.POST)
 	@ResponseBody
 	public ExperimentResponse experiment(
@@ -78,6 +79,7 @@ public class LocalController {
 	 * @param userLocale
 	 * @return
 	 */
+	@PreAuthorize("(hasAuthority('ADMIN_USER') or hasAuthority('STANDARD_USER')) and #oauth2.hasScope('execute')")
 	@RequestMapping("/appcheck/{application}")
 	@ResponseBody
 	public ExperimentResponse appCheck(@PathVariable String application,
@@ -95,6 +97,7 @@ public class LocalController {
 	}
 
 
+	@PreAuthorize("(hasAuthority('ADMIN_USER') or hasAuthority('STANDARD_USER')) and #oauth2.hasScope('manage')")
 	@RequestMapping("/test/{application}")
 	@ResponseBody
 	public ExperimentResponse test(@PathVariable String application,
@@ -114,6 +117,7 @@ public class LocalController {
 	
 
 	// TODO2-2: analysis: structured results
+	@PreAuthorize("(hasAuthority('ADMIN_USER') or hasAuthority('STANDARD_USER')) and #oauth2.hasScope('manage')")
 	@RequestMapping(path = "/analysis/{application}/{experiments}", method = RequestMethod.POST)
 	@ResponseBody
 	public ExperimentResponse analysis(
@@ -134,6 +138,7 @@ public class LocalController {
 
 
 	// TODO2-2: trial: structured results
+	@PreAuthorize("(hasAuthority('ADMIN_USER') or hasAuthority('STANDARD_USER')) and #oauth2.hasScope('manage')")
 	@RequestMapping(path = "/trial/{application}/{experiments}", method = RequestMethod.POST)
 	@ResponseBody
 	public ExperimentResponse trialTest(
