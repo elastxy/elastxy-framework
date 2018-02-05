@@ -1,0 +1,28 @@
+FROM frolvlad/alpine-oraclejre8:slim
+#FROM frolvlad/alpine-oraclejdk8:slim
+
+#VOLUME /data
+
+RUN apk add --no-cache bash
+
+RUN mkdir -p /usr/local/spark-2.2.0-bin-hadoop2.7
+RUN mkdir -p /tmp/sparktemp/eventLog
+
+ADD spark-2.2.0-bin-hadoop2.7 /usr/local/spark-2.2.0-bin-hadoop2.7/
+
+#ADD spark-2.2.0-bin-hadoop2.7.tar spark-2.2.0-bin-hadoop2.7.tar
+#RUN tar -xz spark-2.2.0-bin-hadoop2.7.tar -C /usr/local/
+#RUN rm spark-2.2.0-bin-hadoop2.7.tgz
+
+ENV SPARK_HOME /usr/local/spark-2.2.0-bin-hadoop2.7
+ENV PATH $PATH:$SPARK_HOME/bin
+ 
+COPY conf/*.* /conf/
+
+EXPOSE 4040 6066 7077 8080
+
+WORKDIR $SPARK_HOME
+
+#ENTRYPOINT [ "sh", "-c", "bin/spark-class org.apache.spark.deploy.master.Master -h $MASTER --webui-port 8080" ]
+#RUN touch pause.log
+#RUN tail -f pause.log

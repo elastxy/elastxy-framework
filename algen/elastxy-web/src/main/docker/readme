@@ -28,8 +28,13 @@ docker exec -ti elastxyw /bin/sh
 docker inspect elastxyw
 docker logs -f elastxyw
 
+# NB: Add following lines to DockerFile for pausing container, letting log in to inspect:
+# RUN touch pause.log
+# RUN tail -f pause.log
+
 # Manage containers
 docker ps
+docker ps -a
 docker stop elastxyw
 docker rm elastxyw
 
