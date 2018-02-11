@@ -3,6 +3,7 @@ package org.elastxy.core.applications.components;
 import java.util.HashMap;
 import java.util.Map;
 
+import org.elastxy.core.conf.ConfigurationException;
 import org.springframework.stereotype.Component;
 
 /**
@@ -23,7 +24,11 @@ public class AppComponentsLocator {
 	 * @return
 	 */
 	public AppComponents get(String applicationName){
-		return appComponents.get(applicationName).copy();
+		AppComponents result = appComponents.get(applicationName);
+		if(result==null){
+			throw new ConfigurationException("Application "+applicationName+" not registered. Please register it putting its jars on classpath.");
+		}
+		return result.copy();
 	}
 
 	public AppComponents put(String applicationName, AppComponents appComponents){

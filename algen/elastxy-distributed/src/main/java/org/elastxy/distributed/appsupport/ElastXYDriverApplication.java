@@ -5,6 +5,7 @@ import org.apache.spark.SparkConf;
 import org.apache.spark.api.java.JavaSparkContext;
 import org.elastxy.core.applications.components.AppComponentsLocator;
 import org.elastxy.core.applications.components.factory.AppBootstrapRaw;
+import org.elastxy.core.conf.ConfigurationException;
 import org.elastxy.core.engine.core.Experiment;
 import org.elastxy.core.stats.ExperimentStats;
 import org.elastxy.core.support.JSONSupport;
@@ -81,6 +82,10 @@ public class ElastXYDriverApplication {
 		context.application.envFactory.setup(context);
 //		context.application.resultsRenderer.setup(context);
 		
+		if(context.application.multiColonyEnvFactory==null || context.application.distributedGenomaProvider==null){
+			throw new ConfigurationException("Cannot initialize distributed application "+context.application.appName+
+					". No bean multiColonyEnvFactory and/or distributedGenomaProvider have been declared.");
+		}
 		context.application.multiColonyEnvFactory.setup(context);
 		if(context.application.singleColonyDatasetProvider!=null) context.application.singleColonyDatasetProvider.setup(context);
 		if(context.application.distributedDatasetProvider!=null) context.application.distributedDatasetProvider.setup(context);
