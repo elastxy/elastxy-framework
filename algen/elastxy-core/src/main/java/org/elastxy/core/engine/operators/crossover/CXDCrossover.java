@@ -17,6 +17,10 @@ import org.elastxy.core.engine.operators.Crossover;
  * 
  * Slightly slower than CX, it's best to use CX when applicable.
  * 
+ * NOTE: Implementation is similar to Apache Math3, patched due to following issue.
+ * See issue "Infinite loop for CycleCrossover with duplicates":
+ * https://issues.apache.org/jira/browse/MATH-1451
+ * 
  * @author red
  *
  */

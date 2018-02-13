@@ -16,6 +16,10 @@ import org.elastxy.core.engine.operators.Crossover;
  * 
  * TODO3-1: link Apache math3 library. Check no duplicates in input.
  * 
+ * NOTE: Implementation is similar to Apache Math3, patched due to following issue.
+ * See issue "Infinite loop for CycleCrossover with duplicates":
+ * https://issues.apache.org/jira/browse/MATH-1451
+ * 
  * @author red
  *
  */
