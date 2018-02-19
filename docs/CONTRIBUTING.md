@@ -25,7 +25,7 @@ Please proceed with a pull request by using the provided [PULL_REQUEST_TEMPLATE]
 
 1. Ensure any install or build dependencies are removed before the end of the layer when doing a build.
 2. Update the documentation with details of new features, changes to interfaces (especially public APIs), new environment variables or parameters.
-3. Increase the version numbers to the new version that this Pull Request would represent. The versioning scheme we use is [SemVer](http://semver.org/).
+3. Increase the version numbers to the new version that this Pull Request would represent. The versioning scheme we use is [SemVer](http://semver.org/). For the versions available, see the [tags on this repository](https://github.com/elastxy/elastxy-framework/tags). 
 4. You may merge the Pull Request in once you have the sign-off of the repository owner, or if you do not have permission to do that, you may request the reviewer to merge it for you.
 
 ### NOTE: about point 2, exception applies until Author won't publish clear and complete documentation structure. In the meanwhile, documenting PR will be enough.
