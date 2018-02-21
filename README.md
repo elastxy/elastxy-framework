@@ -15,6 +15,8 @@ Try out the [10' Single Colony Tutorial](http://elastxy.io/documentation#single-
 
 The ElastXY Framework currently maintains a single page reference [Documentation](http://elastxy.io/documentation) on its website and a simple [Changelog](docs/CHANGELOG.md) here for non trivial changes.
 
+A [Swagger UI](http://localhost:8080/swagger-ui.html#/) is available when running locally (to be further polished).
+
 In a near futures also Github wiki pages and an API reference will be made available through the web site, near guides and tutorials across ElastXY projects for all interesting use cases.
 
 You may follow project by its Twitter account [@elastxy](https://twitter.com/elastxy) to be notified.
