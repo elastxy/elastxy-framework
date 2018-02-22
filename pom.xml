@@ -23,7 +23,7 @@
     <modules>
         <module>elastxy-core</module>
         <module>elastxy-web</module>
-        <module>elastxy-applications</module>
+        <!-- <module>elastxy-applications</module>-->
         <module>elastxy-distributed</module>
     </modules>
 	
