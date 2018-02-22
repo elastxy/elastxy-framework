@@ -21,6 +21,8 @@ import org.elastxy.core.engine.operators.Crossover;
  * See issue "Infinite loop for CycleCrossover with duplicates":
  * https://issues.apache.org/jira/browse/MATH-1451
  * 
+ * No copyright notice is present, due to this reason.
+ * 
  * @author red
  *
  */
