@@ -34,7 +34,7 @@
     <parent>
         <groupId>org.elastxy</groupId>
         <artifactId>elastxy-parent</artifactId>
-        <version>1.0.0-SNAPSHOT</version>
+        <version>0.1.0-SNAPSHOT</version>
     </parent>
     
 	<artifactId>elastxy-distributed</artifactId>
@@ -50,7 +50,7 @@
 	  	<dependency>
 	  		<groupId>org.elastxy</groupId>
 	  		<artifactId>elastxy-core</artifactId>
-	  		<version>1.0.0-SNAPSHOT</version>
+	  		<version>0.1.0-SNAPSHOT</version>
 	  	</dependency>
 	
 		<!-- Spring dependencies -->
