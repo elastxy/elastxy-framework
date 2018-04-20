@@ -9,7 +9,7 @@ Please read the [Official Documentation](http://elastxy.io/documentation) for a 
 
 ## Quick start
 
-Try out the [10' Single Colony Tutorial](http://elastxy.io/documentation#single-colony-tutorial) for building your own app for local execution, or the [20' Multi Colony Tutorial](http://elastxy.io/documentation#multi-colony-tutorial) for building a sample distributed application.
+Try out the [10' Single Colony Tutorial](http://elastxy.io/tutorials/#single-colony-tutorial) for building your own app for local execution, or the [20' Multi Colony Tutorial](http://elastxy.io/tutorials/#multi-colony-tutorial) for building a sample distributed application.
 
 ## Documentation
 
@@ -31,13 +31,13 @@ Please report unacceptable behavior to [elastxy@mail.com](mailto:elastxy@mail.co
 
 ## Access to binaries
 
-You can obtain current version of ElastXY Framework and related subprojects by building them locally (see [Build from source](http://elastxy.io/documentation#build-from-sources) section).
+You can obtain current version of ElastXY Framework and related subprojects by building them locally (see [Build from source](http://elastxy.io/tutorials/#quick-start) section).
 
 ElastXY binaries are not yet uploaded to Maven Central: when uploaded, you will be notified through this page or via [@elastxy](https://twitter.com/elastxy) Twitter account.
 
 ## Build from source
 
-See the [Build from source](http://elastxy.io/documentation#build-from-sources) section of documentation page for building locally all necessary artifacts.
+See the [Build from source](http://elastxy.io/tutorials/#quick-start) section of documentation page for building locally all necessary artifacts.
 
 ## Stay in touch
 
@@ -46,7 +46,7 @@ Releases or major progresses are announced via those channels.
 
 ## Questions?
 
-[Open an Issue](https://github.com/elastxy-projects/elastxy-framework/issues/new) and let's chat!
+[Open an Issue](https://github.com/elastxy-framework/issues/new) and let's chat!
 
 ## License
 
@@ -57,7 +57,7 @@ You also may obtain a copy here: see [LICENSE](LICENSE) file.
 
 ### Authors
 
-* **Gabriele Rossi** - *Initial work* - See [Contact](https://elastxy.io/aboutme) page on project web site.
+* **Gabriele Rossi** - *Initial work* - See [Contact](http://elastxy.io/aboutme) page on project web site.
 
 See also the list of [contributors](https://github.com/elastxy/elastxy-framework/contributors) who participated in this project.
 
