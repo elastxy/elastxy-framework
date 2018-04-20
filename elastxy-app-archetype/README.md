@@ -4,5 +4,5 @@
 
 Just run:
 
-``mvn archetype:generate -DarchetypeGroupId=org.elastxy -DarchetypeArtifactId=elastxy-app-archetype -DarchetypeVersion=1.0.0-SNAPSHOT -DgroupId=org.myorganization -DartifactId=myApp``
+``mvn archetype:generate -DarchetypeGroupId=org.elastxy -DarchetypeArtifactId=elastxy-app-archetype -DarchetypeVersion=0.1.0-SNAPSHOT -DgroupId=org.myorganization -DartifactId=myApp``
 
