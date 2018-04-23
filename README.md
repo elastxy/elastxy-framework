@@ -10,6 +10,7 @@ Please read the [Official Documentation](http://elastxy.io/documentation) for a 
 ## Quick start
 
 Try out the [10' Single Colony Tutorial](http://elastxy.io/tutorials/#single-colony-tutorial) for building your own app for local execution, or the [20' Multi Colony Tutorial](http://elastxy.io/tutorials/#multi-colony-tutorial) for building a sample distributed application.
+**IMPORTANT**: Multi Colony Tutorial requires at least an application to work, which will be added in days.
 
 ## Documentation
 
