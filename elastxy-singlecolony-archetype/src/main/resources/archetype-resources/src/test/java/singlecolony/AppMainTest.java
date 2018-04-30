@@ -13,13 +13,13 @@
  * License for the specific language governing permissions and limitations under
  * the License.
  ******************************************************************************/
-package ${groupId}.appArchetype;
+package ${groupId}.singlecolony;
 
 import static org.junit.Assert.*;
 
 import java.io.File;
 
-import ${groupId}.appArchetype.TestConfig;
+import ${groupId}.singlecolony.TestConfig;
 import org.elastxy.core.applications.ApplicationService;
 import org.elastxy.core.context.AlgorithmContext;
 import org.elastxy.core.context.RequestContext;

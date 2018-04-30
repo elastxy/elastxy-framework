@@ -3,7 +3,7 @@
 	
 	"targetBuilder": {
 		"type" : "java",
-		"content" : "${groupId}.appArchetype.AppTargetBuilder"
+		"content" : "${groupId}.singlecolony.AppTargetBuilder"
 	},
 	
 	"envFactory": {
@@ -13,7 +13,7 @@
 	
 	"genomaProvider": {
 		"type" : "java",
-		"content" : "${groupId}.appArchetype.AppGenomaProvider"
+		"content" : "${groupId}.singlecolony.AppGenomaProvider"
 	},
 	
 	"alleleGenerator": {
@@ -33,12 +33,12 @@
 	
 	"fitnessCalculator": {
 		"type" : "java",
-		"content" : "${groupId}.appArchetype.AppFitnessCalculator"
+		"content" : "${groupId}.singlecolony.AppFitnessCalculator"
 	},
 	
 	"incubator": {
 		"type" : "java",
-		"content" : "${groupId}.appArchetype.AppIncubator"
+		"content" : "${groupId}.singlecolony.AppIncubator"
 	},
 	
 	"selector": {
@@ -63,7 +63,7 @@
 	
 	"friendlySolutionRenderer": {
 		"type" : "java",
-		"content" : "${groupId}.appArchetype.AppSolutionRenderer"
+		"content" : "${groupId}.singlecolony.AppSolutionRenderer"
 	},
 	
 	"resultsRenderer": {

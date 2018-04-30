@@ -13,7 +13,7 @@
  * License for the specific language governing permissions and limitations under
  * the License.
  ******************************************************************************/
-package ${groupId}.appArchetype;
+package ${groupId}.singlecolony;
 
 import org.elastxy.core.domain.experiment.Env;
 import org.elastxy.core.domain.genetics.genotype.Chromosome;

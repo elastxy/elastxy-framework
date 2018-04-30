@@ -13,12 +13,28 @@
  * License for the specific language governing permissions and limitations under
  * the License.
  ******************************************************************************/
-package ${groupId}.appArchetype;
+package ${groupId}.singlecolony;
 
-public class AppConstants {
-	
-	// Custom inputs
-	public static final String TARGET_EXPRESSION_RESULT = "TARGET_EXPRESSION_RESULT";
-	public static final String MAX_OPERAND_VALUE = "MAX_OPERAND_VALUE";
+import org.elastxy.core.domain.experiment.Solution;
+import org.elastxy.core.domain.genetics.genotype.Chromosome;
+import org.elastxy.core.domain.genetics.phenotype.NumberPhenotype;
+import org.elastxy.core.tracking.SolutionRenderer;
+
+public class AppSolutionRenderer  implements SolutionRenderer<String> {
+
+	@Override
+	public String render(Solution solution){
+		if(solution==null) return "";
+		Chromosome chromosome = (Chromosome)solution.getGenotype();
+		String result = 
+				chromosome.genes.get(0).allele.value+
+				" "+
+				chromosome.genes.get(1).allele.value+
+				" "+
+				chromosome.genes.get(2).allele.value+
+				" = "+
+				((NumberPhenotype)solution.getPhenotype()).value;
+		return result;
+	}
 	
 }

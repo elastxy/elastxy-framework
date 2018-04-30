@@ -1,17 +1,17 @@
 <archetype xmlns="http://maven.apache.org/plugins/maven-archetype-plugin/archetype/1.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     xsi:schemaLocation="http://maven.apache.org/plugins/maven-archetype-plugin/archetype/1.0.0 http://maven.apache.org/xsd/archetype-1.0.0.xsd">
 
-    <id>elastxy-app-archetype</id>
+    <id>elastxy-singlecolony-archetype</id>
 	
 	<allowPartial>true</allowPartial>
 	
     <sources>
-        <source>src/main/java/appArchetype/AppConstants.java</source>
-        <source>src/main/java/appArchetype/AppFitnessCalculator.java</source>
-        <source>src/main/java/appArchetype/AppGenomaProvider.java</source>
-        <source>src/main/java/appArchetype/AppIncubator.java</source>
-        <source>src/main/java/appArchetype/AppSolutionRenderer.java</source>
-        <source>src/main/java/appArchetype/AppTargetBuilder.java</source>
+        <source>src/main/java/singlecolony/AppConstants.java</source>
+        <source>src/main/java/singlecolony/AppFitnessCalculator.java</source>
+        <source>src/main/java/singlecolony/AppGenomaProvider.java</source>
+        <source>src/main/java/singlecolony/AppIncubator.java</source>
+        <source>src/main/java/singlecolony/AppSolutionRenderer.java</source>
+        <source>src/main/java/singlecolony/AppTargetBuilder.java</source>
     </sources>
 
     <resources>
@@ -22,8 +22,8 @@
     </resources>
     
     <testSources>
-        <source>src/test/java/appArchetype/TestConfig.java</source>
-        <source>src/test/java/appArchetype/AppMainTest.java</source>
+        <source>src/test/java/singlecolony/TestConfig.java</source>
+        <source>src/test/java/singlecolony/AppMainTest.java</source>
     </testSources>
 
 </archetype>

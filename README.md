@@ -46,7 +46,7 @@ Releases or major progresses are announced via those channels.
 
 ## Questions?
 
-[Open an Issue](https://github.com/elastxy-framework/issues/new) and let's chat!
+[Open an Issue](https://github.com/elastxy/elastxy-framework/issues/new) and let's chat!
 
 ## License
 

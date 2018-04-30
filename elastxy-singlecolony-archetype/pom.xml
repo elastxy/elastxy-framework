@@ -3,10 +3,10 @@
 	<modelVersion>4.0.0</modelVersion>
     
     <groupId>org.elastxy</groupId>
-	<artifactId>elastxy-app-archetype</artifactId>
+	<artifactId>elastxy-singlecolony-archetype</artifactId>
 	<version>0.1.0-SNAPSHOT</version>
 	
-	<name>ElastXY App Archetype</name>
+	<name>ElastXY SingleColony App Archetype</name>
 	<url>http://elastxy.org</url>
 		
 </project>

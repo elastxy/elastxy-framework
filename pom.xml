@@ -39,9 +39,8 @@
     <modules>
         <module>elastxy-core</module>
         <module>elastxy-web</module>
-		<module>elastxy-app-archetype</module>
-        <!-- <module>elastxy-applications</module>-->
-        <module>elastxy-distributed</module>
+		<module>elastxy-distributed</module>
+		<module>elastxy-singlecolony-archetype</module>
     </modules>
 	
 	

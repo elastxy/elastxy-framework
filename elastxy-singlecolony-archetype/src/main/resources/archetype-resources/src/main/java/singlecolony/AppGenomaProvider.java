@@ -13,7 +13,7 @@
  * License for the specific language governing permissions and limitations under
  * the License.
  ******************************************************************************/
-package ${groupId}.appArchetype;
+package ${groupId}.singlecolony;
 
 import org.apache.log4j.Logger;
 import org.elastxy.core.conf.ReadConfigSupport;
