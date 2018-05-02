@@ -103,7 +103,16 @@
   			<version>0.1.0-SNAPSHOT</version>
     	</dependency>
     	 -->
-    	
+    	 
+    	 <!-- UNCOMMENT_THIS -->
+    	 <!-- 
+    	<dependency>
+        	<groupId>com.acme</groupId>
+			<artifactId>MathXYM</artifactId>
+  			<version>1.0-SNAPSHOT</version>
+    	</dependency>
+    	 -->
+    	 
     	<dependency>
         	<groupId>org.elastxy</groupId>
 			<artifactId>elastxy-distributed</artifactId>
@@ -186,6 +195,27 @@
                     </execution>
                 </executions>
             </plugin>
+            
+            <plugin>
+			  <groupId>org.codehaus.mojo</groupId>
+			  <artifactId>exec-maven-plugin</artifactId>
+			  <version>1.6.0</version>
+			  <executions>
+			    	<execution>
+			      		<goals>
+			        		<goal>exec</goal>
+			      		</goals>
+			    	</execution>
+			  	</executions>
+				<configuration>
+          			<mainClass>org.elastxy.web.application.ElastXYWebApplication</mainClass>
+          			<arguments>
+            			<argument>-Dmessaging.enabled=false</argument>
+            			<argument>-Dspring.profiles.active=local</argument>
+            			<argument>-Dweb.security.enabled=false</argument><!-- IMPORTANT: enable in production! -->          			
+         			</arguments>
+				</configuration>
+			</plugin>
             
 	         <plugin>
 		        <groupId>io.fabric8</groupId>

@@ -20,8 +20,11 @@ import java.util.Arrays;
 import java.util.Base64;
 import java.util.Properties;
 
+import org.elastxy.core.applications.AppStage;
 import org.elastxy.core.applications.components.AppComponentsLocator;
 import org.elastxy.core.context.AlgorithmContext;
+import org.elastxy.core.context.ContextBuilder;
+import org.elastxy.core.context.RequestContext;
 import org.elastxy.core.stats.ExperimentStats;
 import org.elastxy.core.support.JSONSupport;
 import org.elastxy.distributed.appsupport.ElastXYDriverApplication;
@@ -50,7 +53,7 @@ public class DistributedApplicationService {
 	private Boolean messagingEnabled;
 	
 	@Autowired private AppComponentsLocator appComponentsLocator;
-	
+
 	@Autowired private ApplicationsSparkConfig applicationsSparkConfig;
 	
 	@Autowired private WebExperimentResponseRenderer webRenderer;
@@ -90,6 +93,20 @@ public class DistributedApplicationService {
     	ExperimentResponse response = res(context.requestContext.webRequest, context, stats);
     	
     	return response;
+	}
+	
+
+	
+	public ExperimentResponse executeLocalBenchmark(DistributedAlgorithmContext context) throws Exception {
+
+		// Overwrite initial context with benchmark, plus parameters from request
+		String classpathResource = JSONSupport.checkClasspathResource(context.application.appName, AppStage.BENCHMARK.getName()+".json");
+		DistributedAlgorithmContext result = (DistributedAlgorithmContext)JSONSupport.readJSON(classpathResource, DistributedAlgorithmContext.class);
+		result.application.appName = context.application.appName;
+		result.requestContext = context.requestContext;
+		context.requestContext.webRequest=false;
+
+		return executeDistributedLocal(result);
 	}
 	
 	

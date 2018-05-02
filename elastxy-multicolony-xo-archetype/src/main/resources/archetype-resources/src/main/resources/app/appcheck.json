@@ -1,0 +1,10 @@
+{
+	"applicationSpecifics": {
+		"target" : {
+			"TARGET_EXPRESSION_RESULT" : 23
+		},
+		"params" : {
+			"MAX_OPERAND_VALUE" : 100
+		}
+	}
+}

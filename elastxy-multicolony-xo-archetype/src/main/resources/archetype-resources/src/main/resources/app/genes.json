@@ -1,0 +1,21 @@
+{
+	"metadata" : {
+		"operand" : {
+			"code" : "operand",
+			"name" : "operand",
+			"type" : "INTEGER",
+			"valuesProvider" : "rddProvider"
+		},
+		"operator" : {
+			"code" : "operator",
+			"name" : "operator",
+			"type" : "CHAR",
+			"values" : ["+","-","*","/"]
+		}
+	},
+	
+	"positions" : {
+		"operand" : ["0","2"],
+		"operator" : ["1"]	
+	}
+}

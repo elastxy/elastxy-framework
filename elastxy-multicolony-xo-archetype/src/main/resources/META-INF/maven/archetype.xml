@@ -1,0 +1,27 @@
+<archetype xmlns="http://maven.apache.org/plugins/maven-archetype-plugin/archetype/1.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://maven.apache.org/plugins/maven-archetype-plugin/archetype/1.0.0 http://maven.apache.org/xsd/archetype-1.0.0.xsd">
+
+    <id>elastxy-multicolony-xo-archetype</id>
+	
+	<allowPartial>true</allowPartial>
+	
+    <sources>
+        <source>src/main/java/multicolonyxo/AppConstants.java</source>
+        <source>src/main/java/multicolonyxo/AppFitnessCalculator.java</source>
+        <source>src/main/java/multicolonyxo/AppGenomaProvider.java</source>
+        <source>src/main/java/multicolonyxo/AppIncubator.java</source>
+        <source>src/main/java/multicolonyxo/AppSolutionRenderer.java</source>
+        <source>src/main/java/multicolonyxo/AppTargetBuilder.java</source>
+        <source>src/main/java/multicolonyxo/AppDistributedDatasetProvider.java</source>
+        <source>src/main/java/multicolonyxo/AppDistributedGenomaProvider.java</source>
+        <source>src/main/java/multicolonyxo/DataToAllele.java</source>
+    </sources>
+
+    <resources>
+    	<resource>src/main/resources/app/appcheck.json</resource>
+    	<resource>src/main/resources/app/application.json</resource>
+    	<resource>src/main/resources/app/benchmark.json</resource>
+    	<resource>src/main/resources/app/genes.json</resource>
+    </resources>
+    
+</archetype>

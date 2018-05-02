@@ -18,6 +18,7 @@ package org.elastxy.web.controller;
 import java.util.Locale;
 
 import org.apache.log4j.Logger;
+import org.elastxy.core.context.AlgorithmContext;
 import org.elastxy.core.context.RequestContext;
 import org.elastxy.distributed.context.DistributedAlgorithmContext;
 import org.elastxy.web.distributed.DistributedApplicationService;
@@ -92,17 +93,23 @@ public class DistributedController {
     
     
 	// TODO1-1: check, benchmark, analysis, trial in distributed controller
-//	@PreAuthorize("(hasAuthority('ADMIN_USER') or hasAuthority('STANDARD_USER')) and #oauth2.hasScope('manage')")
-//	@RequestMapping("/local/test/{application}")
-//	@ResponseBody
-//	public ResponseEntity<String> testLocal(@PathVariable String application) {
-//		logger.info("REQUEST Service /local/test/{application} => "+application);
-//		String stats = null;
-//		
-//		logger.info("RESPONSE Service /local/test/{application} => "+stats);
-//		return new ResponseEntity<>(stats, HttpStatus.OK);
-//	}
-//
+	@PreAuthorize("(hasAuthority('ADMIN_USER') or hasAuthority('STANDARD_USER')) and #oauth2.hasScope('manage')")
+	@RequestMapping("/local/test/{application}")
+	@ResponseBody
+	public ExperimentResponse testLocal(@PathVariable String application,
+			@RequestHeader(value="Web-Request", defaultValue="true") boolean webRequest,
+			Locale userLocale) throws Exception {
+		logger.info("REQUEST Service /distributed/local/test/{application} => "+application);
+		DistributedAlgorithmContext context = new DistributedAlgorithmContext();
+		context.application.appName = application;
+		context.requestContext = new RequestContext(webRequest, userLocale);
+		
+		ExperimentResponse response = applicationService.executeLocalBenchmark(context);
+		
+		logger.info("RESPONSE Service /distributed/local/test/{application} => "+response.status);
+		return response;
+	}
+
 //	@PreAuthorize("(hasAuthority('ADMIN_USER') or hasAuthority('STANDARD_USER')) and #oauth2.hasScope('manage')")
 //	@RequestMapping("/cluster/test/{application}")
 //	@ResponseBody
